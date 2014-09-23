@@ -4,7 +4,7 @@ use serialize::Decodable;
 
 struct Endpoint<T> {
 	pub desc: &'static str,
-	params: T 
+	handler: |&params: T|:'static -> String
 }
 
 impl<T: Decodable<json::Decoder, json::DecoderError>> Endpoint<T> {
@@ -12,10 +12,16 @@ impl<T: Decodable<json::Decoder, json::DecoderError>> Endpoint<T> {
 		json::decode(from).unwrap()
 	}
 
-	pub fn new(desc: &'static str, params_body: &str) -> Endpoint<T> {
+	pub fn process(self, params_body: &str) -> String {
+		let params = Endpoint::decode(params_body);
+		let handler = self.handler;
+		handler(params)
+	}
+
+	pub fn new(desc: &'static str, handler: |&params: T|:'static -> String) -> Endpoint<T> {
 		Endpoint {
 			desc: desc,
-			params: Endpoint::decode(params_body)
+			handler: handler
 		}
 	}
 }
@@ -29,14 +35,21 @@ fn params_decode() {
 		user_type: Option<String>
 	};
 
-	let endpoint: Endpoint<Params> = Endpoint::new("Test endpoint", "{\"user_id\": \"test\"}");
+	let endpoint: Endpoint<Params> = Endpoint::new(
+		"Test endpoint", 
+		|params: Params| -> String {
+			assert_eq!(params.user_id.as_slice(), "test");
+			assert!(
+				match params.user_type {
+					Some(String) => false,
+					Nothing => true
+				}
+			)
 
-	assert_eq!(endpoint.params.user_id.as_slice(), "test");
-	assert!(
-		match endpoint.params.user_type {
-			Some(String) => false,
-			Nothing => true
+			"Result".to_string()
 		}
-	)
+	);
+
+	assert_eq!(endpoint.process("{\"user_id\": \"test\"}").as_slice(), "Result");
 
 }
