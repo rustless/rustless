@@ -1,8 +1,10 @@
 use std::io::net::ip::{SocketAddr, IpAddr};
 use http::server::Server as HttpServer;
 use http::server::Config as HttpConfig;
-use http::server::request::{Request};
-use http::server::response::{ResponseWriter};
+use http::server::request::Request as HttpRequest;
+use http::server::response::ResponseWriter as HttpResponseWriter;
+
+use request::Request;
 
 #[deriving(Clone)]
 pub struct Listener {
@@ -21,8 +23,9 @@ impl HttpServer for Listener {
 		}
 	}
 
-	fn handle_request(&self, http_req: Request, http_res: &mut ResponseWriter) {
-		println!("Body: {}", http_req.body);
+	fn handle_request(&self, http_req: HttpRequest, http_res: &mut HttpResponseWriter) {
+		let request = Request::wrap(http_req);
+		println!("Request: {}", request);
 	}
 }
 

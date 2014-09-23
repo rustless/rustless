@@ -6,9 +6,11 @@
 
 extern crate http;
 extern crate serialize;
+extern crate url;
 
 pub use raisin::{Raisin};
 
 mod listener;
 mod raisin;
 mod endpoint;
+mod request;
