@@ -8,13 +8,11 @@ use http::method::Method;
 use http::server::request::Request as HttpRequest;
 
 pub struct Request {
-
 	pub url: Url,
 	pub remote_addr: Option<SocketAddr>,
     pub headers: HeaderCollection,
     pub body: String,
     pub method: Method
-
 }
 
 impl Show for Request {
@@ -32,48 +30,33 @@ impl Show for Request {
 
 impl Request {
 	pub fn wrap(req: HttpRequest) -> Result<Request, String> {
-		match req.request_uri {
+		
+		let url = match req.request_uri {
 			
-			AbsoluteUri(url) => {
-				let string_url: String = format!("{}", url);
-				let parsed_url: Url = match Url::parse(string_url.as_slice()) {
-					Ok(Url) => Url,
-					Err(parse_error) => return Err(format!("{}", parse_error))
-				};
-
-				Ok(Request {
-					url: parsed_url,
-					remote_addr: req.remote_addr,
-					headers: req.headers,
-					body: req.body,
-					method: req.method
-				})
-			},
-
+			AbsoluteUri(url) => format!("{}", url),
 			AbsolutePath(path) => {
-
-				let url_string = match req.headers.host {
+				match req.headers.host {
                     Some(ref host) => format!("http://{}{}", host, path),
                     None => return Err("No HOST header specified in request".to_string())
-                };
-
-				let parsed_url: Url = match Url::parse(url_string.as_slice()) {
-					Ok(url) => url,
-					Err(parse_error) => return Err(format!("{}", parse_error))
-				};
-				
-				Ok(Request {
-					url: parsed_url,
-					remote_addr: req.remote_addr,
-					headers: req.headers,
-					body: req.body,
-					method: req.method
-				})
-
+                }
 			},
 
-			_ => Err("Unsupported request URI".to_string())
+			_ => return Err("Unsupported request URI".to_string())
 
-		}
+		};
+
+		let parsed_url = match Url::parse(url.as_slice()) {
+			Ok(url) => url,
+			Err(parse_error) => return Err(format!("{}", parse_error))
+		};
+
+		Ok(Request {
+			url: parsed_url,
+			remote_addr: req.remote_addr,
+			headers: req.headers,
+			body: req.body,
+			method: req.method
+		})
+
 	}
 }
