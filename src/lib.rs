@@ -1,9 +1,14 @@
+#![crate_name = "raisin"]
+#![comment = "A grape inspired web framework for Rust"]
+#![license = "MIT"]
+#![crate_type = "rlib"]
+#![feature(macro_rules, phase)]
 
 extern crate http;
+extern crate serialize;
 
-use std::io::net::ip::{SocketAddr, IpAddr};
-use std::sync::Arc;
+pub use raisin::{Raisin};
 
-#[test]
-fn it_works() {
-}
+mod listener;
+mod raisin;
+mod endpoint;
