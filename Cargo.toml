@@ -16,3 +16,6 @@ git = "https://github.com/servo/rust-url.git"
 
 [dependencies.anymap]
 git = "https://github.com/chris-morgan/anymap.git"
+
+[dependencies.error]
+git = "https://github.com/reem/rust-error.git"

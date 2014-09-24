@@ -11,16 +11,18 @@ extern crate http;
 extern crate serialize;
 extern crate url;
 extern crate anymap;
+extern crate error;
 
 pub use raisin::{Raisin};
 pub use request::{Request};
-pub use endpoint::{Endpoint};
+pub use api::{Endpoint};
 pub use middleware::{Application, Builder};
 pub use api::{Api,Namespace};
 
+pub use http::method::{Method, Get, Post};
+
 mod listener;
 mod raisin;
-mod endpoint;
 mod request;
 mod route;
 mod middleware;
