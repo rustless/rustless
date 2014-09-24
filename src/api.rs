@@ -1,17 +1,22 @@
 
 use serialize::json;
 use serialize::Decodable;
-use http::method::{Method, Get, Post};
+use http::method::{Method};
+use http::status;
 
 use request::Request;
 use response::Response;
-use route::Route;
+use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
+
+pub trait ApiHandler: Send + Sync {
+	fn call(&self, &str, &mut Request) -> HandleResult<Response>;
+}
 
 #[deriving(Send)]
 pub struct Endpoint<T> {
 	pub desc: &'static str,
-	pub route: Route,
+	pub path: Path,
 	pub method: Method,
 	handler: |&params: T|:'static + Sync + Send -> String,
 }
@@ -28,50 +33,57 @@ impl<T: Decodable<json::Decoder, json::DecoderError>> Endpoint<T> {
 		handler(params)
 	}
 
-	pub fn new(desc: &'static str, method: Method, handler: |&params: T|:'static + Sync + Send -> String) -> Endpoint<T> {
+	pub fn new(desc: &'static str, method: Method, path: &'static str, handler: |&params: T|:'static + Sync + Send -> String) -> Endpoint<T> {
 		Endpoint {
 			desc: desc,
 			method: method,
-			route: Route {
-				matcher: || { Err("Not implemented".to_string()) }
-			},
+			path: Path::parse(path, true).unwrap(),
 			handler: handler
 		}
 	}
 }
 
-impl<T: Decodable<json::Decoder, json::DecoderError>> Handler for Endpoint<T> {
-	fn call(&self, req: &mut Request) -> HandleResult<Response> {
-
-		if false {
-			Err(NotMatchError.abstract())
-		} else {
-			Err(NotMatchError.abstract())
-		}
-		
+impl<T: Decodable<json::Decoder, json::DecoderError>> ApiHandler for Endpoint<T> {
+	fn call(&self, rest_path: &str, req: &mut Request) -> HandleResult<Response> {
+		match self.path.is_match(rest_path) {
+			Some(captures) =>  {
+				return Ok(Response::from_string(status::Ok, "MATCH ENDPOINT!!".to_string()))
+			},
+			None => return Err(NotMatchError.abstract())
+		};
 	}
 }
 
 pub struct Namespace {
-	handlers: Vec<Box<Handler + Send + Sync>>	
+	handlers: Vec<Box<ApiHandler + Send + Sync>>,
+	path: Path	
 }
 
 impl Namespace {
-	pub fn new() -> Namespace {
+	pub fn new(path: &'static str) -> Namespace {
 		Namespace {
-			handlers: vec![]
+			handlers: vec![],
+			path: Path::parse(path, false).unwrap()
 		}
 	}
 
-	pub fn mount_handler(&mut self, edp: Box<Handler + Send + Sync>) {
+	pub fn mount_handler(&mut self, edp: Box<ApiHandler + Send + Sync>) {
 		self.handlers.push(edp)
 	}
 }
 
-impl Handler for Namespace {
-	fn call(&self, req: &mut Request) -> HandleResult<Response> {
+impl ApiHandler for Namespace {
+	fn call(&self, rest_path: &str, req: &mut Request) -> HandleResult<Response> {
+
+		let rest_path: &str = match self.path.is_match(rest_path) {
+			Some(captures) =>  {
+				rest_path.slice_from(captures.at(0).len())
+			},
+			None => return Err(NotMatchError.abstract())
+		};
+
 		for handler in self.handlers.iter() {
-			match handler.call(req) {
+			match handler.call(rest_path, req) {
 				Ok(response) => return Ok(response),
 				Err(err) => {
 					match err.downcast::<NotMatchError>() {
@@ -90,7 +102,7 @@ impl Handler for Namespace {
 #[deriving(Send)]
 pub struct Api {
 	pub version: &'static str,
-	handlers: Vec<Box<Handler + Send + Sync>>
+	handlers: Vec<Box<ApiHandler + Send + Sync>>
 }
 
 impl Api {
@@ -103,10 +115,10 @@ impl Api {
 	}
 
 	pub fn mount_namespace(&mut self, ns: Box<Namespace>) {
-		self.handlers.push(ns as Box<Handler + Send + Sync>)
+		self.handlers.push(ns as Box<ApiHandler + Send + Sync>)
 	}
 
-	pub fn mount_handler(&mut self, edp: Box<Handler + Send + Sync>) {
+	pub fn mount_handler(&mut self, edp: Box<ApiHandler + Send + Sync>) {
 		self.handlers.push(edp)
 	}
 	
@@ -115,8 +127,10 @@ impl Api {
 impl Handler for Api {
 	fn call(&self, req: &mut Request) -> HandleResult<Response> {
 
+		let path = req.url.serialize_path().unwrap_or(String::new());
+
 		for handler in self.handlers.iter() {
-			match handler.call(req) {
+			match handler.call(path.as_slice(), req) {
 				Ok(response) => return Ok(response),
 				Err(err) => {
 					match err.downcast::<NotMatchError>() {
@@ -133,6 +147,8 @@ impl Handler for Api {
 
 #[test]
 fn params_decode() {
+
+	use http::method::{Get};
 	
 	#[deriving(Decodable)]
 	struct Params {
@@ -143,6 +159,7 @@ fn params_decode() {
 	let endpoint: Endpoint<Params> = Endpoint::new(
 		"Test endpoint", 
 		Get,
+		"test",
 		|params: Params| -> String {
 			assert_eq!(params.user_id.as_slice(), "test");
 			assert!(
