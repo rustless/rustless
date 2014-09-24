@@ -67,7 +67,7 @@ impl Namespace {
 		}
 	}
 
-	pub fn mount_handler(&mut self, edp: Box<ApiHandler + Send + Sync>) {
+	pub fn mount(&mut self, edp: Box<ApiHandler + Send + Sync>) {
 		self.handlers.push(edp)
 	}
 }
@@ -114,11 +114,7 @@ impl Api {
 		}
 	}
 
-	pub fn mount_namespace(&mut self, ns: Box<Namespace>) {
-		self.handlers.push(ns as Box<ApiHandler + Send + Sync>)
-	}
-
-	pub fn mount_handler(&mut self, edp: Box<ApiHandler + Send + Sync>) {
+	pub fn mount(&mut self, edp: Box<ApiHandler + Send + Sync>) {
 		self.handlers.push(edp)
 	}
 	
