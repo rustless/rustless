@@ -6,13 +6,15 @@ use http::headers::request::HeaderCollection;
 use http::server::request::{AbsoluteUri, AbsolutePath};
 use http::method::Method;
 use http::server::request::Request as HttpRequest;
+use anymap::AnyMap;
 
 pub struct Request {
 	pub url: Url,
 	pub remote_addr: Option<SocketAddr>,
     pub headers: HeaderCollection,
     pub body: String,
-    pub method: Method
+    pub method: Method,
+    pub ext: AnyMap
 }
 
 impl Show for Request {
@@ -55,7 +57,8 @@ impl Request {
 			remote_addr: req.remote_addr,
 			headers: req.headers,
 			body: req.body,
-			method: req.method
+			method: req.method,
+			ext: AnyMap::new()
 		})
 
 	}
