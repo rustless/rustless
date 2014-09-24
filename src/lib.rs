@@ -18,13 +18,12 @@ pub use request::{Request};
 pub use api::{Endpoint};
 pub use middleware::{Application, Builder};
 pub use api::{Api,Namespace};
-
 pub use http::method::{Method, Get, Post};
 
 mod listener;
 mod raisin;
 mod request;
-mod route;
+mod path;
 mod middleware;
 mod response;
 mod api;
