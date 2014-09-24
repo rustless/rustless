@@ -1,30 +1,52 @@
 
 use serialize::json;
-use regex::{Regex, Captures};
+use regex::{Regex, Captures, SubCaptures};
 
 static matcher: Regex = regex!(r":([a-z][a-z_]*)");
 
 pub struct Path {
-	regex: Regex
+	regex: Regex,
+	pub path: String,
+	pub params: Vec<String>
 }
 
 impl Path {
 
 	pub fn is_match<'a>(&'a self, path: &'a str) -> Option<Captures> {
-		self.regex.captures(path)
+		match self.regex.captures(path) {
+			Some(captures) => Some(captures),
+			None => None
+		}
 	}
 
 	pub fn parse(path: &str, endpoint: bool) -> Result<Path,String> {
 		let mut regex_body = "^/".to_string() + Path::sub_regex(path);
+		
 		if endpoint {
 			regex_body = regex_body + "$";
 		}
+
 		let regex = match Regex::new(regex_body.as_slice()) {
 			Ok(re) => re,
 			Err(err) => return Err(format!("{}", err))
 		};
 
+		let mut params = vec![];
+
+		match matcher.captures(path) {
+			Some(captures) => {
+				for (i, name) in captures.iter().enumerate() {
+					if i > 0 {
+						params.push(name.to_string());	
+					}
+				}
+			},
+			None => ()
+		};
+
 		Ok(Path {
+			path: path.to_string(),
+			params: params,
 			regex: regex
 		})
 	}
