@@ -5,7 +5,7 @@ use http::status;
 
 use collections::treemap::TreeMap;
 use serialize::json;
-use serialize::json::Json;
+use serialize::json::{Json, JsonObject};
 use serialize::json::ToJson;
 
 use request::Request;
@@ -16,8 +16,6 @@ use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, Error
 pub trait ApiHandler: Send + Sync {
 	fn call(&self, &str, &mut JsonObject, &mut Request) -> HandleResult<Response>;
 }
-
-type JsonObject = TreeMap<String,Json>;
 
 #[deriving(Send)]
 pub struct Endpoint<T> {
@@ -87,8 +85,7 @@ impl ApiHandler for Namespace {
 					params.insert(param.clone(), captures.name(param.as_slice()).to_string().to_json());
 				}
 
-				println!("{}", params);
-
+				println!("{}", params.to_json().to_pretty_str());
 				rest_path.slice_from(captures.at(0).len())
 			},
 			None => return Err(NotMatchError.abstract())

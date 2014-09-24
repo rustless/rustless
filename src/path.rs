@@ -32,17 +32,9 @@ impl Path {
 		};
 
 		let mut params = vec![];
-
-		match matcher.captures(path) {
-			Some(captures) => {
-				for (i, name) in captures.iter().enumerate() {
-					if i > 0 {
-						params.push(name.to_string());	
-					}
-				}
-			},
-			None => ()
-		};
+		for capture in matcher.captures_iter(path) {
+			params.push(capture.at(1).to_string());	
+		}
 
 		Ok(Path {
 			path: path.to_string(),
