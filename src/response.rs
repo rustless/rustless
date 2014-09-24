@@ -26,6 +26,10 @@ impl Response {
         }
     }
 
+    pub fn from_string(status: status::Status, body: String) -> Response {
+        Response::from_reader(status, box MemReader::new(body.into_bytes()) as Box<Reader + Send>)
+    }
+
     pub fn from_file(path: &Path) -> IoResult<Response> {
         let file = try!(File::open(path));
         let mut response = Response::from_reader(
