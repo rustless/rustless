@@ -1,13 +1,24 @@
 
 use serialize::json;
 use serialize::Decodable;
+use http::method::{Method, Get, Post};
+use std::any::Any;
 
-struct Endpoint<T> {
+use request::Request;
+use response::Response;
+use route::Route;
+use middleware::{Handler, HandleResult, SimpleError};
+
+#[deriving(Send)]
+pub struct Endpoint<T> {
 	pub desc: &'static str,
-	handler: |&params: T|:'static -> String
+	pub route: Route,
+	pub method: Method,
+	handler: |&params: T|:'static + Sync + Send -> String,
 }
 
 impl<T: Decodable<json::Decoder, json::DecoderError>> Endpoint<T> {
+
 	pub fn decode(from: &str) -> T {
 		json::decode(from).unwrap()
 	}
@@ -18,11 +29,25 @@ impl<T: Decodable<json::Decoder, json::DecoderError>> Endpoint<T> {
 		handler(params)
 	}
 
-	pub fn new(desc: &'static str, handler: |&params: T|:'static -> String) -> Endpoint<T> {
+	pub fn new(desc: &'static str, method: Method, handler: |&params: T|:'static + Sync + Send -> String) -> Endpoint<T> {
 		Endpoint {
 			desc: desc,
+			method: method,
+			route: Route {
+				matcher: || { Err("Not implemented".to_string()) }
+			},
 			handler: handler
 		}
+	}
+}
+
+impl<T: Decodable<json::Decoder, json::DecoderError>> Handler for Endpoint<T> {
+	fn call(&self, req: &mut Request) -> HandleResult<Response> {
+		let error = box SimpleError {
+			name: "Not implemented"
+		};
+
+		Err(error as Box<Any>)
 	}
 }
 
@@ -37,6 +62,7 @@ fn params_decode() {
 
 	let endpoint: Endpoint<Params> = Endpoint::new(
 		"Test endpoint", 
+		Get,
 		|params: Params| -> String {
 			assert_eq!(params.user_id.as_slice(), "test");
 			assert!(
