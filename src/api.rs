@@ -1,8 +1,12 @@
 
-use serialize::json;
 use serialize::Decodable;
 use http::method::{Method};
 use http::status;
+
+use collections::treemap::TreeMap;
+use serialize::json;
+use serialize::json::Json;
+use serialize::json::ToJson;
 
 use request::Request;
 use response::Response;
@@ -10,8 +14,10 @@ use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
 
 pub trait ApiHandler: Send + Sync {
-	fn call(&self, &str, &mut Request) -> HandleResult<Response>;
+	fn call(&self, &str, &mut JsonObject, &mut Request) -> HandleResult<Response>;
 }
+
+type JsonObject = TreeMap<String,Json>;
 
 #[deriving(Send)]
 pub struct Endpoint<T> {
@@ -44,7 +50,7 @@ impl<T: Decodable<json::Decoder, json::DecoderError>> Endpoint<T> {
 }
 
 impl<T: Decodable<json::Decoder, json::DecoderError>> ApiHandler for Endpoint<T> {
-	fn call(&self, rest_path: &str, req: &mut Request) -> HandleResult<Response> {
+	fn call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
 		match self.path.is_match(rest_path) {
 			Some(captures) =>  {
 				return Ok(Response::from_string(status::Ok, "MATCH ENDPOINT!!".to_string()))
@@ -73,17 +79,23 @@ impl Namespace {
 }
 
 impl ApiHandler for Namespace {
-	fn call(&self, rest_path: &str, req: &mut Request) -> HandleResult<Response> {
+	fn call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
 
 		let rest_path: &str = match self.path.is_match(rest_path) {
 			Some(captures) =>  {
+				for param in self.path.params.iter() {
+					params.insert(param.clone(), captures.name(param.as_slice()).to_string().to_json());
+				}
+
+				println!("{}", params);
+
 				rest_path.slice_from(captures.at(0).len())
 			},
 			None => return Err(NotMatchError.abstract())
 		};
 
 		for handler in self.handlers.iter() {
-			match handler.call(rest_path, req) {
+			match handler.call(rest_path, params, req) {
 				Ok(response) => return Ok(response),
 				Err(err) => {
 					match err.downcast::<NotMatchError>() {
@@ -126,7 +138,7 @@ impl Handler for Api {
 		let path = req.url.serialize_path().unwrap_or(String::new());
 
 		for handler in self.handlers.iter() {
-			match handler.call(path.as_slice(), req) {
+			match handler.call(path.as_slice(), &mut TreeMap::new(), req) {
 				Ok(response) => return Ok(response),
 				Err(err) => {
 					match err.downcast::<NotMatchError>() {

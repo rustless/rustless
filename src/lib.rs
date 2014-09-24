@@ -12,6 +12,7 @@ extern crate serialize;
 extern crate url;
 extern crate anymap;
 extern crate error;
+extern crate collections;
 
 pub use raisin::{Raisin};
 pub use request::{Request};
