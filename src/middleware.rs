@@ -13,7 +13,7 @@ pub struct SimpleError {
 
 impl Error for SimpleError {
     fn name(&self) -> &'static str {
-    	return self.name;
+        return self.name;
     }
 }
 
@@ -22,7 +22,7 @@ pub struct NotMatchError;
 
 impl Error for NotMatchError {
     fn name(&self) -> &'static str {
-    	return "NotMatchError";
+        return "NotMatchError";
     }
 }
 
@@ -31,7 +31,7 @@ pub struct NotFoundError;
 
 impl Error for NotFoundError {
     fn name(&self) -> &'static str {
-    	return "NotFoundError";
+        return "NotFoundError";
     }
 }
 
@@ -53,7 +53,7 @@ pub trait CatchMiddleware: Send + Sync {
 }
 
 pub trait Handler: Send + Sync {
-	fn call(&self, &mut Request) -> HandleResult<Response>;
+    fn call(&self, &mut Request) -> HandleResult<Response>;
 }
 
 #[deriving(Send)]
@@ -65,115 +65,115 @@ pub struct Application {
 }
 
 impl Application {
-	pub fn call(&self, req: &mut Request) -> HandleResult<Response> {
+    pub fn call(&self, req: &mut Request) -> HandleResult<Response> {
 
-		for mdw in self.before.iter() {
-			match mdw.before(req) {
-				Err(err) => {
-					match self.handle_error(req, err) {
-						Some(response) => return Ok(response),
-						None => ()
-					}
-				},
-				Ok(()) => ()
-			}
-		}
+        for mdw in self.before.iter() {
+            match mdw.before(req) {
+                Err(err) => {
+                    match self.handle_error(req, err) {
+                        Some(response) => return Ok(response),
+                        None => ()
+                    }
+                },
+                Ok(()) => ()
+            }
+        }
 
-		let mut response: Option<Response> = None;
+        let mut response: Option<Response> = None;
 
-		for handler in self.handlers.iter() {
-			match handler.call(req) {
-				Ok(resp) => response = Some(resp),
-				Err(err) => match err.downcast::<NotMatchError>() {
-					Some(_) => (),
-					None => match self.handle_error(req, err) {
-						Some(response) => return Ok(response),
-						None => ()
-					}
-				}
-			}
-		}
+        for handler in self.handlers.iter() {
+            match handler.call(req) {
+                Ok(resp) => response = Some(resp),
+                Err(err) => match err.downcast::<NotMatchError>() {
+                    Some(_) => (),
+                    None => match self.handle_error(req, err) {
+                        Some(response) => return Ok(response),
+                        None => ()
+                    }
+                }
+            }
+        }
 
-		let mut exact_response = match response {
-			Some(resp) => resp,
-			None => return Ok(self.handle_error(req, NotFoundError.abstract()).unwrap())
-		};
+        let mut exact_response = match response {
+            Some(resp) => resp,
+            None => return Ok(self.handle_error(req, NotFoundError.abstract()).unwrap())
+        };
 
-		for mdw in self.after.iter() {
-			match mdw.after(req, &mut exact_response) {
-				Err(err) => match self.handle_error(req, err) {
-					Some(response) => return Ok(response),
-					None => ()
-				},
-				Ok(()) => ()
-			}
-		}
+        for mdw in self.after.iter() {
+            match mdw.after(req, &mut exact_response) {
+                Err(err) => match self.handle_error(req, err) {
+                    Some(response) => return Ok(response),
+                    None => ()
+                },
+                Ok(()) => ()
+            }
+        }
 
-		Ok(exact_response)
+        Ok(exact_response)
 
-	}
+    }
 
-	pub fn handle_error(&self, req: &mut Request, err: HandleError) -> Option<Response> {
-		for catcher in self.catch.iter() {
-			match catcher.rescue(req, &err) {
-				Ok(maybe_response) => {
-					match maybe_response {
-						Some(resp) => return Some(resp),
-						None => return None
-					}
-				},
-				Err(some) => ()
-			}
-		}
+    pub fn handle_error(&self, req: &mut Request, err: HandleError) -> Option<Response> {
+        for catcher in self.catch.iter() {
+            match catcher.rescue(req, &err) {
+                Ok(maybe_response) => {
+                    match maybe_response {
+                        Some(resp) => return Some(resp),
+                        None => return None
+                    }
+                },
+                Err(some) => ()
+            }
+        }
 
-		let error_message = format!("{}", err);
-		Some(Response::from_string(status::InternalServerError, error_message))
-	}
+        let error_message = format!("{}", err);
+        Some(Response::from_string(status::InternalServerError, error_message))
+    }
 }
 
 pub struct Builder {
-	app: Application
+    app: Application
 }
 
 trait AfterMiddlewareSupport {
-	fn using(&mut self, middleware: Box<AfterMiddleware + Send + Sync>);
+    fn using(&mut self, middleware: Box<AfterMiddleware + Send + Sync>);
 }
 
 trait BeforeMiddlewareSupport {
-	fn using(&mut self, middleware: Box<BeforeMiddleware + Send + Sync>);
+    fn using(&mut self, middleware: Box<BeforeMiddleware + Send + Sync>);
 }
 
 impl Builder {
 
-	pub fn get_app(self) -> Application {
-		self.app
-	}
+    pub fn get_app(self) -> Application {
+        self.app
+    }
 
-	pub fn new() -> Builder {
-		Builder {
-			app: Application {
-				before: vec![],
-				after: vec![],
-				catch: vec![],
-				handlers: vec![]
-			}
-		}
-	}
+    pub fn new() -> Builder {
+        Builder {
+            app: Application {
+                before: vec![],
+                after: vec![],
+                catch: vec![],
+                handlers: vec![]
+            }
+        }
+    }
 
-	pub fn mount(&mut self, handler: Box<Handler + Send + Sync>) {
-		self.app.handlers.push(handler);
-	}
+    pub fn mount(&mut self, handler: Box<Handler + Send + Sync>) {
+        self.app.handlers.push(handler);
+    }
 }
 
 impl AfterMiddlewareSupport for Builder {
-	fn using(&mut self, middleware: Box<AfterMiddleware + Send + Sync>) {
-		self.app.after.push(middleware);
-	}
+    fn using(&mut self, middleware: Box<AfterMiddleware + Send + Sync>) {
+        self.app.after.push(middleware);
+    }
 }
 
 impl BeforeMiddlewareSupport for Builder {
-	fn using(&mut self, middleware: Box<BeforeMiddleware + Send + Sync>) {
-		self.app.before.push(middleware);
-	}
+    fn using(&mut self, middleware: Box<BeforeMiddleware + Send + Sync>) {
+        self.app.before.push(middleware);
+    }
 }
 
