@@ -19,3 +19,9 @@ git = "https://github.com/chris-morgan/anymap.git"
 
 [dependencies.error]
 git = "https://github.com/reem/rust-error.git"
+
+[dependencies.valico]
+path = "../valico"
+
+[dependencies.query]
+path = "../rust-query"
