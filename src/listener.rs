@@ -38,9 +38,9 @@ impl ConcurrentHandler for Application {
     fn handle(&self, mut req: HyperRequest, mut res: HyperResponse<Fresh>) {
 
         let mut request = Request::wrap(req).unwrap();
-        let response = self.call(&mut request);
+        let maybe_response = self.call(&mut request);
         
-        match response {
+        match maybe_response {
             Ok(response) => {
                 *res.status_mut() = response.status;
                 *res.headers_mut() = response.headers;
@@ -55,7 +55,6 @@ impl ConcurrentHandler for Application {
                     },
                     _ => ()
                 }
-
             },
 
             Err(_) => println!("No response")
