@@ -40,8 +40,6 @@ impl ApiHandler for Namespace {
                 for param in self.path.params.iter() {
                     params.insert(param.clone(), captures.name(param.as_slice()).to_string().to_json());
                 }
-
-                println!("{}", params.to_json().to_pretty_str());
                 rest_path.slice_from(captures.at(0).len())
             },
             None => return Err(NotMatchError.abstract())

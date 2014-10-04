@@ -49,11 +49,17 @@ impl Endpoint {
 
 impl ApiHandler for Endpoint {
     fn call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
+
         match self.path.is_match(rest_path) {
             Some(captures) =>  {
-                return Ok(Response::from_string(status::Ok, "MATCH ENDPOINT!!".to_string()))
+                for param in self.path.params.iter() {
+                    params.insert(param.clone(), captures.name(param.as_slice()).to_string().to_json());
+                }
+
+                return Ok(Response::from_string(status::Ok, params.to_json().to_pretty_str()))
             },
             None => return Err(NotMatchError.abstract())
         };
+
     }
 }
