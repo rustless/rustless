@@ -13,12 +13,13 @@ extern crate url;
 extern crate anymap;
 extern crate error;
 extern crate collections;
+extern crate valico;
+extern crate query;
 
 pub use raisin::{Raisin};
 pub use request::{Request};
-pub use api::{Endpoint};
+pub use api::{Endpoint, Api, Namespace};
 pub use middleware::{Application, Builder};
-pub use api::{Api,Namespace};
 pub use http::method::{Method, Get, Post};
 
 mod listener;
