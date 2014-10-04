@@ -4,7 +4,7 @@ use response::Response;
 
 use std::fmt::Show;
 pub use error::{Error, ErrorRefExt};
-use http::status;
+use hyper::status;
 
 #[deriving(Show)]
 pub struct SimpleError {

@@ -1,24 +1,18 @@
-use std::io::net::ip::{IpAddr};
+use std::io::net::ip::{IpAddr, Ipv4Addr};
 use std::sync::Arc;
 
-use listener::{Listener};
+use hyper::server::{Server};
+
+use listener::{Concurrent, ConcurrentHandler};
 use middleware::Application;
 
-pub struct Raisin {
-    pub some: u16,
-}
+pub struct Raisin;
 
 impl Raisin {
 
     pub fn listen(self, app: Application, ip: IpAddr, port: u16) {
-        spawn(proc() {
-            let arc_app = Arc::new(app);
-            Listener {
-                ip: ip,
-                port: port,
-                app: arc_app
-            }.serve();
-        })
+        let server = Server::http(ip, port);
+        server.listen(Concurrent { handler: Arc::new(app) }).unwrap();
     }
 
 }

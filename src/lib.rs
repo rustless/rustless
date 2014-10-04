@@ -7,7 +7,7 @@
 
 extern crate regex_macros;
 extern crate regex;
-extern crate http;
+extern crate hyper;
 extern crate serialize;
 extern crate url;
 extern crate anymap;
@@ -20,7 +20,7 @@ pub use raisin::{Raisin};
 pub use request::{Request};
 pub use api::{Endpoint, Api, Namespace};
 pub use middleware::{Application, Builder};
-pub use http::method::{Method, Get, Post};
+pub use hyper::method::{Method, Get, Post};
 
 mod listener;
 mod raisin;
