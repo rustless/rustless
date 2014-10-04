@@ -1,7 +1,7 @@
 
 use serialize::Decodable;
-use http::method::{Method};
-use http::status;
+use hyper::method::{Method};
+use hyper::status;
 
 use collections::treemap::TreeMap;
 use serialize::json;
