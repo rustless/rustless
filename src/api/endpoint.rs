@@ -1,22 +1,31 @@
-use serialize::Decodable;
-use hyper::method::{Method};
-use hyper::status;
-
 use collections::treemap::TreeMap;
 use serialize::json;
 use serialize::json::{Json, JsonObject};
 use serialize::json::ToJson;
+use serialize::Decodable;
+
+use hyper::method::{Method};
+use hyper::status;
 use valico::Builder as ValicoBuilder;
+use query;
 
 use request::Request;
 use response::Response;
 use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
-
 use api::{ApiHandler};
 
 pub type EndpointHandler = fn(&Json) -> String;
 pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
+
+#[deriving(Show)]
+pub struct QueryStringDecodeError;
+
+impl Error for QueryStringDecodeError {
+    fn name(&self) -> &'static str {
+        return "QueryStringDecodeError";
+    }
+}
 
 #[deriving(Send)]
 pub struct Endpoint {
@@ -53,6 +62,24 @@ impl ApiHandler for Endpoint {
         match self.path.is_match(rest_path) {
             Some(captures) =>  {
                 self.path.apply_captures(params, captures);
+
+                // extend params with query-string params if any
+                if req.url.query.is_some() {
+                    let mut maybe_query_params = query::parse(req.url.query.as_ref().unwrap().as_slice());
+                    match maybe_query_params {
+                        Ok(query_params) => {
+                            for (key, value) in query_params.as_object().unwrap().iter() {
+                                if !params.contains_key(key) {
+                                    params.insert(key.to_string(), value.clone());
+                                }
+                            }
+                        }, 
+                        Err(err) => {
+                            return Err(QueryStringDecodeError.abstract());
+                        }
+                    }
+                }
+
                 return Ok(Response::from_string(status::Ok, self.process(params)))
             },
             None => return Err(NotMatchError.abstract())
