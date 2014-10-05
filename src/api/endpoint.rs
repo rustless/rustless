@@ -80,6 +80,70 @@ impl Endpoint {
             handler: handler
         }
     }
+
+    pub fn call_decode(&self, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
+        
+        // extend params with query-string params if any
+        if req.url.query.is_some() {
+            let mut maybe_query_params = query::parse(req.url.query.as_ref().unwrap().as_slice());
+            match maybe_query_params {
+                Ok(query_params) => {
+                    for (key, value) in query_params.as_object().unwrap().iter() {
+                        if !params.contains_key(key) {
+                            params.insert(key.to_string(), value.clone());
+                        }
+                    }
+                }, 
+                Err(err) => {
+                    return Err(QueryStringDecodeError.abstract());
+                }
+            }
+        }
+
+        let is_json_body = {
+            let content_type = req.headers().get::<header::common::ContentType>(); 
+            if content_type.is_some() {
+                println!("ContentType: {}", content_type.unwrap().0);
+                match content_type.unwrap().0 {
+                    Mime(Application, Json, _) => true,
+                    _ => false
+                }
+            } else {
+                false
+            }
+        };
+
+        if is_json_body {
+            let maybe_body = req.read_to_end();
+        
+            let utf8_string_body = {
+                match maybe_body {
+                    Ok(body) => {
+                        match String::from_utf8(body) {
+                            Ok(e) => e,
+                            Err(_) => return Err(BodyDecodeError::new("Invalid UTF-8 sequence".to_string()).abstract()),
+                        }
+                    },
+                    Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).abstract())
+                }
+            };
+
+            let maybe_json_body = json::from_str(utf8_string_body.as_slice());
+            match maybe_json_body {
+                Ok(json_body) => {
+                    for (key, value) in json_body.as_object().unwrap().iter() {
+                        if !params.contains_key(key) {
+                            params.insert(key.to_string(), value.clone());
+                        }
+                    }
+                },
+                Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).abstract())
+            }
+        }
+
+        return Ok(Response::from_string(status::Ok, self.process(params)))
+    }
+
 }
 
 impl ApiHandler for Endpoint {
@@ -88,69 +152,10 @@ impl ApiHandler for Endpoint {
         match self.path.is_match(rest_path) {
             Some(captures) =>  {
                 self.path.apply_captures(params, captures);
-
-                // extend params with query-string params if any
-                if req.url.query.is_some() {
-                    let mut maybe_query_params = query::parse(req.url.query.as_ref().unwrap().as_slice());
-                    match maybe_query_params {
-                        Ok(query_params) => {
-                            for (key, value) in query_params.as_object().unwrap().iter() {
-                                if !params.contains_key(key) {
-                                    params.insert(key.to_string(), value.clone());
-                                }
-                            }
-                        }, 
-                        Err(err) => {
-                            return Err(QueryStringDecodeError.abstract());
-                        }
-                    }
-                }
-
-                let is_json_body = {
-                    let content_type = req.headers().get::<header::common::ContentType>(); 
-                    if content_type.is_some() {
-                        println!("ContentType: {}", content_type.unwrap().0);
-                        match content_type.unwrap().0 {
-                            Mime(Application, Json, _) => true,
-                            _ => false
-                        }
-                    } else {
-                        false
-                    }
-                };
-
-                if is_json_body {
-                    let maybe_body = req.read_to_end();
-                
-                    let utf8_string_body = {
-                        match maybe_body {
-                            Ok(body) => {
-                                match String::from_utf8(body) {
-                                    Ok(e) => e,
-                                    Err(_) => return Err(BodyDecodeError::new("Invalid UTF-8 sequence".to_string()).abstract()),
-                                }
-                            },
-                            Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).abstract())
-                        }
-                    };
-
-                    let maybe_json_body = json::from_str(utf8_string_body.as_slice());
-                    match maybe_json_body {
-                        Ok(json_body) => {
-                            for (key, value) in json_body.as_object().unwrap().iter() {
-                                if !params.contains_key(key) {
-                                    params.insert(key.to_string(), value.clone());
-                                }
-                            }
-                        },
-                        Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).abstract())
-                    }
-                }
-
-                return Ok(Response::from_string(status::Ok, self.process(params)))
+                self.call_decode(params, req)
             },
-            None => return Err(NotMatchError.abstract())
-        };
+            None => Err(NotMatchError.abstract())
+        }
 
     }
 }
