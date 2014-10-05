@@ -15,7 +15,7 @@ use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, Error
 
 use api::{ApiHandler};
 
-pub type EndpointHandler = |Json|:'static + Send + Sync -> String;
+pub type EndpointHandler = fn(&Json) -> String;
 pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
 
 #[deriving(Send)]
@@ -29,11 +29,11 @@ pub struct Endpoint {
 
 impl Endpoint {
 
-    pub fn process(self, params_body: &str) -> String {
+    pub fn process(&self, params: &JsonObject) -> String {
         // let params = Endpoint::decode(params_body);
-        // let handler = self.handler;
-        // handler(params)
-        "".to_string()
+        let ref handler = self.handler;
+        // fixme not efficient
+        (*handler)(&params.to_json())
     }
 
     pub fn new(method: Method, path: &str, desc: &str, params: ValicoBuildHandler, handler: EndpointHandler) -> Endpoint {
@@ -56,7 +56,7 @@ impl ApiHandler for Endpoint {
                     params.insert(param.clone(), captures.name(param.as_slice()).to_string().to_json());
                 }
 
-                return Ok(Response::from_string(status::Ok, params.to_json().to_pretty_str()))
+                return Ok(Response::from_string(status::Ok, self.process(params)))
             },
             None => return Err(NotMatchError.abstract())
         };

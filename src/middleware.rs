@@ -65,6 +65,7 @@ pub struct Application {
 }
 
 impl Application {
+
     pub fn call(&self, req: &mut Request) -> HandleResult<Response> {
 
         for mdw in self.before.iter() {
@@ -84,13 +85,7 @@ impl Application {
         for handler in self.handlers.iter() {
             match handler.call(req) {
                 Ok(resp) => response = Some(resp),
-                Err(err) => match err.downcast::<NotMatchError>() {
-                    Some(_) => (),
-                    None => match self.handle_error(req, err) {
-                        Some(response) => return Ok(response),
-                        None => ()
-                    }
-                }
+                Err(err) => ()
             }
         }
 
