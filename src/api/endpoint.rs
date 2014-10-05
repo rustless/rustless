@@ -3,9 +3,12 @@ use serialize::json;
 use serialize::json::{Json, JsonObject};
 use serialize::json::ToJson;
 use serialize::Decodable;
+use std::str;
 
+use hyper::mime::{Mime, Application, Json};
 use hyper::method::{Method};
 use hyper::status;
+use hyper::header;
 use valico::Builder as ValicoBuilder;
 use query;
 
@@ -24,6 +27,29 @@ pub struct QueryStringDecodeError;
 impl Error for QueryStringDecodeError {
     fn name(&self) -> &'static str {
         return "QueryStringDecodeError";
+    }
+}
+
+#[deriving(Show)]
+pub struct BodyDecodeError {
+    reason: String
+}
+
+impl BodyDecodeError {
+    pub fn new(reason: String) -> BodyDecodeError {
+        return BodyDecodeError {
+            reason: reason
+        }
+    }
+}
+
+impl Error for BodyDecodeError {
+    fn name(&self) -> &'static str {
+        return "BodyDecodeError";
+    }
+
+    fn description(&self) -> Option<&str> {
+        return Some(self.reason.as_slice())
     }
 }
 
@@ -77,6 +103,47 @@ impl ApiHandler for Endpoint {
                         Err(err) => {
                             return Err(QueryStringDecodeError.abstract());
                         }
+                    }
+                }
+
+                let is_json_body = {
+                    let content_type = req.headers().get::<header::common::ContentType>(); 
+                    if content_type.is_some() {
+                        println!("ContentType: {}", content_type.unwrap().0);
+                        match content_type.unwrap().0 {
+                            Mime(Application, Json, _) => true,
+                            _ => false
+                        }
+                    } else {
+                        false
+                    }
+                };
+
+                if is_json_body {
+                    let maybe_body = req.read_to_end();
+                
+                    let utf8_string_body = {
+                        match maybe_body {
+                            Ok(body) => {
+                                match String::from_utf8(body) {
+                                    Ok(e) => e,
+                                    Err(_) => return Err(BodyDecodeError::new("Invalid UTF-8 sequence".to_string()).abstract()),
+                                }
+                            },
+                            Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).abstract())
+                        }
+                    };
+
+                    let maybe_json_body = json::from_str(utf8_string_body.as_slice());
+                    match maybe_json_body {
+                        Ok(json_body) => {
+                            for (key, value) in json_body.as_object().unwrap().iter() {
+                                if !params.contains_key(key) {
+                                    params.insert(key.to_string(), value.clone());
+                                }
+                            }
+                        },
+                        Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).abstract())
                     }
                 }
 
