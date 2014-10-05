@@ -14,9 +14,43 @@ use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, Error
 
 use api::{ApiHandler};
 
+pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
+
 pub struct Namespace {
-    handlers: Vec<Box<ApiHandler + Send + Sync>>,
+    handlers: ApiHandlers,
     path: Path  
+}
+
+pub trait NamespaceBehavior {
+
+    fn handlers<'a>(&'a self) -> &'a ApiHandlers;
+    fn handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers;
+
+    fn mount(&mut self, edp: Box<ApiHandler + Send + Sync>) {
+        self.handlers_mut().push(edp)
+    }
+
+    fn call_handlers(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
+        for handler in self.handlers().iter() {
+            match handler.call(rest_path, params, req) {
+                Ok(response) => return Ok(response),
+                Err(err) => {
+                    match err.downcast::<NotMatchError>() {
+                        Some(_) => (),
+                        None => return Err(err),
+                    }
+                }
+            };
+        }
+
+        Err(NotMatchError.abstract())
+    }
+
+}
+
+impl NamespaceBehavior for Namespace {
+    fn handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
+    fn handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
 }
 
 impl Namespace {
@@ -25,10 +59,6 @@ impl Namespace {
             handlers: vec![],
             path: Path::parse(path, false).unwrap()
         }
-    }
-
-    pub fn mount(&mut self, edp: Box<ApiHandler + Send + Sync>) {
-        self.handlers.push(edp)
     }
 }
 
@@ -44,18 +74,6 @@ impl ApiHandler for Namespace {
             None => return Err(NotMatchError.abstract())
         };
 
-        for handler in self.handlers.iter() {
-            match handler.call(rest_path, params, req) {
-                Ok(response) => return Ok(response),
-                Err(err) => {
-                    match err.downcast::<NotMatchError>() {
-                        Some(_) => (),
-                        None => return Err(err),
-                    }
-                }
-            };
-        }
-
-        Err(NotMatchError.abstract())
+        self.call_handlers(rest_path, params, req)
     }
 }
