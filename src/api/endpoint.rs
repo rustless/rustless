@@ -52,10 +52,7 @@ impl ApiHandler for Endpoint {
 
         match self.path.is_match(rest_path) {
             Some(captures) =>  {
-                for param in self.path.params.iter() {
-                    params.insert(param.clone(), captures.name(param.as_slice()).to_string().to_json());
-                }
-
+                self.path.apply_captures(params, captures);
                 return Ok(Response::from_string(status::Ok, self.process(params)))
             },
             None => return Err(NotMatchError.abstract())

@@ -37,10 +37,9 @@ impl ApiHandler for Namespace {
 
         let rest_path: &str = match self.path.is_match(rest_path) {
             Some(captures) =>  {
-                for param in self.path.params.iter() {
-                    params.insert(param.clone(), captures.name(param.as_slice()).to_string().to_json());
-                }
-                rest_path.slice_from(captures.at(0).len())
+                let captured_length = captures.at(0).len();
+                self.path.apply_captures(params, captures);
+                rest_path.slice_from(captured_length)
             },
             None => return Err(NotMatchError.abstract())
         };

@@ -71,7 +71,6 @@ impl Request {
             Err(parse_error) => return Err(format!("{}", parse_error))
         };
 
-
         Ok(Request::new(parsed_url, req))
 
     }
