@@ -53,11 +53,14 @@ impl ConcurrentHandler for Application {
                         try_abort!(res.write(content.as_slice()));
                         try_abort!(res.end());
                     },
-                    _ => ()
+                    _ => try_abort!(res.start().and_then(|res| res.end()))
                 }
             },
 
-            Err(_) => println!("No response")
+            Err(_) => {
+                println!("No response");
+                try_abort!(res.start().and_then(|res| res.end()));
+            }
         }
     }
 }
