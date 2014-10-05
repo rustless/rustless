@@ -18,7 +18,7 @@ use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
 use api::{ApiHandler};
 
-pub type EndpointHandler = fn(&mut EndpointInstance, &Json) -> String;
+pub type EndpointHandler = fn<'a>(EndpointInstance<'a>, &Json) -> EndpointInstance<'a>;
 pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
 
 #[deriving(Show)]
@@ -85,13 +85,13 @@ impl Endpoint {
         }
     }
 
-    pub fn process(&self, params: &mut JsonObject, req: &mut Request) -> String {
+    pub fn process<'a>(&'a self, params: &mut JsonObject, req: &'a mut Request) -> EndpointInstance<'a> {
         let ref handler = self.handler;
 
         let mut endpoint_response = EndpointInstance::new(self, req);
 
         // fixme not efficient
-        (*handler)(&mut endpoint_response, &params.to_json())
+        (*handler)(endpoint_response, &params.to_json())
     }
 
     pub fn call_decode(&self, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
@@ -150,7 +150,7 @@ impl Endpoint {
             Err(err) => return Err(ValidationError{ reason: err }.abstract())
         }
 
-        return Ok(Response::from_string(status::Ok, self.process(params, req)))
+        return Ok(self.process(params, req).move_response())
     }
 
 }
@@ -172,7 +172,8 @@ impl ApiHandler for Endpoint {
 pub struct EndpointInstance<'a> {
     pub endpoint: &'a Endpoint,
     pub request: &'a Request,
-    pub ext: AnyMap
+    pub ext: AnyMap,
+    pub response: Response
 }
 
 impl<'a> EndpointInstance<'a> {
@@ -181,8 +182,27 @@ impl<'a> EndpointInstance<'a> {
         EndpointInstance {
             endpoint: endpoint,
             request: request,
-            ext: AnyMap::new()
+            ext: AnyMap::new(),
+            response: Response::new(status::Ok)
         }
+    }
+
+    pub fn redirect(mut self, to: &str) -> EndpointInstance<'a> {
+        self.response.status = status::Found;
+        self.response.headers.set(header::common::Location(to.to_string()));
+
+        self
+    }
+
+    pub fn permanent_redirect(mut self, to: &str) -> EndpointInstance<'a> {
+        self.response.status = status::MovedPermanently;
+        self.response.headers.set(header::common::Location(to.to_string()));
+
+        self
+    }
+
+    pub fn move_response(self) -> Response {
+        self.response
     }
     
 }

@@ -15,6 +15,15 @@ pub struct Response {
 
 impl Response {
 
+    pub fn new(status: StatusCode) -> Response {
+        Response {
+            status: status,
+            headers: Headers::new(),
+            body: None,
+            ext: AnyMap::new()
+        }
+    }
+
     pub fn from_reader(status: StatusCode, body: Box<Reader + Send>) -> Response {
         Response {
             status: status,
@@ -25,7 +34,13 @@ impl Response {
     }
 
     pub fn from_string(status: StatusCode, body: String) -> Response {
-        Response::from_reader(status, box MemReader::new(body.into_bytes()) as Box<Reader + Send>)
+        let mut response = Response::new(status);
+        response.push_string(body);
+        response
+    }
+
+    pub fn push_string(&mut self, body: String) {
+        self.body = Some(box MemReader::new(body.into_bytes()) as Box<Reader + Send>)
     }
 
     pub fn from_file(path: &Path) -> IoResult<Response> {
