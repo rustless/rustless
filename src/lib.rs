@@ -18,7 +18,7 @@ extern crate query;
 
 pub use raisin::{Raisin};
 pub use request::{Request};
-pub use api::{Endpoint, Api, Namespace};
+pub use api::{Endpoint, EndpointInstance, Api, Namespace};
 pub use middleware::{Application, Builder};
 pub use hyper::method::{Method, Get, Post};
 

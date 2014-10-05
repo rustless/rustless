@@ -17,7 +17,7 @@ use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
 use api::{ApiHandler};
 
-pub type EndpointHandler = fn(&Json) -> String;
+pub type EndpointHandler = fn(&mut EndpointInstance, &Json) -> String;
 pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
 
 #[deriving(Show)]
@@ -63,13 +63,6 @@ pub struct Endpoint {
 
 impl Endpoint {
 
-    pub fn process(&self, params: &JsonObject) -> String {
-        // let params = Endpoint::decode(params_body);
-        let ref handler = self.handler;
-        // fixme not efficient
-        (*handler)(&params.to_json())
-    }
-
     pub fn new(method: Method, path: &str, desc: &str, params: ValicoBuildHandler, handler: EndpointHandler) -> Endpoint {
         Endpoint {
             desc: desc.to_string(),
@@ -78,6 +71,15 @@ impl Endpoint {
             coercer: ValicoBuilder::build(params),
             handler: handler
         }
+    }
+
+    pub fn process(&self, params: &mut JsonObject, req: &mut Request) -> String {
+        let ref handler = self.handler;
+
+        let mut endpoint_response = EndpointInstance::new(self, req);
+
+        // fixme not efficient
+        (*handler)(&mut endpoint_response, &params.to_json())
     }
 
     pub fn call_decode(&self, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
@@ -99,6 +101,7 @@ impl Endpoint {
             }
         }
 
+        // extend params with json-encoded body params if any
         if req.is_json_body() {
             let maybe_body = req.read_to_end();
         
@@ -127,7 +130,7 @@ impl Endpoint {
             }
         }
 
-        return Ok(Response::from_string(status::Ok, self.process(params)))
+        return Ok(Response::from_string(status::Ok, self.process(params, req)))
     }
 
 }
@@ -144,4 +147,20 @@ impl ApiHandler for Endpoint {
         }
 
     }
+}
+
+pub struct EndpointInstance<'a> {
+    pub endpoint: &'a Endpoint,
+    pub request: &'a Request
+}
+
+impl<'a> EndpointInstance<'a> {
+
+    pub fn new(endpoint: &'a Endpoint, request: &'a Request) -> EndpointInstance<'a> {
+        EndpointInstance {
+            endpoint: endpoint,
+            request: request
+        }
+    }
+    
 }
