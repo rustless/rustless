@@ -77,12 +77,12 @@ fn main() {
 You can define validations and coercion options for your parameters using a DSL block in 
 Endpoint and Namespace definition. See [Valico] for more info.
 
-[Valico]: https://github.com/s-panferov/valico
+[Valico]: https://github.com/rustless/valico
 
 ## Query strings
 
 Rustless is intergated with [rust-query] to allow smart query-string parsing 
 (e.g. like `"foo[0][a]=a&foo[0][b]=b&foo[1][a]=aa&foo[1][b]=bb"`). See [rust-query] for more info.
 
-[rust-query]: https://github.com/s-panferov/rust-query
+[rust-query]: https://github.com/rustless/rust-query
 
