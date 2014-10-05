@@ -1,11 +1,11 @@
 [package]
 
-name = "raisin"
+name = "rustless"
 version = "0.0.1"
 authors = ["Stanislav Panferov <fnight.m@gmail.com>"]
 
 [lib]
-name = "raisin"
+name = "rustless"
 path = "src/lib.rs"
 
 [dependencies.http]
