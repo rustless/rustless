@@ -30,6 +30,17 @@ impl Error for QueryStringDecodeError {
 }
 
 #[deriving(Show)]
+pub struct ValidationError {
+    reason: JsonObject
+}
+
+impl Error for ValidationError {
+    fn name(&self) -> &'static str {
+        return "ValidationError";
+    }
+}
+
+#[deriving(Show)]
 pub struct BodyDecodeError {
     reason: String
 }
@@ -117,17 +128,25 @@ impl Endpoint {
                 }
             };
 
-            let maybe_json_body = json::from_str(utf8_string_body.as_slice());
-            match maybe_json_body {
-                Ok(json_body) => {
-                    for (key, value) in json_body.as_object().unwrap().iter() {
-                        if !params.contains_key(key) {
-                            params.insert(key.to_string(), value.clone());
+            if (utf8_string_body.len() > 0) {
+              let maybe_json_body = json::from_str(utf8_string_body.as_slice());
+                match maybe_json_body {
+                    Ok(json_body) => {
+                        for (key, value) in json_body.as_object().unwrap().iter() {
+                            if !params.contains_key(key) {
+                                params.insert(key.to_string(), value.clone());
+                            }
                         }
-                    }
-                },
-                Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).abstract())
+                    },
+                    Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).abstract())
+                }  
             }
+        }
+
+        // validate and coerce params
+        match self.coercer.process(params) {
+            Ok(()) => (),
+            Err(err) => return Err(ValidationError{ reason: err }.abstract())
         }
 
         return Ok(Response::from_string(status::Ok, self.process(params, req)))
