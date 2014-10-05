@@ -2,7 +2,7 @@
 #![comment = "A grape inspired web framework for Rust"]
 #![license = "MIT"]
 #![crate_type = "rlib"]
-#![feature(macro_rules, phase)]
+#![feature(macro_rules, phase, tuple_indexing)]
 #[phase(plugin)]
 
 extern crate regex_macros;
