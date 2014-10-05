@@ -5,6 +5,7 @@ use serialize::json::ToJson;
 use serialize::Decodable;
 use std::str;
 
+use anymap::AnyMap;
 use hyper::method::{Method};
 use hyper::status;
 use hyper::header;
@@ -170,7 +171,8 @@ impl ApiHandler for Endpoint {
 
 pub struct EndpointInstance<'a> {
     pub endpoint: &'a Endpoint,
-    pub request: &'a Request
+    pub request: &'a Request,
+    pub ext: AnyMap
 }
 
 impl<'a> EndpointInstance<'a> {
@@ -178,7 +180,8 @@ impl<'a> EndpointInstance<'a> {
     pub fn new(endpoint: &'a Endpoint, request: &'a Request) -> EndpointInstance<'a> {
         EndpointInstance {
             endpoint: endpoint,
-            request: request
+            request: request,
+            ext: AnyMap::new()
         }
     }
     

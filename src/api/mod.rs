@@ -14,7 +14,7 @@ use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
 
 pub use self::endpoint::{Endpoint, EndpointInstance};
-pub use self::namespace::Namespace;
+pub use self::namespace::{Namespace, NamespaceBehavior, ApiHandlers};
 
 mod endpoint;
 mod namespace;
@@ -26,7 +26,7 @@ pub trait ApiHandler {
 #[deriving(Send)]
 pub struct Api {
     pub version: String,
-    handlers: Vec<Box<ApiHandler + Send + Sync>>
+    handlers: ApiHandlers
 }
 
 impl Api {
@@ -37,31 +37,18 @@ impl Api {
             handlers: vec![]
         }
     }
-
-    pub fn mount(&mut self, edp: Box<ApiHandler + Send + Sync>) {
-        self.handlers.push(edp)
-    }
     
+}
+
+impl NamespaceBehavior for Api {
+    fn handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
+    fn handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
 }
 
 impl Handler for Api {
     fn call(&self, req: &mut Request) -> HandleResult<Response> {
-
         let path = req.url.serialize_path().unwrap_or(String::new());
-
-        for handler in self.handlers.iter() {
-            match handler.call(path.as_slice(), &mut TreeMap::new(), req) {
-                Ok(response) => return Ok(response),
-                Err(err) => {
-                    match err.downcast::<NotMatchError>() {
-                        Some(_) => (),
-                        None => return Err(err),
-                    }
-                }
-            };
-        }
-
-        Err(NotMatchError.abstract())
+        self.call_handlers(path.as_slice(), &mut TreeMap::new(), req)
     }
 }
 
