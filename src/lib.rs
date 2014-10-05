@@ -1,5 +1,5 @@
-#![crate_name = "raisin"]
-#![comment = "A grape inspired web framework for Rust"]
+#![crate_name = "rustless"]
+#![comment = "REST-like API micro-framework for Rust"]
 #![license = "MIT"]
 #![crate_type = "rlib"]
 #![feature(macro_rules, phase, tuple_indexing)]
@@ -16,14 +16,14 @@ extern crate collections;
 extern crate valico;
 extern crate query;
 
-pub use raisin::{Raisin};
+pub use rustless::{Rustless};
 pub use request::{Request};
 pub use api::{Endpoint, EndpointInstance, Api, Namespace, NamespaceBehavior};
 pub use middleware::{Application, Builder};
 pub use hyper::method::{Method, Get, Post};
 
 mod listener;
-mod raisin;
+mod rustless;
 mod request;
 mod path;
 mod middleware;

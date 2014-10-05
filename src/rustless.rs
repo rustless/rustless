@@ -6,9 +6,9 @@ use hyper::server::{Server};
 use listener::{Concurrent, ConcurrentHandler};
 use middleware::Application;
 
-pub struct Raisin;
+pub struct Rustless;
 
-impl Raisin {
+impl Rustless {
 
     pub fn listen(self, app: Application, ip: IpAddr, port: u16) {
         let server = Server::http(ip, port);
