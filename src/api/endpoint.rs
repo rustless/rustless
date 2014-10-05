@@ -5,7 +5,6 @@ use serialize::json::ToJson;
 use serialize::Decodable;
 use std::str;
 
-use hyper::mime::{Mime, Application, Json};
 use hyper::method::{Method};
 use hyper::status;
 use hyper::header;
@@ -100,20 +99,7 @@ impl Endpoint {
             }
         }
 
-        let is_json_body = {
-            let content_type = req.headers().get::<header::common::ContentType>(); 
-            if content_type.is_some() {
-                println!("ContentType: {}", content_type.unwrap().0);
-                match content_type.unwrap().0 {
-                    Mime(Application, Json, _) => true,
-                    _ => false
-                }
-            } else {
-                false
-            }
-        };
-
-        if is_json_body {
+        if req.is_json_body() {
             let maybe_body = req.read_to_end();
         
             let utf8_string_body = {

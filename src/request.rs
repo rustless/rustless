@@ -11,6 +11,7 @@ use hyper::method::Method;
 use hyper::header;
 use hyper::header::Headers;
 use hyper::server::Request as HyperRequest;
+use hyper::mime::{Mime, Application, Json};
 
 pub struct Request {
     pub url: Url,
@@ -73,6 +74,19 @@ impl Request {
 
         Ok(Request::new(parsed_url, req))
 
+    }
+
+    pub fn is_json_body(&self) -> bool {
+        let content_type = self.headers().get::<header::common::ContentType>(); 
+        if content_type.is_some() {
+            println!("ContentType: {}", content_type.unwrap().0);
+            match content_type.unwrap().0 {
+                Mime(Application, Json, _) => true,
+                _ => false
+            }
+        } else {
+            false
+        }
     }
 }
 
