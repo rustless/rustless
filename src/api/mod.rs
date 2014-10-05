@@ -13,7 +13,7 @@ use response::Response;
 use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
 
-pub use self::endpoint::Endpoint;
+pub use self::endpoint::{Endpoint, EndpointInstance};
 pub use self::namespace::Namespace;
 
 mod endpoint;
