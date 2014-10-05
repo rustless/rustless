@@ -21,7 +21,8 @@ git = "https://github.com/servo/rust-url.git"
 git = "https://github.com/chris-morgan/anymap.git"
 
 [dependencies.error]
-git = "https://github.com/reem/rust-error.git"
+#git = "https://github.com/reem/rust-error.git"
+path = "../../out/rust-error"
 
 [dependencies.valico]
 path = "../valico"
