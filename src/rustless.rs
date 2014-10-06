@@ -1,9 +1,9 @@
-use std::io::net::ip::{IpAddr, Ipv4Addr};
+use std::io::net::ip::{IpAddr};
 use std::sync::Arc;
 
 use hyper::server::{Server};
 
-use listener::{Concurrent, ConcurrentHandler};
+use listener::{Concurrent};
 use middleware::Application;
 
 pub struct Rustless;

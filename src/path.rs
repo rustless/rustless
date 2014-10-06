@@ -1,9 +1,8 @@
 
-use serialize::json;
 use serialize::json::{JsonObject, ToJson};
-use regex::{Regex, Captures, SubCaptures};
+use regex::{Regex, Captures};
 
-static matcher: Regex = regex!(r":([a-z][a-z_]*)");
+static MATCHER: Regex = regex!(r":([a-z][a-z_]*)");
 
 pub struct Path {
     regex: Regex,
@@ -39,7 +38,7 @@ impl Path {
         };
 
         let mut params = vec![];
-        for capture in matcher.captures_iter(path) {
+        for capture in MATCHER.captures_iter(path) {
             params.push(capture.at(1).to_string()); 
         }
 
@@ -51,7 +50,7 @@ impl Path {
     }
 
     fn sub_regex(path: &str) -> String {
-        return matcher.replace_all(path, "(?P<$1>[^/?&]+)");
+        return MATCHER.replace_all(path, "(?P<$1>[^/?&]+)");
     }
 
 }
@@ -78,7 +77,7 @@ fn parse_and_match() {
     });
 }
 
-#[root]
+#[test]
 fn parse_and_match_root() {
     let path = Path::parse("", true).unwrap();
     assert!(match path.is_match("/") {
@@ -87,7 +86,7 @@ fn parse_and_match_root() {
     });
 }
 
-#[root]
+#[test]
 fn parse_and_match_single_val() {
     let path = Path::parse(":id", true).unwrap();
     assert!(match path.is_match("/550e8400-e29b-41d4-a716-446655440000") {
