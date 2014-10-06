@@ -10,7 +10,7 @@ use middleware::{Handler, HandleResult, Error};
 
 pub use self::endpoint::{Endpoint, EndpointBuilder};
 pub use self::client::Client;
-pub use self::namespace::{Namespace, NamespaceBehavior, ApiHandlers};
+pub use self::namespace::{Namespace, NS, ApiHandlers};
 
 mod endpoint;
 mod namespace;
@@ -94,7 +94,7 @@ impl Api {
     
 }
 
-impl NamespaceBehavior for Api {
+impl NS for Api {
     fn handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
     fn handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
 }
