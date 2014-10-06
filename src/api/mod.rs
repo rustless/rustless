@@ -8,7 +8,7 @@ use request::Request;
 use response::Response;
 use middleware::{Handler, HandleResult, Error};
 
-pub use self::endpoint::{Endpoint, EndpointBuilder, EndpointInstance};
+pub use self::endpoint::{Endpoint, EndpointBuilder, Client};
 pub use self::namespace::{Namespace, NamespaceBehavior, ApiHandlers};
 
 mod endpoint;

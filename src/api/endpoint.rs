@@ -20,7 +20,7 @@ use api::{
     BodyDecodeError, ValicoBuildHandler
 };
 
-pub type EndpointHandler = fn<'a>(EndpointInstance<'a>, &Json) -> EndpointInstance<'a>;
+pub type EndpointHandler = fn<'a>(Client<'a>, &Json) -> Client<'a>;
 
 pub enum EndpointHandlerPresent {
     HandlerPresent
@@ -69,10 +69,10 @@ impl Endpoint {
         HandlerPresent
     }
 
-    pub fn process<'a>(&'a self, params: &mut JsonObject, req: &'a mut Request) -> EndpointInstance<'a> {
+    pub fn process<'a>(&'a self, params: &mut JsonObject, req: &'a mut Request) -> Client<'a> {
         let ref handler = self.handler.unwrap();
 
-        let endpoint_response = EndpointInstance::new(self, req);
+        let endpoint_response = Client::new(self, req);
 
         // fixme not efficient
         (*handler)(endpoint_response, &params.to_json())
@@ -163,17 +163,17 @@ impl ApiHandler for Endpoint {
     }
 }
 
-pub struct EndpointInstance<'a> {
+pub struct Client<'a> {
     pub endpoint: &'a Endpoint,
     pub request: &'a Request,
     pub ext: AnyMap,
     pub response: Response
 }
 
-impl<'a> EndpointInstance<'a> {
+impl<'a> Client<'a> {
 
-    pub fn new(endpoint: &'a Endpoint, request: &'a Request) -> EndpointInstance<'a> {
-        EndpointInstance {
+    pub fn new(endpoint: &'a Endpoint, request: &'a Request) -> Client<'a> {
+        Client {
             endpoint: endpoint,
             request: request,
             ext: AnyMap::new(),
@@ -194,27 +194,27 @@ impl<'a> EndpointInstance<'a> {
         self.set_header(ContentType(application_json));
     }
 
-    pub fn json(mut self, result: &Json) -> EndpointInstance<'a> {
+    pub fn json(mut self, result: &Json) -> Client<'a> {
         self.set_json_content_type();
         self.response.push_string(result.to_string());
 
         self
     }
 
-    pub fn text(mut self, result: String) -> EndpointInstance<'a> {
+    pub fn text(mut self, result: String) -> Client<'a> {
         self.response.push_string(result);
 
         self
     }
 
-    pub fn redirect(mut self, to: &str) -> EndpointInstance<'a> {
+    pub fn redirect(mut self, to: &str) -> Client<'a> {
         self.set_status(status::Found);
         self.set_header(Location(to.to_string()));
 
         self
     }
 
-    pub fn permanent_redirect(mut self, to: &str) -> EndpointInstance<'a> {
+    pub fn permanent_redirect(mut self, to: &str) -> Client<'a> {
         self.set_status(status::MovedPermanently);
         self.set_header(Location(to.to_string()));
 
