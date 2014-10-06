@@ -1,23 +1,26 @@
 
-use serialize::Decodable;
-use hyper::method::{Method};
-use hyper::status;
-
 use collections::treemap::TreeMap;
+use serialize::Decodable;
 use serialize::json;
 use serialize::json::{Json, JsonObject};
 use serialize::json::ToJson;
+
+use hyper::method::{Method};
+use hyper::status;
+use valico::Builder as ValicoBuilder;
 
 use request::Request;
 use response::Response;
 use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
 
-pub use self::endpoint::{Endpoint, EndpointInstance};
+pub use self::endpoint::{Endpoint, EndpointBuilder, EndpointInstance};
 pub use self::namespace::{Namespace, NamespaceBehavior, ApiHandlers};
 
 mod endpoint;
 mod namespace;
+
+pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
 
 #[deriving(Show)]
 pub struct QueryStringDecodeError;
@@ -75,11 +78,22 @@ pub struct Api {
 
 impl Api {
 
-    pub fn new(version: &str) -> Api {
+    pub fn new() -> Api {
         Api {
-            version: version.to_string(),
+            version: "v1".to_string(),
             handlers: vec![]
         }
+    }
+
+    pub fn build(builder: |&mut Api|) -> Api {
+        let mut api = Api::new();
+        builder(&mut api);
+
+        return api;
+    }
+
+    pub fn version(&mut self, version: &str) {
+        self.version = version.to_string();
     }
     
 }

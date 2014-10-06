@@ -3,7 +3,7 @@ use serialize::Decodable;
 use serialize::json;
 use serialize::json::{Json, JsonObject, ToJson};
 
-use hyper::method::{Method};
+use hyper::method::{Method, Get, Post, Put, Delete};
 use hyper::status;
 use valico::Builder as ValicoBuilder;
 
@@ -12,7 +12,7 @@ use response::Response;
 use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
 
-use api::{ApiHandler, ValidationError};
+use api::{ApiHandler, Endpoint, EndpointBuilder, ValidationError, ValicoBuildHandler};
 
 pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 
@@ -23,6 +23,26 @@ pub trait NamespaceBehavior {
 
     fn mount(&mut self, edp: Box<ApiHandler + Send + Sync>) {
         self.handlers_mut().push(edp)
+    }
+
+    fn namespace(&mut self, path: &str, builder: |&mut Namespace|) {
+        self.mount(box Namespace::build(path, builder));
+    }
+
+    fn get(&mut self, path: &str, builder: EndpointBuilder) {
+        self.mount(box Endpoint::build(Get, path, builder));
+    }    
+
+    fn post(&mut self, path: &str, builder: EndpointBuilder) {
+        self.mount(box Endpoint::build(Post, path, builder));
+    }    
+
+    fn put(&mut self, path: &str, builder: EndpointBuilder) {
+        self.mount(box Endpoint::build(Put, path, builder));
+    }    
+
+    fn delete(&mut self, path: &str, builder: EndpointBuilder) {
+        self.mount(box Endpoint::build(Delete, path, builder));
     }
 
     fn call_handlers(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
@@ -55,7 +75,8 @@ impl NamespaceBehavior for Namespace {
 }
 
 impl Namespace {
-    pub fn new(path: &'static str) -> Namespace {
+    
+    pub fn new(path: &str) -> Namespace {
         Namespace {
             handlers: vec![],
             path: Path::parse(path, false).unwrap(),
@@ -63,7 +84,18 @@ impl Namespace {
         }
     }
 
-    fn validate(&self) -> HandleResult<()> {
+    pub fn params(&mut self, builder: ValicoBuildHandler) {
+        self.coercer = Some(ValicoBuilder::build(builder));
+    }
+
+    pub fn build(path: &str, builder: |&mut Namespace|) -> Namespace {
+        let mut namespace = Namespace::new(path);
+        builder(&mut namespace);
+
+        return namespace;
+    }
+
+    fn validate(&self, params: &mut JsonObject) -> HandleResult<()> {
         // Validate namespace params with valico
         if self.coercer.is_some() {
             // validate and coerce params
@@ -91,7 +123,7 @@ impl ApiHandler for Namespace {
             None => return Err(NotMatchError.abstract())
         };
 
-        try!(self.validate());
+        try!(self.validate(params));
 
         self.call_handlers(rest_path, params, req)
     }
