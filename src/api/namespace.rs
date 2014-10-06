@@ -62,9 +62,24 @@ impl Namespace {
             coercer: None
         }
     }
+
+    fn validate(&self) -> HandleResult<()> {
+        // Validate namespace params with valico
+        if self.coercer.is_some() {
+            // validate and coerce params
+            let coercer = self.coercer.as_ref().unwrap();
+            match coercer.process(params) {
+                Ok(()) => Ok(()),
+                Err(err) => return Err(ValidationError{ reason: err }.abstract())
+            }   
+        } else {
+            Ok(())
+        }
+    }
 }
 
 impl ApiHandler for Namespace {
+
     fn call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
 
         let rest_path: &str = match self.path.is_match(rest_path) {
@@ -76,15 +91,7 @@ impl ApiHandler for Namespace {
             None => return Err(NotMatchError.abstract())
         };
 
-        // Validate namespace params with valico
-        if self.coercer.is_some() {
-            // validate and coerce params
-            let coercer = self.coercer.as_ref().unwrap();
-            match coercer.process(params) {
-                Ok(()) => (),
-                Err(err) => return Err(ValidationError{ reason: err }.abstract())
-            }   
-        }
+        try!(self.validate());
 
         self.call_handlers(rest_path, params, req)
     }
