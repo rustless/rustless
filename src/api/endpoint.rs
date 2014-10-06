@@ -145,7 +145,7 @@ impl Endpoint {
 }
 
 impl ApiHandler for Endpoint {
-    fn call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
+    fn api_call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
 
         match self.path.is_match(rest_path) {
             Some(captures) =>  {

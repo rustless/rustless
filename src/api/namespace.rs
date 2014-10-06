@@ -60,7 +60,7 @@ pub trait NS {
 
     fn call_handlers(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
         for handler in self.handlers().iter() {
-            match handler.call(rest_path, params, req) {
+            match handler.api_call(rest_path, params, req) {
                 Ok(response) => return Ok(response),
                 Err(err) => {
                     match err.downcast::<NotMatchError>() {
@@ -124,7 +124,7 @@ impl Namespace {
 }
 
 impl ApiHandler for Namespace {
-    fn call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
+    fn api_call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
 
         let rest_path: &str = match self.path.is_match(rest_path) {
             Some(captures) =>  {
