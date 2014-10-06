@@ -68,9 +68,9 @@ pub trait ApiHandler {
 
 pub enum Versioning {
     PathVersioning,
-    AcceptHeaderVersioning(String),
+    AcceptHeaderVersioning(&'static str),
     AcceptVersionHeaderVersioning,
-    ParamVersioning
+    ParamVersioning(&'static str)
 }
 
 #[deriving(Send)]
@@ -148,6 +148,16 @@ impl Handler for Api {
                        return Err(NotMatchError.abstract()) 
                     }
                 },
+                &ParamVersioning(ref param_name) => {
+                    match req.url.query_pairs() {
+                        Some(query_pairs) => {
+                            if !query_pairs.iter().any(|&(ref key, ref val)| key.as_slice() == *param_name && val == version) {
+                                return Err(NotMatchError.abstract()) 
+                            }    
+                        },
+                        None => return Err(NotMatchError.abstract())
+                    }
+                }
                 _ => ()
             }
         }
