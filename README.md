@@ -16,59 +16,68 @@ Rustless in a port of [Grape] library from Ruby world and is still mostly **in p
 Below is a simple example showing some of the more common features of Rustless.
 
 ~~~rust
-
 extern crate rustless;
 extern crate serialize;
 
 use std::io::net::ip::Ipv4Addr;
 use serialize::json::Json;
 use rustless::{
-  Rustless, Builder, Application, Api, Endpoint, EndpointInstance, 
-  Namespace, NamespaceBehavior, Get, Post
+    Rustless, Builder, Valico, Api, EndpointInstance, NamespaceBehavior
 };
 
 fn main() {
 
-    // Create API with "1" version
-    let mut chat_api = box Api::new("1");
-    
-    // Crate namespace "users" that will accept parameter "id" in URL
-    let mut chat_namespace = box Namespace::new("users/:id");
+    // Create API for chats
+    let mut chats_api = box Api::build(|chats_api| {
+        // Specify API version
+        chats_api.version("v1");
 
-    // This is the handler function to provide response, we will use it later
-    fn process<'a>(endpoint: EndpointInstance<'a>, params: &Json) -> EndpointInstance<'a> {
-        endpoint.json(params)
-    }
+        // Add namespace
+        chats_api.namespace("chats/:id", |chat_ns| {
+            
+            // Valico settings for this namespace
+            chat_ns.params(|params| { 
+                params.req_typed("id", Valico::u64())
+            });
 
-    // Create Endpoint to respond to "POST /users/:id/add_friend" URL.
-    chat_namespace.mount(box Endpoint::new(
-        Post,
-        "add_friend",
-        "Add friend to user",
-        |params| { 
-            // Rustless is intergated with Valico library to provide
-            // parameters validation and coercion.
-            params.req_typed("friend_id", Valico::u64())
-        },
-        process
-    ));
+            // Create endpoint for POST /chats/:id/users/:user_id
+            chat_ns.post("users/:user_id", |endpoint| {
+            
+                // Add description
+                endpoint.desc("Update user");
 
-    chat_api.mount(chat_namespace);
-  
+                // Valico settings for endpoint params
+                endpoint.params(|params| { 
+                    params.req_typed("user_id", Valico::u64());
+                    params.req_typed("name", Valico::string())
+                });
+
+                // Function to handle requests
+                fn handler<'a>(endpoint: EndpointInstance<'a>, params: &Json) -> EndpointInstance<'a> {
+                    // Respond with JSON with correct content-type
+                    endpoint.json(params)
+                }
+
+                // Set-up handler for endpoint
+                endpoint.handle(handler)
+            });
+
+        });
+    });
+
+
     let mut builder = Builder::new();
-    builder.mount(chat_api);
-  
-    // Start server stuff
-    let rustless: Rustless = rustless::Rustless;
-    rustless.listen(
-      builder.get_app(),
-      Ipv4Addr(127, 0, 0, 1),
-      3000
-    );
-  
-    println!("Server started!");
-}
+    builder.mount(chats_api);
 
+    let rustless: Rustless = Rustless;
+    rustless.listen(
+        builder.get_app(),
+        Ipv4Addr(127, 0, 0, 1),
+        3000
+    );
+
+    println!("Rustless server started!");
+}
 ~~~
 
 ## Parameter Validation and Coercion
