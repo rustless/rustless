@@ -41,7 +41,7 @@ pub trait CatchMiddleware: Send + Sync {
 }
 
 pub trait Handler: Send + Sync {
-    fn call(&self, &mut Request) -> HandleResult<Response>;
+    fn call(&self, &str, &mut Request) -> HandleResult<Response>;
 }
 
 #[deriving(Send)]
@@ -78,9 +78,10 @@ impl Application {
         }
 
         let mut response: Option<Response> = None;
+        let path = req.url.serialize_path().unwrap_or(String::new());
 
         for handler in self.handlers.iter() {
-            match handler.call(req) {
+            match handler.call(path.as_slice(), req) {
                 Ok(resp) => response = Some(resp),
                 Err(err) => match err.downcast::<NotMatchError>() {
                     Some(_) => (),
