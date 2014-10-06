@@ -22,7 +22,7 @@ extern crate serialize;
 use std::io::net::ip::Ipv4Addr;
 use serialize::json::Json;
 use rustless::{
-    Rustless, Builder, Valico, Api, EndpointInstance, NamespaceBehavior
+    Rustless, Builder, Valico, Api, Client, NamespaceBehavior
 };
 
 fn main() {
@@ -53,7 +53,7 @@ fn main() {
                 });
 
                 // Function to handle requests
-                fn handler<'a>(endpoint: EndpointInstance<'a>, params: &Json) -> EndpointInstance<'a> {
+                fn handler<'a>(endpoint: Client<'a>, params: &Json) -> Client<'a> {
                     // Respond with JSON with correct content-type
                     endpoint.json(params)
                 }
