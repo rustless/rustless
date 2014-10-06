@@ -12,7 +12,7 @@ use api::{ApiHandler, Endpoint, EndpointBuilder, ValidationError, ValicoBuildHan
 
 pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 
-pub trait NamespaceBehavior {
+pub trait NS {
 
     fn handlers<'a>(&'a self) -> &'a ApiHandlers;
     fn handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers;
@@ -65,7 +65,7 @@ pub struct Namespace {
     coercer: Option<ValicoBuilder>
 }
 
-impl NamespaceBehavior for Namespace {
+impl NS for Namespace {
     fn handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
     fn handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
 }
@@ -107,7 +107,6 @@ impl Namespace {
 }
 
 impl ApiHandler for Namespace {
-
     fn call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
 
         let rest_path: &str = match self.path.is_match(rest_path) {

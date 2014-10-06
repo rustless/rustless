@@ -18,7 +18,7 @@ extern crate query;
 
 pub use rustless::{Rustless};
 pub use request::{Request};
-pub use api::{Endpoint, Client, Api, Namespace, NamespaceBehavior};
+pub use api::{Endpoint, Client, Api, Namespace, NS};
 pub use middleware::{Application, Builder};
 pub use hyper::method::{Method, Get, Post};
 pub use valico::Builder as Valico;
