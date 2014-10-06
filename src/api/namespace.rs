@@ -1,25 +1,20 @@
+use collections::treemap::TreeMap;
 use serialize::Decodable;
+use serialize::json;
+use serialize::json::{Json, JsonObject, ToJson};
+
 use hyper::method::{Method};
 use hyper::status;
-
-use collections::treemap::TreeMap;
-use serialize::json;
-use serialize::json::{Json, JsonObject};
-use serialize::json::ToJson;
+use valico::Builder as ValicoBuilder;
 
 use request::Request;
 use response::Response;
 use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
 
-use api::{ApiHandler};
+use api::{ApiHandler, ValidationError};
 
 pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
-
-pub struct Namespace {
-    handlers: ApiHandlers,
-    path: Path  
-}
 
 pub trait NamespaceBehavior {
 
@@ -48,6 +43,12 @@ pub trait NamespaceBehavior {
 
 }
 
+pub struct Namespace {
+    handlers: ApiHandlers,
+    path: Path,
+    coercer: Option<ValicoBuilder>
+}
+
 impl NamespaceBehavior for Namespace {
     fn handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
     fn handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
@@ -57,7 +58,8 @@ impl Namespace {
     pub fn new(path: &'static str) -> Namespace {
         Namespace {
             handlers: vec![],
-            path: Path::parse(path, false).unwrap()
+            path: Path::parse(path, false).unwrap(),
+            coercer: None
         }
     }
 }
@@ -73,6 +75,16 @@ impl ApiHandler for Namespace {
             },
             None => return Err(NotMatchError.abstract())
         };
+
+        // Validate namespace params with valico
+        if self.coercer.is_some() {
+            // validate and coerce params
+            let coercer = self.coercer.as_ref().unwrap();
+            match coercer.process(params) {
+                Ok(()) => (),
+                Err(err) => return Err(ValidationError{ reason: err }.abstract())
+            }   
+        }
 
         self.call_handlers(rest_path, params, req)
     }
