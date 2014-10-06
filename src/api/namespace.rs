@@ -21,22 +21,39 @@ pub trait NS {
         self.handlers_mut().push(edp)
     }
 
+    /* 
+     * Namespace aliases
+     */
+
     fn namespace(&mut self, path: &str, builder: |&mut Namespace|) {
         self.mount(box Namespace::build(path, builder));
     }
+    fn group(&mut self, path: &str, builder: |&mut Namespace|) {
+        self.mount(box Namespace::build(path, builder));
+    }
+    fn resource(&mut self, path: &str, builder: |&mut Namespace|) {
+        self.mount(box Namespace::build(path, builder));
+    }
+    fn resources(&mut self, path: &str, builder: |&mut Namespace|) {
+        self.mount(box Namespace::build(path, builder));
+    }
+    fn segment(&mut self, path: &str, builder: |&mut Namespace|) {
+        self.mount(box Namespace::build(path, builder));
+    }
+
+    /* 
+     * Endpoints
+     */
 
     fn get(&mut self, path: &str, builder: EndpointBuilder) {
         self.mount(box Endpoint::build(Get, path, builder));
     }    
-
     fn post(&mut self, path: &str, builder: EndpointBuilder) {
         self.mount(box Endpoint::build(Post, path, builder));
     }    
-
     fn put(&mut self, path: &str, builder: EndpointBuilder) {
         self.mount(box Endpoint::build(Put, path, builder));
     }    
-
     fn delete(&mut self, path: &str, builder: EndpointBuilder) {
         self.mount(box Endpoint::build(Delete, path, builder));
     }
