@@ -54,6 +54,15 @@ pub struct Application {
 
 impl Application {
 
+    pub fn new() -> Application {
+        Application {
+            before: vec![],
+            after: vec![],
+            catch: vec![],
+            handlers: vec![]
+        }
+    }
+
     pub fn call(&self, req: &mut Request) -> HandleResult<Response> {
 
         for mdw in self.before.iter() {
@@ -118,10 +127,10 @@ impl Application {
         let error_message = format!("{}", err);
         Some(Response::from_string(status::InternalServerError, error_message))
     }
-}
 
-pub struct Builder {
-    app: Application
+    pub fn mount(&mut self, handler: Box<Handler + Send + Sync>) {
+        self.handlers.push(handler);
+    }
 }
 
 trait AfterMiddlewareSupport {
@@ -132,37 +141,15 @@ trait BeforeMiddlewareSupport {
     fn using(&mut self, middleware: Box<BeforeMiddleware + Send + Sync>);
 }
 
-impl Builder {
-
-    pub fn get_app(self) -> Application {
-        self.app
-    }
-
-    pub fn new() -> Builder {
-        Builder {
-            app: Application {
-                before: vec![],
-                after: vec![],
-                catch: vec![],
-                handlers: vec![]
-            }
-        }
-    }
-
-    pub fn mount(&mut self, handler: Box<Handler + Send + Sync>) {
-        self.app.handlers.push(handler);
-    }
-}
-
-impl AfterMiddlewareSupport for Builder {
+impl AfterMiddlewareSupport for Application {
     fn using(&mut self, middleware: Box<AfterMiddleware + Send + Sync>) {
-        self.app.after.push(middleware);
+        self.after.push(middleware);
     }
 }
 
-impl BeforeMiddlewareSupport for Builder {
+impl BeforeMiddlewareSupport for Application {
     fn using(&mut self, middleware: Box<BeforeMiddleware + Send + Sync>) {
-        self.app.before.push(middleware);
+        self.before.push(middleware);
     }
 }
 
