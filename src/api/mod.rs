@@ -8,11 +8,13 @@ use request::Request;
 use response::Response;
 use middleware::{Handler, HandleResult, Error};
 
-pub use self::endpoint::{Endpoint, EndpointBuilder, Client};
+pub use self::endpoint::{Endpoint, EndpointBuilder};
+pub use self::client::Client;
 pub use self::namespace::{Namespace, NamespaceBehavior, ApiHandlers};
 
 mod endpoint;
 mod namespace;
+mod client;
 
 pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
 
