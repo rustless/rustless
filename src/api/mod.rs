@@ -95,35 +95,3 @@ impl Handler for Api {
         self.call_handlers(path.as_slice(), &mut TreeMap::new(), req)
     }
 }
-
-// #[test]
-// fn params_decode() {
-
-//     use http::method::{Get};
-    
-//     #[deriving(Decodable)]
-//     struct Params {
-//         user_id: String,
-//         user_type: Option<String>
-//     };
-
-//     let endpoint: Endpoint = Endpoint::new(
-//         "Test endpoint", 
-//         Get,
-//         "test",
-//         // |params: Params| -> String {
-//         //     assert_eq!(params.user_id.as_slice(), "test");
-//         //     assert!(
-//         //         match params.user_type {
-//         //             Some(String) => false,
-//         //             Nothing => true
-//         //         }
-//         //     )
-
-//         //     "Result".to_string()
-//         // }
-//     );
-
-//     // assert_eq!(endpoint.process("{\"user_id\": \"test\"}").as_slice(), "Result");
-
-// }
