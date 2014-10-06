@@ -19,53 +19,11 @@ use request::Request;
 use response::Response;
 use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
-use api::{ApiHandler};
+use api::{ApiHandler, QueryStringDecodeError, ValidationError, BodyDecodeError};
 
 pub type EndpointHandler = fn<'a>(EndpointInstance<'a>, &Json) -> EndpointInstance<'a>;
 pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
 
-#[deriving(Show)]
-pub struct QueryStringDecodeError;
-
-impl Error for QueryStringDecodeError {
-    fn name(&self) -> &'static str {
-        return "QueryStringDecodeError";
-    }
-}
-
-#[deriving(Show)]
-pub struct ValidationError {
-    reason: JsonObject
-}
-
-impl Error for ValidationError {
-    fn name(&self) -> &'static str {
-        return "ValidationError";
-    }
-}
-
-#[deriving(Show)]
-pub struct BodyDecodeError {
-    reason: String
-}
-
-impl BodyDecodeError {
-    pub fn new(reason: String) -> BodyDecodeError {
-        return BodyDecodeError {
-            reason: reason
-        }
-    }
-}
-
-impl Error for BodyDecodeError {
-    fn name(&self) -> &'static str {
-        return "BodyDecodeError";
-    }
-
-    fn description(&self) -> Option<&str> {
-        return Some(self.reason.as_slice())
-    }
-}
 
 #[deriving(Send)]
 pub struct Endpoint {
