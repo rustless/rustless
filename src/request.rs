@@ -1,7 +1,6 @@
 use url::{Url};
 
 use std::io::{Reader, IoResult};
-use std::str::from_utf8;
 use std::fmt::{Show, Formatter, FormatError};
 use std::io::net::ip::SocketAddr;
 use anymap::AnyMap;

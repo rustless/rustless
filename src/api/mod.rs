@@ -1,18 +1,12 @@
 
 use collections::treemap::TreeMap;
-use serialize::Decodable;
-use serialize::json;
-use serialize::json::{Json, JsonObject};
-use serialize::json::ToJson;
+use serialize::json::{JsonObject};
 
-use hyper::method::{Method};
-use hyper::status;
 use valico::Builder as ValicoBuilder;
 
 use request::Request;
 use response::Response;
-use path::{Path};
-use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
+use middleware::{Handler, HandleResult, Error};
 
 pub use self::endpoint::{Endpoint, EndpointBuilder, EndpointInstance};
 pub use self::namespace::{Namespace, NamespaceBehavior, ApiHandlers};

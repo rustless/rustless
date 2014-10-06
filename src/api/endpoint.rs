@@ -1,15 +1,11 @@
-use collections::treemap::TreeMap;
 use serialize::json;
 use serialize::json::{Json, JsonObject};
 use serialize::json::ToJson;
-use serialize::Decodable;
-use std::str;
 
 use anymap::AnyMap;
 use hyper::method::{Method};
 use hyper::status;
 use hyper::mime;
-use hyper::header;
 use hyper::header::Header;
 use hyper::header::common::{ContentType, Location};
 use valico::Builder as ValicoBuilder;
@@ -18,7 +14,7 @@ use query;
 use request::Request;
 use response::Response;
 use path::{Path};
-use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
+use middleware::{HandleResult, NotMatchError, Error};
 use api::{
     ApiHandler, QueryStringDecodeError, ValidationError, 
     BodyDecodeError, ValicoBuildHandler
@@ -76,7 +72,7 @@ impl Endpoint {
     pub fn process<'a>(&'a self, params: &mut JsonObject, req: &'a mut Request) -> EndpointInstance<'a> {
         let ref handler = self.handler.unwrap();
 
-        let mut endpoint_response = EndpointInstance::new(self, req);
+        let endpoint_response = EndpointInstance::new(self, req);
 
         // fixme not efficient
         (*handler)(endpoint_response, &params.to_json())
@@ -100,7 +96,7 @@ impl Endpoint {
         
         // extend params with query-string params if any
         if req.url.query.is_some() {
-            let mut maybe_query_params = query::parse(req.url.query.as_ref().unwrap().as_slice());
+            let maybe_query_params = query::parse(req.url.query.as_ref().unwrap().as_slice());
             match maybe_query_params {
                 Ok(query_params) => {
                     for (key, value) in query_params.as_object().unwrap().iter() {
@@ -109,7 +105,7 @@ impl Endpoint {
                         }
                     }
                 }, 
-                Err(err) => {
+                Err(_) => {
                     return Err(QueryStringDecodeError.abstract());
                 }
             }
@@ -131,7 +127,7 @@ impl Endpoint {
                 }
             };
 
-            if (utf8_string_body.len() > 0) {
+            if utf8_string_body.len() > 0 {
               let maybe_json_body = json::from_str(utf8_string_body.as_slice());
                 match maybe_json_body {
                     Ok(json_body) => {

@@ -1,10 +1,9 @@
-use std::io::net::ip::{SocketAddr, IpAddr};
 use std::sync::Arc;
 
 use middleware::Application;
 use request::Request;
 
-use hyper::server::{Server, Handler, Incoming};
+use hyper::server::{Handler, Incoming};
 use hyper::server::Request as HyperRequest;
 use hyper::server::Response as HyperResponse;
 use hyper::header::common::ContentLength;
@@ -35,7 +34,7 @@ macro_rules! try_abort(
 )
 
 impl ConcurrentHandler for Application {
-    fn handle(&self, mut req: HyperRequest, mut res: HyperResponse<Fresh>) {
+    fn handle(&self, req: HyperRequest, mut res: HyperResponse<Fresh>) {
 
         let mut request = Request::wrap(req).unwrap();
         let maybe_response = self.call(&mut request);

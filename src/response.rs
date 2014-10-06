@@ -1,5 +1,4 @@
 use std::io::{IoResult, File, MemReader};
-use std::path::BytesContainer;
 
 use hyper::header::Headers;
 use hyper::status;
@@ -45,7 +44,7 @@ impl Response {
 
     pub fn from_file(path: &Path) -> IoResult<Response> {
         let file = try!(File::open(path));
-        let mut response = Response::from_reader(
+        let response = Response::from_reader(
             status::Ok,
             box file as Box<Reader + Send>
         );

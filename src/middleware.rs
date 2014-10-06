@@ -2,20 +2,8 @@
 use request::Request;
 use response::Response;
 
-use std::fmt::Show;
 pub use error::{Error, ErrorRefExt};
 use hyper::status;
-
-#[deriving(Show)]
-pub struct SimpleError {
-    pub name: &'static str
-}
-
-impl Error for SimpleError {
-    fn name(&self) -> &'static str {
-        return self.name;
-    }
-}
 
 #[deriving(Show)]
 pub struct NotMatchError;
