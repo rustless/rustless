@@ -19,40 +19,81 @@ use request::Request;
 use response::Response;
 use path::{Path};
 use middleware::{Handler, HandleResult, SimpleError, NotMatchError, Error, ErrorRefExt};
-use api::{ApiHandler, QueryStringDecodeError, ValidationError, BodyDecodeError};
+use api::{
+    ApiHandler, QueryStringDecodeError, ValidationError, 
+    BodyDecodeError, ValicoBuildHandler
+};
 
 pub type EndpointHandler = fn<'a>(EndpointInstance<'a>, &Json) -> EndpointInstance<'a>;
-pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
 
+pub enum EndpointHandlerPresent {
+    HandlerPresent
+}
+
+pub type EndpointBuilder = |&mut Endpoint|: 'static -> EndpointHandlerPresent;
 
 #[deriving(Send)]
 pub struct Endpoint {
-    pub desc: String,
-    pub path: Path,
     pub method: Method,
-    pub coercer: ValicoBuilder,
-    handler: EndpointHandler,
+    pub path: Path,
+    pub desc: Option<String>,
+    pub coercer: Option<ValicoBuilder>,
+    handler: Option<EndpointHandler>,
 }
 
 impl Endpoint {
 
-    pub fn new(method: Method, path: &str, desc: &str, params: ValicoBuildHandler, handler: EndpointHandler) -> Endpoint {
+    pub fn new(method: Method, path: &str) -> Endpoint {
         Endpoint {
-            desc: desc.to_string(),
             method: method,
             path: Path::parse(path, true).unwrap(),
-            coercer: ValicoBuilder::build(params),
-            handler: handler
+            desc: None,
+            coercer: None,
+            handler: None
         }
     }
 
+    pub fn build(method: Method, path: &str, builder: EndpointBuilder) -> Endpoint {
+        let mut endpoint = Endpoint::new(method, path);
+        builder(&mut endpoint);
+
+        endpoint
+    }
+
+    pub fn desc(&mut self, desc: &str) {
+        self.desc = Some(desc.to_string());
+    }
+
+    pub fn params(&mut self, builder: ValicoBuildHandler) {
+        self.coercer = Some(ValicoBuilder::build(builder));
+    }
+
+    pub fn handle(&mut self, handler: EndpointHandler) -> EndpointHandlerPresent {
+        self.handler = Some(handler);
+        HandlerPresent
+    }
+
     pub fn process<'a>(&'a self, params: &mut JsonObject, req: &'a mut Request) -> EndpointInstance<'a> {
-        let ref handler = self.handler;
+        let ref handler = self.handler.unwrap();
 
         let mut endpoint_response = EndpointInstance::new(self, req);
 
         // fixme not efficient
         (*handler)(endpoint_response, &params.to_json())
+    }
+
+    fn validate(&self, params: &mut JsonObject) -> HandleResult<()> {
+        // Validate namespace params with valico
+        if self.coercer.is_some() {
+            // validate and coerce params
+            let coercer = self.coercer.as_ref().unwrap();
+            match coercer.process(params) {
+                Ok(()) => Ok(()),
+                Err(err) => return Err(ValidationError{ reason: err }.abstract())
+            }   
+        } else {
+            Ok(())
+        }
     }
 
     pub fn call_decode(&self, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
@@ -105,11 +146,7 @@ impl Endpoint {
             }
         }
 
-        // validate and coerce params
-        match self.coercer.process(params) {
-            Ok(()) => (),
-            Err(err) => return Err(ValidationError{ reason: err }.abstract())
-        }
+        try!(self.validate(params));
 
         return Ok(self.process(params, req).move_response())
     }
