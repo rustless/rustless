@@ -4,6 +4,8 @@ use serialize::json::{JsonObject};
 
 use valico::Builder as ValicoBuilder;
 
+use hyper;
+use hyper::header::common::{Accept};
 use request::Request;
 use response::Response;
 use middleware::{Handler, HandleResult, Error, NotMatchError};
@@ -11,10 +13,12 @@ use middleware::{Handler, HandleResult, Error, NotMatchError};
 pub use self::endpoint::{Endpoint, EndpointBuilder};
 pub use self::client::Client;
 pub use self::namespace::{Namespace, NS, ApiHandlers};
+pub use self::media::Media;
 
 mod endpoint;
 mod namespace;
 mod client;
+mod media;
 
 pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
 
@@ -69,7 +73,6 @@ pub trait ApiHandler {
 pub enum Versioning {
     PathVersioning,
     AcceptHeaderVersioning(&'static str),
-    AcceptVersionHeaderVersioning,
     ParamVersioning(&'static str)
 }
 
@@ -157,12 +160,35 @@ impl Handler for Api {
                         },
                         None => return Err(NotMatchError.abstract())
                     }
+                },
+                &AcceptHeaderVersioning(ref vendor) => {
+                    let header = req.headers().get::<Accept>();
+                    match header {
+                        Some(&Accept(ref mimes)) => {
+                            let mut matched_media: Option<Media> = None;
+                            for mime in mimes.iter() {
+                                match Media::from_mime(mime) {
+                                    Some(media) => {
+                                        if media.vendor.as_slice() == *vendor && 
+                                           media.version.is_some() && 
+                                           media.version.as_ref().unwrap() == version {
+                                            matched_media = Some(media);
+                                            break;
+                                        }
+                                    }, 
+                                    None => ()
+                                }
+                            }
+
+                            if matched_media.is_none() {
+                                return Err(NotMatchError.abstract())
+                            }
+                        },
+                        None => return Err(NotMatchError.abstract())
+                    }
                 }
-                _ => ()
             }
         }
-
-        println!("Prefix {} {}", rest_path, self.prefix);
 
         self.call_handlers(rest_path, &mut TreeMap::new(), req)
     }
