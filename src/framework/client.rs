@@ -27,6 +27,10 @@ impl<'a> Client<'a> {
         }
     }
 
+    pub fn status(&mut self) -> status::StatusCode {
+        self.response.status
+    }
+
     pub fn set_status(&mut self, status: status::StatusCode) {
         self.response.status = status;
     }
