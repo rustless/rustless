@@ -2,7 +2,7 @@
 use api::Endpoint;
 use request::Request;
 use response::Response;
-use middleware::HandleResult;
+use middleware::{HandleResult, Error};
 
 use serialize::json::{Json};
 
@@ -11,7 +11,6 @@ use hyper::status;
 use hyper::mime;
 use hyper::header::Header;
 use hyper::header::common::{ContentType, Location};
-
 
 pub struct Client<'a> {
     pub endpoint: &'a Endpoint,
@@ -42,6 +41,10 @@ impl<'a> Client<'a> {
     pub fn set_json_content_type(&mut self) {
         let application_json: mime::Mime = from_str("application/json").unwrap();
         self.set_header(ContentType(application_json));
+    }
+
+    pub fn error<T: Error>(mut self, error: T) -> HandleResult<Client<'a>> {
+        Err(error.abstract())
     }
 
     pub fn json(mut self, result: &Json) -> HandleResult<Client<'a>> {

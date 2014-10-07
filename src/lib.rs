@@ -26,6 +26,17 @@ pub use middleware::{Application, HandleResult, HandleSuccessResult};
 pub use hyper::method::{Method, Get, Post};
 pub use valico::Builder as Valico;
 
+#[macro_export]
+macro_rules! edp_handler {
+    ($edp:ident, |$client:ident, $params:ident| $blk:block) => ({
+        fn endpoint_handler<'a>($client: Client<'a>, $params: &Json) -> HandleResult<Client<'a>> {
+            $blk
+        }
+
+        $edp.handle(endpoint_handler)
+    })
+}
+
 mod listener;
 mod rustless;
 mod request;
