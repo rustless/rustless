@@ -2,17 +2,16 @@ use serialize::json;
 use serialize::json::{Json, JsonObject};
 use serialize::json::ToJson;
 
-use hyper::method::{Method};
 use valico::Builder as ValicoBuilder;
 use query;
 
-use request::Request;
-use response::Response;
-use path::{Path};
-use middleware::{HandleResult, HandleSuccessResult, NotMatchError, Error};
-use api::{
-    ApiHandler, QueryStringDecodeError, ValidationError, 
-    BodyDecodeError, ValicoBuildHandler, Client, CallInfo
+use server_backend::method::{Method};
+use server::{Request, Response};
+use middleware::{HandleResult, NotMatchError, Error};
+use framework::path::{Path};
+use framework::errors::{QueryStringDecodeError, ValidationError, BodyDecodeError};
+use framework::{
+    ApiHandler, ValicoBuildHandler, Client, CallInfo
 };
 
 pub type EndpointHandler = fn<'a>(Client<'a>, &Json) -> HandleResult<Client<'a>>;

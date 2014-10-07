@@ -2,6 +2,7 @@
 #![comment = "REST-like API micro-framework for Rust"]
 #![license = "MIT"]
 #![crate_type = "rlib"]
+#![deny(warnings)]
 #![feature(macro_rules, phase, tuple_indexing)]
 #[phase(plugin)]
 
@@ -12,19 +13,18 @@ extern crate serialize;
 extern crate url;
 extern crate anymap;
 extern crate error;
+
 extern crate collections;
 extern crate valico;
 extern crate query;
 
-pub use rustless::{Rustless};
-pub use request::{Request};
-pub use api::{
-    Endpoint, Client, Api, Namespace, NS, Versioning, PathVersioning,
-    AcceptHeaderVersioning, ParamVersioning
-};
-pub use middleware::{Application, HandleResult, HandleSuccessResult};
-pub use hyper::method::{Method, Get, Post};
 pub use valico::Builder as Valico;
+pub use server::{Server, Request, Response};
+pub use middleware::{Application, HandleResult, HandleSuccessResult};
+pub use framework::{
+    Endpoint, Client, Api, Namespace, Nesting, 
+    PathVersioning, AcceptHeaderVersioning, ParamVersioning
+};
 
 #[macro_export]
 macro_rules! edp_handler {
@@ -48,10 +48,8 @@ macro_rules! callback {
     })
 }
 
-mod listener;
+mod server_backend;
 mod rustless;
-mod request;
-mod path;
 mod middleware;
-mod response;
-mod api;
+mod server;
+mod framework;

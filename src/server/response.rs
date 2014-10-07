@@ -1,8 +1,8 @@
 use std::io::{IoResult, File, MemReader};
 
-use hyper::header::Headers;
-use hyper::status;
-use hyper::status::StatusCode;
+use server_backend::header::Headers;
+use server_backend::status;
+use server_backend::status::StatusCode;
 use anymap::AnyMap;
 
 pub struct Response {
@@ -23,6 +23,7 @@ impl Response {
         }
     }
 
+    #[allow(dead_code)]
     pub fn from_reader(status: StatusCode, body: Box<Reader + Send>) -> Response {
         Response {
             status: status,
@@ -42,6 +43,7 @@ impl Response {
         self.body = Some(box MemReader::new(body.into_bytes()) as Box<Reader + Send>)
     }
 
+    #[allow(dead_code)]
     pub fn from_file(path: &Path) -> IoResult<Response> {
         let file = try!(File::open(path));
         let response = Response::from_reader(

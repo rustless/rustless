@@ -1,6 +1,6 @@
 
 use regex::Regex;
-use hyper::mime::{Mime, Application, SubLevel, SubExt};
+use hyper::mime::{Mime, Application, SubExt};
 
 pub struct Media {
     pub vendor: String,

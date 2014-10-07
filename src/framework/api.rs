@@ -1,75 +1,15 @@
-
 use collections::treemap::TreeMap;
 use serialize::json::{JsonObject};
 
-use valico::Builder as ValicoBuilder;
-
-use hyper;
-use hyper::header::common::{Accept};
-use request::Request;
-use response::Response;
+use server::{Request, Response};
+use server_backend::header::common::Accept;
 use middleware::{Handler, HandleResult, Error, NotMatchError};
 
-pub use self::endpoint::{Endpoint, EndpointBuilder};
-pub use self::client::Client;
-pub use self::namespace::{Namespace, NS, ApiHandlers, Callback, CallInfo};
-pub use self::media::Media;
+use framework::nesting::Nesting;
+use framework::media::Media;
+use framework::{ApiHandler, ApiHandlers, Callback, CallInfo};
 
-mod endpoint;
-mod namespace;
-mod client;
-mod media;
-
-pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
-
-#[deriving(Show)]
-pub struct QueryStringDecodeError;
-
-impl Error for QueryStringDecodeError {
-    fn name(&self) -> &'static str {
-        return "QueryStringDecodeError";
-    }
-}
-
-#[deriving(Show)]
-pub struct ValidationError {
-    reason: JsonObject
-}
-
-impl Error for ValidationError {
-    fn name(&self) -> &'static str {
-        return "ValidationError";
-    }
-}
-
-#[deriving(Show)]
-pub struct BodyDecodeError {
-    reason: String
-}
-
-impl BodyDecodeError {
-    pub fn new(reason: String) -> BodyDecodeError {
-        return BodyDecodeError {
-            reason: reason
-        }
-    }
-}
-
-impl Error for BodyDecodeError {
-    fn name(&self) -> &'static str {
-        return "BodyDecodeError";
-    }
-
-    fn description(&self) -> Option<&str> {
-        return Some(self.reason.as_slice())
-    }
-}
-
-
-pub trait ApiHandler {
-    fn api_call(&self, &str, &mut JsonObject, &mut Request, &mut CallInfo) -> HandleResult<Response>;
-}
-
+#[allow(dead_code)]
 pub enum Versioning {
     PathVersioning,
     AcceptHeaderVersioning(&'static str),
@@ -121,7 +61,7 @@ impl Api {
     
 }
 
-impl NS for Api {
+impl Nesting for Api {
     fn get_handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
     fn get_handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
 

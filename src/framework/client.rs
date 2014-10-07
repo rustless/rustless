@@ -1,16 +1,13 @@
-
-use api::Endpoint;
-use request::Request;
-use response::Response;
-use middleware::{HandleResult, Error};
-
 use serialize::json::{Json};
-
 use anymap::AnyMap;
-use hyper::status;
-use hyper::mime;
-use hyper::header::Header;
-use hyper::header::common::{ContentType, Location};
+
+use framework::Endpoint;
+use server::{Request, Response};
+use middleware::{HandleResult, Error};
+use server_backend::status;
+use server_backend::mime;
+use server_backend::header::Header;
+use server_backend::header::common::{ContentType, Location};
 
 pub struct Client<'a> {
     pub endpoint: &'a Endpoint,
@@ -43,7 +40,7 @@ impl<'a> Client<'a> {
         self.set_header(ContentType(application_json));
     }
 
-    pub fn error<T: Error>(mut self, error: T) -> HandleResult<Client<'a>> {
+    pub fn error<T: Error>(self, error: T) -> HandleResult<Client<'a>> {
         Err(error.abstract())
     }
 
