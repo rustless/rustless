@@ -16,62 +16,68 @@ Rustless in a port of [Grape] library from Ruby world and is still mostly **in p
 Below is a simple example showing some of the more common features of Rustless.
 
 ~~~rust
+#![feature(phase)]
+
+#[phase(plugin)]
+extern crate rustless;
 extern crate rustless;
 extern crate serialize;
 
 use std::io::net::ip::Ipv4Addr;
 use serialize::json::Json;
 use rustless::{
-    Rustless, Builder, Valico, Api, Client, NamespaceBehavior
+    Rustless, Application, Valico, Api, Client, NS, 
+    PathVersioning, AcceptHeaderVersioning, HandleResult
 };
 
 fn main() {
 
-    // Create API for chats
-    let mut chats_api = box Api::build(|chats_api| {
+    let api = box Api::build(|api| {
         // Specify API version
-        chats_api.version("v1");
+        api.version("v1", AcceptHeaderVersioning("chat"));
+        api.prefix("api");
 
-        // Add namespace
-        chats_api.namespace("chats/:id", |chat_ns| {
-            
-            // Valico settings for this namespace
-            chat_ns.params(|params| { 
-                params.req_typed("id", Valico::u64())
-            });
-
-            // Create endpoint for POST /chats/:id/users/:user_id
-            chat_ns.post("users/:user_id", |endpoint| {
-            
-                // Add description
-                endpoint.desc("Update user");
-
-                // Valico settings for endpoint params
-                endpoint.params(|params| { 
-                    params.req_typed("user_id", Valico::u64());
-                    params.req_typed("name", Valico::string())
+        // Create API for chats
+        let chats_api = box Api::build(|chats_api| {
+            // Add namespace
+            chats_api.namespace("chats/:id", |chat_ns| {
+                
+                // Valico settings for this namespace
+                chat_ns.params(|params| { 
+                    params.req_typed("id", Valico::u64())
                 });
 
-                // Function to handle requests
-                fn handler<'a>(endpoint: Client<'a>, params: &Json) -> Client<'a> {
-                    // Respond with JSON with correct content-type
-                    endpoint.json(params)
-                }
+                // Create endpoint for POST /chats/:id/users/:user_id
+                chat_ns.post("users/:user_id", |endpoint| {
+                
+                    // Add description
+                    endpoint.desc("Update user");
 
-                // Set-up handler for endpoint
-                endpoint.handle(handler)
+                    // Valico settings for endpoint params
+                    endpoint.params(|params| { 
+                        params.req_typed("user_id", Valico::u64());
+                        params.req_typed("name", Valico::string())
+                    });
+
+                    // Set-up handler for endpoint, note that we return
+                    // of macro invocation.
+                    edp_handler!(endpoint, |client, params| {
+                        client.json(params)
+                    })
+                });
+
             });
-
         });
+
+        api.mount(chats_api);
     });
 
-
-    let mut builder = Builder::new();
-    builder.mount(chats_api);
+    let mut app = Application::new();
+    app.mount(api);
 
     let rustless: Rustless = Rustless;
     rustless.listen(
-        builder.get_app(),
+        app,
         Ipv4Addr(127, 0, 0, 1),
         3000
     );
