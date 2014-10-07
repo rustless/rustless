@@ -1,6 +1,3 @@
-Rustless
-======
-
 ## What is Rustless?
 
 Rustless is a REST-like API micro-framework for Rust. It's designed to provide a simple DSL to easily develop RESTful APIs. It has built-in support for common conventions, including multiple formats, subdomain/prefix restriction, content negotiation, versioning and much more.
@@ -21,24 +18,31 @@ Below is a simple example showing some of the more common features of Rustless.
 #[phase(plugin)]
 extern crate rustless;
 extern crate rustless;
+extern crate hyper;
 extern crate serialize;
 
 use std::io::net::ip::Ipv4Addr;
-use serialize::json::Json;
+use serialize::json::{JsonObject, ToJson};
 use rustless::{
-    Rustless, Application, Valico, Api, Client, NS, 
-    PathVersioning, AcceptHeaderVersioning, HandleResult
+    Server, Application, Valico, Api, Client, Nesting, 
+    HandleResult, HandleSuccessResult, AcceptHeaderVersioning
 };
 
 fn main() {
 
     let api = box Api::build(|api| {
-        // Specify API version and versioning strategy
+        // Specify API version
         api.version("v1", AcceptHeaderVersioning("chat"));
         api.prefix("api");
 
         // Create API for chats
         let chats_api = box Api::build(|chats_api| {
+
+            chats_api.after(callback!(|client, _params| {
+                client.set_status(hyper::status::NotFound);
+                Ok(())
+            }));
+
             // Add namespace
             chats_api.namespace("chats/:id", |chat_ns| {
                 
@@ -62,7 +66,7 @@ fn main() {
                     // Set-up handler for endpoint, note that we return
                     // of macro invocation.
                     edp_handler!(endpoint, |client, params| {
-                        client.json(params)
+                        client.json(&params.to_json())
                     })
                 });
 
@@ -75,8 +79,8 @@ fn main() {
     let mut app = Application::new();
     app.mount(api);
 
-    let rustless: Rustless = Rustless;
-    rustless.listen(
+    let server: Server = Server;
+    server.listen(
         app,
         Ipv4Addr(127, 0, 0, 1),
         3000
@@ -214,8 +218,8 @@ Steps 4, 5 and 6 only happen if validation succeeds.
 E.g. using `after`:
 
 ~~~rust
-chats_api.after(callback!(|client| {
-    client.set_status(NotFound);
+chats_api.after(callback!(|client, _params| {
+    client.set_status(hyper::status::NotFound);
     Ok(())
 }));
 ~~~
