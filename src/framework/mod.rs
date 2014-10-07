@@ -29,7 +29,7 @@ pub trait ApiHandler {
 
 pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 
-pub type Callback = fn<'a>(&'a mut Client) -> HandleSuccessResult;
+pub type Callback = fn<'a>(&'a mut Client, &JsonObject) -> HandleSuccessResult;
 
 pub struct CallInfo {
     pub before: Vec<Callback>,

@@ -1,6 +1,5 @@
 use serialize::json;
-use serialize::json::{Json, JsonObject};
-use serialize::json::ToJson;
+use serialize::json::{JsonObject};
 
 use valico::Builder as ValicoBuilder;
 use query;
@@ -14,7 +13,7 @@ use framework::{
     ApiHandler, ValicoBuildHandler, Client, CallInfo, Callback
 };
 
-pub type EndpointHandler = fn<'a>(Client<'a>, &Json) -> HandleResult<Client<'a>>;
+pub type EndpointHandler = fn<'a>(Client<'a>, &JsonObject) -> HandleResult<Client<'a>>;
 
 pub enum EndpointHandlerPresent {
     HandlerPresent
@@ -81,17 +80,16 @@ impl Endpoint {
         
         let mut client = Client::new(self, req);
 
-        try!(Endpoint::call_callbacks(&info.before, &mut client));
+        try!(Endpoint::call_callbacks(&info.before, &mut client, params));
         try!(Endpoint::parse_request(client.request, params));
-        try!(Endpoint::call_callbacks(&info.before_validation, &mut client));
+        try!(Endpoint::call_callbacks(&info.before_validation, &mut client, params));
         try!(self.validate(params));
-        try!(Endpoint::call_callbacks(&info.after_validation, &mut client));
+        try!(Endpoint::call_callbacks(&info.after_validation, &mut client, params));
 
         let ref handler = self.handler.unwrap();
-        // fixme not efficient to_json call
-        let mut client = try!((*handler)(client, &params.to_json()));
+        let mut client = try!((*handler)(client, params));
             
-        try!(Endpoint::call_callbacks(&info.after, &mut client));
+        try!(Endpoint::call_callbacks(&info.after, &mut client, params));
 
         Ok(client.move_response())
     }
@@ -146,9 +144,9 @@ impl Endpoint {
         Ok(())
     }
 
-    fn call_callbacks(cbs: &Vec<Callback>, client: &mut Client) -> HandleSuccessResult {
+    fn call_callbacks(cbs: &Vec<Callback>, client: &mut Client, params: &mut JsonObject) -> HandleSuccessResult {
         for cb in cbs.iter() {
-            try!((*cb)(client));
+            try!((*cb)(client, params));
         }
 
         Ok(())
