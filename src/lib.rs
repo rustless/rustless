@@ -22,7 +22,7 @@ pub use api::{
     Endpoint, Client, Api, Namespace, NS, Versioning, PathVersioning,
     AcceptHeaderVersioning, ParamVersioning
 };
-pub use middleware::{Application};
+pub use middleware::{Application, HandleResult, HandleSuccessResult};
 pub use hyper::method::{Method, Get, Post};
 pub use valico::Builder as Valico;
 

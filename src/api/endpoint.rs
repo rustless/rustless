@@ -15,7 +15,7 @@ use api::{
     BodyDecodeError, ValicoBuildHandler, Client
 };
 
-pub type EndpointHandler = fn<'a>(Client<'a>, &Json) -> Client<'a>;
+pub type EndpointHandler = fn<'a>(Client<'a>, &Json) -> HandleResult<Client<'a>>;
 
 pub enum EndpointHandlerPresent {
     HandlerPresent
@@ -62,15 +62,6 @@ impl Endpoint {
     pub fn handle(&mut self, handler: EndpointHandler) -> EndpointHandlerPresent {
         self.handler = Some(handler);
         HandlerPresent
-    }
-
-    pub fn process<'a>(&'a self, params: &mut JsonObject, req: &'a mut Request) -> Client<'a> {
-        let ref handler = self.handler.unwrap();
-
-        let endpoint_response = Client::new(self, req);
-
-        // fixme not efficient
-        (*handler)(endpoint_response, &params.to_json())
     }
 
     fn validate(&self, params: &mut JsonObject) -> HandleResult<()> {
@@ -139,7 +130,16 @@ impl Endpoint {
 
         try!(self.validate(params));
 
-        return Ok(self.process(params, req).move_response())
+        return self.process(params, req).map(|client| client.move_response())
+    }
+
+    fn process<'a>(&'a self, params: &mut JsonObject, req: &'a mut Request) -> HandleResult<Client<'a>> {
+        let ref handler = self.handler.unwrap();
+
+        let endpoint_response = Client::new(self, req);
+
+        // fixme not efficient
+        (*handler)(endpoint_response, &params.to_json())
     }
 
 }

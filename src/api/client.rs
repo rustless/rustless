@@ -2,6 +2,7 @@
 use api::Endpoint;
 use request::Request;
 use response::Response;
+use middleware::HandleResult;
 
 use serialize::json::{Json};
 
@@ -10,6 +11,7 @@ use hyper::status;
 use hyper::mime;
 use hyper::header::Header;
 use hyper::header::common::{ContentType, Location};
+
 
 pub struct Client<'a> {
     pub endpoint: &'a Endpoint,
@@ -42,31 +44,31 @@ impl<'a> Client<'a> {
         self.set_header(ContentType(application_json));
     }
 
-    pub fn json(mut self, result: &Json) -> Client<'a> {
+    pub fn json(mut self, result: &Json) -> HandleResult<Client<'a>> {
         self.set_json_content_type();
         self.response.push_string(result.to_string());
 
-        self
+        Ok(self)
     }
 
-    pub fn text(mut self, result: String) -> Client<'a> {
+    pub fn text(mut self, result: String) -> HandleResult<Client<'a>> {
         self.response.push_string(result);
 
-        self
+        Ok(self)
     }
 
-    pub fn redirect(mut self, to: &str) -> Client<'a> {
+    pub fn redirect(mut self, to: &str) -> HandleResult<Client<'a>> {
         self.set_status(status::Found);
         self.set_header(Location(to.to_string()));
 
-        self
+        Ok(self)
     }
 
-    pub fn permanent_redirect(mut self, to: &str) -> Client<'a> {
+    pub fn permanent_redirect(mut self, to: &str) -> HandleResult<Client<'a>> {
         self.set_status(status::MovedPermanently);
         self.set_header(Location(to.to_string()));
 
-        self
+        Ok(self)
     }
 
     pub fn move_response(self) -> Response {

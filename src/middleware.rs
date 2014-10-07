@@ -25,8 +25,8 @@ impl Error for NotFoundError {
 
 
 pub type HandleError = Box<Error>;
-pub type HandleResult<'a, T> = Result<T, HandleError>;
-pub type HandleSuccessResult<'a> = HandleResult<'a, ()>;
+pub type HandleResult<T> = Result<T, HandleError>;
+pub type HandleSuccessResult = HandleResult<()>;
 
 pub trait BeforeMiddleware: Send + Sync {
     fn before(&self, &mut Request) -> HandleSuccessResult;
