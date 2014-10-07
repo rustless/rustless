@@ -5,12 +5,12 @@ use std::fmt::{Show, Formatter, FormatError};
 use std::io::net::ip::SocketAddr;
 use anymap::AnyMap;
 
-use hyper;
-use hyper::method::Method;
-use hyper::header;
-use hyper::header::Headers;
-use hyper::server::Request as HyperRequest;
-use hyper::mime::{Mime, Application, Json};
+use server_backend::method::Method;
+use server_backend::header;
+use server_backend::header::Headers;
+use server_backend::server::Request as HyperRequest;
+use server_backend::mime::{Mime, Application, Json};
+use server_backend::uri;
 
 pub struct Request {
     pub url: Url,
@@ -54,13 +54,13 @@ impl Request {
     pub fn wrap(req: HyperRequest) -> Result<Request, String> {
         
         let url = match req.uri {
-            hyper::uri::AbsolutePath(ref path) => {
+            uri::AbsolutePath(ref path) => {
                 match req.headers.get::<header::common::Host>() {
                     Some(host) => format!("http://{}{}", host.0, path),
                     None => return Err("No HOST header specified in request".to_string())
                 }
             },
-            hyper::uri::AbsoluteUri(ref uri) => format!("{}", uri),
+            uri::AbsoluteUri(ref uri) => format!("{}", uri),
             _ => return Err("Unsupported request URI".to_string())
         };
 

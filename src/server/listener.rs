@@ -1,16 +1,16 @@
 use std::sync::Arc;
 
 use middleware::Application;
-use request::Request;
+use server::request::Request;
 
-use hyper::server::{Handler, Incoming};
-use hyper::server::Request as HyperRequest;
-use hyper::server::Response as HyperResponse;
-use hyper::header::common::ContentLength;
-use hyper::net::{HttpStream, HttpAcceptor, Fresh};
+use server_backend::server::{Handler, Incoming};
+use server_backend::server::Request as ServerRequest;
+use server_backend::server::Response as ServerResponse;
+use server_backend::header::common::ContentLength;
+use server_backend::net::{HttpStream, HttpAcceptor, Fresh};
 
 pub trait ConcurrentHandler: Send + Sync {
-    fn handle(&self, req: HyperRequest, res: HyperResponse<Fresh>);
+    fn handle(&self, req: ServerRequest, res: ServerResponse<Fresh>);
 }
 
 pub struct Concurrent<H: ConcurrentHandler> { pub handler: Arc<H> }
@@ -34,7 +34,7 @@ macro_rules! try_abort(
 )
 
 impl ConcurrentHandler for Application {
-    fn handle(&self, req: HyperRequest, mut res: HyperResponse<Fresh>) {
+    fn handle(&self, req: ServerRequest, mut res: ServerResponse<Fresh>) {
 
         let mut request = Request::wrap(req).unwrap();
         let maybe_response = self.call(&mut request);

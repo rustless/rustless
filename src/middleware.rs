@@ -1,9 +1,7 @@
-
-use request::Request;
-use response::Response;
-
 pub use error::{Error, ErrorRefExt};
-use hyper::status;
+
+use server::{Request, Response};
+use server_backend::status;
 
 #[deriving(Show)]
 pub struct NotMatchError;
