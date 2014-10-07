@@ -14,14 +14,14 @@ use hyper::header::common::{ContentType, Location};
 
 pub struct Client<'a> {
     pub endpoint: &'a Endpoint,
-    pub request: &'a Request,
+    pub request: &'a mut Request,
     pub ext: AnyMap,
     pub response: Response
 }
 
 impl<'a> Client<'a> {
 
-    pub fn new(endpoint: &'a Endpoint, request: &'a Request) -> Client<'a> {
+    pub fn new(endpoint: &'a Endpoint, request: &'a mut Request) -> Client<'a> {
         Client {
             endpoint: endpoint,
             request: request,

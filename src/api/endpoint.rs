@@ -9,10 +9,10 @@ use query;
 use request::Request;
 use response::Response;
 use path::{Path};
-use middleware::{HandleResult, NotMatchError, Error};
+use middleware::{HandleResult, HandleSuccessResult, NotMatchError, Error};
 use api::{
     ApiHandler, QueryStringDecodeError, ValidationError, 
-    BodyDecodeError, ValicoBuildHandler, Client
+    BodyDecodeError, ValicoBuildHandler, Client, CallInfo
 };
 
 pub type EndpointHandler = fn<'a>(Client<'a>, &Json) -> HandleResult<Client<'a>>;
@@ -78,8 +78,18 @@ impl Endpoint {
         }
     }
 
-    pub fn call_decode(&self, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
+    pub fn call_decode(&self, params: &mut JsonObject, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
         
+        let mut client = Client::new(self, req);
+
+        for cb in info.before.iter() {
+            try!((*cb)(&mut client));
+        }
+
+        {
+
+        let req: &mut Request = client.request;
+
         // extend params with query-string params if any
         if req.url.query.is_some() {
             let maybe_query_params = query::parse(req.url.query.as_ref().unwrap().as_slice());
@@ -128,29 +138,38 @@ impl Endpoint {
             }
         }
 
+        }   
+
+        for cb in info.before_validation.iter() {
+            try!((*cb)(&mut client));
+        }
+
         try!(self.validate(params));
 
-        return self.process(params, req).map(|client| client.move_response())
-    }
+        for cb in info.after_validation.iter() {
+            try!((*cb)(&mut client));
+        }
 
-    fn process<'a>(&'a self, params: &mut JsonObject, req: &'a mut Request) -> HandleResult<Client<'a>> {
         let ref handler = self.handler.unwrap();
+        // fixme not efficient to_json call
+        let mut client = try!((*handler)(client, &params.to_json()));
+            
+        for cb in info.after.iter() {
+            try!((*cb)(&mut client));
+        }
 
-        let endpoint_response = Client::new(self, req);
-
-        // fixme not efficient
-        (*handler)(endpoint_response, &params.to_json())
+        Ok(client.move_response())
     }
 
 }
 
 impl ApiHandler for Endpoint {
-    fn api_call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
+    fn api_call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
 
         match self.path.is_match(rest_path) {
             Some(captures) =>  {
                 self.path.apply_captures(params, captures);
-                self.call_decode(params, req)
+                self.call_decode(params, req, info)
             },
             None => Err(NotMatchError.abstract())
         }
