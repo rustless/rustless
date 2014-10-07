@@ -12,7 +12,7 @@ use middleware::{Handler, HandleResult, Error, NotMatchError};
 
 pub use self::endpoint::{Endpoint, EndpointBuilder};
 pub use self::client::Client;
-pub use self::namespace::{Namespace, NS, ApiHandlers};
+pub use self::namespace::{Namespace, NS, ApiHandlers, Callback, CallInfo};
 pub use self::media::Media;
 
 mod endpoint;
@@ -67,7 +67,7 @@ impl Error for BodyDecodeError {
 
 
 pub trait ApiHandler {
-    fn api_call(&self, &str, &mut JsonObject, &mut Request) -> HandleResult<Response>;
+    fn api_call(&self, &str, &mut JsonObject, &mut Request, &mut CallInfo) -> HandleResult<Response>;
 }
 
 pub enum Versioning {
@@ -81,7 +81,11 @@ pub struct Api {
     pub version: Option<String>,
     pub versioning: Option<Versioning>,
     pub prefix: String,
-    handlers: ApiHandlers
+    handlers: ApiHandlers,
+    before: Vec<Callback>,
+    before_validation: Vec<Callback>,
+    after_validation: Vec<Callback>,
+    after: Vec<Callback>
 }
 
 impl Api {
@@ -91,7 +95,11 @@ impl Api {
             version: None,
             versioning: None,
             prefix: "".to_string(),
-            handlers: vec![]
+            handlers: vec![],
+            before: vec![],
+            before_validation: vec![],
+            after_validation: vec![],
+            after: vec![]
         }
     }
 
@@ -114,18 +122,24 @@ impl Api {
 }
 
 impl NS for Api {
-    fn handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
-    fn handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
+    fn get_handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
+    fn get_handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
+
+    fn get_before<'a>(&'a self) -> &'a Vec<Callback> { &self.before }
+    fn get_before_mut<'a>(&'a mut self) -> &'a mut Vec<Callback> { &mut self.before }
+
+    fn get_before_validation<'a>(&'a self) -> &'a Vec<Callback> { &self.before_validation }
+    fn get_before_validation_mut<'a>(&'a mut self) -> &'a mut Vec<Callback> { &mut self.before_validation }
+
+    fn get_after_validation<'a>(&'a self) -> &'a Vec<Callback> { &self.after_validation }
+    fn get_after_validation_mut<'a>(&'a mut self) -> &'a mut Vec<Callback> { &mut self.after_validation }
+
+    fn get_after<'a>(&'a self) -> &'a Vec<Callback> { &self.after }
+    fn get_after_mut<'a>(&'a mut self) -> &'a mut Vec<Callback> { &mut self.after }
 }
 
 impl ApiHandler for Api {
-    fn api_call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request) -> HandleResult<Response> {
-        self.call(rest_path, req)
-    }
-}
-
-impl Handler for Api {
-    fn call(&self, rest_path: &str, req: &mut Request) -> HandleResult<Response> {
+    fn api_call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
         
         // Check prefix
         let mut rest_path = if self.prefix.len() > 0 {
@@ -190,6 +204,13 @@ impl Handler for Api {
             }
         }
 
-        self.call_handlers(rest_path, &mut TreeMap::new(), req)
+        self.push_callbacks(info);
+        self.call_handlers(rest_path, params, req, info)
+    }
+}
+
+impl Handler for Api {
+    fn call(&self, rest_path: &str, req: &mut Request) -> HandleResult<Response> {
+        self.api_call(rest_path, &mut TreeMap::new(), req, &mut CallInfo::new())
     }
 }

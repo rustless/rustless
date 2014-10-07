@@ -37,6 +37,17 @@ macro_rules! edp_handler {
     })
 }
 
+#[macro_export]
+macro_rules! callback {
+    (|$client:ident| $blk:block) => ({
+        fn callback<'a>($client: &mut Client<'a>) -> HandleSuccessResult {
+            $blk
+        }
+
+        callback
+    })
+}
+
 mod listener;
 mod rustless;
 mod request;
