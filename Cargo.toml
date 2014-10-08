@@ -8,6 +8,9 @@ authors = ["Stanislav Panferov <fnight.m@gmail.com>"]
 name = "rustless"
 path = "src/lib.rs"
 
+[[test]]
+name = "tests"
+
 [dependencies.http]
 git = "https://github.com/chris-morgan/rust-http.git"
 
