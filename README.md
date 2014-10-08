@@ -8,6 +8,9 @@ Rustless in a port of [Grape] library from Ruby world and is still mostly **in p
 [Grape]: https://github.com/intridea/grape
 [hyper]: https://github.com/hyperium/hyper
 
+### Status
+[![Build Status](https://travis-ci.org/rustless/rustless.svg?branch=master)](https://travis-ci.org/rustless/rustless)
+
 ## Basic Usage
 
 Below is a simple example showing some of the more common features of Rustless.
