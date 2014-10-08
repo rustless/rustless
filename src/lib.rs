@@ -19,7 +19,7 @@ extern crate collections;
 extern crate valico;
 extern crate query;
 
-pub use common::{Cookies};
+pub use common::{Cookies, Static};
 pub use valico::Builder as Valico;
 pub use server::{Server, Request, Response};
 pub use middleware::{Application, HandleResult, HandleSuccessResult};
