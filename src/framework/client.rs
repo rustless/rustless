@@ -1,9 +1,10 @@
 use serialize::json::{Json};
 use anymap::AnyMap;
 
-use framework::Endpoint;
 use server::{Request, Response};
 use middleware::{HandleResult, Error};
+use framework::endpoint::Endpoint;
+use framework::media::Media;
 use server_backend::status;
 use server_backend::mime;
 use server_backend::header::Header;
@@ -12,16 +13,18 @@ use server_backend::header::common::{ContentType, Location};
 pub struct Client<'a> {
     pub endpoint: &'a Endpoint,
     pub request: &'a mut Request,
+    pub media: Option<&'a Media>,
     pub ext: AnyMap,
     pub response: Response
 }
 
 impl<'a> Client<'a> {
 
-    pub fn new(endpoint: &'a Endpoint, request: &'a mut Request) -> Client<'a> {
+    pub fn new(endpoint: &'a Endpoint, request: &'a mut Request, media: Option<&'a Media>) -> Client<'a> {
         Client {
             endpoint: endpoint,
             request: request,
+            media: media,
             ext: AnyMap::new(),
             response: Response::new(status::Ok)
         }

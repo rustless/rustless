@@ -78,7 +78,7 @@ impl Endpoint {
 
     pub fn call_decode(&self, params: &mut JsonObject, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
         
-        let mut client = Client::new(self, req);
+        let mut client = Client::new(self, req, info.media.as_ref());
 
         try!(Endpoint::call_callbacks(&info.before, &mut client, params));
         try!(Endpoint::parse_request(client.request, params));
