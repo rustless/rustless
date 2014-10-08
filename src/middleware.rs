@@ -27,11 +27,11 @@ pub type HandleResult<T> = Result<T, HandleError>;
 pub type HandleSuccessResult = HandleResult<()>;
 
 pub trait BeforeMiddleware: Send + Sync {
-    fn before(&self, &mut Request) -> HandleSuccessResult;
+    fn before(&self, &mut Request) -> HandleResult<Option<Response>>;
 }
 
 pub trait AfterMiddleware: Send + Sync {
-    fn after(&self, &mut Request, &mut Response) -> HandleSuccessResult;
+    fn after(&self, &mut Request, &mut Response) -> HandleResult<Option<Response>>;
 }
 
 pub trait CatchMiddleware: Send + Sync {
@@ -71,7 +71,8 @@ impl Application {
                         None => ()
                     }
                 },
-                Ok(()) => ()
+                Ok(Some(response)) => return Ok(response),
+                Ok(None) => ()
             }
         }
 
@@ -102,7 +103,8 @@ impl Application {
                     Some(response) => return Ok(response),
                     None => ()
                 },
-                Ok(()) => ()
+                Ok(Some(response)) => return Ok(response),
+                Ok(None) => ()
             }
         }
 
