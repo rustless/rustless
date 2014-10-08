@@ -32,6 +32,7 @@ pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 pub type Callback = fn<'a>(&'a mut Client, &JsonObject) -> HandleSuccessResult;
 
 pub struct CallInfo {
+    pub media: Option<Media>,
     pub before: Vec<Callback>,
     pub before_validation: Vec<Callback>,
     pub after_validation: Vec<Callback>,
@@ -41,6 +42,7 @@ pub struct CallInfo {
 impl CallInfo {
     pub fn new() -> CallInfo {
         CallInfo {
+            media: None,
             before: vec![],
             before_validation: vec![],
             after_validation: vec![],
