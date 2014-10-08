@@ -136,6 +136,9 @@ impl ApiHandler for Api {
 
                             if matched_media.is_none() {
                                 return Err(NotMatchError.abstract())
+                            } else {
+                                // attach matched media to info for later use
+                                info.media = matched_media;
                             }
                         },
                         None => return Err(NotMatchError.abstract())
