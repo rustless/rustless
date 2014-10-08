@@ -43,8 +43,11 @@ impl<'a> Client<'a> {
     }
 
     pub fn set_json_content_type(&mut self) {
-        let application_json: mime::Mime = from_str("application/json").unwrap();
-        self.set_header(ContentType(application_json));
+        self.set_header(ContentType(mime::Mime(mime::Application, mime::Json, vec![])));
+    }
+
+    pub fn set_content_type(&mut self, mime: mime::Mime) {
+        self.set_header(ContentType(mime));
     }
 
     pub fn error<T: Error>(self, error: T) -> HandleResult<Client<'a>> {
