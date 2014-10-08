@@ -1,9 +1,6 @@
 language: rust
-before_install:
-  - sudo add-apt-repository --yes ppa:hansjorg/rust
-  - sudo add-apt-repository --yes ppa:cmrx64/cargo
-  - sudo apt-get update -qq
-install:
-  - sudo apt-get install -qq rust-nightly cargo
 script:
-  - cargo build
+  - cargo build --verbose
+  - cargo test --verbose
+  - rustdoc --test README.md -L target
+  - cargo doc
