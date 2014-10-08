@@ -78,5 +78,13 @@ impl<'a> Client<'a> {
     pub fn move_response(self) -> Response {
         self.response
     }
+
+    pub fn ext(&self) -> &AnyMap {
+        &self.ext
+    }
+
+    pub fn ext_mut(&mut self) -> &mut AnyMap {
+        &mut self.ext
+    }
     
 }
