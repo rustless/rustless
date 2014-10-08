@@ -87,6 +87,14 @@ impl Request {
             false
         }
     }
+
+    pub fn ext(&self) -> &AnyMap {
+        &self.ext
+    }
+
+    pub fn ext_mut(&mut self) -> &mut AnyMap {
+        &mut self.ext
+    }
 }
 
 impl Reader for Request {

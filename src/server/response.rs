@@ -54,4 +54,12 @@ impl Response {
         Ok(response)
     }
 
+    pub fn ext(&self) -> &AnyMap {
+        &self.ext
+    }
+
+    pub fn ext_mut(&mut self) -> &mut AnyMap {
+        &mut self.ext
+    }
+
 }

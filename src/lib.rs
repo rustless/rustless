@@ -13,11 +13,13 @@ extern crate serialize;
 extern crate url;
 extern crate anymap;
 extern crate error;
+extern crate cookie;
 
 extern crate collections;
 extern crate valico;
 extern crate query;
 
+pub use common::{Cookies};
 pub use valico::Builder as Valico;
 pub use server::{Server, Request, Response};
 pub use middleware::{Application, HandleResult, HandleSuccessResult};
@@ -52,4 +54,5 @@ mod server_backend;
 mod rustless;
 mod middleware;
 mod server;
-mod framework;
+pub mod framework;
+pub mod common;
