@@ -58,7 +58,7 @@ impl Application {
         }
 
         let mut response: Option<Response> = None;
-        let path = req.url.serialize_path().unwrap_or(String::new());
+        let path = req.url().serialize_path().unwrap_or(String::new());
 
         for handler in self.handlers.iter() {
             match handler.call(path.as_slice(), req) {

@@ -1,8 +1,12 @@
 #![feature(phase)]
 
-extern crate rustless;
+#![deny(warnings)]
+#![deny(bad_style)]
 
-#[test]
-fn test() {
-    assert!(true)
-}
+#[phase(plugin)]
+extern crate rustless;
+extern crate rustless;
+extern crate hyper;
+extern crate serialize;
+
+mod api01;

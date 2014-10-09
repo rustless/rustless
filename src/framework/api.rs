@@ -107,7 +107,7 @@ impl ApiHandler for Api {
                     }
                 },
                 &ParamVersioning(ref param_name) => {
-                    match req.url.query_pairs() {
+                    match req.url().query_pairs() {
                         Some(query_pairs) => {
                             if !query_pairs.iter().any(|&(ref key, ref val)| key.as_slice() == *param_name && val == version) {
                                 return Err(NotMatchError.abstract()) 

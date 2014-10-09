@@ -154,8 +154,8 @@ impl Endpoint {
 
     fn parse_request(req: &mut Request, params: &mut JsonObject) -> HandleSuccessResult {
         // extend params with query-string params if any
-        if req.url.query.is_some() {
-            try!(Endpoint::parse_query(req.url.query.as_ref().unwrap().as_slice(), params));   
+        if req.url().query.is_some() {
+            try!(Endpoint::parse_query(req.url().query.as_ref().unwrap().as_slice(), params));   
         }
 
         // extend params with json-encoded body params if any

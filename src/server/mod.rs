@@ -6,11 +6,11 @@ use server_backend::server::Server as HttpServer;
 use server::listener::{Concurrent};
 use middleware::Application;
 
-pub use self::request::Request;
+pub use self::request::{Request, ServerRequest};
 pub use self::response::Response;
 
 mod listener;
-mod request;
+pub mod request;
 mod response;
 
 pub struct Server;
