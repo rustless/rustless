@@ -16,10 +16,22 @@ pub trait Request: Reader + Show + Send {
     fn remote_addr(&self) -> &SocketAddr;
     fn headers(&self) -> &Headers;
     fn method(&self) -> &Method;
-    fn is_json_body(&self) -> bool;
     fn ext(&self) -> &AnyMap;
     fn ext_mut(&mut self) -> &mut AnyMap;
     fn url(&self) -> &Url;
+
+    fn is_json_body(&self) -> bool {
+        let content_type = self.headers().get::<header::common::ContentType>(); 
+        if content_type.is_some() {
+            println!("ContentType: {}", content_type.unwrap().0);
+            match content_type.unwrap().0 {
+                Mime(Application, Json, _) => true,
+                _ => false
+            }
+        } else {
+            false
+        }
+    }
 }
 
 #[deriving(Send)]
@@ -45,19 +57,6 @@ impl Request for ServerRequest {
 
     fn method(&self) -> &Method {
         return &self.raw.method;
-    }
-
-    fn is_json_body(&self) -> bool {
-        let content_type = self.headers().get::<header::common::ContentType>(); 
-        if content_type.is_some() {
-            println!("ContentType: {}", content_type.unwrap().0);
-            match content_type.unwrap().0 {
-                Mime(Application, Json, _) => true,
-                _ => false
-            }
-        } else {
-            false
-        }
     }
 
     fn ext(&self) -> &AnyMap {
