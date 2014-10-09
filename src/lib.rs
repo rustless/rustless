@@ -32,6 +32,7 @@ pub use framework::{
 #[macro_export]
 macro_rules! edp_handler {
     ($edp:ident, |$client:ident, $params:ident| $blk:block) => ({
+        #[allow(dead_code)]
         fn endpoint_handler<'a>($client: Client<'a>, $params: &JsonObject) -> HandleResult<Client<'a>> {
             $blk
         }
