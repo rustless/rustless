@@ -1,24 +1,14 @@
 
-use std::io::IoError;
 use std::io::fs::PathExtensions;
 use std::os::make_absolute;
 
-use middleware::{Handler, HandleResult, NotMatchError, Error};
+use errors::{Error, FileError, NotMatchError};
+use middleware::{Handler, HandleResult};
 use server::{Request, Response};
 
 #[deriving(Clone)]
 pub struct Static {
     root_path: Path
-}
-
-#[deriving(Show)]
-pub struct FileError(IoError);
-
-impl Error for FileError {
-    fn name(&self) -> &'static str {
-        let &FileError(ref error) = self;
-        error.desc
-    }
 }
 
 impl Static {

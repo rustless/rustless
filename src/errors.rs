@@ -1,5 +1,24 @@
-use middleware::Error;
 use serialize::json::JsonObject;
+use std::io::IoError;
+pub use error::{Error, ErrorRefExt};
+
+#[deriving(Show)]
+pub struct NotMatchError;
+
+impl Error for NotMatchError {
+    fn name(&self) -> &'static str {
+        return "NotMatchError";
+    }
+}
+
+#[deriving(Show)]
+pub struct NotFoundError;
+
+impl Error for NotFoundError {
+    fn name(&self) -> &'static str {
+        return "NotFoundError";
+    }
+}
 
 #[deriving(Show)]
 pub struct QueryStringDecodeError;
@@ -41,5 +60,15 @@ impl Error for BodyDecodeError {
 
     fn description(&self) -> Option<&str> {
         return Some(self.reason.as_slice())
+    }
+}
+
+#[deriving(Show)]
+pub struct FileError(pub IoError);
+
+impl Error for FileError {
+    fn name(&self) -> &'static str {
+        let &FileError(ref error) = self;
+        error.desc
     }
 }

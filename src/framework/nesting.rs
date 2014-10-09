@@ -2,7 +2,8 @@ use serialize::json::JsonObject;
 
 use server::{Request, Response};
 use server_backend::method::{Get, Post, Put, Delete};
-use middleware::{HandleResult, NotMatchError, Error, ErrorRefExt};
+use middleware::{HandleResult};
+use errors::{NotMatchError, Error, ErrorRefExt};
 
 use framework::endpoint::{Endpoint, EndpointBuilder};
 use framework::{ApiHandler, ApiHandlers, Callback, CallInfo};

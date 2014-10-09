@@ -3,7 +3,8 @@ use serialize::json::{JsonObject};
 
 use server::{Request, Response};
 use server_backend::header::common::Accept;
-use middleware::{Handler, HandleResult, Error, NotMatchError};
+use errors::{Error, NotMatchError};
+use middleware::{Handler, HandleResult};
 
 use framework::nesting::Nesting;
 use framework::media::Media;
