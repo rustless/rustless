@@ -9,8 +9,9 @@ use middleware::Application;
 pub use self::request::{Request, ServerRequest};
 pub use self::response::Response;
 
-mod listener;
 pub mod request;
+mod simple_request;
+mod listener;
 mod response;
 
 pub struct Server;

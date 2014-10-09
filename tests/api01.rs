@@ -60,10 +60,9 @@ fn create_app() -> Application {
 }
 
 #[test]
+#[allow(unused_variable)]
 fn test_api() {
 
     let app = create_app();
-
-    app.call()
 
 }
