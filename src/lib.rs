@@ -3,6 +3,7 @@
 #![license = "MIT"]
 #![crate_type = "rlib"]
 #![deny(warnings)]
+#![deny(bad_style)]
 #![feature(macro_rules, phase, tuple_indexing)]
 #[phase(plugin)]
 

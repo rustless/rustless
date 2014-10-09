@@ -8,7 +8,7 @@ use middleware::{Handler, HandleResult};
 
 use framework::nesting::Nesting;
 use framework::media::Media;
-use framework::{ApiHandler, ApiHandlers, Callback, CallInfo};
+use framework::{ApiHandler, ApiHandlers, Callbacks, CallInfo};
 
 #[allow(dead_code)]
 pub enum Versioning {
@@ -23,10 +23,10 @@ pub struct Api {
     pub versioning: Option<Versioning>,
     pub prefix: String,
     handlers: ApiHandlers,
-    before: Vec<Callback>,
-    before_validation: Vec<Callback>,
-    after_validation: Vec<Callback>,
-    after: Vec<Callback>
+    before: Callbacks,
+    before_validation: Callbacks,
+    after_validation: Callbacks,
+    after: Callbacks
 }
 
 impl Api {
@@ -66,17 +66,17 @@ impl Nesting for Api {
     fn get_handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
     fn get_handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
 
-    fn get_before<'a>(&'a self) -> &'a Vec<Callback> { &self.before }
-    fn get_before_mut<'a>(&'a mut self) -> &'a mut Vec<Callback> { &mut self.before }
+    fn get_before<'a>(&'a self) -> &'a Callbacks { &self.before }
+    fn get_before_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.before }
 
-    fn get_before_validation<'a>(&'a self) -> &'a Vec<Callback> { &self.before_validation }
-    fn get_before_validation_mut<'a>(&'a mut self) -> &'a mut Vec<Callback> { &mut self.before_validation }
+    fn get_before_validation<'a>(&'a self) -> &'a Callbacks { &self.before_validation }
+    fn get_before_validation_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.before_validation }
 
-    fn get_after_validation<'a>(&'a self) -> &'a Vec<Callback> { &self.after_validation }
-    fn get_after_validation_mut<'a>(&'a mut self) -> &'a mut Vec<Callback> { &mut self.after_validation }
+    fn get_after_validation<'a>(&'a self) -> &'a Callbacks { &self.after_validation }
+    fn get_after_validation_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.after_validation }
 
-    fn get_after<'a>(&'a self) -> &'a Vec<Callback> { &self.after }
-    fn get_after_mut<'a>(&'a mut self) -> &'a mut Vec<Callback> { &mut self.after }
+    fn get_after<'a>(&'a self) -> &'a Callbacks { &self.after }
+    fn get_after_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.after }
 }
 
 impl ApiHandler for Api {
