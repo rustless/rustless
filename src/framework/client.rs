@@ -2,7 +2,8 @@ use serialize::json::{Json};
 use anymap::AnyMap;
 
 use server::{Request, Response};
-use middleware::{HandleResult, Error};
+use errors::{Error};
+use middleware::{HandleResult};
 use framework::endpoint::Endpoint;
 use framework::media::Media;
 use server_backend::status;
@@ -66,6 +67,19 @@ impl<'a> Client<'a> {
 
         Ok(self)
     }
+
+    // pub fn file(mut self, path: Path) -> HandleResult<Client<'a>> {
+    //     if path.is_file() {
+    //         match self.response.push_file(&path) {
+    //             Ok(()) => Ok(self),
+    //             Err(err) => {
+    //                 return Err(FileError(err).abstract());
+    //             }
+    //         }
+    //     }
+
+    //     Ok(self)
+    // }
 
     pub fn redirect(mut self, to: &str) -> HandleResult<Client<'a>> {
         self.set_status(status::Found);

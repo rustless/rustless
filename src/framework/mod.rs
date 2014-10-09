@@ -14,7 +14,6 @@ pub use self::media::Media;
 
 mod nesting;
 mod api;
-mod errors;
 mod endpoint;
 mod namespace;
 mod client;

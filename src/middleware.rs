@@ -1,26 +1,7 @@
-pub use error::{Error, ErrorRefExt};
 
 use server::{Request, Response};
 use server_backend::status;
-
-#[deriving(Show)]
-pub struct NotMatchError;
-
-impl Error for NotMatchError {
-    fn name(&self) -> &'static str {
-        return "NotMatchError";
-    }
-}
-
-#[deriving(Show)]
-pub struct NotFoundError;
-
-impl Error for NotFoundError {
-    fn name(&self) -> &'static str {
-        return "NotFoundError";
-    }
-}
-
+use errors::{Error, ErrorRefExt, NotMatchError, NotFoundError};
 
 pub type HandleError = Box<Error>;
 pub type HandleResult<T> = Result<T, HandleError>;
