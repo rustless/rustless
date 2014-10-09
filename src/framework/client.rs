@@ -1,8 +1,9 @@
 use serialize::json::{Json};
 use anymap::AnyMap;
+use std::os;
 
 use server::{Request, Response};
-use errors::{Error};
+use errors::{Error, FileError};
 use middleware::{HandleResult};
 use framework::endpoint::Endpoint;
 use framework::media::Media;
@@ -18,6 +19,8 @@ pub struct Client<'a> {
     pub ext: AnyMap,
     pub response: Response
 }
+
+pub type ClientResult<'a> = HandleResult<Client<'a>>;
 
 impl<'a> Client<'a> {
 
@@ -51,44 +54,40 @@ impl<'a> Client<'a> {
         self.set_header(ContentType(mime));
     }
 
-    pub fn error<T: Error>(self, error: T) -> HandleResult<Client<'a>> {
+    pub fn error<T: Error>(self, error: T) -> ClientResult<'a> {
         Err(error.abstract())
     }
 
-    pub fn json(mut self, result: &Json) -> HandleResult<Client<'a>> {
+    pub fn json(mut self, result: &Json) -> ClientResult<'a> {
         self.set_json_content_type();
         self.response.push_string(result.to_string());
 
         Ok(self)
     }
 
-    pub fn text(mut self, result: String) -> HandleResult<Client<'a>> {
+    pub fn text(mut self, result: String) -> ClientResult<'a> {
         self.response.push_string(result);
 
         Ok(self)
     }
 
-    // pub fn file(mut self, path: Path) -> HandleResult<Client<'a>> {
-    //     if path.is_file() {
-    //         match self.response.push_file(&path) {
-    //             Ok(()) => Ok(self),
-    //             Err(err) => {
-    //                 return Err(FileError(err).abstract());
-    //             }
-    //         }
-    //     }
+    pub fn file(mut self, path: &Path) -> ClientResult<'a> {
+       match self.response.push_file(&os::make_absolute(path)) {
+            Ok(()) => Ok(self),
+            Err(err) => {
+                return Err(FileError(err).abstract());
+            }
+        } 
+    }
 
-    //     Ok(self)
-    // }
-
-    pub fn redirect(mut self, to: &str) -> HandleResult<Client<'a>> {
+    pub fn redirect(mut self, to: &str) -> ClientResult<'a> {
         self.set_status(status::Found);
         self.set_header(Location(to.to_string()));
 
         Ok(self)
     }
 
-    pub fn permanent_redirect(mut self, to: &str) -> HandleResult<Client<'a>> {
+    pub fn permanent_redirect(mut self, to: &str) -> ClientResult<'a> {
         self.set_status(status::MovedPermanently);
         self.set_header(Location(to.to_string()));
 

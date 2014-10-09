@@ -43,14 +43,17 @@ impl Response {
         self.body = Some(box MemReader::new(body.into_bytes()) as Box<Reader + Send>)
     }
 
+    pub fn push_file(&mut self, path: &Path) -> IoResult<()> {
+        let reader = box try!(File::open(path));
+        self.body = Some(reader as Box<Reader + Send>);
+
+        Ok(())
+    }
+
     #[allow(dead_code)]
     pub fn from_file(path: &Path) -> IoResult<Response> {
-        let file = try!(File::open(path));
-        let response = Response::from_reader(
-            status::Ok,
-            box file as Box<Reader + Send>
-        );
-        // TODO: content_type
+        let mut response = Response::new(status::Ok);
+        try!(response.push_file(path));
         Ok(response)
     }
 
