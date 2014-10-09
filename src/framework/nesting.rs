@@ -6,7 +6,7 @@ use middleware::{HandleResult};
 use errors::{NotMatchError, Error, ErrorRefExt};
 
 use framework::endpoint::{Endpoint, EndpointBuilder};
-use framework::{ApiHandler, ApiHandlers, Callback, CallInfo};
+use framework::{ApiHandler, ApiHandlers, Callback, Callbacks, CallInfo};
 use framework::namespace::Namespace;
 
 pub trait Nesting {
@@ -14,17 +14,17 @@ pub trait Nesting {
     fn get_handlers<'a>(&'a self) -> &'a ApiHandlers;
     fn get_handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers;
 
-    fn get_before<'a>(&'a self) -> &'a Vec<Callback>;
-    fn get_before_mut<'a>(&'a mut self) -> &'a mut Vec<Callback>;
+    fn get_before<'a>(&'a self) -> &'a Callbacks;
+    fn get_before_mut<'a>(&'a mut self) -> &'a mut Callbacks;
 
-    fn get_before_validation<'a>(&'a self) -> &'a Vec<Callback>;
-    fn get_before_validation_mut<'a>(&'a mut self) -> &'a mut Vec<Callback>;
+    fn get_before_validation<'a>(&'a self) -> &'a Callbacks;
+    fn get_before_validation_mut<'a>(&'a mut self) -> &'a mut Callbacks;
 
-    fn get_after_validation<'a>(&'a self) -> &'a Vec<Callback>;
-    fn get_after_validation_mut<'a>(&'a mut self) -> &'a mut Vec<Callback>;
+    fn get_after_validation<'a>(&'a self) -> &'a Callbacks;
+    fn get_after_validation_mut<'a>(&'a mut self) -> &'a mut Callbacks;
 
-    fn get_after<'a>(&'a self) -> &'a Vec<Callback>;
-    fn get_after_mut<'a>(&'a mut self) -> &'a mut Vec<Callback>;
+    fn get_after<'a>(&'a self) -> &'a Callbacks;
+    fn get_after_mut<'a>(&'a mut self) -> &'a mut Callbacks;
 
     fn push_callbacks(&self, info: &mut CallInfo) {
         for cb in self.get_before().iter() { info.before.push(*cb); }
