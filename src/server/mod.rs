@@ -6,6 +6,7 @@ use server_backend::server::Server as HttpServer;
 use server::listener::{Concurrent};
 use middleware::Application;
 
+pub use self::simple_request::{SimpleRequest};
 pub use self::request::{Request, ServerRequest};
 pub use self::response::Response;
 

@@ -106,8 +106,12 @@ impl Application {
             }
         }
 
-        let error_message = format!("{}", err);
-        Some(Response::from_string(status::InternalServerError, error_message))
+        if err.downcast::<NotFoundError>().is_some() {
+            Some(Response::from_string(status::NotFound, "".to_string()))  
+        } else {
+            let error_message = format!("{}", err);
+            Some(Response::from_string(status::InternalServerError, error_message))    
+        }
     }
 
     pub fn mount(&mut self, handler: Box<Handler + Send + Sync>) {
