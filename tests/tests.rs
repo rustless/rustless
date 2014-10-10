@@ -8,6 +8,7 @@ extern crate rustless;
 extern crate rustless;
 extern crate hyper;
 extern crate serialize;
+extern crate url;
 
 mod request;
 mod api01;

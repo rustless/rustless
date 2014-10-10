@@ -22,7 +22,7 @@ extern crate query;
 
 pub use common::{Cookies, Static};
 pub use valico::Builder as Valico;
-pub use server::{Server, Request, Response};
+pub use server::{Server, Request, SimpleRequest, Response};
 pub use middleware::{Application, HandleResult, HandleSuccessResult};
 pub use framework::{
     Endpoint, Client, Api, Namespace, Nesting, 
@@ -53,7 +53,7 @@ macro_rules! callback {
 }
 
 pub mod errors;
-mod server_backend;
+pub mod server_backend;
 mod middleware;
 mod server;
 pub mod framework;

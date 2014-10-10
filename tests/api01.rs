@@ -1,10 +1,12 @@
 
-
+use url::Url;
 use std::path::Path;
 use serialize::json::{JsonObject, ToJson};
+use rustless::server_backend::method::{Post};
+use rustless::server_backend::status::{NotFound};
 use rustless::{
     Application, Valico, Api, Client, Nesting, 
-    HandleResult, AcceptHeaderVersioning, Static
+    HandleResult, AcceptHeaderVersioning, Static, SimpleRequest
 };
 
 fn create_app() -> Application {
@@ -62,7 +64,11 @@ fn create_app() -> Application {
 #[test]
 #[allow(unused_variable)]
 fn test_api() {
-
     let app = create_app();
 
+    let mut rq = SimpleRequest::new(Post, 
+        Url::parse("http://127.0.0.1:3000/chats/100/users/15").unwrap()); 
+    let response = app.call(&mut rq).unwrap();
+    // not found because accept-header not present
+    assert_eq!(response.status, NotFound);
 }
