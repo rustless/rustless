@@ -3,12 +3,12 @@ use serialize::json::{JsonObject};
 
 use server::{Request, Response};
 use server_backend::header::common::Accept;
-use errors::{Error, NotMatchError};
+use errors::{Error, ErrorRefExt, NotMatchError, NotAcceptableError};
 use middleware::{Handler, HandleResult};
 
 use framework::nesting::Nesting;
 use framework::media::Media;
-use framework::{ApiHandler, ApiHandlers, Callbacks, CallInfo};
+use framework::{ApiHandler, ApiHandlers, Callbacks, CallInfo, ErrorFormatters, ErrorFormatter};
 
 #[allow(dead_code)]
 pub enum Versioning {
@@ -26,7 +26,8 @@ pub struct Api {
     before: Callbacks,
     before_validation: Callbacks,
     after_validation: Callbacks,
-    after: Callbacks
+    after: Callbacks,
+    error_formatters: ErrorFormatters
 }
 
 impl Api {
@@ -40,7 +41,8 @@ impl Api {
             before: vec![],
             before_validation: vec![],
             after_validation: vec![],
-            after: vec![]
+            after: vec![],
+            error_formatters: vec![]
         }
     }
 
@@ -58,6 +60,32 @@ impl Api {
 
     pub fn prefix(&mut self, prefix: &str) {
         self.prefix = prefix.to_string();
+    }
+
+    pub fn error_formatter(&mut self, formatter: ErrorFormatter) {
+        self.error_formatters.push(formatter);
+    }
+
+    fn handle_error(&self, err: &Box<Error>, media: &Media) -> Option<Response>  {
+        for err_formatter in self.error_formatters.iter() {
+            match (*err_formatter)(err, media) {
+                Some(resp) => return Some(resp),
+                None => ()
+            }
+        }
+
+        None
+    }
+
+    fn extract_media(&self, req: &Request) -> Option<Media> {
+        let header = req.headers().get::<Accept>();
+        match header {
+            Some(&Accept(ref mimes)) if !mimes.is_empty() => {
+                // TODO: Allow only several mime types
+                Some(Media::from_mime(&mimes[0]))
+            },
+            _ => Some(Media::default())
+        }
     }
     
 }
@@ -93,6 +121,8 @@ impl ApiHandler for Api {
             rest_path
         };
 
+        let mut media: Option<Media> = None;
+
         // Check version
         if self.version.is_some() {
             let version = self.version.as_ref().unwrap();
@@ -122,7 +152,7 @@ impl ApiHandler for Api {
                         Some(&Accept(ref mimes)) => {
                             let mut matched_media: Option<Media> = None;
                             for mime in mimes.iter() {
-                                match Media::from_mime(mime) {
+                                match Media::from_vendor(mime) {
                                     Some(media) => {
                                         if media.vendor.as_slice() == *vendor && 
                                            media.version.is_some() && 
@@ -138,13 +168,22 @@ impl ApiHandler for Api {
                             if matched_media.is_none() {
                                 return Err(NotMatchError.erase())
                             } else {
-                                // attach matched media to info for later use
-                                info.media = matched_media;
+                                media = matched_media;
                             }
                         },
                         None => return Err(NotMatchError.erase())
                     }
                 }
+            }
+        }
+
+        // Check accept media type
+        if media.is_none() {
+            match self.extract_media(req) {
+                Some(media) => {
+                    info.media = media
+                },
+                None => return Err(NotAcceptableError.erase())
             }
         }
 
@@ -155,6 +194,20 @@ impl ApiHandler for Api {
 
 impl Handler for Api {
     fn call(&self, rest_path: &str, req: &mut Request) -> HandleResult<Response> {
-        self.api_call(rest_path, &mut TreeMap::new(), req, &mut CallInfo::new())
+        match self.api_call(rest_path, &mut TreeMap::new(), req, &mut CallInfo::new())  {
+            Ok(resp) => Ok(resp),
+            Err(err) => {
+                if err.downcast::<NotMatchError>().is_none() {
+                    // FIXME: Here we extract mime second time (first time in `api_call`), 
+                    //        maybe we can do something better?
+                    match self.handle_error(&err, &self.extract_media(req).unwrap_or_else(|| Media::default())) {
+                        Some(resp) => Ok(resp),
+                        None => Err(err)
+                    }
+                } else {
+                    Err(err)
+                }
+            }
+        }
     }
 }

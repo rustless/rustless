@@ -25,7 +25,7 @@ pub use valico::Builder as Valico;
 pub use server::{Server, Request, SimpleRequest, Response};
 pub use middleware::{Application, HandleResult, HandleSuccessResult};
 pub use framework::{
-    Endpoint, Client, Api, Namespace, Nesting, 
+    Endpoint, Client, Api, Namespace, Nesting, Media,
     PathVersioning, AcceptHeaderVersioning, ParamVersioning
 };
 
@@ -51,6 +51,31 @@ macro_rules! callback {
         callback
     })
 }
+
+#[macro_export]
+macro_rules! rescue_from (
+    ($api:ident, $t:ty, |$err:ident, $media:ident| $blk:block) => ({
+        #[allow(dead_code)]
+        fn error_formatter(err: &Box<Error>, $media: &Media) -> Option<Response> { 
+            match err.downcast::<$t>() {
+                Some($err) => {
+                    $blk
+                },
+                None => None
+            }
+        }
+
+        $api.error_formatter(error_formatter);
+    });
+    ($api:ident, all, |$err:ident, $media:ident| $blk:block) => ({
+        #[allow(dead_code)]
+        fn error_formatter($err: &Box<Error>, $media: &Media) -> Option<Response> { 
+            $blk
+        }
+
+        $api.error_formatter(error_formatter);
+    });
+)
 
 pub mod errors;
 pub mod server_backend;

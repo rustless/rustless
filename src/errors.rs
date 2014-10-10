@@ -72,3 +72,11 @@ impl Error for FileError {
         error.desc
     }
 }
+
+#[deriving(Show)]
+pub struct NotAcceptableError;
+impl Error for NotAcceptableError {
+    fn name(&self) -> &'static str {
+        "NotAcceptableError"
+    }
+}

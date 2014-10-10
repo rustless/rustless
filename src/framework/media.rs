@@ -1,12 +1,13 @@
 
 use regex::Regex;
-use hyper::mime::{Mime, Application, SubExt};
+use hyper::mime::{Mime, Application, Text, Plain, SubExt};
 
 pub struct Media {
     pub vendor: String,
+    pub mime: Mime,
     pub version: Option<String>,
     pub param: Option<String>,
-    pub format: Option<String>
+    pub format: Option<String>,
 }
 
 static MEDIA_REGEX: Regex = regex!(r"vnd\.(?P<vendor>[a-zA-Z_-]+)(?:\.(?P<version>[a-zA-Z0-9]+)(?:\.(?P<param>[a-zA-Z0-9]+))?)?(?:\+(?P<format>[a-zA-Z0-9]+))?");
@@ -20,7 +21,22 @@ fn present_or_none(string: String) -> Option<String> {
 }
 
 impl Media {
-    pub fn from_mime(mime: &Mime) -> Option<Media> {
+
+    pub fn default() -> Media {
+        Media::from_mime(&Mime(Text, Plain, vec![]))
+    }
+
+    pub fn from_mime(mime: &Mime) -> Media {
+        Media {
+            vendor: "default".to_string(),
+            version: None,
+            param: None,
+            format: None,
+            mime: mime.clone()
+        }
+    }
+
+    pub fn from_vendor(mime: &Mime) -> Option<Media> {
         match mime {
             &Mime(Application, SubExt(ref ext), _) => {
                 match MEDIA_REGEX.captures(ext.as_slice()) {
@@ -34,7 +50,8 @@ impl Media {
                             vendor: vendor,
                             version: version,
                             param: param,
-                            format: format
+                            format: format,
+                            mime: mime.clone()
                         })
                     },
                     None => None
