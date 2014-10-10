@@ -87,7 +87,7 @@ impl ApiHandler for Api {
             if rest_path.slice_from(1).starts_with(self.prefix.as_slice()) {
                 rest_path.slice_from(self.prefix.len() + 1)
             } else {
-               return Err(NotMatchError.abstract()) 
+               return Err(NotMatchError.erase()) 
             }
         } else {
             rest_path
@@ -103,17 +103,17 @@ impl ApiHandler for Api {
                     if rest_path.slice_from(1).starts_with(version.as_slice()) {
                         rest_path = rest_path.slice_from(version.len() + 1)
                     } else {
-                       return Err(NotMatchError.abstract()) 
+                       return Err(NotMatchError.erase()) 
                     }
                 },
                 &ParamVersioning(ref param_name) => {
                     match req.url().query_pairs() {
                         Some(query_pairs) => {
                             if !query_pairs.iter().any(|&(ref key, ref val)| key.as_slice() == *param_name && val == version) {
-                                return Err(NotMatchError.abstract()) 
+                                return Err(NotMatchError.erase()) 
                             }    
                         },
-                        None => return Err(NotMatchError.abstract())
+                        None => return Err(NotMatchError.erase())
                     }
                 },
                 &AcceptHeaderVersioning(ref vendor) => {
@@ -136,13 +136,13 @@ impl ApiHandler for Api {
                             }
 
                             if matched_media.is_none() {
-                                return Err(NotMatchError.abstract())
+                                return Err(NotMatchError.erase())
                             } else {
                                 // attach matched media to info for later use
                                 info.media = matched_media;
                             }
                         },
-                        None => return Err(NotMatchError.abstract())
+                        None => return Err(NotMatchError.erase())
                     }
                 }
             }

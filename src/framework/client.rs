@@ -55,7 +55,7 @@ impl<'a> Client<'a> {
     }
 
     pub fn error<T: Error>(self, error: T) -> ClientResult<'a> {
-        Err(error.abstract())
+        Err(error.erase())
     }
 
     pub fn json(mut self, result: &Json) -> ClientResult<'a> {
@@ -75,7 +75,7 @@ impl<'a> Client<'a> {
        match self.response.push_file(&os::make_absolute(path)) {
             Ok(()) => Ok(self),
             Err(err) => {
-                return Err(FileError(err).abstract());
+                return Err(FileError(err).erase());
             }
         } 
     }

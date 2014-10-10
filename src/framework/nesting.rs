@@ -92,7 +92,7 @@ pub trait Nesting {
             };
         }
 
-        Err(NotMatchError.abstract())
+        Err(NotMatchError.erase())
     }
 
 }

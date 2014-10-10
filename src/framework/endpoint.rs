@@ -69,7 +69,7 @@ impl Endpoint {
             let coercer = self.coercer.as_ref().unwrap();
             match coercer.process(params) {
                 Ok(()) => Ok(()),
-                Err(err) => return Err(ValidationError{ reason: err }.abstract())
+                Err(err) => return Err(ValidationError{ reason: err }.erase())
             }   
         } else {
             Ok(())
@@ -105,7 +105,7 @@ impl Endpoint {
                 }
             }, 
             Err(_) => {
-                return Err(QueryStringDecodeError.abstract());
+                return Err(QueryStringDecodeError.erase());
             }
         }
 
@@ -120,10 +120,10 @@ impl Endpoint {
                 Ok(body) => {
                     match String::from_utf8(body) {
                         Ok(e) => e,
-                        Err(_) => return Err(BodyDecodeError::new("Invalid UTF-8 sequence".to_string()).abstract()),
+                        Err(_) => return Err(BodyDecodeError::new("Invalid UTF-8 sequence".to_string()).erase()),
                     }
                 },
-                Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).abstract())
+                Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).erase())
             }
         };
 
@@ -137,7 +137,7 @@ impl Endpoint {
                         }
                     }
                 },
-                Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).abstract())
+                Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).erase())
             }  
         }
 
@@ -176,7 +176,7 @@ impl ApiHandler for Endpoint {
                 self.path.apply_captures(params, captures);
                 self.call_decode(params, req, info)
             },
-            None => Err(NotMatchError.abstract())
+            None => Err(NotMatchError.erase())
         }
 
     }
