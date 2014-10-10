@@ -15,7 +15,7 @@ use server_backend::header::common::{ContentType, Location};
 pub struct Client<'a> {
     pub endpoint: &'a Endpoint,
     pub request: &'a mut Request,
-    pub media: Option<&'a Media>,
+    pub media: &'a Media,
     pub ext: AnyMap,
     pub response: Response
 }
@@ -24,7 +24,7 @@ pub type ClientResult<'a> = HandleResult<Client<'a>>;
 
 impl<'a> Client<'a> {
 
-    pub fn new(endpoint: &'a Endpoint, request: &'a mut Request, media: Option<&'a Media>) -> Client<'a> {
+    pub fn new(endpoint: &'a Endpoint, request: &'a mut Request, media: &'a Media) -> Client<'a> {
         Client {
             endpoint: endpoint,
             request: request,
@@ -43,7 +43,7 @@ impl<'a> Client<'a> {
     }
 
     pub fn set_header<H: Header>(&mut self, header: H) {
-        self.response.headers.set(header);
+        self.response.set_header(header);
     }
 
     pub fn set_json_content_type(&mut self) {

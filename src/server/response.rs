@@ -1,7 +1,10 @@
-use std::io::{IoResult, File, MemReader};
+use std::io::{Reader, IoResult, File, MemReader};
+use serialize::json::Json;
 
-use server_backend::header::Headers;
+use server_backend::header::{Headers, Header};
+use server_backend::header::common::{ContentType};
 use server_backend::status;
+use server_backend::mime;
 use server_backend::status::StatusCode;
 use anymap::AnyMap;
 
@@ -39,6 +42,21 @@ impl Response {
         response
     }
 
+    pub fn set_header<H: Header>(&mut self, header: H) {
+        self.headers.set(header);
+    }
+
+    pub fn set_json_content_type(&mut self) {
+        self.set_header(ContentType(mime::Mime(mime::Application, mime::Json, vec![])));
+    }
+
+    pub fn from_json(status: StatusCode, body: &Json) -> Response {
+        let mut response = Response::new(status);
+        response.set_json_content_type();
+        response.push_string(body.to_string());
+        response
+    }
+
     pub fn push_string(&mut self, body: String) {
         self.body = Some(box MemReader::new(body.into_bytes()) as Box<Reader + Send>)
     }
@@ -65,4 +83,13 @@ impl Response {
         &mut self.ext
     }
 
+}
+
+impl Reader for Response {
+    fn read(&mut self, buf: &mut [u8]) -> IoResult<uint> {
+        match self.body {
+            Some(ref mut reader) => reader.read(buf),
+            None => Ok(0u)
+        }
+    }
 }

@@ -109,8 +109,7 @@ impl Application {
         if err.downcast::<NotFoundError>().is_some() {
             Some(Response::from_string(status::NotFound, "".to_string()))  
         } else {
-            let error_message = format!("{}", err);
-            Some(Response::from_string(status::InternalServerError, error_message))    
+            Some(Response::from_string(status::InternalServerError, format!("{}", err)))    
         }
     }
 

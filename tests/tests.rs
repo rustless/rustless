@@ -1,4 +1,5 @@
 #![feature(phase)]
+#![feature(macro_rules)]
 
 #![deny(warnings)]
 #![deny(bad_style)]
