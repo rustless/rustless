@@ -20,6 +20,7 @@ mod namespace;
 mod client;
 mod media;
 mod path;
+mod formatters;
 
 pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
 
