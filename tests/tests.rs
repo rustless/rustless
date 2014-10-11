@@ -61,5 +61,6 @@ macro_rules! edp_stub(
 )
 
 mod versioning;
+mod namespace;
 mod prefix;
 mod api01;
