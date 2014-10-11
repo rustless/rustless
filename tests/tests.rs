@@ -70,4 +70,4 @@ mod versioning;
 mod namespace;
 mod params;
 mod prefix;
-mod api01;
+mod redirect;
