@@ -53,7 +53,7 @@ macro_rules! callback {
 }
 
 #[macro_export]
-macro_rules! rescue_from (
+macro_rules! format_error (
     ($api:ident, $t:ty, |$err:ident, $media:ident| $blk:block) => ({
         #[allow(dead_code)]
         fn error_formatter(err: &Box<Error>, $media: &Media) -> Option<Response> { 
