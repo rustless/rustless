@@ -9,7 +9,7 @@ Like Rust itself, Rustless is still in the early stages of development, so don't
 [Grape]: https://github.com/intridea/grape
 [hyper]: https://github.com/hyperium/hyper
 
-### Status
+## Status
 [![Build Status](https://travis-ci.org/rustless/rustless.svg?branch=master)](https://travis-ci.org/rustless/rustless)
 
 ## Basic Usage
@@ -94,9 +94,52 @@ fn main() {
 }
 ~~~
 
+## Mounting
+
+In Rustless you can use three core entities to build your RESTful app: `Api`, `Namespace` and `Endpoint`. 
+
+* Api can mount Api, Namespace and Endpoint
+* Namespace can mount Api, Namespace and Endpoint
+
+~~~rust
+Api::build(|api| {
+
+    // Api inside Api example
+    api.mount(box Api::build(|nested_api| {
+
+        // Endpoint definition
+        nested_api.get("nested_info", |endpoint| {
+            // endpoint.params(|params| {});
+            // endpoint.desc("Some description");
+
+            // Endpoint handler
+            edp_handler!(endpoint, |client, _params| {
+                client.text("Some usefull info".to_string())
+            })
+        });
+
+    }))
+
+    // The namespace method has a number of aliases, including: group, 
+    // resource, resources, and segment. Use whichever reads the best 
+    // for your API.
+    api.namespace("ns1", |ns1| {
+        ns1.group("ns2", |ns2| {
+            ns2.resource("ns3", |ns3| {
+                ns3.resources("ns4", |ns4| {
+                    ns4.segment("ns5", |ns5| {
+                        // ...
+                    );
+                })
+            })
+        })
+    })
+})
+~~~
+
 ## Parameter Validation and Coercion
 
-You can define validations and coercion options for your parameters using a DSL block in Endpoint and Namespace definition. See [Valico] for more info about things you can do.
+You can define validations and coercion options for your parameters using a DSL block inside `Endpoint` and `Namespace` definition. See [Valico] for more info about things you can do.
 
 ~~~rust 
 api.get("users/:user_id/messages/:message_id", |endpoint| {
@@ -118,15 +161,15 @@ end decoding (even with nesting, like `foo[0][a]=a&foo[0][b]=b&foo[1][a]=aa&foo[
 
 [rust-query]: https://github.com/rustless/rust-query
 
-## Versioning
+## API versioning
 
 There are three strategies in which clients can reach your API's endpoints: 
 
-    * PathVersioning
-    * AcceptHeaderVersioning
-    * ParamVersioning
+* PathVersioning
+* AcceptHeaderVersioning
+* ParamVersioning
 
-### Path
+### Path versioning strategy
 
 ~~~rust
 api.version("v1", PathVersioning);
@@ -136,7 +179,7 @@ Using this versioning strategy, clients should pass the desired version in the U
 
     curl -H http://localhost:3000/v1/chats/
 
-### Header
+### Header versioning strategy
 
 ~~~rust
 api.version("v1", AcceptHeaderVersioning("chat"));
@@ -148,7 +191,7 @@ Using this versioning strategy, clients should pass the desired version in the H
 
 Accept version format is the same as Github (uses)[https://developer.github.com/v3/media/].
 
-### Param
+### Param versioning strategy
 
 ~~~rust
 api.version("v1", ParamVersioning("ver"));
@@ -158,7 +201,7 @@ Using this versioning strategy, clients should pass the desired version as a req
 
     curl -H http://localhost:9292/statuses/public_timeline?ver=v1
 
-## HTTP Status Code
+## Respond with custom HTTP Status Code
 
 By default Rustless returns a 200 status code for `GET`-Requests and 201 for `POST`-Requests. You can use `status` and `set_status` to query and set the actual HTTP Status Code
 
@@ -166,9 +209,9 @@ By default Rustless returns a 200 status code for `GET`-Requests and 201 for `PO
 client.set_status(NotFound);
 ~~~
 
-## Parameters
+## Use parameters
 
-Request parameters are available through the `params` struct. This includes `GET`, `POST` and `PUT` parameters, along with any named parameters you specify in your route strings.
+Request parameters are available through the `params: JsonObject` inside `Endpoint` handlers and all callbacks. This includes `GET`, `POST` and `PUT` parameters, along with any named parameters you specify in your route strings.
 
 The request:
 
@@ -206,7 +249,7 @@ client.redirect("http://google.com");
 client.redirect_permanent("http://google.com");
 ~~~
 
-## Raising Exceptions
+## Error firing
 
 You can abort the execution of an API method by raising errors with `error`.
 
@@ -231,24 +274,6 @@ And then throw:
 client.error(UnauthorizedError);
 ~~~
 
-## Before and After
-
-Blocks can be executed before or after every API call, using `before`, `after`,
-`before_validation` and `after_validation`.
-
-Before and after callbacks execute in the following order:
-
-1. `before`
-2. `before_validation`
-3. _validations_
-4. `after_validation`
-5. _the API call_
-6. `after`
-
-Steps 4, 5 and 6 only happen if validation succeeds.
-
-The block applies to every API call within and below the current nesting level.
-
 ## Error handling
 
 Rustless can be told to rescue specific errors and return them in the custom API format.
@@ -266,6 +291,24 @@ format_error!(api, all, |_err, _media| {
     Some(Response::from_string(status::InternalServerError, "Not enough mana!".to_string()))
 });
 ~~~
+
+## Before and After callbacks
+
+Blocks can be executed before or after every API call, using `before`, `after`,
+`before_validation` and `after_validation`.
+
+Before and after callbacks execute in the following order:
+
+1. `before`
+2. `before_validation`
+3. _validations_
+4. `after_validation`
+5. _the API call_
+6. `after`
+
+Steps 4, 5 and 6 only happen if validation succeeds.
+
+The block applies to every API call within and below the current nesting level.
 
 ## Secure API example
 
@@ -294,7 +337,7 @@ Api::build(|api| {
 
             // Fire error from callback is token is wrong
             return Err(UnauthorizedError.erase())
-            
+
         }));
 
         // This `/api/admin/server_status` endpoint is secure now
