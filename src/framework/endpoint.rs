@@ -171,6 +171,11 @@ impl Endpoint {
 impl ApiHandler for Endpoint {
     fn api_call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
 
+        // Method guard
+        if req.method() != &self.method {
+            return Err(NotMatchError.erase())
+        }
+
         match self.path.is_match(rest_path) {
             Some(captures) =>  {
                 self.path.apply_captures(params, captures);
