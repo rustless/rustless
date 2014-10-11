@@ -98,6 +98,17 @@ fn main() {
 
 You can define validations and coercion options for your parameters using a DSL block in Endpoint and Namespace definition. See [Valico] for more info about things you can do.
 
+~~~rust 
+api.get("users/:user_id/messages/:message_id", |endpoint| {
+    endpoint.params(|params| {
+        params.req_typed("user_id", Valico::u64());
+        params.req_typed("message_id", Valico::u64());
+    });
+
+    // ...
+})
+~~~
+
 [Valico]: https://github.com/rustless/valico
 
 ## Query strings
@@ -199,8 +210,25 @@ client.redirect_permanent("http://google.com");
 
 You can abort the execution of an API method by raising errors with `error`.
 
+Define your error like this:
+
 ~~~rust
-client.error(CustomError);
+use rustless::errors::{Error, ErrorRefExt};
+
+#[deriving(Show)]
+pub struct UnauthorizedError;
+
+impl Error for UnauthorizedError {
+    fn name(&self) -> &'static str {
+        return "UnauthorizedError";
+    }
+}
+~~~
+
+And then throw:
+
+~~~rust
+client.error(UnauthorizedError);
 ~~~
 
 ## Before and After
@@ -219,13 +247,63 @@ Before and after callbacks execute in the following order:
 
 Steps 4, 5 and 6 only happen if validation succeeds.
 
-E.g. using `after`:
+The block applies to every API call within and below the current nesting level.
+
+## Error handling
+
+Rustless can be told to rescue specific errors and return them in the custom API format.
 
 ~~~rust
-chats_api.after(callback!(|client, _params| {
-    client.set_status(hyper::status::NotFound);
-    Ok(())
-}));
+format_error!(api, UnauthorizedError, |_err, _media| {
+    Some(Response::from_string(status::Unauthorized, "Please provide correct `token` parameter".to_string()))
+});
 ~~~
 
-The block applies to every API call within and below the current nesting level.
+Also Rustless can be told to rescue all errors:
+
+~~~rust
+format_error!(api, all, |_err, _media| {
+    Some(Response::from_string(status::InternalServerError, "Not enough mana!".to_string()))
+});
+~~~
+
+## Secure API example
+
+~~~rust
+Api::build(|api| {
+    api.prefix("api");
+
+    format_error!(api, UnauthorizedError, |_err, _media| {
+        Some(Response::from_string(status::Unauthorized, "Please provide correct `token` parameter".to_string()))
+    });
+
+    api.namespace("admin", |admin_ns| {
+
+        admin_ns.params(|params| {
+            params.req_typed("token", Valico::string())
+        });
+
+        // Using after_validation callback to check token
+        admin_ns.after_validation(callback!(|_client, params| {
+            
+            match params.find(&"token".to_string()) {
+                // We can unwrap() safely because token in validated already
+                Some(token) => if token.as_string().unwrap().as_slice() == "password1" { return Ok(()) },
+                None => ()
+            }
+
+            // Fire error from callback is token is wrong
+            return Err(UnauthorizedError.erase())
+            
+        }));
+
+        // This `/api/admin/server_status` endpoint is secure now
+        admin_ns.get("server_status", |endpoint| {
+            edp_handler!(endpoint, |client, _params| {
+                client.text("Everything is OK".to_string())  
+            })
+        });
+    })
+})
+~~~
+
