@@ -50,17 +50,24 @@ macro_rules! app(
     })
 )
 
+macro_rules! edp_stub_handler(
+    ($endpoint:ident) => ({
+        edp_handler!($endpoint, |client, _params| {
+            client.text("Some usefull info".to_string())
+        })
+    })
+)
+
 macro_rules! edp_stub(
     ($api:ident) => ({
         $api.get("info", |endpoint| {
-            edp_handler!(endpoint, |client, _params| {
-                client.text("Some usefull info".to_string())
-            })
+            edp_stub_handler!(endpoint)
         });    
     })
 )
 
 mod versioning;
 mod namespace;
+mod params;
 mod prefix;
 mod api01;

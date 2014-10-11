@@ -9,6 +9,7 @@ use middleware::{Handler, HandleResult};
 use framework::nesting::Nesting;
 use framework::media::Media;
 use framework::{ApiHandler, ApiHandlers, Callbacks, CallInfo, ErrorFormatters, ErrorFormatter};
+use framework::formatters;
 
 #[allow(dead_code)]
 pub enum Versioning {
@@ -27,7 +28,8 @@ pub struct Api {
     before_validation: Callbacks,
     after_validation: Callbacks,
     after: Callbacks,
-    error_formatters: ErrorFormatters
+    error_formatters: ErrorFormatters,
+    default_error_formatters: ErrorFormatters
 }
 
 impl Api {
@@ -42,7 +44,8 @@ impl Api {
             before_validation: vec![],
             after_validation: vec![],
             after: vec![],
-            error_formatters: vec![]
+            error_formatters: vec![],
+            default_error_formatters: vec![formatters::validation_error_formatter]
         }
     }
 
@@ -68,6 +71,13 @@ impl Api {
 
     fn handle_error(&self, err: &Box<Error>, media: &Media) -> Option<Response>  {
         for err_formatter in self.error_formatters.iter() {
+            match (*err_formatter)(err, media) {
+                Some(resp) => return Some(resp),
+                None => ()
+            }
+        }
+
+        for err_formatter in self.default_error_formatters.iter() {
             match (*err_formatter)(err, media) {
                 Some(resp) => return Some(resp),
                 None => ()
