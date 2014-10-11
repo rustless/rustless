@@ -1,10 +1,13 @@
 use collections::treemap::TreeMap;
+use serialize::json;
 use serialize::json::{JsonObject};
+
+use query;
 
 use server::{Request, Response};
 use server_backend::header::common::Accept;
-use errors::{Error, ErrorRefExt, NotMatchError, NotAcceptableError};
-use middleware::{Handler, HandleResult};
+use errors::{Error, ErrorRefExt, NotMatchError, NotAcceptableError, QueryStringDecodeError, BodyDecodeError};
+use middleware::{Handler, HandleResult, HandleSuccessResult};
 
 use framework::nesting::Nesting;
 use framework::media::Media;
@@ -96,6 +99,70 @@ impl Api {
             },
             _ => Some(Media::default())
         }
+    }
+
+    fn parse_query(query_str: &str, params: &mut JsonObject) -> HandleSuccessResult {
+        let maybe_query_params = query::parse(query_str);
+        match maybe_query_params {
+            Ok(query_params) => {
+                for (key, value) in query_params.as_object().unwrap().iter() {
+                    if !params.contains_key(key) {
+                        params.insert(key.to_string(), value.clone());
+                    }
+                }
+            }, 
+            Err(_) => {
+                return Err(QueryStringDecodeError.erase());
+            }
+        }
+
+        Ok(())
+    }
+
+    fn parse_json_body(req: &mut Request, params: &mut JsonObject) -> HandleSuccessResult {
+        let maybe_body = req.read_to_end();
+        
+        let utf8_string_body = {
+            match maybe_body {
+                Ok(body) => {
+                    match String::from_utf8(body) {
+                        Ok(e) => e,
+                        Err(_) => return Err(BodyDecodeError::new("Invalid UTF-8 sequence".to_string()).erase()),
+                    }
+                },
+                Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).erase())
+            }
+        };
+
+        if utf8_string_body.len() > 0 {
+          let maybe_json_body = json::from_str(utf8_string_body.as_slice());
+            match maybe_json_body {
+                Ok(json_body) => {
+                    for (key, value) in json_body.as_object().unwrap().iter() {
+                        if !params.contains_key(key) {
+                            params.insert(key.to_string(), value.clone());
+                        }
+                    }
+                },
+                Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).erase())
+            }  
+        }
+
+        Ok(())
+    }
+
+    fn parse_request(req: &mut Request, params: &mut JsonObject) -> HandleSuccessResult {
+        // extend params with query-string params if any
+        if req.url().query.is_some() {
+            try!(Api::parse_query(req.url().query.as_ref().unwrap().as_slice(), params));   
+        }
+
+        // extend params with json-encoded body params if any
+        if req.is_json_body() {
+            try!(Api::parse_json_body(req, params));
+        }
+
+        Ok(())
     }
     
 }
@@ -204,7 +271,11 @@ impl ApiHandler for Api {
 
 impl Handler for Api {
     fn call(&self, rest_path: &str, req: &mut Request) -> HandleResult<Response> {
-        match self.api_call(rest_path, &mut TreeMap::new(), req, &mut CallInfo::new())  {
+
+        let mut params = TreeMap::new();
+        try!(Api::parse_request(req, &mut params));
+        
+        match self.api_call(rest_path, &mut params, req, &mut CallInfo::new())  {
             Ok(resp) => Ok(resp),
             Err(err) => {
                 if err.downcast::<NotMatchError>().is_none() {
