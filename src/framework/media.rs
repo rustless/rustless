@@ -1,14 +1,6 @@
 
 use regex::Regex;
-use hyper::mime::{Mime, Application, Text, Plain, SubExt};
-
-pub struct Media {
-    pub vendor: String,
-    pub mime: Mime,
-    pub version: Option<String>,
-    pub param: Option<String>,
-    pub format: Option<String>,
-}
+use hyper::mime::{Mime, Application, Json, Text, Plain, SubExt};
 
 static MEDIA_REGEX: Regex = regex!(r"vnd\.(?P<vendor>[a-zA-Z_-]+)(?:\.(?P<version>[a-zA-Z0-9]+)(?:\.(?P<param>[a-zA-Z0-9]+))?)?(?:\+(?P<format>[a-zA-Z0-9]+))?");
 
@@ -18,6 +10,30 @@ fn present_or_none(string: String) -> Option<String> {
     } else {
         Some(string)
     }
+}
+
+#[deriving(Show)]
+pub enum Format {
+    JsonFormat,
+    PlainTextFormat,
+    OtherFormat(Mime)
+}
+
+impl Format {
+    pub fn from_mime(mime: &Mime) -> Format {
+        match mime {
+            &Mime(Text, Plain, _) => PlainTextFormat,
+            &Mime(Application, Json, _) => JsonFormat,
+            _ => OtherFormat(mime.clone())
+        }
+    }
+}
+
+pub struct Media {
+    pub vendor: String,
+    pub version: Option<String>,
+    pub param: Option<String>,
+    pub format: Format
 }
 
 impl Media {
@@ -31,8 +47,7 @@ impl Media {
             vendor: "default".to_string(),
             version: None,
             param: None,
-            format: None,
-            mime: mime.clone()
+            format: Format::from_mime(mime)
         }
     }
 
@@ -44,14 +59,20 @@ impl Media {
                         let vendor = captures.name("vendor").to_string();
                         let version = present_or_none(captures.name("version").to_string());
                         let param = present_or_none(captures.name("param").to_string());
-                        let format = present_or_none(captures.name("format").to_string());
+                        let format_str = present_or_none(captures.name("format").to_string());
+
+                        let format = match format_str {
+                            Some(format) => if format.as_slice() == "json" { JsonFormat }
+                                            else if format.as_slice() == "txt" { PlainTextFormat }
+                                            else { Format::from_mime(mime) },
+                            None => Format::from_mime(mime)
+                        };
 
                         Some(Media {
                             vendor: vendor,
                             version: version,
                             param: param,
-                            format: format,
-                            mime: mime.clone()
+                            format: format
                         })
                     },
                     None => None
@@ -90,4 +111,24 @@ fn asset_regexp() {
     
     let captures = MEDIA_REGEX.captures("application/vnd");
     assert!(captures.is_none());
+}
+
+#[test]
+fn assert_media() {
+
+    match Media::from_mime(&from_str("application/json").unwrap()).format {
+        JsonFormat => (),
+        _ => fail!("Wrong format")
+    }
+
+    match Media::from_mime(&from_str("text/plain").unwrap()).format {
+        PlainTextFormat => (),
+        _ => fail!("Wrong format")
+    }
+
+    match Media::from_mime(&from_str("application/octet-stream").unwrap()).format {
+        OtherFormat(_) => (),
+        _ => fail!("Wrong format")
+    }
+
 }
