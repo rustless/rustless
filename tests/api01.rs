@@ -66,42 +66,16 @@ fn create_app() -> Application {
     app.mount(api);
 
     app
-
 }
-
-macro_rules! sr {
-    ($edp:ident, $url:expr) => {
-        SimpleRequest::new($edp, Url::parse($url).unwrap())
-    };
-    ($edp:ident, $url:expr, $blk:expr) => {
-        SimpleRequest::build($edp, Url::parse($url).unwrap(), $blk)
-    };
-}
-
-macro_rules! call_app {
-    ($app:ident, $edp:ident, $url:expr) => {
-        $app.call(&mut sr!($edp, $url))
-    };    
-    ($app:ident, $edp:ident, $url:expr, $blk:expr) => {
-        $app.call(&mut sr!($edp, $url, $blk))
-    };
-}
-
-macro_rules! resp_body (
-    ($resp:ident) => (str::from_utf8($resp.read_to_end().unwrap().as_slice()).unwrap())
-)
-
-macro_rules! mime(
-    ($mime:expr) => (from_str($mime).unwrap())
-)
 
 #[test]
 #[allow(unused_variable)]
 fn test_api() {
+
     let app = create_app();
 
     let response = call_app!(app, Post, "http://127.0.0.1:3000/api/chats/100/users/15").unwrap();
-    // not found because accept-header not present
+    // not found because accept-header is not present
     assert_eq!(response.status, status::NotFound);
 
     let response = call_app!(app, Post, "http://127.0.0.1:3000/api/chats/100/users/15", |rq| {
