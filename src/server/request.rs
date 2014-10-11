@@ -23,7 +23,6 @@ pub trait Request: Reader + Show + Send {
     fn is_json_body(&self) -> bool {
         let content_type = self.headers().get::<header::common::ContentType>(); 
         if content_type.is_some() {
-            println!("ContentType: {}", content_type.unwrap().0);
             match content_type.unwrap().0 {
                 Mime(Application, Json, _) => true,
                 _ => false
@@ -89,8 +88,6 @@ impl ServerRequest {
             uri::AbsoluteUri(ref uri) => format!("{}", uri),
             _ => return Err("Unsupported request URI".to_string())
         };
-
-        println!("Url is {}", url);
 
         let parsed_url = match Url::parse(url.as_slice()) {
             Ok(url) => url,
