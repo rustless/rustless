@@ -276,6 +276,8 @@ client.error(UnauthorizedError);
 
 ## Error handling
 
+By default Rustless wil respond all errors with status::InternalServerError.
+
 Rustless can be told to rescue specific errors and return them in the custom API format.
 
 ~~~rust
