@@ -31,9 +31,8 @@ git = "https://github.com/reem/rust-error.git"
 git = "https://github.com/rustless/valico.git"
 #path = "../valico"
 
-[dependencies.query]
-git = "https://github.com/rustless/rust-query.git"
-#path = "../rust-query"
+[dependencies.queryst]
+git = "https://github.com/rustless/queryst.git"
 
 [dependencies.cookie]
 git = "https://github.com/alexcrichton/cookie-rs"

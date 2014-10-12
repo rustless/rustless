@@ -18,7 +18,7 @@ extern crate cookie;
 
 extern crate collections;
 extern crate valico;
-extern crate query;
+extern crate queryst;
 
 pub use common::{Cookies, Static};
 pub use valico::Builder as Valico;

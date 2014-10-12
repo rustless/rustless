@@ -2,7 +2,7 @@ use collections::treemap::TreeMap;
 use serialize::json;
 use serialize::json::{JsonObject};
 
-use query;
+use queryst;
 
 use server::{Request, Response};
 use server_backend::header::common::Accept;
@@ -102,7 +102,7 @@ impl Api {
     }
 
     fn parse_query(query_str: &str, params: &mut JsonObject) -> HandleSuccessResult {
-        let maybe_query_params = query::parse(query_str);
+        let maybe_query_params = queryst::parse(query_str);
         match maybe_query_params {
             Ok(query_params) => {
                 for (key, value) in query_params.as_object().unwrap().iter() {

@@ -156,10 +156,10 @@ api.get("users/:user_id/messages/:message_id", |endpoint| {
 
 ## Query strings
 
-Rustless is intergated with [rust-query] to allow smart query-string parsing 
-end decoding (even with nesting, like `foo[0][a]=a&foo[0][b]=b&foo[1][a]=aa&foo[1][b]=bb`). See [rust-query] for more info.
+Rustless is intergated with [queryst] to allow smart query-string parsing 
+end decoding (even with nesting, like `foo[0][a]=a&foo[0][b]=b&foo[1][a]=aa&foo[1][b]=bb`). See [queryst] for more info.
 
-[rust-query]: https://github.com/rustless/rust-query
+[queryst]: https://github.com/rustless/queryst
 
 ## API versioning
 
