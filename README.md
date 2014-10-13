@@ -1,5 +1,7 @@
 ## What is Rustless?
 
+[![Build Status](https://travis-ci.org/rustless/rustless.svg?branch=master)](https://travis-ci.org/rustless/rustless)
+
 Rustless is a REST-like API micro-framework for Rust. It's designed to provide a simple DSL to easily develop RESTful APIs. It has built-in support for common conventions, including multiple formats, subdomain/prefix restriction, content negotiation, versioning and much more.
 
 Rustless in a port of [Grape] library from Ruby world. Based on [hyper] - an HTTP library for Rust.
@@ -9,8 +11,13 @@ Like Rust itself, Rustless is still in the early stages of development, so don't
 [Grape]: https://github.com/intridea/grape
 [hyper]: https://github.com/hyperium/hyper
 
-## Status
-[![Build Status](https://travis-ci.org/rustless/rustless.svg?branch=master)](https://travis-ci.org/rustless/rustless)
+```toml
+# Cargo.toml
+[dependencies.rustless]
+git = "https://github.com/rustless/rustless"
+```
+
+[API docs](http://rustless.org/rustless/doc/rustless)
 
 ## Basic Usage
 
