@@ -1,4 +1,5 @@
 use cookie::{CookieJar};
+use server::Request;
 
 pub trait Cookies {
     fn find_cookie_jar(&self) -> Option<&CookieJar<'static>>;
@@ -15,12 +16,12 @@ pub trait Cookies {
     }
 }
 
-// impl Cookies for Request {
-//     fn find_cookie_jar(&self) -> Option<&CookieJar<'static>> {
-//         self.ext().find()
-//     }
+impl Cookies for &'static mut Request {
+    fn find_cookie_jar(&self) -> Option<&CookieJar<'static>> {
+        self.ext().find()
+    }
 
-//     fn store_cookie_jar(&mut self, jar: CookieJar<'static>) {
-//         self.ext_mut().insert(jar);
-//     }
-// }
+    fn store_cookie_jar(&mut self, jar: CookieJar<'static>) {
+        self.ext_mut().insert(jar);
+    }
+}
