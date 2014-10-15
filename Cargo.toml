@@ -32,3 +32,6 @@ git = "https://github.com/rustless/queryst.git"
 
 [dependencies.cookie]
 git = "https://github.com/alexcrichton/cookie-rs"
+
+[dependencies.jsonway]
+git = "https://github.com/rustless/jsonway"
