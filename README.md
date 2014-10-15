@@ -359,3 +359,9 @@ Api::build(|api| {
 })
 ~~~
 
+## JSON responses
+
+Rustless includes (JsonWay)[https://github.com/rustless/jsonway] library to offer both complex JSON building DSL and configurable serializers for your objects. See (API docs)[http://rustless.org/jsonway/doc/jsonway/] for details.
+
+Also feel free to use any other serialization library you want.
+
