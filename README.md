@@ -1,20 +1,20 @@
 
 ## Table of Contents
 
-- What is Rustless?
-- Basic Usage
-- Mounting
-- Parameter Validation and Coercion
-- Query strings
-- API versioning
-- Respond with custom HTTP Status Code
-- Use parameters
-- Redirecting
-- Error firing
-- Error handling
-- Before and After callbacks
-- Secure API example
-- JSON responses
+- [What is Rustless?](#what-is-rustless)
+- [Basic Usage](#basic-usage)
+- [Mounting](#mounting)
+- [Parameters validation and coercion](#parameters-validation-and-coercion)
+- [Query strings](#query-strings)
+- [API versioning](#api-versioning)
+- [Respond with custom HTTP Status Code](#respond-with-custom-http-status-code)
+- [Use parameters](#use-parameters)
+- [Redirecting](#redirecting)
+- [Errors firing](#errors-firing)
+- [Errors handling](#errors-handling)
+- [Before and After callbacks](#before-and-after-callbacks)
+- [Secure API example](#secure-api-example)
+- [JSON responses](#json-responses)
 
 ## What is Rustless?
 
@@ -162,7 +162,7 @@ Api::build(|api| {
 })
 ~~~
 
-## Parameter Validation and Coercion
+## Parameters validation and coercion
 
 You can define validations and coercion options for your parameters using a DSL block inside `Endpoint` and `Namespace` definition. See [Valico] for more info about things you can do.
 
@@ -274,7 +274,7 @@ client.redirect("http://google.com");
 client.redirect_permanent("http://google.com");
 ~~~
 
-## Error firing
+## Errors firing
 
 You can abort the execution of an API method by raising errors with `error`.
 
@@ -299,7 +299,7 @@ And then throw:
 client.error(UnauthorizedError);
 ~~~
 
-## Error handling
+## Errors handling
 
 By default Rustless wil respond all errors with status::InternalServerError.
 
