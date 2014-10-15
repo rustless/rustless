@@ -10,6 +10,7 @@ extern crate rustless;
 extern crate hyper;
 extern crate serialize;
 extern crate url;
+extern crate jsonway;
 
 #[macro_export]
 macro_rules! sr {
@@ -72,3 +73,4 @@ mod params;
 mod prefix;
 mod redirect;
 mod callbacks;
+mod serializers;
