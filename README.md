@@ -37,6 +37,12 @@ git = "https://github.com/rustless/rustless"
 
 [API docs](http://rustless.org/rustless/doc/rustless)
 
+## See also
+
+* [Valico](https://github.com/rustless/valico) - Rust JSON validator and coercer. See [Api docs](http://rustless.org/valico/doc/valico).
+* [Queryst](https://github.com/rustless/queryst) - Rust query string parser with nesting support. See [Api docs](http://rustless.org/queryst/doc/queryst).
+* [JsonWay](https://github.com/rustless/jsonway) - JSON building DSL and configurable serializers for Rust. See [Api docs](http://rustless.org/jsonway/doc/jsonway).
+
 ## Basic Usage
 
 Below is a simple example showing some of the more common features of Rustless.
