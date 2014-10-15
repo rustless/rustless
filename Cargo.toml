@@ -11,12 +11,8 @@ path = "src/lib.rs"
 [[test]]
 name = "tests"
 
-[dependencies.http]
-git = "https://github.com/chris-morgan/rust-http.git"
-
 [dependencies.hyper]
 git = "https://github.com/hyperium/hyper.git"
-#path = "../../out/hyper"
 
 [dependencies.url]
 git = "https://github.com/servo/rust-url.git"
