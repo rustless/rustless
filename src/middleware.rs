@@ -102,7 +102,7 @@ impl Application {
                         None => return None
                     }
                 },
-                Err(some) => ()
+                Err(_) => ()
             }
         }
 
