@@ -81,7 +81,7 @@ impl ServerRequest {
         let url = match req.uri {
             uri::AbsolutePath(ref path) => {
                 match req.headers.get::<header::common::Host>() {
-                    Some(host) => format!("http://{}{}", host.0, path),
+                    Some(host) => format!("http://{}{}", host.hostname, path),
                     None => return Err("No HOST header specified in request".to_string())
                 }
             },
