@@ -3,7 +3,7 @@ use serialize::json::{JsonObject};
 use valico::Builder as ValicoBuilder;
 
 use server::{Request, Response};
-use middleware::{HandleResult, HandleSuccessResult};
+use middleware::{Application, HandleResult, HandleSuccessResult};
 use errors::{Error};
 
 pub use self::api::{Api, PathVersioning, AcceptHeaderVersioning, ParamVersioning};
@@ -36,22 +36,24 @@ pub type ErrorFormatter = fn(&Box<Error>, &Media) -> Option<Response>;
 pub type Callbacks = Vec<Callback>;
 pub type ErrorFormatters = Vec<ErrorFormatter>;
 
-pub struct CallInfo {
+pub struct CallInfo<'a> {
     pub media: Media,
     pub before: Callbacks,
     pub before_validation: Callbacks,
     pub after_validation: Callbacks,
-    pub after: Callbacks
+    pub after: Callbacks,
+    pub app: &'a Application
 }
 
-impl CallInfo {
-    pub fn new() -> CallInfo {
+impl<'a> CallInfo<'a> {
+    pub fn new(app: &'a Application) -> CallInfo<'a> {
         CallInfo {
             media: Media::default(),
             before: vec![],
             before_validation: vec![],
             after_validation: vec![],
-            after: vec![]
+            after: vec![],
+            app: app
         }
     }
 }

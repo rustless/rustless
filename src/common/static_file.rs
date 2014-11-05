@@ -3,7 +3,7 @@ use std::io::fs::PathExtensions;
 use std::os::make_absolute;
 
 use errors::{Error, FileError, NotMatchError};
-use middleware::{Handler, HandleResult};
+use middleware::{Application, Handler, HandleResult};
 use server::{Request, Response};
 
 #[deriving(Clone)]
@@ -20,7 +20,7 @@ impl Static {
 }
 
 impl Handler for Static {
-    fn call(&self, rest_path: &str, _: &mut Request) -> HandleResult<Response> {
+    fn call(&self, rest_path: &str, _: &mut Request, _: &Application) -> HandleResult<Response> {
         let requested_path = self.root_path.join(Path::new(rest_path.trim_left_chars('/')));
 
         if requested_path.is_file() {

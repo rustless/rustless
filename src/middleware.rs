@@ -1,4 +1,5 @@
 
+use anymap::AnyMap;
 use server::{Request, Response};
 use server_backend::status;
 use errors::{Error, ErrorRefExt, NotMatchError, NotFoundError};
@@ -20,7 +21,7 @@ pub trait CatchMiddleware: Send + Sync {
 }
 
 pub trait Handler: Send + Sync {
-    fn call(&self, &str, &mut Request) -> HandleResult<Response>;
+    fn call(&self, &str, &mut Request, &Application) -> HandleResult<Response>;
 }
 
 #[deriving(Send)]
@@ -28,7 +29,8 @@ pub struct Application {
     before: Vec<Box<BeforeMiddleware + Send + Sync>>,
     after: Vec<Box<AfterMiddleware + Send + Sync>>,
     catch: Vec<Box<CatchMiddleware + Send + Sync>>,
-    handlers: Vec<Box<Handler + Send + Sync>>
+    handlers: Vec<Box<Handler + Send + Sync>>,
+    pub ext: AnyMap
 }
 
 impl Application {
@@ -38,7 +40,8 @@ impl Application {
             before: vec![],
             after: vec![],
             catch: vec![],
-            handlers: vec![]
+            handlers: vec![],
+            ext: AnyMap::new()
         }
     }
 
@@ -61,7 +64,7 @@ impl Application {
         let path = req.url().serialize_path().unwrap_or(String::new());
 
         for handler in self.handlers.iter() {
-            match handler.call(path.as_slice(), req) {
+            match handler.call(path.as_slice(), req, self) {
                 Ok(resp) => response = Some(resp),
                 Err(err) => match err.downcast::<NotMatchError>() {
                     Some(_) => (),

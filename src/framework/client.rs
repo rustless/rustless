@@ -4,7 +4,7 @@ use std::os;
 
 use server::{Request, Response};
 use errors::{Error, FileError};
-use middleware::{HandleResult};
+use middleware::{Application, HandleResult};
 use framework::endpoint::Endpoint;
 use framework::media::Media;
 use server_backend::status;
@@ -13,6 +13,7 @@ use server_backend::header::{Header, HeaderFormat};
 use server_backend::header::common::{ContentType, Location};
 
 pub struct Client<'a> {
+    pub app: &'a Application,
     pub endpoint: &'a Endpoint,
     pub request: &'a mut Request,
     pub media: &'a Media,
@@ -24,8 +25,9 @@ pub type ClientResult<'a> = HandleResult<Client<'a>>;
 
 impl<'a> Client<'a> {
 
-    pub fn new(endpoint: &'a Endpoint, request: &'a mut Request, media: &'a Media) -> Client<'a> {
+    pub fn new(app: &'a Application, endpoint: &'a Endpoint, request: &'a mut Request, media: &'a Media) -> Client<'a> {
         Client {
+            app: app,
             endpoint: endpoint,
             request: request,
             media: media,

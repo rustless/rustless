@@ -7,7 +7,7 @@ use queryst;
 use server::{Request, Response};
 use server_backend::header::common::Accept;
 use errors::{Error, ErrorRefExt, NotMatchError, NotAcceptableError, QueryStringDecodeError, BodyDecodeError};
-use middleware::{Handler, HandleResult, HandleSuccessResult};
+use middleware::{Application, Handler, HandleResult, HandleSuccessResult};
 
 use framework::nesting::Nesting;
 use framework::media::Media;
@@ -270,12 +270,12 @@ impl ApiHandler for Api {
 }
 
 impl Handler for Api {
-    fn call(&self, rest_path: &str, req: &mut Request) -> HandleResult<Response> {
+    fn call(&self, rest_path: &str, req: &mut Request, app: &Application) -> HandleResult<Response> {
 
         let mut params = TreeMap::new();
         try!(Api::parse_request(req, &mut params));
         
-        match self.api_call(rest_path, &mut params, req, &mut CallInfo::new())  {
+        match self.api_call(rest_path, &mut params, req, &mut CallInfo::new(app))  {
             Ok(resp) => Ok(resp),
             Err(err) => {
                 if err.downcast::<NotMatchError>().is_none() {
