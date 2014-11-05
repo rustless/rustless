@@ -7,8 +7,6 @@ use rustless::{
     Application, Api, Client, Valico, Nesting, HandleResult, SimpleRequest
 };
 
-use rustless::errors::{Error};
-
 #[test]
 fn it_validates_endpoint_simple_path_params() {
 

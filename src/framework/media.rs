@@ -118,17 +118,17 @@ fn assert_media() {
 
     match Media::from_mime(&from_str("application/json").unwrap()).format {
         JsonFormat => (),
-        _ => fail!("Wrong format")
+        _ => panic!("Wrong format")
     }
 
     match Media::from_mime(&from_str("text/plain").unwrap()).format {
         PlainTextFormat => (),
-        _ => fail!("Wrong format")
+        _ => panic!("Wrong format")
     }
 
     match Media::from_mime(&from_str("application/octet-stream").unwrap()).format {
         OtherFormat(_) => (),
-        _ => fail!("Wrong format")
+        _ => panic!("Wrong format")
     }
 
 }

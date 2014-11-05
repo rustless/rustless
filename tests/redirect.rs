@@ -7,8 +7,6 @@ use rustless::{
     Application, Api, Client, Nesting, HandleResult, SimpleRequest
 };
 
-use rustless::errors::{Error};
-
 #[test]
 fn it_allows_redirect() {
 

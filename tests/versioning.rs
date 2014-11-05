@@ -8,8 +8,6 @@ use rustless::{
     PathVersioning, ParamVersioning, SimpleRequest
 };
 
-use rustless::errors::{Error};
-
 #[test]
 fn it_pass_accept_header_versioning() {
 

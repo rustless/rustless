@@ -29,11 +29,11 @@ impl Handler for Static {
                     return Ok(response);
                 },
                 Err(err) => {
-                    return Err(FileError(err).erase());
+                    return Err(box FileError(err) as Box<Error>);
                 }
             }
         }
 
-        Err(NotMatchError.erase())
+        Err(box NotMatchError as Box<Error>)
     }
 }

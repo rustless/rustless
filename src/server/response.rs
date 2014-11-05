@@ -1,7 +1,7 @@
 use std::io::{Reader, IoResult, File, MemReader};
 use serialize::json::Json;
 
-use server_backend::header::{Headers, Header};
+use server_backend::header::{Headers, Header, HeaderFormat};
 use server_backend::header::common::{ContentType};
 use server_backend::status;
 use server_backend::mime;
@@ -42,7 +42,7 @@ impl Response {
         response
     }
 
-    pub fn set_header<H: Header>(&mut self, header: H) {
+    pub fn set_header<H: Header + HeaderFormat>(&mut self, header: H) {
         self.headers.set(header);
     }
 

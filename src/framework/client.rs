@@ -9,7 +9,7 @@ use framework::endpoint::Endpoint;
 use framework::media::Media;
 use server_backend::status;
 use server_backend::mime;
-use server_backend::header::Header;
+use server_backend::header::{Header, HeaderFormat};
 use server_backend::header::common::{ContentType, Location};
 
 pub struct Client<'a> {
@@ -42,7 +42,7 @@ impl<'a> Client<'a> {
         self.response.status = status;
     }
 
-    pub fn set_header<H: Header>(&mut self, header: H) {
+    pub fn set_header<H: Header + HeaderFormat>(&mut self, header: H) {
         self.response.set_header(header);
     }
 
@@ -55,7 +55,7 @@ impl<'a> Client<'a> {
     }
 
     pub fn error<T: Error>(self, error: T) -> ClientResult<'a> {
-        Err(error.erase())
+        Err(box error as Box<Error>)
     }
 
     pub fn json(mut self, result: &Json) -> ClientResult<'a> {
@@ -75,7 +75,7 @@ impl<'a> Client<'a> {
        match self.response.push_file(&os::make_absolute(path)) {
             Ok(()) => Ok(self),
             Err(err) => {
-                return Err(FileError(err).erase());
+                return Err(box FileError(err) as Box<Error>);
             }
         } 
     }

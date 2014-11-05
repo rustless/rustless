@@ -92,7 +92,7 @@ pub trait Nesting {
             };
         }
 
-        Err(NotMatchError.erase())
+        Err(box NotMatchError as Box<Error>)
     }
 
 }

@@ -67,7 +67,7 @@ impl Endpoint {
             let coercer = self.coercer.as_ref().unwrap();
             match coercer.process(params) {
                 Ok(()) => Ok(()),
-                Err(err) => return Err(ValidationError{ reason: err }.erase())
+                Err(err) => return Err(box ValidationError{ reason: err } as Box<Error>)
             }   
         } else {
             Ok(())
@@ -106,7 +106,7 @@ impl ApiHandler for Endpoint {
 
         // Method guard
         if req.method() != &self.method {
-            return Err(NotMatchError.erase())
+            return Err(box NotMatchError as Box<Error>)
         }
 
         match self.path.is_match(rest_path) {
@@ -114,7 +114,7 @@ impl ApiHandler for Endpoint {
                 self.path.apply_captures(params, captures);
                 self.call_decode(params, req, info)
             },
-            None => Err(NotMatchError.erase())
+            None => Err(box NotMatchError as Box<Error>)
         }
 
     }
