@@ -72,7 +72,7 @@ impl Namespace {
             let coercer = self.coercer.as_ref().unwrap();
             match coercer.process(params) {
                 Ok(()) => Ok(()),
-                Err(err) => return Err(ValidationError{ reason: err }.erase())
+                Err(err) => return Err(box ValidationError{ reason: err } as Box<Error>)
             }   
         } else {
             Ok(())
@@ -89,7 +89,7 @@ impl ApiHandler for Namespace {
                 self.path.apply_captures(params, captures);
                 rest_path.slice_from(captured_length)
             },
-            None => return Err(NotMatchError.erase())
+            None => return Err(box NotMatchError as Box<Error>)
         };
 
         try!(self.validate(params));

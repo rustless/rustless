@@ -75,7 +75,7 @@ impl Application {
 
         let mut exact_response = match response {
             Some(resp) => resp,
-            None => return Ok(self.handle_error(req, NotFoundError.erase()).unwrap())
+            None => return Ok(self.handle_error(req, box NotFoundError).unwrap())
         };
 
         for mdw in self.after.iter() {

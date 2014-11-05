@@ -41,7 +41,7 @@ fn it_allows_to_create_namespace() {
                 }
 
                 // Fire error from callback is token is wrong
-                return Err(UnauthorizedError.erase())
+                return Err(box UnauthorizedError as Box<Error>)
             }));
 
             // This `/api/admin/server_status` endpoint is secure now

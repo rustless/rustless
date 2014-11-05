@@ -1,4 +1,4 @@
-use collections::treemap::TreeMap;
+use collections::tree_map::TreeMap;
 use serialize::json;
 use serialize::json::{JsonObject};
 
@@ -112,7 +112,7 @@ impl Api {
                 }
             }, 
             Err(_) => {
-                return Err(QueryStringDecodeError.erase());
+                return Err(box QueryStringDecodeError as Box<Error>);
             }
         }
 
@@ -127,10 +127,10 @@ impl Api {
                 Ok(body) => {
                     match String::from_utf8(body) {
                         Ok(e) => e,
-                        Err(_) => return Err(BodyDecodeError::new("Invalid UTF-8 sequence".to_string()).erase()),
+                        Err(_) => return Err(box BodyDecodeError::new("Invalid UTF-8 sequence".to_string()) as Box<Error>),
                     }
                 },
-                Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).erase())
+                Err(err) => return Err(box BodyDecodeError::new(format!("{}", err)) as Box<Error>)
             }
         };
 
@@ -144,7 +144,7 @@ impl Api {
                         }
                     }
                 },
-                Err(err) => return Err(BodyDecodeError::new(format!("{}", err)).erase())
+                Err(err) => return Err(box BodyDecodeError::new(format!("{}", err)) as Box<Error>)
             }  
         }
 
@@ -192,7 +192,7 @@ impl ApiHandler for Api {
             if rest_path.slice_from(1).starts_with(self.prefix.as_slice()) {
                 rest_path.slice_from(self.prefix.len() + 1)
             } else {
-               return Err(NotMatchError.erase()) 
+               return Err(box NotMatchError as Box<Error>) 
             }
         } else {
             rest_path
@@ -210,17 +210,17 @@ impl ApiHandler for Api {
                     if rest_path.slice_from(1).starts_with(version.as_slice()) {
                         rest_path = rest_path.slice_from(version.len() + 1)
                     } else {
-                       return Err(NotMatchError.erase()) 
+                       return Err(box NotMatchError as Box<Error>) 
                     }
                 },
                 &ParamVersioning(ref param_name) => {
                     match req.url().query_pairs() {
                         Some(query_pairs) => {
                             if !query_pairs.iter().any(|&(ref key, ref val)| key.as_slice() == *param_name && val == version) {
-                                return Err(NotMatchError.erase()) 
+                                return Err(box NotMatchError as Box<Error>) 
                             }    
                         },
-                        None => return Err(NotMatchError.erase())
+                        None => return Err(box NotMatchError as Box<Error>)
                     }
                 },
                 &AcceptHeaderVersioning(ref vendor) => {
@@ -243,12 +243,12 @@ impl ApiHandler for Api {
                             }
 
                             if matched_media.is_none() {
-                                return Err(NotMatchError.erase())
+                                return Err(box NotMatchError as Box<Error>)
                             } else {
                                 media = matched_media;
                             }
                         },
-                        None => return Err(NotMatchError.erase())
+                        None => return Err(box NotMatchError as Box<Error>)
                     }
                 }
             }
@@ -260,7 +260,7 @@ impl ApiHandler for Api {
                 Some(media) => {
                     info.media = media
                 },
-                None => return Err(NotAcceptableError.erase())
+                None => return Err(box NotAcceptableError as Box<Error>)
             }
         }
 
