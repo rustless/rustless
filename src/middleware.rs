@@ -3,6 +3,7 @@ use anymap::AnyMap;
 use server::{Request, Response};
 use server_backend::status;
 use errors::{Error, ErrorRefExt, NotMatchError, NotFoundError};
+use {Extensible};
 
 pub type HandleError = Box<Error>;
 pub type HandleResult<T> = Result<T, HandleError>;
@@ -120,6 +121,8 @@ impl Application {
         self.handlers.push(handler);
     }
 }
+
+impl_extensible!(Application)
 
 trait AfterMiddlewareSupport {
     fn using(&mut self, middleware: Box<AfterMiddleware + Send + Sync>);

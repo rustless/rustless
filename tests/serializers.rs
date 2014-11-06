@@ -39,6 +39,6 @@ fn it_serializes_json_properly() {
 
     let body: Json = from_str(from_utf8(response.read_to_end().unwrap().as_slice()).unwrap()).unwrap();
 
-    assert!(body.find(&"uptime".to_string()).is_some());
-    assert!(body.find(&"echo_params".to_string()).is_some());
+    assert!(body.find("uptime").is_some());
+    assert!(body.find("echo_params").is_some());
 }

@@ -77,6 +77,20 @@ macro_rules! format_error (
     });
 )
 
+pub trait Extensible {
+    fn ext(&self) -> &::anymap::AnyMap;
+    fn ext_mut(&mut self) -> &mut ::anymap::AnyMap;
+}
+
+macro_rules! impl_extensible(
+    ($t:ty) => (
+        impl Extensible for $t {
+            fn ext(&self) -> &::anymap::AnyMap { &self.ext }
+            fn ext_mut(&mut self) -> &mut ::anymap::AnyMap { &mut self.ext }
+        }
+    )
+)
+
 pub mod errors;
 pub mod server_backend;
 mod middleware;

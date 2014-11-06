@@ -4,6 +4,7 @@ use std::io::{Reader, IoResult};
 use std::fmt::{Show, Formatter, FormatError};
 use std::io::net::ip::SocketAddr;
 use anymap::AnyMap;
+use {Extensible};
 
 use server_backend::method::Method;
 use server_backend::header;
@@ -12,12 +13,10 @@ use server_backend::server::Request as RawRequest;
 use server_backend::mime::{Mime, Application, Json};
 use server_backend::uri;
 
-pub trait Request: Reader + Show + Send {
+pub trait Request: Reader + Show + Send + Extensible {
     fn remote_addr(&self) -> &SocketAddr;
     fn headers(&self) -> &Headers;
     fn method(&self) -> &Method;
-    fn ext(&self) -> &AnyMap;
-    fn ext_mut(&mut self) -> &mut AnyMap;
     fn url(&self) -> &Url;
 
     fn is_json_body(&self) -> bool {
@@ -57,15 +56,9 @@ impl Request for ServerRequest {
     fn method(&self) -> &Method {
         return &self.raw.method;
     }
-
-    fn ext(&self) -> &AnyMap {
-        &self.ext
-    }
-
-    fn ext_mut(&mut self) -> &mut AnyMap {
-        &mut self.ext
-    }
 }
+
+impl_extensible!(ServerRequest)
 
 impl ServerRequest {
     pub fn new(url: Url, req: RawRequest) -> ServerRequest {

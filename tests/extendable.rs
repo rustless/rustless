@@ -31,5 +31,5 @@ fn it_pass_without_versioning() {
     assert_eq!(response.status, status::Ok);
 
     let body: Json = from_str(from_utf8(response.read_to_end().unwrap().as_slice()).unwrap()).unwrap();
-    assert_eq!(body.find(&"value".to_string()).unwrap().as_string().unwrap(), "Ok");
+    assert_eq!(body.find("value").unwrap().as_string().unwrap(), "Ok");
 }
