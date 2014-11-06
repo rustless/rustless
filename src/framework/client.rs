@@ -11,6 +11,7 @@ use server_backend::status;
 use server_backend::mime;
 use server_backend::header::{Header, HeaderFormat};
 use server_backend::header::common::{ContentType, Location};
+use {Extensible};
 
 pub struct Client<'a> {
     pub app: &'a Application,
@@ -108,4 +109,9 @@ impl<'a> Client<'a> {
         &mut self.ext
     }
     
+}
+
+impl<'a> Extensible for Client<'a> {
+    fn ext(&self) -> &::anymap::AnyMap { &self.ext }
+    fn ext_mut(&mut self) -> &mut ::anymap::AnyMap { &mut self.ext }
 }

@@ -7,6 +7,7 @@ use server_backend::status;
 use server_backend::mime;
 use server_backend::status::StatusCode;
 use anymap::AnyMap;
+use {Extensible};
 
 pub struct Response {
     pub status: StatusCode,
@@ -84,6 +85,8 @@ impl Response {
     }
 
 }
+
+impl_extensible!(Response)
 
 impl Reader for Response {
     fn read(&mut self, buf: &mut [u8]) -> IoResult<uint> {

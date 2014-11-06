@@ -5,9 +5,10 @@ use std::fmt::{Show, Formatter, FormatError};
 use std::io::net::ip::SocketAddr;
 use anymap::AnyMap;
 
+use {Extensible};
+
 use server_backend::method::Method;
 use server_backend::header::Headers;
-
 use server::{Request};
 
 #[deriving(Send)]
@@ -37,14 +38,6 @@ impl Request for SimpleRequest {
 
     fn method(&self) -> &Method {
         return &self.method;
-    }
-
-    fn ext(&self) -> &AnyMap {
-        &self.ext
-    }
-
-    fn ext_mut(&mut self) -> &mut AnyMap {
-        &mut self.ext
     }
 
 }
@@ -94,6 +87,8 @@ impl SimpleRequest {
     }
 
 }
+
+impl_extensible!(SimpleRequest)
 
 impl Reader for SimpleRequest {
     fn read(&mut self, buf: &mut [u8]) -> IoResult<uint> {
