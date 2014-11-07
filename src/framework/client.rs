@@ -45,51 +45,42 @@ impl<'a> Client<'a> {
         self.response.status
     }
 
-    pub fn set_status(&mut self, status: status::StatusCode) -> &mut Client<'a> {
+    pub fn set_status(&mut self, status: status::StatusCode) {
         self.response.status = status;
-        self
     }
 
-    pub fn unauthorized(&mut self) -> &mut Client<'a> {
+    pub fn unauthorized(&mut self) {
         self.response.status = status::Unauthorized;
-        self
     }
 
-    pub fn forbidden(&mut self) -> &mut Client<'a> {
+    pub fn forbidden(&mut self) {
         self.response.status = status::Forbidden;
-        self
     }
 
-    pub fn not_found(&mut self) -> &mut Client<'a> {
+    pub fn not_found(&mut self) {
         self.response.status = status::NotFound;
-        self
     }
 
-    pub fn internal_server_error(&mut self) -> &mut Client<'a> {
+    pub fn internal_server_error(&mut self) {
         self.response.status = status::InternalServerError;
-        self
     }
 
-    pub fn not_implemented(&mut self) -> &mut Client<'a> {
+    pub fn not_implemented(&mut self) {
         self.response.status = status::NotImplemented;
-        self
     }
 
     //
 
-    pub fn set_header<H: Header + HeaderFormat>(&mut self, header: H) -> &mut Client<'a> {
+    pub fn set_header<H: Header + HeaderFormat>(&mut self, header: H) {
         self.response.set_header(header);
-        self
     }
 
-    pub fn set_json_content_type(&mut self) -> &mut Client<'a> {
+    pub fn set_json_content_type(&mut self) {
         self.set_header(ContentType(mime::Mime(mime::Application, mime::Json, vec![])));
-        self
     }
 
-    pub fn set_content_type(&mut self, mime: mime::Mime) -> &mut Client<'a> {
+    pub fn set_content_type(&mut self, mime: mime::Mime) {
         self.set_header(ContentType(mime));
-        self
     }
 
     pub fn error<T: Error>(self, error: T) -> ClientResult<'a> {
