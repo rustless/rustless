@@ -37,6 +37,10 @@ impl<'a> Client<'a> {
         }
     }
 
+    //
+    // Work with status
+    //
+
     pub fn status(&mut self) -> status::StatusCode {
         self.response.status
     }
@@ -44,6 +48,28 @@ impl<'a> Client<'a> {
     pub fn set_status(&mut self, status: status::StatusCode) {
         self.response.status = status;
     }
+
+    pub fn unauthorized(&mut self) {
+        self.response.status = status::Unauthorized;
+    }
+
+    pub fn forbidden(&mut self) {
+        self.response.status = status::Forbidden;
+    }
+
+    pub fn not_found(&mut self) {
+        self.response.status = status::NotFound;
+    }
+
+    pub fn internal_server_error(&mut self) {
+        self.response.status = status::InternalServerError;
+    }
+
+    pub fn not_implemented(&mut self) {
+        self.response.status = status::NotImplemented;
+    }
+
+    //
 
     pub fn set_header<H: Header + HeaderFormat>(&mut self, header: H) {
         self.response.set_header(header);
