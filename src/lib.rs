@@ -33,7 +33,8 @@ pub use framework::{
 macro_rules! edp_handler {
     ($edp:ident, |$client:ident, $params:ident| $blk:block) => ({
         #[allow(dead_code)]
-        fn endpoint_handler<'a>($client: Client<'a>, $params: &JsonObject) -> HandleResult<Client<'a>> {
+        #[allow(unused_mut)]
+        fn endpoint_handler<'a>(mut $client: Client<'a>, $params: &JsonObject) -> HandleResult<Client<'a>> {
             $blk
         }
 
