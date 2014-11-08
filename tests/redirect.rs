@@ -14,7 +14,7 @@ fn it_allows_redirect() {
         api.prefix("api");
         api.post("redirect_me/:href", |endpoint| {
             edp_handler!(endpoint, |client, params| {
-                client.redirect(params.find(&"href".to_string()).unwrap().as_string().unwrap())
+                client.redirect(params.get(&"href".to_string()).unwrap().as_string().unwrap())
             })
         });
     });
@@ -33,7 +33,7 @@ fn it_allows_permanent_redirect() {
         api.prefix("api");
         api.post("redirect_me/:href", |endpoint| {
             edp_handler!(endpoint, |client, params| {
-                client.permanent_redirect(params.find(&"href".to_string()).unwrap().as_string().unwrap())
+                client.permanent_redirect(params.get(&"href".to_string()).unwrap().as_string().unwrap())
             })
         });
     });
