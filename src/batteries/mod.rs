@@ -1,6 +1,5 @@
 
-pub use self::cookie::Cookies;
 pub use self::static_file::Static;
 
-mod cookie;
-mod static_file;
+pub mod cookie;
+pub mod static_file;
