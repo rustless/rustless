@@ -17,7 +17,7 @@ fn it_pass_without_versioning() {
     let mut app = app!(|api| {
         api.get("plugin_value", |endpoint| {
             edp_handler!(endpoint, |client, _params| {
-                let ref ext_value = client.app.ext.find::<TestExt>().unwrap().0;
+                let ref ext_value = client.app.ext.get::<TestExt>().unwrap().0;
                 client.json(&JsonWay::object(|json| {
                     json.set("value", ext_value.clone());
                 }).unwrap())

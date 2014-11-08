@@ -18,7 +18,7 @@ pub trait Cookies {
 
 impl Cookies for &'static mut Request {
     fn find_cookie_jar(&self) -> Option<&CookieJar<'static>> {
-        self.ext().find()
+        self.ext().get()
     }
 
     fn store_cookie_jar(&mut self, jar: CookieJar<'static>) {
