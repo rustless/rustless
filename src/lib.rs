@@ -20,7 +20,6 @@ extern crate collections;
 extern crate valico;
 extern crate queryst;
 
-pub use common::{Cookies, Static};
 pub use valico::Builder as Valico;
 pub use server::{Server, Request, SimpleRequest, Response};
 pub use middleware::{Application, HandleResult, HandleSuccessResult};
@@ -94,7 +93,7 @@ macro_rules! impl_extensible(
 
 pub mod errors;
 pub mod server_backend;
-mod middleware;
-mod server;
+pub mod middleware;
+pub mod server;
 pub mod framework;
-pub mod common;
+pub mod batteries;
