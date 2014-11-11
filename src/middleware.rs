@@ -120,27 +120,25 @@ impl Application {
     pub fn mount(&mut self, handler: Box<Handler + Send + Sync>) {
         self.handlers.push(handler);
     }
+
+    pub fn before<B>(&mut self, middleware: B) where B: BeforeMiddleware {
+        self.before.push(box middleware as Box<BeforeMiddleware + Send + Sync>);
+    }
+
+    pub fn after<A>(&mut self, middleware: A) where A: AfterMiddleware {
+        self.after.push(box middleware as Box<AfterMiddleware + Send + Sync>);
+    }
+
+    pub fn using<B, A>(&mut self, middlewares: (B, A)) where B: BeforeMiddleware, A: AfterMiddleware {
+        let (before, after) = middlewares;
+        self.before.push(box before as Box<BeforeMiddleware + Send + Sync>);
+        self.after.push(box after as Box<AfterMiddleware + Send + Sync>);
+    }
+
+    pub fn catch<C>(&mut self, middleware: C) where C: CatchMiddleware {
+        self.catch.push(box middleware as Box<CatchMiddleware + Send + Sync>);
+    }
 }
 
 impl_extensible!(Application)
-
-trait AfterMiddlewareSupport {
-    fn using(&mut self, middleware: Box<AfterMiddleware + Send + Sync>);
-}
-
-trait BeforeMiddlewareSupport {
-    fn using(&mut self, middleware: Box<BeforeMiddleware + Send + Sync>);
-}
-
-impl AfterMiddlewareSupport for Application {
-    fn using(&mut self, middleware: Box<AfterMiddleware + Send + Sync>) {
-        self.after.push(middleware);
-    }
-}
-
-impl BeforeMiddlewareSupport for Application {
-    fn using(&mut self, middleware: Box<BeforeMiddleware + Send + Sync>) {
-        self.before.push(middleware);
-    }
-}
 

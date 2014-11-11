@@ -77,7 +77,7 @@ macro_rules! format_error (
     });
 )
 
-pub trait Extensible {
+pub trait Extensible for Sized? {
     fn ext(&self) -> &::anymap::AnyMap;
     fn ext_mut(&mut self) -> &mut ::anymap::AnyMap;
 }
