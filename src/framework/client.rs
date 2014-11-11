@@ -109,6 +109,10 @@ impl<'a> Client<'a> {
         } 
     }
 
+    pub fn empty(self) -> ClientResult<'a> {
+        Ok(self)
+    }
+
     pub fn redirect(mut self, to: &str) -> ClientResult<'a> {
         self.set_status(status::Found);
         self.set_header(Location(to.to_string()));
