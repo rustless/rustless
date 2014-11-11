@@ -30,7 +30,7 @@ pub trait ApiHandler {
 
 pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 
-pub type Callback = fn<'a>(&'a mut Client, &JsonObject) -> HandleSuccessResult;
+pub type Callback = for<'a> fn(&'a mut Client, &JsonObject) -> HandleSuccessResult;
 pub type ErrorFormatter = fn(&Box<Error>, &Media) -> Option<Response>;
 
 pub type Callbacks = Vec<Callback>;

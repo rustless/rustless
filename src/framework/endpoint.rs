@@ -11,7 +11,7 @@ use framework::{
     ApiHandler, ValicoBuildHandler, Client, CallInfo, Callback
 };
 
-pub type EndpointHandler = fn<'a>(Client<'a>, &JsonObject) -> HandleResult<Client<'a>>;
+pub type EndpointHandler = for<'a> fn(Client<'a>, &JsonObject) -> HandleResult<Client<'a>>;
 
 pub enum EndpointHandlerPresent {
     HandlerPresent
