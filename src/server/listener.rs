@@ -3,23 +3,21 @@ use std::sync::Arc;
 use middleware::Application;
 use server::request::{Request, ServerRequest};
 
-use server_backend::server::{Handler, Incoming};
-use server_backend::server::Request as RawRequest;
-use server_backend::server::Response as RawResponse;
+use server_backend::server::{Connection, Handler, Incoming};
 use server_backend::header::common::ContentLength;
-use server_backend::net::{HttpStream, HttpAcceptor, Fresh};
+use server_backend::net::{HttpStream, HttpAcceptor};
 
 pub trait ConcurrentHandler: Send + Sync {
-    fn handle(&self, req: RawRequest, res: RawResponse<Fresh>);
+    fn handle(&self, Connection);
 }
 
 pub struct Concurrent<H: ConcurrentHandler> { pub handler: Arc<H> }
 
 impl<H: ConcurrentHandler> Handler<HttpAcceptor, HttpStream> for Concurrent<H> {
     fn handle(self, mut incoming: Incoming) {
-        for (mut req, mut res) in incoming {
+        for mut connection in incoming {
             let clone = self.handler.clone();
-            spawn(proc() { clone.handle(req, res) })
+            spawn(proc() { clone.handle(connection) })
         }
     }
 }
@@ -34,7 +32,9 @@ macro_rules! try_abort(
 )
 
 impl ConcurrentHandler for Application {
-    fn handle(&self, req: RawRequest, mut res: RawResponse<Fresh>) {
+    fn handle(&self, connection: Connection) {
+
+        let (req, mut res) = connection.open().unwrap();
 
         let mut request = ServerRequest::wrap(req).unwrap();
         let maybe_response = self.call(&mut request);
