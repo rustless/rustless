@@ -25,7 +25,6 @@ git = "https://github.com/reem/rust-error.git"
 
 [dependencies.valico]
 git = "https://github.com/rustless/valico.git"
-#path = "../valico"
 
 [dependencies.queryst]
 git = "https://github.com/rustless/queryst.git"
