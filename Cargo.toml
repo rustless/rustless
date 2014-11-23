@@ -11,26 +11,12 @@ path = "src/lib.rs"
 [[test]]
 name = "tests"
 
-[dependencies.hyper]
-git = "https://github.com/hyperium/hyper.git"
-
-[dependencies.url]
-git = "https://github.com/servo/rust-url.git"
-
-[dependencies.anymap]
-git = "https://github.com/chris-morgan/anymap.git"
-
-[dependencies.error]
-git = "https://github.com/reem/rust-error.git"
-
-[dependencies.valico]
-git = "https://github.com/rustless/valico.git"
-
-[dependencies.queryst]
-git = "https://github.com/rustless/queryst.git"
-
-[dependencies.cookie]
-git = "https://github.com/alexcrichton/cookie-rs"
-
-[dependencies.jsonway]
-git = "https://github.com/rustless/jsonway"
+[dependencies]
+valico = "~0.1.0"
+queryst = "~0.1.0"
+jsonway = "~0.1.0"
+url = "~0.2.0"
+anymap = "~0.9.1"
+error = "~0.0.1"
+cookie = "~0.0.1"
+hyper = "~0.0.1"
