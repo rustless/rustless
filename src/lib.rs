@@ -2,7 +2,7 @@
 #![comment = "REST-like API micro-framework for Rust"]
 #![license = "MIT"]
 #![crate_type = "rlib"]
-// #![deny(warnings)]
+#![deny(warnings)]
 #![deny(bad_style)]
 #![feature(macro_rules, phase, tuple_indexing)]
 #[phase(plugin)]

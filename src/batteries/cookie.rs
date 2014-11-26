@@ -1,5 +1,4 @@
 use cookie::{CookieJar};
-use backend::{HandleResult};
 use backend::{Request};
 use {Extensible};
 use server::header::common::cookie::Cookies;
