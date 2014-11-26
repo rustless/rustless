@@ -5,10 +5,10 @@ use std::str::from_utf8;
 
 use jsonway::JsonWay;
 
-use rustless::server_backend::header::common::ContentType;
-use rustless::server_backend::method::{Get};
-use rustless::server_backend::status;
-use rustless::server_backend::mime;
+use rustless::server::header::common::ContentType;
+use rustless::server::method::{Get};
+use rustless::server::status;
+use rustless::server::mime;
 use rustless::{
     Application, Api, Client, Nesting, HandleResult, SimpleRequest
 };

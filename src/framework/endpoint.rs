@@ -2,10 +2,10 @@ use serialize::json::{JsonObject};
 
 use valico::Builder as ValicoBuilder;
 
-use server_backend::method::{Method};
-use server::{Request, Response};
+use server::method::{Method};
+use backend::{Request, Response};
 use errors::{NotMatchError, Error, ValidationError};
-use middleware::{HandleResult, HandleSuccessResult};
+use backend::{HandleResult, HandleSuccessResult};
 use framework::path::{Path};
 use framework::{
     ApiHandler, ValicoBuildHandler, Client, CallInfo, Callback

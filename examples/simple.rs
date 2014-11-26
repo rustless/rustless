@@ -1,10 +1,26 @@
-use url::Url;
+#![feature(phase)]
+
+#[phase(plugin)]
+extern crate rustless;
+extern crate rustless;
+
+extern crate iron;
+extern crate url;
+extern crate serialize;
+extern crate valico;
+extern crate cookie;
+
+use iron::{Iron, Chain, ChainBuilder};
+use cookie::Cookie;
+
 use serialize::json::{JsonObject};
-use rustless::server::method::{Get};
+use valico::Builder as Valico;
 use rustless::server::status;
 use rustless::errors::{Error, ErrorRefExt};
+use rustless::batteries::cookie::CookieExt;
 use rustless::{
-    Application, Api, Client, Valico, Media, Nesting, HandleResult, HandleSuccessResult, SimpleRequest, Response
+    Application, Api, Client, Nesting, HandleResult, Versioning,
+    Media, Response, HandleSuccessResult
 };
 
 #[deriving(Show)]
@@ -12,15 +28,15 @@ pub struct UnauthorizedError;
 
 impl Error for UnauthorizedError {
     fn name(&self) -> &'static str {
-        return "Unauthorized";
+        return "UnauthorizedError";
     }
 }
 
-#[test]
-fn it_allows_to_create_namespace() {
+fn main() {
 
-    let app = app!(|api| {
+    let app = Application::new(Api::build(|api| {
         api.prefix("api");
+        api.version("v1", Versioning::Path);
 
         format_error!(api, UnauthorizedError, |_err, _media| {
             Some(Response::from_string(status::Unauthorized, "Please provide correct `token` parameter".to_string()))
@@ -34,6 +50,7 @@ fn it_allows_to_create_namespace() {
 
             // Using after_validation callback to check token
             admin_ns.after_validation(callback!(|_client, params| {
+
                 match params.get(&"token".to_string()) {
                     // We can unwrap() safely because token in validated already
                     Some(token) => if token.as_string().unwrap().as_slice() == "password1" { return Ok(()) },
@@ -42,25 +59,32 @@ fn it_allows_to_create_namespace() {
 
                 // Fire error from callback is token is wrong
                 return Err(box UnauthorizedError as Box<Error>)
+
             }));
 
             // This `/api/admin/server_status` endpoint is secure now
             admin_ns.get("server_status", |endpoint| {
-
                 edp_handler!(endpoint, |client, _params| {
+                    {
+                        let cookies = client.request.cookies();
+                        let signed_cookies = cookies.signed();
+
+                        let mut user_cookie = Cookie::new("session".to_string(), "verified".to_string());
+                        signed_cookies.add(user_cookie);
+                    }
+
                     client.text("Everything is OK".to_string())  
                 })
             });
         })
-    });
+    }));
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/admin/server_status").unwrap();
-    assert_eq!(response.status, status::BadRequest);
+    
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/admin/server_status?token=wrong%20token").unwrap();
-    assert_eq!(response.status, status::Unauthorized);
+    let mut chain = ChainBuilder::new(app);
+    chain.link(::rustless::batteries::cookie::new("secretsecretsecretsecretsecretsecretsecret".as_bytes()));
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/admin/server_status?token=password1").unwrap();
-    assert_eq!(response.status, status::Ok);
+    Iron::new(chain).listen("localhost:4000").unwrap();
+    println!("On 4000");
 
 }

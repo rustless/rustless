@@ -1,30 +1,28 @@
-use url::{Url};
-
-use std::io::{File, MemReader, Reader, IoResult};
+use std::io::{File, Reader, IoResult};
 use std::fmt::{Show, Formatter, Error};
 use std::io::net::ip::SocketAddr;
-use anymap::AnyMap;
+use typemap::TypeMap;
 
 use {Extensible};
 
-use server_backend::method::Method;
-use server_backend::header::Headers;
-use server::{Request};
+use server::method::Method;
+use server::header::Headers;
+use backend::{Request, Url, AsUrl, WrapUrl};
 
 #[deriving(Send)]
 #[allow(dead_code)]
 pub struct SimpleRequest {
     pub url: Url,
-    pub ext: AnyMap,
+    pub ext: TypeMap,
     pub remote_addr: SocketAddr,
     pub headers: Headers,
     pub method: Method,
-    pub body: Option<Box<Reader + Send>>
+    pub body: Vec<u8>
 }
 
 impl Request for SimpleRequest {
 
-    fn url(&self) -> &Url {
+    fn url(&self) -> &AsUrl {
         return &self.url;    
     }
 
@@ -40,23 +38,27 @@ impl Request for SimpleRequest {
         return &self.method;
     }
 
+    fn body(&self) -> &Vec<u8> {
+        return &self.body;
+    }
+
 }
 
 #[allow(dead_code)]
 impl SimpleRequest {
     
-    pub fn new(method: Method, url: Url) -> SimpleRequest {
+    pub fn new(method: Method, url: ::url::Url) -> SimpleRequest {
         SimpleRequest {
-            url: url,
+            url: url.wrap_url(),
             method: method,
-            ext: AnyMap::new(),
+            ext: TypeMap::new(),
             remote_addr: from_str("127.0.0.1:8000").unwrap(),
             headers: Headers::new(),
-            body: None
+            body: vec![]
         }
     }
 
-    pub fn build(method: Method, url: Url, builder: |&mut SimpleRequest|) -> SimpleRequest {
+    pub fn build(method: Method, url: ::url::Url, builder: |&mut SimpleRequest|) -> SimpleRequest {
         let mut srq = SimpleRequest::new(method, url);
         builder(&mut srq);
 
@@ -76,12 +78,12 @@ impl SimpleRequest {
     }
 
     pub fn push_string(&mut self, body: String) {
-        self.body = Some(box MemReader::new(body.into_bytes()) as Box<Reader + Send>)
+        self.body = body.into_bytes()
     }
 
     pub fn push_file(&mut self, path: &Path) -> IoResult<()> {
-        let reader = box try!(File::open(path));
-        self.body = Some(reader as Box<Reader + Send>);
+        let mut reader = box try!(File::open(path));
+        self.body = try!(reader.read_to_end());
 
         Ok(())
     }
@@ -89,15 +91,6 @@ impl SimpleRequest {
 }
 
 impl_extensible!(SimpleRequest)
-
-impl Reader for SimpleRequest {
-    fn read(&mut self, buf: &mut [u8]) -> IoResult<uint> {
-        match self.body {
-            Some(ref mut reader) => reader.read(buf),
-            None => Ok(0u)
-        }
-    }
-}
 
 impl Show for SimpleRequest {
     fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {

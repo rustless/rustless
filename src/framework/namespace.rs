@@ -2,9 +2,9 @@ use serialize::json::{JsonObject};
 
 use valico::Builder as ValicoBuilder;
 
-use server::{Request, Response};
+use backend::{Request, Response};
 use errors::{NotMatchError, ValidationError, Error};
-use middleware::{HandleResult};
+use backend::{HandleResult};
 
 use framework::path::{Path};
 use framework::nesting::Nesting;

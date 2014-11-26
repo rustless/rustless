@@ -1,19 +1,19 @@
 use std::io::{Reader, IoResult, File, MemReader};
 use serialize::json::Json;
 
-use server_backend::header::{Headers, Header, HeaderFormat};
-use server_backend::header::common::{ContentType};
-use server_backend::status;
-use server_backend::mime;
-use server_backend::status::StatusCode;
-use anymap::AnyMap;
+use server::header::{Headers, Header, HeaderFormat};
+use server::header::common::{ContentType};
+use server::status;
+use server::mime;
+use server::status::StatusCode;
+use typemap::TypeMap;
 use {Extensible};
 
 pub struct Response {
     pub status: StatusCode,
     pub headers: Headers,
     pub body: Option<Box<Reader + Send>>,
-    pub ext: AnyMap
+    pub ext: TypeMap
 }
 
 impl Response {
@@ -23,7 +23,7 @@ impl Response {
             status: status,
             headers: Headers::new(),
             body: None,
-            ext: AnyMap::new()
+            ext: TypeMap::new()
         }
     }
 
@@ -33,7 +33,7 @@ impl Response {
             status: status,
             headers: Headers::new(),
             body: Some(body),
-            ext: AnyMap::new()
+            ext: TypeMap::new()
         }
     }
 
@@ -76,11 +76,11 @@ impl Response {
         Ok(response)
     }
 
-    pub fn ext(&self) -> &AnyMap {
+    pub fn ext(&self) -> &TypeMap {
         &self.ext
     }
 
-    pub fn ext_mut(&mut self) -> &mut AnyMap {
+    pub fn ext_mut(&mut self) -> &mut TypeMap {
         &mut self.ext
     }
 

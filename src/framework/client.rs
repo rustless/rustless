@@ -1,16 +1,17 @@
 use serialize::json::{Json};
-use anymap::AnyMap;
+use typemap::TypeMap;
 use std::os;
 
-use server::{Request, Response};
+use backend::{Request, Response};
 use errors::{Error, FileError};
-use middleware::{Application, HandleResult};
+use backend::{HandleResult};
+use framework::api::{Application};
 use framework::endpoint::Endpoint;
 use framework::media::Media;
-use server_backend::status;
-use server_backend::mime;
-use server_backend::header::{Header, HeaderFormat};
-use server_backend::header::common::{ContentType, Location};
+use server::status;
+use server::mime;
+use server::header::{Header, HeaderFormat};
+use server::header::common::{ContentType, Location};
 use {Extensible};
 
 pub struct Client<'a> {
@@ -18,7 +19,7 @@ pub struct Client<'a> {
     pub endpoint: &'a Endpoint,
     pub request: &'a mut Request,
     pub media: &'a Media,
-    pub ext: AnyMap,
+    pub ext: TypeMap,
     pub response: Response
 }
 
@@ -32,7 +33,7 @@ impl<'a> Client<'a> {
             endpoint: endpoint,
             request: request,
             media: media,
-            ext: AnyMap::new(),
+            ext: TypeMap::new(),
             response: Response::new(status::Ok)
         }
     }
@@ -138,17 +139,17 @@ impl<'a> Client<'a> {
         self.response
     }
 
-    pub fn ext(&self) -> &AnyMap {
+    pub fn ext(&self) -> &TypeMap {
         &self.ext
     }
 
-    pub fn ext_mut(&mut self) -> &mut AnyMap {
+    pub fn ext_mut(&mut self) -> &mut TypeMap {
         &mut self.ext
     }
     
 }
 
 impl<'a> Extensible for Client<'a> {
-    fn ext(&self) -> &::anymap::AnyMap { &self.ext }
-    fn ext_mut(&mut self) -> &mut ::anymap::AnyMap { &mut self.ext }
+    fn ext(&self) -> &::typemap::TypeMap { &self.ext }
+    fn ext_mut(&mut self) -> &mut ::typemap::TypeMap { &mut self.ext }
 }
