@@ -1,13 +1,15 @@
 use collections::tree_map::TreeMap;
 use serialize::json;
 use serialize::json::{JsonObject};
+use typemap::TypeMap;
 
 use queryst;
 
-use server::{Request, Response};
-use server_backend::header::common::Accept;
+use backend::{Request, Response};
+use server::status;
+use server::header::common::Accept;
 use errors::{Error, ErrorRefExt, NotMatchError, NotAcceptableError, QueryStringDecodeError, BodyDecodeError};
-use middleware::{Application, Handler, HandleResult, HandleSuccessResult};
+use backend::{Handler, HandleResult, HandleSuccessResult};
 
 use framework::nesting::Nesting;
 use framework::media::Media;
@@ -16,9 +18,9 @@ use framework::formatters;
 
 #[allow(dead_code)]
 pub enum Versioning {
-    PathVersioning,
-    AcceptHeaderVersioning(&'static str),
-    ParamVersioning(&'static str)
+    Path,
+    AcceptHeader(&'static str),
+    Param(&'static str)
 }
 
 #[deriving(Send)]
@@ -120,18 +122,10 @@ impl Api {
     }
 
     fn parse_json_body(req: &mut Request, params: &mut JsonObject) -> HandleSuccessResult {
-        let maybe_body = req.read_to_end();
-        
-        let utf8_string_body = {
-            match maybe_body {
-                Ok(body) => {
-                    match String::from_utf8(body) {
-                        Ok(e) => e,
-                        Err(_) => return Err(box BodyDecodeError::new("Invalid UTF-8 sequence".to_string()) as Box<Error>),
-                    }
-                },
-                Err(err) => return Err(box BodyDecodeError::new(format!("{}", err)) as Box<Error>)
-            }
+
+        let utf8_string_body = match String::from_utf8(req.body().clone()) {
+            Ok(e) => e,
+            Err(_) => return Err(box BodyDecodeError::new("Invalid UTF-8 sequence".to_string()) as Box<Error>),
         };
 
         if utf8_string_body.len() > 0 {
@@ -153,8 +147,8 @@ impl Api {
 
     fn parse_request(req: &mut Request, params: &mut JsonObject) -> HandleSuccessResult {
         // extend params with query-string params if any
-        if req.url().query.is_some() {
-            try!(Api::parse_query(req.url().query.as_ref().unwrap().as_slice(), params));   
+        if req.url().query().is_some() {
+            try!(Api::parse_query(req.url().query().as_ref().unwrap().as_slice(), params));   
         }
 
         // extend params with json-encoded body params if any
@@ -163,6 +157,28 @@ impl Api {
         }
 
         Ok(())
+    }
+
+    #[allow(unused_variables)]
+    pub fn call(&self, rest_path: &str, req: &mut Request, app: &Application) -> HandleResult<Response> {
+        let mut params = TreeMap::new();
+        try!(Api::parse_request(req, &mut params));
+        
+        match self.api_call(rest_path, &mut params, req, &mut CallInfo::new(app))  {
+            Ok(resp) => Ok(resp),
+            Err(err) => {
+                if err.downcast::<NotMatchError>().is_none() {
+                    // FIXME: Here we extract mime second time (first time in `api_call`), 
+                    //        maybe we can do something better?
+                    match self.handle_error(&err, &self.extract_media(req).unwrap_or_else(|| Media::default())) {
+                        Some(resp) => Ok(resp),
+                        None => Err(err)
+                    }
+                } else {
+                    Err(err)
+                }
+            }
+        }
     }
     
 }
@@ -206,24 +222,20 @@ impl ApiHandler for Api {
             let versioning = self.versioning.as_ref().unwrap();
 
             match versioning {
-                &Versioning::PathVersioning => {
+                &Versioning::Path => {
                     if rest_path.slice_from(1).starts_with(version.as_slice()) {
                         rest_path = rest_path.slice_from(version.len() + 1)
                     } else {
                        return Err(box NotMatchError as Box<Error>) 
                     }
                 },
-                &Versioning::ParamVersioning(ref param_name) => {
-                    match req.url().query_pairs() {
-                        Some(query_pairs) => {
-                            if !query_pairs.iter().any(|&(ref key, ref val)| key.as_slice() == *param_name && val == version) {
-                                return Err(box NotMatchError as Box<Error>) 
-                            }    
-                        },
-                        None => return Err(box NotMatchError as Box<Error>)
+                &Versioning::Param(ref param_name) => {
+                    match params.get(*param_name) {
+                        Some(obj) if obj.is_string() && obj.as_string().unwrap() == version.as_slice() => (),
+                        _ => return Err(box NotMatchError as Box<Error>)
                     }
                 },
-                &Versioning::AcceptHeaderVersioning(ref vendor) => {
+                &Versioning::AcceptHeader(ref vendor) => {
                     let header = req.headers().get::<Accept>();
                     match header {
                         Some(&Accept(ref mimes)) => {
@@ -269,25 +281,33 @@ impl ApiHandler for Api {
     }
 }
 
-impl Handler for Api {
-    fn call(&self, rest_path: &str, req: &mut Request, app: &Application) -> HandleResult<Response> {
+#[deriving(Send)]
+pub struct Application {
+    pub ext: TypeMap,
+    pub root_api: Api 
+}
 
-        let mut params = TreeMap::new();
-        try!(Api::parse_request(req, &mut params));
-        
-        match self.api_call(rest_path, &mut params, req, &mut CallInfo::new(app))  {
-            Ok(resp) => Ok(resp),
+impl Application {
+    pub fn new(root_api: Api) -> Application {
+        Application {
+            root_api: root_api,
+            ext: TypeMap::new()
+        }
+    }
+
+    pub fn call(&self, req: &mut Request) -> HandleResult<Response> {
+        self.root_api.call(("/".to_string() + req.url().path().connect("/")).as_slice(), req, self)
+    }
+
+    pub fn call_with_not_found(&self, req: &mut Request) -> HandleResult<Response> {
+        let res = self.call(req);
+        match res {
+            Ok(res) => Ok(res),
             Err(err) => {
-                if err.downcast::<NotMatchError>().is_none() {
-                    // FIXME: Here we extract mime second time (first time in `api_call`), 
-                    //        maybe we can do something better?
-                    match self.handle_error(&err, &self.extract_media(req).unwrap_or_else(|| Media::default())) {
-                        Some(resp) => Ok(resp),
-                        None => Err(err)
-                    }
-                } else {
-                    Err(err)
+                if err.downcast::<NotMatchError>().is_some() {
+                    return Ok(Response::from_string(status::NotFound, "".to_string()));
                 }
+                return Err(err);
             }
         }
     }

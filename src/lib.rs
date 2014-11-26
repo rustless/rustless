@@ -2,7 +2,7 @@
 #![comment = "REST-like API micro-framework for Rust"]
 #![license = "MIT"]
 #![crate_type = "rlib"]
-#![deny(warnings)]
+// #![deny(warnings)]
 #![deny(bad_style)]
 #![feature(macro_rules, phase, tuple_indexing)]
 #[phase(plugin)]
@@ -12,19 +12,22 @@ extern crate regex;
 extern crate hyper;
 extern crate serialize;
 extern crate url;
-extern crate anymap;
 extern crate error;
 extern crate cookie;
+
+extern crate iron;
+extern crate typemap;
+extern crate plugin;
 
 extern crate collections;
 extern crate valico;
 extern crate queryst;
 
 pub use valico::Builder as Valico;
-pub use server::{Server, Request, SimpleRequest, Response};
-pub use middleware::{Application, HandleResult, HandleSuccessResult};
+pub use backend::{Request, SimpleRequest, Response};
+pub use backend::{Handler, HandleResult, HandleSuccessResult};
 pub use framework::{
-    Endpoint, Client, Api, Namespace, Nesting, Media, Versioning
+    Endpoint, Client, Api, Application, Namespace, Nesting, Media, Versioning
 };
 
 #[macro_export]
@@ -77,22 +80,21 @@ macro_rules! format_error (
 )
 
 pub trait Extensible for Sized? {
-    fn ext(&self) -> &::anymap::AnyMap;
-    fn ext_mut(&mut self) -> &mut ::anymap::AnyMap;
+    fn ext(&self) -> &::typemap::TypeMap;
+    fn ext_mut(&mut self) -> &mut ::typemap::TypeMap;
 }
 
 macro_rules! impl_extensible(
     ($t:ty) => (
         impl Extensible for $t {
-            fn ext(&self) -> &::anymap::AnyMap { &self.ext }
-            fn ext_mut(&mut self) -> &mut ::anymap::AnyMap { &mut self.ext }
+            fn ext(&self) -> &::typemap::TypeMap { &self.ext }
+            fn ext_mut(&mut self) -> &mut ::typemap::TypeMap { &mut self.ext }
         }
     )
 )
 
 pub mod errors;
-pub mod server_backend;
-pub mod middleware;
 pub mod server;
+pub mod backend;
 pub mod framework;
 pub mod batteries;

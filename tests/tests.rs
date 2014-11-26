@@ -1,7 +1,7 @@
 #![feature(phase)]
 #![feature(macro_rules)]
 
-// #![deny(warnings)]
+#![deny(warnings)]
 #![deny(bad_style)]
 
 #[phase(plugin)]
@@ -25,10 +25,10 @@ macro_rules! sr {
 #[macro_export]
 macro_rules! call_app {
     ($app:ident, $edp:ident, $url:expr) => {
-        $app.call(&mut sr!($edp, $url))
+        $app.call_with_not_found(&mut sr!($edp, $url))
     };    
     ($app:ident, $edp:ident, $url:expr, $blk:expr) => {
-        $app.call(&mut sr!($edp, $url, $blk))
+        $app.call_with_not_found(&mut sr!($edp, $url, $blk))
     };
 }
 
@@ -44,9 +44,7 @@ macro_rules! mime(
 
 macro_rules! app(
     ($builder:expr) => ({
-        let mut app = Application::new();
-        let api = box Api::build($builder);
-        app.mount(api);
+        let app = Application::new(Api::build($builder));
         app
     })
 )
@@ -74,4 +72,3 @@ mod prefix;
 mod redirect;
 mod callbacks;
 mod serializers;
-mod extendable;

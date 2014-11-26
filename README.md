@@ -20,7 +20,7 @@
 
 [![Build Status](https://travis-ci.org/rustless/rustless.svg?branch=master)](https://travis-ci.org/rustless/rustless)
 
-Rustless is a REST-like API micro-framework for Rust. It's designed to provide a simple DSL to easily develop RESTful APIs. It has built-in support for common conventions, including multiple formats, subdomain/prefix restriction, content negotiation, versioning and much more.
+Rustless is a REST-like API micro-framework for Rust. It's designed to provide a simple DSL to easily develop RESTful APIs on top of the [Iron](https://github.com/iron/iron) web framework. It has built-in support for common conventions, including multiple formats, subdomain/prefix restriction, content negotiation, versioning and much more.
 
 Rustless in a port of [Grape] library from Ruby world. Based on [hyper] - an HTTP library for Rust.
 
@@ -60,14 +60,14 @@ use std::io::net::ip::Ipv4Addr;
 use serialize::json::{JsonObject, ToJson};
 use rustless::{
     Server, Application, Valico, Api, Client, Nesting, 
-    HandleResult, HandleSuccessResult, AcceptHeaderVersioning
+    HandleResult, HandleSuccessResult, AcceptHeader
 };
 
 fn main() {
 
     let api = box Api::build(|api| {
         // Specify API version
-        api.version("v1", AcceptHeaderVersioning("chat"));
+        api.version("v1", AcceptHeader("chat"));
         api.prefix("api");
 
         // Create API for chats
@@ -111,15 +111,10 @@ fn main() {
         api.mount(chats_api);
     });
 
-    let mut app = Application::new();
-    app.mount(api);
+    let mut app = Application::new(api);
 
-    let server: Server = Server;
-    server.listen(
-        app,
-        Ipv4Addr(127, 0, 0, 1),
-        3000
-    );
+    Iron::new(app).listen("localhost:4000").unwrap();
+    println!("On 4000");
 
     println!("Rustless server started!");
 }
@@ -196,14 +191,14 @@ end decoding (even with nesting, like `foo[0][a]=a&foo[0][b]=b&foo[1][a]=aa&foo[
 
 There are three strategies in which clients can reach your API's endpoints: 
 
-* PathVersioning
-* AcceptHeaderVersioning
-* ParamVersioning
+* Path
+* AcceptHeader
+* Param
 
 ### Path versioning strategy
 
 ~~~rust
-api.version("v1", PathVersioning);
+api.version("v1", Path);
 ~~~
 
 Using this versioning strategy, clients should pass the desired version in the URL.
@@ -213,7 +208,7 @@ Using this versioning strategy, clients should pass the desired version in the U
 ### Header versioning strategy
 
 ~~~rust
-api.version("v1", AcceptHeaderVersioning("chat"));
+api.version("v1", AcceptHeader("chat"));
 ~~~
 
 Using this versioning strategy, clients should pass the desired version in the HTTP `Accept` head.
@@ -225,7 +220,7 @@ Accept version format is the same as Github (uses)[https://developer.github.com/
 ### Param versioning strategy
 
 ~~~rust
-api.version("v1", ParamVersioning("ver"));
+api.version("v1", Param("ver"));
 ~~~
 
 Using this versioning strategy, clients should pass the desired version as a request parameter in the URL query.
@@ -369,7 +364,7 @@ Api::build(|api| {
             }
 
             // Fire error from callback is token is wrong
-            return Err(UnauthorizedError.erase())
+            return Err(box UnauthorizedError as Box<Error>)
 
         }));
 

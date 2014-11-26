@@ -1,8 +1,8 @@
 use url::Url;
 use serialize::json::{JsonObject};
-use rustless::server_backend::method::{Post};
-use rustless::server_backend::header::common::{Location};
-use rustless::server_backend::status;
+use rustless::server::method::{Post};
+use rustless::server::header::common::{Location};
+use rustless::server::status;
 use rustless::{
     Application, Api, Client, Nesting, HandleResult, SimpleRequest
 };
