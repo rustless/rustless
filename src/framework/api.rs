@@ -206,14 +206,14 @@ impl ApiHandler for Api {
             let versioning = self.versioning.as_ref().unwrap();
 
             match versioning {
-                &PathVersioning => {
+                &Versioning::PathVersioning => {
                     if rest_path.slice_from(1).starts_with(version.as_slice()) {
                         rest_path = rest_path.slice_from(version.len() + 1)
                     } else {
                        return Err(box NotMatchError as Box<Error>) 
                     }
                 },
-                &ParamVersioning(ref param_name) => {
+                &Versioning::ParamVersioning(ref param_name) => {
                     match req.url().query_pairs() {
                         Some(query_pairs) => {
                             if !query_pairs.iter().any(|&(ref key, ref val)| key.as_slice() == *param_name && val == version) {
@@ -223,7 +223,7 @@ impl ApiHandler for Api {
                         None => return Err(box NotMatchError as Box<Error>)
                     }
                 },
-                &AcceptHeaderVersioning(ref vendor) => {
+                &Versioning::AcceptHeaderVersioning(ref vendor) => {
                     let header = req.headers().get::<Accept>();
                     match header {
                         Some(&Accept(ref mimes)) => {

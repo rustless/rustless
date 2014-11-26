@@ -24,8 +24,7 @@ pub use valico::Builder as Valico;
 pub use server::{Server, Request, SimpleRequest, Response};
 pub use middleware::{Application, HandleResult, HandleSuccessResult};
 pub use framework::{
-    Endpoint, Client, Api, Namespace, Nesting, Media,
-    PathVersioning, AcceptHeaderVersioning, ParamVersioning
+    Endpoint, Client, Api, Namespace, Nesting, Media, Versioning
 };
 
 #[macro_export]

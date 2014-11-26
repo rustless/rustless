@@ -1,7 +1,7 @@
 use url::{Url};
 
 use std::io::{File, MemReader, Reader, IoResult};
-use std::fmt::{Show, Formatter, FormatError};
+use std::fmt::{Show, Formatter, Error};
 use std::io::net::ip::SocketAddr;
 use anymap::AnyMap;
 
@@ -100,7 +100,7 @@ impl Reader for SimpleRequest {
 }
 
 impl Show for SimpleRequest {
-    fn fmt(&self, f: &mut Formatter) -> Result<(), FormatError> {
+    fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {
         try!(writeln!(f, "SimpleRequest ->"));
         try!(writeln!(f, "  url: {}", self.url));
         try!(writeln!(f, "  method: {}", self.method()));

@@ -3,7 +3,7 @@ use serialize::json::{JsonObject};
 use rustless::server_backend::method::{Get};
 use rustless::server_backend::status;
 use rustless::{
-    Application, Api, Client, Nesting, HandleResult, SimpleRequest, PathVersioning
+    Application, Api, Client, Nesting, HandleResult, SimpleRequest, Versioning
 };
 
 #[test]
@@ -48,7 +48,7 @@ fn it_allows_prefix_with_path_versioning() {
 
     let app = app!(|api| {
         api.prefix("api");
-        api.version("v1", PathVersioning);
+        api.version("v1", Versioning::PathVersioning);
         api.mount(box Api::build(|nested_api| {
             nested_api.prefix("nested_api");
             edp_stub!(nested_api);

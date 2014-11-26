@@ -6,7 +6,7 @@ use server::{Request, Response};
 use middleware::{Application, HandleResult, HandleSuccessResult};
 use errors::{Error};
 
-pub use self::api::{Api, PathVersioning, AcceptHeaderVersioning, ParamVersioning};
+pub use self::api::{Api, Versioning};
 pub use self::endpoint::{Endpoint, EndpointBuilder};
 pub use self::client::Client;
 pub use self::nesting::Nesting;
