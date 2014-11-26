@@ -11,7 +11,7 @@ pub fn validation_error_formatter(err: &Box<Error>, media: &Media) -> Option<Res
     match err.downcast::<ValidationError>() {
         Some(err) => {
             match media.format {
-                media::JsonFormat => Some(Response::from_json(BadRequest, &err.reason.to_json())),
+                media::Format::JsonFormat => Some(Response::from_json(BadRequest, &err.reason.to_json())),
                 // TODO: Make formatter for a mere mortals
                 _ => Some(Response::from_string(BadRequest, err.reason.to_json().to_pretty_str()))  
             }

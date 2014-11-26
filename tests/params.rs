@@ -69,7 +69,7 @@ fn it_validates_query_params() {
             endpoint.params(|params| {
                 params.req_typed("user_id", Valico::u64());
                 params.req("profile", |profile| {
-                    profile.allow_values(["simple".to_string(), "full".to_string()])
+                    profile.allow_values(&["simple".to_string(), "full".to_string()])
                 })
             });
 
@@ -110,7 +110,7 @@ fn it_validates_common_namespace_params() {
             users.get("profile/:profile", |endpoint| {
                 endpoint.params(|params| {
                     params.req("profile", |profile| {
-                        profile.allow_values(["simple".to_string(), "full".to_string()])
+                        profile.allow_values(&["simple".to_string(), "full".to_string()])
                     })
                 });
 

@@ -101,7 +101,14 @@ impl<'a> Client<'a> {
     }
 
     pub fn file(mut self, path: &Path) -> ClientResult<'a> {
-       match self.response.push_file(&os::make_absolute(path)) {
+        let absolute_path = match os::make_absolute(path) {
+            Ok(path) => path,
+            Err(err) => {
+                return Err(box FileError(err) as Box<Error>);
+            }
+        };
+
+        match self.response.push_file(&absolute_path) {
             Ok(()) => Ok(self),
             Err(err) => {
                 return Err(box FileError(err) as Box<Error>);

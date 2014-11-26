@@ -57,7 +57,7 @@ impl Endpoint {
 
     pub fn handle(&mut self, handler: EndpointHandler) -> EndpointHandlerPresent {
         self.handler = Some(handler);
-        HandlerPresent
+        EndpointHandlerPresent::HandlerPresent
     }
 
     fn validate(&self, params: &mut JsonObject) -> HandleResult<()> {

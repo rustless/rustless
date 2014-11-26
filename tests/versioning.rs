@@ -4,15 +4,14 @@ use rustless::server_backend::method::{Get};
 use rustless::server_backend::status;
 use rustless::server_backend::header::common::Accept;
 use rustless::{
-    Application, Api, Client, Nesting, HandleResult, AcceptHeaderVersioning, 
-    PathVersioning, ParamVersioning, SimpleRequest
+    Application, Api, Client, Nesting, HandleResult, Versioning, SimpleRequest
 };
 
 #[test]
 fn it_pass_accept_header_versioning() {
 
     let app = app!(|api| {
-        api.version("v1", AcceptHeaderVersioning("infoapi"));
+        api.version("v1", Versioning::AcceptHeaderVersioning("infoapi"));
         edp_stub!(api);
     });
 
@@ -32,7 +31,7 @@ fn it_pass_accept_header_versioning() {
 #[test]
 fn it_pass_path_versioning() {
     let app = app!(|api| {
-        api.version("v1", PathVersioning);
+        api.version("v1", Versioning::PathVersioning);
         edp_stub!(api);
     });
 
@@ -47,7 +46,7 @@ fn it_pass_path_versioning() {
 #[test]
 fn it_pass_param_versioning() {
     let app = app!(|api| {
-        api.version("v1", ParamVersioning("v"));
+        api.version("v1", Versioning::ParamVersioning("v"));
         edp_stub!(api);
     });
 
@@ -62,11 +61,11 @@ fn it_pass_param_versioning() {
 #[test]
 fn it_pass_nesting_param_versioning() {
     let app = app!(|api| {
-        api.version("v1", ParamVersioning("v"));
+        api.version("v1", Versioning::ParamVersioning("v"));
         edp_stub!(api);
 
         api.mount(box Api::build(|nested_api| {
-            nested_api.version("v2", ParamVersioning("nested_ver"));
+            nested_api.version("v2", Versioning::ParamVersioning("nested_ver"));
 
             nested_api.get("nested_info", |endpoint| {
                 edp_handler!(endpoint, |client, _params| {
@@ -90,11 +89,11 @@ fn it_pass_nesting_param_versioning() {
 #[test]
 fn it_pass_nesting_path_versioning() {
     let app = app!(|api| {
-        api.version("v1", PathVersioning);
+        api.version("v1", Versioning::PathVersioning);
         edp_stub!(api);
 
         api.mount(box Api::build(|nested_api| {
-            nested_api.version("v2", PathVersioning);
+            nested_api.version("v2", Versioning::PathVersioning);
 
             nested_api.get("nested_info", |endpoint| {
                 edp_handler!(endpoint, |client, _params| {
@@ -118,14 +117,14 @@ fn it_pass_nesting_path_versioning() {
 #[test]
 fn it_pass_nesting_crazy_mixed_versioning_never_do_this() {
     let app = app!(|api| {
-        api.version("v1", AcceptHeaderVersioning("infoapi"));
+        api.version("v1", Versioning::AcceptHeaderVersioning("infoapi"));
         edp_stub!(api);
 
         api.mount(box Api::build(|nested_api| {
-            nested_api.version("v2", PathVersioning);
+            nested_api.version("v2", Versioning::PathVersioning);
 
             nested_api.mount(box Api::build(|nested_nested_api| {
-                nested_nested_api.version("v3", ParamVersioning("ver"));
+                nested_nested_api.version("v3", Versioning::ParamVersioning("ver"));
                 edp_stub!(nested_nested_api);
             }))
         }))

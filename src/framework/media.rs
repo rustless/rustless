@@ -1,6 +1,6 @@
 
 use regex::Regex;
-use hyper::mime::{Mime, Application, Json, Text, Plain, SubExt};
+use hyper::mime::{Mime, Application, Json, Text, Plain, SubLevel};
 
 static MEDIA_REGEX: Regex = regex!(r"vnd\.(?P<vendor>[a-zA-Z_-]+)(?:\.(?P<version>[a-zA-Z0-9]+)(?:\.(?P<param>[a-zA-Z0-9]+))?)?(?:\+(?P<format>[a-zA-Z0-9]+))?");
 
@@ -22,9 +22,9 @@ pub enum Format {
 impl Format {
     pub fn from_mime(mime: &Mime) -> Format {
         match mime {
-            &Mime(Text, Plain, _) => PlainTextFormat,
-            &Mime(Application, Json, _) => JsonFormat,
-            _ => OtherFormat(mime.clone())
+            &Mime(Text, Plain, _) => Format::PlainTextFormat,
+            &Mime(Application, Json, _) => Format::JsonFormat,
+            _ => Format::OtherFormat(mime.clone())
         }
     }
 }
@@ -53,7 +53,7 @@ impl Media {
 
     pub fn from_vendor(mime: &Mime) -> Option<Media> {
         match mime {
-            &Mime(Application, SubExt(ref ext), _) => {
+            &Mime(Application, SubLevel::Ext(ref ext), _) => {
                 match MEDIA_REGEX.captures(ext.as_slice()) {
                     Some(captures) => {
                         let vendor = captures.name("vendor").to_string();
@@ -62,8 +62,8 @@ impl Media {
                         let format_str = present_or_none(captures.name("format").to_string());
 
                         let format = match format_str {
-                            Some(format) => if format.as_slice() == "json" { JsonFormat }
-                                            else if format.as_slice() == "txt" { PlainTextFormat }
+                            Some(format) => if format.as_slice() == "json" { Format::JsonFormat }
+                                            else if format.as_slice() == "txt" { Format::PlainTextFormat }
                                             else { Format::from_mime(mime) },
                             None => Format::from_mime(mime)
                         };
@@ -117,17 +117,17 @@ fn asset_regexp() {
 fn assert_media() {
 
     match Media::from_mime(&from_str("application/json").unwrap()).format {
-        JsonFormat => (),
+        Format::JsonFormat => (),
         _ => panic!("Wrong format")
     }
 
     match Media::from_mime(&from_str("text/plain").unwrap()).format {
-        PlainTextFormat => (),
+        Format::PlainTextFormat => (),
         _ => panic!("Wrong format")
     }
 
     match Media::from_mime(&from_str("application/octet-stream").unwrap()).format {
-        OtherFormat(_) => (),
+        Format::OtherFormat(_) => (),
         _ => panic!("Wrong format")
     }
 

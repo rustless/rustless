@@ -1,7 +1,8 @@
 use url::{Url};
 
 use std::io::{Reader, IoResult};
-use std::fmt::{Show, Formatter, FormatError};
+use std::fmt::{Show, Formatter};
+use std::io::{MemReader};
 use std::io::net::ip::SocketAddr;
 use anymap::AnyMap;
 use {Extensible};
@@ -34,9 +35,12 @@ pub trait Request: Reader + Show + Send + Extensible {
 
 #[deriving(Send)]
 pub struct ServerRequest {
-    pub url: Url,
-    pub ext: AnyMap,
-    raw: RawRequest
+    url: Url,
+    remote_addr: SocketAddr,
+    headers: Headers,
+    method: Method,
+    body: Vec<u8>,
+    pub ext: AnyMap
 }
 
 impl Request for ServerRequest {
@@ -46,30 +50,33 @@ impl Request for ServerRequest {
     }
 
     fn remote_addr(&self) -> &SocketAddr {
-        return &self.raw.remote_addr;
+        return &self.remote_addr;
     }
 
     fn headers(&self) -> &Headers {
-        return &self.raw.headers;
+        return &self.headers;
     }
 
     fn method(&self) -> &Method {
-        return &self.raw.method;
+        return &self.method;
     }
 }
 
 impl_extensible!(ServerRequest)
 
 impl ServerRequest {
-    pub fn new(url: Url, req: RawRequest) -> ServerRequest {
+    pub fn new(url: Url, remote_addr: SocketAddr, headers: Headers, method: Method, body: Vec<u8>) -> ServerRequest {
         ServerRequest {
             url: url,
-            raw: req,
+            remote_addr: remote_addr,
+            headers: headers,
+            method: method,
+            body: body,
             ext: AnyMap::new(),
         }
     }
 
-    pub fn wrap(req: RawRequest) -> Result<ServerRequest, String> {
+    pub fn wrap(mut req: RawRequest) -> Result<ServerRequest, String> {
         
         let url = match req.uri {
             uri::AbsolutePath(ref path) => {
@@ -87,19 +94,24 @@ impl ServerRequest {
             Err(parse_error) => return Err(format!("{}", parse_error))
         };
 
-        Ok(ServerRequest::new(parsed_url, req))
+        let body = match req.read_to_end() {
+            Ok(body) => body,
+            Err(e) => return Err(format!("Couldn't read request body: {}", e))
+        };
+
+        Ok(ServerRequest::new(parsed_url, req.remote_addr.clone(), req.headers.clone(), req.method.clone(), body))
 
     }
 }
 
 impl Reader for ServerRequest {
     fn read(&mut self, buf: &mut [u8]) -> IoResult<uint> {
-        self.raw.read(buf)
+        MemReader::new(self.body.clone()).read(buf)
     }
 }
 
 impl Show for ServerRequest {
-    fn fmt(&self, f: &mut Formatter) -> Result<(), FormatError> {
+    fn fmt(&self, f: &mut Formatter) -> Result<(), ::std::fmt::Error> {
         try!(writeln!(f, "ServerRequest ->"));
         try!(writeln!(f, "  url: {}", self.url));
         try!(writeln!(f, "  method: {}", self.method()));

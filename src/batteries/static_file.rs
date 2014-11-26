@@ -13,8 +13,13 @@ pub struct Static {
 
 impl Static {
     pub fn new(root_path: Path) -> Static {
+        let absolute_path = match make_absolute(&root_path) {
+            Ok(path) => path,
+            Err(err) => panic!("{}", err)
+        };
+
         Static {
-            root_path: make_absolute(&root_path)
+            root_path: absolute_path
         }
     }
 }
