@@ -50,7 +50,7 @@ fn main() {
             // Using after_validation callback to check token
             admin_ns.after_validation(callback!(|_client, params| {
 
-                match params.get(&"token".to_string()) {
+                match params.get("token") {
                     // We can unwrap() safely because token in validated already
                     Some(token) => if token.as_string().unwrap().as_slice() == "password1" { return Ok(()) },
                     None => ()
