@@ -1,5 +1,5 @@
 use url::Url;
-use serialize::json::{JsonObject, Json, ToJson};
+use serialize::json::{Json, ToJson};
 use serialize::json::from_str;
 use std::str::from_utf8;
 
@@ -10,7 +10,7 @@ use rustless::server::method::{Get};
 use rustless::server::status;
 use rustless::server::mime;
 use rustless::{
-    Application, Api, Client, Nesting, HandleResult, SimpleRequest
+    Application, Api, Client, Nesting, SimpleRequest
 };
 
 #[test]

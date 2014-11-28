@@ -13,14 +13,13 @@ extern crate cookie;
 use iron::{Iron, Chain, ChainBuilder};
 use cookie::Cookie;
 
-use serialize::json::{JsonObject};
 use valico::Builder as Valico;
 use rustless::server::status;
 use rustless::errors::{Error, ErrorRefExt};
 use rustless::batteries::cookie::CookieExt;
 use rustless::{
-    Application, Api, Client, Nesting, HandleResult, Versioning,
-    Media, Response, HandleSuccessResult
+    Application, Api, Client, Nesting, Versioning,
+    Response
 };
 
 #[deriving(Show)]

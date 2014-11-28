@@ -35,7 +35,8 @@ macro_rules! edp_handler {
     ($edp:ident, |$client:ident, $params:ident| $blk:block) => ({
         #[allow(dead_code)]
         #[allow(unused_mut)]
-        fn endpoint_handler<'a>(mut $client: Client<'a>, $params: &JsonObject) -> HandleResult<Client<'a>> {
+        fn endpoint_handler<'a>(mut $client: ::rustless::Client<'a>, 
+                                $params: &::serialize::json::JsonObject) -> ::rustless::HandleResult<Client<'a>> {
             $blk
         }
 
@@ -46,7 +47,7 @@ macro_rules! edp_handler {
 #[macro_export]
 macro_rules! callback {
     (|$client:ident, $params:ident| $blk:block) => ({
-        fn callback<'a>($client: &mut Client<'a>, $params: &JsonObject) -> HandleSuccessResult {
+        fn callback<'a>($client: &mut ::rustless::Client<'a>, $params: &::serialize::json::JsonObject) -> ::rustless::HandleSuccessResult {
             $blk
         }
 
@@ -58,7 +59,7 @@ macro_rules! callback {
 macro_rules! format_error (
     ($api:ident, $t:ty, |$err:ident, $media:ident| $blk:block) => ({
         #[allow(dead_code)]
-        fn error_formatter(err: &Box<Error>, $media: &Media) -> Option<Response> { 
+        fn error_formatter(err: &Box<::rustless::errors::Error>, $media: &::rustless::Media) -> Option<::rustless::Response> { 
             match err.downcast::<$t>() {
                 Some($err) => {
                     $blk
@@ -71,7 +72,7 @@ macro_rules! format_error (
     });
     ($api:ident, all, |$err:ident, $media:ident| $blk:block) => ({
         #[allow(dead_code)]
-        fn error_formatter($err: &Box<Error>, $media: &Media) -> Option<Response> { 
+        fn error_formatter($err: &Box<::rustless::errors::Error>, $media: &::rustless::Media) -> Option<::rustless::Response> { 
             $blk
         }
 

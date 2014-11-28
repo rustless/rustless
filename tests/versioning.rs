@@ -1,10 +1,9 @@
 use url::Url;
-use serialize::json::{JsonObject};
 use rustless::server::method::{Get};
 use rustless::server::status;
 use rustless::server::header::common::Accept;
 use rustless::{
-    Application, Api, Client, Nesting, HandleResult, Versioning, SimpleRequest
+    Application, Api, Client, Nesting, Versioning, SimpleRequest
 };
 
 #[test]

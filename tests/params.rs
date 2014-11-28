@@ -1,10 +1,9 @@
 use url::Url;
 use std::str;
-use serialize::json::{JsonObject};
 use rustless::server::method::{Get};
 use rustless::server::status;
 use rustless::{
-    Application, Api, Client, Valico, Nesting, HandleResult, SimpleRequest
+    Application, Api, Client, Valico, Nesting, SimpleRequest
 };
 
 #[test]
