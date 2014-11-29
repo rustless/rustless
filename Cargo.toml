@@ -3,6 +3,10 @@
 name = "rustless"
 version = "0.1.0"
 authors = ["Stanislav Panferov <fnight.m@gmail.com>"]
+description = "Rustless is a REST-like API micro-framework for Rust."
+keywords = ["api", "web", "hyper", "iron", "rest"]
+readme = "README.md"
+license = "MIT"
 
 [lib]
 name = "rustless"
