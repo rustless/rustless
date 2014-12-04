@@ -5,7 +5,7 @@ use errors::{Error, ErrorRefExt, ValidationError};
 use framework::media;
 use framework::media::Media;
 use backend::{Response};
-use server::status::BadRequest;
+use server::status::StatusCode::BadRequest;
 
 pub fn validation_error_formatter(err: &Box<Error>, media: &Media) -> Option<Response> {
     match err.downcast::<ValidationError>() {

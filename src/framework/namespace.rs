@@ -1,4 +1,4 @@
-use serialize::json::{JsonObject};
+use serialize::json::{Object};
 
 use valico::Builder as ValicoBuilder;
 
@@ -65,7 +65,7 @@ impl Namespace {
         return namespace;
     }
 
-    fn validate(&self, params: &mut JsonObject) -> HandleResult<()> {
+    fn validate(&self, params: &mut Object) -> HandleResult<()> {
         // Validate namespace params with valico
         if self.coercer.is_some() {
             // validate and coerce params
@@ -81,7 +81,7 @@ impl Namespace {
 }
 
 impl ApiHandler for Namespace {
-    fn api_call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
+    fn api_call(&self, rest_path: &str, params: &mut Object, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
 
         let rest_path: &str = match self.path.is_match(rest_path) {
             Some(captures) =>  {

@@ -1,7 +1,7 @@
-use serialize::json::JsonObject;
+use serialize::json::Object;
 
 use backend::{Request, Response};
-use server::method::{Get, Post, Put, Delete};
+use server::method::Method::{Get, Post, Put, Delete};
 use backend::{HandleResult};
 use errors::{NotMatchError, Error, ErrorRefExt};
 
@@ -79,7 +79,7 @@ pub trait Nesting {
     fn after(&mut self, callback: Callback) { self.get_after_mut().push(callback); }
     fn after_validation(&mut self, callback: Callback) { self.get_after_validation_mut().push(callback); }
 
-    fn call_handlers(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
+    fn call_handlers(&self, rest_path: &str, params: &mut Object, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
         for handler in self.get_handlers().iter() {
             match handler.api_call(rest_path, params, req, info) {
                 Ok(response) => return Ok(response),

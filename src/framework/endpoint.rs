@@ -1,4 +1,4 @@
-use serialize::json::{JsonObject};
+use serialize::json::{Object};
 
 use valico::Builder as ValicoBuilder;
 
@@ -11,7 +11,7 @@ use framework::{
     ApiHandler, ValicoBuildHandler, Client, CallInfo, Callback
 };
 
-pub type EndpointHandler = for<'a> fn(Client<'a>, &JsonObject) -> HandleResult<Client<'a>>;
+pub type EndpointHandler = for<'a> fn(Client<'a>, &Object) -> HandleResult<Client<'a>>;
 
 pub enum EndpointHandlerPresent {
     HandlerPresent
@@ -60,7 +60,7 @@ impl Endpoint {
         EndpointHandlerPresent::HandlerPresent
     }
 
-    fn validate(&self, params: &mut JsonObject) -> HandleResult<()> {
+    fn validate(&self, params: &mut Object) -> HandleResult<()> {
         // Validate namespace params with valico
         if self.coercer.is_some() {
             // validate and coerce params
@@ -74,7 +74,7 @@ impl Endpoint {
         }
     }
 
-    pub fn call_decode(&self, params: &mut JsonObject, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
+    pub fn call_decode(&self, params: &mut Object, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
         
         let mut client = Client::new(info.app, self, req, &info.media);
 
@@ -91,7 +91,7 @@ impl Endpoint {
         Ok(client.move_response())
     }
 
-    fn call_callbacks(cbs: &Vec<Callback>, client: &mut Client, params: &mut JsonObject) -> HandleSuccessResult {
+    fn call_callbacks(cbs: &Vec<Callback>, client: &mut Client, params: &mut Object) -> HandleSuccessResult {
         for cb in cbs.iter() {
             try!((*cb)(client, params));
         }
@@ -102,7 +102,7 @@ impl Endpoint {
 }
 
 impl ApiHandler for Endpoint {
-    fn api_call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
+    fn api_call(&self, rest_path: &str, params: &mut Object, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
 
         // Method guard
         if req.method() != &self.method {

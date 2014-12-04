@@ -14,7 +14,7 @@ use iron::{Iron, Chain, ChainBuilder};
 use cookie::Cookie;
 
 use valico::Builder as Valico;
-use rustless::server::status;
+use rustless::server::status::{StatusCode};
 use rustless::errors::{Error, ErrorRefExt};
 use rustless::batteries::cookie::CookieExt;
 use rustless::{
@@ -38,7 +38,7 @@ fn main() {
         api.version("v1", Versioning::Path);
 
         format_error!(api, UnauthorizedError, |_err, _media| {
-            Some(Response::from_string(status::Unauthorized, "Please provide correct `token` parameter".to_string()))
+            Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
         });
 
         api.namespace("admin", |admin_ns| {

@@ -1,6 +1,4 @@
 #![crate_name = "rustless"]
-#![comment = "REST-like API micro-framework for Rust"]
-#![license = "MIT"]
 #![crate_type = "rlib"]
 #![deny(warnings)]
 #![deny(bad_style)]
@@ -36,7 +34,7 @@ macro_rules! edp_handler {
         #[allow(dead_code)]
         #[allow(unused_mut)]
         fn endpoint_handler<'a>(mut $client: ::rustless::Client<'a>, 
-                                $params: &::serialize::json::JsonObject) -> ::rustless::HandleResult<Client<'a>> {
+                                $params: &::serialize::json::Object) -> ::rustless::HandleResult<Client<'a>> {
             $blk
         }
 
@@ -47,7 +45,7 @@ macro_rules! edp_handler {
 #[macro_export]
 macro_rules! callback {
     (|$client:ident, $params:ident| $blk:block) => ({
-        fn callback<'a>($client: &mut ::rustless::Client<'a>, $params: &::serialize::json::JsonObject) -> ::rustless::HandleSuccessResult {
+        fn callback<'a>($client: &mut ::rustless::Client<'a>, $params: &::serialize::json::Object) -> ::rustless::HandleSuccessResult {
             $blk
         }
 

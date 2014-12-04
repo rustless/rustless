@@ -1,12 +1,12 @@
 use collections::tree_map::TreeMap;
 use serialize::json;
-use serialize::json::{JsonObject};
+use serialize::json::{Object};
 use typemap::TypeMap;
 
 use queryst;
 
 use backend::{Request, Response};
-use server::status;
+use server::status::StatusCode;
 use server::header::common::Accept;
 use errors::{Error, ErrorRefExt, NotMatchError, NotAcceptableError, QueryStringDecodeError, BodyDecodeError};
 use backend::{Handler, HandleResult, HandleSuccessResult};
@@ -103,7 +103,7 @@ impl Api {
         }
     }
 
-    fn parse_query(query_str: &str, params: &mut JsonObject) -> HandleSuccessResult {
+    fn parse_query(query_str: &str, params: &mut Object) -> HandleSuccessResult {
         let maybe_query_params = queryst::parse(query_str);
         match maybe_query_params {
             Ok(query_params) => {
@@ -121,7 +121,7 @@ impl Api {
         Ok(())
     }
 
-    fn parse_json_body(req: &mut Request, params: &mut JsonObject) -> HandleSuccessResult {
+    fn parse_json_body(req: &mut Request, params: &mut Object) -> HandleSuccessResult {
 
         let utf8_string_body = match String::from_utf8(req.body().clone()) {
             Ok(e) => e,
@@ -145,7 +145,7 @@ impl Api {
         Ok(())
     }
 
-    fn parse_request(req: &mut Request, params: &mut JsonObject) -> HandleSuccessResult {
+    fn parse_request(req: &mut Request, params: &mut Object) -> HandleSuccessResult {
         // extend params with query-string params if any
         if req.url().query().is_some() {
             try!(Api::parse_query(req.url().query().as_ref().unwrap().as_slice(), params));   
@@ -201,7 +201,7 @@ impl Nesting for Api {
 }
 
 impl ApiHandler for Api {
-    fn api_call(&self, rest_path: &str, params: &mut JsonObject, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
+    fn api_call(&self, rest_path: &str, params: &mut Object, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
         
         // Check prefix
         let mut rest_path = if self.prefix.len() > 0 {
@@ -305,7 +305,7 @@ impl Application {
             Ok(res) => Ok(res),
             Err(err) => {
                 if err.downcast::<NotMatchError>().is_some() {
-                    return Ok(Response::from_string(status::NotFound, "".to_string()));
+                    return Ok(Response::from_string(StatusCode::NotFound, "".to_string()));
                 }
                 return Err(err);
             }

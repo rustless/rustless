@@ -1,5 +1,5 @@
 
-use serialize::json::{JsonObject, ToJson};
+use serialize::json::{Object, ToJson};
 use regex::{Regex, Captures};
 
 static MATCHER: Regex = regex!(r":([a-z][a-z_]*)");
@@ -12,7 +12,7 @@ pub struct Path {
 
 impl Path {
 
-    pub fn apply_captures(&self, jobj: &mut JsonObject, captures: Captures) {
+    pub fn apply_captures(&self, jobj: &mut Object, captures: Captures) {
         for param in self.params.iter() {
             jobj.insert(param.clone(), captures.name(param.as_slice()).to_string().to_json());
         }

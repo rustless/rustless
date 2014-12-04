@@ -1,6 +1,6 @@
 use url::Url;
-use rustless::server::method::{Get};
-use rustless::server::status;
+use rustless::server::method::Method::{Get};
+use rustless::server::status::StatusCode;
 use rustless::server::header::common::Accept;
 use rustless::{
     Application, Api, Client, Nesting, Versioning, SimpleRequest
@@ -16,7 +16,7 @@ fn it_pass_accept_header_versioning() {
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info").unwrap();
     // not found because accept-header is not present
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info", |rq| {
         rq.headers_mut().set(
@@ -24,7 +24,7 @@ fn it_pass_accept_header_versioning() {
         );
     }).unwrap();
 
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 }
 
 #[test]
@@ -36,10 +36,10 @@ fn it_pass_path_versioning() {
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info").unwrap();
     // not found because version is not present in path
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/v1/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 }
 
 #[test]
@@ -51,10 +51,10 @@ fn it_pass_param_versioning() {
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info").unwrap();
     // not found because version is not present in param
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info?v=v1").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 }
 
 #[test]
@@ -75,14 +75,14 @@ fn it_pass_nesting_param_versioning() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info?v=v1").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info/nested_info?v=v1").unwrap();
     // not found because nested_info param in not present
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/nested_info?v=v1&nested_ver=v2").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 }
 
 #[test]
@@ -103,14 +103,14 @@ fn it_pass_nesting_path_versioning() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/v1/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/v1/nested_info").unwrap();
     // not found because v2 in not present in path
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/v1/v2/nested_info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 }
 
 #[test]
@@ -135,7 +135,7 @@ fn it_pass_nesting_crazy_mixed_versioning_never_do_this() {
         );
     }).unwrap();
 
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/v2/nested_nested_info", |rq| {
         rq.headers_mut().set(
@@ -143,7 +143,7 @@ fn it_pass_nesting_crazy_mixed_versioning_never_do_this() {
         );
     }).unwrap();
 
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 }
 
 #[test]
@@ -153,5 +153,5 @@ fn it_pass_without_versioning() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 }

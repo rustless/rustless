@@ -1,6 +1,6 @@
 use url::Url;
-use rustless::server::method::{Get};
-use rustless::server::status;
+use rustless::server::method::Method::{Get};
+use rustless::server::status::StatusCode;
 use rustless::{
     Application, Api, Client, Nesting, SimpleRequest, Versioning
 };
@@ -15,10 +15,10 @@ fn it_allows_prefix() {
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info").unwrap();
     // not found because prefix is not present
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 }
 
 #[test]
@@ -33,13 +33,13 @@ fn it_allows_nested_prefix() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info").unwrap();
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/info").unwrap();
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/nested_api/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 }
 
 #[test]
@@ -55,11 +55,11 @@ fn it_allows_prefix_with_path_versioning() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info").unwrap();
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/info").unwrap();
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/v1/info").unwrap();
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 }

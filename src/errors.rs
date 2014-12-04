@@ -1,4 +1,4 @@
-use serialize::json::JsonObject;
+use serialize::json::Object;
 use std::io::IoError;
 pub use error::{Error, ErrorRefExt};
 
@@ -31,7 +31,7 @@ impl Error for QueryStringDecodeError {
 
 #[deriving(Show)]
 pub struct ValidationError {
-    pub reason: JsonObject
+    pub reason: Object
 }
 
 impl Error for ValidationError {

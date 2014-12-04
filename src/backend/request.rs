@@ -6,7 +6,7 @@ use url::Host;
 use server::method::Method;
 use server::header;
 use server::header::Headers;
-use server::mime::{Mime, Application, Json};
+use server::mime::{Mime, TopLevel, SubLevel};
 
 pub trait AsUrl {
     fn scheme(&self) -> &str;
@@ -30,7 +30,7 @@ pub trait Request: Show + Send + Extensible {
         let content_type = self.headers().get::<header::common::ContentType>(); 
         if content_type.is_some() {
             match content_type.unwrap().0 {
-                Mime(Application, Json, _) => true,
+                Mime(TopLevel::Application, SubLevel::Json, _) => true,
                 _ => false
             }
         } else {

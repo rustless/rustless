@@ -1,7 +1,7 @@
 use url::Url;
-use rustless::server::method::{Post};
+use rustless::server::method::Method::{Post};
 use rustless::server::header::common::{Location};
-use rustless::server::status;
+use rustless::server::status::StatusCode;
 use rustless::{
     Application, Api, Client, Nesting, SimpleRequest
 };
@@ -19,7 +19,7 @@ fn it_allows_redirect() {
     });
 
     let response = call_app!(app, Post, "http://127.0.0.1:3000/api/redirect_me/google.com").unwrap();
-    assert_eq!(response.status, status::Found);
+    assert_eq!(response.status, StatusCode::Found);
     let &Location(ref location) = response.headers.get::<Location>().unwrap();
     assert_eq!(location.as_slice(), "google.com")
 
@@ -38,7 +38,7 @@ fn it_allows_permanent_redirect() {
     });
 
     let response = call_app!(app, Post, "http://127.0.0.1:3000/api/redirect_me/google.com").unwrap();
-    assert_eq!(response.status, status::MovedPermanently);
+    assert_eq!(response.status, StatusCode::MovedPermanently);
     let &Location(ref location) = response.headers.get::<Location>().unwrap();
     assert_eq!(location.as_slice(), "google.com")
 

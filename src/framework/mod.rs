@@ -1,4 +1,4 @@
-use serialize::json::{JsonObject};
+use serialize::json::{Object};
 
 use valico::Builder as ValicoBuilder;
 
@@ -25,12 +25,12 @@ mod formatters;
 pub type ValicoBuildHandler<'a> = |&mut ValicoBuilder|:'a;
 
 pub trait ApiHandler {
-    fn api_call(&self, &str, &mut JsonObject, &mut Request, &mut CallInfo) -> HandleResult<Response>;
+    fn api_call(&self, &str, &mut Object, &mut Request, &mut CallInfo) -> HandleResult<Response>;
 }
 
 pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 
-pub type Callback = for<'a> fn(&'a mut Client, &JsonObject) -> HandleSuccessResult;
+pub type Callback = for<'a> fn(&'a mut Client, &Object) -> HandleSuccessResult;
 pub type ErrorFormatter = fn(&Box<Error>, &Media) -> Option<Response>;
 
 pub type Callbacks = Vec<Callback>;

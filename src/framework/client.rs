@@ -8,8 +8,8 @@ use backend::{HandleResult};
 use framework::api::{Application};
 use framework::endpoint::Endpoint;
 use framework::media::Media;
-use server::status;
-use server::mime;
+use server::status::StatusCode;
+use server::mime::{Mime, TopLevel, SubLevel};
 use server::header::{Header, HeaderFormat};
 use server::header::common::{ContentType, Location};
 use {Extensible};
@@ -34,7 +34,7 @@ impl<'a> Client<'a> {
             request: request,
             media: media,
             ext: TypeMap::new(),
-            response: Response::new(status::Ok)
+            response: Response::new(StatusCode::Ok)
         }
     }
 
@@ -42,32 +42,32 @@ impl<'a> Client<'a> {
     // Work with status
     //
 
-    pub fn status(&mut self) -> status::StatusCode {
+    pub fn status(&mut self) -> StatusCode {
         self.response.status
     }
 
-    pub fn set_status(&mut self, status: status::StatusCode) {
+    pub fn set_status(&mut self, status: StatusCode) {
         self.response.status = status;
     }
 
     pub fn unauthorized(&mut self) {
-        self.response.status = status::Unauthorized;
+        self.response.status = StatusCode::Unauthorized;
     }
 
     pub fn forbidden(&mut self) {
-        self.response.status = status::Forbidden;
+        self.response.status = StatusCode::Forbidden;
     }
 
     pub fn not_found(&mut self) {
-        self.response.status = status::NotFound;
+        self.response.status = StatusCode::NotFound;
     }
 
     pub fn internal_server_error(&mut self) {
-        self.response.status = status::InternalServerError;
+        self.response.status = StatusCode::InternalServerError;
     }
 
     pub fn not_implemented(&mut self) {
-        self.response.status = status::NotImplemented;
+        self.response.status = StatusCode::NotImplemented;
     }
 
     //
@@ -77,10 +77,10 @@ impl<'a> Client<'a> {
     }
 
     pub fn set_json_content_type(&mut self) {
-        self.set_header(ContentType(mime::Mime(mime::Application, mime::Json, vec![])));
+        self.set_header(ContentType(Mime(TopLevel::Application, SubLevel::Json, vec![])));
     }
 
-    pub fn set_content_type(&mut self, mime: mime::Mime) {
+    pub fn set_content_type(&mut self, mime: Mime) {
         self.set_header(ContentType(mime));
     }
 
@@ -122,14 +122,14 @@ impl<'a> Client<'a> {
     }
 
     pub fn redirect(mut self, to: &str) -> ClientResult<'a> {
-        self.set_status(status::Found);
+        self.set_status(StatusCode::Found);
         self.set_header(Location(to.to_string()));
 
         Ok(self)
     }
 
     pub fn permanent_redirect(mut self, to: &str) -> ClientResult<'a> {
-        self.set_status(status::MovedPermanently);
+        self.set_status(StatusCode::MovedPermanently);
         self.set_header(Location(to.to_string()));
 
         Ok(self)

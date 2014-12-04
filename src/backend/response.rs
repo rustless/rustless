@@ -3,8 +3,7 @@ use serialize::json::Json;
 
 use server::header::{Headers, Header, HeaderFormat};
 use server::header::common::{ContentType};
-use server::status;
-use server::mime;
+use server::mime::{Mime, TopLevel, SubLevel};
 use server::status::StatusCode;
 use typemap::TypeMap;
 use {Extensible};
@@ -48,7 +47,7 @@ impl Response {
     }
 
     pub fn set_json_content_type(&mut self) {
-        self.set_header(ContentType(mime::Mime(mime::Application, mime::Json, vec![])));
+        self.set_header(ContentType(Mime(TopLevel::Application, SubLevel::Json, vec![])));
     }
 
     pub fn from_json(status: StatusCode, body: &Json) -> Response {
@@ -71,7 +70,7 @@ impl Response {
 
     #[allow(dead_code)]
     pub fn from_file(path: &Path) -> IoResult<Response> {
-        let mut response = Response::new(status::Ok);
+        let mut response = Response::new(StatusCode::Ok);
         try!(response.push_file(path));
         Ok(response)
     }

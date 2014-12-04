@@ -1,7 +1,7 @@
 use url::Url;
 use std::str;
-use rustless::server::method::{Get};
-use rustless::server::status;
+use rustless::server::method::Method::{Get};
+use rustless::server::status::StatusCode;
 use rustless::{
     Application, Api, Client, Valico, Nesting, SimpleRequest
 };
@@ -18,16 +18,16 @@ fn it_validates_endpoint_simple_path_params() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users").unwrap();
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/").unwrap();
-    assert_eq!(response.status, status::NotFound);
+    assert_eq!(response.status, StatusCode::NotFound);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/Skywalker/messages/100").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100/messages/12").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
 }
 
@@ -48,13 +48,13 @@ fn it_validates_typed_endpoint_path_params() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/Skywalker/messages/100").unwrap();
-    assert_eq!(response.status, status::BadRequest);    
+    assert_eq!(response.status, StatusCode::BadRequest);    
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100/messages/Skywalker").unwrap();
-    assert_eq!(response.status, status::BadRequest);
+    assert_eq!(response.status, StatusCode::BadRequest);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100/messages/12").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
 }
 
@@ -77,19 +77,19 @@ fn it_validates_query_params() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100").unwrap();
-    assert_eq!(response.status, status::BadRequest);    
+    assert_eq!(response.status, StatusCode::BadRequest);    
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100?profile=1").unwrap();
-    assert_eq!(response.status, status::BadRequest);    
+    assert_eq!(response.status, StatusCode::BadRequest);    
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100?profile=fulll").unwrap();
-    assert_eq!(response.status, status::BadRequest);        
+    assert_eq!(response.status, StatusCode::BadRequest);        
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100?profile=full").unwrap();
-    assert_eq!(response.status, status::Ok);    
+    assert_eq!(response.status, StatusCode::Ok);    
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100?profile=simple").unwrap();
-    assert_eq!(response.status, status::Ok);   
+    assert_eq!(response.status, StatusCode::Ok);   
      
 }
 
@@ -119,13 +119,13 @@ fn it_validates_common_namespace_params() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100").unwrap();
-    assert_eq!(response.status, status::BadRequest);    
+    assert_eq!(response.status, StatusCode::BadRequest);    
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100/profile/full").unwrap();
     // missed `ext` param
-    assert_eq!(response.status, status::BadRequest);  
+    assert_eq!(response.status, StatusCode::BadRequest);  
 
     let mut response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100/profile/full?ext=some").unwrap();
         println!("{}", resp_body!(response));
-    assert_eq!(response.status, status::Ok);   
+    assert_eq!(response.status, StatusCode::Ok);   
 }

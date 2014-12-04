@@ -1,6 +1,6 @@
 use url::Url;
-use rustless::server::method::{Get};
-use rustless::server::status;
+use rustless::server::method::Method::{Get};
+use rustless::server::status::StatusCode;
 use rustless::{
     Application, Api, Client, Nesting, SimpleRequest
 };
@@ -20,19 +20,19 @@ fn it_allows_to_create_namespace() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns1/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns2/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns3/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns4/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns5/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
 }
 
@@ -55,6 +55,6 @@ fn it_allows_nested_namespaces() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns1/ns2/ns3/ns4/ns5/info").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
 }

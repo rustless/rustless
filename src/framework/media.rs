@@ -1,6 +1,6 @@
 
 use regex::Regex;
-use hyper::mime::{Mime, Application, Json, Text, Plain, SubLevel};
+use hyper::mime::{Mime, TopLevel, SubLevel};
 
 static MEDIA_REGEX: Regex = regex!(r"vnd\.(?P<vendor>[a-zA-Z_-]+)(?:\.(?P<version>[a-zA-Z0-9]+)(?:\.(?P<param>[a-zA-Z0-9]+))?)?(?:\+(?P<format>[a-zA-Z0-9]+))?");
 
@@ -22,8 +22,8 @@ pub enum Format {
 impl Format {
     pub fn from_mime(mime: &Mime) -> Format {
         match mime {
-            &Mime(Text, Plain, _) => Format::PlainTextFormat,
-            &Mime(Application, Json, _) => Format::JsonFormat,
+            &Mime(TopLevel::Text, SubLevel::Plain, _) => Format::PlainTextFormat,
+            &Mime(TopLevel::Application, SubLevel::Json, _) => Format::JsonFormat,
             _ => Format::OtherFormat(mime.clone())
         }
     }
@@ -39,7 +39,7 @@ pub struct Media {
 impl Media {
 
     pub fn default() -> Media {
-        Media::from_mime(&Mime(Text, Plain, vec![]))
+        Media::from_mime(&Mime(TopLevel::Text, SubLevel::Plain, vec![]))
     }
 
     pub fn from_mime(mime: &Mime) -> Media {
@@ -53,7 +53,7 @@ impl Media {
 
     pub fn from_vendor(mime: &Mime) -> Option<Media> {
         match mime {
-            &Mime(Application, SubLevel::Ext(ref ext), _) => {
+            &Mime(TopLevel::Application, SubLevel::Ext(ref ext), _) => {
                 match MEDIA_REGEX.captures(ext.as_slice()) {
                     Some(captures) => {
                         let vendor = captures.name("vendor").to_string();

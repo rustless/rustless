@@ -1,6 +1,6 @@
 use url::Url;
-use rustless::server::method::{Get};
-use rustless::server::status;
+use rustless::server::method::Method::{Get};
+use rustless::server::status::StatusCode;
 use rustless::errors::{Error, ErrorRefExt};
 use rustless::{
     Application, Api, Client, Valico, Nesting, SimpleRequest, Response
@@ -22,7 +22,7 @@ fn it_allows_to_create_namespace() {
         api.prefix("api");
 
         format_error!(api, UnauthorizedError, |_err, _media| {
-            Some(Response::from_string(status::Unauthorized, "Please provide correct `token` parameter".to_string()))
+            Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
         });
 
         api.namespace("admin", |admin_ns| {
@@ -54,12 +54,12 @@ fn it_allows_to_create_namespace() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/admin/server_status").unwrap();
-    assert_eq!(response.status, status::BadRequest);
+    assert_eq!(response.status, StatusCode::BadRequest);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/admin/server_status?token=wrong%20token").unwrap();
-    assert_eq!(response.status, status::Unauthorized);
+    assert_eq!(response.status, StatusCode::Unauthorized);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/admin/server_status?token=password1").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
 }

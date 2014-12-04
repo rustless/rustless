@@ -6,8 +6,8 @@ use std::str::from_utf8;
 use jsonway::JsonWay;
 
 use rustless::server::header::common::ContentType;
-use rustless::server::method::{Get};
-use rustless::server::status;
+use rustless::server::method::Method::{Get};
+use rustless::server::status::StatusCode;
 use rustless::server::mime;
 use rustless::{
     Application, Api, Client, Nesting, SimpleRequest
@@ -30,11 +30,11 @@ fn it_serializes_json_properly() {
     });
 
     let mut response = call_app!(app, Get, "http://127.0.0.1:3000/api/status").unwrap();
-    assert_eq!(response.status, status::Ok);
+    assert_eq!(response.status, StatusCode::Ok);
 
     {
         let &ContentType(ref mime_type): &ContentType = response.headers.get().unwrap();
-        assert_eq!(*mime_type, mime::Mime(mime::Application, mime::Json, vec![]));    
+        assert_eq!(*mime_type, mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, vec![]));    
     }
 
     let body: Json = from_str(from_utf8(response.read_to_end().unwrap().as_slice()).unwrap()).unwrap();
