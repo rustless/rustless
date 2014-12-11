@@ -2,7 +2,7 @@
 #![crate_type = "rlib"]
 #![deny(warnings)]
 #![deny(bad_style)]
-#![feature(macro_rules, phase, tuple_indexing)]
+#![feature(macro_rules, phase)]
 #[phase(plugin)]
 
 extern crate regex_macros;
