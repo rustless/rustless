@@ -22,7 +22,7 @@ use rustless::{
     Response
 };
 
-#[deriving(Show)]
+#[deriving(Show, Copy)]
 pub struct UnauthorizedError;
 
 impl Error for UnauthorizedError {

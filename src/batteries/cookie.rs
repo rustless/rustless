@@ -47,6 +47,7 @@ impl BeforeMiddleware for CookieDecodeMiddleware {
     }
 }
 
+#[allow(missing_copy_implementations)]
 pub struct CookieEncodeMiddleware;
 
 impl AfterMiddleware for CookieEncodeMiddleware {

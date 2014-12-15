@@ -2,7 +2,7 @@ use serialize::json::Object;
 use std::io::IoError;
 pub use error::{Error, ErrorRefExt};
 
-#[deriving(Show)]
+#[deriving(Show, Copy)]
 pub struct NotMatchError;
 
 impl Error for NotMatchError {
@@ -11,7 +11,7 @@ impl Error for NotMatchError {
     }
 }
 
-#[deriving(Show)]
+#[deriving(Show, Copy)]
 pub struct NotFoundError;
 
 impl Error for NotFoundError {
@@ -20,7 +20,7 @@ impl Error for NotFoundError {
     }
 }
 
-#[deriving(Show)]
+#[deriving(Show, Copy)]
 pub struct QueryStringDecodeError;
 
 impl Error for QueryStringDecodeError {
@@ -73,7 +73,7 @@ impl Error for FileError {
     }
 }
 
-#[deriving(Show)]
+#[deriving(Show, Copy)]
 pub struct NotAcceptableError;
 impl Error for NotAcceptableError {
     fn name(&self) -> &'static str {

@@ -17,6 +17,7 @@ use framework::{ApiHandler, ApiHandlers, Callbacks, CallInfo, ErrorFormatters, E
 use framework::formatters;
 
 #[allow(dead_code)]
+#[allow(missing_copy_implementations)]
 pub enum Versioning {
     Path,
     AcceptHeader(&'static str),
