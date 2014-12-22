@@ -26,7 +26,7 @@ impl Path {
     }
 
     pub fn parse(path: &str, endpoint: bool) -> Result<Path,String> {
-        let mut regex_body = "^/".to_string() + Path::sub_regex(path);
+        let mut regex_body = "^/".to_string() + Path::sub_regex(path).as_slice();
         
         if endpoint {
             regex_body = regex_body + "$";
@@ -66,8 +66,8 @@ fn parse_and_match() {
     let path = Path::parse(":user_id/messages/:message_id", true).unwrap();
     assert!(match path.is_match("/1920/messages/100500") {
         Some(captures) => {
-            captures.name("user_id") == "1920" && 
-            captures.name("message_id") == "100500"
+            captures.name("user_id").unwrap() == "1920" && 
+            captures.name("message_id").unwrap() == "100500"
         }
         None => false   
     });
@@ -81,7 +81,7 @@ fn parse_and_match() {
 fn parse_and_match_root() {
     let path = Path::parse("", true).unwrap();
     assert!(match path.is_match("/") {
-        Some(captures) => captures.at(0) == "/",
+        Some(captures) => captures.at(0).unwrap() == "/",
         None => false
     });
 }
@@ -90,7 +90,7 @@ fn parse_and_match_root() {
 fn parse_and_match_single_val() {
     let path = Path::parse(":id", true).unwrap();
     assert!(match path.is_match("/550e8400-e29b-41d4-a716-446655440000") {
-        Some(captures) => captures.name("id") == "550e8400-e29b-41d4-a716-446655440000",
+        Some(captures) => captures.name("id").unwrap() == "550e8400-e29b-41d4-a716-446655440000",
         None => false
     });
 }

@@ -3,7 +3,7 @@ use serialize::json::Object;
 use backend::{Request, Response};
 use server::method::Method::{Get, Post, Put, Delete};
 use backend::{HandleResult};
-use errors::{NotMatchError, Error, ErrorRefExt};
+use errors::{NotMatchError, Error};
 
 use framework::endpoint::{Endpoint, EndpointBuilder};
 use framework::{ApiHandler, ApiHandlers, Callback, Callbacks, CallInfo};

@@ -1,12 +1,13 @@
 use serialize::json::Object;
 use std::io::IoError;
-pub use error::{Error, ErrorRefExt};
+pub use error::{Error};
+use std::error::Error as StdError;
 
 #[deriving(Show, Copy)]
 pub struct NotMatchError;
 
-impl Error for NotMatchError {
-    fn name(&self) -> &'static str {
+impl StdError for NotMatchError {
+    fn description(&self) -> &str {
         return "NotMatchError";
     }
 }
@@ -14,8 +15,8 @@ impl Error for NotMatchError {
 #[deriving(Show, Copy)]
 pub struct NotFoundError;
 
-impl Error for NotFoundError {
-    fn name(&self) -> &'static str {
+impl StdError for NotFoundError {
+    fn description(&self) -> &str {
         return "NotFoundError";
     }
 }
@@ -23,8 +24,8 @@ impl Error for NotFoundError {
 #[deriving(Show, Copy)]
 pub struct QueryStringDecodeError;
 
-impl Error for QueryStringDecodeError {
-    fn name(&self) -> &'static str {
+impl StdError for QueryStringDecodeError {
+    fn description(&self) -> &str {
         return "QueryStringDecodeError";
     }
 }
@@ -34,8 +35,8 @@ pub struct ValidationError {
     pub reason: Object
 }
 
-impl Error for ValidationError {
-    fn name(&self) -> &'static str {
+impl StdError for ValidationError {
+    fn description(&self) -> &str {
         return "ValidationError";
     }
 }
@@ -53,21 +54,17 @@ impl BodyDecodeError {
     }
 }
 
-impl Error for BodyDecodeError {
-    fn name(&self) -> &'static str {
+impl StdError for BodyDecodeError {
+    fn description(&self) -> &str {
         return "BodyDecodeError";
-    }
-
-    fn description(&self) -> Option<&str> {
-        return Some(self.reason.as_slice())
     }
 }
 
 #[deriving(Show)]
 pub struct FileError(pub IoError);
 
-impl Error for FileError {
-    fn name(&self) -> &'static str {
+impl StdError for FileError {
+    fn description(&self) -> &str {
         let &FileError(ref error) = self;
         error.desc
     }
@@ -75,8 +72,8 @@ impl Error for FileError {
 
 #[deriving(Show, Copy)]
 pub struct NotAcceptableError;
-impl Error for NotAcceptableError {
-    fn name(&self) -> &'static str {
+impl StdError for NotAcceptableError {
+    fn description(&self) -> &str {
         "NotAcceptableError"
     }
 }

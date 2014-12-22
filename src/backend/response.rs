@@ -85,7 +85,7 @@ impl Response {
 
 }
 
-impl_extensible!(Response)
+impl_extensible!(Response);
 
 impl Reader for Response {
     fn read(&mut self, buf: &mut [u8]) -> IoResult<uint> {

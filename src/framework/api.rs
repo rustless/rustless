@@ -1,4 +1,4 @@
-use collections::tree_map::TreeMap;
+use collections::BTreeMap;
 use serialize::json;
 use serialize::json::{Object};
 use typemap::TypeMap;
@@ -8,7 +8,7 @@ use queryst;
 use backend::{Request, Response};
 use server::status::StatusCode;
 use server::header::common::Accept;
-use errors::{Error, ErrorRefExt, NotMatchError, NotAcceptableError, QueryStringDecodeError, BodyDecodeError};
+use errors::{Error, NotMatchError, NotAcceptableError, QueryStringDecodeError, BodyDecodeError};
 use backend::{Handler, HandleResult, HandleSuccessResult};
 
 use framework::nesting::Nesting;
@@ -162,7 +162,7 @@ impl Api {
 
     #[allow(unused_variables)]
     pub fn call(&self, rest_path: &str, req: &mut Request, app: &Application) -> HandleResult<Response> {
-        let mut params = TreeMap::new();
+        let mut params = BTreeMap::new();
         try!(Api::parse_request(req, &mut params));
         
         match self.api_call(rest_path, &mut params, req, &mut CallInfo::new(app))  {
@@ -297,7 +297,7 @@ impl Application {
     }
 
     pub fn call(&self, req: &mut Request) -> HandleResult<Response> {
-        self.root_api.call(("/".to_string() + req.url().path().connect("/")).as_slice(), req, self)
+        self.root_api.call(("/".to_string() + req.url().path().connect("/").as_slice()).as_slice(), req, self)
     }
 
     pub fn call_with_not_found(&self, req: &mut Request) -> HandleResult<Response> {

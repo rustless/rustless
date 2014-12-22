@@ -54,7 +54,7 @@ macro_rules! callback {
 }
 
 #[macro_export]
-macro_rules! format_error (
+macro_rules! format_error {
     ($api:ident, $t:ty, |$err:ident, $media:ident| $blk:block) => ({
         #[allow(dead_code)]
         fn error_formatter(err: &Box<::rustless::errors::Error>, $media: &::rustless::Media) -> Option<::rustless::Response> { 
@@ -76,21 +76,21 @@ macro_rules! format_error (
 
         $api.error_formatter(error_formatter);
     });
-)
+}
 
 pub trait Extensible for Sized? {
     fn ext(&self) -> &::typemap::TypeMap;
     fn ext_mut(&mut self) -> &mut ::typemap::TypeMap;
 }
 
-macro_rules! impl_extensible(
+macro_rules! impl_extensible {
     ($t:ty) => (
         impl Extensible for $t {
             fn ext(&self) -> &::typemap::TypeMap { &self.ext }
             fn ext_mut(&mut self) -> &mut ::typemap::TypeMap { &mut self.ext }
         }
     )
-)
+}
 
 pub mod errors;
 pub mod server;

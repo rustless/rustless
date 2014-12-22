@@ -1,13 +1,13 @@
 
 use serialize::json::ToJson;
 
-use errors::{Error, ErrorRefExt, ValidationError};
+use errors::{Error, ValidationError};
 use framework::media;
 use framework::media::Media;
 use backend::{Response};
 use server::status::StatusCode::BadRequest;
 
-pub fn validation_error_formatter(err: &Box<Error>, media: &Media) -> Option<Response> {
+pub fn validation_error_formatter(err: &Box<::errors::Error>, media: &Media) -> Option<Response> {
     match err.downcast::<ValidationError>() {
         Some(err) => {
             match media.format {

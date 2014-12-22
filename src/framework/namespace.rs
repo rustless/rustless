@@ -85,7 +85,7 @@ impl ApiHandler for Namespace {
 
         let rest_path: &str = match self.path.is_match(rest_path) {
             Some(captures) =>  {
-                let captured_length = captures.at(0).len();
+                let captured_length = captures.at(0).map_or(0, |c| c.len());
                 self.path.apply_captures(params, captures);
                 rest_path.slice_from(captured_length)
             },

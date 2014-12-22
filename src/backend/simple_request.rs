@@ -90,7 +90,7 @@ impl SimpleRequest {
 
 }
 
-impl_extensible!(SimpleRequest)
+impl_extensible!(SimpleRequest);
 
 impl Show for SimpleRequest {
     fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {
