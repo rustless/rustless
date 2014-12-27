@@ -16,6 +16,8 @@ path = "src/lib.rs"
 name = "tests"
 
 [dependencies]
+regex = "*"
+rustc-serialize = "*"
 valico = "*"
 queryst = "*"
 jsonway = "*"
