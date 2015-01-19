@@ -12,8 +12,7 @@ use framework::{ApiHandler, ApiHandlers, Callbacks, CallInfo};
 use framework::namespace::Namespace;
 use framework::client::{Client};
 
-pub trait Nesting {
-
+pub trait Node {
     fn get_handlers<'a>(&'a self) -> &'a ApiHandlers;
     fn get_handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers;
 
@@ -29,12 +28,38 @@ pub trait Nesting {
     fn get_after<'a>(&'a self) -> &'a Callbacks;
     fn get_after_mut<'a>(&'a mut self) -> &'a mut Callbacks;
 
-    fn push_callbacks(&self, _info: &mut CallInfo) {
-        // for cb in self.get_before().iter() { info.before.push(cb); }
-        // for cb in self.get_before_validation().iter() { info.before_validation.push(cb); }
-        // for cb in self.get_after_validation().iter() { info.after_validation.push(cb); }
-        // for cb in self.get_after().iter() { info.after.push(cb); }
-    }
+    fn push_node<'a>(&'a self, _info: &mut CallInfo<'a>);
+}
+
+#[macro_export]
+macro_rules! impl_nesting {
+    ($t:ident) => (
+        impl nesting::Node for $t {
+            fn get_handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
+            fn get_handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
+
+            fn get_before<'a>(&'a self) -> &'a Callbacks { &self.before }
+            fn get_before_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.before }
+
+            fn get_before_validation<'a>(&'a self) -> &'a Callbacks { &self.before_validation }
+            fn get_before_validation_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.before_validation }
+
+            fn get_after_validation<'a>(&'a self) -> &'a Callbacks { &self.after_validation }
+            fn get_after_validation_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.after_validation }
+
+            fn get_after<'a>(&'a self) -> &'a Callbacks { &self.after }
+            fn get_after_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.after }
+
+            fn push_node<'a>(&'a self, _info: &mut CallInfo<'a>) {
+                _info.parents.push(self);
+            }
+        }
+
+        impl nesting::Nesting for $t {}
+    )
+}
+
+pub trait Nesting: Node {
 
     fn mount<H>(&mut self, edp: H) where H: ApiHandler + Send+Sync {
         self.get_handlers_mut().push(Box::new(edp))
@@ -90,7 +115,7 @@ pub trait Nesting {
         self.get_after_validation_mut().push(Box::new(callback)); 
     }
 
-    fn call_handlers(&self, rest_path: &str, params: &mut Object, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
+    fn call_handlers<'a>(&'a self, rest_path: &str, params: &mut Object, req: &mut Request, info: &mut CallInfo<'a>) -> HandleResult<Response> {
         for handler in self.get_handlers().iter() {
             match handler.api_call(rest_path, params, req, info) {
                 Ok(response) => return Ok(response),

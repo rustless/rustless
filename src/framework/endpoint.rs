@@ -81,15 +81,26 @@ impl Endpoint {
         
         let mut client = Client::new(info.app, self, req, &info.media);
 
-        try!(Endpoint::call_callbacks(&info.before, &mut client, params));
-        try!(Endpoint::call_callbacks(&info.before_validation, &mut client, params));
+        for parent in info.parents.iter() {
+            try!(Endpoint::call_callbacks(parent.get_before(), &mut client, params));
+        }
+
+        for parent in info.parents.iter() {
+            try!(Endpoint::call_callbacks(parent.get_before_validation(), &mut client, params));
+        }
+
         try!(self.validate(params));
-        try!(Endpoint::call_callbacks(&info.after_validation, &mut client, params));
+
+        for parent in info.parents.iter() {
+            try!(Endpoint::call_callbacks(parent.get_after_validation(), &mut client, params));
+        }
 
         let handler = self.handler.as_ref();
         let mut client = try!((handler.unwrap())(client, params));
-            
-        try!(Endpoint::call_callbacks(&info.after, &mut client, params));
+
+        for parent in info.parents.iter() {
+            try!(Endpoint::call_callbacks(parent.get_after(), &mut client, params));
+        }
 
         Ok(client.move_response())
     }

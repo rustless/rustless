@@ -17,13 +17,18 @@ impl StdError for UnauthorizedError {
 }
 
 #[test]
-fn it_allows_to_create_namespace() {
+fn it_invokes_callbacks() {
 
     let app = app!(|api| {
         api.prefix("api");
 
-        api.error_formatter(|_err, _media| {
-            Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
+        api.error_formatter(|err, _media| {
+            match err.downcast::<UnauthorizedError>() {
+                Some(_) => {
+                    return Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
+                },
+                None => None
+            }
         });
 
         api.namespace("admin", |admin_ns| {

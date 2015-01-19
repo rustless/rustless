@@ -7,10 +7,11 @@ use errors::{Error};
 pub use self::api::{Application, Api, Versioning};
 pub use self::endpoint::{Endpoint, EndpointBuilder};
 pub use self::client::Client;
-pub use self::nesting::Nesting;
+pub use self::nesting::{Nesting, Node};
 pub use self::namespace::{Namespace};
 pub use self::media::Media;
 
+#[macro_use]
 mod nesting;
 mod api;
 mod endpoint;
@@ -21,7 +22,7 @@ mod path;
 mod formatters;
 
 pub trait ApiHandler {
-    fn api_call(&self, &str, &mut Object, &mut Request, &mut CallInfo) -> HandleResult<Response>;
+    fn api_call<'a>(&'a self, &str, &mut Object, &mut Request, &mut CallInfo<'a>) -> HandleResult<Response>;
 }
 
 pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
@@ -34,10 +35,7 @@ pub type ErrorFormatters = Vec<ErrorFormatter>;
 
 pub struct CallInfo<'a> {
     pub media: Media,
-    pub before: Vec<Callback>,
-    pub before_validation: Vec<Callback>,
-    pub after_validation: Vec<Callback>,
-    pub after: Vec<Callback>,
+    pub parents: Vec<&'a (Node + 'static)>,
     pub app: &'a Application
 }
 
@@ -45,10 +43,7 @@ impl<'a> CallInfo<'a> {
     pub fn new(app: &'a Application) -> CallInfo<'a> {
         CallInfo {
             media: Media::default(),
-            before: vec![],
-            before_validation: vec![],
-            after_validation: vec![],
-            after: vec![],
+            parents: vec![],
             app: app
         }
     }

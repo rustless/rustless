@@ -7,7 +7,7 @@ use errors::{NotMatchError, ValidationError, Error};
 use backend::{HandleResult};
 
 use framework::path::{Path};
-use framework::nesting::Nesting;
+use framework::nesting::{self, Nesting, Node};
 use framework::{
     ApiHandler, Callbacks, ApiHandlers, CallInfo
 };
@@ -22,22 +22,7 @@ pub struct Namespace {
     after: Callbacks
 }
 
-impl Nesting for Namespace {
-    fn get_handlers<'a>(&'a self) -> &'a ApiHandlers { &self.handlers }
-    fn get_handlers_mut<'a>(&'a mut self) -> &'a mut ApiHandlers { &mut self.handlers }
-
-    fn get_before<'a>(&'a self) -> &'a Callbacks { &self.before }
-    fn get_before_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.before }
-
-    fn get_before_validation<'a>(&'a self) -> &'a Callbacks { &self.before_validation }
-    fn get_before_validation_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.before_validation }
-
-    fn get_after_validation<'a>(&'a self) -> &'a Callbacks { &self.after_validation }
-    fn get_after_validation_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.after_validation }
-
-    fn get_after<'a>(&'a self) -> &'a Callbacks { &self.after }
-    fn get_after_mut<'a>(&'a mut self) -> &'a mut Callbacks { &mut self.after }
-}
+impl_nesting!(Namespace);
 
 impl Namespace {
     
@@ -80,7 +65,7 @@ impl Namespace {
 }
 
 impl ApiHandler for Namespace {
-    fn api_call(&self, rest_path: &str, params: &mut Object, req: &mut Request, info: &mut CallInfo) -> HandleResult<Response> {
+    fn api_call<'a>(&'a self, rest_path: &str, params: &mut Object, req: &mut Request, info: &mut CallInfo<'a>) -> HandleResult<Response> {
 
         let rest_path: &str = match self.path.is_match(rest_path) {
             Some(captures) =>  {
@@ -93,7 +78,7 @@ impl ApiHandler for Namespace {
 
         try!(self.validate(params));
 
-        self.push_callbacks(info);
+        self.push_node(info);
         self.call_handlers(rest_path, params, req, info)
     }
 }

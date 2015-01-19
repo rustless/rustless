@@ -29,56 +29,6 @@ pub use framework::{
     Endpoint, Client, Api, Application, Namespace, Nesting, Media, Versioning
 };
 
-// #[macro_export]
-// macro_rules! edp_handler {
-//     ($edp:ident, |$client:ident, $params:ident| $blk:block) => ({
-//         #[allow(dead_code)]
-//         #[allow(unused_mut)]
-//         fn endpoint_handler<'a>(mut $client: ::rustless::Client<'a>, 
-//                                 $params: &::serialize::json::Object) -> ::rustless::HandleResult<Client<'a>> {
-//             $blk
-//         }
-
-//         $edp.handle(endpoint_handler)
-//     })
-// }
-
-// #[macro_export]
-// macro_rules! callback {
-//     (|$client:ident, $params:ident| $blk:block) => ({
-//         fn callback<'a>($client: &mut ::rustless::Client<'a>, $params: &::serialize::json::Object) -> ::rustless::HandleSuccessResult {
-//             $blk
-//         }
-
-//         callback
-//     })
-// }
-
-// #[macro_export]
-// macro_rules! format_error {
-//     ($api:ident, $t:ty, |$err:ident, $media:ident| $blk:block) => ({
-//         #[allow(dead_code)]
-//         fn error_formatter(err: &Box<::rustless::errors::Error>, $media: &::rustless::Media) -> Option<::rustless::Response> { 
-//             match err.downcast::<$t>() {
-//                 Some($err) => {
-//                     $blk
-//                 },
-//                 None => None
-//             }
-//         }
-
-//         $api.error_formatter(error_formatter);
-//     });
-//     ($api:ident, all, |$err:ident, $media:ident| $blk:block) => ({
-//         #[allow(dead_code)]
-//         fn error_formatter($err: &Box<::rustless::errors::Error>, $media: &::rustless::Media) -> Option<::rustless::Response> { 
-//             $blk
-//         }
-
-//         $api.error_formatter(error_formatter);
-//     });
-// }
-
 pub trait Extensible {
     fn ext(&self) -> &::typemap::TypeMap;
     fn ext_mut(&mut self) -> &mut ::typemap::TypeMap;
