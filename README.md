@@ -73,10 +73,10 @@ fn main() {
         // Create API for chats
         let chats_api = box Api::build(|chats_api| {
 
-            chats_api.after(callback!(|client, _params| {
+            chats_api.after(|client, _params| {
                 client.set_status(hyper::status::NotFound);
                 Ok(())
-            }));
+            });
 
             // Add namespace
             chats_api.namespace("chats/:id", |chat_ns| {
@@ -98,9 +98,7 @@ fn main() {
                         params.req_typed("name", Valico::string())
                     });
 
-                    // Set-up handler for endpoint, note that we return
-                    // of macro invocation.
-                    edp_handler!(endpoint, |client, params| {
+                    endpoint.handle(|client, params| {
                         client.json(&params.to_json())
                     })
                 });
@@ -131,7 +129,7 @@ In Rustless you can use three core entities to build your RESTful app: `Api`, `N
 Api::build(|api| {
 
     // Api inside Api example
-    api.mount(box Api::build(|nested_api| {
+    api.mount(Api::build(|nested_api| {
 
         // Endpoint definition
         nested_api.get("nested_info", |endpoint| {
@@ -139,7 +137,7 @@ Api::build(|api| {
             // endpoint.desc("Some description");
 
             // Endpoint handler
-            edp_handler!(endpoint, |client, _params| {
+            endpoint.handle(|client, _params| {
                 client.text("Some usefull info".to_string())
             })
         });
@@ -307,16 +305,13 @@ By default Rustless wil respond all errors with status::InternalServerError.
 Rustless can be told to rescue specific errors and return them in the custom API format.
 
 ~~~rust
-format_error!(api, UnauthorizedError, |_err, _media| {
-    Some(Response::from_string(status::Unauthorized, "Please provide correct `token` parameter".to_string()))
-});
-~~~
-
-Also Rustless can be told to rescue all errors:
-
-~~~rust
-format_error!(api, all, |_err, _media| {
-    Some(Response::from_string(status::InternalServerError, "Not enough mana!".to_string()))
+api.error_formatter(|err, _media| {
+    match err.downcast::<UnauthorizedError>() {
+        Some(_) => {
+            return Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
+        },
+        None => None
+    }
 });
 ~~~
 
@@ -343,9 +338,15 @@ The block applies to every API call within and below the current nesting level.
 ~~~rust
 Api::build(|api| {
     api.prefix("api");
+    api.version("v1", Versioning::Path);
 
-    format_error!(api, UnauthorizedError, |_err, _media| {
-        Some(Response::from_string(status::Unauthorized, "Please provide correct `token` parameter".to_string()))
+    api.error_formatter(|err, _media| {
+        match err.downcast::<UnauthorizedError>() {
+            Some(_) => {
+                return Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
+            },
+            None => None
+        }
     });
 
     api.namespace("admin", |admin_ns| {
@@ -355,22 +356,30 @@ Api::build(|api| {
         });
 
         // Using after_validation callback to check token
-        admin_ns.after_validation(callback!(|_client, params| {
-            
-            match params.find(&"token".to_string()) {
+        admin_ns.after_validation(|&: _client, params| {
+
+            match params.get("token") {
                 // We can unwrap() safely because token in validated already
                 Some(token) => if token.as_string().unwrap().as_slice() == "password1" { return Ok(()) },
                 None => ()
             }
 
             // Fire error from callback is token is wrong
-            return Err(box UnauthorizedError as Box<Error>)
+            return Err(Box::new(UnauthorizedError) as Box<Error>)
 
-        }));
+        });
 
         // This `/api/admin/server_status` endpoint is secure now
         admin_ns.get("server_status", |endpoint| {
-            edp_handler!(endpoint, |client, _params| {
+            endpoint.handle(|client, _params| {
+                {
+                    let cookies = client.request.cookies();
+                    let signed_cookies = cookies.signed();
+
+                    let user_cookie = Cookie::new("session".to_string(), "verified".to_string());
+                    signed_cookies.add(user_cookie);
+                }
+
                 client.text("Everything is OK".to_string())  
             })
         });
