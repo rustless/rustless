@@ -9,7 +9,6 @@ use server::method::Method;
 use server::header::Headers;
 use backend::{Request, Url, AsUrl, WrapUrl};
 
-#[deriving(Send)]
 #[allow(dead_code)]
 pub struct SimpleRequest {
     pub url: Url,
@@ -52,13 +51,13 @@ impl SimpleRequest {
             url: url.wrap_url(),
             method: method,
             ext: TypeMap::new(),
-            remote_addr: from_str("127.0.0.1:8000").unwrap(),
+            remote_addr: "127.0.0.1:8000".parse().unwrap(),
             headers: Headers::new(),
             body: vec![]
         }
     }
 
-    pub fn build(method: Method, url: ::url::Url, builder: |&mut SimpleRequest|) -> SimpleRequest {
+    pub fn build<F>(method: Method, url: ::url::Url, builder: F) -> SimpleRequest where F: Fn(&mut SimpleRequest) {
         let mut srq = SimpleRequest::new(method, url);
         builder(&mut srq);
 
@@ -70,7 +69,7 @@ impl SimpleRequest {
     }
 
     pub fn set_remote_str(&mut self, addr: &str) {
-        self.remote_addr = from_str(addr).unwrap();
+        self.remote_addr = addr.parse().unwrap();
     }
 
     pub fn headers_mut(&mut self) -> &mut Headers {
@@ -82,7 +81,7 @@ impl SimpleRequest {
     }
 
     pub fn push_file(&mut self, path: &Path) -> IoResult<()> {
-        let mut reader = box try!(File::open(path));
+        let mut reader = Box::new(try!(File::open(path)));
         self.body = try!(reader.read_to_end());
 
         Ok(())
@@ -97,8 +96,8 @@ impl Show for SimpleRequest {
         try!(writeln!(f, "SimpleRequest ->"));
         try!(writeln!(f, "  url: {}", self.url));
         try!(writeln!(f, "  method: {}", self.method()));
-        try!(writeln!(f, "  path: {}", self.url.path()));
-        try!(writeln!(f, "  query: {}", self.url.query));
+        try!(writeln!(f, "  path: {:?}", self.url.path()));
+        try!(writeln!(f, "  query: {:?}", self.url.query));
         try!(writeln!(f, "  remote_addr: {}", self.remote_addr()));
         Ok(())
     }

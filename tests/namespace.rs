@@ -2,7 +2,7 @@ use url::Url;
 use rustless::server::method::Method::{Get};
 use rustless::server::status::StatusCode;
 use rustless::{
-    Application, Api, Client, Nesting, SimpleRequest
+    Application, Api, Nesting, SimpleRequest
 };
 
 #[test]

@@ -3,7 +3,7 @@ use std::io::IoError;
 pub use error::{Error};
 use std::error::Error as StdError;
 
-#[deriving(Show, Copy)]
+#[derive(Show, Copy)]
 pub struct NotMatchError;
 
 impl StdError for NotMatchError {
@@ -12,7 +12,7 @@ impl StdError for NotMatchError {
     }
 }
 
-#[deriving(Show, Copy)]
+#[derive(Show, Copy)]
 pub struct NotFoundError;
 
 impl StdError for NotFoundError {
@@ -21,7 +21,7 @@ impl StdError for NotFoundError {
     }
 }
 
-#[deriving(Show, Copy)]
+#[derive(Show, Copy)]
 pub struct QueryStringDecodeError;
 
 impl StdError for QueryStringDecodeError {
@@ -30,7 +30,7 @@ impl StdError for QueryStringDecodeError {
     }
 }
 
-#[deriving(Show)]
+#[derive(Show)]
 pub struct ValidationError {
     pub reason: Object
 }
@@ -41,7 +41,7 @@ impl StdError for ValidationError {
     }
 }
 
-#[deriving(Show)]
+#[derive(Show)]
 pub struct BodyDecodeError {
     pub reason: String
 }
@@ -60,7 +60,7 @@ impl StdError for BodyDecodeError {
     }
 }
 
-#[deriving(Show)]
+#[derive(Show)]
 pub struct FileError(pub IoError);
 
 impl StdError for FileError {
@@ -70,7 +70,7 @@ impl StdError for FileError {
     }
 }
 
-#[deriving(Show, Copy)]
+#[derive(Show, Copy)]
 pub struct NotAcceptableError;
 impl StdError for NotAcceptableError {
     fn description(&self) -> &str {

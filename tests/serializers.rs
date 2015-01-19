@@ -1,6 +1,5 @@
 use url::Url;
-use serialize::json::{Json, ToJson};
-use serialize::json::from_str;
+use serialize::json::{self, Json};
 use std::str::from_utf8;
 
 use jsonway::JsonWay;
@@ -10,7 +9,7 @@ use rustless::server::method::Method::{Get};
 use rustless::server::status::StatusCode;
 use rustless::server::mime;
 use rustless::{
-    Application, Api, Client, Nesting, SimpleRequest
+    Application, Api, Nesting, SimpleRequest
 };
 
 #[test]
@@ -20,10 +19,10 @@ fn it_serializes_json_properly() {
         api.prefix("api");
 
         api.get("status", |endpoint| {
-            edp_handler!(endpoint, |client, params| {
+            endpoint.handle(|client, params| {
                 client.json(&JsonWay::object(|json| {
                     json.set("uptime", "Ok".to_string());
-                    json.set("echo_params", params.to_json());
+                    json.set("echo_params", json::Json::Object(params.clone()));
                 }).unwrap())
             })
         })
@@ -37,7 +36,7 @@ fn it_serializes_json_properly() {
         assert_eq!(*mime_type, mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, vec![]));    
     }
 
-    let body: Json = from_str(from_utf8(response.read_to_end().unwrap().as_slice()).unwrap()).unwrap();
+    let body: Json = from_utf8(response.read_to_end().unwrap().as_slice()).unwrap().parse().unwrap();
 
     assert!(body.find("uptime").is_some());
     assert!(body.find("echo_params").is_some());

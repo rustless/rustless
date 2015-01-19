@@ -14,7 +14,7 @@ impl Path {
 
     pub fn apply_captures(&self, jobj: &mut Object, captures: Captures) {
         for param in self.params.iter() {
-            jobj.insert(param.clone(), captures.name(param.as_slice()).to_string().to_json());
+            jobj.insert(param.clone(), captures.name(param.as_slice()).unwrap_or("").to_string().to_json());
         }
     }
 
@@ -39,7 +39,7 @@ impl Path {
 
         let mut params = vec![];
         for capture in MATCHER.captures_iter(path) {
-            params.push(capture.at(1).to_string()); 
+            params.push(capture.at(1).unwrap_or("").to_string()); 
         }
 
         Ok(Path {

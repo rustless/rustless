@@ -2,7 +2,7 @@ use url::Url;
 use rustless::server::method::Method::{Get};
 use rustless::server::status::StatusCode;
 use rustless::{
-    Application, Api, Client, Nesting, SimpleRequest, Versioning
+    Application, Api, Nesting, SimpleRequest, Versioning
 };
 
 #[test]
@@ -26,7 +26,7 @@ fn it_allows_nested_prefix() {
 
     let app = app!(|api| {
         api.prefix("api");
-        api.mount(box Api::build(|nested_api| {
+        api.mount(Api::build(|nested_api| {
             nested_api.prefix("nested_api");
             edp_stub!(nested_api);
         }))
@@ -48,7 +48,7 @@ fn it_allows_prefix_with_path_versioning() {
     let app = app!(|api| {
         api.prefix("api");
         api.version("v1", Versioning::Path);
-        api.mount(box Api::build(|nested_api| {
+        api.mount(Api::build(|nested_api| {
             nested_api.prefix("nested_api");
             edp_stub!(nested_api);
         }))

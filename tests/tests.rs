@@ -1,14 +1,11 @@
-#![feature(phase)]
-#![feature(macro_rules)]
-
 #![deny(warnings)]
 #![deny(bad_style)]
+#![allow(unstable)]
 
-#[phase(plugin)]
-extern crate rustless;
+#[macro_use]
 extern crate rustless;
 extern crate hyper;
-extern crate serialize;
+extern crate "rustc-serialize" as serialize;
 extern crate url;
 extern crate jsonway;
 
@@ -33,37 +30,37 @@ macro_rules! call_app {
 }
 
 #[macro_export]
-macro_rules! resp_body (
+macro_rules! resp_body {
     ($resp:ident) => (str::from_utf8($resp.read_to_end().unwrap().as_slice()).unwrap())
-)
+}
 
 #[macro_export]
-macro_rules! mime(
-    ($mime:expr) => (from_str($mime).unwrap())
-)
+macro_rules! mime {
+    ($mime:expr) => ($mime.parse().unwrap())
+}
 
-macro_rules! app(
+macro_rules! app {
     ($builder:expr) => ({
         let app = Application::new(Api::build($builder));
         app
     })
-)
+}
 
-macro_rules! edp_stub_handler(
+macro_rules! edp_stub_handler {
     ($endpoint:ident) => ({
-        edp_handler!($endpoint, |client, _params| {
+        $endpoint.handle(|client, _params| {
             client.text("Some usefull info".to_string())
         })
     })
-)
+}
 
-macro_rules! edp_stub(
+macro_rules! edp_stub {
     ($api:ident) => ({
         $api.get("info", |endpoint| {
             edp_stub_handler!(endpoint)
         });    
     })
-)
+}
 
 mod versioning;
 mod namespace;

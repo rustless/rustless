@@ -3,7 +3,7 @@ use rustless::server::method::Method::{Post};
 use rustless::server::header::common::{Location};
 use rustless::server::status::StatusCode;
 use rustless::{
-    Application, Api, Client, Nesting, SimpleRequest
+    Application, Api, Nesting, SimpleRequest
 };
 
 #[test]
@@ -12,7 +12,7 @@ fn it_allows_redirect() {
     let app = app!(|api| {
         api.prefix("api");
         api.post("redirect_me/:href", |endpoint| {
-            edp_handler!(endpoint, |client, params| {
+            endpoint.handle(|client, params| {
                 client.redirect(params.get(&"href".to_string()).unwrap().as_string().unwrap())
             })
         });
@@ -31,7 +31,7 @@ fn it_allows_permanent_redirect() {
     let app = app!(|api| {
         api.prefix("api");
         api.post("redirect_me/:href", |endpoint| {
-            edp_handler!(endpoint, |client, params| {
+            endpoint.handle(|client, params| {
                 client.permanent_redirect(params.get(&"href".to_string()).unwrap().as_string().unwrap())
             })
         });

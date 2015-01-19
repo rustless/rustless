@@ -4,15 +4,7 @@ use hyper::mime::{Mime, TopLevel, SubLevel};
 
 static MEDIA_REGEX: Regex = regex!(r"vnd\.(?P<vendor>[a-zA-Z_-]+)(?:\.(?P<version>[a-zA-Z0-9]+)(?:\.(?P<param>[a-zA-Z0-9]+))?)?(?:\+(?P<format>[a-zA-Z0-9]+))?");
 
-fn present_or_none(string: String) -> Option<String> {
-    if string.is_empty() {
-        None
-    } else {
-        Some(string)
-    }
-}
-
-#[deriving(Show)]
+#[derive(Show)]
 pub enum Format {
     JsonFormat,
     PlainTextFormat,
@@ -56,10 +48,10 @@ impl Media {
             &Mime(TopLevel::Application, SubLevel::Ext(ref ext), _) => {
                 match MEDIA_REGEX.captures(ext.as_slice()) {
                     Some(captures) => {
-                        let vendor = captures.name("vendor").to_string();
-                        let version = present_or_none(captures.name("version").to_string());
-                        let param = present_or_none(captures.name("param").to_string());
-                        let format_str = present_or_none(captures.name("format").to_string());
+                        let vendor = captures.name("vendor");
+                        let version = captures.name("version").map(|s| s.to_string());
+                        let param = captures.name("param").map(|s| s.to_string());
+                        let format_str = captures.name("format").map(|s| s.to_string());
 
                         let format = match format_str {
                             Some(format) => if format.as_slice() == "json" { Format::JsonFormat }
@@ -69,7 +61,7 @@ impl Media {
                         };
 
                         Some(Media {
-                            vendor: vendor,
+                            vendor: vendor.unwrap().to_string(),
                             version: version,
                             param: param,
                             format: format
@@ -94,20 +86,20 @@ fn asset_regexp() {
     let captures = MEDIA_REGEX.captures("application/vnd.github.v3+json").unwrap();
     assert_eq!(captures.name("vendor").unwrap(), "github");
     assert_eq!(captures.name("version").unwrap(), "v3");
-    assert_eq!(captures.name("param").unwrap(), "");
+    assert_eq!(captures.name("param"), None);
     assert_eq!(captures.name("format").unwrap(), "json");
     
     let captures = MEDIA_REGEX.captures("application/vnd.github+json").unwrap();
     assert_eq!(captures.name("vendor").unwrap(), "github");
-    assert_eq!(captures.name("version").unwrap(), "");
-    assert_eq!(captures.name("param").unwrap(), "");
+    assert_eq!(captures.name("version"), None);
+    assert_eq!(captures.name("param"), None);
     assert_eq!(captures.name("format").unwrap(), "json");
     
     let captures = MEDIA_REGEX.captures("application/vnd.github").unwrap();
     assert_eq!(captures.name("vendor").unwrap(), "github");
-    assert_eq!(captures.name("version").unwrap(), "");
-    assert_eq!(captures.name("param").unwrap(), "");
-    assert_eq!(captures.name("format").unwrap(), "");
+    assert_eq!(captures.name("version"), None);
+    assert_eq!(captures.name("param"), None);
+    assert_eq!(captures.name("format"), None);
     
     let captures = MEDIA_REGEX.captures("application/vnd");
     assert!(captures.is_none());
@@ -116,17 +108,17 @@ fn asset_regexp() {
 #[test]
 fn assert_media() {
 
-    match Media::from_mime(&from_str("application/json").unwrap()).format {
+    match Media::from_mime(&"application/json".parse().unwrap()).format {
         Format::JsonFormat => (),
         _ => panic!("Wrong format")
     }
 
-    match Media::from_mime(&from_str("text/plain").unwrap()).format {
+    match Media::from_mime(&"text/plain".parse().unwrap()).format {
         Format::PlainTextFormat => (),
         _ => panic!("Wrong format")
     }
 
-    match Media::from_mime(&from_str("application/octet-stream").unwrap()).format {
+    match Media::from_mime(&"application/octet-stream".parse().unwrap()).format {
         Format::OtherFormat(_) => (),
         _ => panic!("Wrong format")
     }

@@ -9,11 +9,13 @@ use iron::{AfterMiddleware, BeforeMiddleware, IronResult};
 use iron::Request as IronRequest;
 use iron::Response as IronResponse;
 
-struct Jar;
+struct CookieJarKey;
 
-impl ::typemap::Assoc<CookieJar<'static>> for Jar {}
+impl ::typemap::Key for CookieJarKey {
+    type Value = CookieJar<'static>;
+}
 
-pub trait CookieExt for Sized? {
+pub trait CookieExt {
     fn find_cookie_jar(&mut self) -> Option<&mut CookieJar<'static>>;
     fn store_cookie_jar(&mut self, jar: CookieJar<'static>);
     fn cookies<'a>(&'a mut self) -> &'a mut CookieJar<'static> { 
@@ -23,11 +25,11 @@ pub trait CookieExt for Sized? {
 
 impl CookieExt for Request {
     fn find_cookie_jar<'a>(&'a mut self) -> Option<&'a mut CookieJar<'static>> {
-        self.ext_mut().get_mut::<Jar, CookieJar<'static>>()
+        self.ext_mut().get_mut::<CookieJarKey>()
     }
 
     fn store_cookie_jar(&mut self, jar: CookieJar<'static>) {
-        self.ext_mut().insert::<Jar, CookieJar<'static>>(jar);
+        self.ext_mut().insert::<CookieJarKey>(jar);
     }
 }
 
@@ -42,7 +44,7 @@ impl BeforeMiddleware for CookieDecodeMiddleware {
             .map(|cookies| cookies.to_cookie_jar(token))
             .unwrap_or_else(|| CookieJar::new(token));
 
-        req.ext_mut().insert(jar);
+        req.ext_mut().insert::<CookieJarKey>(jar);
         Ok(())
     }
 }

@@ -3,7 +3,7 @@ use rustless::server::method::Method::{Get};
 use rustless::server::status::StatusCode;
 use rustless::server::header::common::Accept;
 use rustless::{
-    Application, Api, Client, Nesting, Versioning, SimpleRequest
+    Application, Api, Nesting, Versioning, SimpleRequest
 };
 
 #[test]
@@ -63,11 +63,11 @@ fn it_pass_nesting_param_versioning() {
         api.version("v1", Versioning::Param("v"));
         edp_stub!(api);
 
-        api.mount(box Api::build(|nested_api| {
+        api.mount(Api::build(|nested_api| {
             nested_api.version("v2", Versioning::Param("nested_ver"));
 
             nested_api.get("nested_info", |endpoint| {
-                edp_handler!(endpoint, |client, _params| {
+                endpoint.handle(|client, _params| {
                     client.text("Some usefull info".to_string())
                 })
             });
@@ -91,11 +91,11 @@ fn it_pass_nesting_path_versioning() {
         api.version("v1", Versioning::Path);
         edp_stub!(api);
 
-        api.mount(box Api::build(|nested_api| {
+        api.mount(Api::build(|nested_api| {
             nested_api.version("v2", Versioning::Path);
 
             nested_api.get("nested_info", |endpoint| {
-                edp_handler!(endpoint, |client, _params| {
+                endpoint.handle(|client, _params| {
                     client.text("Some usefull info".to_string())
                 })
             });
@@ -119,10 +119,10 @@ fn it_pass_nesting_crazy_mixed_versioning_never_do_this() {
         api.version("v1", Versioning::AcceptHeader("infoapi"));
         edp_stub!(api);
 
-        api.mount(box Api::build(|nested_api| {
+        api.mount(Api::build(|nested_api| {
             nested_api.version("v2", Versioning::Path);
 
-            nested_api.mount(box Api::build(|nested_nested_api| {
+            nested_api.mount(Api::build(|nested_nested_api| {
                 nested_nested_api.version("v3", Versioning::Param("ver"));
                 edp_stub!(nested_nested_api);
             }))
