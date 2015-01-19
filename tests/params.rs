@@ -3,7 +3,7 @@ use std::str;
 use rustless::server::method::Method::{Get};
 use rustless::server::status::StatusCode;
 use rustless::{
-    Application, Api, Client, Valico, Nesting, SimpleRequest
+    Application, Api, Valico, Nesting, SimpleRequest
 };
 
 #[test]

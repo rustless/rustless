@@ -1,32 +1,32 @@
-#![feature(phase)]
+#![allow(unstable)]
 
-#[phase(plugin)]
-extern crate rustless;
+#[macro_use]
 extern crate rustless;
 
 extern crate iron;
 extern crate url;
-extern crate serialize;
+extern crate "rustc-serialize" as serialize;
 extern crate valico;
 extern crate cookie;
 
+use std::error::Error as StdError;
 use iron::{Iron, Chain, ChainBuilder};
 use cookie::Cookie;
 
 use valico::Builder as Valico;
 use rustless::server::status::{StatusCode};
-use rustless::errors::{Error, ErrorRefExt};
+use rustless::errors::{Error};
 use rustless::batteries::cookie::CookieExt;
 use rustless::{
-    Application, Api, Client, Nesting, Versioning,
+    Application, Api, Nesting, Versioning,
     Response
 };
 
-#[deriving(Show, Copy)]
+#[derive(Show, Copy)]
 pub struct UnauthorizedError;
 
-impl Error for UnauthorizedError {
-    fn name(&self) -> &'static str {
+impl StdError for UnauthorizedError {
+    fn description(&self) -> &str {
         return "UnauthorizedError";
     }
 }
@@ -37,7 +37,7 @@ fn main() {
         api.prefix("api");
         api.version("v1", Versioning::Path);
 
-        format_error!(api, UnauthorizedError, |_err, _media| {
+        api.error_formatter(|&: _err, _media| {
             Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
         });
 
@@ -48,7 +48,7 @@ fn main() {
             });
 
             // Using after_validation callback to check token
-            admin_ns.after_validation(callback!(|_client, params| {
+            admin_ns.after_validation(|&: _client, params| {
 
                 match params.get("token") {
                     // We can unwrap() safely because token in validated already
@@ -57,18 +57,18 @@ fn main() {
                 }
 
                 // Fire error from callback is token is wrong
-                return Err(box UnauthorizedError as Box<Error>)
+                return Err(Box::new(UnauthorizedError) as Box<Error>)
 
-            }));
+            });
 
             // This `/api/admin/server_status` endpoint is secure now
             admin_ns.get("server_status", |endpoint| {
-                edp_handler!(endpoint, |client, _params| {
+                endpoint.handle(|client, _params| {
                     {
                         let cookies = client.request.cookies();
                         let signed_cookies = cookies.signed();
 
-                        let mut user_cookie = Cookie::new("session".to_string(), "verified".to_string());
+                        let user_cookie = Cookie::new("session".to_string(), "verified".to_string());
                         signed_cookies.add(user_cookie);
                     }
 

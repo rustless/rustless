@@ -1,7 +1,7 @@
 
 use serialize::json::{ToJson, as_pretty_json};
 
-use errors::{Error, ValidationError};
+use errors::{ValidationError};
 use framework::media;
 use framework::media::Media;
 use backend::{Response};

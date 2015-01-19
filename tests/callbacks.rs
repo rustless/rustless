@@ -1,16 +1,17 @@
 use url::Url;
 use rustless::server::method::Method::{Get};
 use rustless::server::status::StatusCode;
-use rustless::errors::{Error, ErrorRefExt};
+use rustless::errors::{Error};
+use std::error::Error as StdError;
 use rustless::{
-    Application, Api, Client, Valico, Nesting, SimpleRequest, Response
+    Application, Api, Valico, Nesting, SimpleRequest, Response
 };
 
-#[deriving(Show)]
+#[derive(Show)]
 pub struct UnauthorizedError;
 
-impl Error for UnauthorizedError {
-    fn name(&self) -> &'static str {
+impl StdError for UnauthorizedError {
+    fn description(&self) -> &'static str {
         return "Unauthorized";
     }
 }
@@ -21,7 +22,7 @@ fn it_allows_to_create_namespace() {
     let app = app!(|api| {
         api.prefix("api");
 
-        format_error!(api, UnauthorizedError, |_err, _media| {
+        api.error_formatter(|_err, _media| {
             Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
         });
 
@@ -32,7 +33,7 @@ fn it_allows_to_create_namespace() {
             });
 
             // Using after_validation callback to check token
-            admin_ns.after_validation(callback!(|_client, params| {
+            admin_ns.after_validation(|_client, params| {
                 match params.get(&"token".to_string()) {
                     // We can unwrap() safely because token in validated already
                     Some(token) => if token.as_string().unwrap().as_slice() == "password1" { return Ok(()) },
@@ -40,13 +41,13 @@ fn it_allows_to_create_namespace() {
                 }
 
                 // Fire error from callback is token is wrong
-                return Err(box UnauthorizedError as Box<Error>)
-            }));
+                return Err(Box::new(UnauthorizedError) as Box<Error>)
+            });
 
             // This `/api/admin/server_status` endpoint is secure now
             admin_ns.get("server_status", |endpoint| {
 
-                edp_handler!(endpoint, |client, _params| {
+                endpoint.handle(|client, _params| {
                     client.text("Everything is OK".to_string())  
                 })
             });

@@ -57,8 +57,9 @@ impl Endpoint {
         self.coercer = Some(ValicoBuilder::build(builder));
     }
 
-    pub fn handle(&mut self, handler: EndpointHandler) -> EndpointHandlerPresent {
-        self.handler = Some(handler);
+    pub fn handle<F>(&mut self, handler: F) -> EndpointHandlerPresent
+    where F: for<'a> Fn(Client<'a>, &Object) -> HandleResult<Client<'a>> + Sync+Send {
+        self.handler = Some(Box::new(handler));
         EndpointHandlerPresent::HandlerPresent
     }
 
@@ -85,8 +86,8 @@ impl Endpoint {
         try!(self.validate(params));
         try!(Endpoint::call_callbacks(&info.after_validation, &mut client, params));
 
-        let ref handler = self.handler.unwrap();
-        let mut client = try!((*handler)(client, params));
+        let handler = self.handler.as_ref();
+        let mut client = try!((handler.unwrap())(client, params));
             
         try!(Endpoint::call_callbacks(&info.after, &mut client, params));
 

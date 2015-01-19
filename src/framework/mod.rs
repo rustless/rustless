@@ -34,10 +34,10 @@ pub type ErrorFormatters = Vec<ErrorFormatter>;
 
 pub struct CallInfo<'a> {
     pub media: Media,
-    pub before: Vec<&'a Callback>,
-    pub before_validation: Vec<&'a Callback>,
-    pub after_validation: Vec<&'a Callback>,
-    pub after: Vec<&'a Callback>,
+    pub before: Vec<Callback>,
+    pub before_validation: Vec<Callback>,
+    pub after_validation: Vec<Callback>,
+    pub after: Vec<Callback>,
     pub app: &'a Application
 }
 

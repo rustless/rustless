@@ -1,5 +1,4 @@
 use collections::BTreeMap;
-use serialize::json;
 use serialize::json::{Json, Object};
 use typemap::TypeMap;
 
@@ -13,7 +12,7 @@ use backend::{Handler, HandleResult, HandleSuccessResult};
 
 use framework::nesting::Nesting;
 use framework::media::Media;
-use framework::{ApiHandler, ApiHandlers, Callbacks, CallInfo, ErrorFormatters, ErrorFormatter};
+use framework::{ApiHandler, ApiHandlers, Callbacks, CallInfo, ErrorFormatters};
 use framework::formatters;
 
 #[allow(dead_code)]
@@ -72,8 +71,8 @@ impl Api {
         self.prefix = prefix.to_string();
     }
 
-    pub fn error_formatter(&mut self, formatter: ErrorFormatter) {
-        self.error_formatters.push(formatter);
+    pub fn error_formatter<F>(&mut self, formatter: F) where F: Fn(&Box<Error + 'static>, &Media) -> Option<Response> + Send+Sync {
+        self.error_formatters.push(Box::new(formatter));
     }
 
     fn handle_error(&self, err: &Box<Error>, media: &Media) -> Option<Response>  {
