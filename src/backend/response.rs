@@ -58,11 +58,11 @@ impl Response {
     }
 
     pub fn push_string(&mut self, body: String) {
-        self.body = Some(box MemReader::new(body.into_bytes()) as Box<Reader + Send>)
+        self.body = Some(Box::new(MemReader::new(body.into_bytes())) as Box<Reader + Send>)
     }
 
     pub fn push_file(&mut self, path: &Path) -> IoResult<()> {
-        let reader = box try!(File::open(path));
+        let reader = Box::new(try!(File::open(path)));
         self.body = Some(reader as Box<Reader + Send>);
 
         Ok(())
@@ -88,10 +88,10 @@ impl Response {
 impl_extensible!(Response);
 
 impl Reader for Response {
-    fn read(&mut self, buf: &mut [u8]) -> IoResult<uint> {
+    fn read(&mut self, buf: &mut [u8]) -> IoResult<usize> {
         match self.body {
             Some(ref mut reader) => reader.read(buf),
-            None => Ok(0u)
+            None => Ok(0us)
         }
     }
 }

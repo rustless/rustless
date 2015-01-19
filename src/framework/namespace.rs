@@ -9,8 +9,7 @@ use backend::{HandleResult};
 use framework::path::{Path};
 use framework::nesting::Nesting;
 use framework::{
-    ApiHandler, ValicoBuildHandler,
-    Callbacks, ApiHandlers, CallInfo
+    ApiHandler, Callbacks, ApiHandlers, CallInfo
 };
 
 pub struct Namespace {
@@ -54,11 +53,11 @@ impl Namespace {
         }
     }
 
-    pub fn params(&mut self, builder: ValicoBuildHandler) {
+    pub fn params<F>(&mut self, builder: F) where F: Fn(&mut ValicoBuilder) {
         self.coercer = Some(ValicoBuilder::build(builder));
     }
 
-    pub fn build(path: &str, builder: |&mut Namespace|) -> Namespace {
+    pub fn build<F>(path: &str, builder: F) -> Namespace where F: Fn(&mut Namespace) {
         let mut namespace = Namespace::new(path);
         builder(&mut namespace);
 
@@ -72,7 +71,7 @@ impl Namespace {
             let coercer = self.coercer.as_ref().unwrap();
             match coercer.process(params) {
                 Ok(()) => Ok(()),
-                Err(err) => return Err(box ValidationError{ reason: err } as Box<Error>)
+                Err(err) => return Err(Box::new(ValidationError{ reason: err }) as Box<Error>)
             }   
         } else {
             Ok(())
@@ -89,7 +88,7 @@ impl ApiHandler for Namespace {
                 self.path.apply_captures(params, captures);
                 rest_path.slice_from(captured_length)
             },
-            None => return Err(box NotMatchError as Box<Error>)
+            None => return Err(Box::new(NotMatchError) as Box<Error>)
         };
 
         try!(self.validate(params));

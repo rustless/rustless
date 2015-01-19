@@ -8,18 +8,17 @@ use errors::{NotMatchError, Error, ValidationError};
 use backend::{HandleResult, HandleSuccessResult};
 use framework::path::{Path};
 use framework::{
-    ApiHandler, ValicoBuildHandler, Client, CallInfo, Callback
+    ApiHandler, Client, CallInfo, Callback
 };
 
-pub type EndpointHandler = for<'a> fn(Client<'a>, &Object) -> HandleResult<Client<'a>>;
+pub type EndpointHandler = Box<for<'a> Fn(Client<'a>, &Object) -> HandleResult<Client<'a>> + 'static + Sync>;
 
 pub enum EndpointHandlerPresent {
     HandlerPresent
 }
 
-pub type EndpointBuilder = |&mut Endpoint|: 'static -> EndpointHandlerPresent;
+pub type EndpointBuilder = Fn(&mut Endpoint) -> EndpointHandlerPresent + 'static;
 
-#[deriving(Send)]
 pub struct Endpoint {
     pub method: Method,
     pub path: Path,
@@ -27,6 +26,8 @@ pub struct Endpoint {
     pub coercer: Option<ValicoBuilder>,
     handler: Option<EndpointHandler>,
 }
+
+unsafe impl Send for Endpoint {}
 
 impl Endpoint {
 
@@ -40,7 +41,8 @@ impl Endpoint {
         }
     }
 
-    pub fn build(method: Method, path: &str, builder: EndpointBuilder) -> Endpoint {
+    pub fn build<F>(method: Method, path: &str, builder: F) -> Endpoint 
+    where F: Fn(&mut Endpoint) -> EndpointHandlerPresent {
         let mut endpoint = Endpoint::new(method, path);
         builder(&mut endpoint);
 
@@ -51,7 +53,7 @@ impl Endpoint {
         self.desc = Some(desc.to_string());
     }
 
-    pub fn params(&mut self, builder: ValicoBuildHandler) {
+    pub fn params<F>(&mut self, builder: F) where F: Fn(&mut ValicoBuilder) + 'static {
         self.coercer = Some(ValicoBuilder::build(builder));
     }
 
@@ -67,7 +69,7 @@ impl Endpoint {
             let coercer = self.coercer.as_ref().unwrap();
             match coercer.process(params) {
                 Ok(()) => Ok(()),
-                Err(err) => return Err(box ValidationError{ reason: err } as Box<Error>)
+                Err(err) => return Err(Box::new(ValidationError{ reason: err }) as Box<Error>)
             }   
         } else {
             Ok(())
@@ -106,7 +108,7 @@ impl ApiHandler for Endpoint {
 
         // Method guard
         if req.method() != &self.method {
-            return Err(box NotMatchError as Box<Error>)
+            return Err(Box::new(NotMatchError) as Box<Error>)
         }
 
         match self.path.is_match(rest_path) {
@@ -114,7 +116,7 @@ impl ApiHandler for Endpoint {
                 self.path.apply_captures(params, captures);
                 self.call_decode(params, req, info)
             },
-            None => Err(box NotMatchError as Box<Error>)
+            None => Err(Box::new(NotMatchError) as Box<Error>)
         }
 
     }

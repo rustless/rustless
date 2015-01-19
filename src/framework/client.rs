@@ -85,7 +85,7 @@ impl<'a> Client<'a> {
     }
 
     pub fn error<T: Error>(self, error: T) -> ClientResult<'a> {
-        Err(box error as Box<Error>)
+        Err(Box::new(error) as Box<Error>)
     }
 
     pub fn json(mut self, result: &Json) -> ClientResult<'a> {
@@ -105,14 +105,14 @@ impl<'a> Client<'a> {
         let absolute_path = match os::make_absolute(path) {
             Ok(path) => path,
             Err(err) => {
-                return Err(box FileError(err) as Box<Error>);
+                return Err(Box::new(FileError(err)) as Box<Error>);
             }
         };
 
         match self.response.push_file(&absolute_path) {
             Ok(()) => Ok(self),
             Err(err) => {
-                return Err(box FileError(err) as Box<Error>);
+                return Err(Box::new(FileError(err)) as Box<Error>);
             }
         } 
     }

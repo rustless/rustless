@@ -3,9 +3,11 @@ use serialize::json::Object;
 use backend::{Request, Response};
 use server::method::Method::{Get, Post, Put, Delete};
 use backend::{HandleResult};
-use errors::{NotMatchError, Error};
+use errors::{NotMatchError};
 
-use framework::endpoint::{Endpoint, EndpointBuilder};
+use errors::Error;
+
+use framework::endpoint::{Endpoint, EndpointHandlerPresent};
 use framework::{ApiHandler, ApiHandlers, Callback, Callbacks, CallInfo};
 use framework::namespace::Namespace;
 
@@ -26,11 +28,11 @@ pub trait Nesting {
     fn get_after<'a>(&'a self) -> &'a Callbacks;
     fn get_after_mut<'a>(&'a mut self) -> &'a mut Callbacks;
 
-    fn push_callbacks(&self, info: &mut CallInfo) {
-        for cb in self.get_before().iter() { info.before.push(*cb); }
-        for cb in self.get_before_validation().iter() { info.before_validation.push(*cb); }
-        for cb in self.get_after_validation().iter() { info.after_validation.push(*cb); }
-        for cb in self.get_after().iter() { info.after.push(*cb); }
+    fn push_callbacks<'a>(&'a self, info: &mut CallInfo<'a>) {
+        for cb in self.get_before().iter() { info.before.push(cb); }
+        for cb in self.get_before_validation().iter() { info.before_validation.push(cb); }
+        for cb in self.get_after_validation().iter() { info.after_validation.push(cb); }
+        for cb in self.get_after().iter() { info.after.push(cb); }
     }
 
     fn mount(&mut self, edp: Box<ApiHandler + Send + Sync>) {
@@ -41,37 +43,37 @@ pub trait Nesting {
      * Namespace aliases
      */
 
-    fn namespace(&mut self, path: &str, builder: |&mut Namespace|) {
-        self.mount(box Namespace::build(path, builder));
+    fn namespace<F>(&mut self, path: &str, builder: F) where F: Fn(&mut Namespace) {
+        self.mount(Box::new(Namespace::build(path, builder)));
     }
-    fn group(&mut self, path: &str, builder: |&mut Namespace|) {
-        self.mount(box Namespace::build(path, builder));
+    fn group<F>(&mut self, path: &str, builder: F) where F: Fn(&mut Namespace) {
+        self.mount(Box::new(Namespace::build(path, builder)));
     }
-    fn resource(&mut self, path: &str, builder: |&mut Namespace|) {
-        self.mount(box Namespace::build(path, builder));
+    fn resource<F>(&mut self, path: &str, builder: F) where F: Fn(&mut Namespace) {
+        self.mount(Box::new(Namespace::build(path, builder)));
     }
-    fn resources(&mut self, path: &str, builder: |&mut Namespace|) {
-        self.mount(box Namespace::build(path, builder));
+    fn resources<F>(&mut self, path: &str, builder: F) where F: Fn(&mut Namespace) {
+        self.mount(Box::new(Namespace::build(path, builder)));
     }
-    fn segment(&mut self, path: &str, builder: |&mut Namespace|) {
-        self.mount(box Namespace::build(path, builder));
+    fn segment<F>(&mut self, path: &str, builder: F) where F: Fn(&mut Namespace) {
+        self.mount(Box::new(Namespace::build(path, builder)));
     }
 
     /* 
      * Endpoints
      */
 
-    fn get(&mut self, path: &str, builder: EndpointBuilder) {
-        self.mount(box Endpoint::build(Get, path, builder));
+    fn get<F>(&mut self, path: &str, builder: F) where F: Fn(&mut Endpoint) -> EndpointHandlerPresent {
+        self.mount(Box::new(Endpoint::build(Get, path, builder)));
     }    
-    fn post(&mut self, path: &str, builder: EndpointBuilder) {
-        self.mount(box Endpoint::build(Post, path, builder));
+    fn post<F>(&mut self, path: &str, builder: F) where F: Fn(&mut Endpoint) -> EndpointHandlerPresent {
+        self.mount(Box::new(Endpoint::build(Post, path, builder)));
     }    
-    fn put(&mut self, path: &str, builder: EndpointBuilder) {
-        self.mount(box Endpoint::build(Put, path, builder));
+    fn put<F>(&mut self, path: &str, builder: F) where F: Fn(&mut Endpoint) -> EndpointHandlerPresent {
+        self.mount(Box::new(Endpoint::build(Put, path, builder)));
     }    
-    fn delete(&mut self, path: &str, builder: EndpointBuilder) {
-        self.mount(box Endpoint::build(Delete, path, builder));
+    fn delete<F>(&mut self, path: &str, builder: F) where F: Fn(&mut Endpoint) -> EndpointHandlerPresent {
+        self.mount(Box::new(Endpoint::build(Delete, path, builder)));
     }
 
     fn before(&mut self, callback: Callback) { self.get_before_mut().push(callback); }
@@ -92,7 +94,7 @@ pub trait Nesting {
             };
         }
 
-        Err(box NotMatchError as Box<Error>)
+        Err(Box::new(NotMatchError) as Box<Error>)
     }
 
 }

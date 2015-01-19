@@ -1,14 +1,14 @@
 #![crate_name = "rustless"]
 #![crate_type = "rlib"]
+#![feature(plugin)]
 #![deny(warnings)]
 #![deny(bad_style)]
-#![feature(macro_rules, phase)]
-#[phase(plugin)]
 
+#[plugin]
 extern crate regex_macros;
 extern crate regex;
 extern crate hyper;
-extern crate serialize;
+extern crate "rustc-serialize" as serialize;
 extern crate url;
 extern crate error;
 extern crate cookie;
@@ -78,7 +78,7 @@ macro_rules! format_error {
     });
 }
 
-pub trait Extensible for Sized? {
+pub trait Extensible {
     fn ext(&self) -> &::typemap::TypeMap;
     fn ext_mut(&mut self) -> &mut ::typemap::TypeMap;
 }
