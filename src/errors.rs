@@ -1,79 +1,79 @@
-use serialize::json::Object;
-use std::io::IoError;
+use serialize::json;
+use std::io;
 pub use error::{Error};
-use std::error::Error as StdError;
+use std;
 
 #[derive(Show, Copy)]
-pub struct NotMatchError;
+pub struct NotMatch;
 
-impl StdError for NotMatchError {
+impl std::error::Error for NotMatch {
     fn description(&self) -> &str {
-        return "NotMatchError";
+        return "NotMatch";
     }
 }
 
 #[derive(Show, Copy)]
-pub struct NotFoundError;
+pub struct NotFound;
 
-impl StdError for NotFoundError {
+impl std::error::Error for NotFound {
     fn description(&self) -> &str {
-        return "NotFoundError";
+        return "NotFound";
     }
 }
 
 #[derive(Show, Copy)]
-pub struct QueryStringDecodeError;
+pub struct QueryString;
 
-impl StdError for QueryStringDecodeError {
+impl std::error::Error for QueryString {
     fn description(&self) -> &str {
-        return "QueryStringDecodeError";
+        return "QueryString";
     }
 }
 
 #[derive(Show)]
-pub struct ValidationError {
-    pub reason: Object
+pub struct Validation {
+    pub reason: json::Object
 }
 
-impl StdError for ValidationError {
+impl std::error::Error for Validation {
     fn description(&self) -> &str {
-        return "ValidationError";
+        return "Validation";
     }
 }
 
 #[derive(Show)]
-pub struct BodyDecodeError {
+pub struct Body {
     pub reason: String
 }
 
-impl BodyDecodeError {
-    pub fn new(reason: String) -> BodyDecodeError {
-        return BodyDecodeError {
+impl Body {
+    pub fn new(reason: String) -> Body {
+        return Body {
             reason: reason
         }
     }
 }
 
-impl StdError for BodyDecodeError {
+impl std::error::Error for Body {
     fn description(&self) -> &str {
-        return "BodyDecodeError";
+        return "Body";
     }
 }
 
 #[derive(Show)]
-pub struct FileError(pub IoError);
+pub struct File(pub io::IoError);
 
-impl StdError for FileError {
+impl std::error::Error for File {
     fn description(&self) -> &str {
-        let &FileError(ref error) = self;
+        let &File(ref error) = self;
         error.desc
     }
 }
 
 #[derive(Show, Copy)]
-pub struct NotAcceptableError;
-impl StdError for NotAcceptableError {
+pub struct NotAcceptable;
+impl std::error::Error for NotAcceptable {
     fn description(&self) -> &str {
-        "NotAcceptableError"
+        "NotAcceptable"
     }
 }

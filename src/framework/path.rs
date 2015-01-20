@@ -1,24 +1,24 @@
 
-use serialize::json::{Object, ToJson};
-use regex::{Regex, Captures};
+use serialize::json::{self, ToJson};
+use regex;
 
-static MATCHER: Regex = regex!(r":([a-z][a-z_]*)");
+static MATCHER: regex::Regex = regex!(r":([a-z][a-z_]*)");
 
 pub struct Path {
-    regex: Regex,
+    regex: regex::Regex,
     pub path: String,
     pub params: Vec<String>
 }
 
 impl Path {
 
-    pub fn apply_captures(&self, jobj: &mut Object, captures: Captures) {
+    pub fn apply_captures(&self, jobj: &mut json::Object, captures: regex::Captures) {
         for param in self.params.iter() {
             jobj.insert(param.clone(), captures.name(param.as_slice()).unwrap_or("").to_string().to_json());
         }
     }
 
-    pub fn is_match<'a>(&'a self, path: &'a str) -> Option<Captures> {
+    pub fn is_match<'a>(&'a self, path: &'a str) -> Option<regex::Captures> {
         match self.regex.captures(path) {
             Some(captures) => Some(captures),
             None => None
@@ -32,7 +32,7 @@ impl Path {
             regex_body = regex_body + "$";
         }
 
-        let regex = match Regex::new(regex_body.as_slice()) {
+        let regex = match regex::Regex::new(regex_body.as_slice()) {
             Ok(re) => re,
             Err(err) => return Err(format!("{}", err))
         };

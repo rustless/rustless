@@ -1,21 +1,21 @@
-use std::io::{File, Reader, IoResult};
-use std::fmt::{Show, Formatter, Error};
-use std::io::net::ip::SocketAddr;
-use typemap::TypeMap;
+use std::io;
+use std::fmt;
+use std::io::net::ip;
+use typemap;
 
 use {Extensible};
 
-use server::method::Method;
-use server::header::Headers;
+use server::method;
+use server::header;
 use backend::{Request, Url, AsUrl, WrapUrl};
 
 #[allow(dead_code)]
 pub struct SimpleRequest {
     pub url: Url,
-    pub ext: TypeMap,
-    pub remote_addr: SocketAddr,
-    pub headers: Headers,
-    pub method: Method,
+    pub ext: typemap::TypeMap,
+    pub remote_addr: ip::SocketAddr,
+    pub headers: header::Headers,
+    pub method: method::Method,
     pub body: Vec<u8>
 }
 
@@ -25,15 +25,15 @@ impl Request for SimpleRequest {
         return &self.url;    
     }
 
-    fn remote_addr(&self) -> &SocketAddr {
+    fn remote_addr(&self) -> &ip::SocketAddr {
         return &self.remote_addr;
     }
 
-    fn headers(&self) -> &Headers {
+    fn headers(&self) -> &header::Headers {
         return &self.headers;
     }
 
-    fn method(&self) -> &Method {
+    fn method(&self) -> &method::Method {
         return &self.method;
     }
 
@@ -46,25 +46,26 @@ impl Request for SimpleRequest {
 #[allow(dead_code)]
 impl SimpleRequest {
     
-    pub fn new(method: Method, url: ::url::Url) -> SimpleRequest {
+    pub fn new(method: method::Method, url: ::url::Url) -> SimpleRequest {
         SimpleRequest {
             url: url.wrap_url(),
             method: method,
-            ext: TypeMap::new(),
+            ext: typemap::TypeMap::new(),
             remote_addr: "127.0.0.1:8000".parse().unwrap(),
-            headers: Headers::new(),
+            headers: header::Headers::new(),
             body: vec![]
         }
     }
 
-    pub fn build<F>(method: Method, url: ::url::Url, builder: F) -> SimpleRequest where F: Fn(&mut SimpleRequest) {
+    pub fn build<F>(method: method::Method, url: ::url::Url, builder: F) -> SimpleRequest 
+    where F: Fn(&mut SimpleRequest) {
         let mut srq = SimpleRequest::new(method, url);
         builder(&mut srq);
 
         srq
     }
 
-    pub fn set_remote_addr(&mut self, addr: SocketAddr) {
+    pub fn set_remote_addr(&mut self, addr: ip::SocketAddr) {
         self.remote_addr = addr;
     }
 
@@ -72,7 +73,7 @@ impl SimpleRequest {
         self.remote_addr = addr.parse().unwrap();
     }
 
-    pub fn headers_mut(&mut self) -> &mut Headers {
+    pub fn headers_mut(&mut self) -> &mut header::Headers {
         return &mut self.headers;
     }
 
@@ -80,8 +81,8 @@ impl SimpleRequest {
         self.body = body.into_bytes()
     }
 
-    pub fn push_file(&mut self, path: &Path) -> IoResult<()> {
-        let mut reader = Box::new(try!(File::open(path)));
+    pub fn push_file(&mut self, path: &Path) -> io::IoResult<()> {
+        let mut reader = Box::new(try!(io::File::open(path)));
         self.body = try!(reader.read_to_end());
 
         Ok(())
@@ -91,8 +92,8 @@ impl SimpleRequest {
 
 impl_extensible!(SimpleRequest);
 
-impl Show for SimpleRequest {
-    fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {
+impl fmt::Show for SimpleRequest {
+    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
         try!(writeln!(f, "SimpleRequest ->"));
         try!(writeln!(f, "  url: {}", self.url));
         try!(writeln!(f, "  method: {}", self.method()));

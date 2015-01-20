@@ -1,21 +1,21 @@
 
-use regex::Regex;
-use hyper::mime::{Mime, TopLevel, SubLevel};
+use regex;
+use server::mime;
 
-static MEDIA_REGEX: Regex = regex!(r"vnd\.(?P<vendor>[a-zA-Z_-]+)(?:\.(?P<version>[a-zA-Z0-9]+)(?:\.(?P<param>[a-zA-Z0-9]+))?)?(?:\+(?P<format>[a-zA-Z0-9]+))?");
+static MEDIA_REGEX: regex::Regex = regex!(r"vnd\.(?P<vendor>[a-zA-Z_-]+)(?:\.(?P<version>[a-zA-Z0-9]+)(?:\.(?P<param>[a-zA-Z0-9]+))?)?(?:\+(?P<format>[a-zA-Z0-9]+))?");
 
 #[derive(Show)]
 pub enum Format {
     JsonFormat,
     PlainTextFormat,
-    OtherFormat(Mime)
+    OtherFormat(mime::Mime)
 }
 
 impl Format {
-    pub fn from_mime(mime: &Mime) -> Format {
+    pub fn from_mime(mime: &mime::Mime) -> Format {
         match mime {
-            &Mime(TopLevel::Text, SubLevel::Plain, _) => Format::PlainTextFormat,
-            &Mime(TopLevel::Application, SubLevel::Json, _) => Format::JsonFormat,
+            &mime::Mime(mime::TopLevel::Text, mime::SubLevel::Plain, _) => Format::PlainTextFormat,
+            &mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, _) => Format::JsonFormat,
             _ => Format::OtherFormat(mime.clone())
         }
     }
@@ -31,10 +31,10 @@ pub struct Media {
 impl Media {
 
     pub fn default() -> Media {
-        Media::from_mime(&Mime(TopLevel::Text, SubLevel::Plain, vec![]))
+        Media::from_mime(&mime::Mime(mime::TopLevel::Text, mime::SubLevel::Plain, vec![]))
     }
 
-    pub fn from_mime(mime: &Mime) -> Media {
+    pub fn from_mime(mime: &mime::Mime) -> Media {
         Media {
             vendor: "default".to_string(),
             version: None,
@@ -43,9 +43,9 @@ impl Media {
         }
     }
 
-    pub fn from_vendor(mime: &Mime) -> Option<Media> {
+    pub fn from_vendor(mime: &mime::Mime) -> Option<Media> {
         match mime {
-            &Mime(TopLevel::Application, SubLevel::Ext(ref ext), _) => {
+            &mime::Mime(mime::TopLevel::Application, mime::SubLevel::Ext(ref ext), _) => {
                 match MEDIA_REGEX.captures(ext.as_slice()) {
                     Some(captures) => {
                         let vendor = captures.name("vendor");

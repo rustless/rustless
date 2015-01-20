@@ -1,16 +1,13 @@
-use url::Url;
-use rustless::server::method::Method::{Get};
-use rustless::server::status::StatusCode;
-use rustless::errors::{Error};
-use std::error::Error as StdError;
-use rustless::{
-    Application, Api, Valico, Nesting, SimpleRequest, Response
-};
+use std;
+use valico;
+use rustless::{self, Nesting};
+use rustless::server::status;
+use rustless::errors::{self, Error};
 
 #[derive(Show)]
 pub struct UnauthorizedError;
 
-impl StdError for UnauthorizedError {
+impl std::error::Error for UnauthorizedError {
     fn description(&self) -> &'static str {
         return "Unauthorized";
     }
@@ -25,7 +22,7 @@ fn it_invokes_callbacks() {
         api.error_formatter(|err, _media| {
             match err.downcast::<UnauthorizedError>() {
                 Some(_) => {
-                    return Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
+                    return Some(rustless::Response::from_string(status::StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
                 },
                 None => None
             }
@@ -34,7 +31,7 @@ fn it_invokes_callbacks() {
         api.namespace("admin", |admin_ns| {
 
             admin_ns.params(|params| {
-                params.req_typed("token", Valico::string())
+                params.req_typed("token", valico::Builder::string())
             });
 
             // Using after_validation callback to check token
@@ -46,7 +43,7 @@ fn it_invokes_callbacks() {
                 }
 
                 // Fire error from callback is token is wrong
-                return Err(Box::new(UnauthorizedError) as Box<Error>)
+                return Err(Box::new(UnauthorizedError) as Box<errors::Error>)
             });
 
             // This `/api/admin/server_status` endpoint is secure now
@@ -60,12 +57,12 @@ fn it_invokes_callbacks() {
     });
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/admin/server_status").unwrap();
-    assert_eq!(response.status, StatusCode::BadRequest);
+    assert_eq!(response.status, status::StatusCode::BadRequest);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/admin/server_status?token=wrong%20token").unwrap();
-    assert_eq!(response.status, StatusCode::Unauthorized);
+    assert_eq!(response.status, status::StatusCode::Unauthorized);
 
     let response = call_app!(app, Get, "http://127.0.0.1:3000/api/admin/server_status?token=password1").unwrap();
-    assert_eq!(response.status, StatusCode::Ok);
+    assert_eq!(response.status, status::StatusCode::Ok);
 
 }

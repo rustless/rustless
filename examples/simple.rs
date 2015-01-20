@@ -9,23 +9,17 @@ extern crate "rustc-serialize" as serialize;
 extern crate valico;
 extern crate cookie;
 
-use std::error::Error as StdError;
-use iron::{Iron, Chain, ChainBuilder};
-use cookie::Cookie;
+use iron::{Chain};
 
-use valico::Builder as Valico;
-use rustless::server::status::{StatusCode};
+use rustless::server::status;
 use rustless::errors::{Error};
 use rustless::batteries::cookie::CookieExt;
-use rustless::{
-    Application, Api, Nesting, Versioning,
-    Response
-};
+use rustless::{Nesting};
 
 #[derive(Show, Copy)]
 pub struct UnauthorizedError;
 
-impl StdError for UnauthorizedError {
+impl std::error::Error for UnauthorizedError {
     fn description(&self) -> &str {
         return "UnauthorizedError";
     }
@@ -33,14 +27,17 @@ impl StdError for UnauthorizedError {
 
 fn main() {
 
-    let app = Application::new(Api::build(|api| {
+    let app = rustless::Application::new(rustless::Api::build(|api| {
         api.prefix("api");
-        api.version("v1", Versioning::Path);
+        api.version("v1", rustless::Versioning::Path);
 
         api.error_formatter(|err, _media| {
             match err.downcast::<UnauthorizedError>() {
                 Some(_) => {
-                    return Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
+                    return Some(rustless::Response::from_string(
+                        status::StatusCode::Unauthorized, 
+                        "Please provide correct `token` parameter".to_string()
+                    ))
                 },
                 None => None
             }
@@ -49,7 +46,7 @@ fn main() {
         api.namespace("admin", |admin_ns| {
 
             admin_ns.params(|params| {
-                params.req_typed("token", Valico::string())
+                params.req_typed("token", valico::Builder::string())
             });
 
             // Using after_validation callback to check token
@@ -73,7 +70,7 @@ fn main() {
                         let cookies = client.request.cookies();
                         let signed_cookies = cookies.signed();
 
-                        let user_cookie = Cookie::new("session".to_string(), "verified".to_string());
+                        let user_cookie = cookie::Cookie::new("session".to_string(), "verified".to_string());
                         signed_cookies.add(user_cookie);
                     }
 
@@ -85,10 +82,10 @@ fn main() {
 
     
 
-    let mut chain = ChainBuilder::new(app);
+    let mut chain = iron::ChainBuilder::new(app);
     chain.link(::rustless::batteries::cookie::new("secretsecretsecretsecretsecretsecretsecret".as_bytes()));
 
-    Iron::new(chain).listen("localhost:4000").unwrap();
+    iron::Iron::new(chain).listen("localhost:4000").unwrap();
     println!("On 4000");
 
 }
