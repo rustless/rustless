@@ -9,9 +9,9 @@ use framework::path;
 use framework::nesting::{self, Nesting, Node};
 
 pub struct Namespace {
-    handlers: framework::ApiHandlers,
-    path: path::Path,
-    coercer: Option<valico::Builder>,
+    pub handlers: framework::ApiHandlers,
+    pub path: path::Path,
+    pub coercer: Option<valico::Builder>,
     before: framework::Callbacks,
     before_validation: framework::Callbacks,
     after_validation: framework::Callbacks,
@@ -76,9 +76,6 @@ impl framework::ApiHandler for Namespace {
         try!(self.validate(params));
 
         self.push_node(info);
-
-        println!("REST NAMESPACE PATH '{}'", rest_path);
-
         self.call_handlers(rest_path, params, req, info)
     }
 }

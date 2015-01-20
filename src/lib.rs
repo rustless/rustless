@@ -23,6 +23,9 @@ extern crate valico;
 extern crate queryst;
 extern crate jsonway;
 
+#[macro_use] #[no_link]
+extern crate mopa;
+
 pub use backend::{Request, SimpleRequest, Response};
 pub use backend::{Handler, HandleResult, HandleSuccessResult};
 pub use framework::{

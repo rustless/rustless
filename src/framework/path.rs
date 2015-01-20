@@ -27,14 +27,7 @@ impl Path {
     }
 
     pub fn is_match<'a>(&'a self, path: &'a str) -> Option<regex::Captures> {
-        match self.regex.captures(path) {
-            Some(captures) => {
-                println!("PATH IS MATCH: {:?} -> {}", self.regex, path); Some(captures)
-            },
-            None => {
-                println!("PATH IS NOT MATCH: {:?} -> {}", self.regex, path); None
-            }
-        }
+        self.regex.captures(path)
     }
 
     pub fn parse(path: &str, endpoint: bool) -> Result<Path,String> {

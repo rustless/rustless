@@ -1,7 +1,140 @@
-
-use jsonway;
+use std::ascii::AsciiExt;
+use serialize::json::{ToJson};
+use jsonway::{self, MutableJson};
 use framework::{self, Nesting};
 use server::header::common::access_control::allow_origin;
+
+#[allow(unused_variables)]
+pub fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handlers: &framework::ApiHandlers) {
+    let mut current_path = current_path.to_string();
+
+    for handler in handlers.iter() {
+        if handler.is::<framework::Api>() {
+            let api = handler.downcast_ref::<framework::Api>().unwrap();
+            if api.prefix.len() > 0 {
+                current_path.push_str((api.prefix.to_string() + "/").as_slice());
+            }
+            if api.versioning.is_some() {
+                match api.versioning.as_ref().unwrap() {
+                    &framework::Versioning::Path if api.version.is_some() => {
+                        current_path.push_str((api.version.as_ref().unwrap().to_string() + "/").as_slice())
+                    },
+                    _ => ()
+                }
+            }
+            fill_paths(current_path.as_slice(), paths, &api.handlers);
+        } else if handler.is::<framework::Namespace>() {
+            let namespace = handler.downcast_ref::<framework::Namespace>().unwrap();
+            current_path.push_str((namespace.path.path.to_string() + "/").as_slice());
+            fill_paths(current_path.as_slice(), paths, &namespace.handlers);
+        } else if handler.is::<framework::Endpoint>() {
+            let endpoint = handler.downcast_ref::<framework::Endpoint>().unwrap();
+            current_path.push_str((endpoint.path.path.to_string() + "/").as_slice());
+
+            let definition = jsonway::JsonWay::object(|def| {
+                // A list of tags for API documentation control. Tags can be used for logical grouping 
+                // of operations by resources or any other qualifier.
+                def.array("tags", |tags| {});
+
+                // A short summary of what the operation does. For maximum readability in the swagger-ui, 
+                // this field SHOULD be less than 120 characters.
+                def.set("summary", "Summary".to_string());
+
+                // A verbose explanation of the operation behavior. 
+                // GFM syntax can be used for rich text representation.
+                def.set("description",  "Description".to_string());
+
+                // External Documentation Object   
+                // Additional external documentation for this operation.
+                def.object("externalDocs", |external_docs| {
+                    // A short description of the target documentation. 
+                    // GFM syntax can be used for rich text representation.
+                    external_docs.set("description", "Description".to_string()); 
+                    //  Required. The URL for the target documentation. Value MUST be in the format of a URL.
+                    external_docs.set("url", "http://google.com".to_string());
+                });
+
+                // A friendly name for the operation. The id MUST be unique among all operations described 
+                // in the API. Tools and libraries MAY use the operation id to uniquely identify an operation.
+                def.set("operationId", "OP".to_string());
+
+                // A list of MIME types the operation can consume. 
+                // This overrides the [consumes](#swaggerConsumes) definition at the Swagger Object. 
+                // An empty value MAY be used to clear the global definition. 
+                // Value MUST be as described under Mime Types.
+                def.array("consumes", |consumes| {});    
+
+                // A list of MIME types the operation can produce. 
+                // This overrides the [produces](#swaggerProduces) definition at the Swagger Object. 
+                // An empty value MAY be used to clear the global definition. 
+                // Value MUST be as described under Mime Types.
+                def.array("produces", |produces| {});
+
+                // A list of parameters that are applicable for this operation. 
+                // If a parameter is already defined at the Path Item, the new definition will override it, 
+                // but can never remove it. The list MUST NOT include duplicated parameters. 
+                // A unique parameter is defined by a combination of a name and location. 
+                // The list can use the Reference Object to link to parameters that are 
+                // defined at the Swagger Object's parameters. There can be one "body" parameter at most.
+                def.array("parameters", |parameters| {});
+
+                // Required. The list of possible responses as they are returned from executing this operation.
+                def.object("responses",  |responses| {
+                    responses.object("default", |default| {
+                        // Required. A short description of the response. 
+                        // GFM syntax can be used for rich text representation.
+                        default.set("description", "Description".to_string());
+
+                        // A definition of the response structure. It can be a primitive, an array or an object. 
+                        // If this field does not exist, it means no content is returned as part of the response. 
+                        // As an extension to the Schema Object, its root type value may also be "file". 
+                        // This SHOULD be accompanied by a relevant produces mime-type.
+                        default.object("schema", |schema| {});
+
+                        // A list of headers that are sent with the response.
+                        default.object("headers", |headers| {});
+
+                        // An example of the response message.
+                        default.object("examples", |examples| {});
+                    })
+                });
+
+                // The transfer protocol for the operation. Values MUST be from the list: "http", "https", 
+                // "ws", "wss". The value overrides the Swagger Object schemes definition.
+                def.array("schemes", |schemes| {});
+
+                // Declares this operation to be deprecated. Usage of the declared operation should be refrained. 
+                // Default value is false.
+                def.set("deprecated", false);
+
+                // A declaration of which security schemes are applied for this operation. 
+                // The list of values describes alternative security schemes that can be used 
+                // (that is, there is a logical OR between the security requirements). 
+                // This definition overrides any declared top-level security. 
+                // To remove a top-level security declaration, an empty array can be used.
+                def.array("security", |security| {});
+            });
+
+            let method = format!("{:?}", endpoint.method).to_ascii_lowercase();
+            let present = {
+                let maybe_path_obj = paths.object.get_mut(current_path.as_slice());
+                if maybe_path_obj.is_some() {
+                    let path_obj = maybe_path_obj.unwrap().as_object_mut().unwrap();
+                    path_obj.insert(method.to_string(), definition.to_json());
+                    true
+                } else {
+                    false
+                }
+            };
+            
+            if !present {
+                paths.object(current_path.as_slice(), move |: path_item| {
+                    path_item.set(method, definition);
+                })
+            }
+        }
+    }
+}
 
 #[allow(dead_code)]
 #[allow(unused_variables)]
@@ -17,7 +150,7 @@ pub fn create_swagger_api(path: &str) -> framework::Api {
             docs.get("", |endpoint| {
                 endpoint.handle(|&: mut client, _params| {
                     client.set_header(allow_origin::AccessControlAllowOrigin::AllowStar);
-                    client.json(&jsonway::JsonWay::object(|json| {
+                    let swagger_data = &jsonway::JsonWay::object(|json| {
                         // Required. Specifies the Swagger Specification version being used. 
                         // It can be used by the Swagger UI and other clients to interpret the API listing. 
                         // The value MUST be "2.0".
@@ -89,7 +222,7 @@ pub fn create_swagger_api(path: &str) -> framework::Api {
 
                         // Required. The available paths and operations for the API.
                         json.object("paths", |paths| {
-
+                            fill_paths("/", paths, &client.app.root_api.handlers);
                         });
 
                          // An object to hold data types produced and consumed by operations.
@@ -135,7 +268,8 @@ pub fn create_swagger_api(path: &str) -> framework::Api {
                         json.object("externalDocs", |external_docs| {
 
                         })   
-                    }).unwrap())
+                    }).unwrap();
+                    client.json(swagger_data)
                 })
             })
         })

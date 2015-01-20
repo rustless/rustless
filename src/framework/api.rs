@@ -26,7 +26,7 @@ pub struct Api {
     pub version: Option<String>,
     pub versioning: Option<Versioning>,
     pub prefix: String,
-    handlers: framework::ApiHandlers,
+    pub handlers: framework::ApiHandlers,
     before: framework::Callbacks,
     before_validation: framework::Callbacks,
     after_validation: framework::Callbacks,

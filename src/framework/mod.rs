@@ -28,9 +28,11 @@ pub struct CallInfo<'a> {
     pub app: &'a app::Application
 }
 
-pub trait ApiHandler {
+pub trait ApiHandler: ::std::any::Any {
     fn api_call<'a>(&'a self, &str, &mut json::Object, &mut backend::Request, &mut CallInfo<'a>) -> backend::HandleResult<backend::Response>;
 }
+
+mopafy!(ApiHandler);
 
 pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 
