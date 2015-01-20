@@ -31,7 +31,7 @@ fn it_invokes_callbacks() {
         api.namespace("admin", |admin_ns| {
 
             admin_ns.params(|params| {
-                params.req_typed("token", valico::Builder::string())
+                params.req_typed("token", valico::string())
             });
 
             // Using after_validation callback to check token
