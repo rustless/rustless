@@ -7,25 +7,26 @@ extern crate rustless;
 extern crate hyper;
 extern crate "rustc-serialize" as serialize;
 extern crate url;
+extern crate valico;
 extern crate jsonway;
 
 #[macro_export]
 macro_rules! sr {
-    ($edp:ident, $url:expr) => {
-        SimpleRequest::new($edp, Url::parse($url).unwrap())
+    ($method:ident, $url:expr) => {
+        ::rustless::SimpleRequest::new(::rustless::server::method::Method::$method, ::url::Url::parse($url).unwrap())
     };
-    ($edp:ident, $url:expr, $blk:expr) => {
-        SimpleRequest::build($edp, Url::parse($url).unwrap(), $blk)
+    ($method:ident, $url:expr, $blk:expr) => {
+        ::rustless::SimpleRequest::build(::rustless::server::method::Method::$method, ::url::Url::parse($url).unwrap(), $blk)
     };
 }
 
 #[macro_export]
 macro_rules! call_app {
-    ($app:ident, $edp:ident, $url:expr) => {
-        $app.call_with_not_found(&mut sr!($edp, $url))
+    ($app:ident, $method:ident, $url:expr) => {
+        $app.call_with_not_found(&mut sr!($method, $url))
     };    
-    ($app:ident, $edp:ident, $url:expr, $blk:expr) => {
-        $app.call_with_not_found(&mut sr!($edp, $url, $blk))
+    ($app:ident, $method:ident, $url:expr, $blk:expr) => {
+        $app.call_with_not_found(&mut sr!($method, $url, $blk))
     };
 }
 
@@ -41,7 +42,7 @@ macro_rules! mime {
 
 macro_rules! app {
     ($builder:expr) => ({
-        let app = Application::new(Api::build($builder));
+        let app = ::rustless::Application::new(::rustless::Api::build($builder));
         app
     })
 }

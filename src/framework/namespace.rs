@@ -1,25 +1,21 @@
-use serialize::json::{Object};
+use serialize::json;
+use valico;
 
-use valico::Builder as ValicoBuilder;
+use backend;
+use errors;
 
-use backend::{Request, Response};
-use errors::{NotMatchError, ValidationError, Error};
-use backend::{HandleResult};
-
-use framework::path::{Path};
+use framework;
+use framework::path;
 use framework::nesting::{self, Nesting, Node};
-use framework::{
-    ApiHandler, Callbacks, ApiHandlers, CallInfo
-};
 
 pub struct Namespace {
-    handlers: ApiHandlers,
-    path: Path,
-    coercer: Option<ValicoBuilder>,
-    before: Callbacks,
-    before_validation: Callbacks,
-    after_validation: Callbacks,
-    after: Callbacks
+    handlers: framework::ApiHandlers,
+    path: path::Path,
+    coercer: Option<valico::Builder>,
+    before: framework::Callbacks,
+    before_validation: framework::Callbacks,
+    after_validation: framework::Callbacks,
+    after: framework::Callbacks
 }
 
 impl_nesting!(Namespace);
@@ -29,7 +25,7 @@ impl Namespace {
     pub fn new(path: &str) -> Namespace {
         Namespace {
             handlers: vec![],
-            path: Path::parse(path, false).unwrap(),
+            path: path::Path::parse(path, false).unwrap(),
             coercer: None,
             before: vec![],
             before_validation: vec![],
@@ -38,8 +34,8 @@ impl Namespace {
         }
     }
 
-    pub fn params<F>(&mut self, builder: F) where F: Fn(&mut ValicoBuilder) {
-        self.coercer = Some(ValicoBuilder::build(builder));
+    pub fn params<F>(&mut self, builder: F) where F: Fn(&mut valico::Builder) {
+        self.coercer = Some(valico::Builder::build(builder));
     }
 
     pub fn build<F>(path: &str, builder: F) -> Namespace where F: Fn(&mut Namespace) {
@@ -49,14 +45,14 @@ impl Namespace {
         return namespace;
     }
 
-    fn validate(&self, params: &mut Object) -> HandleResult<()> {
+    fn validate(&self, params: &mut json::Object) -> backend::HandleResult<()> {
         // Validate namespace params with valico
         if self.coercer.is_some() {
             // validate and coerce params
             let coercer = self.coercer.as_ref().unwrap();
             match coercer.process(params) {
                 Ok(()) => Ok(()),
-                Err(err) => return Err(Box::new(ValidationError{ reason: err }) as Box<Error>)
+                Err(err) => return Err(Box::new(errors::Validation{ reason: err }) as Box<errors::Error>)
             }   
         } else {
             Ok(())
@@ -64,8 +60,9 @@ impl Namespace {
     }
 }
 
-impl ApiHandler for Namespace {
-    fn api_call<'a>(&'a self, rest_path: &str, params: &mut Object, req: &mut Request, info: &mut CallInfo<'a>) -> HandleResult<Response> {
+impl framework::ApiHandler for Namespace {
+    fn api_call<'a>(&'a self, rest_path: &str, params: &mut json::Object, req: &mut backend::Request, 
+                    info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
 
         let rest_path: &str = match self.path.is_match(rest_path) {
             Some(captures) =>  {
@@ -73,7 +70,7 @@ impl ApiHandler for Namespace {
                 self.path.apply_captures(params, captures);
                 rest_path.slice_from(captured_length)
             },
-            None => return Err(Box::new(NotMatchError) as Box<Error>)
+            None => return Err(Box::new(errors::NotMatch) as Box<errors::Error>)
         };
 
         try!(self.validate(params));

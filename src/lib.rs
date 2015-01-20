@@ -22,7 +22,6 @@ extern crate collections;
 extern crate valico;
 extern crate queryst;
 
-pub use valico::Builder as Valico;
 pub use backend::{Request, SimpleRequest, Response};
 pub use backend::{Handler, HandleResult, HandleSuccessResult};
 pub use framework::{
@@ -36,7 +35,7 @@ pub trait Extensible {
 
 macro_rules! impl_extensible {
     ($t:ty) => (
-        impl Extensible for $t {
+        impl $crate::Extensible for $t {
             fn ext(&self) -> &::typemap::TypeMap { &self.ext }
             fn ext_mut(&mut self) -> &mut ::typemap::TypeMap { &mut self.ext }
         }
