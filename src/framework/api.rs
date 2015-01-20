@@ -12,6 +12,7 @@ use framework::app;
 use framework::nesting::{self, Nesting, Node};
 use framework::media;
 use framework::formatters;
+use framework::path;
 
 #[allow(dead_code)]
 #[allow(missing_copy_implementations)]
@@ -195,8 +196,8 @@ impl framework::ApiHandler for Api {
         
         // Check prefix
         let mut rest_path = if self.prefix.len() > 0 {
-            if rest_path.slice_from(1).starts_with(self.prefix.as_slice()) {
-                rest_path.slice_from(self.prefix.len() + 1)
+            if rest_path.starts_with(self.prefix.as_slice()) {
+                path::normalize(rest_path.slice_from(self.prefix.len()))
             } else {
                return Err(Box::new(errors::NotMatch) as Box<Error>)
             }
@@ -213,8 +214,8 @@ impl framework::ApiHandler for Api {
 
             match versioning {
                 &Versioning::Path => {
-                    if rest_path.slice_from(1).starts_with(version.as_slice()) {
-                        rest_path = rest_path.slice_from(version.len() + 1)
+                    if rest_path.starts_with(version.as_slice()) {
+                        rest_path = path::normalize(rest_path.slice_from(version.len()))
                     } else {
                        return Err(Box::new(errors::NotMatch) as Box<Error>)
                     }

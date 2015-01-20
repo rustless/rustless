@@ -10,6 +10,7 @@ use framework::path;
 
 pub type EndpointHandler = Box<for<'a> Fn(framework::Client<'a>, &json::Object) -> backend::HandleResult<framework::Client<'a>> + 'static + Sync>;
 
+#[allow(missing_copy_implementations)]
 pub enum EndpointHandlerPresent {
     HandlerPresent
 }

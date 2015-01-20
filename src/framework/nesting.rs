@@ -101,6 +101,14 @@ pub trait Nesting: Node {
     fn delete<F>(&mut self, path: &str, builder: F) where F: Fn(&mut endpoint::Endpoint) 
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Delete, path, builder));
+    }    
+    fn options<F>(&mut self, path: &str, builder: F) where F: Fn(&mut endpoint::Endpoint) 
+    -> endpoint::EndpointHandlerPresent {
+        self.mount(endpoint::Endpoint::build(method::Method::Options, path, builder));
+    }    
+    fn head<F>(&mut self, path: &str, builder: F) where F: Fn(&mut endpoint::Endpoint) 
+    -> endpoint::EndpointHandlerPresent {
+        self.mount(endpoint::Endpoint::build(method::Method::Head, path, builder));
     }
 
     fn before<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Object) 

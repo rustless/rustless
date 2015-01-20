@@ -12,15 +12,15 @@ pub use self::namespace::{Namespace};
 pub use self::media::Media;
 
 #[macro_use]
-mod nesting;
-mod api;
-mod endpoint;
-mod namespace;
-mod client;
-mod media;
-mod path;
-mod formatters;
-mod app;
+pub mod nesting;
+pub mod api;
+pub mod endpoint;
+pub mod namespace;
+pub mod client;
+pub mod media;
+pub mod path;
+pub mod formatters;
+pub mod app;
 
 pub struct CallInfo<'a> {
     pub media: media::Media,

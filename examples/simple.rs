@@ -13,6 +13,7 @@ use iron::{Chain};
 
 use rustless::server::status;
 use rustless::errors::{Error};
+use rustless::batteries::swagger;
 use rustless::batteries::cookie::CookieExt;
 use rustless::{Nesting};
 
@@ -30,6 +31,8 @@ fn main() {
     let app = rustless::Application::new(rustless::Api::build(|api| {
         api.prefix("api");
         api.version("v1", rustless::Versioning::Path);
+        
+        api.mount(swagger::create_swagger_api("api-docs"));
 
         api.error_formatter(|err, _media| {
             match err.downcast::<UnauthorizedError>() {

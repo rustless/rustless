@@ -68,7 +68,7 @@ impl framework::ApiHandler for Namespace {
             Some(captures) =>  {
                 let captured_length = captures.at(0).map_or(0, |c| c.len());
                 self.path.apply_captures(params, captures);
-                rest_path.slice_from(captured_length)
+                path::normalize(rest_path.slice_from(captured_length))
             },
             None => return Err(Box::new(errors::NotMatch) as Box<errors::Error>)
         };
@@ -76,6 +76,9 @@ impl framework::ApiHandler for Namespace {
         try!(self.validate(params));
 
         self.push_node(info);
+
+        println!("REST NAMESPACE PATH '{}'", rest_path);
+
         self.call_handlers(rest_path, params, req, info)
     }
 }

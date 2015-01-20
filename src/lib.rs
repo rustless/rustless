@@ -21,6 +21,7 @@ extern crate plugin;
 extern crate collections;
 extern crate valico;
 extern crate queryst;
+extern crate jsonway;
 
 pub use backend::{Request, SimpleRequest, Response};
 pub use backend::{Handler, HandleResult, HandleSuccessResult};
