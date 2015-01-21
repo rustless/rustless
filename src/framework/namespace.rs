@@ -34,11 +34,11 @@ impl Namespace {
         }
     }
 
-    pub fn params<F>(&mut self, builder: F) where F: Fn(&mut valico::Builder) {
+    pub fn params<F>(&mut self, builder: F) where F: FnOnce(&mut valico::Builder) {
         self.coercer = Some(valico::Builder::build(builder));
     }
 
-    pub fn build<F>(path: &str, builder: F) -> Namespace where F: Fn(&mut Namespace) {
+    pub fn build<F>(path: &str, builder: F) -> Namespace where F: FnOnce(&mut Namespace) {
         let mut namespace = Namespace::new(path);
         builder(&mut namespace);
 

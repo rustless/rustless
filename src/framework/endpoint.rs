@@ -15,7 +15,7 @@ pub enum EndpointHandlerPresent {
     HandlerPresent
 }
 
-pub type EndpointBuilder = Fn(&mut Endpoint) -> EndpointHandlerPresent + 'static;
+pub type EndpointBuilder = FnOnce(&mut Endpoint) -> EndpointHandlerPresent + 'static;
 
 pub struct Endpoint {
     pub method: method::Method,
@@ -40,7 +40,7 @@ impl Endpoint {
     }
 
     pub fn build<F>(method: method::Method, path: &str, builder: F) -> Endpoint 
-    where F: Fn(&mut Endpoint) -> EndpointHandlerPresent {
+    where F: FnOnce(&mut Endpoint) -> EndpointHandlerPresent {
         let mut endpoint = Endpoint::new(method, path);
         builder(&mut endpoint);
 
@@ -51,13 +51,18 @@ impl Endpoint {
         self.desc = Some(desc.to_string());
     }
 
-    pub fn params<F>(&mut self, builder: F) where F: Fn(&mut valico::Builder) + 'static {
+    pub fn params<F>(&mut self, builder: F) where F: FnOnce(&mut valico::Builder) + 'static {
         self.coercer = Some(valico::Builder::build(builder));
     }
 
     pub fn handle<F>(&mut self, handler: F) -> EndpointHandlerPresent
     where F: for<'a> Fn(framework::Client<'a>, &json::Object) -> backend::HandleResult<framework::Client<'a>> + Sync+Send {
         self.handler = Some(Box::new(handler));
+        EndpointHandlerPresent::HandlerPresent
+    }
+
+    pub fn handle_boxed(&mut self, handler: EndpointHandler) -> EndpointHandlerPresent {
+        self.handler = Some(handler);
         EndpointHandlerPresent::HandlerPresent
     }
 

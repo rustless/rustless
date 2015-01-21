@@ -28,11 +28,11 @@ impl std::error::Error for UnauthorizedError {
 
 fn main() {
 
-    let app = rustless::Application::new(rustless::Api::build(|api| {
+    let mut app = rustless::Application::new(rustless::Api::build(|api| {
         api.prefix("api");
         api.version("v1", rustless::Versioning::Path);
         
-        api.mount(swagger::create_swagger_api("api-docs"));
+        api.mount(swagger::create_api("api-docs"));
 
         api.error_formatter(|err, _media| {
             match err.downcast::<UnauthorizedError>() {
@@ -83,7 +83,23 @@ fn main() {
         })
     }));
 
-    
+    swagger::enable(&mut app, swagger::Spec {
+        info: swagger::Info {
+            title: "Example API".to_string(),
+            description: Some("Simple API to demonstration".to_string()),
+            contact: Some(swagger::Contact {
+                name: "Stanislav Panferov".to_string(),
+                url: Some("http://panferov.me".to_string()),
+                ..std::default::Default::default()
+            }),
+            license: Some(swagger::License {
+                name: "MIT".to_string(),
+                ..std::default::Default::default()
+            }),
+            ..std::default::Default::default()
+        },
+        ..std::default::Default::default()
+    });
 
     let mut chain = iron::ChainBuilder::new(app);
     chain.link(::rustless::batteries::cookie::new("secretsecretsecretsecretsecretsecretsecret".as_bytes()));

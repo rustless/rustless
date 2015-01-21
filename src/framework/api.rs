@@ -54,7 +54,7 @@ impl Api {
         }
     }
 
-    pub fn build<F>(builder: F) -> Api where F: Fn(&mut Api) {
+    pub fn build<F>(builder: F) -> Api where F: FnOnce(&mut Api) {
         let mut api = Api::new();
         builder(&mut api);
 

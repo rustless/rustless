@@ -66,19 +66,19 @@ pub trait Nesting: Node {
      * namespace::Namespace aliases
      */
 
-    fn namespace<F>(&mut self, path: &str, builder: F) where F: Fn(&mut namespace::Namespace) {
+    fn namespace<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut namespace::Namespace) {
         self.mount(namespace::Namespace::build(path, builder));
     }
-    fn group<F>(&mut self, path: &str, builder: F) where F: Fn(&mut namespace::Namespace) {
+    fn group<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut namespace::Namespace) {
         self.mount(namespace::Namespace::build(path, builder));
     }
-    fn resource<F>(&mut self, path: &str, builder: F) where F: Fn(&mut namespace::Namespace) {
+    fn resource<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut namespace::Namespace) {
         self.mount(namespace::Namespace::build(path, builder));
     }
-    fn resources<F>(&mut self, path: &str, builder: F) where F: Fn(&mut namespace::Namespace) {
+    fn resources<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut namespace::Namespace) {
         self.mount(namespace::Namespace::build(path, builder));
     }
-    fn segment<F>(&mut self, path: &str, builder: F) where F: Fn(&mut namespace::Namespace) {
+    fn segment<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut namespace::Namespace) {
         self.mount(namespace::Namespace::build(path, builder));
     }
 
@@ -86,27 +86,27 @@ pub trait Nesting: Node {
      * endpoint::Endpoints
      */
 
-    fn get<F>(&mut self, path: &str, builder: F) where F: Fn(&mut endpoint::Endpoint) 
+    fn get<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Get, path, builder));
     }    
-    fn post<F>(&mut self, path: &str, builder: F) where F: Fn(&mut endpoint::Endpoint) 
+    fn post<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Post, path, builder));
     }    
-    fn put<F>(&mut self, path: &str, builder: F) where F: Fn(&mut endpoint::Endpoint) 
+    fn put<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Put, path, builder));
     }    
-    fn delete<F>(&mut self, path: &str, builder: F) where F: Fn(&mut endpoint::Endpoint) 
+    fn delete<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Delete, path, builder));
     }    
-    fn options<F>(&mut self, path: &str, builder: F) where F: Fn(&mut endpoint::Endpoint) 
+    fn options<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Options, path, builder));
     }    
-    fn head<F>(&mut self, path: &str, builder: F) where F: Fn(&mut endpoint::Endpoint) 
+    fn head<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Head, path, builder));
     }

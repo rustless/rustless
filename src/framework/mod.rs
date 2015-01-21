@@ -5,7 +5,7 @@ use errors;
 
 pub use self::app::{Application};
 pub use self::api::{Api, Versioning};
-pub use self::endpoint::{Endpoint, EndpointBuilder};
+pub use self::endpoint::{Endpoint, EndpointHandler, EndpointBuilder};
 pub use self::client::Client;
 pub use self::nesting::{Nesting, Node};
 pub use self::namespace::{Namespace};
