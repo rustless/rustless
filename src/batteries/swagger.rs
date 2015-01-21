@@ -6,35 +6,42 @@ use server::header::common::access_control::allow_origin;
 
 #[allow(unused_variables)]
 pub fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handlers: &framework::ApiHandlers) {
-    let mut current_path = current_path.to_string();
-
     for handler in handlers.iter() {
         if handler.is::<framework::Api>() {
+            let mut path = current_path.to_string();
+
             let api = handler.downcast_ref::<framework::Api>().unwrap();
             if api.prefix.len() > 0 {
-                current_path.push_str((api.prefix.to_string() + "/").as_slice());
+                path.push_str((api.prefix).as_slice());
             }
             if api.versioning.is_some() {
                 match api.versioning.as_ref().unwrap() {
                     &framework::Versioning::Path if api.version.is_some() => {
-                        current_path.push_str((api.version.as_ref().unwrap().to_string() + "/").as_slice())
+                        path.push_str((api.version.as_ref().unwrap().to_string() + "/").as_slice())
                     },
                     _ => ()
                 }
             }
-            fill_paths(current_path.as_slice(), paths, &api.handlers);
+            fill_paths(path.as_slice(), paths, &api.handlers);
+
         } else if handler.is::<framework::Namespace>() {
+            let mut path = current_path.to_string();
             let namespace = handler.downcast_ref::<framework::Namespace>().unwrap();
-            current_path.push_str((namespace.path.path.to_string() + "/").as_slice());
-            fill_paths(current_path.as_slice(), paths, &namespace.handlers);
+            path.push_str(("/".to_string() + namespace.path.path.as_slice()).as_slice());
+            fill_paths(path.as_slice(), paths, &namespace.handlers);
+        
         } else if handler.is::<framework::Endpoint>() {
+            let mut path = current_path.to_string();
             let endpoint = handler.downcast_ref::<framework::Endpoint>().unwrap();
-            current_path.push_str((endpoint.path.path.to_string() + "/").as_slice());
+
+            if endpoint.path.path.len() > 0 {
+                path.push_str(("/".to_string() + endpoint.path.path.as_slice()).as_slice());
+            }
 
             let definition = jsonway::JsonWay::object(|def| {
                 // A list of tags for API documentation control. Tags can be used for logical grouping 
                 // of operations by resources or any other qualifier.
-                def.array("tags", |tags| {});
+                // def.array("tags", |tags| { });
 
                 // A short summary of what the operation does. For maximum readability in the swagger-ui, 
                 // this field SHOULD be less than 120 characters.
@@ -80,7 +87,7 @@ pub fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handle
 
                 // Required. The list of possible responses as they are returned from executing this operation.
                 def.object("responses",  |responses| {
-                    responses.object("default", |default| {
+                    responses.object("200", |default| {
                         // Required. A short description of the response. 
                         // GFM syntax can be used for rich text representation.
                         default.set("description", "Description".to_string());
@@ -117,7 +124,7 @@ pub fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handle
 
             let method = format!("{:?}", endpoint.method).to_ascii_lowercase();
             let present = {
-                let maybe_path_obj = paths.object.get_mut(current_path.as_slice());
+                let maybe_path_obj = paths.object.get_mut(path.as_slice());
                 if maybe_path_obj.is_some() {
                     let path_obj = maybe_path_obj.unwrap().as_object_mut().unwrap();
                     path_obj.insert(method.to_string(), definition.to_json());
@@ -128,10 +135,11 @@ pub fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handle
             };
             
             if !present {
-                paths.object(current_path.as_slice(), move |: path_item| {
+                paths.object(path.as_slice(), move |: path_item| {
                     path_item.set(method, definition);
                 })
             }
+
         }
     }
 }
@@ -222,7 +230,7 @@ pub fn create_swagger_api(path: &str) -> framework::Api {
 
                         // Required. The available paths and operations for the API.
                         json.object("paths", |paths| {
-                            fill_paths("/", paths, &client.app.root_api.handlers);
+                            fill_paths("", paths, &client.app.root_api.handlers);
                         });
 
                          // An object to hold data types produced and consumed by operations.
@@ -260,7 +268,7 @@ pub fn create_swagger_api(path: &str) -> framework::Api {
                         // Not all tags that are used by the Operation Object must be declared. 
                         // The tags that are not declared may be organized randomly or based on the tools' logic. 
                         // Each tag name in the list MUST be unique.
-                        json.array("security", |responses| {
+                        json.array("tags", |tags| {
 
                         });
 
