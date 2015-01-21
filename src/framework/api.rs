@@ -16,16 +16,22 @@ use framework::path;
 
 #[allow(dead_code)]
 #[allow(missing_copy_implementations)]
+#[derive(Clone)]
 pub enum Versioning {
     Path,
     AcceptHeader(&'static str),
     Param(&'static str)
 }
 
+#[derive(Clone)]
+pub struct Version {
+    pub version: String,
+    pub versioning: Versioning,
+}
+
 pub struct Api {
-    pub version: Option<String>,
-    pub versioning: Option<Versioning>,
-    pub prefix: String,
+    pub version: Option<Version>,
+    pub prefix: Option<String>,
     pub handlers: framework::ApiHandlers,
     before: framework::Callbacks,
     before_validation: framework::Callbacks,
@@ -42,8 +48,7 @@ impl Api {
     pub fn new() -> Api {
         Api {
             version: None,
-            versioning: None,
-            prefix: "".to_string(),
+            prefix: None,
             handlers: vec![],
             before: vec![],
             before_validation: vec![],
@@ -62,12 +67,14 @@ impl Api {
     }
 
     pub fn version(&mut self, version: &str, versioning: Versioning) {
-        self.version = Some(version.to_string());
-        self.versioning = Some(versioning);
+        self.version = Some(Version {
+            version: version.to_string(),
+            versioning: versioning
+        });
     }
 
     pub fn prefix(&mut self, prefix: &str) {
-        self.prefix = prefix.to_string();
+        self.prefix = Some(prefix.to_string());
     }
 
     pub fn error_formatter<F>(&mut self, formatter: F) 
@@ -195,22 +202,24 @@ impl framework::ApiHandler for Api {
     -> backend::HandleResult<backend::Response> {
         
         // Check prefix
-        let mut rest_path = if self.prefix.len() > 0 {
-            if rest_path.starts_with(self.prefix.as_slice()) {
-                path::normalize(rest_path.slice_from(self.prefix.len()))
-            } else {
-               return Err(Box::new(errors::NotMatch) as Box<Error>)
-            }
-        } else {
-            rest_path
+        let mut rest_path = match self.prefix.as_ref() {
+            Some(prefix) => {
+                if rest_path.starts_with(prefix.as_slice()) {
+                    path::normalize(rest_path.slice_from(prefix.len()))
+                } else {
+                   return Err(Box::new(errors::NotMatch) as Box<Error>)
+                }
+            },
+            None => rest_path
         };
 
         let mut media: Option<media::Media> = None;
 
         // Check version
         if self.version.is_some() {
-            let version = self.version.as_ref().unwrap();
-            let versioning = self.versioning.as_ref().unwrap();
+            let version_struct = self.version.as_ref().unwrap();
+            let ref version = version_struct.version;
+            let ref versioning = version_struct.versioning;
 
             match versioning {
                 &Versioning::Path => {

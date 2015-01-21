@@ -4,7 +4,7 @@ use backend;
 use errors;
 
 pub use self::app::{Application};
-pub use self::api::{Api, Versioning};
+pub use self::api::{Api, Versioning, Version};
 pub use self::endpoint::{Endpoint, EndpointHandler, EndpointBuilder};
 pub use self::client::Client;
 pub use self::nesting::{Nesting, Node};

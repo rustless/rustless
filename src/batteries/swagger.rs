@@ -128,7 +128,7 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
 
             // Required. Provides the version of the application API (not to be confused by the specification version).
             info.set("version", spec.info.version.clone()
-                .or(app.root_api.version.clone())
+                .or(app.root_api.version.clone().map(|v| v.version))
                 .unwrap_or_else(|| "0.0.0".to_string()));
         });
 
@@ -145,14 +145,17 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
         // The value MUST start with a leading slash (/). The basePath does not support path
         // templating.
         json.set("basePath", spec.base_path.clone().unwrap_or_else(|| {
-            let mut base_path = "/".to_string() + app.root_api.prefix.as_slice();
-            if app.root_api.versioning.is_some() {
-                match app.root_api.versioning.as_ref().unwrap() {
-                    &framework::Versioning::Path if app.root_api.version.is_some() => {
+            let mut base_path = "/".to_string();
+            if app.root_api.prefix.is_some() {
+                base_path.push_str(app.root_api.prefix.as_ref().unwrap().as_slice());
+            }
+            if app.root_api.version.is_some() {
+                match app.root_api.version.as_ref().unwrap() {
+                    &framework::Version{ref version, versioning: framework::Versioning::Path}  => {
                         if base_path.len() > 1 {
                             base_path.push_str("/")
                         }
-                        base_path.push_str(app.root_api.version.as_ref().unwrap().as_slice());
+                        base_path.push_str(version.as_slice());
                     },
                     _ => ()
                 }
@@ -276,13 +279,15 @@ fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handlers: 
             let mut path = current_path.to_string();
 
             let api = handler.downcast_ref::<framework::Api>().unwrap();
-            if api.prefix.len() > 0 {
-                path.push_str((api.prefix).as_slice());
+            if api.prefix.is_some() {
+                path.push_str(api.prefix.as_ref().unwrap().as_slice());
             }
-            if api.versioning.is_some() {
-                match api.versioning.as_ref().unwrap() {
-                    &framework::Versioning::Path if api.version.is_some() => {
-                        path.push_str((api.version.as_ref().unwrap().to_string() + "/").as_slice())
+
+            if api.version.is_some() {
+                match api.version.as_ref().unwrap() {
+                    &framework::Version{ref version, versioning: framework::Versioning::Path} => {
+                        path.push_str(version.as_slice());
+                        path.push_str("/");
                     },
                     _ => ()
                 }
