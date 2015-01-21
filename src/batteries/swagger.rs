@@ -59,7 +59,7 @@ pub struct Info {
 #[derive(Default)]
 pub struct License {
     pub name: String,
-    pub url: Option<String>
+    pub url: String
 }
 
 #[derive(Copy)]
@@ -121,11 +121,8 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
                 info.object("license", |license| {
                     // The license name used for the API.
                     license.set("name", license_spec.name.clone());
-
-                    if license_spec.url.is_some() {
-                        // An URL to the license used for the API. MUST be in the format of a URL.
-                        license.set("url", license_spec.url.as_ref().unwrap().clone());    
-                    }
+                    // An URL to the license used for the API. MUST be in the format of a URL.
+                    license.set("url", license_spec.url.clone());    
                 });
             }
 
@@ -257,6 +254,7 @@ pub fn create_api(path: &str) -> framework::Api {
     framework::Api::build(|: api| {
         api.namespace(path, |: docs| {
             docs.get("", |: endpoint| {
+                endpoint.summary("Get Swagger 2.0 specification of this API");
                 endpoint.handle(|&: mut client, _params| {
                     client.set_header(allow_origin::AccessControlAllowOrigin::AllowStar);
                     let swagger_spec = client.app.ext.get::<SwaggerSpecKey>();
@@ -310,54 +308,24 @@ fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handlers: 
                 // of operations by resources or any other qualifier.
                 // def.array("tags", |tags| { });
 
-                // A short summary of what the operation does. For maximum readability in the swagger-ui, 
-                // this field SHOULD be less than 120 characters.
-                def.set("summary", "Summary".to_string());
+                if endpoint.summary.is_some() {
+                    // A short summary of what the operation does. For maximum readability in the swagger-ui, 
+                    // this field SHOULD be less than 120 characters.
+                    def.set("summary", endpoint.summary.as_ref().unwrap().clone());  
+                }
 
-                // A verbose explanation of the operation behavior. 
-                // GFM syntax can be used for rich text representation.
-                def.set("description",  "Description".to_string());
-
-                // External Documentation Object   
-                // Additional external documentation for this operation.
-                def.object("externalDocs", |external_docs| {
-                    // A short description of the target documentation. 
+                if endpoint.desc.is_some() {
+                    // A verbose explanation of the operation behavior. 
                     // GFM syntax can be used for rich text representation.
-                    external_docs.set("description", "Description".to_string()); 
-                    //  Required. The URL for the target documentation. Value MUST be in the format of a URL.
-                    external_docs.set("url", "http://google.com".to_string());
-                });
-
-                // A friendly name for the operation. The id MUST be unique among all operations described 
-                // in the API. Tools and libraries MAY use the operation id to uniquely identify an operation.
-                def.set("operationId", "OP".to_string());
-
-                // A list of MIME types the operation can consume. 
-                // This overrides the [consumes](#swaggerConsumes) definition at the Swagger Object. 
-                // An empty value MAY be used to clear the global definition. 
-                // Value MUST be as described under Mime Types.
-                def.array("consumes", |consumes| {});    
-
-                // A list of MIME types the operation can produce. 
-                // This overrides the [produces](#swaggerProduces) definition at the Swagger Object. 
-                // An empty value MAY be used to clear the global definition. 
-                // Value MUST be as described under Mime Types.
-                def.array("produces", |produces| {});
-
-                // A list of parameters that are applicable for this operation. 
-                // If a parameter is already defined at the Path Item, the new definition will override it, 
-                // but can never remove it. The list MUST NOT include duplicated parameters. 
-                // A unique parameter is defined by a combination of a name and location. 
-                // The list can use the Reference Object to link to parameters that are 
-                // defined at the Swagger Object's parameters. There can be one "body" parameter at most.
-                def.array("parameters", |parameters| {});
+                    def.set("description",  endpoint.desc.as_ref().unwrap().clone());
+                }
 
                 // Required. The list of possible responses as they are returned from executing this operation.
                 def.object("responses",  |responses| {
                     responses.object("200", |default| {
                         // Required. A short description of the response. 
                         // GFM syntax can be used for rich text representation.
-                        default.set("description", "Description".to_string());
+                        default.set("description", "Default response".to_string());
 
                         // A definition of the response structure. It can be a primitive, an array or an object. 
                         // If this field does not exist, it means no content is returned as part of the response. 
@@ -373,20 +341,56 @@ fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handlers: 
                     })
                 });
 
-                // The transfer protocol for the operation. Values MUST be from the list: "http", "https", 
-                // "ws", "wss". The value overrides the Swagger Object schemes definition.
-                def.array("schemes", |schemes| {});
+                // TODO Implement the rest of the Swagger 2.0 spec
 
-                // Declares this operation to be deprecated. Usage of the declared operation should be refrained. 
-                // Default value is false.
-                def.set("deprecated", false);
+                // // External Documentation Object   
+                // // Additional external documentation for this operation.
+                // def.object("externalDocs", |external_docs| {
+                //     // A short description of the target documentation. 
+                //     // GFM syntax can be used for rich text representation.
+                //     external_docs.set("description", "Description".to_string()); 
+                //     //  Required. The URL for the target documentation. Value MUST be in the format of a URL.
+                //     external_docs.set("url", "http://google.com".to_string());
+                // });
 
-                // A declaration of which security schemes are applied for this operation. 
-                // The list of values describes alternative security schemes that can be used 
-                // (that is, there is a logical OR between the security requirements). 
-                // This definition overrides any declared top-level security. 
-                // To remove a top-level security declaration, an empty array can be used.
-                def.array("security", |security| {});
+                // // A friendly name for the operation. The id MUST be unique among all operations described 
+                // // in the API. Tools and libraries MAY use the operation id to uniquely identify an operation.
+                // def.set("operationId", "OP".to_string());
+
+                // // A list of MIME types the operation can consume. 
+                // // This overrides the [consumes](#swaggerConsumes) definition at the Swagger Object. 
+                // // An empty value MAY be used to clear the global definition. 
+                // // Value MUST be as described under Mime Types.
+                // def.array("consumes", |consumes| {});    
+
+                // // A list of MIME types the operation can produce. 
+                // // This overrides the [produces](#swaggerProduces) definition at the Swagger Object. 
+                // // An empty value MAY be used to clear the global definition. 
+                // // Value MUST be as described under Mime Types.
+                // def.array("produces", |produces| {});
+
+                // // A list of parameters that are applicable for this operation. 
+                // // If a parameter is already defined at the Path Item, the new definition will override it, 
+                // // but can never remove it. The list MUST NOT include duplicated parameters. 
+                // // A unique parameter is defined by a combination of a name and location. 
+                // // The list can use the Reference Object to link to parameters that are 
+                // // defined at the Swagger Object's parameters. There can be one "body" parameter at most.
+                // def.array("parameters", |parameters| {});
+
+                // // The transfer protocol for the operation. Values MUST be from the list: "http", "https", 
+                // // "ws", "wss". The value overrides the Swagger Object schemes definition.
+                // def.array("schemes", |schemes| {});
+
+                // // Declares this operation to be deprecated. Usage of the declared operation should be refrained. 
+                // // Default value is false.
+                // def.set("deprecated", false);
+
+                // // A declaration of which security schemes are applied for this operation. 
+                // // The list of values describes alternative security schemes that can be used 
+                // // (that is, there is a logical OR between the security requirements). 
+                // // This definition overrides any declared top-level security. 
+                // // To remove a top-level security declaration, an empty array can be used.
+                // def.array("security", |security| {});
             });
 
             let method = format!("{:?}", endpoint.method).to_ascii_lowercase();

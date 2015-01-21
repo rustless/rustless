@@ -20,6 +20,7 @@ pub type EndpointBuilder = FnOnce(&mut Endpoint) -> EndpointHandlerPresent + 'st
 pub struct Endpoint {
     pub method: method::Method,
     pub path: path::Path,
+    pub summary: Option<String>,
     pub desc: Option<String>,
     pub coercer: Option<valico::Builder>,
     handler: Option<EndpointHandler>,
@@ -33,9 +34,10 @@ impl Endpoint {
         Endpoint {
             method: method,
             path: path::Path::parse(path, true).unwrap(),
+            summary: None,
             desc: None,
             coercer: None,
-            handler: None
+            handler: None,
         }
     }
 
@@ -45,6 +47,10 @@ impl Endpoint {
         builder(&mut endpoint);
 
         endpoint
+    }
+
+    pub fn summary(&mut self, summary: &str) {
+        self.summary = Some(summary.to_string());
     }
 
     pub fn desc(&mut self, desc: &str) {
