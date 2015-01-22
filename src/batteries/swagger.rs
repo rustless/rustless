@@ -6,6 +6,7 @@ use jsonway::{self, MutableJson};
 use framework::{self, Nesting};
 use server::mime;
 use server::header;
+use server::method;
 
 #[derive(Copy)]
 #[allow(dead_code)]
@@ -184,7 +185,7 @@ impl json::ToJson for Param {
     fn to_json(&self) -> json::Json {
         jsonway::JsonWay::object(|param| {
             param.set("name", self.name.clone());
-            param.set("place", self.place.to_string());
+            param.set("in", self.place.to_string());
             if self.description.is_some() {
                 param.set("description", self.description.clone().unwrap());
             }
@@ -422,7 +423,6 @@ struct WalkContext<'a> {
     pub params: Vec<Param>
 }
 
-#[allow(unused_variables)]
 fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuilder, handlers: &framework::ApiHandlers) {
     for handler in handlers.iter() {
         if handler.is::<framework::Api>() {
@@ -470,114 +470,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
                 path.push_str(("/".to_string() + encode_path_string(&endpoint.path).as_slice()).as_slice());
             }
 
-            let definition = jsonway::JsonWay::object(|: def| {
-                // A list of tags for API documentation control. Tags can be used for logical grouping 
-                // of operations by resources or any other qualifier.
-                // def.array("tags", |tags| { });
-
-                if endpoint.summary.is_some() {
-                    // A short summary of what the operation does. For maximum readability in the swagger-ui, 
-                    // this field SHOULD be less than 120 characters.
-                    def.set("summary", endpoint.summary.as_ref().unwrap().clone());  
-                }
-
-                if endpoint.desc.is_some() {
-                    // A verbose explanation of the operation behavior. 
-                    // GFM syntax can be used for rich text representation.
-                    def.set("description",  endpoint.desc.as_ref().unwrap().clone());
-                }
-
-                // Required. The list of possible responses as they are returned from executing this operation.
-                def.object("responses",  |responses| {
-                    responses.object("200", |default| {
-                        // Required. A short description of the response. 
-                        // GFM syntax can be used for rich text representation.
-                        default.set("description", "Default response".to_string());
-
-                        // A definition of the response structure. It can be a primitive, an array or an object. 
-                        // If this field does not exist, it means no content is returned as part of the response. 
-                        // As an extension to the Schema Object, its root type value may also be "file". 
-                        // This SHOULD be accompanied by a relevant produces mime-type.
-                        default.object("schema", |schema| {});
-
-                        // A list of headers that are sent with the response.
-                        default.object("headers", |headers| {});
-
-                        // An example of the response message.
-                        default.object("examples", |examples| {});
-                    })
-                });
-
-                // TODO Implement the rest of the Swagger 2.0 spec
-
-                // // External Documentation Object   
-                // // Additional external documentation for this operation.
-                // def.object("externalDocs", |external_docs| {
-                //     // A short description of the target documentation. 
-                //     // GFM syntax can be used for rich text representation.
-                //     external_docs.set("description", "Description".to_string()); 
-                //     //  Required. The URL for the target documentation. Value MUST be in the format of a URL.
-                //     external_docs.set("url", "http://google.com".to_string());
-                // });
-
-                // // A friendly name for the operation. The id MUST be unique among all operations described 
-                // // in the API. Tools and libraries MAY use the operation id to uniquely identify an operation.
-                // def.set("operationId", "OP".to_string());
-
-                if endpoint.consumes.is_some() {
-                    // A list of MIME types the operation can consume. 
-                    // This overrides the [consumes](#swaggerConsumes) definition at the Swagger Object. 
-                    // An empty value MAY be used to clear the global definition. 
-                    // Value MUST be as described under Mime Types.
-                    def.array("consumes", |consumes| {
-                        let consumes_spec = endpoint.consumes.as_ref().unwrap();
-                        for mime in consumes_spec.iter() {
-                            consumes.push(mime.to_string())
-                        }
-                    });     
-                }
-
-                if endpoint.produces.is_some() {
-                    // A list of MIME types the operation can produce. 
-                    // This overrides the [produces](#swaggerProduces) definition at the Swagger Object. 
-                    // An empty value MAY be used to clear the global definition. 
-                    // Value MUST be as described under Mime Types.
-                    def.array("produces", |produces| {
-                        let produces_spec = endpoint.produces.as_ref().unwrap();
-                        for mime in produces_spec.iter() {
-                            produces.push(mime.to_string())
-                        }
-                    });  
-                }
-
-                // A list of parameters that are applicable for this operation. 
-                // If a parameter is already defined at the Path Item, the new definition will override it, 
-                // but can never remove it. The list MUST NOT include duplicated parameters. 
-                // A unique parameter is defined by a combination of a name and location. 
-                // The list can use the Reference Object to link to parameters that are 
-                // defined at the Swagger Object's parameters. There can be one "body" parameter at most.
-                def.array("parameters", |parameters| {
-                    let params = extract_params(&endpoint.coercer, &endpoint.path);
-                    for param in params.iter() {
-                        parameters.push(param.to_json()) 
-                    }
-                });
-
-                // // The transfer protocol for the operation. Values MUST be from the list: "http", "https", 
-                // // "ws", "wss". The value overrides the Swagger Object schemes definition.
-                // def.array("schemes", |schemes| {});
-
-                // // Declares this operation to be deprecated. Usage of the declared operation should be refrained. 
-                // // Default value is false.
-                // def.set("deprecated", false);
-
-                // // A declaration of which security schemes are applied for this operation. 
-                // // The list of values describes alternative security schemes that can be used 
-                // // (that is, there is a logical OR between the security requirements). 
-                // // This definition overrides any declared top-level security. 
-                // // To remove a top-level security declaration, an empty array can be used.
-                // def.array("security", |security| {});
-            });
+            let definition = build_endpoint_definition(endpoint, &mut context);
 
             let method = format!("{:?}", endpoint.method).to_ascii_lowercase();
             let exists = {
@@ -595,7 +488,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
                 paths.object(path.as_slice(), |: path_item| {
                     path_item.set(method.clone(), definition.to_json());
                     path_item.array("parameters", |parameters| {
-                        for param in context.params.drain() {
+                        for param in context.params.iter() {
                             parameters.push(param.to_json())
                         }
                     })
@@ -603,6 +496,137 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
             }
         }
     }
+}
+
+#[allow(unused_variables)]
+fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkContext) -> json::Json {
+    jsonway::JsonWay::object(|: def| {
+        // A list of tags for API documentation control. Tags can be used for logical grouping 
+        // of operations by resources or any other qualifier.
+        // def.array("tags", |tags| { });
+
+        if endpoint.summary.is_some() {
+            // A short summary of what the operation does. For maximum readability in the swagger-ui, 
+            // this field SHOULD be less than 120 characters.
+            def.set("summary", endpoint.summary.as_ref().unwrap().clone());  
+        }
+
+        if endpoint.desc.is_some() {
+            // A verbose explanation of the operation behavior. 
+            // GFM syntax can be used for rich text representation.
+            def.set("description",  endpoint.desc.as_ref().unwrap().clone());
+        }
+
+        // Required. The list of possible responses as they are returned from executing this operation.
+        def.object("responses",  |responses| {
+            responses.object("200", |default| {
+                // Required. A short description of the response. 
+                // GFM syntax can be used for rich text representation.
+                default.set("description", "Default response".to_string());
+
+                // A definition of the response structure. It can be a primitive, an array or an object. 
+                // If this field does not exist, it means no content is returned as part of the response. 
+                // As an extension to the Schema Object, its root type value may also be "file". 
+                // This SHOULD be accompanied by a relevant produces mime-type.
+                default.object("schema", |schema| {});
+
+                // A list of headers that are sent with the response.
+                default.object("headers", |headers| {});
+
+                // An example of the response message.
+                default.object("examples", |examples| {});
+            })
+        });
+
+        // TODO Implement the rest of the Swagger 2.0 spec
+
+        // // External Documentation Object   
+        // // Additional external documentation for this operation.
+        // def.object("externalDocs", |external_docs| {
+        //     // A short description of the target documentation. 
+        //     // GFM syntax can be used for rich text representation.
+        //     external_docs.set("description", "Description".to_string()); 
+        //     //  Required. The URL for the target documentation. Value MUST be in the format of a URL.
+        //     external_docs.set("url", "http://google.com".to_string());
+        // });
+
+        // // A friendly name for the operation. The id MUST be unique among all operations described 
+        // // in the API. Tools and libraries MAY use the operation id to uniquely identify an operation.
+        // def.set("operationId", "OP".to_string());
+
+        if endpoint.consumes.is_some() {
+            // A list of MIME types the operation can consume. 
+            // This overrides the [consumes](#swaggerConsumes) definition at the Swagger Object. 
+            // An empty value MAY be used to clear the global definition. 
+            // Value MUST be as described under Mime Types.
+            def.array("consumes", |consumes| {
+                let consumes_spec = endpoint.consumes.as_ref().unwrap();
+                for mime in consumes_spec.iter() {
+                    consumes.push(mime.to_string())
+                }
+            });     
+        }
+
+        if endpoint.produces.is_some() {
+            // A list of MIME types the operation can produce. 
+            // This overrides the [produces](#swaggerProduces) definition at the Swagger Object. 
+            // An empty value MAY be used to clear the global definition. 
+            // Value MUST be as described under Mime Types.
+            def.array("produces", |produces| {
+                let produces_spec = endpoint.produces.as_ref().unwrap();
+                for mime in produces_spec.iter() {
+                    produces.push(mime.to_string())
+                }
+            });  
+        }
+
+        // A list of parameters that are applicable for this operation. 
+        // If a parameter is already defined at the Path Item, the new definition will override it, 
+        // but can never remove it. The list MUST NOT include duplicated parameters. 
+        // A unique parameter is defined by a combination of a name and location. 
+        // The list can use the Reference Object to link to parameters that are 
+        // defined at the Swagger Object's parameters. There can be one "body" parameter at most.
+        def.array("parameters", |parameters| {
+            let params = extract_params(&endpoint.coercer, &endpoint.path);
+            let mut final_params = vec![];
+            for param in context.params.iter() {
+                final_params.push(param.clone()) 
+            }
+            for param in params.iter() {
+                final_params.push(param.clone()) 
+            }
+
+            match endpoint.method {
+                method::Method::Post | 
+                method::Method::Put => {
+                    for param in final_params.iter_mut() {
+                        match param.place {
+                            Place::Query => param.place = Place::FormData,
+                            _ => ()
+                        }
+                    }
+                },
+                _ => ()
+            };
+
+            parameters.map(&mut final_params.iter(), |param| param.to_json());
+        });
+
+        // // The transfer protocol for the operation. Values MUST be from the list: "http", "https", 
+        // // "ws", "wss". The value overrides the Swagger Object schemes definition.
+        // def.array("schemes", |schemes| {});
+
+        // // Declares this operation to be deprecated. Usage of the declared operation should be refrained. 
+        // // Default value is false.
+        // def.set("deprecated", false);
+
+        // // A declaration of which security schemes are applied for this operation. 
+        // // The list of values describes alternative security schemes that can be used 
+        // // (that is, there is a logical OR between the security requirements). 
+        // // This definition overrides any declared top-level security. 
+        // // To remove a top-level security declaration, an empty array can be used.
+        // def.array("security", |security| {});
+    }).unwrap()
 }
 
 fn encode_path_string(path: &framework::Path) -> String {
@@ -627,7 +651,7 @@ fn param_type(param: &valico::Param) -> ParamType {
     }
 }
 
-fn build_param(param: &valico::Param, required: bool) -> Param {
+fn build_param_from_coercer(param: &valico::Param, required: bool) -> Param {
     let swagger_param = Param {
         name: param.name.clone(),
         place: Place::Query,
@@ -649,10 +673,10 @@ fn extract_params(coercer: &Option<valico::Builder>, path: &framework::Path) -> 
     if coercer.is_some() {
         let coercer = coercer.as_ref().unwrap();
         for param in coercer.get_required().iter() {
-            params.insert(param.name.clone(), build_param(param, true));
+            params.insert(param.name.clone(), build_param_from_coercer(param, true));
         }
         for param in coercer.get_optional().iter() {
-            params.insert(param.name.clone(), build_param(param, true));
+            params.insert(param.name.clone(), build_param_from_coercer(param, false));
         }
     }
 
