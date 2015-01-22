@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `mucell` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, mucell">
+
+    <title>mucell - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'></p>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>mucell</a><wbr><a class='stability Unstable' title='almost stable, but not the macro parts'>Unstable</a></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-0' href='../src/mucell/lib.rs.html#1-359'>[src]</a></span></h1>
+<div class='docblock'><p>A cell with the ability to mutate the value through an immutable reference when safe.</p>
+
+<h1 id="comparison-with-refcell" class='section-header'><a
+                           href="#comparison-with-refcell">Comparison with <code>RefCell</code></a></h1>
+<p><code>RefCell</code> goes for completely runtime checking, having <code>try_borrow</code>, <code>try_borrow_mut</code>,
+<code>borrow</code> and <code>borrow_mut</code> all taking <code>&amp;self</code> and using custom reference types everywhere.</p>
+
+<p><code>MuCell</code> (out of pity and the fact that “non-ascii idents are not fully supported” I did not
+name it <code>ΜCell</code> with the crate named <code>µcell</code>) makes much more use of true Rust borrow checking
+for a result that is more efficient and has no possibility of panicking.</p>
+
+<p>However, its purpose is not the same as <code>RefCell</code>; it is designed specifically for cases where
+something only <em>needs</em> an immutable reference, but where being able to safely take a mutable
+reference can improve efficiency. Say, for example, where it’s beneficial to be able to cache
+the result of a calculation, but you don’t really want to <em>need</em> to do that.</p>
+
+<p>The purpose of all of this is for an accessor for a <code>T</code> that can be made more efficient if it
+can have <code>&amp;mut self</code>, but doesn’t strictly require it. For this reason, it’s often going to be
+paired with <a href="http://doc.rust-lang.org/std/borrow/enum.Cow.html"><code>std::borrow::Cow</code></a>, e.g.
+<code>Cow&lt;String, str&gt;</code> (a.k.a. <code>std::str::CowString</code>) or <code>Cow&lt;Vec&lt;T&gt;, [T]&gt;</code> (a.k.a.
+<code>std::vec::CowVec</code>), producing <code>Borrowed</code> if you are able to mutate the value or <code>Owned</code> of the
+same data if not.</p>
+
+<h1 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h1>
+<p>This example covers most of the surface area of the library:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>MuCell</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]);
+
+<span class='comment'>// You can borrow from the cell mutably at no cost.</span>
+<span class='ident'>cell</span>.<span class='ident'>borrow_mut</span>().<span class='ident'>push</span>(<span class='number'>4</span>);
+
+<span class='comment'>// You can borrow immutably, too, and it’s very cheap.</span>
+<span class='comment'>// (Rust’s standard borrow checking prevents you from doing</span>
+<span class='comment'>// this while there’s a mutable reference taken out.)</span>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>cell</span>.<span class='ident'>borrow</span>(), <span class='kw-2'>&amp;</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>]);
+
+<span class='comment'>// So long as there are no active borrows,</span>
+<span class='comment'>// try_mutate can be used to mutate the value.</span>
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>try_mutate</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>push</span>(<span class='number'>5</span>)));
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>cell</span>.<span class='ident'>borrow</span>(), <span class='kw-2'>&amp;</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>]);
+
+<span class='comment'>// But when there is an immutable borrow active,</span>
+<span class='comment'>// try_mutate says no.</span>
+<span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='ident'>cell</span>.<span class='ident'>borrow</span>();
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>cell</span>.<span class='ident'>try_mutate</span>(<span class='op'>|</span>_<span class='op'>|</span> <span class='macro'>unreachable</span><span class='macro'>!</span>()));
+<span class='ident'>drop</span>(<span class='ident'>b</span>);
+
+<span class='comment'>// We can have many immutable borrows at a time, too.</span>
+{
+    <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='ident'>cell</span>.<span class='ident'>borrow</span>();
+    <span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='ident'>cell</span>.<span class='ident'>borrow</span>();
+    <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>cell</span>.<span class='ident'>borrow</span>();
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>a</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>b</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _);
+}
+
+<span class='comment'>// Once they’re all cleared, try_mutate is happy again.</span>
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>try_mutate</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>push</span>(<span class='number'>6</span>)));
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>cell</span>.<span class='ident'>borrow</span>(), <span class='kw-2'>&amp;</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>, <span class='number'>6</span>]);
+</pre>
+
+<p>Look at the examples in the repository for some slightly more practical (though still
+typically contrived) examples. Also see the <a class="macro" href="macro.mucell_ref_type!.html"
+title="mucell::mucell_ref_type!">mucell_ref_type!</a> docs for an example of that part of the
+library.</p>
+</div><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='macro' href='macro.mucell_ref_type!.html'
+                               title='mucell::mucell_ref_type!'>mucell_ref_type!</a></td>
+                        <td class='docblock short'><p>Create a new reference type to something inside the cell.</p>
+</td>
+                    </tr>
+                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Stable' title='Stable'></a><a class='struct' href='struct.MuCell.html'
+                               title='mucell::MuCell'>MuCell</a></td>
+                        <td class='docblock short'><p>A cell with the ability to mutate the value through an immutable reference when safe</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Stable' title='Stable'></a><a class='struct' href='struct.Ref.html'
+                               title='mucell::Ref'>Ref</a></td>
+                        <td class='docblock short'><p>An immutable reference to a <code>MuCell</code>. Dereference to get at the object.</p>
+</td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "mucell";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

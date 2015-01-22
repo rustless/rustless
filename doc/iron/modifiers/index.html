@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `modifiers` mod in crate `iron`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, modifiers">
+
+    <title>iron::modifiers - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <p class='location'><a href='../index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='../headers/index.html'>headers</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../middleware/index.html'>middleware</a><a class='mod ' href='../mime/index.html'>mime</a><a class='mod ' href='../modifier/index.html'>modifier</a><a class='mod current' href='../modifiers/index.html'>modifiers</a><a class='mod ' href='../prelude/index.html'>prelude</a><a class='mod ' href='../response/index.html'>response</a><a class='mod ' href='../status/index.html'>status</a><a class='mod ' href='../typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.Headers.html'>Headers</a><a class='struct ' href='../struct.Iron.html'>Iron</a><a class='struct ' href='../struct.Request.html'>Request</a><a class='struct ' href='../struct.TypeMap.html'>TypeMap</a><a class='struct ' href='../struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='../trait.Error.html'>Error</a><a class='trait ' href='../trait.Plugin.html'>Plugin</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>modifiers</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-2229' href='../../src/iron/modifiers.rs.html#1-118'>[src]</a></span></h1>
+<div class='docblock'><p>Defines a series of convenience modifiers for editing Responses</p>
+
+<p>Modifiers can be used to edit Responses through the owning
+method <code>set</code> or the mutating <code>set_mut</code>, both of which are
+defined in the <code>Set</code> trait.</p>
+
+<p>Instead of having a combinatorial explosion of Response methods
+and constructors, this provides a series of modifiers that
+can be used through the <code>Set</code> trait.</p>
+
+<p>For instance, instead of <code>Response::redirect</code> constructing a
+redirect response, we provide a <code>Redirect</code> modifier, so you
+can just do:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='ident'>Response</span>::<span class='ident'>new</span>()
+    .<span class='ident'>set</span>(<span class='ident'>status</span>)
+    .<span class='ident'>set</span>(<span class='ident'>Redirect</span>(<span class='ident'>url</span>));
+</pre>
+
+<p>This is more extensible as it allows you to combine
+arbitrary modifiers without having a massive number of
+Response constructors.</p>
+
+<p>For more information about the modifier system, see
+<a href="https://github.com/reem/rust-modifier">rust-modifier</a>.</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Redirect.html'
+                               title='iron::modifiers::Redirect'>Redirect</a></td>
+                        <td class='docblock short'><p>A modifier for creating redirect responses.</p>
+</td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "iron";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `CallInfo` struct in crate `rustless`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, CallInfo">
+
+    <title>rustless::framework::CallInfo - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../index.html'>rustless</a>::<wbr><a href='index.html'>framework</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='api/index.html'>api</a><a class='mod ' href='app/index.html'>app</a><a class='mod ' href='client/index.html'>client</a><a class='mod ' href='endpoint/index.html'>endpoint</a><a class='mod ' href='formatters/index.html'>formatters</a><a class='mod ' href='media/index.html'>media</a><a class='mod ' href='namespace/index.html'>namespace</a><a class='mod ' href='nesting/index.html'>nesting</a><a class='mod ' href='path/index.html'>path</a></div><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.CallInfo.html'>CallInfo</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.ApiHandler.html'>ApiHandler</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>rustless</a>::<wbr><a href='index.html'>framework</a>::<wbr><a class='struct' href=''>CallInfo</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-10341' href='../../src/rustless/framework/mod.rs.html#26-30'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct CallInfo&lt;'a&gt; {
+    pub media: <a class='struct' href='../../rustless/framework/media/struct.Media.html' title='rustless::framework::media::Media'>Media</a>,
+    pub parents: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;&amp;'a <a class='trait' href='../../rustless/framework/nesting/trait.Node.html' title='rustless::framework::nesting::Node'>Node</a> + 'static&gt;,
+    pub app: &amp;'a <a class='struct' href='../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a>,
+}</pre><h2 class='fields'>Fields</h2>
+<table><tr><td id='structfield.media'><a class='stability Unmarked' title='No stability level'></a><code>media</code></td><td></td></tr><tr><td id='structfield.parents'><a class='stability Unmarked' title='No stability level'></a><code>parents</code></td><td></td></tr><tr><td id='structfield.app'><a class='stability Unmarked' title='No stability level'></a><code>app</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a&gt; <a class='struct' href='../../rustless/framework/struct.CallInfo.html' title='rustless::framework::CallInfo'>CallInfo</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(app: &amp;'a <a class='struct' href='../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a>) -&gt; <a class='struct' href='../../rustless/framework/struct.CallInfo.html' title='rustless::framework::CallInfo'>CallInfo</a>&lt;'a&gt;</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "rustless";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

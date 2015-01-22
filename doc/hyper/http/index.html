@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `http` mod in crate `hyper`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, http">
+
+    <title>hyper::http - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../index.html'>hyper</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='../client/index.html'>client</a><a class='mod ' href='../header/index.html'>header</a><a class='mod current' href='../http/index.html'>http</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../mime/index.html'>mime</a><a class='mod ' href='../net/index.html'>net</a><a class='mod ' href='../server/index.html'>server</a><a class='mod ' href='../status/index.html'>status</a><a class='mod ' href='../uri/index.html'>uri</a><a class='mod ' href='../version/index.html'>version</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.SocketAddr.html'>SocketAddr</a><a class='struct ' href='../struct.Url.html'>Url</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='../enum.HttpError.html'>HttpError</a><a class='enum ' href='../enum.IpAddr.html'>IpAddr</a></div><div class='block macro'><h2>Macros</h2><a class='macro ' href='../macro.bench_header!.html'>bench_header!</a><a class='macro ' href='../macro.deref!.html'>deref!</a><a class='macro ' href='../macro.impl_header!.html'>impl_header!</a><a class='macro ' href='../macro.impl_list_header!.html'>impl_list_header!</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>hyper</a>::<wbr><a class='mod' href=''>http</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-20477' href='../../src/hyper/http.rs.html#1-889'>[src]</a></span></h1>
+<div class='docblock'><p>Pieces pertaining to the HTTP message protocol.</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.LineEnding.html'
+                               title='hyper::http::LineEnding'>LineEnding</a></td>
+                        <td class='docblock short'><p>A <code>Show</code>able struct to easily write line endings to a formatter.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.RawStatus.html'
+                               title='hyper::http::RawStatus'>RawStatus</a></td>
+                        <td class='docblock short'><p>The raw status code and reason-phrase.</p>
+</td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.HttpReader.html'
+                               title='hyper::http::HttpReader'>HttpReader</a></td>
+                        <td class='docblock short'><p>Readers to handle different Transfer-Encodings.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.HttpWriter.html'
+                               title='hyper::http::HttpWriter'>HttpWriter</a></td>
+                        <td class='docblock short'><p>Writers to handle different Transfer-Encodings.</p>
+</td>
+                    </tr>
+                </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CR.html'
+                               title='hyper::http::CR'>CR</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.LF.html'
+                               title='hyper::http::LF'>LF</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.LINE_ENDING.html'
+                               title='hyper::http::LINE_ENDING'>LINE_ENDING</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.SP.html'
+                               title='hyper::http::SP'>SP</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.STAR.html'
+                               title='hyper::http::STAR'>STAR</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.is_token.html'
+                               title='hyper::http::is_token'>is_token</a></td>
+                        <td class='docblock short'><p>Determines if byte is a token char.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_header.html'
+                               title='hyper::http::read_header'>read_header</a></td>
+                        <td class='docblock short'><p>Read a RawHeaderLine from a Reader.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_http_version.html'
+                               title='hyper::http::read_http_version'>read_http_version</a></td>
+                        <td class='docblock short'><p>Read the <code>HttpVersion</code> from a raw stream, such as <code>HTTP/1.1</code>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_method.html'
+                               title='hyper::http::read_method'>read_method</a></td>
+                        <td class='docblock short'><p>Read a <code>Method</code> from a raw stream, such as <code>GET</code>.</p>
+
+<h3 id="note:" class='section-header'><a
+                           href="#note:">Note:</a></h3>
+<p>Extension methods are only parsed to 16 characters.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_request_line.html'
+                               title='hyper::http::read_request_line'>read_request_line</a></td>
+                        <td class='docblock short'><p>Read the <code>RequestLine</code>, such as <code>GET / HTTP/1.1</code>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_status.html'
+                               title='hyper::http::read_status'>read_status</a></td>
+                        <td class='docblock short'><p>Read the StatusCode from a stream.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_status_line.html'
+                               title='hyper::http::read_status_line'>read_status_line</a></td>
+                        <td class='docblock short'><p>Read the StatusLine, such as <code>HTTP/1.1 200 OK</code>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_uri.html'
+                               title='hyper::http::read_uri'>read_uri</a></td>
+                        <td class='docblock short'><p>Read a <code>RequestUri</code> from a raw stream.</p>
+</td>
+                    </tr>
+                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.RawHeaderLine.html'
+                               title='hyper::http::RawHeaderLine'>RawHeaderLine</a></td>
+                        <td class='docblock short'><p>The raw bytes when parsing a header line.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.RequestLine.html'
+                               title='hyper::http::RequestLine'>RequestLine</a></td>
+                        <td class='docblock short'><p><code>request-line   = method SP request-target SP HTTP-version CRLF</code></p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.StatusLine.html'
+                               title='hyper::http::StatusLine'>StatusLine</a></td>
+                        <td class='docblock short'><p><code>status-line = HTTP-version SP status-code SP reason-phrase CRLF</code></p>
+</td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "hyper";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

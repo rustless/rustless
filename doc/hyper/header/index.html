@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `header` mod in crate `hyper`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, header">
+
+    <title>hyper::header - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../index.html'>hyper</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='../client/index.html'>client</a><a class='mod current' href='../header/index.html'>header</a><a class='mod ' href='../http/index.html'>http</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../mime/index.html'>mime</a><a class='mod ' href='../net/index.html'>net</a><a class='mod ' href='../server/index.html'>server</a><a class='mod ' href='../status/index.html'>status</a><a class='mod ' href='../uri/index.html'>uri</a><a class='mod ' href='../version/index.html'>version</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.SocketAddr.html'>SocketAddr</a><a class='struct ' href='../struct.Url.html'>Url</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='../enum.HttpError.html'>HttpError</a><a class='enum ' href='../enum.IpAddr.html'>IpAddr</a></div><div class='block macro'><h2>Macros</h2><a class='macro ' href='../macro.bench_header!.html'>bench_header!</a><a class='macro ' href='../macro.deref!.html'>deref!</a><a class='macro ' href='../macro.impl_header!.html'>impl_header!</a><a class='macro ' href='../macro.impl_list_header!.html'>impl_list_header!</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>hyper</a>::<wbr><a class='mod' href=''>header</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-4471' href='../../src/hyper/header/mod.rs.html#1-721'>[src]</a></span></h1>
+<div class='docblock'><p>Headers container, and common header fields.</p>
+
+<p>hyper has the opinion that Headers should be strongly-typed, because that&#39;s
+why we&#39;re using Rust in the first place. To set or get any header, an object
+must implement the <code>Header</code> trait from this module. Several common headers
+are already provided, such as <code>Host</code>, <code>ContentType</code>, <code>UserAgent</code>, and others.</p>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='parsing/index.html'
+                               title='hyper::header::parsing'>parsing</a></td>
+                        <td class='docblock short'><p>Utility functions for Header implementations.</p>
+</td>
+                    </tr>
+                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Accept.html'
+                               title='hyper::header::Accept'>Accept</a></td>
+                        <td class='docblock short'><p>The <code>Accept</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AcceptEncoding.html'
+                               title='hyper::header::AcceptEncoding'>AcceptEncoding</a></td>
+                        <td class='docblock short'><p>The <code>Accept-Encoding</code> header</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AccessControlAllowHeaders.html'
+                               title='hyper::header::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></td>
+                        <td class='docblock short'><p>The <code>Access-Control-Allow-Headers</code> response header,
+part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AccessControlAllowMethods.html'
+                               title='hyper::header::AccessControlAllowMethods'>AccessControlAllowMethods</a></td>
+                        <td class='docblock short'><p>The <code>Access-Control-Allow-Methods</code> response header,
+part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AccessControlMaxAge.html'
+                               title='hyper::header::AccessControlMaxAge'>AccessControlMaxAge</a></td>
+                        <td class='docblock short'><p>The <code>Access-Control-Max-Age</code> response header,
+part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AccessControlRequestHeaders.html'
+                               title='hyper::header::AccessControlRequestHeaders'>AccessControlRequestHeaders</a></td>
+                        <td class='docblock short'><p>The <code>Access-Control-Request-Headers</code> request header,
+part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AccessControlRequestMethod.html'
+                               title='hyper::header::AccessControlRequestMethod'>AccessControlRequestMethod</a></td>
+                        <td class='docblock short'><p>The <code>Access-Control-Request-Method</code> request header,
+part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Allow.html'
+                               title='hyper::header::Allow'>Allow</a></td>
+                        <td class='docblock short'><p>The <code>Allow</code> header.
+See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://tools.ietf.org/html/rfc7231#section-7.4.1</a></p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Authorization.html'
+                               title='hyper::header::Authorization'>Authorization</a></td>
+                        <td class='docblock short'><p>The <code>Authorization</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Basic.html'
+                               title='hyper::header::Basic'>Basic</a></td>
+                        <td class='docblock short'><p>Credential holder for Basic Authentication</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.CacheControl.html'
+                               title='hyper::header::CacheControl'>CacheControl</a></td>
+                        <td class='docblock short'><p>The Cache-Control header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Connection.html'
+                               title='hyper::header::Connection'>Connection</a></td>
+                        <td class='docblock short'><p>The <code>Connection</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.ContentLength.html'
+                               title='hyper::header::ContentLength'>ContentLength</a></td>
+                        <td class='docblock short'><p>The <code>Content-Length</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.ContentType.html'
+                               title='hyper::header::ContentType'>ContentType</a></td>
+                        <td class='docblock short'><p>The <code>Content-Type</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Cookies.html'
+                               title='hyper::header::Cookies'>Cookies</a></td>
+                        <td class='docblock short'><p>The <code>Cookie</code> header. Defined in <a href="tools.ietf.org/html/rfc6265#section-5.4">RFC6265</a>:</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Date.html'
+                               title='hyper::header::Date'>Date</a></td>
+                        <td class='docblock short'><p>The <code>Date</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Etag.html'
+                               title='hyper::header::Etag'>Etag</a></td>
+                        <td class='docblock short'><p>The <code>Etag</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Expires.html'
+                               title='hyper::header::Expires'>Expires</a></td>
+                        <td class='docblock short'><p>The <code>Expires</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.HeaderFormatter.html'
+                               title='hyper::header::HeaderFormatter'>HeaderFormatter</a></td>
+                        <td class='docblock short'><p>A wrapper around any Header with a Show impl that calls fmt_header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.HeaderView.html'
+                               title='hyper::header::HeaderView'>HeaderView</a></td>
+                        <td class='docblock short'><p>Returned with the <code>HeadersItems</code> iterator.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Headers.html'
+                               title='hyper::header::Headers'>Headers</a></td>
+                        <td class='docblock short'><p>A map of header fields on requests and responses.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.HeadersItems.html'
+                               title='hyper::header::HeadersItems'>HeadersItems</a></td>
+                        <td class='docblock short'><p>An <code>Iterator</code> over the fields in a <code>Headers</code> map.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Host.html'
+                               title='hyper::header::Host'>Host</a></td>
+                        <td class='docblock short'><p>The <code>Host</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.IfModifiedSince.html'
+                               title='hyper::header::IfModifiedSince'>IfModifiedSince</a></td>
+                        <td class='docblock short'><p>The <code>If-Modified-Since</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.LastModified.html'
+                               title='hyper::header::LastModified'>LastModified</a></td>
+                        <td class='docblock short'><p>The <code>LastModified</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Location.html'
+                               title='hyper::header::Location'>Location</a></td>
+                        <td class='docblock short'><p>The <code>Location</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.QualityItem.html'
+                               title='hyper::header::QualityItem'>QualityItem</a></td>
+                        <td class='docblock short'><p>Represents an item with a quality value as defined in
+<a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">RFC7231</a>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Referer.html'
+                               title='hyper::header::Referer'>Referer</a></td>
+                        <td class='docblock short'><p>The <code>Referer</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Server.html'
+                               title='hyper::header::Server'>Server</a></td>
+                        <td class='docblock short'><p>The <code>Server</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.SetCookie.html'
+                               title='hyper::header::SetCookie'>SetCookie</a></td>
+                        <td class='docblock short'><p>The <code>Set-Cookie</code> header</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.TransferEncoding.html'
+                               title='hyper::header::TransferEncoding'>TransferEncoding</a></td>
+                        <td class='docblock short'><p>The <code>Transfer-Encoding</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Upgrade.html'
+                               title='hyper::header::Upgrade'>Upgrade</a></td>
+                        <td class='docblock short'><p>The <code>Upgrade</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.UserAgent.html'
+                               title='hyper::header::UserAgent'>UserAgent</a></td>
+                        <td class='docblock short'><p>The <code>User-Agent</code> header field.</p>
+</td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.AccessControlAllowOrigin.html'
+                               title='hyper::header::AccessControlAllowOrigin'>AccessControlAllowOrigin</a></td>
+                        <td class='docblock short'><p>The <code>Access-Control-Allow-Origin</code> response header,
+part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.CacheDirective.html'
+                               title='hyper::header::CacheDirective'>CacheDirective</a></td>
+                        <td class='docblock short'><p>CacheControl contains a list of these directives.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.ConnectionOption.html'
+                               title='hyper::header::ConnectionOption'>ConnectionOption</a></td>
+                        <td class='docblock short'><p>Values that can be in the <code>Connection</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Encoding.html'
+                               title='hyper::header::Encoding'>Encoding</a></td>
+                        <td class='docblock short'><p>A value to represent an encoding used in <code>Transfer-Encoding</code>
+or <code>Accept-Encoding</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Protocol.html'
+                               title='hyper::header::Protocol'>Protocol</a></td>
+                        <td class='docblock short'><p>Protocol values that can appear in the Upgrade header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Vary.html'
+                               title='hyper::header::Vary'>Vary</a></td>
+                        <td class='docblock short'><p>The <code>Allow</code> header.
+See also <a href="https://tools.ietf.org/html/rfc7231#section-7.1.4">https://tools.ietf.org/html/rfc7231#section-7.1.4</a></p>
+</td>
+                    </tr>
+                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Header.html'
+                               title='hyper::header::Header'>Header</a></td>
+                        <td class='docblock short'><p>A trait for any object that will represent a header field and value.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.HeaderFormat.html'
+                               title='hyper::header::HeaderFormat'>HeaderFormat</a></td>
+                        <td class='docblock short'><p>A trait for any object that will represent a header field and value.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Scheme.html'
+                               title='hyper::header::Scheme'>Scheme</a></td>
+                        <td class='docblock short'><p>An Authorization scheme to be used in the header.</p>
+</td>
+                    </tr>
+                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.qitem.html'
+                               title='hyper::header::qitem'>qitem</a></td>
+                        <td class='docblock short'><p>Convinience function to wrap a value in a <code>QualityItem</code>
+Sets <code>q</code> to the default 1.0</p>
+</td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "hyper";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

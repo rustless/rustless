@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `HeaderFormat` trait in crate `hyper`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, HeaderFormat">
+
+    <title>hyper::header::HeaderFormat - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../index.html'>hyper</a>::<wbr><a href='index.html'>header</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='parsing/index.html'>parsing</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Accept.html'>Accept</a><a class='struct ' href='struct.AcceptEncoding.html'>AcceptEncoding</a><a class='struct ' href='struct.AccessControlAllowHeaders.html'>AccessControlAllowHeaders</a><a class='struct ' href='struct.AccessControlAllowMethods.html'>AccessControlAllowMethods</a><a class='struct ' href='struct.AccessControlMaxAge.html'>AccessControlMaxAge</a><a class='struct ' href='struct.AccessControlRequestHeaders.html'>AccessControlRequestHeaders</a><a class='struct ' href='struct.AccessControlRequestMethod.html'>AccessControlRequestMethod</a><a class='struct ' href='struct.Allow.html'>Allow</a><a class='struct ' href='struct.Authorization.html'>Authorization</a><a class='struct ' href='struct.Basic.html'>Basic</a><a class='struct ' href='struct.CacheControl.html'>CacheControl</a><a class='struct ' href='struct.Connection.html'>Connection</a><a class='struct ' href='struct.ContentLength.html'>ContentLength</a><a class='struct ' href='struct.ContentType.html'>ContentType</a><a class='struct ' href='struct.Cookies.html'>Cookies</a><a class='struct ' href='struct.Date.html'>Date</a><a class='struct ' href='struct.Etag.html'>Etag</a><a class='struct ' href='struct.Expires.html'>Expires</a><a class='struct ' href='struct.HeaderFormatter.html'>HeaderFormatter</a><a class='struct ' href='struct.HeaderView.html'>HeaderView</a><a class='struct ' href='struct.Headers.html'>Headers</a><a class='struct ' href='struct.HeadersItems.html'>HeadersItems</a><a class='struct ' href='struct.Host.html'>Host</a><a class='struct ' href='struct.IfModifiedSince.html'>IfModifiedSince</a><a class='struct ' href='struct.LastModified.html'>LastModified</a><a class='struct ' href='struct.Location.html'>Location</a><a class='struct ' href='struct.QualityItem.html'>QualityItem</a><a class='struct ' href='struct.Referer.html'>Referer</a><a class='struct ' href='struct.Server.html'>Server</a><a class='struct ' href='struct.SetCookie.html'>SetCookie</a><a class='struct ' href='struct.TransferEncoding.html'>TransferEncoding</a><a class='struct ' href='struct.Upgrade.html'>Upgrade</a><a class='struct ' href='struct.UserAgent.html'>UserAgent</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.AccessControlAllowOrigin.html'>AccessControlAllowOrigin</a><a class='enum ' href='enum.CacheDirective.html'>CacheDirective</a><a class='enum ' href='enum.ConnectionOption.html'>ConnectionOption</a><a class='enum ' href='enum.Encoding.html'>Encoding</a><a class='enum ' href='enum.Protocol.html'>Protocol</a><a class='enum ' href='enum.Vary.html'>Vary</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Header.html'>Header</a><a class='trait current' href='trait.HeaderFormat.html'>HeaderFormat</a><a class='trait ' href='trait.Scheme.html'>Scheme</a></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.qitem.html'>qitem</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='trait' href=''>HeaderFormat</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-18217' href='../../src/hyper/header/mod.rs.html#58-65'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait HeaderFormat: HeaderClone + <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> {
+    fn <a href='#tymethod.fmt_header' class='fnname'>fmt_header</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a>;
+}</pre><div class='docblock'><p>A trait for any object that will represent a header field and value.</p>
+
+<p>This trait represents the formatting of a Header for output to a TcpStream.</p>
+</div>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.fmt_header' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.fmt_header' class='fnname'>fmt_header</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h3><div class='docblock'><p>Format a header to be output into a TcpStream.</p>
+
+<p>This method is not allowed to introduce an Err not produced
+by the passed-in Formatter.</p>
+</div></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlAllowHeaders.html' title='hyper::header::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlAllowMethods.html' title='hyper::header::AccessControlAllowMethods'>AccessControlAllowMethods</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../hyper/header/enum.AccessControlAllowOrigin.html' title='hyper::header::AccessControlAllowOrigin'>AccessControlAllowOrigin</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlMaxAge.html' title='hyper::header::AccessControlMaxAge'>AccessControlMaxAge</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlRequestHeaders.html' title='hyper::header::AccessControlRequestHeaders'>AccessControlRequestHeaders</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlRequestMethod.html' title='hyper::header::AccessControlRequestMethod'>AccessControlRequestMethod</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlAllowHeaders.html' title='hyper::header::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlAllowMethods.html' title='hyper::header::AccessControlAllowMethods'>AccessControlAllowMethods</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../hyper/header/enum.AccessControlAllowOrigin.html' title='hyper::header::AccessControlAllowOrigin'>AccessControlAllowOrigin</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlMaxAge.html' title='hyper::header::AccessControlMaxAge'>AccessControlMaxAge</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlRequestHeaders.html' title='hyper::header::AccessControlRequestHeaders'>AccessControlRequestHeaders</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlRequestMethod.html' title='hyper::header::AccessControlRequestMethod'>AccessControlRequestMethod</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Accept.html' title='hyper::header::Accept'>Accept</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AcceptEncoding.html' title='hyper::header::AcceptEncoding'>AcceptEncoding</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Allow.html' title='hyper::header::Allow'>Allow</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;S: <a class='trait' href='../../hyper/header/trait.Scheme.html' title='hyper::header::Scheme'>Scheme</a>&gt; <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Authorization.html' title='hyper::header::Authorization'>Authorization</a>&lt;S&gt;</code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.CacheControl.html' title='hyper::header::CacheControl'>CacheControl</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Cookies.html' title='hyper::header::Cookies'>Cookies</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Connection.html' title='hyper::header::Connection'>Connection</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.ContentLength.html' title='hyper::header::ContentLength'>ContentLength</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.ContentType.html' title='hyper::header::ContentType'>ContentType</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Date.html' title='hyper::header::Date'>Date</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Etag.html' title='hyper::header::Etag'>Etag</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Expires.html' title='hyper::header::Expires'>Expires</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Host.html' title='hyper::header::Host'>Host</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.LastModified.html' title='hyper::header::LastModified'>LastModified</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.IfModifiedSince.html' title='hyper::header::IfModifiedSince'>IfModifiedSince</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Location.html' title='hyper::header::Location'>Location</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Referer.html' title='hyper::header::Referer'>Referer</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Server.html' title='hyper::header::Server'>Server</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.SetCookie.html' title='hyper::header::SetCookie'>SetCookie</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.TransferEncoding.html' title='hyper::header::TransferEncoding'>TransferEncoding</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Upgrade.html' title='hyper::header::Upgrade'>Upgrade</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.UserAgent.html' title='hyper::header::UserAgent'>UserAgent</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../hyper/header/enum.Vary.html' title='hyper::header::Vary'>Vary</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlAllowHeaders.html' title='hyper::header::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlAllowMethods.html' title='hyper::header::AccessControlAllowMethods'>AccessControlAllowMethods</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../hyper/header/enum.AccessControlAllowOrigin.html' title='hyper::header::AccessControlAllowOrigin'>AccessControlAllowOrigin</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlMaxAge.html' title='hyper::header::AccessControlMaxAge'>AccessControlMaxAge</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlRequestHeaders.html' title='hyper::header::AccessControlRequestHeaders'>AccessControlRequestHeaders</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AccessControlRequestMethod.html' title='hyper::header::AccessControlRequestMethod'>AccessControlRequestMethod</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Accept.html' title='hyper::header::Accept'>Accept</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.AcceptEncoding.html' title='hyper::header::AcceptEncoding'>AcceptEncoding</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Allow.html' title='hyper::header::Allow'>Allow</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;S: <a class='trait' href='../../hyper/header/trait.Scheme.html' title='hyper::header::Scheme'>Scheme</a>&gt; <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Authorization.html' title='hyper::header::Authorization'>Authorization</a>&lt;S&gt;</code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.CacheControl.html' title='hyper::header::CacheControl'>CacheControl</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Cookies.html' title='hyper::header::Cookies'>Cookies</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Connection.html' title='hyper::header::Connection'>Connection</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.ContentLength.html' title='hyper::header::ContentLength'>ContentLength</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.ContentType.html' title='hyper::header::ContentType'>ContentType</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Date.html' title='hyper::header::Date'>Date</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Etag.html' title='hyper::header::Etag'>Etag</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Expires.html' title='hyper::header::Expires'>Expires</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Host.html' title='hyper::header::Host'>Host</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.LastModified.html' title='hyper::header::LastModified'>LastModified</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.IfModifiedSince.html' title='hyper::header::IfModifiedSince'>IfModifiedSince</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Location.html' title='hyper::header::Location'>Location</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Referer.html' title='hyper::header::Referer'>Referer</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Server.html' title='hyper::header::Server'>Server</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.SetCookie.html' title='hyper::header::SetCookie'>SetCookie</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.TransferEncoding.html' title='hyper::header::TransferEncoding'>TransferEncoding</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.Upgrade.html' title='hyper::header::Upgrade'>Upgrade</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../hyper/header/struct.UserAgent.html' title='hyper::header::UserAgent'>UserAgent</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../hyper/header/enum.Vary.html' title='hyper::header::Vary'>Vary</a></code></li>
+</ul><script type="text/javascript" async
+                              src="../../implementors/hyper/header/trait.HeaderFormat.js">
+                      </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "hyper";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `is_match` fn in crate `regex`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, is_match">
+
+    <title>regex::is_match - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    <link rel="shortcut icon" href="http://www.rust-lang.org/favicon.ico">
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        <a href='../regex/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
+        <p class='location'><a href='index.html'>regex</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Captures.html'>Captures</a><a class='struct ' href='struct.Error.html'>Error</a><a class='struct ' href='struct.FindCaptures.html'>FindCaptures</a><a class='struct ' href='struct.FindMatches.html'>FindMatches</a><a class='struct ' href='struct.NoExpand.html'>NoExpand</a><a class='struct ' href='struct.RegexSplits.html'>RegexSplits</a><a class='struct ' href='struct.RegexSplitsN.html'>RegexSplitsN</a><a class='struct ' href='struct.SubCaptures.html'>SubCaptures</a><a class='struct ' href='struct.SubCapturesPos.html'>SubCapturesPos</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.Regex.html'>Regex</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Replacer.html'>Replacer</a></div><div class='block fn'><h2>Functions</h2><a class='fn current' href='fn.is_match.html'>is_match</a><a class='fn ' href='fn.quote.html'>quote</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content fn">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>regex</a>::<wbr><a class='fn' href=''>is_match</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-8489' href='../src/regex/re.rs.html#50-52'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn is_match(regex: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, text: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>, <a class='struct' href='../regex/struct.Error.html' title='regex::Error'>Error</a>&gt;</pre><div class='docblock'><p>Tests if the given regular expression matches somewhere in the text given.</p>
+
+<p>If there was a problem compiling the regular expression, an error is
+returned.</p>
+
+<p>To find submatches, split or replace text, you&#39;ll need to compile an
+expression first.</p>
+
+<p>Note that you should prefer the <code>regex!</code> macro when possible. For example,
+<code>regex!(&quot;...&quot;).is_match(&quot;...&quot;)</code>.</p>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "regex";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

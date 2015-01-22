@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `UnsafeAnyExt` trait in crate `unsafe-any`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, UnsafeAnyExt">
+
+    <title>unsafe-any::UnsafeAnyExt - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='index.html'>unsafe-any</a></p><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.UnsafeAny.html'>UnsafeAny</a><a class='trait current' href='trait.UnsafeAnyExt.html'>UnsafeAnyExt</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>unsafe-any</a>::<wbr><a class='trait' href=''>UnsafeAnyExt</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-93' href='../src/unsafe-any/lib.rs.html#49-70'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait UnsafeAnyExt {
+    unsafe fn <a href='#tymethod.downcast_ref_unchecked' class='fnname'>downcast_ref_unchecked</a>&lt;T: 'static&gt;(&amp;self) -&gt; &amp;T;
+    unsafe fn <a href='#tymethod.downcast_mut_unchecked' class='fnname'>downcast_mut_unchecked</a>&lt;T: 'static&gt;(&amp;mut self) -&gt; &amp;mut T;
+    unsafe fn <a href='#tymethod.downcast_unchecked' class='fnname'>downcast_unchecked</a>&lt;T: 'static&gt;(self: <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;Self&gt;) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;T&gt;;
+}</pre><div class='docblock'><p>An extension trait for unchecked downcasting of trait objects.</p>
+</div>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.downcast_ref_unchecked' class='method'><a class='stability Unmarked' title='No stability level'></a><code>unsafe fn <a href='#tymethod.downcast_ref_unchecked' class='fnname'>downcast_ref_unchecked</a>&lt;T: 'static&gt;(&amp;self) -&gt; &amp;T</code></h3><div class='docblock'><p>Returns a reference to the contained value, assuming that it is of type <code>T</code>.</p>
+
+<h2 id="warning" class='section-header'><a
+                           href="#warning">Warning</a></h2>
+<p>If you are not <em>absolutely certain</em> of <code>T</code> you should <em>not</em> call this!</p>
+</div><h3 id='tymethod.downcast_mut_unchecked' class='method'><a class='stability Unmarked' title='No stability level'></a><code>unsafe fn <a href='#tymethod.downcast_mut_unchecked' class='fnname'>downcast_mut_unchecked</a>&lt;T: 'static&gt;(&amp;mut self) -&gt; &amp;mut T</code></h3><div class='docblock'><p>Returns a mutable reference to the contained value, assuming that it is of type <code>T</code>.</p>
+
+<h2 id="warning" class='section-header'><a
+                           href="#warning">Warning</a></h2>
+<p>If you are not <em>absolutely certain</em> of <code>T</code> you should <em>not</em> call this!</p>
+</div><h3 id='tymethod.downcast_unchecked' class='method'><a class='stability Unmarked' title='No stability level'></a><code>unsafe fn <a href='#tymethod.downcast_unchecked' class='fnname'>downcast_unchecked</a>&lt;T: 'static&gt;(self: <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;Self&gt;) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;T&gt;</code></h3><div class='docblock'><p>Returns a the contained value, assuming that it is of type <code>T</code>.</p>
+
+<h2 id="warning" class='section-header'><a
+                           href="#warning">Warning</a></h2>
+<p>If you are not <em>absolutely certain</em> of <code>T</code> you should <em>not</em> call this!</p>
+</div></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../unsafe-any/trait.UnsafeAnyExt.html' title='unsafe-any::UnsafeAnyExt'>UnsafeAnyExt</a> for <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a></code></li>
+</ul><script type="text/javascript" async
+                              src="../implementors/unsafe-any/trait.UnsafeAnyExt.js">
+                      </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "unsafe-any";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

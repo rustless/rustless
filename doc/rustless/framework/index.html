@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `framework` mod in crate `rustless`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, framework">
+
+    <title>rustless::framework - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../index.html'>rustless</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='../backend/index.html'>backend</a><a class='mod ' href='../batteries/index.html'>batteries</a><a class='mod ' href='../errors/index.html'>errors</a><a class='mod current' href='../framework/index.html'>framework</a><a class='mod ' href='../server/index.html'>server</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.Response.html'>Response</a><a class='struct ' href='../struct.SimpleRequest.html'>SimpleRequest</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='../trait.Extensible.html'>Extensible</a><a class='trait ' href='../trait.Handler.html'>Handler</a></div><div class='block macro'><h2>Macros</h2><a class='macro ' href='../macro.impl_nesting!.html'>impl_nesting!</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>rustless</a>::<wbr><a class='mod' href=''>framework</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-2157' href='../../src/rustless/framework/mod.rs.html#1-54'>[src]</a></span></h1>
+<h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
+<table><tr><td><code>pub use self::app::{<a class='struct' href='../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a>};</code></td></tr><tr><td><code>pub use self::api::{<a class='struct' href='../../rustless/framework/api/struct.Api.html' title='rustless::framework::api::Api'>Api</a>, <a class='enum' href='../../rustless/framework/api/enum.Versioning.html' title='rustless::framework::api::Versioning'>Versioning</a>, <a class='struct' href='../../rustless/framework/api/struct.Version.html' title='rustless::framework::api::Version'>Version</a>};</code></td></tr><tr><td><code>pub use self::endpoint::{<a class='struct' href='../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>, <a class='type' href='../../rustless/framework/endpoint/type.EndpointHandler.html' title='rustless::framework::endpoint::EndpointHandler'>EndpointHandler</a>, <a class='type' href='../../rustless/framework/endpoint/type.EndpointBuilder.html' title='rustless::framework::endpoint::EndpointBuilder'>EndpointBuilder</a>};</code></td></tr><tr><td><code>pub use self::<a class='mod'
+                                            href='./client/index.html'>client</a>::<a class='struct' href='../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>;</code></td></tr><tr><td><code>pub use self::nesting::{<a class='trait' href='../../rustless/framework/nesting/trait.Nesting.html' title='rustless::framework::nesting::Nesting'>Nesting</a>, <a class='trait' href='../../rustless/framework/nesting/trait.Node.html' title='rustless::framework::nesting::Node'>Node</a>};</code></td></tr><tr><td><code>pub use self::namespace::{<a class='struct' href='../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a>};</code></td></tr><tr><td><code>pub use self::<a class='mod'
+                                            href='./media/index.html'>media</a>::<a class='struct' href='../../rustless/framework/media/struct.Media.html' title='rustless::framework::media::Media'>Media</a>;</code></td></tr><tr><td><code>pub use self::<a class='mod'
+                                            href='./path/index.html'>path</a>::<a class='struct' href='../../rustless/framework/path/struct.Path.html' title='rustless::framework::path::Path'>Path</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='api/index.html'
+                               title='rustless::framework::api'>api</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='app/index.html'
+                               title='rustless::framework::app'>app</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='client/index.html'
+                               title='rustless::framework::client'>client</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='endpoint/index.html'
+                               title='rustless::framework::endpoint'>endpoint</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='formatters/index.html'
+                               title='rustless::framework::formatters'>formatters</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='media/index.html'
+                               title='rustless::framework::media'>media</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='namespace/index.html'
+                               title='rustless::framework::namespace'>namespace</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='nesting/index.html'
+                               title='rustless::framework::nesting'>nesting</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='path/index.html'
+                               title='rustless::framework::path'>path</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.CallInfo.html'
+                               title='rustless::framework::CallInfo'>CallInfo</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.ApiHandler.html'
+                               title='rustless::framework::ApiHandler'>ApiHandler</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.ApiHandlers.html'
+                               title='rustless::framework::ApiHandlers'>ApiHandlers</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Callback.html'
+                               title='rustless::framework::Callback'>Callback</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Callbacks.html'
+                               title='rustless::framework::Callbacks'>Callbacks</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.ErrorFormatter.html'
+                               title='rustless::framework::ErrorFormatter'>ErrorFormatter</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.ErrorFormatters.html'
+                               title='rustless::framework::ErrorFormatters'>ErrorFormatters</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "rustless";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

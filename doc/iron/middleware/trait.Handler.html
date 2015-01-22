@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Handler` trait in crate `iron`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Handler">
+
+    <title>iron::middleware::Handler - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <p class='location'><a href='../index.html'>iron</a>::<wbr><a href='index.html'>middleware</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.ChainBuilder.html'>ChainBuilder</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.AfterMiddleware.html'>AfterMiddleware</a><a class='trait ' href='trait.AroundMiddleware.html'>AroundMiddleware</a><a class='trait ' href='trait.BeforeMiddleware.html'>BeforeMiddleware</a><a class='trait ' href='trait.Chain.html'>Chain</a><a class='trait current' href='trait.Handler.html'>Handler</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>iron</a>::<wbr><a href='index.html'>middleware</a>::<wbr><a class='trait' href=''>Handler</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-525' href='../../src/iron/middleware.rs.html#73-89'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait Handler: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> {
+    fn <a href='#tymethod.call' class='fnname'>call</a>(&amp;self, &amp;mut <a class='struct' href='../../iron/struct.Request.html' title='iron::Request'>Request</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;;
+
+    fn <a href='#method.catch' class='fnname'>catch</a>(&amp;self, _: &amp;mut <a class='struct' href='../../iron/struct.Request.html' title='iron::Request'>Request</a>, err: <a class='type' href='../../iron/type.IronError.html' title='iron::IronError'>IronError</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>, <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;)</a> { ... }
+}</pre><div class='docblock'><p><code>Handler</code>s are responsible for handling requests by creating Responses from Requests.</p>
+
+<p>By default, bare functions and variants of Chain implement <code>Handler</code>.</p>
+
+<p><code>Handler</code>s are allowed to return errors, and if they do, their <code>catch</code> method is called and the
+error is propagated to <code>AfterMiddleware</code>.</p>
+</div>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.call' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.call' class='fnname'>call</a>(&amp;self, &amp;mut <a class='struct' href='../../iron/struct.Request.html' title='iron::Request'>Request</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;</code></h3><div class='docblock'><p>Produce a <code>Response</code> from a Request, with the possibility of error.</p>
+
+<p>If this returns an Err, <code>catch</code> is called with the error.</p>
+</div></div>
+            <h2 id='provided-methods'>Provided Methods</h2>
+            <div class='methods'>
+        <h3 id='method.catch' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.catch' class='fnname'>catch</a>(&amp;self, _: &amp;mut <a class='struct' href='../../iron/struct.Request.html' title='iron::Request'>Request</a>, err: <a class='type' href='../../iron/type.IronError.html' title='iron::IronError'>IronError</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>, <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;)</a></code></h3><div class='docblock'><p>If <code>Handler</code>&#39;s call method produces an Err, then this method is called
+to produce a <code>Response</code> and possibly handle the error.</p>
+
+<p>If the passed-in error is not handled, it should be returned as the second
+item in the returned tuple. If it is handled, then <code>Ok(())</code> can be returned
+instead to indicate that all is good with the Response and the error has
+been dealt with.</p>
+</div></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='../../iron/middleware/struct.ChainBuilder.html' title='iron::middleware::ChainBuilder'>ChainBuilder</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + for&lt;'a&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;'a mut <a class='struct' href='../../iron/struct.Request.html' title='iron::Request'>Request</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;&gt; <a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for F</code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a>&gt;</code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/arc/struct.Arc.html' title='alloc::arc::Arc'>Arc</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a>&gt;&gt;</code></li>
+</ul><script type="text/javascript" async
+                              src="../../implementors/iron/middleware/trait.Handler.js">
+                      </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "iron";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

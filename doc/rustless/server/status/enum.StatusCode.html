@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `StatusCode` enum in crate `rustless`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, StatusCode">
+
+    <title>rustless::server::status::StatusCode - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>status</a></p><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.StatusClass.html'>StatusClass</a><a class='enum current' href='enum.StatusCode.html'>StatusCode</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>status</a>::<wbr><a class='enum' href=''>StatusCode</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-29090' href='../../../hyper/status/enum.StatusCode.html?gotosrc=29090'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum StatusCode {
+    Continue,
+    SwitchingProtocols,
+    Processing,
+    Code103,
+    Code104,
+    Code105,
+    Code106,
+    Code107,
+    Code108,
+    Code109,
+    Code110,
+    Code111,
+    Code112,
+    Code113,
+    Code114,
+    Code115,
+    Code116,
+    Code117,
+    Code118,
+    Code119,
+    Code120,
+    Code121,
+    Code122,
+    Code123,
+    Code124,
+    Code125,
+    Code126,
+    Code127,
+    Code128,
+    Code129,
+    Code130,
+    Code131,
+    Code132,
+    Code133,
+    Code134,
+    Code135,
+    Code136,
+    Code137,
+    Code138,
+    Code139,
+    Code140,
+    Code141,
+    Code142,
+    Code143,
+    Code144,
+    Code145,
+    Code146,
+    Code147,
+    Code148,
+    Code149,
+    Code150,
+    Code151,
+    Code152,
+    Code153,
+    Code154,
+    Code155,
+    Code156,
+    Code157,
+    Code158,
+    Code159,
+    Code160,
+    Code161,
+    Code162,
+    Code163,
+    Code164,
+    Code165,
+    Code166,
+    Code167,
+    Code168,
+    Code169,
+    Code170,
+    Code171,
+    Code172,
+    Code173,
+    Code174,
+    Code175,
+    Code176,
+    Code177,
+    Code178,
+    Code179,
+    Code180,
+    Code181,
+    Code182,
+    Code183,
+    Code184,
+    Code185,
+    Code186,
+    Code187,
+    Code188,
+    Code189,
+    Code190,
+    Code191,
+    Code192,
+    Code193,
+    Code194,
+    Code195,
+    Code196,
+    Code197,
+    Code198,
+    Code199,
+    Ok,
+    Created,
+    Accepted,
+    NonAuthoritativeInformation,
+    NoContent,
+    ResetContent,
+    PartialContent,
+    MultiStatus,
+    AlreadyReported,
+    Code209,
+    Code210,
+    Code211,
+    Code212,
+    Code213,
+    Code214,
+    Code215,
+    Code216,
+    Code217,
+    Code218,
+    Code219,
+    Code220,
+    Code221,
+    Code222,
+    Code223,
+    Code224,
+    Code225,
+    ImUsed,
+    Code227,
+    Code228,
+    Code229,
+    Code230,
+    Code231,
+    Code232,
+    Code233,
+    Code234,
+    Code235,
+    Code236,
+    Code237,
+    Code238,
+    Code239,
+    Code240,
+    Code241,
+    Code242,
+    Code243,
+    Code244,
+    Code245,
+    Code246,
+    Code247,
+    Code248,
+    Code249,
+    Code250,
+    Code251,
+    Code252,
+    Code253,
+    Code254,
+    Code255,
+    Code256,
+    Code257,
+    Code258,
+    Code259,
+    Code260,
+    Code261,
+    Code262,
+    Code263,
+    Code264,
+    Code265,
+    Code266,
+    Code267,
+    Code268,
+    Code269,
+    Code270,
+    Code271,
+    Code272,
+    Code273,
+    Code274,
+    Code275,
+    Code276,
+    Code277,
+    Code278,
+    Code279,
+    Code280,
+    Code281,
+    Code282,
+    Code283,
+    Code284,
+    Code285,
+    Code286,
+    Code287,
+    Code288,
+    Code289,
+    Code290,
+    Code291,
+    Code292,
+    Code293,
+    Code294,
+    Code295,
+    Code296,
+    Code297,
+    Code298,
+    Code299,
+    MultipleChoices,
+    MovedPermanently,
+    Found,
+    SeeOther,
+    NotModified,
+    UseProxy,
+    SwitchProxy,
+    TemporaryRedirect,
+    PermanentRedirect,
+    Code309,
+    Code310,
+    Code311,
+    Code312,
+    Code313,
+    Code314,
+    Code315,
+    Code316,
+    Code317,
+    Code318,
+    Code319,
+    Code320,
+    Code321,
+    Code322,
+    Code323,
+    Code324,
+    Code325,
+    Code326,
+    Code327,
+    Code328,
+    Code329,
+    Code330,
+    Code331,
+    Code332,
+    Code333,
+    Code334,
+    Code335,
+    Code336,
+    Code337,
+    Code338,
+    Code339,
+    Code340,
+    Code341,
+    Code342,
+    Code343,
+    Code344,
+    Code345,
+    Code346,
+    Code347,
+    Code348,
+    Code349,
+    Code350,
+    Code351,
+    Code352,
+    Code353,
+    Code354,
+    Code355,
+    Code356,
+    Code357,
+    Code358,
+    Code359,
+    Code360,
+    Code361,
+    Code362,
+    Code363,
+    Code364,
+    Code365,
+    Code366,
+    Code367,
+    Code368,
+    Code369,
+    Code370,
+    Code371,
+    Code372,
+    Code373,
+    Code374,
+    Code375,
+    Code376,
+    Code377,
+    Code378,
+    Code379,
+    Code380,
+    Code381,
+    Code382,
+    Code383,
+    Code384,
+    Code385,
+    Code386,
+    Code387,
+    Code388,
+    Code389,
+    Code390,
+    Code391,
+    Code392,
+    Code393,
+    Code394,
+    Code395,
+    Code396,
+    Code397,
+    Code398,
+    Code399,
+    BadRequest,
+    Unauthorized,
+    PaymentRequired,
+    Forbidden,
+    NotFound,
+    MethodNotAllowed,
+    NotAcceptable,
+    ProxyAuthenticationRequired,
+    RequestTimeout,
+    Conflict,
+    Gone,
+    LengthRequired,
+    PreconditionFailed,
+    RequestEntityTooLarge,
+    RequestUriTooLong,
+    UnsupportedMediaType,
+    RequestedRangeNotSatisfiable,
+    ExpectationFailed,
+    ImATeapot,
+    AuthenticationTimeout,
+    Code420,
+    Code421,
+    UnprocessableEntity,
+    Locked,
+    FailedDependency,
+    UnorderedCollection,
+    UpgradeRequired,
+    Code427,
+    PreconditionRequired,
+    TooManyRequests,
+    Code430,
+    RequestHeaderFieldsTooLarge,
+    Code432,
+    Code433,
+    Code434,
+    Code435,
+    Code436,
+    Code437,
+    Code438,
+    Code439,
+    Code440,
+    Code441,
+    Code442,
+    Code443,
+    Code444,
+    Code445,
+    Code446,
+    Code447,
+    Code448,
+    Code449,
+    Code450,
+    UnavailableForLegalReasons,
+    Code452,
+    Code453,
+    Code454,
+    Code455,
+    Code456,
+    Code457,
+    Code458,
+    Code459,
+    Code460,
+    Code461,
+    Code462,
+    Code463,
+    Code464,
+    Code465,
+    Code466,
+    Code467,
+    Code468,
+    Code469,
+    Code470,
+    Code471,
+    Code472,
+    Code473,
+    Code474,
+    Code475,
+    Code476,
+    Code477,
+    Code478,
+    Code479,
+    Code480,
+    Code481,
+    Code482,
+    Code483,
+    Code484,
+    Code485,
+    Code486,
+    Code487,
+    Code488,
+    Code489,
+    Code490,
+    Code491,
+    Code492,
+    Code493,
+    Code494,
+    Code495,
+    Code496,
+    Code497,
+    Code498,
+    Code499,
+    InternalServerError,
+    NotImplemented,
+    BadGateway,
+    ServiceUnavailable,
+    GatewayTimeout,
+    HttpVersionNotSupported,
+    VariantAlsoNegotiates,
+    InsufficientStorage,
+    LoopDetected,
+    Code509,
+    NotExtended,
+    NetworkAuthenticationRequired,
+    Code512,
+    Code513,
+    Code514,
+    Code515,
+    Code516,
+    Code517,
+    Code518,
+    Code519,
+    Code520,
+    Code521,
+    Code522,
+    Code523,
+    Code524,
+    Code525,
+    Code526,
+    Code527,
+    Code528,
+    Code529,
+    Code530,
+    Code531,
+    Code532,
+    Code533,
+    Code534,
+    Code535,
+    Code536,
+    Code537,
+    Code538,
+    Code539,
+    Code540,
+    Code541,
+    Code542,
+    Code543,
+    Code544,
+    Code545,
+    Code546,
+    Code547,
+    Code548,
+    Code549,
+    Code550,
+    Code551,
+    Code552,
+    Code553,
+    Code554,
+    Code555,
+    Code556,
+    Code557,
+    Code558,
+    Code559,
+    Code560,
+    Code561,
+    Code562,
+    Code563,
+    Code564,
+    Code565,
+    Code566,
+    Code567,
+    Code568,
+    Code569,
+    Code570,
+    Code571,
+    Code572,
+    Code573,
+    Code574,
+    Code575,
+    Code576,
+    Code577,
+    Code578,
+    Code579,
+    Code580,
+    Code581,
+    Code582,
+    Code583,
+    Code584,
+    Code585,
+    Code586,
+    Code587,
+    Code588,
+    Code589,
+    Code590,
+    Code591,
+    Code592,
+    Code593,
+    Code594,
+    Code595,
+    Code596,
+    Code597,
+    Code598,
+    Code599,
+}</pre><div class='docblock'><p>An HTTP status code (<code>Status-Code</code> in RFC 2616).</p>
+
+<p>This enum is absolutely exhaustive, covering all 500 possible values (100–599).</p>
+
+<p>For HTTP/2.0, statuses belonging to the 1xx Informational class are invalid.</p>
+
+<p>As this is a C‐style enum with each variant having a corresponding value, you may use the likes
+of <code>Continue as u16</code> to retreive the value <code>100u16</code>. Normally, though, you should not need to do
+any such thing; just use the status code as a <code>StatusCode</code>.</p>
+
+<p>If you encounter a status code that you do not know how to deal with, you should treat it as the
+<code>x00</code> status code—e.g. for code 123, treat it as 100 (Continue). This can be achieved with
+<code>self.class().default_code()</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Code123</span>.<span class='ident'>class</span>().<span class='ident'>default_code</span>(), <span class='ident'>Continue</span>);
+</pre>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.Continue'><a class='stability Unmarked' title='No stability level'></a><code>Continue</code></td><td><div class='docblock'><p>100 Continue</p>
+</div></td></tr><tr><td id='variant.SwitchingProtocols'><a class='stability Unmarked' title='No stability level'></a><code>SwitchingProtocols</code></td><td><div class='docblock'><p>101 Switching Protocols</p>
+</div></td></tr><tr><td id='variant.Processing'><a class='stability Unmarked' title='No stability level'></a><code>Processing</code></td><td><div class='docblock'><p>102 Processing</p>
+</div></td></tr><tr><td id='variant.Code103'><a class='stability Unmarked' title='No stability level'></a><code>Code103</code></td><td><div class='docblock'><p>103 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code104'><a class='stability Unmarked' title='No stability level'></a><code>Code104</code></td><td><div class='docblock'><p>104 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code105'><a class='stability Unmarked' title='No stability level'></a><code>Code105</code></td><td><div class='docblock'><p>105 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code106'><a class='stability Unmarked' title='No stability level'></a><code>Code106</code></td><td><div class='docblock'><p>106 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code107'><a class='stability Unmarked' title='No stability level'></a><code>Code107</code></td><td><div class='docblock'><p>107 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code108'><a class='stability Unmarked' title='No stability level'></a><code>Code108</code></td><td><div class='docblock'><p>108 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code109'><a class='stability Unmarked' title='No stability level'></a><code>Code109</code></td><td><div class='docblock'><p>109 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code110'><a class='stability Unmarked' title='No stability level'></a><code>Code110</code></td><td><div class='docblock'><p>110 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code111'><a class='stability Unmarked' title='No stability level'></a><code>Code111</code></td><td><div class='docblock'><p>111 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code112'><a class='stability Unmarked' title='No stability level'></a><code>Code112</code></td><td><div class='docblock'><p>112 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code113'><a class='stability Unmarked' title='No stability level'></a><code>Code113</code></td><td><div class='docblock'><p>113 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code114'><a class='stability Unmarked' title='No stability level'></a><code>Code114</code></td><td><div class='docblock'><p>114 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code115'><a class='stability Unmarked' title='No stability level'></a><code>Code115</code></td><td><div class='docblock'><p>115 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code116'><a class='stability Unmarked' title='No stability level'></a><code>Code116</code></td><td><div class='docblock'><p>116 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code117'><a class='stability Unmarked' title='No stability level'></a><code>Code117</code></td><td><div class='docblock'><p>117 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code118'><a class='stability Unmarked' title='No stability level'></a><code>Code118</code></td><td><div class='docblock'><p>118 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code119'><a class='stability Unmarked' title='No stability level'></a><code>Code119</code></td><td><div class='docblock'><p>119 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code120'><a class='stability Unmarked' title='No stability level'></a><code>Code120</code></td><td><div class='docblock'><p>120 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code121'><a class='stability Unmarked' title='No stability level'></a><code>Code121</code></td><td><div class='docblock'><p>121 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code122'><a class='stability Unmarked' title='No stability level'></a><code>Code122</code></td><td><div class='docblock'><p>122 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code123'><a class='stability Unmarked' title='No stability level'></a><code>Code123</code></td><td><div class='docblock'><p>123 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code124'><a class='stability Unmarked' title='No stability level'></a><code>Code124</code></td><td><div class='docblock'><p>124 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code125'><a class='stability Unmarked' title='No stability level'></a><code>Code125</code></td><td><div class='docblock'><p>125 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code126'><a class='stability Unmarked' title='No stability level'></a><code>Code126</code></td><td><div class='docblock'><p>126 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code127'><a class='stability Unmarked' title='No stability level'></a><code>Code127</code></td><td><div class='docblock'><p>127 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code128'><a class='stability Unmarked' title='No stability level'></a><code>Code128</code></td><td><div class='docblock'><p>128 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code129'><a class='stability Unmarked' title='No stability level'></a><code>Code129</code></td><td><div class='docblock'><p>129 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code130'><a class='stability Unmarked' title='No stability level'></a><code>Code130</code></td><td><div class='docblock'><p>130 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code131'><a class='stability Unmarked' title='No stability level'></a><code>Code131</code></td><td><div class='docblock'><p>131 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code132'><a class='stability Unmarked' title='No stability level'></a><code>Code132</code></td><td><div class='docblock'><p>132 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code133'><a class='stability Unmarked' title='No stability level'></a><code>Code133</code></td><td><div class='docblock'><p>133 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code134'><a class='stability Unmarked' title='No stability level'></a><code>Code134</code></td><td><div class='docblock'><p>134 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code135'><a class='stability Unmarked' title='No stability level'></a><code>Code135</code></td><td><div class='docblock'><p>135 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code136'><a class='stability Unmarked' title='No stability level'></a><code>Code136</code></td><td><div class='docblock'><p>136 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code137'><a class='stability Unmarked' title='No stability level'></a><code>Code137</code></td><td><div class='docblock'><p>137 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code138'><a class='stability Unmarked' title='No stability level'></a><code>Code138</code></td><td><div class='docblock'><p>138 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code139'><a class='stability Unmarked' title='No stability level'></a><code>Code139</code></td><td><div class='docblock'><p>139 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code140'><a class='stability Unmarked' title='No stability level'></a><code>Code140</code></td><td><div class='docblock'><p>140 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code141'><a class='stability Unmarked' title='No stability level'></a><code>Code141</code></td><td><div class='docblock'><p>141 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code142'><a class='stability Unmarked' title='No stability level'></a><code>Code142</code></td><td><div class='docblock'><p>142 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code143'><a class='stability Unmarked' title='No stability level'></a><code>Code143</code></td><td><div class='docblock'><p>143 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code144'><a class='stability Unmarked' title='No stability level'></a><code>Code144</code></td><td><div class='docblock'><p>144 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code145'><a class='stability Unmarked' title='No stability level'></a><code>Code145</code></td><td><div class='docblock'><p>145 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code146'><a class='stability Unmarked' title='No stability level'></a><code>Code146</code></td><td><div class='docblock'><p>146 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code147'><a class='stability Unmarked' title='No stability level'></a><code>Code147</code></td><td><div class='docblock'><p>147 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code148'><a class='stability Unmarked' title='No stability level'></a><code>Code148</code></td><td><div class='docblock'><p>148 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code149'><a class='stability Unmarked' title='No stability level'></a><code>Code149</code></td><td><div class='docblock'><p>149 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code150'><a class='stability Unmarked' title='No stability level'></a><code>Code150</code></td><td><div class='docblock'><p>150 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code151'><a class='stability Unmarked' title='No stability level'></a><code>Code151</code></td><td><div class='docblock'><p>151 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code152'><a class='stability Unmarked' title='No stability level'></a><code>Code152</code></td><td><div class='docblock'><p>152 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code153'><a class='stability Unmarked' title='No stability level'></a><code>Code153</code></td><td><div class='docblock'><p>153 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code154'><a class='stability Unmarked' title='No stability level'></a><code>Code154</code></td><td><div class='docblock'><p>154 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code155'><a class='stability Unmarked' title='No stability level'></a><code>Code155</code></td><td><div class='docblock'><p>155 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code156'><a class='stability Unmarked' title='No stability level'></a><code>Code156</code></td><td><div class='docblock'><p>156 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code157'><a class='stability Unmarked' title='No stability level'></a><code>Code157</code></td><td><div class='docblock'><p>157 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code158'><a class='stability Unmarked' title='No stability level'></a><code>Code158</code></td><td><div class='docblock'><p>158 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code159'><a class='stability Unmarked' title='No stability level'></a><code>Code159</code></td><td><div class='docblock'><p>159 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code160'><a class='stability Unmarked' title='No stability level'></a><code>Code160</code></td><td><div class='docblock'><p>160 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code161'><a class='stability Unmarked' title='No stability level'></a><code>Code161</code></td><td><div class='docblock'><p>161 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code162'><a class='stability Unmarked' title='No stability level'></a><code>Code162</code></td><td><div class='docblock'><p>162 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code163'><a class='stability Unmarked' title='No stability level'></a><code>Code163</code></td><td><div class='docblock'><p>163 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code164'><a class='stability Unmarked' title='No stability level'></a><code>Code164</code></td><td><div class='docblock'><p>164 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code165'><a class='stability Unmarked' title='No stability level'></a><code>Code165</code></td><td><div class='docblock'><p>165 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code166'><a class='stability Unmarked' title='No stability level'></a><code>Code166</code></td><td><div class='docblock'><p>166 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code167'><a class='stability Unmarked' title='No stability level'></a><code>Code167</code></td><td><div class='docblock'><p>167 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code168'><a class='stability Unmarked' title='No stability level'></a><code>Code168</code></td><td><div class='docblock'><p>168 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code169'><a class='stability Unmarked' title='No stability level'></a><code>Code169</code></td><td><div class='docblock'><p>169 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code170'><a class='stability Unmarked' title='No stability level'></a><code>Code170</code></td><td><div class='docblock'><p>170 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code171'><a class='stability Unmarked' title='No stability level'></a><code>Code171</code></td><td><div class='docblock'><p>171 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code172'><a class='stability Unmarked' title='No stability level'></a><code>Code172</code></td><td><div class='docblock'><p>172 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code173'><a class='stability Unmarked' title='No stability level'></a><code>Code173</code></td><td><div class='docblock'><p>173 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code174'><a class='stability Unmarked' title='No stability level'></a><code>Code174</code></td><td><div class='docblock'><p>174 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code175'><a class='stability Unmarked' title='No stability level'></a><code>Code175</code></td><td><div class='docblock'><p>175 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code176'><a class='stability Unmarked' title='No stability level'></a><code>Code176</code></td><td><div class='docblock'><p>176 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code177'><a class='stability Unmarked' title='No stability level'></a><code>Code177</code></td><td><div class='docblock'><p>177 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code178'><a class='stability Unmarked' title='No stability level'></a><code>Code178</code></td><td><div class='docblock'><p>178 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code179'><a class='stability Unmarked' title='No stability level'></a><code>Code179</code></td><td><div class='docblock'><p>179 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code180'><a class='stability Unmarked' title='No stability level'></a><code>Code180</code></td><td><div class='docblock'><p>180 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code181'><a class='stability Unmarked' title='No stability level'></a><code>Code181</code></td><td><div class='docblock'><p>181 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code182'><a class='stability Unmarked' title='No stability level'></a><code>Code182</code></td><td><div class='docblock'><p>182 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code183'><a class='stability Unmarked' title='No stability level'></a><code>Code183</code></td><td><div class='docblock'><p>183 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code184'><a class='stability Unmarked' title='No stability level'></a><code>Code184</code></td><td><div class='docblock'><p>184 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code185'><a class='stability Unmarked' title='No stability level'></a><code>Code185</code></td><td><div class='docblock'><p>185 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code186'><a class='stability Unmarked' title='No stability level'></a><code>Code186</code></td><td><div class='docblock'><p>186 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code187'><a class='stability Unmarked' title='No stability level'></a><code>Code187</code></td><td><div class='docblock'><p>187 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code188'><a class='stability Unmarked' title='No stability level'></a><code>Code188</code></td><td><div class='docblock'><p>188 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code189'><a class='stability Unmarked' title='No stability level'></a><code>Code189</code></td><td><div class='docblock'><p>189 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code190'><a class='stability Unmarked' title='No stability level'></a><code>Code190</code></td><td><div class='docblock'><p>190 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code191'><a class='stability Unmarked' title='No stability level'></a><code>Code191</code></td><td><div class='docblock'><p>191 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code192'><a class='stability Unmarked' title='No stability level'></a><code>Code192</code></td><td><div class='docblock'><p>192 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code193'><a class='stability Unmarked' title='No stability level'></a><code>Code193</code></td><td><div class='docblock'><p>193 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code194'><a class='stability Unmarked' title='No stability level'></a><code>Code194</code></td><td><div class='docblock'><p>194 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code195'><a class='stability Unmarked' title='No stability level'></a><code>Code195</code></td><td><div class='docblock'><p>195 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code196'><a class='stability Unmarked' title='No stability level'></a><code>Code196</code></td><td><div class='docblock'><p>196 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code197'><a class='stability Unmarked' title='No stability level'></a><code>Code197</code></td><td><div class='docblock'><p>197 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code198'><a class='stability Unmarked' title='No stability level'></a><code>Code198</code></td><td><div class='docblock'><p>198 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code199'><a class='stability Unmarked' title='No stability level'></a><code>Code199</code></td><td><div class='docblock'><p>199 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Ok'><a class='stability Unmarked' title='No stability level'></a><code>Ok</code></td><td><div class='docblock'><p>200 OK</p>
+</div></td></tr><tr><td id='variant.Created'><a class='stability Unmarked' title='No stability level'></a><code>Created</code></td><td><div class='docblock'><p>201 Created</p>
+</div></td></tr><tr><td id='variant.Accepted'><a class='stability Unmarked' title='No stability level'></a><code>Accepted</code></td><td><div class='docblock'><p>202 Accepted</p>
+</div></td></tr><tr><td id='variant.NonAuthoritativeInformation'><a class='stability Unmarked' title='No stability level'></a><code>NonAuthoritativeInformation</code></td><td><div class='docblock'><p>203 Non-Authoritative Information</p>
+</div></td></tr><tr><td id='variant.NoContent'><a class='stability Unmarked' title='No stability level'></a><code>NoContent</code></td><td><div class='docblock'><p>204 No Content</p>
+</div></td></tr><tr><td id='variant.ResetContent'><a class='stability Unmarked' title='No stability level'></a><code>ResetContent</code></td><td><div class='docblock'><p>205 Reset Content</p>
+</div></td></tr><tr><td id='variant.PartialContent'><a class='stability Unmarked' title='No stability level'></a><code>PartialContent</code></td><td><div class='docblock'><p>206 Partial Content</p>
+</div></td></tr><tr><td id='variant.MultiStatus'><a class='stability Unmarked' title='No stability level'></a><code>MultiStatus</code></td><td><div class='docblock'><p>207 Multi-Status</p>
+</div></td></tr><tr><td id='variant.AlreadyReported'><a class='stability Unmarked' title='No stability level'></a><code>AlreadyReported</code></td><td><div class='docblock'><p>208 Already Reported</p>
+</div></td></tr><tr><td id='variant.Code209'><a class='stability Unmarked' title='No stability level'></a><code>Code209</code></td><td><div class='docblock'><p>209 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code210'><a class='stability Unmarked' title='No stability level'></a><code>Code210</code></td><td><div class='docblock'><p>210 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code211'><a class='stability Unmarked' title='No stability level'></a><code>Code211</code></td><td><div class='docblock'><p>211 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code212'><a class='stability Unmarked' title='No stability level'></a><code>Code212</code></td><td><div class='docblock'><p>212 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code213'><a class='stability Unmarked' title='No stability level'></a><code>Code213</code></td><td><div class='docblock'><p>213 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code214'><a class='stability Unmarked' title='No stability level'></a><code>Code214</code></td><td><div class='docblock'><p>214 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code215'><a class='stability Unmarked' title='No stability level'></a><code>Code215</code></td><td><div class='docblock'><p>215 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code216'><a class='stability Unmarked' title='No stability level'></a><code>Code216</code></td><td><div class='docblock'><p>216 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code217'><a class='stability Unmarked' title='No stability level'></a><code>Code217</code></td><td><div class='docblock'><p>217 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code218'><a class='stability Unmarked' title='No stability level'></a><code>Code218</code></td><td><div class='docblock'><p>218 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code219'><a class='stability Unmarked' title='No stability level'></a><code>Code219</code></td><td><div class='docblock'><p>219 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code220'><a class='stability Unmarked' title='No stability level'></a><code>Code220</code></td><td><div class='docblock'><p>220 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code221'><a class='stability Unmarked' title='No stability level'></a><code>Code221</code></td><td><div class='docblock'><p>221 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code222'><a class='stability Unmarked' title='No stability level'></a><code>Code222</code></td><td><div class='docblock'><p>222 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code223'><a class='stability Unmarked' title='No stability level'></a><code>Code223</code></td><td><div class='docblock'><p>223 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code224'><a class='stability Unmarked' title='No stability level'></a><code>Code224</code></td><td><div class='docblock'><p>224 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code225'><a class='stability Unmarked' title='No stability level'></a><code>Code225</code></td><td><div class='docblock'><p>225 (unregistered)</p>
+</div></td></tr><tr><td id='variant.ImUsed'><a class='stability Unmarked' title='No stability level'></a><code>ImUsed</code></td><td><div class='docblock'><p>226 IM Used</p>
+</div></td></tr><tr><td id='variant.Code227'><a class='stability Unmarked' title='No stability level'></a><code>Code227</code></td><td><div class='docblock'><p>227 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code228'><a class='stability Unmarked' title='No stability level'></a><code>Code228</code></td><td><div class='docblock'><p>228 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code229'><a class='stability Unmarked' title='No stability level'></a><code>Code229</code></td><td><div class='docblock'><p>229 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code230'><a class='stability Unmarked' title='No stability level'></a><code>Code230</code></td><td><div class='docblock'><p>230 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code231'><a class='stability Unmarked' title='No stability level'></a><code>Code231</code></td><td><div class='docblock'><p>231 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code232'><a class='stability Unmarked' title='No stability level'></a><code>Code232</code></td><td><div class='docblock'><p>232 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code233'><a class='stability Unmarked' title='No stability level'></a><code>Code233</code></td><td><div class='docblock'><p>233 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code234'><a class='stability Unmarked' title='No stability level'></a><code>Code234</code></td><td><div class='docblock'><p>234 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code235'><a class='stability Unmarked' title='No stability level'></a><code>Code235</code></td><td><div class='docblock'><p>235 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code236'><a class='stability Unmarked' title='No stability level'></a><code>Code236</code></td><td><div class='docblock'><p>236 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code237'><a class='stability Unmarked' title='No stability level'></a><code>Code237</code></td><td><div class='docblock'><p>237 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code238'><a class='stability Unmarked' title='No stability level'></a><code>Code238</code></td><td><div class='docblock'><p>238 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code239'><a class='stability Unmarked' title='No stability level'></a><code>Code239</code></td><td><div class='docblock'><p>239 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code240'><a class='stability Unmarked' title='No stability level'></a><code>Code240</code></td><td><div class='docblock'><p>240 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code241'><a class='stability Unmarked' title='No stability level'></a><code>Code241</code></td><td><div class='docblock'><p>241 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code242'><a class='stability Unmarked' title='No stability level'></a><code>Code242</code></td><td><div class='docblock'><p>242 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code243'><a class='stability Unmarked' title='No stability level'></a><code>Code243</code></td><td><div class='docblock'><p>243 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code244'><a class='stability Unmarked' title='No stability level'></a><code>Code244</code></td><td><div class='docblock'><p>244 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code245'><a class='stability Unmarked' title='No stability level'></a><code>Code245</code></td><td><div class='docblock'><p>245 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code246'><a class='stability Unmarked' title='No stability level'></a><code>Code246</code></td><td><div class='docblock'><p>246 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code247'><a class='stability Unmarked' title='No stability level'></a><code>Code247</code></td><td><div class='docblock'><p>247 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code248'><a class='stability Unmarked' title='No stability level'></a><code>Code248</code></td><td><div class='docblock'><p>248 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code249'><a class='stability Unmarked' title='No stability level'></a><code>Code249</code></td><td><div class='docblock'><p>249 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code250'><a class='stability Unmarked' title='No stability level'></a><code>Code250</code></td><td><div class='docblock'><p>250 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code251'><a class='stability Unmarked' title='No stability level'></a><code>Code251</code></td><td><div class='docblock'><p>251 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code252'><a class='stability Unmarked' title='No stability level'></a><code>Code252</code></td><td><div class='docblock'><p>252 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code253'><a class='stability Unmarked' title='No stability level'></a><code>Code253</code></td><td><div class='docblock'><p>253 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code254'><a class='stability Unmarked' title='No stability level'></a><code>Code254</code></td><td><div class='docblock'><p>254 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code255'><a class='stability Unmarked' title='No stability level'></a><code>Code255</code></td><td><div class='docblock'><p>255 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code256'><a class='stability Unmarked' title='No stability level'></a><code>Code256</code></td><td><div class='docblock'><p>256 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code257'><a class='stability Unmarked' title='No stability level'></a><code>Code257</code></td><td><div class='docblock'><p>257 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code258'><a class='stability Unmarked' title='No stability level'></a><code>Code258</code></td><td><div class='docblock'><p>258 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code259'><a class='stability Unmarked' title='No stability level'></a><code>Code259</code></td><td><div class='docblock'><p>259 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code260'><a class='stability Unmarked' title='No stability level'></a><code>Code260</code></td><td><div class='docblock'><p>260 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code261'><a class='stability Unmarked' title='No stability level'></a><code>Code261</code></td><td><div class='docblock'><p>261 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code262'><a class='stability Unmarked' title='No stability level'></a><code>Code262</code></td><td><div class='docblock'><p>262 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code263'><a class='stability Unmarked' title='No stability level'></a><code>Code263</code></td><td><div class='docblock'><p>263 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code264'><a class='stability Unmarked' title='No stability level'></a><code>Code264</code></td><td><div class='docblock'><p>264 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code265'><a class='stability Unmarked' title='No stability level'></a><code>Code265</code></td><td><div class='docblock'><p>265 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code266'><a class='stability Unmarked' title='No stability level'></a><code>Code266</code></td><td><div class='docblock'><p>266 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code267'><a class='stability Unmarked' title='No stability level'></a><code>Code267</code></td><td><div class='docblock'><p>267 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code268'><a class='stability Unmarked' title='No stability level'></a><code>Code268</code></td><td><div class='docblock'><p>268 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code269'><a class='stability Unmarked' title='No stability level'></a><code>Code269</code></td><td><div class='docblock'><p>269 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code270'><a class='stability Unmarked' title='No stability level'></a><code>Code270</code></td><td><div class='docblock'><p>270 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code271'><a class='stability Unmarked' title='No stability level'></a><code>Code271</code></td><td><div class='docblock'><p>271 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code272'><a class='stability Unmarked' title='No stability level'></a><code>Code272</code></td><td><div class='docblock'><p>272 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code273'><a class='stability Unmarked' title='No stability level'></a><code>Code273</code></td><td><div class='docblock'><p>273 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code274'><a class='stability Unmarked' title='No stability level'></a><code>Code274</code></td><td><div class='docblock'><p>274 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code275'><a class='stability Unmarked' title='No stability level'></a><code>Code275</code></td><td><div class='docblock'><p>275 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code276'><a class='stability Unmarked' title='No stability level'></a><code>Code276</code></td><td><div class='docblock'><p>276 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code277'><a class='stability Unmarked' title='No stability level'></a><code>Code277</code></td><td><div class='docblock'><p>277 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code278'><a class='stability Unmarked' title='No stability level'></a><code>Code278</code></td><td><div class='docblock'><p>278 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code279'><a class='stability Unmarked' title='No stability level'></a><code>Code279</code></td><td><div class='docblock'><p>279 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code280'><a class='stability Unmarked' title='No stability level'></a><code>Code280</code></td><td><div class='docblock'><p>280 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code281'><a class='stability Unmarked' title='No stability level'></a><code>Code281</code></td><td><div class='docblock'><p>281 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code282'><a class='stability Unmarked' title='No stability level'></a><code>Code282</code></td><td><div class='docblock'><p>282 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code283'><a class='stability Unmarked' title='No stability level'></a><code>Code283</code></td><td><div class='docblock'><p>283 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code284'><a class='stability Unmarked' title='No stability level'></a><code>Code284</code></td><td><div class='docblock'><p>284 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code285'><a class='stability Unmarked' title='No stability level'></a><code>Code285</code></td><td><div class='docblock'><p>285 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code286'><a class='stability Unmarked' title='No stability level'></a><code>Code286</code></td><td><div class='docblock'><p>286 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code287'><a class='stability Unmarked' title='No stability level'></a><code>Code287</code></td><td><div class='docblock'><p>287 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code288'><a class='stability Unmarked' title='No stability level'></a><code>Code288</code></td><td><div class='docblock'><p>288 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code289'><a class='stability Unmarked' title='No stability level'></a><code>Code289</code></td><td><div class='docblock'><p>289 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code290'><a class='stability Unmarked' title='No stability level'></a><code>Code290</code></td><td><div class='docblock'><p>290 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code291'><a class='stability Unmarked' title='No stability level'></a><code>Code291</code></td><td><div class='docblock'><p>291 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code292'><a class='stability Unmarked' title='No stability level'></a><code>Code292</code></td><td><div class='docblock'><p>292 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code293'><a class='stability Unmarked' title='No stability level'></a><code>Code293</code></td><td><div class='docblock'><p>293 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code294'><a class='stability Unmarked' title='No stability level'></a><code>Code294</code></td><td><div class='docblock'><p>294 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code295'><a class='stability Unmarked' title='No stability level'></a><code>Code295</code></td><td><div class='docblock'><p>295 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code296'><a class='stability Unmarked' title='No stability level'></a><code>Code296</code></td><td><div class='docblock'><p>296 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code297'><a class='stability Unmarked' title='No stability level'></a><code>Code297</code></td><td><div class='docblock'><p>297 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code298'><a class='stability Unmarked' title='No stability level'></a><code>Code298</code></td><td><div class='docblock'><p>298 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code299'><a class='stability Unmarked' title='No stability level'></a><code>Code299</code></td><td><div class='docblock'><p>299 (unregistered)</p>
+</div></td></tr><tr><td id='variant.MultipleChoices'><a class='stability Unmarked' title='No stability level'></a><code>MultipleChoices</code></td><td><div class='docblock'><p>300 Multiple Choices</p>
+</div></td></tr><tr><td id='variant.MovedPermanently'><a class='stability Unmarked' title='No stability level'></a><code>MovedPermanently</code></td><td><div class='docblock'><p>301 Moved Permanently</p>
+</div></td></tr><tr><td id='variant.Found'><a class='stability Unmarked' title='No stability level'></a><code>Found</code></td><td><div class='docblock'><p>302 Found</p>
+</div></td></tr><tr><td id='variant.SeeOther'><a class='stability Unmarked' title='No stability level'></a><code>SeeOther</code></td><td><div class='docblock'><p>303 See Other</p>
+</div></td></tr><tr><td id='variant.NotModified'><a class='stability Unmarked' title='No stability level'></a><code>NotModified</code></td><td><div class='docblock'><p>304 Not Modified</p>
+</div></td></tr><tr><td id='variant.UseProxy'><a class='stability Unmarked' title='No stability level'></a><code>UseProxy</code></td><td><div class='docblock'><p>305 Use Proxy</p>
+</div></td></tr><tr><td id='variant.SwitchProxy'><a class='stability Unmarked' title='No stability level'></a><code>SwitchProxy</code></td><td><div class='docblock'><p>306 Switch Proxy</p>
+</div></td></tr><tr><td id='variant.TemporaryRedirect'><a class='stability Unmarked' title='No stability level'></a><code>TemporaryRedirect</code></td><td><div class='docblock'><p>307 Temporary Redirect</p>
+</div></td></tr><tr><td id='variant.PermanentRedirect'><a class='stability Unmarked' title='No stability level'></a><code>PermanentRedirect</code></td><td><div class='docblock'><p>308 Permanent Redirect</p>
+</div></td></tr><tr><td id='variant.Code309'><a class='stability Unmarked' title='No stability level'></a><code>Code309</code></td><td><div class='docblock'><p>309 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code310'><a class='stability Unmarked' title='No stability level'></a><code>Code310</code></td><td><div class='docblock'><p>310 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code311'><a class='stability Unmarked' title='No stability level'></a><code>Code311</code></td><td><div class='docblock'><p>311 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code312'><a class='stability Unmarked' title='No stability level'></a><code>Code312</code></td><td><div class='docblock'><p>312 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code313'><a class='stability Unmarked' title='No stability level'></a><code>Code313</code></td><td><div class='docblock'><p>313 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code314'><a class='stability Unmarked' title='No stability level'></a><code>Code314</code></td><td><div class='docblock'><p>314 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code315'><a class='stability Unmarked' title='No stability level'></a><code>Code315</code></td><td><div class='docblock'><p>315 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code316'><a class='stability Unmarked' title='No stability level'></a><code>Code316</code></td><td><div class='docblock'><p>316 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code317'><a class='stability Unmarked' title='No stability level'></a><code>Code317</code></td><td><div class='docblock'><p>317 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code318'><a class='stability Unmarked' title='No stability level'></a><code>Code318</code></td><td><div class='docblock'><p>318 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code319'><a class='stability Unmarked' title='No stability level'></a><code>Code319</code></td><td><div class='docblock'><p>319 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code320'><a class='stability Unmarked' title='No stability level'></a><code>Code320</code></td><td><div class='docblock'><p>320 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code321'><a class='stability Unmarked' title='No stability level'></a><code>Code321</code></td><td><div class='docblock'><p>321 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code322'><a class='stability Unmarked' title='No stability level'></a><code>Code322</code></td><td><div class='docblock'><p>322 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code323'><a class='stability Unmarked' title='No stability level'></a><code>Code323</code></td><td><div class='docblock'><p>323 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code324'><a class='stability Unmarked' title='No stability level'></a><code>Code324</code></td><td><div class='docblock'><p>324 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code325'><a class='stability Unmarked' title='No stability level'></a><code>Code325</code></td><td><div class='docblock'><p>325 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code326'><a class='stability Unmarked' title='No stability level'></a><code>Code326</code></td><td><div class='docblock'><p>326 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code327'><a class='stability Unmarked' title='No stability level'></a><code>Code327</code></td><td><div class='docblock'><p>327 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code328'><a class='stability Unmarked' title='No stability level'></a><code>Code328</code></td><td><div class='docblock'><p>328 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code329'><a class='stability Unmarked' title='No stability level'></a><code>Code329</code></td><td><div class='docblock'><p>329 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code330'><a class='stability Unmarked' title='No stability level'></a><code>Code330</code></td><td><div class='docblock'><p>330 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code331'><a class='stability Unmarked' title='No stability level'></a><code>Code331</code></td><td><div class='docblock'><p>331 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code332'><a class='stability Unmarked' title='No stability level'></a><code>Code332</code></td><td><div class='docblock'><p>332 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code333'><a class='stability Unmarked' title='No stability level'></a><code>Code333</code></td><td><div class='docblock'><p>333 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code334'><a class='stability Unmarked' title='No stability level'></a><code>Code334</code></td><td><div class='docblock'><p>334 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code335'><a class='stability Unmarked' title='No stability level'></a><code>Code335</code></td><td><div class='docblock'><p>335 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code336'><a class='stability Unmarked' title='No stability level'></a><code>Code336</code></td><td><div class='docblock'><p>336 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code337'><a class='stability Unmarked' title='No stability level'></a><code>Code337</code></td><td><div class='docblock'><p>337 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code338'><a class='stability Unmarked' title='No stability level'></a><code>Code338</code></td><td><div class='docblock'><p>338 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code339'><a class='stability Unmarked' title='No stability level'></a><code>Code339</code></td><td><div class='docblock'><p>339 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code340'><a class='stability Unmarked' title='No stability level'></a><code>Code340</code></td><td><div class='docblock'><p>340 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code341'><a class='stability Unmarked' title='No stability level'></a><code>Code341</code></td><td><div class='docblock'><p>341 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code342'><a class='stability Unmarked' title='No stability level'></a><code>Code342</code></td><td><div class='docblock'><p>342 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code343'><a class='stability Unmarked' title='No stability level'></a><code>Code343</code></td><td><div class='docblock'><p>343 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code344'><a class='stability Unmarked' title='No stability level'></a><code>Code344</code></td><td><div class='docblock'><p>344 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code345'><a class='stability Unmarked' title='No stability level'></a><code>Code345</code></td><td><div class='docblock'><p>345 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code346'><a class='stability Unmarked' title='No stability level'></a><code>Code346</code></td><td><div class='docblock'><p>346 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code347'><a class='stability Unmarked' title='No stability level'></a><code>Code347</code></td><td><div class='docblock'><p>347 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code348'><a class='stability Unmarked' title='No stability level'></a><code>Code348</code></td><td><div class='docblock'><p>348 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code349'><a class='stability Unmarked' title='No stability level'></a><code>Code349</code></td><td><div class='docblock'><p>349 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code350'><a class='stability Unmarked' title='No stability level'></a><code>Code350</code></td><td><div class='docblock'><p>350 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code351'><a class='stability Unmarked' title='No stability level'></a><code>Code351</code></td><td><div class='docblock'><p>351 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code352'><a class='stability Unmarked' title='No stability level'></a><code>Code352</code></td><td><div class='docblock'><p>352 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code353'><a class='stability Unmarked' title='No stability level'></a><code>Code353</code></td><td><div class='docblock'><p>353 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code354'><a class='stability Unmarked' title='No stability level'></a><code>Code354</code></td><td><div class='docblock'><p>354 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code355'><a class='stability Unmarked' title='No stability level'></a><code>Code355</code></td><td><div class='docblock'><p>355 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code356'><a class='stability Unmarked' title='No stability level'></a><code>Code356</code></td><td><div class='docblock'><p>356 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code357'><a class='stability Unmarked' title='No stability level'></a><code>Code357</code></td><td><div class='docblock'><p>357 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code358'><a class='stability Unmarked' title='No stability level'></a><code>Code358</code></td><td><div class='docblock'><p>358 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code359'><a class='stability Unmarked' title='No stability level'></a><code>Code359</code></td><td><div class='docblock'><p>359 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code360'><a class='stability Unmarked' title='No stability level'></a><code>Code360</code></td><td><div class='docblock'><p>360 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code361'><a class='stability Unmarked' title='No stability level'></a><code>Code361</code></td><td><div class='docblock'><p>361 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code362'><a class='stability Unmarked' title='No stability level'></a><code>Code362</code></td><td><div class='docblock'><p>362 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code363'><a class='stability Unmarked' title='No stability level'></a><code>Code363</code></td><td><div class='docblock'><p>363 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code364'><a class='stability Unmarked' title='No stability level'></a><code>Code364</code></td><td><div class='docblock'><p>364 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code365'><a class='stability Unmarked' title='No stability level'></a><code>Code365</code></td><td><div class='docblock'><p>365 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code366'><a class='stability Unmarked' title='No stability level'></a><code>Code366</code></td><td><div class='docblock'><p>366 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code367'><a class='stability Unmarked' title='No stability level'></a><code>Code367</code></td><td><div class='docblock'><p>367 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code368'><a class='stability Unmarked' title='No stability level'></a><code>Code368</code></td><td><div class='docblock'><p>368 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code369'><a class='stability Unmarked' title='No stability level'></a><code>Code369</code></td><td><div class='docblock'><p>369 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code370'><a class='stability Unmarked' title='No stability level'></a><code>Code370</code></td><td><div class='docblock'><p>370 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code371'><a class='stability Unmarked' title='No stability level'></a><code>Code371</code></td><td><div class='docblock'><p>371 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code372'><a class='stability Unmarked' title='No stability level'></a><code>Code372</code></td><td><div class='docblock'><p>372 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code373'><a class='stability Unmarked' title='No stability level'></a><code>Code373</code></td><td><div class='docblock'><p>373 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code374'><a class='stability Unmarked' title='No stability level'></a><code>Code374</code></td><td><div class='docblock'><p>374 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code375'><a class='stability Unmarked' title='No stability level'></a><code>Code375</code></td><td><div class='docblock'><p>375 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code376'><a class='stability Unmarked' title='No stability level'></a><code>Code376</code></td><td><div class='docblock'><p>376 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code377'><a class='stability Unmarked' title='No stability level'></a><code>Code377</code></td><td><div class='docblock'><p>377 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code378'><a class='stability Unmarked' title='No stability level'></a><code>Code378</code></td><td><div class='docblock'><p>378 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code379'><a class='stability Unmarked' title='No stability level'></a><code>Code379</code></td><td><div class='docblock'><p>379 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code380'><a class='stability Unmarked' title='No stability level'></a><code>Code380</code></td><td><div class='docblock'><p>380 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code381'><a class='stability Unmarked' title='No stability level'></a><code>Code381</code></td><td><div class='docblock'><p>381 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code382'><a class='stability Unmarked' title='No stability level'></a><code>Code382</code></td><td><div class='docblock'><p>382 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code383'><a class='stability Unmarked' title='No stability level'></a><code>Code383</code></td><td><div class='docblock'><p>383 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code384'><a class='stability Unmarked' title='No stability level'></a><code>Code384</code></td><td><div class='docblock'><p>384 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code385'><a class='stability Unmarked' title='No stability level'></a><code>Code385</code></td><td><div class='docblock'><p>385 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code386'><a class='stability Unmarked' title='No stability level'></a><code>Code386</code></td><td><div class='docblock'><p>386 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code387'><a class='stability Unmarked' title='No stability level'></a><code>Code387</code></td><td><div class='docblock'><p>387 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code388'><a class='stability Unmarked' title='No stability level'></a><code>Code388</code></td><td><div class='docblock'><p>388 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code389'><a class='stability Unmarked' title='No stability level'></a><code>Code389</code></td><td><div class='docblock'><p>389 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code390'><a class='stability Unmarked' title='No stability level'></a><code>Code390</code></td><td><div class='docblock'><p>390 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code391'><a class='stability Unmarked' title='No stability level'></a><code>Code391</code></td><td><div class='docblock'><p>391 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code392'><a class='stability Unmarked' title='No stability level'></a><code>Code392</code></td><td><div class='docblock'><p>392 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code393'><a class='stability Unmarked' title='No stability level'></a><code>Code393</code></td><td><div class='docblock'><p>393 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code394'><a class='stability Unmarked' title='No stability level'></a><code>Code394</code></td><td><div class='docblock'><p>394 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code395'><a class='stability Unmarked' title='No stability level'></a><code>Code395</code></td><td><div class='docblock'><p>395 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code396'><a class='stability Unmarked' title='No stability level'></a><code>Code396</code></td><td><div class='docblock'><p>396 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code397'><a class='stability Unmarked' title='No stability level'></a><code>Code397</code></td><td><div class='docblock'><p>397 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code398'><a class='stability Unmarked' title='No stability level'></a><code>Code398</code></td><td><div class='docblock'><p>398 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code399'><a class='stability Unmarked' title='No stability level'></a><code>Code399</code></td><td><div class='docblock'><p>399 (unregistered)</p>
+</div></td></tr><tr><td id='variant.BadRequest'><a class='stability Unmarked' title='No stability level'></a><code>BadRequest</code></td><td><div class='docblock'><p>400 Bad Request</p>
+</div></td></tr><tr><td id='variant.Unauthorized'><a class='stability Unmarked' title='No stability level'></a><code>Unauthorized</code></td><td><div class='docblock'><p>401 Unauthorized</p>
+</div></td></tr><tr><td id='variant.PaymentRequired'><a class='stability Unmarked' title='No stability level'></a><code>PaymentRequired</code></td><td><div class='docblock'><p>402 Payment Required</p>
+</div></td></tr><tr><td id='variant.Forbidden'><a class='stability Unmarked' title='No stability level'></a><code>Forbidden</code></td><td><div class='docblock'><p>403 Forbidden</p>
+</div></td></tr><tr><td id='variant.NotFound'><a class='stability Unmarked' title='No stability level'></a><code>NotFound</code></td><td><div class='docblock'><p>404 Not Found</p>
+</div></td></tr><tr><td id='variant.MethodNotAllowed'><a class='stability Unmarked' title='No stability level'></a><code>MethodNotAllowed</code></td><td><div class='docblock'><p>405 Method Not Allowed</p>
+</div></td></tr><tr><td id='variant.NotAcceptable'><a class='stability Unmarked' title='No stability level'></a><code>NotAcceptable</code></td><td><div class='docblock'><p>406 Not Acceptable</p>
+</div></td></tr><tr><td id='variant.ProxyAuthenticationRequired'><a class='stability Unmarked' title='No stability level'></a><code>ProxyAuthenticationRequired</code></td><td><div class='docblock'><p>407 Proxy Authentication Required</p>
+</div></td></tr><tr><td id='variant.RequestTimeout'><a class='stability Unmarked' title='No stability level'></a><code>RequestTimeout</code></td><td><div class='docblock'><p>408 Request Timeout</p>
+</div></td></tr><tr><td id='variant.Conflict'><a class='stability Unmarked' title='No stability level'></a><code>Conflict</code></td><td><div class='docblock'><p>409 Conflict</p>
+</div></td></tr><tr><td id='variant.Gone'><a class='stability Unmarked' title='No stability level'></a><code>Gone</code></td><td><div class='docblock'><p>410 Gone</p>
+</div></td></tr><tr><td id='variant.LengthRequired'><a class='stability Unmarked' title='No stability level'></a><code>LengthRequired</code></td><td><div class='docblock'><p>411 Length Required</p>
+</div></td></tr><tr><td id='variant.PreconditionFailed'><a class='stability Unmarked' title='No stability level'></a><code>PreconditionFailed</code></td><td><div class='docblock'><p>412 Precondition Failed</p>
+</div></td></tr><tr><td id='variant.RequestEntityTooLarge'><a class='stability Unmarked' title='No stability level'></a><code>RequestEntityTooLarge</code></td><td><div class='docblock'><p>413 Request Entity Too Large</p>
+</div></td></tr><tr><td id='variant.RequestUriTooLong'><a class='stability Unmarked' title='No stability level'></a><code>RequestUriTooLong</code></td><td><div class='docblock'><p>414 Request-URI Too Long</p>
+</div></td></tr><tr><td id='variant.UnsupportedMediaType'><a class='stability Unmarked' title='No stability level'></a><code>UnsupportedMediaType</code></td><td><div class='docblock'><p>415 Unsupported Media Type</p>
+</div></td></tr><tr><td id='variant.RequestedRangeNotSatisfiable'><a class='stability Unmarked' title='No stability level'></a><code>RequestedRangeNotSatisfiable</code></td><td><div class='docblock'><p>416 Requested Range Not Satisfiable</p>
+</div></td></tr><tr><td id='variant.ExpectationFailed'><a class='stability Unmarked' title='No stability level'></a><code>ExpectationFailed</code></td><td><div class='docblock'><p>417 Expectation Failed</p>
+</div></td></tr><tr><td id='variant.ImATeapot'><a class='stability Unmarked' title='No stability level'></a><code>ImATeapot</code></td><td><div class='docblock'><p>418 I&#39;m a teapot</p>
+</div></td></tr><tr><td id='variant.AuthenticationTimeout'><a class='stability Unmarked' title='No stability level'></a><code>AuthenticationTimeout</code></td><td><div class='docblock'><p>419 Authentication Timeout</p>
+</div></td></tr><tr><td id='variant.Code420'><a class='stability Unmarked' title='No stability level'></a><code>Code420</code></td><td><div class='docblock'><p>420 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code421'><a class='stability Unmarked' title='No stability level'></a><code>Code421</code></td><td><div class='docblock'><p>421 (unregistered)</p>
+</div></td></tr><tr><td id='variant.UnprocessableEntity'><a class='stability Unmarked' title='No stability level'></a><code>UnprocessableEntity</code></td><td><div class='docblock'><p>422 Unprocessable Entity</p>
+</div></td></tr><tr><td id='variant.Locked'><a class='stability Unmarked' title='No stability level'></a><code>Locked</code></td><td><div class='docblock'><p>423 Locked</p>
+</div></td></tr><tr><td id='variant.FailedDependency'><a class='stability Unmarked' title='No stability level'></a><code>FailedDependency</code></td><td><div class='docblock'><p>424 Failed Dependency</p>
+</div></td></tr><tr><td id='variant.UnorderedCollection'><a class='stability Unmarked' title='No stability level'></a><code>UnorderedCollection</code></td><td><div class='docblock'><p>425 Unordered Collection</p>
+</div></td></tr><tr><td id='variant.UpgradeRequired'><a class='stability Unmarked' title='No stability level'></a><code>UpgradeRequired</code></td><td><div class='docblock'><p>426 Upgrade Required</p>
+</div></td></tr><tr><td id='variant.Code427'><a class='stability Unmarked' title='No stability level'></a><code>Code427</code></td><td><div class='docblock'><p>427 (unregistered)</p>
+</div></td></tr><tr><td id='variant.PreconditionRequired'><a class='stability Unmarked' title='No stability level'></a><code>PreconditionRequired</code></td><td><div class='docblock'><p>428 Precondition Required</p>
+</div></td></tr><tr><td id='variant.TooManyRequests'><a class='stability Unmarked' title='No stability level'></a><code>TooManyRequests</code></td><td><div class='docblock'><p>429 Too Many Requests</p>
+</div></td></tr><tr><td id='variant.Code430'><a class='stability Unmarked' title='No stability level'></a><code>Code430</code></td><td><div class='docblock'><p>430 (unregistered)</p>
+</div></td></tr><tr><td id='variant.RequestHeaderFieldsTooLarge'><a class='stability Unmarked' title='No stability level'></a><code>RequestHeaderFieldsTooLarge</code></td><td><div class='docblock'><p>431 Request Header Fields Too Large</p>
+</div></td></tr><tr><td id='variant.Code432'><a class='stability Unmarked' title='No stability level'></a><code>Code432</code></td><td><div class='docblock'><p>432 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code433'><a class='stability Unmarked' title='No stability level'></a><code>Code433</code></td><td><div class='docblock'><p>433 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code434'><a class='stability Unmarked' title='No stability level'></a><code>Code434</code></td><td><div class='docblock'><p>434 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code435'><a class='stability Unmarked' title='No stability level'></a><code>Code435</code></td><td><div class='docblock'><p>435 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code436'><a class='stability Unmarked' title='No stability level'></a><code>Code436</code></td><td><div class='docblock'><p>436 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code437'><a class='stability Unmarked' title='No stability level'></a><code>Code437</code></td><td><div class='docblock'><p>437 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code438'><a class='stability Unmarked' title='No stability level'></a><code>Code438</code></td><td><div class='docblock'><p>438 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code439'><a class='stability Unmarked' title='No stability level'></a><code>Code439</code></td><td><div class='docblock'><p>439 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code440'><a class='stability Unmarked' title='No stability level'></a><code>Code440</code></td><td><div class='docblock'><p>440 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code441'><a class='stability Unmarked' title='No stability level'></a><code>Code441</code></td><td><div class='docblock'><p>441 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code442'><a class='stability Unmarked' title='No stability level'></a><code>Code442</code></td><td><div class='docblock'><p>442 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code443'><a class='stability Unmarked' title='No stability level'></a><code>Code443</code></td><td><div class='docblock'><p>443 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code444'><a class='stability Unmarked' title='No stability level'></a><code>Code444</code></td><td><div class='docblock'><p>444 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code445'><a class='stability Unmarked' title='No stability level'></a><code>Code445</code></td><td><div class='docblock'><p>445 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code446'><a class='stability Unmarked' title='No stability level'></a><code>Code446</code></td><td><div class='docblock'><p>446 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code447'><a class='stability Unmarked' title='No stability level'></a><code>Code447</code></td><td><div class='docblock'><p>447 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code448'><a class='stability Unmarked' title='No stability level'></a><code>Code448</code></td><td><div class='docblock'><p>448 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code449'><a class='stability Unmarked' title='No stability level'></a><code>Code449</code></td><td><div class='docblock'><p>449 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code450'><a class='stability Unmarked' title='No stability level'></a><code>Code450</code></td><td><div class='docblock'><p>450 (unregistered)</p>
+</div></td></tr><tr><td id='variant.UnavailableForLegalReasons'><a class='stability Unmarked' title='No stability level'></a><code>UnavailableForLegalReasons</code></td><td><div class='docblock'><p>451 Unavailable For Legal Reasons</p>
+</div></td></tr><tr><td id='variant.Code452'><a class='stability Unmarked' title='No stability level'></a><code>Code452</code></td><td><div class='docblock'><p>452 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code453'><a class='stability Unmarked' title='No stability level'></a><code>Code453</code></td><td><div class='docblock'><p>453 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code454'><a class='stability Unmarked' title='No stability level'></a><code>Code454</code></td><td><div class='docblock'><p>454 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code455'><a class='stability Unmarked' title='No stability level'></a><code>Code455</code></td><td><div class='docblock'><p>455 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code456'><a class='stability Unmarked' title='No stability level'></a><code>Code456</code></td><td><div class='docblock'><p>456 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code457'><a class='stability Unmarked' title='No stability level'></a><code>Code457</code></td><td><div class='docblock'><p>457 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code458'><a class='stability Unmarked' title='No stability level'></a><code>Code458</code></td><td><div class='docblock'><p>458 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code459'><a class='stability Unmarked' title='No stability level'></a><code>Code459</code></td><td><div class='docblock'><p>459 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code460'><a class='stability Unmarked' title='No stability level'></a><code>Code460</code></td><td><div class='docblock'><p>460 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code461'><a class='stability Unmarked' title='No stability level'></a><code>Code461</code></td><td><div class='docblock'><p>461 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code462'><a class='stability Unmarked' title='No stability level'></a><code>Code462</code></td><td><div class='docblock'><p>462 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code463'><a class='stability Unmarked' title='No stability level'></a><code>Code463</code></td><td><div class='docblock'><p>463 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code464'><a class='stability Unmarked' title='No stability level'></a><code>Code464</code></td><td><div class='docblock'><p>464 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code465'><a class='stability Unmarked' title='No stability level'></a><code>Code465</code></td><td><div class='docblock'><p>465 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code466'><a class='stability Unmarked' title='No stability level'></a><code>Code466</code></td><td><div class='docblock'><p>466 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code467'><a class='stability Unmarked' title='No stability level'></a><code>Code467</code></td><td><div class='docblock'><p>467 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code468'><a class='stability Unmarked' title='No stability level'></a><code>Code468</code></td><td><div class='docblock'><p>468 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code469'><a class='stability Unmarked' title='No stability level'></a><code>Code469</code></td><td><div class='docblock'><p>469 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code470'><a class='stability Unmarked' title='No stability level'></a><code>Code470</code></td><td><div class='docblock'><p>470 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code471'><a class='stability Unmarked' title='No stability level'></a><code>Code471</code></td><td><div class='docblock'><p>471 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code472'><a class='stability Unmarked' title='No stability level'></a><code>Code472</code></td><td><div class='docblock'><p>472 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code473'><a class='stability Unmarked' title='No stability level'></a><code>Code473</code></td><td><div class='docblock'><p>473 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code474'><a class='stability Unmarked' title='No stability level'></a><code>Code474</code></td><td><div class='docblock'><p>474 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code475'><a class='stability Unmarked' title='No stability level'></a><code>Code475</code></td><td><div class='docblock'><p>475 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code476'><a class='stability Unmarked' title='No stability level'></a><code>Code476</code></td><td><div class='docblock'><p>476 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code477'><a class='stability Unmarked' title='No stability level'></a><code>Code477</code></td><td><div class='docblock'><p>477 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code478'><a class='stability Unmarked' title='No stability level'></a><code>Code478</code></td><td><div class='docblock'><p>478 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code479'><a class='stability Unmarked' title='No stability level'></a><code>Code479</code></td><td><div class='docblock'><p>479 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code480'><a class='stability Unmarked' title='No stability level'></a><code>Code480</code></td><td><div class='docblock'><p>480 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code481'><a class='stability Unmarked' title='No stability level'></a><code>Code481</code></td><td><div class='docblock'><p>481 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code482'><a class='stability Unmarked' title='No stability level'></a><code>Code482</code></td><td><div class='docblock'><p>482 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code483'><a class='stability Unmarked' title='No stability level'></a><code>Code483</code></td><td><div class='docblock'><p>483 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code484'><a class='stability Unmarked' title='No stability level'></a><code>Code484</code></td><td><div class='docblock'><p>484 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code485'><a class='stability Unmarked' title='No stability level'></a><code>Code485</code></td><td><div class='docblock'><p>485 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code486'><a class='stability Unmarked' title='No stability level'></a><code>Code486</code></td><td><div class='docblock'><p>486 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code487'><a class='stability Unmarked' title='No stability level'></a><code>Code487</code></td><td><div class='docblock'><p>487 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code488'><a class='stability Unmarked' title='No stability level'></a><code>Code488</code></td><td><div class='docblock'><p>488 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code489'><a class='stability Unmarked' title='No stability level'></a><code>Code489</code></td><td><div class='docblock'><p>489 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code490'><a class='stability Unmarked' title='No stability level'></a><code>Code490</code></td><td><div class='docblock'><p>490 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code491'><a class='stability Unmarked' title='No stability level'></a><code>Code491</code></td><td><div class='docblock'><p>491 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code492'><a class='stability Unmarked' title='No stability level'></a><code>Code492</code></td><td><div class='docblock'><p>492 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code493'><a class='stability Unmarked' title='No stability level'></a><code>Code493</code></td><td><div class='docblock'><p>493 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code494'><a class='stability Unmarked' title='No stability level'></a><code>Code494</code></td><td><div class='docblock'><p>494 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code495'><a class='stability Unmarked' title='No stability level'></a><code>Code495</code></td><td><div class='docblock'><p>495 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code496'><a class='stability Unmarked' title='No stability level'></a><code>Code496</code></td><td><div class='docblock'><p>496 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code497'><a class='stability Unmarked' title='No stability level'></a><code>Code497</code></td><td><div class='docblock'><p>497 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code498'><a class='stability Unmarked' title='No stability level'></a><code>Code498</code></td><td><div class='docblock'><p>498 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code499'><a class='stability Unmarked' title='No stability level'></a><code>Code499</code></td><td><div class='docblock'><p>499 (unregistered)</p>
+</div></td></tr><tr><td id='variant.InternalServerError'><a class='stability Unmarked' title='No stability level'></a><code>InternalServerError</code></td><td><div class='docblock'><p>500 Internal Server Error</p>
+</div></td></tr><tr><td id='variant.NotImplemented'><a class='stability Unmarked' title='No stability level'></a><code>NotImplemented</code></td><td><div class='docblock'><p>501 Not Implemented</p>
+</div></td></tr><tr><td id='variant.BadGateway'><a class='stability Unmarked' title='No stability level'></a><code>BadGateway</code></td><td><div class='docblock'><p>502 Bad Gateway</p>
+</div></td></tr><tr><td id='variant.ServiceUnavailable'><a class='stability Unmarked' title='No stability level'></a><code>ServiceUnavailable</code></td><td><div class='docblock'><p>503 Service Unavailable</p>
+</div></td></tr><tr><td id='variant.GatewayTimeout'><a class='stability Unmarked' title='No stability level'></a><code>GatewayTimeout</code></td><td><div class='docblock'><p>504 Gateway Timeout</p>
+</div></td></tr><tr><td id='variant.HttpVersionNotSupported'><a class='stability Unmarked' title='No stability level'></a><code>HttpVersionNotSupported</code></td><td><div class='docblock'><p>505 HTTP Version Not Supported</p>
+</div></td></tr><tr><td id='variant.VariantAlsoNegotiates'><a class='stability Unmarked' title='No stability level'></a><code>VariantAlsoNegotiates</code></td><td><div class='docblock'><p>506 Variant Also Negotiates</p>
+</div></td></tr><tr><td id='variant.InsufficientStorage'><a class='stability Unmarked' title='No stability level'></a><code>InsufficientStorage</code></td><td><div class='docblock'><p>507 Insufficient Storage</p>
+</div></td></tr><tr><td id='variant.LoopDetected'><a class='stability Unmarked' title='No stability level'></a><code>LoopDetected</code></td><td><div class='docblock'><p>508 Loop Detected</p>
+</div></td></tr><tr><td id='variant.Code509'><a class='stability Unmarked' title='No stability level'></a><code>Code509</code></td><td><div class='docblock'><p>509 (unregistered)</p>
+</div></td></tr><tr><td id='variant.NotExtended'><a class='stability Unmarked' title='No stability level'></a><code>NotExtended</code></td><td><div class='docblock'><p>510 Not Extended</p>
+</div></td></tr><tr><td id='variant.NetworkAuthenticationRequired'><a class='stability Unmarked' title='No stability level'></a><code>NetworkAuthenticationRequired</code></td><td><div class='docblock'><p>511 Network Authentication Required</p>
+</div></td></tr><tr><td id='variant.Code512'><a class='stability Unmarked' title='No stability level'></a><code>Code512</code></td><td><div class='docblock'><p>512 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code513'><a class='stability Unmarked' title='No stability level'></a><code>Code513</code></td><td><div class='docblock'><p>513 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code514'><a class='stability Unmarked' title='No stability level'></a><code>Code514</code></td><td><div class='docblock'><p>514 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code515'><a class='stability Unmarked' title='No stability level'></a><code>Code515</code></td><td><div class='docblock'><p>515 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code516'><a class='stability Unmarked' title='No stability level'></a><code>Code516</code></td><td><div class='docblock'><p>516 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code517'><a class='stability Unmarked' title='No stability level'></a><code>Code517</code></td><td><div class='docblock'><p>517 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code518'><a class='stability Unmarked' title='No stability level'></a><code>Code518</code></td><td><div class='docblock'><p>518 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code519'><a class='stability Unmarked' title='No stability level'></a><code>Code519</code></td><td><div class='docblock'><p>519 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code520'><a class='stability Unmarked' title='No stability level'></a><code>Code520</code></td><td><div class='docblock'><p>520 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code521'><a class='stability Unmarked' title='No stability level'></a><code>Code521</code></td><td><div class='docblock'><p>521 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code522'><a class='stability Unmarked' title='No stability level'></a><code>Code522</code></td><td><div class='docblock'><p>522 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code523'><a class='stability Unmarked' title='No stability level'></a><code>Code523</code></td><td><div class='docblock'><p>523 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code524'><a class='stability Unmarked' title='No stability level'></a><code>Code524</code></td><td><div class='docblock'><p>524 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code525'><a class='stability Unmarked' title='No stability level'></a><code>Code525</code></td><td><div class='docblock'><p>525 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code526'><a class='stability Unmarked' title='No stability level'></a><code>Code526</code></td><td><div class='docblock'><p>526 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code527'><a class='stability Unmarked' title='No stability level'></a><code>Code527</code></td><td><div class='docblock'><p>527 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code528'><a class='stability Unmarked' title='No stability level'></a><code>Code528</code></td><td><div class='docblock'><p>528 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code529'><a class='stability Unmarked' title='No stability level'></a><code>Code529</code></td><td><div class='docblock'><p>529 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code530'><a class='stability Unmarked' title='No stability level'></a><code>Code530</code></td><td><div class='docblock'><p>530 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code531'><a class='stability Unmarked' title='No stability level'></a><code>Code531</code></td><td><div class='docblock'><p>531 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code532'><a class='stability Unmarked' title='No stability level'></a><code>Code532</code></td><td><div class='docblock'><p>532 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code533'><a class='stability Unmarked' title='No stability level'></a><code>Code533</code></td><td><div class='docblock'><p>533 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code534'><a class='stability Unmarked' title='No stability level'></a><code>Code534</code></td><td><div class='docblock'><p>534 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code535'><a class='stability Unmarked' title='No stability level'></a><code>Code535</code></td><td><div class='docblock'><p>535 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code536'><a class='stability Unmarked' title='No stability level'></a><code>Code536</code></td><td><div class='docblock'><p>536 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code537'><a class='stability Unmarked' title='No stability level'></a><code>Code537</code></td><td><div class='docblock'><p>537 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code538'><a class='stability Unmarked' title='No stability level'></a><code>Code538</code></td><td><div class='docblock'><p>538 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code539'><a class='stability Unmarked' title='No stability level'></a><code>Code539</code></td><td><div class='docblock'><p>539 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code540'><a class='stability Unmarked' title='No stability level'></a><code>Code540</code></td><td><div class='docblock'><p>540 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code541'><a class='stability Unmarked' title='No stability level'></a><code>Code541</code></td><td><div class='docblock'><p>541 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code542'><a class='stability Unmarked' title='No stability level'></a><code>Code542</code></td><td><div class='docblock'><p>542 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code543'><a class='stability Unmarked' title='No stability level'></a><code>Code543</code></td><td><div class='docblock'><p>543 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code544'><a class='stability Unmarked' title='No stability level'></a><code>Code544</code></td><td><div class='docblock'><p>544 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code545'><a class='stability Unmarked' title='No stability level'></a><code>Code545</code></td><td><div class='docblock'><p>545 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code546'><a class='stability Unmarked' title='No stability level'></a><code>Code546</code></td><td><div class='docblock'><p>546 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code547'><a class='stability Unmarked' title='No stability level'></a><code>Code547</code></td><td><div class='docblock'><p>547 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code548'><a class='stability Unmarked' title='No stability level'></a><code>Code548</code></td><td><div class='docblock'><p>548 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code549'><a class='stability Unmarked' title='No stability level'></a><code>Code549</code></td><td><div class='docblock'><p>549 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code550'><a class='stability Unmarked' title='No stability level'></a><code>Code550</code></td><td><div class='docblock'><p>550 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code551'><a class='stability Unmarked' title='No stability level'></a><code>Code551</code></td><td><div class='docblock'><p>551 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code552'><a class='stability Unmarked' title='No stability level'></a><code>Code552</code></td><td><div class='docblock'><p>552 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code553'><a class='stability Unmarked' title='No stability level'></a><code>Code553</code></td><td><div class='docblock'><p>553 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code554'><a class='stability Unmarked' title='No stability level'></a><code>Code554</code></td><td><div class='docblock'><p>554 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code555'><a class='stability Unmarked' title='No stability level'></a><code>Code555</code></td><td><div class='docblock'><p>555 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code556'><a class='stability Unmarked' title='No stability level'></a><code>Code556</code></td><td><div class='docblock'><p>556 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code557'><a class='stability Unmarked' title='No stability level'></a><code>Code557</code></td><td><div class='docblock'><p>557 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code558'><a class='stability Unmarked' title='No stability level'></a><code>Code558</code></td><td><div class='docblock'><p>558 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code559'><a class='stability Unmarked' title='No stability level'></a><code>Code559</code></td><td><div class='docblock'><p>559 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code560'><a class='stability Unmarked' title='No stability level'></a><code>Code560</code></td><td><div class='docblock'><p>560 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code561'><a class='stability Unmarked' title='No stability level'></a><code>Code561</code></td><td><div class='docblock'><p>561 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code562'><a class='stability Unmarked' title='No stability level'></a><code>Code562</code></td><td><div class='docblock'><p>562 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code563'><a class='stability Unmarked' title='No stability level'></a><code>Code563</code></td><td><div class='docblock'><p>563 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code564'><a class='stability Unmarked' title='No stability level'></a><code>Code564</code></td><td><div class='docblock'><p>564 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code565'><a class='stability Unmarked' title='No stability level'></a><code>Code565</code></td><td><div class='docblock'><p>565 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code566'><a class='stability Unmarked' title='No stability level'></a><code>Code566</code></td><td><div class='docblock'><p>566 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code567'><a class='stability Unmarked' title='No stability level'></a><code>Code567</code></td><td><div class='docblock'><p>567 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code568'><a class='stability Unmarked' title='No stability level'></a><code>Code568</code></td><td><div class='docblock'><p>568 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code569'><a class='stability Unmarked' title='No stability level'></a><code>Code569</code></td><td><div class='docblock'><p>569 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code570'><a class='stability Unmarked' title='No stability level'></a><code>Code570</code></td><td><div class='docblock'><p>570 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code571'><a class='stability Unmarked' title='No stability level'></a><code>Code571</code></td><td><div class='docblock'><p>571 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code572'><a class='stability Unmarked' title='No stability level'></a><code>Code572</code></td><td><div class='docblock'><p>572 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code573'><a class='stability Unmarked' title='No stability level'></a><code>Code573</code></td><td><div class='docblock'><p>573 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code574'><a class='stability Unmarked' title='No stability level'></a><code>Code574</code></td><td><div class='docblock'><p>574 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code575'><a class='stability Unmarked' title='No stability level'></a><code>Code575</code></td><td><div class='docblock'><p>575 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code576'><a class='stability Unmarked' title='No stability level'></a><code>Code576</code></td><td><div class='docblock'><p>576 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code577'><a class='stability Unmarked' title='No stability level'></a><code>Code577</code></td><td><div class='docblock'><p>577 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code578'><a class='stability Unmarked' title='No stability level'></a><code>Code578</code></td><td><div class='docblock'><p>578 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code579'><a class='stability Unmarked' title='No stability level'></a><code>Code579</code></td><td><div class='docblock'><p>579 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code580'><a class='stability Unmarked' title='No stability level'></a><code>Code580</code></td><td><div class='docblock'><p>580 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code581'><a class='stability Unmarked' title='No stability level'></a><code>Code581</code></td><td><div class='docblock'><p>581 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code582'><a class='stability Unmarked' title='No stability level'></a><code>Code582</code></td><td><div class='docblock'><p>582 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code583'><a class='stability Unmarked' title='No stability level'></a><code>Code583</code></td><td><div class='docblock'><p>583 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code584'><a class='stability Unmarked' title='No stability level'></a><code>Code584</code></td><td><div class='docblock'><p>584 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code585'><a class='stability Unmarked' title='No stability level'></a><code>Code585</code></td><td><div class='docblock'><p>585 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code586'><a class='stability Unmarked' title='No stability level'></a><code>Code586</code></td><td><div class='docblock'><p>586 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code587'><a class='stability Unmarked' title='No stability level'></a><code>Code587</code></td><td><div class='docblock'><p>587 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code588'><a class='stability Unmarked' title='No stability level'></a><code>Code588</code></td><td><div class='docblock'><p>588 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code589'><a class='stability Unmarked' title='No stability level'></a><code>Code589</code></td><td><div class='docblock'><p>589 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code590'><a class='stability Unmarked' title='No stability level'></a><code>Code590</code></td><td><div class='docblock'><p>590 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code591'><a class='stability Unmarked' title='No stability level'></a><code>Code591</code></td><td><div class='docblock'><p>591 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code592'><a class='stability Unmarked' title='No stability level'></a><code>Code592</code></td><td><div class='docblock'><p>592 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code593'><a class='stability Unmarked' title='No stability level'></a><code>Code593</code></td><td><div class='docblock'><p>593 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code594'><a class='stability Unmarked' title='No stability level'></a><code>Code594</code></td><td><div class='docblock'><p>594 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code595'><a class='stability Unmarked' title='No stability level'></a><code>Code595</code></td><td><div class='docblock'><p>595 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code596'><a class='stability Unmarked' title='No stability level'></a><code>Code596</code></td><td><div class='docblock'><p>596 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code597'><a class='stability Unmarked' title='No stability level'></a><code>Code597</code></td><td><div class='docblock'><p>597 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code598'><a class='stability Unmarked' title='No stability level'></a><code>Code598</code></td><td><div class='docblock'><p>598 (unregistered)</p>
+</div></td></tr><tr><td id='variant.Code599'><a class='stability Unmarked' title='No stability level'></a><code>Code599</code></td><td><div class='docblock'><p>599 (unregistered)</p>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.canonical_reason' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.canonical_reason' class='fnname'>canonical_reason</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h4>
+<div class='docblock'><p>Get the standardised <code>Reason-Phrase</code> for this status code.</p>
+
+<p>This is mostly here for servers writing responses, but could potentially have application at
+other times.</p>
+
+<p>The reason phrase is defined as being exclusively for human readers. You should avoid
+derive any meaning from it at all costs.</p>
+
+<p>Bear in mind also that in HTTP/2.0 the reason phrase is abolished from transmission, and so
+this canonical reason phrase really is the only reason phrase you’ll find.</p>
+</div><h4 id='method.class' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.class' class='fnname'>class</a>(&amp;self) -&gt; <a class='enum' href='../../../rustless/server/status/enum.StatusClass.html' title='rustless::server::status::StatusClass'>StatusClass</a></code></h4>
+<div class='docblock'><p>Determine the class of a status code, based on its first digit.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'></div><h3 class='impl'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.String.html' title='core::fmt::String'>String</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='docblock'><p>Formats the status code, <em>including</em> the canonical reason.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>ImATeapot</span>)[],
+           <span class='string'>&quot;418 I&#39;m a teapot&quot;</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>Code123</span>)[],
+           <span class='string'>&quot;123 &lt;unknown status code&gt;&quot;</span>);
+</pre>
+
+<p>If you wish to just include the number, cast to a u16 instead.</p>
+</div><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt; for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.eq' class='fnname'>eq</a>(&amp;self, other: &amp;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.ne' class='fnname'>ne</a>(&amp;self, &amp;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.assert_receiver_is_total_eq' class='method'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#method.assert_receiver_is_total_eq' class='fnname'>assert_receiver_is_total_eq</a>(&amp;self)</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h4>
+<h4 id='method.clone_from' class='method'><a class='stability Unstable' title='Unstable: this function is rarely used'></a><code>fn <a href='#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, &amp;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>)</code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/num/trait.FromPrimitive.html' title='core::num::FromPrimitive'>FromPrimitive</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.from_i64' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_i64' class='fnname'>from_i64</a>(n: <a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_u64' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_u64' class='fnname'>from_u64</a>(n: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_int' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_int' class='fnname'>from_int</a>(<a href='http://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_i8' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_i8' class='fnname'>from_i8</a>(<a href='http://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_i16' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_i16' class='fnname'>from_i16</a>(<a href='http://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_i32' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_i32' class='fnname'>from_i32</a>(<a href='http://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_uint' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_uint' class='fnname'>from_uint</a>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_u8' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_u8' class='fnname'>from_u8</a>(<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_u16' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_u16' class='fnname'>from_u16</a>(<a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_u32' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_u32' class='fnname'>from_u32</a>(<a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_f32' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_f32' class='fnname'>from_f32</a>(<a href='http://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+<h4 id='method.from_f64' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.from_f64' class='fnname'>from_f64</a>(<a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html' title='core::cmp::PartialOrd'>PartialOrd</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>&gt; for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.partial_cmp' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.partial_cmp' class='fnname'>partial_cmp</a>(&amp;self, other: &amp;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a>&gt;</code></h4>
+<h4 id='method.lt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.lt' class='fnname'>lt</a>(&amp;self, &amp;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.le' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.le' class='fnname'>le</a>(&amp;self, &amp;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.gt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.gt' class='fnname'>gt</a>(&amp;self, &amp;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ge' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.ge' class='fnname'>ge</a>(&amp;self, &amp;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.cmp' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.cmp' class='fnname'>cmp</a>(&amp;self, other: &amp;<a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a></code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/num/trait.ToPrimitive.html' title='core::num::ToPrimitive'>ToPrimitive</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.to_i64' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_i64' class='fnname'>to_i64</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>&gt;</code></h4>
+<h4 id='method.to_u64' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_u64' class='fnname'>to_u64</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
+<h4 id='method.to_int' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_int' class='fnname'>to_int</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a>&gt;</code></h4>
+<h4 id='method.to_i8' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_i8' class='fnname'>to_i8</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>&gt;</code></h4>
+<h4 id='method.to_i16' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_i16' class='fnname'>to_i16</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>&gt;</code></h4>
+<h4 id='method.to_i32' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_i32' class='fnname'>to_i32</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>&gt;</code></h4>
+<h4 id='method.to_uint' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_uint' class='fnname'>to_uint</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<h4 id='method.to_u8' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_u8' class='fnname'>to_u8</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
+<h4 id='method.to_u16' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_u16' class='fnname'>to_u16</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>&gt;</code></h4>
+<h4 id='method.to_u32' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_u32' class='fnname'>to_u32</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt;</code></h4>
+<h4 id='method.to_f32' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_f32' class='fnname'>to_f32</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>&gt;</code></h4>
+<h4 id='method.to_f64' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_f64' class='fnname'>to_f64</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../iron/modifier/trait.Modifier.html' title='iron::modifier::Modifier'>Modifier</a>&lt;<a class='struct' href='../../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt; for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.modify' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.modify' class='fnname'>modify</a>(self, res: &amp;mut <a class='struct' href='../../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>)</code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Show.html' title='core::fmt::Show'>Show</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "rustless";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    
+    <script async src="../../../search-index.js"></script>
+</body>
+</html>

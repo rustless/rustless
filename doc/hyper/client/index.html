@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `client` mod in crate `hyper`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, client">
+
+    <title>hyper::client - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../index.html'>hyper</a></p><div class='block mod'><h2>Modules</h2><a class='mod current' href='../client/index.html'>client</a><a class='mod ' href='../header/index.html'>header</a><a class='mod ' href='../http/index.html'>http</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../mime/index.html'>mime</a><a class='mod ' href='../net/index.html'>net</a><a class='mod ' href='../server/index.html'>server</a><a class='mod ' href='../status/index.html'>status</a><a class='mod ' href='../uri/index.html'>uri</a><a class='mod ' href='../version/index.html'>version</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.SocketAddr.html'>SocketAddr</a><a class='struct ' href='../struct.Url.html'>Url</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='../enum.HttpError.html'>HttpError</a><a class='enum ' href='../enum.IpAddr.html'>IpAddr</a></div><div class='block macro'><h2>Macros</h2><a class='macro ' href='../macro.bench_header!.html'>bench_header!</a><a class='macro ' href='../macro.deref!.html'>deref!</a><a class='macro ' href='../macro.impl_header!.html'>impl_header!</a><a class='macro ' href='../macro.impl_list_header!.html'>impl_list_header!</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>hyper</a>::<wbr><a class='mod' href=''>client</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-43' href='../../src/hyper/client/mod.rs.html#1-405'>[src]</a></span></h1>
+<div class='docblock'><p>HTTP Client</p>
+
+<h1 id="usage" class='section-header'><a
+                           href="#usage">Usage</a></h1>
+<p>The <code>Client</code> API is designed for most people to make HTTP requests.
+It utilizes the lower level <code>Request</code> API.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>Client</span>;
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>client</span> <span class='op'>=</span> <span class='ident'>Client</span>::<span class='ident'>new</span>();
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>get</span>(<span class='string'>&quot;http://example.domain&quot;</span>).<span class='ident'>send</span>().<span class='ident'>unwrap</span>();
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>status</span>, <span class='ident'>hyper</span>::<span class='prelude-val'>Ok</span>);
+</pre>
+
+<p>The returned value from is a <code>Response</code>, which provides easy access
+to the <code>status</code>, the <code>headers</code>, and the response body via the <code>Writer</code>
+trait.</p>
+</div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
+<table><tr><td><code>pub use self::<a class='mod'
+                                            href='./request/index.html'>request</a>::<a class='struct' href='../../hyper/client/request/struct.Request.html' title='hyper::client::request::Request'>Request</a>;</code></td></tr><tr><td><code>pub use self::<a class='mod'
+                                            href='./response/index.html'>response</a>::<a class='struct' href='../../hyper/client/response/struct.Response.html' title='hyper::client::response::Response'>Response</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='request/index.html'
+                               title='hyper::client::request'>request</a></td>
+                        <td class='docblock short'><p>Client Requests</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='response/index.html'
+                               title='hyper::client::response'>response</a></td>
+                        <td class='docblock short'><p>Client Responses</p>
+</td>
+                    </tr>
+                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Client.html'
+                               title='hyper::client::Client'>Client</a></td>
+                        <td class='docblock short'><p>A Client to use additional features with Requests.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.RequestBuilder.html'
+                               title='hyper::client::RequestBuilder'>RequestBuilder</a></td>
+                        <td class='docblock short'><p>Options for an individual Request.</p>
+</td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Body.html'
+                               title='hyper::client::Body'>Body</a></td>
+                        <td class='docblock short'><p>The target enum for the IntoBody trait.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.RedirectPolicy.html'
+                               title='hyper::client::RedirectPolicy'>RedirectPolicy</a></td>
+                        <td class='docblock short'><p>Behavior regarding how to handle redirects within a Client.</p>
+</td>
+                    </tr>
+                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.IntoBody.html'
+                               title='hyper::client::IntoBody'>IntoBody</a></td>
+                        <td class='docblock short'><p>A helper trait to allow overloading of the body parameter.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.IntoUrl.html'
+                               title='hyper::client::IntoUrl'>IntoUrl</a></td>
+                        <td class='docblock short'><p>A helper trait to convert common objects into a Url.</p>
+</td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "hyper";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

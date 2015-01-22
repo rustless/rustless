@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `ContentType` struct in crate `rustless`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ContentType">
+
+    <title>rustless::server::header::ContentType - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>header</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='parsing/index.html'>parsing</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Accept.html'>Accept</a><a class='struct ' href='struct.AcceptEncoding.html'>AcceptEncoding</a><a class='struct ' href='struct.AccessControlAllowHeaders.html'>AccessControlAllowHeaders</a><a class='struct ' href='struct.AccessControlAllowMethods.html'>AccessControlAllowMethods</a><a class='struct ' href='struct.AccessControlMaxAge.html'>AccessControlMaxAge</a><a class='struct ' href='struct.AccessControlRequestHeaders.html'>AccessControlRequestHeaders</a><a class='struct ' href='struct.AccessControlRequestMethod.html'>AccessControlRequestMethod</a><a class='struct ' href='struct.Allow.html'>Allow</a><a class='struct ' href='struct.Authorization.html'>Authorization</a><a class='struct ' href='struct.Basic.html'>Basic</a><a class='struct ' href='struct.CacheControl.html'>CacheControl</a><a class='struct ' href='struct.Connection.html'>Connection</a><a class='struct ' href='struct.ContentLength.html'>ContentLength</a><a class='struct current' href='struct.ContentType.html'>ContentType</a><a class='struct ' href='struct.Cookies.html'>Cookies</a><a class='struct ' href='struct.Date.html'>Date</a><a class='struct ' href='struct.Etag.html'>Etag</a><a class='struct ' href='struct.Expires.html'>Expires</a><a class='struct ' href='struct.HeaderFormatter.html'>HeaderFormatter</a><a class='struct ' href='struct.HeaderView.html'>HeaderView</a><a class='struct ' href='struct.Headers.html'>Headers</a><a class='struct ' href='struct.HeadersItems.html'>HeadersItems</a><a class='struct ' href='struct.Host.html'>Host</a><a class='struct ' href='struct.IfModifiedSince.html'>IfModifiedSince</a><a class='struct ' href='struct.LastModified.html'>LastModified</a><a class='struct ' href='struct.Location.html'>Location</a><a class='struct ' href='struct.QualityItem.html'>QualityItem</a><a class='struct ' href='struct.Referer.html'>Referer</a><a class='struct ' href='struct.Server.html'>Server</a><a class='struct ' href='struct.SetCookie.html'>SetCookie</a><a class='struct ' href='struct.TransferEncoding.html'>TransferEncoding</a><a class='struct ' href='struct.Upgrade.html'>Upgrade</a><a class='struct ' href='struct.UserAgent.html'>UserAgent</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.AccessControlAllowOrigin.html'>AccessControlAllowOrigin</a><a class='enum ' href='enum.CacheDirective.html'>CacheDirective</a><a class='enum ' href='enum.ConnectionOption.html'>ConnectionOption</a><a class='enum ' href='enum.Encoding.html'>Encoding</a><a class='enum ' href='enum.Protocol.html'>Protocol</a><a class='enum ' href='enum.Vary.html'>Vary</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Header.html'>Header</a><a class='trait ' href='trait.HeaderFormat.html'>HeaderFormat</a><a class='trait ' href='trait.Scheme.html'>Scheme</a></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.qitem.html'>qitem</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='struct' href=''>ContentType</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-11454' href='../../../hyper/header/common/content_type/struct.ContentType.html?gotosrc=11454'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct ContentType(pub <a class='struct' href='../../../rustless/server/mime/struct.Mime.html' title='rustless::server::mime::Mime'>Mime</a>);</pre><div class='docblock'><p>The <code>Content-Type</code> header.</p>
+
+<p>Used to describe the MIME type of message body. Can be used with both
+requests and responses.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a></code></h3><div class='impl-items'><h4 id='method.deref' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.deref' class='fnname'>deref</a>(&amp;'a self) -&gt; &amp;'a <a class='struct' href='../../../rustless/server/mime/struct.Mime.html' title='rustless::server::mime::Mime'>Mime</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.deref_mut' class='fnname'>deref_mut</a>(&amp;'a mut self) -&gt; &amp;'a mut <a class='struct' href='../../../rustless/server/mime/struct.Mime.html' title='rustless::server::mime::Mime'>Mime</a></code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rustless/server/header/trait.Header.html' title='rustless::server::header::Header'>Header</a> for <a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a></code></h3><div class='impl-items'><h4 id='method.header_name' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.header_name' class='fnname'>header_name</a>(<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a>&gt;) -&gt; &amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<h4 id='method.parse_header' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.parse_header' class='fnname'>parse_header</a>(raw: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;<a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a></code></h3><div class='impl-items'><h4 id='method.fmt_header' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.fmt_header' class='fnname'>fmt_header</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Show.html' title='core::fmt::Show'>Show</a> for <a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;<a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a>&gt; for <a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.ne' class='fnname'>ne</a>(&amp;self, &amp;<a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a></code></h4>
+<h4 id='method.clone_from' class='method'><a class='stability Unstable' title='Unstable: this function is rarely used'></a><code>fn <a href='#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, &amp;<a class='struct' href='../../../rustless/server/header/struct.ContentType.html' title='rustless::server::header::ContentType'>ContentType</a>)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "rustless";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    
+    <script async src="../../../search-index.js"></script>
+</body>
+</html>

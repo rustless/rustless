@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `MuCell` struct in crate `mucell`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, MuCell">
+
+    <title>mucell::MuCell - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='index.html'>mucell</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.MuCell.html'>MuCell</a><a class='struct ' href='struct.Ref.html'>Ref</a></div><div class='block macro'><h2>Macros</h2><a class='macro ' href='macro.mucell_ref_type!.html'>mucell_ref_type!</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>mucell</a>::<wbr><a class='struct' href=''>MuCell</a><wbr><a class='stability Stable' title=''>Stable</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-35' href='../src/mucell/lib.rs.html#95-98'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct MuCell&lt;T&gt; {
+    // some fields omitted
+}</pre><div class='docblock'><p>A cell with the ability to mutate the value through an immutable reference when safe</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;T&gt; <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.new' class='fnname'>new</a>(value: T) -&gt; <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h4>
+<div class='docblock'><p>Construct a new cell containing the given value</p>
+</div><h4 id='method.borrow_mut' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.borrow_mut' class='fnname'>borrow_mut</a>(&amp;mut self) -&gt; &amp;mut T</code></h4>
+<div class='docblock'><p>Borrow the contained object mutably.</p>
+
+<p>This is genuinely and completely free.</p>
+</div><h4 id='method.borrow' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.borrow' class='fnname'>borrow</a>(&amp;self) -&gt; <a class='struct' href='../mucell/struct.Ref.html' title='mucell::Ref'>Ref</a>&lt;T&gt;</code></h4>
+<div class='docblock'><p>Borrow the contained object immutably.</p>
+
+<p>Unlike <code>borrow_mut</code>, this isn’t <em>quite</em> free, but oh, so all but! It has a smattering of
+reference counting. No branches, though, so it’s as fast as is computationally possible.</p>
+</div><h4 id='method.try_mutate' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.try_mutate' class='fnname'>try_mutate</a>&lt;F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut T)&gt;(&amp;self, mutator: F) -&gt; bool</code></h4>
+<div class='docblock'><p>Mutate the contained object if possible.</p>
+
+<p>If any immutable references produced by calling <code>borrow()</code> are active,
+this will return false, not executing the function given.</p>
+
+<p>If there are no immutable references active,
+this will execute the mutator function and return true.</p>
+
+<p><strong>Caution:</strong> you should avoid touching <code>self</code> inside the mutator (not that it would really
+make much sense to be touching it, anyway); most notably, you MUST NOT call <code>borrow</code> on
+<code>self</code> inside the mutator, which includes things like the <code>==</code> implementation which borrow
+the value briefly; while calling <code>try_mutate</code> inside it will just return false, in debug
+builds calling <code>borrow</code> will panic and in release builds it will break memory safety as you
+will have both a mutable and an immutable reference to the same object at the same time
+(yep, it’s not quite preventing aliasing). So don’t do it.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unstable' title='Unstable: will be overhauled with new lifetime rules; see RFC 458'></a><code>impl&lt;T&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'></div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.eq' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.eq' class='fnname'>eq</a>(&amp;self, other: &amp;<a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;) -&gt; bool</code></h4>
+<h4 id='method.ne' class='tymethod'><a class='stability Stable' title='Stable'></a><code>fn <a href='#tymethod.ne' class='fnname'>ne</a>(&amp;self, other: &amp;Rhs) -&gt; bool</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.assert_receiver_is_total_eq' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.assert_receiver_is_total_eq' class='fnname'>assert_receiver_is_total_eq</a>(&amp;self)</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html' title='core::cmp::PartialOrd'>PartialOrd</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html' title='core::cmp::PartialOrd'>PartialOrd</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.partial_cmp' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.partial_cmp' class='fnname'>partial_cmp</a>(&amp;self, other: &amp;<a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a>&gt;</code></h4>
+<h4 id='method.lt' class='tymethod'><a class='stability Stable' title='Stable'></a><code>fn <a href='#tymethod.lt' class='fnname'>lt</a>(&amp;self, other: &amp;Rhs) -&gt; bool</code></h4>
+<h4 id='method.le' class='tymethod'><a class='stability Stable' title='Stable'></a><code>fn <a href='#tymethod.le' class='fnname'>le</a>(&amp;self, other: &amp;Rhs) -&gt; bool</code></h4>
+<h4 id='method.gt' class='tymethod'><a class='stability Stable' title='Stable'></a><code>fn <a href='#tymethod.gt' class='fnname'>gt</a>(&amp;self, other: &amp;Rhs) -&gt; bool</code></h4>
+<h4 id='method.ge' class='tymethod'><a class='stability Stable' title='Stable'></a><code>fn <a href='#tymethod.ge' class='fnname'>ge</a>(&amp;self, other: &amp;Rhs) -&gt; bool</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.cmp' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.cmp' class='fnname'>cmp</a>(&amp;self, other: &amp;<a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.default' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h4>
+<h4 id='method.clone_from' class='tymethod'><a class='stability Unstable' title='Unstable: this function is rarely used'></a><code>fn <a href='#tymethod.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is not stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Show.html' title='core::fmt::Show'>Show</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Show.html' title='core::fmt::Show'>Show</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is not stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Octal.html' title='core::fmt::Octal'>Octal</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Octal.html' title='core::fmt::Octal'>Octal</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is not stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Binary.html' title='core::fmt::Binary'>Binary</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Binary.html' title='core::fmt::Binary'>Binary</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is not stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.LowerHex.html' title='core::fmt::LowerHex'>LowerHex</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.LowerHex.html' title='core::fmt::LowerHex'>LowerHex</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is not stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.UpperHex.html' title='core::fmt::UpperHex'>UpperHex</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.UpperHex.html' title='core::fmt::UpperHex'>UpperHex</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is not stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Pointer.html' title='core::fmt::Pointer'>Pointer</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Pointer.html' title='core::fmt::Pointer'>Pointer</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is not stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.LowerExp.html' title='core::fmt::LowerExp'>LowerExp</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.LowerExp.html' title='core::fmt::LowerExp'>LowerExp</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is not stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.UpperExp.html' title='core::fmt::UpperExp'>UpperExp</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.UpperExp.html' title='core::fmt::UpperExp'>UpperExp</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is not stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/rand/trait.Rand.html' title='rand::Rand'>Rand</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/rand/trait.Rand.html' title='rand::Rand'>Rand</a> for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.rand' class='method'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#method.rand' class='fnname'>rand</a>&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/rand/trait.Rng.html' title='rand::Rng'>Rng</a>&gt;(rng: &amp;mut R) -&gt; <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is not stable'></a><code>impl&lt;H, T&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/hash/trait.Hash.html' title='core::hash::Hash'>Hash</a>&lt;H&gt; for <a class='struct' href='../mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt; <span class='where'>where H: <a class='trait' href='http://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html' title='core::hash::Hasher'>Hasher</a>, T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/hash/trait.Hash.html' title='core::hash::Hash'>Hash</a>&lt;H&gt;</span></code></h3><div class='impl-items'><h4 id='method.hash' class='method'><a class='stability Unstable' title='Unstable: module was recently redesigned'></a><code>fn <a href='#method.hash' class='fnname'>hash</a>(&amp;self, state: &amp;mut H)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "mucell";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

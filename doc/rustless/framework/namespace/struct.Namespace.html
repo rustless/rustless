@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Namespace` struct in crate `rustless`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Namespace">
+
+    <title>rustless::framework::namespace::Namespace - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>framework</a>::<wbr><a href='index.html'>namespace</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.Namespace.html'>Namespace</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>framework</a>::<wbr><a href='index.html'>namespace</a>::<wbr><a class='struct' href=''>Namespace</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-5222' href='../../../src/rustless/framework/namespace.rs.html#11-19'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Namespace {
+    pub handlers: <a class='type' href='../../../rustless/framework/type.ApiHandlers.html' title='rustless::framework::ApiHandlers'>ApiHandlers</a>,
+    pub path: <a class='struct' href='../../../rustless/framework/path/struct.Path.html' title='rustless::framework::path::Path'>Path</a>,
+    pub coercer: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../../valico/builder/struct.Builder.html' title='valico::builder::Builder'>Builder</a>&gt;,
+    // some fields omitted
+}</pre><h2 class='fields'>Fields</h2>
+<table><tr><td id='structfield.handlers'><a class='stability Unmarked' title='No stability level'></a><code>handlers</code></td><td></td></tr><tr><td id='structfield.path'><a class='stability Unmarked' title='No stability level'></a><code>path</code></td><td></td></tr><tr><td id='structfield.coercer'><a class='stability Unmarked' title='No stability level'></a><code>coercer</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a></code></h4>
+<h4 id='method.params' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.params' class='fnname'>params</a>&lt;F&gt;(&amp;mut self, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/builder/struct.Builder.html' title='valico::builder::Builder'>Builder</a>)</span></code></h4>
+<h4 id='method.build' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.build' class='fnname'>build</a>&lt;F&gt;(path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) -&gt; <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a> <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a>)</span></code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rustless/framework/nesting/trait.Node.html' title='rustless::framework::nesting::Node'>Node</a> for <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a></code></h3><div class='impl-items'><h4 id='method.get_handlers' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_handlers' class='fnname'>get_handlers</a>&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a <a class='type' href='../../../rustless/framework/type.ApiHandlers.html' title='rustless::framework::ApiHandlers'>ApiHandlers</a></code></h4>
+<h4 id='method.get_handlers_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_handlers_mut' class='fnname'>get_handlers_mut</a>&lt;'a&gt;(&amp;'a mut self) -&gt; &amp;'a mut <a class='type' href='../../../rustless/framework/type.ApiHandlers.html' title='rustless::framework::ApiHandlers'>ApiHandlers</a></code></h4>
+<h4 id='method.get_before' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_before' class='fnname'>get_before</a>&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a <a class='type' href='../../../rustless/framework/type.Callbacks.html' title='rustless::framework::Callbacks'>Callbacks</a></code></h4>
+<h4 id='method.get_before_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_before_mut' class='fnname'>get_before_mut</a>&lt;'a&gt;(&amp;'a mut self) -&gt; &amp;'a mut <a class='type' href='../../../rustless/framework/type.Callbacks.html' title='rustless::framework::Callbacks'>Callbacks</a></code></h4>
+<h4 id='method.get_before_validation' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_before_validation' class='fnname'>get_before_validation</a>&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a <a class='type' href='../../../rustless/framework/type.Callbacks.html' title='rustless::framework::Callbacks'>Callbacks</a></code></h4>
+<h4 id='method.get_before_validation_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_before_validation_mut' class='fnname'>get_before_validation_mut</a>&lt;'a&gt;(&amp;'a mut self) -&gt; &amp;'a mut <a class='type' href='../../../rustless/framework/type.Callbacks.html' title='rustless::framework::Callbacks'>Callbacks</a></code></h4>
+<h4 id='method.get_after_validation' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_after_validation' class='fnname'>get_after_validation</a>&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a <a class='type' href='../../../rustless/framework/type.Callbacks.html' title='rustless::framework::Callbacks'>Callbacks</a></code></h4>
+<h4 id='method.get_after_validation_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_after_validation_mut' class='fnname'>get_after_validation_mut</a>&lt;'a&gt;(&amp;'a mut self) -&gt; &amp;'a mut <a class='type' href='../../../rustless/framework/type.Callbacks.html' title='rustless::framework::Callbacks'>Callbacks</a></code></h4>
+<h4 id='method.get_after' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_after' class='fnname'>get_after</a>&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a <a class='type' href='../../../rustless/framework/type.Callbacks.html' title='rustless::framework::Callbacks'>Callbacks</a></code></h4>
+<h4 id='method.get_after_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_after_mut' class='fnname'>get_after_mut</a>&lt;'a&gt;(&amp;'a mut self) -&gt; &amp;'a mut <a class='type' href='../../../rustless/framework/type.Callbacks.html' title='rustless::framework::Callbacks'>Callbacks</a></code></h4>
+<h4 id='method.push_node' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.push_node' class='fnname'>push_node</a>&lt;'a&gt;(&amp;'a self, _info: &amp;mut <a class='struct' href='../../../rustless/framework/struct.CallInfo.html' title='rustless::framework::CallInfo'>CallInfo</a>&lt;'a&gt;)</code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rustless/framework/nesting/trait.Nesting.html' title='rustless::framework::nesting::Nesting'>Nesting</a> for <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a></code></h3><div class='impl-items'><h4 id='method.mount' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.mount' class='fnname'>mount</a>&lt;H&gt;(&amp;mut self, edp: H) <span class='where'>where H: <a class='trait' href='../../../rustless/framework/trait.ApiHandler.html' title='rustless::framework::ApiHandler'>ApiHandler</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a></span></code></h4>
+<h4 id='method.namespace' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.namespace' class='fnname'>namespace</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a>)</span></code></h4>
+<h4 id='method.group' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.group' class='fnname'>group</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a>)</span></code></h4>
+<h4 id='method.resource' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.resource' class='fnname'>resource</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a>)</span></code></h4>
+<h4 id='method.resources' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.resources' class='fnname'>resources</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a>)</span></code></h4>
+<h4 id='method.segment' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.segment' class='fnname'>segment</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a>)</span></code></h4>
+<h4 id='method.get' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get' class='fnname'>get</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>) -&gt; <a class='enum' href='../../../rustless/framework/endpoint/enum.EndpointHandlerPresent.html' title='rustless::framework::endpoint::EndpointHandlerPresent'>EndpointHandlerPresent</a></span></code></h4>
+<h4 id='method.post' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.post' class='fnname'>post</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>) -&gt; <a class='enum' href='../../../rustless/framework/endpoint/enum.EndpointHandlerPresent.html' title='rustless::framework::endpoint::EndpointHandlerPresent'>EndpointHandlerPresent</a></span></code></h4>
+<h4 id='method.put' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.put' class='fnname'>put</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>) -&gt; <a class='enum' href='../../../rustless/framework/endpoint/enum.EndpointHandlerPresent.html' title='rustless::framework::endpoint::EndpointHandlerPresent'>EndpointHandlerPresent</a></span></code></h4>
+<h4 id='method.delete' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.delete' class='fnname'>delete</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>) -&gt; <a class='enum' href='../../../rustless/framework/endpoint/enum.EndpointHandlerPresent.html' title='rustless::framework::endpoint::EndpointHandlerPresent'>EndpointHandlerPresent</a></span></code></h4>
+<h4 id='method.options' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.options' class='fnname'>options</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>) -&gt; <a class='enum' href='../../../rustless/framework/endpoint/enum.EndpointHandlerPresent.html' title='rustless::framework::endpoint::EndpointHandlerPresent'>EndpointHandlerPresent</a></span></code></h4>
+<h4 id='method.head' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.head' class='fnname'>head</a>&lt;F&gt;(&amp;mut self, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, builder: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>) -&gt; <a class='enum' href='../../../rustless/framework/endpoint/enum.EndpointHandlerPresent.html' title='rustless::framework::endpoint::EndpointHandlerPresent'>EndpointHandlerPresent</a></span></code></h4>
+<h4 id='method.before' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.before' class='fnname'>before</a>&lt;F&gt;(&amp;mut self, callback: F) <span class='where'>where F: for&lt;'a&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;'a mut <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>, &amp;<a class='type' href='../../../rustc-serialize/json/type.Object.html' title='rustc-serialize::json::Object'>Object</a>) -&gt; <a class='type' href='../../../rustless/type.HandleSuccessResult.html' title='rustless::HandleSuccessResult'>HandleSuccessResult</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a></span></code></h4>
+<h4 id='method.before_validation' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.before_validation' class='fnname'>before_validation</a>&lt;F&gt;(&amp;mut self, callback: F) <span class='where'>where F: for&lt;'a&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;'a mut <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>, &amp;<a class='type' href='../../../rustc-serialize/json/type.Object.html' title='rustc-serialize::json::Object'>Object</a>) -&gt; <a class='type' href='../../../rustless/type.HandleSuccessResult.html' title='rustless::HandleSuccessResult'>HandleSuccessResult</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a></span></code></h4>
+<h4 id='method.after' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.after' class='fnname'>after</a>&lt;F&gt;(&amp;mut self, callback: F) <span class='where'>where F: for&lt;'a&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;'a mut <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>, &amp;<a class='type' href='../../../rustc-serialize/json/type.Object.html' title='rustc-serialize::json::Object'>Object</a>) -&gt; <a class='type' href='../../../rustless/type.HandleSuccessResult.html' title='rustless::HandleSuccessResult'>HandleSuccessResult</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a></span></code></h4>
+<h4 id='method.after_validation' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.after_validation' class='fnname'>after_validation</a>&lt;F&gt;(&amp;mut self, callback: F) <span class='where'>where F: for&lt;'a&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;'a mut <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>, &amp;<a class='type' href='../../../rustc-serialize/json/type.Object.html' title='rustc-serialize::json::Object'>Object</a>) -&gt; <a class='type' href='../../../rustless/type.HandleSuccessResult.html' title='rustless::HandleSuccessResult'>HandleSuccessResult</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a></span></code></h4>
+<h4 id='method.call_handlers' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.call_handlers' class='fnname'>call_handlers</a>&lt;'a&gt;(&amp;'a self, rest_path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, params: &amp;mut <a class='type' href='../../../rustc-serialize/json/type.Object.html' title='rustc-serialize::json::Object'>Object</a>, req: &amp;mut <a class='trait' href='../../../rustless/backend/request/trait.Request.html' title='rustless::backend::request::Request'>Request</a>, info: &amp;mut <a class='struct' href='../../../rustless/framework/struct.CallInfo.html' title='rustless::framework::CallInfo'>CallInfo</a>&lt;'a&gt;) -&gt; <a class='type' href='../../../rustless/type.HandleResult.html' title='rustless::HandleResult'>HandleResult</a>&lt;<a class='struct' href='../../../rustless/struct.Response.html' title='rustless::Response'>Response</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rustless/framework/trait.ApiHandler.html' title='rustless::framework::ApiHandler'>ApiHandler</a> for <a class='struct' href='../../../rustless/framework/namespace/struct.Namespace.html' title='rustless::framework::namespace::Namespace'>Namespace</a></code></h3><div class='impl-items'><h4 id='method.api_call' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.api_call' class='fnname'>api_call</a>&lt;'a&gt;(&amp;'a self, rest_path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, params: &amp;mut <a class='type' href='../../../rustc-serialize/json/type.Object.html' title='rustc-serialize::json::Object'>Object</a>, req: &amp;mut <a class='trait' href='../../../rustless/backend/request/trait.Request.html' title='rustless::backend::request::Request'>Request</a>, info: &amp;mut <a class='struct' href='../../../rustless/framework/struct.CallInfo.html' title='rustless::framework::CallInfo'>CallInfo</a>&lt;'a&gt;) -&gt; <a class='type' href='../../../rustless/type.HandleResult.html' title='rustless::HandleResult'>HandleResult</a>&lt;<a class='struct' href='../../../rustless/struct.Response.html' title='rustless::Response'>Response</a>&gt;</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "rustless";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    
+    <script async src="../../../search-index.js"></script>
+</body>
+</html>

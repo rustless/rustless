@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `JsonWay` struct in crate `jsonway`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, JsonWay">
+
+    <title>jsonway::JsonWay - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='index.html'>jsonway</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='array_builder/index.html'>array_builder</a><a class='mod ' href='array_serializer/index.html'>array_serializer</a><a class='mod ' href='mutable_json/index.html'>mutable_json</a><a class='mod ' href='object_builder/index.html'>object_builder</a><a class='mod ' href='serializer/index.html'>serializer</a></div><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.JsonWay.html'>JsonWay</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>jsonway</a>::<wbr><a class='struct' href=''>JsonWay</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-1272' href='../src/jsonway/lib.rs.html#23'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct JsonWay;</pre><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../jsonway/struct.JsonWay.html' title='jsonway::JsonWay'>JsonWay</a></code></h3><div class='docblock'><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>jsonway</span>::<span class='ident'>JsonWay</span>;
+
+<span class='kw'>let</span> <span class='ident'>json</span> <span class='op'>=</span> <span class='ident'>JsonWay</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>json</span><span class='op'>|</span> {
+    <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;first_name&quot;</span>, <span class='string'>&quot;Luke&quot;</span>.<span class='ident'>to_string</span>()); 
+    <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;last_name&quot;</span>, <span class='string'>&quot;Skywalker&quot;</span>.<span class='ident'>to_string</span>());
+
+    <span class='ident'>json</span>.<span class='ident'>object</span>(<span class='string'>&quot;info&quot;</span>, <span class='op'>|</span><span class='ident'>json</span><span class='op'>|</span> {
+        <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;homeworld&quot;</span>, <span class='string'>&quot;Tatooine&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;born&quot;</span>, <span class='string'>&quot;19 BBY&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;died&quot;</span>, <span class='string'>&quot;Between 45 ABY and 137 ABY&quot;</span>.<span class='ident'>to_string</span>());
+    });
+
+    <span class='ident'>json</span>.<span class='ident'>array</span>(<span class='string'>&quot;masters&quot;</span>, <span class='op'>|</span><span class='ident'>json</span><span class='op'>|</span> {
+        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Obi-Wan Kenobi&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Yoda&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Joruus C&#39;baoth (Briefly)&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Darth Sidious (Briefly)&quot;</span>.<span class='ident'>to_string</span>());
+    });
+}).<span class='ident'>unwrap</span>();
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>json</span>.<span class='ident'>find</span>(<span class='string'>&quot;first_name&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>as_string</span>().<span class='ident'>unwrap</span>(), <span class='string'>&quot;Luke&quot;</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>json</span>.<span class='ident'>find</span>(<span class='string'>&quot;last_name&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>as_string</span>().<span class='ident'>unwrap</span>(), <span class='string'>&quot;Skywalker&quot;</span>);
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>json</span>.<span class='ident'>find</span>(<span class='string'>&quot;info&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>is_object</span>());
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>json</span>.<span class='ident'>find</span>(<span class='string'>&quot;masters&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>is_array</span>());
+</pre>
+</div><div class='impl-items'><h4 id='method.array' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.array' class='fnname'>array</a>&lt;F&gt;(builder: F) -&gt; <a class='struct' href='../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a> <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a>)</span></code></h4>
+<div class='docblock'><p>Create and return new ListBuilder</p>
+</div><h4 id='method.object' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.object' class='fnname'>object</a>&lt;F&gt;(builder: F) -&gt; <a class='struct' href='../jsonway/object_builder/struct.ObjectBuilder.html' title='jsonway::object_builder::ObjectBuilder'>ObjectBuilder</a> <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../jsonway/object_builder/struct.ObjectBuilder.html' title='jsonway::object_builder::ObjectBuilder'>ObjectBuilder</a>)</span></code></h4>
+<div class='docblock'><p>Create and return new ObjectBuilder</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "jsonway";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
