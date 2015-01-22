@@ -15,6 +15,7 @@
 - [Before and After callbacks](#before-and-after-callbacks)
 - [Secure API example](#secure-api-example)
 - [JSON responses](#json-responses)
+- [Swagger 2.0 support](#swagger-20)
 
 ## What is Rustless?
 
