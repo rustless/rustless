@@ -9,10 +9,13 @@ extern crate "rustc-serialize" as serialize;
 extern crate valico;
 extern crate cookie;
 
+use serialize::json;
+
 use iron::{Chain};
 
 use rustless::server::status;
 use rustless::errors::{Error};
+use rustless::batteries::swagger;
 use rustless::batteries::cookie::CookieExt;
 use rustless::{Nesting};
 
@@ -27,9 +30,11 @@ impl std::error::Error for UnauthorizedError {
 
 fn main() {
 
-    let app = rustless::Application::new(rustless::Api::build(|api| {
+    let mut app = rustless::Application::new(rustless::Api::build(|api| {
         api.prefix("api");
         api.version("v1", rustless::Versioning::Path);
+        
+        api.mount(swagger::create_api("api-docs"));
 
         api.error_formatter(|err, _media| {
             match err.downcast::<UnauthorizedError>() {
@@ -41,6 +46,30 @@ fn main() {
                 },
                 None => None
             }
+        });
+
+        api.post("greet/:name", |endpoint| {
+            endpoint.summary("Sends greeting");
+            endpoint.desc("Use this to talk to yourself");
+            endpoint.params(|params| {
+                params.req_typed("name", valico::string());
+                params.req_typed("greeting", valico::string());
+            });
+            endpoint.handle(|client, params| {
+                client.text(
+                    format!("{}, {}", 
+                        params.get("greeting").unwrap().to_string(),
+                        params.get("name").unwrap().to_string())
+                )
+            })
+        });
+
+        api.get("echo", |endpoint| {
+            endpoint.summary("Sends back what it gets");
+            endpoint.desc("Use this to talk to yourself");
+            endpoint.handle(|client, params| {
+                client.json(&json::Json::Object(params.clone()))
+            })
         });
 
         api.namespace("admin", |admin_ns| {
@@ -65,6 +94,8 @@ fn main() {
 
             // This `/api/admin/server_status` endpoint is secure now
             admin_ns.get("server_status", |endpoint| {
+                endpoint.summary("Get server status");
+                endpoint.desc("Use this API to receive some useful information about the state of our server");
                 endpoint.handle(|client, _params| {
                     {
                         let cookies = client.request.cookies();
@@ -80,7 +111,23 @@ fn main() {
         })
     }));
 
-    
+    swagger::enable(&mut app, swagger::Spec {
+        info: swagger::Info {
+            title: "Example API".to_string(),
+            description: Some("Simple API to demonstration".to_string()),
+            contact: Some(swagger::Contact {
+                name: "Stanislav Panferov".to_string(),
+                url: Some("http://panferov.me".to_string()),
+                ..std::default::Default::default()
+            }),
+            license: Some(swagger::License {
+                name: "MIT".to_string(),
+                url: "http://opensource.org/licenses/MIT".to_string()
+            }),
+            ..std::default::Default::default()
+        },
+        ..std::default::Default::default()
+    });
 
     let mut chain = iron::ChainBuilder::new(app);
     chain.link(::rustless::batteries::cookie::new("secretsecretsecretsecretsecretsecretsecret".as_bytes()));

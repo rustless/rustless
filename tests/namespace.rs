@@ -54,3 +54,35 @@ fn it_allows_nested_namespaces() {
     assert_eq!(response.status, status::StatusCode::Ok);
 
 }
+
+#[test]
+fn it_allows_grouping_with_zero_path() {
+
+    let app = app!(|api| {
+        api.prefix("api");
+
+        api.namespace("ns1", |ns1| {
+            ns1.get("", |edp| {
+                edp.handle(|client, _params| {
+                    client.text("Some usefull info".to_string())
+                })
+            });
+            ns1.post("", |edp| {
+                edp.handle(|client, _params| {
+                    client.text("Some usefull info".to_string())
+                })
+            })
+        })
+
+    });
+
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns1").unwrap();
+    assert_eq!(response.status, status::StatusCode::Ok);
+
+    let response = call_app!(app, Post, "http://127.0.0.1:3000/api/ns1").unwrap();
+    assert_eq!(response.status, status::StatusCode::Ok);
+
+    let response = call_app!(app, Delete, "http://127.0.0.1:3000/api/ns1").unwrap();
+    assert_eq!(response.status, status::StatusCode::NotFound);
+
+}

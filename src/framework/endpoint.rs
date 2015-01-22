@@ -3,6 +3,7 @@ use serialize::json;
 use valico;
 
 use server::method;
+use server::mime;
 use backend;
 use errors;
 use framework;
@@ -10,17 +11,21 @@ use framework::path;
 
 pub type EndpointHandler = Box<for<'a> Fn(framework::Client<'a>, &json::Object) -> backend::HandleResult<framework::Client<'a>> + 'static + Sync>;
 
+#[allow(missing_copy_implementations)]
 pub enum EndpointHandlerPresent {
     HandlerPresent
 }
 
-pub type EndpointBuilder = Fn(&mut Endpoint) -> EndpointHandlerPresent + 'static;
+pub type EndpointBuilder = FnOnce(&mut Endpoint) -> EndpointHandlerPresent + 'static;
 
 pub struct Endpoint {
     pub method: method::Method,
     pub path: path::Path,
+    pub summary: Option<String>,
     pub desc: Option<String>,
     pub coercer: Option<valico::Builder>,
+    pub consumes: Option<Vec<mime::Mime>>,
+    pub produces: Option<Vec<mime::Mime>>,
     handler: Option<EndpointHandler>,
 }
 
@@ -32,31 +37,51 @@ impl Endpoint {
         Endpoint {
             method: method,
             path: path::Path::parse(path, true).unwrap(),
+            summary: None,
             desc: None,
             coercer: None,
-            handler: None
+            consumes: None,
+            produces: None,
+            handler: None,
         }
     }
 
     pub fn build<F>(method: method::Method, path: &str, builder: F) -> Endpoint 
-    where F: Fn(&mut Endpoint) -> EndpointHandlerPresent {
+    where F: FnOnce(&mut Endpoint) -> EndpointHandlerPresent {
         let mut endpoint = Endpoint::new(method, path);
         builder(&mut endpoint);
 
         endpoint
     }
 
+    pub fn summary(&mut self, summary: &str) {
+        self.summary = Some(summary.to_string());
+    }
+
     pub fn desc(&mut self, desc: &str) {
         self.desc = Some(desc.to_string());
     }
 
-    pub fn params<F>(&mut self, builder: F) where F: Fn(&mut valico::Builder) + 'static {
+    pub fn consumes(&mut self, mimes: Vec<mime::Mime>) {
+        self.consumes = Some(mimes);
+    }
+
+    pub fn produces(&mut self, mimes: Vec<mime::Mime>) {
+        self.produces = Some(mimes);
+    }
+
+    pub fn params<F>(&mut self, builder: F) where F: FnOnce(&mut valico::Builder) + 'static {
         self.coercer = Some(valico::Builder::build(builder));
     }
 
     pub fn handle<F>(&mut self, handler: F) -> EndpointHandlerPresent
     where F: for<'a> Fn(framework::Client<'a>, &json::Object) -> backend::HandleResult<framework::Client<'a>> + Sync+Send {
         self.handler = Some(Box::new(handler));
+        EndpointHandlerPresent::HandlerPresent
+    }
+
+    pub fn handle_boxed(&mut self, handler: EndpointHandler) -> EndpointHandlerPresent {
+        self.handler = Some(handler);
         EndpointHandlerPresent::HandlerPresent
     }
 

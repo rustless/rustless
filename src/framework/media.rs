@@ -4,6 +4,27 @@ use server::mime;
 
 static MEDIA_REGEX: regex::Regex = regex!(r"vnd\.(?P<vendor>[a-zA-Z_-]+)(?:\.(?P<version>[a-zA-Z0-9]+)(?:\.(?P<param>[a-zA-Z0-9]+))?)?(?:\+(?P<format>[a-zA-Z0-9]+))?");
 
+pub fn is_json(mime: &mime::Mime) -> bool {
+    match mime {
+        &mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, _) => true,
+        _ => false
+    }
+}
+
+pub fn is_urlencoded(mime: &mime::Mime) -> bool {
+    match mime {
+        &mime::Mime(mime::TopLevel::Application, mime::SubLevel::WwwFormUrlEncoded, _) => true,
+        _ => false
+    }
+}
+
+pub fn is_form_data(mime: &mime::Mime) -> bool {
+    match mime {
+        &mime::Mime(mime::TopLevel::Multipart, mime::SubLevel::FormData, _) => true,
+        _ => false
+    }
+}
+
 #[derive(Show)]
 pub enum Format {
     JsonFormat,

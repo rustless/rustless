@@ -2,9 +2,10 @@ use std::fmt;
 use std::io::net::ip;
 use url;
 
+use framework::media;
+
 use server::method;
 use server::header;
-use server::mime;
 
 pub trait AsUrl {
     fn scheme(&self) -> &str;
@@ -25,14 +26,15 @@ pub trait Request: fmt::Show + Send + ::Extensible {
     fn body(&self) -> &Vec<u8>;
 
     fn is_json_body(&self) -> bool {
-        let content_type = self.headers().get::<header::ContentType>(); 
-        if content_type.is_some() {
-            match content_type.unwrap().0 {
-                mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, _) => true,
-                _ => false
-            }
-        } else {
-            false
-        }
+        self.headers().get::<header::ContentType>().map_or(false, |ct| media::is_json(&ct.0))
+    }
+
+    fn is_urlencoded_body(&self) -> bool {
+        self.headers().get::<header::ContentType>().map_or(false, |ct| media::is_urlencoded(&ct.0))
+    }
+
+
+    fn is_form_data_body(&self) -> bool {
+        self.headers().get::<header::ContentType>().map_or(false, |ct| media::is_form_data(&ct.0))
     }
 }

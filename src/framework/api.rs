@@ -4,6 +4,7 @@ use serialize::json;
 use queryst;
 
 use backend;
+use server::mime;
 use server::header;
 use errors::{self, Error};
 
@@ -12,26 +13,35 @@ use framework::app;
 use framework::nesting::{self, Nesting, Node};
 use framework::media;
 use framework::formatters;
+use framework::path;
 
 #[allow(dead_code)]
 #[allow(missing_copy_implementations)]
+#[derive(Clone)]
 pub enum Versioning {
     Path,
     AcceptHeader(&'static str),
     Param(&'static str)
 }
 
+#[derive(Clone)]
+pub struct Version {
+    pub version: String,
+    pub versioning: Versioning,
+}
+
 pub struct Api {
-    pub version: Option<String>,
-    pub versioning: Option<Versioning>,
-    pub prefix: String,
-    handlers: framework::ApiHandlers,
+    pub version: Option<Version>,
+    pub prefix: Option<String>,
+    pub handlers: framework::ApiHandlers,
     before: framework::Callbacks,
     before_validation: framework::Callbacks,
     after_validation: framework::Callbacks,
     after: framework::Callbacks,
     error_formatters: framework::ErrorFormatters,
-    default_error_formatters: framework::ErrorFormatters
+    default_error_formatters: framework::ErrorFormatters,
+    consumes: Option<Vec<mime::Mime>>,
+    produces: Option<Vec<mime::Mime>>,
 }
 
 unsafe impl Send for Api {}
@@ -41,19 +51,20 @@ impl Api {
     pub fn new() -> Api {
         Api {
             version: None,
-            versioning: None,
-            prefix: "".to_string(),
+            prefix: None,
             handlers: vec![],
             before: vec![],
             before_validation: vec![],
             after_validation: vec![],
             after: vec![],
             error_formatters: vec![],
-            default_error_formatters: vec![formatters::create_default_error_formatter()]
+            default_error_formatters: vec![formatters::create_default_error_formatter()],
+            consumes: None,
+            produces: None,
         }
     }
 
-    pub fn build<F>(builder: F) -> Api where F: Fn(&mut Api) {
+    pub fn build<F>(builder: F) -> Api where F: FnOnce(&mut Api) {
         let mut api = Api::new();
         builder(&mut api);
 
@@ -61,12 +72,22 @@ impl Api {
     }
 
     pub fn version(&mut self, version: &str, versioning: Versioning) {
-        self.version = Some(version.to_string());
-        self.versioning = Some(versioning);
+        self.version = Some(Version {
+            version: version.to_string(),
+            versioning: versioning
+        });
     }
 
     pub fn prefix(&mut self, prefix: &str) {
-        self.prefix = prefix.to_string();
+        self.prefix = Some(prefix.to_string());
+    }
+
+    pub fn consumes(&mut self, mimes: Vec<mime::Mime>) {
+        self.consumes = Some(mimes);
+    }
+
+    pub fn produces(&mut self, mimes: Vec<mime::Mime>) {
+        self.produces = Some(mimes);
     }
 
     pub fn error_formatter<F>(&mut self, formatter: F) 
@@ -121,14 +142,18 @@ impl Api {
         Ok(())
     }
 
-    fn parse_json_body(req: &mut backend::Request, params: &mut json::Object) -> backend::HandleSuccessResult {
-
-        let utf8_string_body = match String::from_utf8(req.body().clone()) {
-            Ok(e) => e,
-            Err(_) => return Err(Box::new(
+    fn parse_utf8(req: &mut backend::Request) -> backend::HandleResult<String> {
+        match String::from_utf8(req.body().clone()) {
+            Ok(e) => Ok(e),
+            Err(_) => Err(Box::new(
                 errors::Body::new("Invalid UTF-8 sequence".to_string())
             ) as Box<Error>),
-        };
+        }
+    }
+
+    fn parse_json_body(req: &mut backend::Request, params: &mut json::Object) -> backend::HandleSuccessResult {
+
+        let utf8_string_body = try!(Api::parse_utf8(req));
 
         if utf8_string_body.len() > 0 {
           let maybe_json_body = utf8_string_body.parse::<json::Json>();
@@ -147,6 +172,26 @@ impl Api {
         Ok(())
     }
 
+    fn parse_urlencoded_body(req: &mut backend::Request, params: &mut json::Object) -> backend::HandleSuccessResult {
+        let utf8_string_body = try!(Api::parse_utf8(req));
+
+        if utf8_string_body.len() > 0 {
+            let maybe_json_body = queryst::parse(utf8_string_body.as_slice());
+            match maybe_json_body {
+                Ok(json_body) => {
+                    for (key, value) in json_body.as_object().unwrap().iter() {
+                        if !params.contains_key(key) {
+                            params.insert(key.to_string(), value.clone());
+                        }
+                    }
+                },
+                Err(_) => return Err(Box::new(errors::Body::new(format!("Invalid encoded data"))) as Box<Error>)
+            }  
+        }
+
+        Ok(())
+    }
+
     fn parse_request(req: &mut backend::Request, params: &mut json::Object) -> backend::HandleSuccessResult {
         // extend params with query-string params if any
         if req.url().query().is_some() {
@@ -156,6 +201,8 @@ impl Api {
         // extend params with json-encoded body params if any
         if req.is_json_body() {
             try!(Api::parse_json_body(req, params));
+        } else if req.is_urlencoded_body() {
+            try!(Api::parse_urlencoded_body(req, params));
         }
 
         Ok(())
@@ -194,27 +241,29 @@ impl framework::ApiHandler for Api {
     -> backend::HandleResult<backend::Response> {
         
         // Check prefix
-        let mut rest_path = if self.prefix.len() > 0 {
-            if rest_path.slice_from(1).starts_with(self.prefix.as_slice()) {
-                rest_path.slice_from(self.prefix.len() + 1)
-            } else {
-               return Err(Box::new(errors::NotMatch) as Box<Error>)
-            }
-        } else {
-            rest_path
+        let mut rest_path = match self.prefix.as_ref() {
+            Some(prefix) => {
+                if rest_path.starts_with(prefix.as_slice()) {
+                    path::normalize(rest_path.slice_from(prefix.len()))
+                } else {
+                   return Err(Box::new(errors::NotMatch) as Box<Error>)
+                }
+            },
+            None => rest_path
         };
 
         let mut media: Option<media::Media> = None;
 
         // Check version
         if self.version.is_some() {
-            let version = self.version.as_ref().unwrap();
-            let versioning = self.versioning.as_ref().unwrap();
+            let version_struct = self.version.as_ref().unwrap();
+            let ref version = version_struct.version;
+            let ref versioning = version_struct.versioning;
 
             match versioning {
                 &Versioning::Path => {
-                    if rest_path.slice_from(1).starts_with(version.as_slice()) {
-                        rest_path = rest_path.slice_from(version.len() + 1)
+                    if rest_path.starts_with(version.as_slice()) {
+                        rest_path = path::normalize(rest_path.slice_from(version.len()))
                     } else {
                        return Err(Box::new(errors::NotMatch) as Box<Error>)
                     }

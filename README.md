@@ -247,7 +247,7 @@ The Rustless endpoint:
 
 ~~~rust
 api.post("", |endpoint| {
-    edp_handler!(endpoint, |client, params| {
+    endpoint.handle(|client, params| {
         client.json(params)
     })
 });
@@ -285,8 +285,8 @@ use rustless::errors::{Error, ErrorRefExt};
 #[deriving(Show)]
 pub struct UnauthorizedError;
 
-impl Error for UnauthorizedError {
-    fn name(&self) -> &'static str {
+impl std::error::Error for UnauthorizedError {
+    fn description(&self) -> &str {
         return "UnauthorizedError";
     }
 }
@@ -392,4 +392,44 @@ Api::build(|api| {
 Rustless includes [JsonWay](https://github.com/rustless/jsonway) library to offer both complex JSON building DSL and configurable serializers for your objects. See [API docs](http://rustless.org/jsonway/doc/jsonway/) for details.
 
 Also feel free to use any other serialization library you want.
+
+## Swagger 2.0
+
+Rustless has a basic implementation of Swagger 2.0 specification. It is not fully complete and in future we need to implement:
+
+* JSON Schema support (when some appropriate JSON Schema library will appear);
+* Security parts of the specification;
+
+But now you can already use Swagger 2.0:
+
+```rust
+let mut app = rustless::Application::new(rustless::Api::build(|api| {
+    // ...
+
+    api.mount(swagger::create_api("api-docs"));
+
+    // ... 
+}))
+
+swagger::enable(&mut app, swagger::Spec {
+    info: swagger::Info {
+        title: "Example API".to_string(),
+        description: Some("Simple API to demonstration".to_string()),
+        contact: Some(swagger::Contact {
+            name: "Stanislav Panferov".to_string(),
+            url: Some("http://panferov.me".to_string()),
+            ..std::default::Default::default()
+        }),
+        license: Some(swagger::License {
+            name: "MIT".to_string(),
+            url: "http://opensource.org/licenses/MIT".to_string()
+        }),
+        ..std::default::Default::default()
+    },
+    host: "localhost:4000".to_string(),
+    ..std::default::Default::default()
+});
+```
+
+After that you can use `/api-docs` path in Swagger UI to render your API structure.
 

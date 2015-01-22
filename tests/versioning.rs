@@ -73,7 +73,7 @@ fn it_pass_nesting_param_versioning() {
     let response = call_app!(app, Get, "http://127.0.0.1:3000/info?v=v1").unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/info/nested_info?v=v1").unwrap();
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/nested_info?v=v1").unwrap();
     // not found because nested_info param in not present
     assert_eq!(response.status, status::StatusCode::NotFound);
 

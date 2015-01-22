@@ -20,7 +20,7 @@ impl Application {
     }
 
     pub fn call(&self, req: &mut backend::Request) -> backend::HandleResult<backend::Response> {
-        self.root_api.call(("/".to_string() + req.url().path().connect("/").as_slice()).as_slice(), req, self)
+        self.root_api.call((req.url().path().connect("/").as_slice()).as_slice(), req, self)
     }
 
     pub fn call_with_not_found(&self, req: &mut backend::Request) -> backend::HandleResult<backend::Response> {

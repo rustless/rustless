@@ -9,9 +9,9 @@ use framework::path;
 use framework::nesting::{self, Nesting, Node};
 
 pub struct Namespace {
-    handlers: framework::ApiHandlers,
-    path: path::Path,
-    coercer: Option<valico::Builder>,
+    pub handlers: framework::ApiHandlers,
+    pub path: path::Path,
+    pub coercer: Option<valico::Builder>,
     before: framework::Callbacks,
     before_validation: framework::Callbacks,
     after_validation: framework::Callbacks,
@@ -34,11 +34,11 @@ impl Namespace {
         }
     }
 
-    pub fn params<F>(&mut self, builder: F) where F: Fn(&mut valico::Builder) {
+    pub fn params<F>(&mut self, builder: F) where F: FnOnce(&mut valico::Builder) {
         self.coercer = Some(valico::Builder::build(builder));
     }
 
-    pub fn build<F>(path: &str, builder: F) -> Namespace where F: Fn(&mut Namespace) {
+    pub fn build<F>(path: &str, builder: F) -> Namespace where F: FnOnce(&mut Namespace) {
         let mut namespace = Namespace::new(path);
         builder(&mut namespace);
 
@@ -68,7 +68,7 @@ impl framework::ApiHandler for Namespace {
             Some(captures) =>  {
                 let captured_length = captures.at(0).map_or(0, |c| c.len());
                 self.path.apply_captures(params, captures);
-                rest_path.slice_from(captured_length)
+                path::normalize(rest_path.slice_from(captured_length))
             },
             None => return Err(Box::new(errors::NotMatch) as Box<errors::Error>)
         };

@@ -4,23 +4,24 @@ use backend;
 use errors;
 
 pub use self::app::{Application};
-pub use self::api::{Api, Versioning};
-pub use self::endpoint::{Endpoint, EndpointBuilder};
+pub use self::api::{Api, Versioning, Version};
+pub use self::endpoint::{Endpoint, EndpointHandler, EndpointBuilder};
 pub use self::client::Client;
 pub use self::nesting::{Nesting, Node};
 pub use self::namespace::{Namespace};
 pub use self::media::Media;
+pub use self::path::Path;
 
 #[macro_use]
-mod nesting;
-mod api;
-mod endpoint;
-mod namespace;
-mod client;
-mod media;
-mod path;
-mod formatters;
-mod app;
+pub mod nesting;
+pub mod api;
+pub mod endpoint;
+pub mod namespace;
+pub mod client;
+pub mod media;
+pub mod path;
+pub mod formatters;
+pub mod app;
 
 pub struct CallInfo<'a> {
     pub media: media::Media,
@@ -28,9 +29,11 @@ pub struct CallInfo<'a> {
     pub app: &'a app::Application
 }
 
-pub trait ApiHandler {
+pub trait ApiHandler: ::std::any::Any {
     fn api_call<'a>(&'a self, &str, &mut json::Object, &mut backend::Request, &mut CallInfo<'a>) -> backend::HandleResult<backend::Response>;
 }
+
+mopafy!(ApiHandler);
 
 pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 
