@@ -3,6 +3,7 @@ use serialize::json;
 use valico;
 
 use server::method;
+use server::mime;
 use backend;
 use errors;
 use framework;
@@ -23,6 +24,8 @@ pub struct Endpoint {
     pub summary: Option<String>,
     pub desc: Option<String>,
     pub coercer: Option<valico::Builder>,
+    pub consumes: Option<Vec<mime::Mime>>,
+    pub produces: Option<Vec<mime::Mime>>,
     handler: Option<EndpointHandler>,
 }
 
@@ -37,6 +40,8 @@ impl Endpoint {
             summary: None,
             desc: None,
             coercer: None,
+            consumes: None,
+            produces: None,
             handler: None,
         }
     }
@@ -55,6 +60,14 @@ impl Endpoint {
 
     pub fn desc(&mut self, desc: &str) {
         self.desc = Some(desc.to_string());
+    }
+
+    pub fn consumes(&mut self, mimes: Vec<mime::Mime>) {
+        self.consumes = Some(mimes);
+    }
+
+    pub fn produces(&mut self, mimes: Vec<mime::Mime>) {
+        self.produces = Some(mimes);
     }
 
     pub fn params<F>(&mut self, builder: F) where F: FnOnce(&mut valico::Builder) + 'static {

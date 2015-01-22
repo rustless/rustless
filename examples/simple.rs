@@ -48,6 +48,17 @@ fn main() {
             }
         });
 
+        api.get("greet/:name", |endpoint| {
+            endpoint.summary("Sends greeting");
+            endpoint.desc("Use this to talk to yourself");
+            endpoint.params(|params| {
+                params.req_typed("name", valico::string());
+            });
+            endpoint.handle(|client, params| {
+                client.text(params.get("name").unwrap().to_string())
+            })
+        });
+
         api.get("echo", |endpoint| {
             endpoint.summary("Sends back what it gets");
             endpoint.desc("Use this to talk to yourself");

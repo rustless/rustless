@@ -2,7 +2,7 @@
 use serialize::json::{self, ToJson};
 use regex;
 
-static MATCHER: regex::Regex = regex!(r":([a-z][a-z_]*)");
+pub static MATCHER: regex::Regex = regex!(r":([a-z][a-z_]*)");
 
 pub struct Path {
     regex: regex::Regex,

@@ -24,15 +24,20 @@ pub trait Request: fmt::Show + Send + ::Extensible {
     fn url(&self) -> &AsUrl;
     fn body(&self) -> &Vec<u8>;
 
-    fn is_json_body(&self) -> bool {
+    fn is_content_type(&self, mime: &mime::Mime) -> bool {
         let content_type = self.headers().get::<header::ContentType>(); 
         if content_type.is_some() {
-            match content_type.unwrap().0 {
-                mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, _) => true,
-                _ => false
-            }
+            &content_type.unwrap().0 == mime
         } else {
             false
         }
+    }
+
+    fn is_json_body(&self) -> bool {
+        self.is_content_type(&mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, vec![]))
+    }
+
+    fn is_urlencoded_body(&self) -> bool {
+        self.is_content_type(&mime::Mime(mime::TopLevel::Application, mime::SubLevel::WwwFormUrlEncoded, vec![]))
     }
 }

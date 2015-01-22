@@ -1,12 +1,16 @@
 use std::ascii::AsciiExt;
+use valico;
+use collections;
 use serialize::json::{self, ToJson};
 use jsonway::{self, MutableJson};
 use framework::{self, Nesting};
 use server::mime;
-use server::header::common::access_control::allow_origin;
+use server::header;
 
 #[derive(Copy)]
 #[allow(dead_code)]
+/// The transfer protocol for the operation. Values MUST be from the list: "http", "https", "ws", "wss". 
+/// The value overrides the Swagger Object schemes definition.
 pub enum Scheme {
     Http,
     Https,
@@ -27,6 +31,7 @@ impl ToString for Scheme {
 
 #[allow(dead_code)]
 #[derive(Default)]
+/// Contact information for the exposed API.
 pub struct Contact {
     pub name: String,
     pub url: Option<String>,
@@ -35,6 +40,7 @@ pub struct Contact {
 
 #[allow(dead_code)]
 #[derive(Default)]
+/// This is the root document object for the API specification.
 pub struct Spec {
     pub info: Info,
     pub host: Option<String>,
@@ -46,6 +52,8 @@ pub struct Spec {
 
 #[allow(dead_code)]
 #[derive(Default)]
+/// The object provides metadata about the API. The metadata can be used by the clients 
+/// if needed, and can be presented in the Swagger-UI for convenience.
 pub struct Info {
     pub title: String,
     pub description: Option<String>,
@@ -57,9 +65,142 @@ pub struct Info {
 
 #[allow(dead_code)]
 #[derive(Default)]
+/// License information for the exposed API.
 pub struct License {
     pub name: String,
     pub url: String
+}
+
+#[allow(dead_code)]
+#[derive(Clone)]
+/// The location of the parameter. Possible values are 
+/// "query", "header", "path", "formData" or "body".
+enum Place {
+    Query,
+    Header,
+    Path,
+    FormData,
+    Body
+}
+
+impl ToString for Place {
+    fn to_string(&self) -> String {
+        match self {
+            &Place::Query => "query",
+            &Place::Header => "header",
+            &Place::Path => "path",
+            &Place::FormData => "formData",
+            &Place::Body => "body"
+        }.to_string()
+    }
+}
+
+#[allow(dead_code)]
+#[derive(Clone)]
+/// The type of the parameter. Since the parameter is not located at the request body, 
+/// it is limited to simple types (that is, not an object). 
+/// The value MUST be one of "string", "number", "integer", "boolean", "array" or "file". 
+enum ParamType {
+    String, 
+    Number, 
+    Integer, 
+    Boolean, 
+    Array,
+    File
+}
+
+impl ToString for ParamType {
+    fn to_string(&self) -> String {
+        match self {
+            &ParamType::String => "string",
+            &ParamType::Number => "number",
+            &ParamType::Integer => "integer",
+            &ParamType::Boolean => "boolean",
+            &ParamType::Array => "array",
+            &ParamType::File => "file"
+        }.to_string()
+    }
+}
+
+#[allow(dead_code)]
+#[derive(Clone)]
+/// The internal type of the array. 
+/// The value MUST be one of "string", "number", "integer", "boolean", or "array". 
+/// Files and models are not allowed.
+enum ItemType {
+    String, 
+    Number, 
+    Integer, 
+    Boolean,
+    Array
+}
+
+impl ToString for ItemType {
+    fn to_string(&self) -> String {
+        match self {
+            &ItemType::String => "string",
+            &ItemType::Number => "number",
+            &ItemType::Integer => "integer",
+            &ItemType::Boolean => "boolean",
+            &ItemType::Array => "array"
+        }.to_string()
+    }
+}
+
+#[allow(dead_code)]
+#[derive(Clone)]
+/// An limited subset of JSON-Schema's items object. 
+/// It is used by parameter definitions that are not located in "body".
+struct ItemParams {
+    pub type_: ItemType,
+    pub format: Option<String>,
+    pub items: Option<Vec<ItemParams>>
+}
+
+#[allow(dead_code)]
+#[derive(Clone)]
+/// Describes a single operation parameter extension fields.
+enum ParamExt {
+    BodyParam(json::Object),
+    NormalParam {
+        type_: ParamType,
+        format: Option<String>,
+        items: Option<Vec<ItemParams>>,
+    }
+}
+
+#[allow(dead_code)]
+#[derive(Clone)]
+/// Describes a single operation parameter.
+struct Param {
+    pub name: String,
+    pub place: Place,
+    pub description: Option<String>,
+    pub required: bool,
+    pub ext: ParamExt
+}
+
+impl json::ToJson for Param {
+    fn to_json(&self) -> json::Json {
+        jsonway::JsonWay::object(|param| {
+            param.set("name", self.name.clone());
+            param.set("place", self.place.to_string());
+            if self.description.is_some() {
+                param.set("description", self.description.clone().unwrap());
+            }
+            param.set("required", self.required);
+            match &self.ext {
+                &ParamExt::BodyParam(ref schema) => param.set("schema", schema.clone()),
+                &ParamExt::NormalParam{ref type_, ref format, ..} => {
+                    param.set("type", type_.to_string());
+                    if format.is_some() {
+                        param.set("format", format.clone().unwrap())
+                    }
+                    // TODO items
+                }
+            }
+        }).to_json()
+    }
 }
 
 #[derive(Copy)]
@@ -200,7 +341,10 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
 
         // Required. The available paths and operations for the API.
         json.object("paths", |paths| {
-            fill_paths("", paths, &app.root_api.handlers);
+            fill_paths(WalkContext {
+                path: "",
+                params: vec![]
+            }, paths, &app.root_api.handlers);
         });
 
         // TODO Implement the rest of the spec
@@ -259,7 +403,7 @@ pub fn create_api(path: &str) -> framework::Api {
             docs.get("", |: endpoint| {
                 endpoint.summary("Get Swagger 2.0 specification of this API");
                 endpoint.handle(|&: mut client, _params| {
-                    client.set_header(allow_origin::AccessControlAllowOrigin::AllowStar);
+                    client.set_header(header::AccessControlAllowOrigin::AllowStar);
                     let swagger_spec = client.app.ext.get::<SwaggerSpecKey>();
                     if swagger_spec.is_some() {
                         client.json(swagger_spec.unwrap())
@@ -272,11 +416,17 @@ pub fn create_api(path: &str) -> framework::Api {
     })
 }
 
+#[allow(dead_code)]
+struct WalkContext<'a> {
+    pub path: &'a str,
+    pub params: Vec<Param>
+}
+
 #[allow(unused_variables)]
-fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handlers: &framework::ApiHandlers) {
+fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuilder, handlers: &framework::ApiHandlers) {
     for handler in handlers.iter() {
         if handler.is::<framework::Api>() {
-            let mut path = current_path.to_string();
+            let mut path = context.path.to_string();
 
             let api = handler.downcast_ref::<framework::Api>().unwrap();
             if api.prefix.is_some() {
@@ -292,23 +442,35 @@ fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handlers: 
                     _ => ()
                 }
             }
-            fill_paths(path.as_slice(), paths, &api.handlers);
+
+            fill_paths(WalkContext{
+                path: path.as_slice(), 
+                params: context.params.clone()
+            }, paths, &api.handlers);
 
         } else if handler.is::<framework::Namespace>() {
-            let mut path = current_path.to_string();
+
+            let mut path = context.path.to_string();
             let namespace = handler.downcast_ref::<framework::Namespace>().unwrap();
-            path.push_str(("/".to_string() + namespace.path.path.as_slice()).as_slice());
-            fill_paths(path.as_slice(), paths, &namespace.handlers);
+            path.push_str(("/".to_string() + encode_path_string(&namespace.path).as_slice()).as_slice());
+
+            let mut params = context.params.clone();
+            params.append(&mut extract_params(&namespace.coercer, &namespace.path));
+
+            fill_paths(WalkContext{
+                path: path.as_slice(), 
+                params: params,
+            }, paths, &namespace.handlers);
         
         } else if handler.is::<framework::Endpoint>() {
-            let mut path = current_path.to_string();
+            let mut path = context.path.to_string();
             let endpoint = handler.downcast_ref::<framework::Endpoint>().unwrap();
 
             if endpoint.path.path.len() > 0 {
-                path.push_str(("/".to_string() + endpoint.path.path.as_slice()).as_slice());
+                path.push_str(("/".to_string() + encode_path_string(&endpoint.path).as_slice()).as_slice());
             }
 
-            let definition = jsonway::JsonWay::object(|def| {
+            let definition = jsonway::JsonWay::object(|: def| {
                 // A list of tags for API documentation control. Tags can be used for logical grouping 
                 // of operations by resources or any other qualifier.
                 // def.array("tags", |tags| { });
@@ -362,25 +524,44 @@ fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handlers: 
                 // // in the API. Tools and libraries MAY use the operation id to uniquely identify an operation.
                 // def.set("operationId", "OP".to_string());
 
-                // // A list of MIME types the operation can consume. 
-                // // This overrides the [consumes](#swaggerConsumes) definition at the Swagger Object. 
-                // // An empty value MAY be used to clear the global definition. 
-                // // Value MUST be as described under Mime Types.
-                // def.array("consumes", |consumes| {});    
+                if endpoint.consumes.is_some() {
+                    // A list of MIME types the operation can consume. 
+                    // This overrides the [consumes](#swaggerConsumes) definition at the Swagger Object. 
+                    // An empty value MAY be used to clear the global definition. 
+                    // Value MUST be as described under Mime Types.
+                    def.array("consumes", |consumes| {
+                        let consumes_spec = endpoint.consumes.as_ref().unwrap();
+                        for mime in consumes_spec.iter() {
+                            consumes.push(mime.to_string())
+                        }
+                    });     
+                }
 
-                // // A list of MIME types the operation can produce. 
-                // // This overrides the [produces](#swaggerProduces) definition at the Swagger Object. 
-                // // An empty value MAY be used to clear the global definition. 
-                // // Value MUST be as described under Mime Types.
-                // def.array("produces", |produces| {});
+                if endpoint.produces.is_some() {
+                    // A list of MIME types the operation can produce. 
+                    // This overrides the [produces](#swaggerProduces) definition at the Swagger Object. 
+                    // An empty value MAY be used to clear the global definition. 
+                    // Value MUST be as described under Mime Types.
+                    def.array("produces", |produces| {
+                        let produces_spec = endpoint.produces.as_ref().unwrap();
+                        for mime in produces_spec.iter() {
+                            produces.push(mime.to_string())
+                        }
+                    });  
+                }
 
-                // // A list of parameters that are applicable for this operation. 
-                // // If a parameter is already defined at the Path Item, the new definition will override it, 
-                // // but can never remove it. The list MUST NOT include duplicated parameters. 
-                // // A unique parameter is defined by a combination of a name and location. 
-                // // The list can use the Reference Object to link to parameters that are 
-                // // defined at the Swagger Object's parameters. There can be one "body" parameter at most.
-                // def.array("parameters", |parameters| {});
+                // A list of parameters that are applicable for this operation. 
+                // If a parameter is already defined at the Path Item, the new definition will override it, 
+                // but can never remove it. The list MUST NOT include duplicated parameters. 
+                // A unique parameter is defined by a combination of a name and location. 
+                // The list can use the Reference Object to link to parameters that are 
+                // defined at the Swagger Object's parameters. There can be one "body" parameter at most.
+                def.array("parameters", |parameters| {
+                    let params = extract_params(&endpoint.coercer, &endpoint.path);
+                    for param in params.iter() {
+                        parameters.push(param.to_json()) 
+                    }
+                });
 
                 // // The transfer protocol for the operation. Values MUST be from the list: "http", "https", 
                 // // "ws", "wss". The value overrides the Swagger Object schemes definition.
@@ -399,7 +580,7 @@ fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handlers: 
             });
 
             let method = format!("{:?}", endpoint.method).to_ascii_lowercase();
-            let present = {
+            let exists = {
                 let maybe_path_obj = paths.object.get_mut(path.as_slice());
                 if maybe_path_obj.is_some() {
                     let path_obj = maybe_path_obj.unwrap().as_object_mut().unwrap();
@@ -410,12 +591,100 @@ fn fill_paths(current_path: &str, paths: &mut jsonway::ObjectBuilder, handlers: 
                 }
             };
             
-            if !present {
-                paths.object(path.as_slice(), move |: path_item| {
-                    path_item.set(method, definition);
-                })
+            if !exists {
+                paths.object(path.as_slice(), |: path_item| {
+                    path_item.set(method.clone(), definition.to_json());
+                    path_item.array("parameters", |parameters| {
+                        for param in context.params.drain() {
+                            parameters.push(param.to_json())
+                        }
+                    })
+                });
             }
-
         }
     }
+}
+
+fn encode_path_string(path: &framework::Path) -> String {
+    let ref original_path = path.path;
+    return framework::path::MATCHER.replace_all(original_path.as_slice(), "{$1}");
+}
+
+fn param_type(param: &valico::Param) -> ParamType {
+    match &param.coercer {
+        &Some(ref coercer) => {
+            match coercer.get_primitive_type() {
+                valico::PrimitiveType::String => ParamType::String,
+                valico::PrimitiveType::I64 => ParamType::Integer,
+                valico::PrimitiveType::F64 => ParamType::Number,
+                valico::PrimitiveType::Array => ParamType::Array,
+                valico::PrimitiveType::Boolean => ParamType::Boolean,
+                valico::PrimitiveType::File => ParamType::File,
+                _ => ParamType::String
+            }
+        },
+        &None => ParamType::String
+    }
+}
+
+fn build_param(param: &valico::Param, required: bool) -> Param {
+    let swagger_param = Param {
+        name: param.name.clone(),
+        place: Place::Query,
+        description: param.description.clone(),
+        required: required,
+        ext: ParamExt::NormalParam {
+            type_: param_type(param),
+            format: None,
+            items: None
+        }
+    };
+
+    swagger_param
+}
+
+fn extract_params(coercer: &Option<valico::Builder>, path: &framework::Path) -> Vec<Param> {
+    let mut params = collections::BTreeMap::new();
+
+    if coercer.is_some() {
+        let coercer = coercer.as_ref().unwrap();
+        for param in coercer.get_required().iter() {
+            params.insert(param.name.clone(), build_param(param, true));
+        }
+        for param in coercer.get_optional().iter() {
+            params.insert(param.name.clone(), build_param(param, true));
+        }
+    }
+
+    for param_name in path.params.iter() {
+        let exists = {
+            let mut existing_param = params.get_mut(param_name);
+            if existing_param.is_some() {
+                let param = existing_param.as_mut().unwrap();
+                param.place = Place::Path;
+                param.required = true;
+                true
+            } else {
+                false
+            }
+        };
+
+        if !exists {
+            let param = Param {
+                name: param_name.clone(),
+                place: Place::Path,
+                description: None,
+                required: true,
+                ext: ParamExt::NormalParam {
+                    type_: ParamType::String,
+                    format: None,
+                    items: None
+                }
+            };
+
+            params.insert(param_name.clone(), param);
+        }
+    }
+    
+    params.into_iter().map(|(_key, value)| value).collect::<Vec<Param>>()
 }

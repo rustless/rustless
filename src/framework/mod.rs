@@ -10,6 +10,7 @@ pub use self::client::Client;
 pub use self::nesting::{Nesting, Node};
 pub use self::namespace::{Namespace};
 pub use self::media::Media;
+pub use self::path::Path;
 
 #[macro_use]
 pub mod nesting;

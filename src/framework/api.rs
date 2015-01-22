@@ -4,6 +4,7 @@ use serialize::json;
 use queryst;
 
 use backend;
+use server::mime;
 use server::header;
 use errors::{self, Error};
 
@@ -38,7 +39,9 @@ pub struct Api {
     after_validation: framework::Callbacks,
     after: framework::Callbacks,
     error_formatters: framework::ErrorFormatters,
-    default_error_formatters: framework::ErrorFormatters
+    default_error_formatters: framework::ErrorFormatters,
+    consumes: Option<Vec<mime::Mime>>,
+    produces: Option<Vec<mime::Mime>>,
 }
 
 unsafe impl Send for Api {}
@@ -55,7 +58,9 @@ impl Api {
             after_validation: vec![],
             after: vec![],
             error_formatters: vec![],
-            default_error_formatters: vec![formatters::create_default_error_formatter()]
+            default_error_formatters: vec![formatters::create_default_error_formatter()],
+            consumes: None,
+            produces: None,
         }
     }
 
@@ -75,6 +80,14 @@ impl Api {
 
     pub fn prefix(&mut self, prefix: &str) {
         self.prefix = Some(prefix.to_string());
+    }
+
+    pub fn consumes(&mut self, mimes: Vec<mime::Mime>) {
+        self.consumes = Some(mimes);
+    }
+
+    pub fn produces(&mut self, mimes: Vec<mime::Mime>) {
+        self.produces = Some(mimes);
     }
 
     pub fn error_formatter<F>(&mut self, formatter: F) 
@@ -129,14 +142,18 @@ impl Api {
         Ok(())
     }
 
-    fn parse_json_body(req: &mut backend::Request, params: &mut json::Object) -> backend::HandleSuccessResult {
-
-        let utf8_string_body = match String::from_utf8(req.body().clone()) {
-            Ok(e) => e,
-            Err(_) => return Err(Box::new(
+    fn parse_utf8(req: &mut backend::Request) -> backend::HandleResult<String> {
+        match String::from_utf8(req.body().clone()) {
+            Ok(e) => Ok(e),
+            Err(_) => Err(Box::new(
                 errors::Body::new("Invalid UTF-8 sequence".to_string())
             ) as Box<Error>),
-        };
+        }
+    }
+
+    fn parse_json_body(req: &mut backend::Request, params: &mut json::Object) -> backend::HandleSuccessResult {
+
+        let utf8_string_body = try!(Api::parse_utf8(req));
 
         if utf8_string_body.len() > 0 {
           let maybe_json_body = utf8_string_body.parse::<json::Json>();
@@ -155,6 +172,26 @@ impl Api {
         Ok(())
     }
 
+    fn parse_urlencoded_body(req: &mut backend::Request, params: &mut json::Object) -> backend::HandleSuccessResult {
+        let utf8_string_body = try!(Api::parse_utf8(req));
+
+        if utf8_string_body.len() > 0 {
+            let maybe_json_body = queryst::parse(utf8_string_body.as_slice());
+            match maybe_json_body {
+                Ok(json_body) => {
+                    for (key, value) in json_body.as_object().unwrap().iter() {
+                        if !params.contains_key(key) {
+                            params.insert(key.to_string(), value.clone());
+                        }
+                    }
+                },
+                Err(_) => return Err(Box::new(errors::Body::new(format!("Invalid encoded data"))) as Box<Error>)
+            }  
+        }
+
+        Ok(())
+    }
+
     fn parse_request(req: &mut backend::Request, params: &mut json::Object) -> backend::HandleSuccessResult {
         // extend params with query-string params if any
         if req.url().query().is_some() {
@@ -164,6 +201,8 @@ impl Api {
         // extend params with json-encoded body params if any
         if req.is_json_body() {
             try!(Api::parse_json_body(req, params));
+        } else if req.is_urlencoded_body() {
+            try!(Api::parse_urlencoded_body(req, params));
         }
 
         Ok(())
