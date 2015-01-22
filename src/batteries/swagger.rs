@@ -216,6 +216,7 @@ pub fn enable(app: &mut framework::Application, spec: Spec) {
 }
 
 #[allow(unused_variables)]
+/// Build the basic Swagger 2.0 object
 pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
     jsonway::JsonWay::object(|&: json| {
         // Required. Specifies the Swagger Specification version being used. 
@@ -287,6 +288,9 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
         // The value MUST start with a leading slash (/). The basePath does not support path
         // templating.
         json.set("basePath", spec.base_path.clone().unwrap_or_else(|| {
+            // Here we are generating the `basePath` from prefix and version
+            // (if versioning strategy is Path)
+
             let mut base_path = "/".to_string();
             if app.root_api.prefix.is_some() {
                 base_path.push_str(app.root_api.prefix.as_ref().unwrap().as_slice());
@@ -398,6 +402,7 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
 }
 
 #[allow(unused_variables)]
+/// Create an API to handle doc requests
 pub fn create_api(path: &str) -> framework::Api {
     framework::Api::build(|: api| {
         api.namespace(path, |: docs| {
@@ -423,6 +428,7 @@ struct WalkContext<'a> {
     pub params: Vec<Param>
 }
 
+/// Walks through the tree and collects the info about Endpoints
 fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuilder, handlers: &framework::ApiHandlers) {
     for handler in handlers.iter() {
         if handler.is::<framework::Api>() {
@@ -499,6 +505,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
 }
 
 #[allow(unused_variables)]
+/// Creates Endpoint definition according to Swagger 2.0 specification
 fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkContext) -> json::Json {
     jsonway::JsonWay::object(|: def| {
         // A list of tags for API documentation control. Tags can be used for logical grouping 
@@ -629,11 +636,13 @@ fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkC
     }).unwrap()
 }
 
+/// Encodes path string to Swagger 2.0 format (e.g. '/user/:user_id' becomes '/user/{user_id}')
 fn encode_path_string(path: &framework::Path) -> String {
     let ref original_path = path.path;
     return framework::path::MATCHER.replace_all(original_path.as_slice(), "{$1}");
 }
 
+/// Converts `valico::Param` into Swagger's ParamType
 fn param_type(param: &valico::Param) -> ParamType {
     match &param.coercer {
         &Some(ref coercer) => {
@@ -651,6 +660,7 @@ fn param_type(param: &valico::Param) -> ParamType {
     }
 }
 
+/// Crate Swagger's `Param` from `valico::Param`
 fn build_param_from_coercer(param: &valico::Param, required: bool) -> Param {
     let swagger_param = Param {
         name: param.name.clone(),
@@ -667,6 +677,7 @@ fn build_param_from_coercer(param: &valico::Param, required: bool) -> Param {
     swagger_param
 }
 
+/// Translates information from `coercer` and `path` to list of Swagger's Param objects
 fn extract_params(coercer: &Option<valico::Builder>, path: &framework::Path) -> Vec<Param> {
     let mut params = collections::BTreeMap::new();
 
