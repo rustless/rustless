@@ -19,7 +19,7 @@ pub trait CookieExt {
     }
 }
 
-impl CookieExt for backend::Request {
+impl<'r> CookieExt for (backend::Request + 'r) {
     fn find_cookie_jar<'a>(&'a mut self) -> Option<&'a mut cookie::CookieJar<'static>> {
         self.ext_mut().get_mut::<CookieJarKey>()
     }
@@ -36,7 +36,7 @@ pub struct CookieDecodeMiddleware {
 impl iron::BeforeMiddleware for CookieDecodeMiddleware {
     fn before(&self, req: &mut iron::Request) -> iron::IronResult<()> {
         let token = self.secret_token.as_slice();
-        let jar = req.headers().get::<header::Cookies>()
+        let jar = req.headers().get::<header::Cookie>()
             .map(|cookies| cookies.to_cookie_jar(token))
             .unwrap_or_else(|| cookie::CookieJar::new(token));
 
@@ -49,7 +49,7 @@ impl iron::BeforeMiddleware for CookieDecodeMiddleware {
 pub struct CookieEncodeMiddleware;
 
 impl iron::AfterMiddleware for CookieEncodeMiddleware {
-    fn after(&self, req: &mut iron::Request, res: &mut iron::Response) -> iron::IronResult<()> {
+    fn after(&self, req: &mut iron::Request, mut res: iron::Response) -> iron::IronResult<iron::Response> {
         let maybe_jar = (req as &mut backend::Request).find_cookie_jar();
         match maybe_jar {
             Some(jar) => {
@@ -58,7 +58,7 @@ impl iron::AfterMiddleware for CookieEncodeMiddleware {
             None => ()
         }
 
-        Ok(())
+        Ok(res)
     }
 }
 

@@ -1,4 +1,5 @@
-#![allow(unstable)]
+#![feature(core)]
+#![feature(collections)]
 
 #[macro_use]
 extern crate rustless;
@@ -9,9 +10,10 @@ extern crate "rustc-serialize" as serialize;
 extern crate valico;
 extern crate cookie;
 
+use std::fmt;
+use std::error;
+use std::error::Error as StdError;
 use serialize::json;
-
-use iron::{Chain};
 
 use rustless::server::status;
 use rustless::errors::{Error};
@@ -22,9 +24,15 @@ use rustless::{Nesting};
 #[derive(Show, Copy)]
 pub struct UnauthorizedError;
 
-impl std::error::Error for UnauthorizedError {
+impl error::Error for UnauthorizedError {
     fn description(&self) -> &str {
         return "UnauthorizedError";
+    }
+}
+
+impl fmt::Display for UnauthorizedError {
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        self.description().fmt(formatter)
     }
 }
 
@@ -129,7 +137,7 @@ fn main() {
         ..std::default::Default::default()
     });
 
-    let mut chain = iron::ChainBuilder::new(app);
+    let mut chain = iron::Chain::new(app);
     chain.link(::rustless::batteries::cookie::new("secretsecretsecretsecretsecretsecretsecret".as_bytes()));
 
     iron::Iron::new(chain).listen("localhost:4000").unwrap();

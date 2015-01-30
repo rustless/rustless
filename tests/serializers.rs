@@ -16,7 +16,7 @@ fn it_serializes_json_properly() {
 
         api.get("status", |endpoint| {
             endpoint.handle(|client, params| {
-                client.json(&jsonway::JsonWay::object(|json| {
+                client.json(&jsonway::object(|json| {
                     json.set("uptime", "Ok".to_string());
                     json.set("echo_params", json::Json::Object(params.clone()));
                 }).unwrap())
@@ -24,7 +24,7 @@ fn it_serializes_json_properly() {
         })
     });
 
-    let mut response = call_app!(app, Get, "http://127.0.0.1:3000/api/status").unwrap();
+    let mut response = call_app!(app, Get, "http://127.0.0.1:3000/api/status").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
     {

@@ -1,6 +1,8 @@
-#![deny(warnings)]
+// #![deny(warnings)]
 #![deny(bad_style)]
-#![allow(unstable)]
+#![feature(collections)]
+#![feature(core)]
+#![feature(io)]
 
 #[macro_use]
 extern crate rustless;
@@ -23,10 +25,10 @@ macro_rules! sr {
 #[macro_export]
 macro_rules! call_app {
     ($app:ident, $method:ident, $url:expr) => {
-        $app.call_with_not_found(&mut sr!($method, $url))
+        $app.call(&mut sr!($method, $url))
     };    
     ($app:ident, $method:ident, $url:expr, $blk:expr) => {
-        $app.call_with_not_found(&mut sr!($method, $url, $blk))
+        $app.call(&mut sr!($method, $url, $blk))
     };
 }
 

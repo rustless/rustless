@@ -1,11 +1,15 @@
 use std::fmt;
-use std::io::net::ip;
+use std::old_io::net::ip;
 use url;
 
 use framework::media;
 
 use server::method;
 use server::header;
+
+pub trait Body: Reader { }
+
+impl Body for Box<Reader + 'static> { }
 
 pub trait AsUrl {
     fn scheme(&self) -> &str;
@@ -18,12 +22,13 @@ pub trait AsUrl {
     fn fragment(&self) -> &Option<String>;
 }
 
-pub trait Request: fmt::Show + Send + ::Extensible {
+pub trait Request: fmt::Debug + ::Extensible {
     fn remote_addr(&self) -> &ip::SocketAddr;
     fn headers(&self) -> &header::Headers;
     fn method(&self) -> &method::Method;
     fn url(&self) -> &AsUrl;
-    fn body(&self) -> &Vec<u8>;
+    fn body(&self) -> &Body;
+    fn body_mut(&mut self) -> &mut Body;
 
     fn is_json_body(&self) -> bool {
         self.headers().get::<header::ContentType>().map_or(false, |ct| media::is_json(&ct.0))
@@ -32,7 +37,6 @@ pub trait Request: fmt::Show + Send + ::Extensible {
     fn is_urlencoded_body(&self) -> bool {
         self.headers().get::<header::ContentType>().map_or(false, |ct| media::is_urlencoded(&ct.0))
     }
-
 
     fn is_form_data_body(&self) -> bool {
         self.headers().get::<header::ContentType>().map_or(false, |ct| media::is_form_data(&ct.0))

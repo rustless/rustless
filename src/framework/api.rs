@@ -95,22 +95,23 @@ impl Api {
         self.error_formatters.push(Box::new(formatter));
     }
 
-    fn handle_error(&self, err: &Box<Error>, media: &media::Media) -> Option<backend::Response>  {
+    fn handle_error(&self, err: &Box<Error>, media: &media::Media) -> backend::Response  {
         for err_formatter in self.error_formatters.iter() {
-            match (*err_formatter)(err, media) {
-                Some(resp) => return Some(resp),
+            match err_formatter(err, media) {
+                Some(resp) => return resp,
                 None => ()
             }
         }
 
         for err_formatter in self.default_error_formatters.iter() {
-            match (*err_formatter)(err, media) {
-                Some(resp) => return Some(resp),
+            match err_formatter(err, media) {
+                Some(resp) => return resp,
                 None => ()
             }
         }
 
-        None
+        unreachable!()
+        
     }
 
     fn extract_media(&self, req: &backend::Request) -> Option<media::Media> {
@@ -143,12 +144,20 @@ impl Api {
     }
 
     fn parse_utf8(req: &mut backend::Request) -> backend::HandleResult<String> {
-        match String::from_utf8(req.body().clone()) {
-            Ok(e) => Ok(e),
+        match req.body_mut().read_to_end() {
+            Ok(bytes) => {
+                 match String::from_utf8(bytes) {
+                    Ok(e) => Ok(e),
+                    Err(_) => Err(Box::new(
+                        errors::Body::new("Invalid UTF-8 sequence".to_string())
+                    ) as Box<Error>),
+                }
+            },
             Err(_) => Err(Box::new(
-                errors::Body::new("Invalid UTF-8 sequence".to_string())
+                errors::Body::new("Invalid request body".to_string())
             ) as Box<Error>),
         }
+       
     }
 
     fn parse_json_body(req: &mut backend::Request, params: &mut json::Object) -> backend::HandleSuccessResult {
@@ -209,24 +218,26 @@ impl Api {
     }
 
     #[allow(unused_variables)]
-    pub fn call(&self, rest_path: &str, req: &mut backend::Request, app: &app::Application) 
-    -> backend::HandleResult<backend::Response> {
-        let mut params = collections::BTreeMap::new();
-        try!(Api::parse_request(req, &mut params));
+    pub fn call<'a>(&self, 
+        rest_path: &str, 
+        req: &'a mut (backend::Request + 'a), 
+        app: &app::Application) -> backend::HandleExtendedResult<backend::Response> {
         
-        match self.api_call(rest_path, &mut params, req, &mut framework::CallInfo::new(app))  {
+        let mut params = collections::BTreeMap::new();
+        let parse_result = Api::parse_request(req, &mut params);
+
+        let api_result = parse_result.and_then(|_| {
+            self.api_call(rest_path, &mut params, req, &mut framework::CallInfo::new(app))
+        });
+        
+        match api_result {
             Ok(resp) => Ok(resp),
             Err(err) => {
-                if err.downcast::<errors::NotMatch>().is_none() {
-                    // FIXME: Here we extract mime second time (first time in `api_call`), 
-                    //        maybe we can do something better?
-                    match self.handle_error(&err, &self.extract_media(req).unwrap_or_else(|| media::Media::default())) {
-                        Some(resp) => Ok(resp),
-                        None => Err(err)
-                    }
-                } else {
-                    Err(err)
-                }
+                let resp = self.handle_error(&err, &self.extract_media(req).unwrap_or_else(|| media::Media::default()));
+                Err(backend::ErrorResponse { 
+                    error: err,
+                    response: resp 
+                })
             }
         }
     }
@@ -236,15 +247,17 @@ impl Api {
 impl_nesting!(Api);
 
 impl framework::ApiHandler for Api {
-    fn api_call<'a>(&'a self, rest_path: &str, params: &mut json::Object, 
-                    req: &mut backend::Request, info: &mut framework::CallInfo<'a>) 
-    -> backend::HandleResult<backend::Response> {
-        
+    fn api_call<'a, 'r>(&'a self, 
+        rest_path: &str, 
+        params: &mut json::Object, 
+        req: &'r mut (backend::Request + 'r), 
+        info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
+
         // Check prefix
         let mut rest_path = match self.prefix.as_ref() {
             Some(prefix) => {
                 if rest_path.starts_with(prefix.as_slice()) {
-                    path::normalize(rest_path.slice_from(prefix.len()))
+                    path::normalize(&rest_path[(prefix.len())..])
                 } else {
                    return Err(Box::new(errors::NotMatch) as Box<Error>)
                 }
@@ -263,7 +276,7 @@ impl framework::ApiHandler for Api {
             match versioning {
                 &Versioning::Path => {
                     if rest_path.starts_with(version.as_slice()) {
-                        rest_path = path::normalize(rest_path.slice_from(version.len()))
+                        rest_path = path::normalize(&rest_path[(version.len())..])
                     } else {
                        return Err(Box::new(errors::NotMatch) as Box<Error>)
                     }

@@ -14,7 +14,7 @@ fn it_allows_redirect() {
         });
     });
 
-    let response = call_app!(app, Post, "http://127.0.0.1:3000/api/redirect_me/google.com").unwrap();
+    let response = call_app!(app, Post, "http://127.0.0.1:3000/api/redirect_me/google.com").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Found);
     let &header::Location(ref location) = response.headers.get::<header::Location>().unwrap();
     assert_eq!(location.as_slice(), "google.com")
@@ -33,7 +33,7 @@ fn it_allows_permanent_redirect() {
         });
     });
 
-    let response = call_app!(app, Post, "http://127.0.0.1:3000/api/redirect_me/google.com").unwrap();
+    let response = call_app!(app, Post, "http://127.0.0.1:3000/api/redirect_me/google.com").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::MovedPermanently);
     let &header::Location(ref location) = response.headers.get::<header::Location>().unwrap();
     assert_eq!(location.as_slice(), "google.com")

@@ -30,7 +30,7 @@ pub struct CallInfo<'a> {
 }
 
 pub trait ApiHandler: ::std::any::Any {
-    fn api_call<'a>(&'a self, &str, &mut json::Object, &mut backend::Request, &mut CallInfo<'a>) -> backend::HandleResult<backend::Response>;
+    fn api_call<'a, 'b>(&'a self, &str, &mut json::Object, &'b mut (backend::Request + 'b), &mut CallInfo<'a>) -> backend::HandleResult<backend::Response>;
 }
 
 mopafy!(ApiHandler);

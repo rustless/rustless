@@ -99,7 +99,7 @@ impl Endpoint {
         }
     }
 
-    pub fn call_decode(&self, params: &mut json::Object, req: &mut backend::Request, 
+    pub fn call_decode<'a>(&self, params: &mut json::Object, req: &'a mut (backend::Request + 'a), 
                        info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
         
         let mut client = framework::Client::new(info.app, self, req, &info.media);
@@ -140,8 +140,11 @@ impl Endpoint {
 }
 
 impl framework::ApiHandler for Endpoint {
-    fn api_call(&self, rest_path: &str, params: &mut json::Object, req: &mut backend::Request, 
-                info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
+    fn api_call<'r>(&self, 
+        rest_path: &str, 
+        params: &mut json::Object, 
+        req: &'r mut (backend::Request + 'r), 
+        info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
 
         // method::Method guard
         if req.method() != &self.method {

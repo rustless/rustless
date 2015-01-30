@@ -50,10 +50,11 @@ impl Namespace {
         if self.coercer.is_some() {
             // validate and coerce params
             let coercer = self.coercer.as_ref().unwrap();
-            match coercer.process(params) {
-                Ok(()) => Ok(()),
-                Err(err) => return Err(Box::new(errors::Validation{ reason: err }) as Box<errors::Error>)
-            }   
+            let val_result = coercer.process(params);
+
+            val_result.map_err(|err| {
+                Box::new(errors::Validation{ reason: err }) as Box<errors::Error>
+            })
         } else {
             Ok(())
         }
@@ -61,14 +62,14 @@ impl Namespace {
 }
 
 impl framework::ApiHandler for Namespace {
-    fn api_call<'a>(&'a self, rest_path: &str, params: &mut json::Object, req: &mut backend::Request, 
+    fn api_call<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Object, req: &'r mut (backend::Request + 'r), 
                     info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
 
         let rest_path: &str = match self.path.is_match(rest_path) {
             Some(captures) =>  {
                 let captured_length = captures.at(0).map_or(0, |c| c.len());
                 self.path.apply_captures(params, captures);
-                path::normalize(rest_path.slice_from(captured_length))
+                path::normalize(&rest_path[(captured_length)..])
             },
             None => return Err(Box::new(errors::NotMatch) as Box<errors::Error>)
         };

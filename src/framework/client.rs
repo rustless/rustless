@@ -14,7 +14,7 @@ use server::header;
 pub struct Client<'a> {
     pub app: &'a app::Application,
     pub endpoint: &'a endpoint::Endpoint,
-    pub request: &'a mut backend::Request,
+    pub request: &'a mut (backend::Request + 'a),
     pub media: &'a media::Media,
     pub ext: typemap::TypeMap,
     pub response: backend::Response
@@ -24,8 +24,8 @@ pub type ClientResult<'a> = backend::HandleResult<Client<'a>>;
 
 impl<'a> Client<'a> {
 
-    pub fn new(app: &'a app::Application, endpoint: &'a endpoint::Endpoint, 
-               request: &'a mut backend::Request, media: &'a media::Media) -> Client<'a> {
+    pub fn new<'r>(app: &'a app::Application, endpoint: &'a endpoint::Endpoint, 
+               request: &'a mut (backend::Request + 'r), media: &'a media::Media) -> Client<'a> {
         Client {
             app: app,
             endpoint: endpoint,
