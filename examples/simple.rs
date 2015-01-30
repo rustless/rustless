@@ -96,7 +96,10 @@ fn main() {
                 }
 
                 // Fire error from callback is token is wrong
-                return Err(Box::new(UnauthorizedError) as Box<Error>)
+                return Err(rustless::ErrorResponse{
+                    error: Box::new(UnauthorizedError) as Box<Error>,
+                    response: None
+                })
 
             });
 

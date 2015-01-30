@@ -53,7 +53,7 @@ impl Namespace {
             let val_result = coercer.process(params);
 
             val_result.map_err(|err| {
-                Box::new(errors::Validation{ reason: err }) as Box<errors::Error>
+                error_response!(errors::Validation{ reason: err })
             })
         } else {
             Ok(())
@@ -71,7 +71,7 @@ impl framework::ApiHandler for Namespace {
                 self.path.apply_captures(params, captures);
                 path::normalize(&rest_path[(captured_length)..])
             },
-            None => return Err(Box::new(errors::NotMatch) as Box<errors::Error>)
+            None => return Err(error_response!(errors::NotMatch))
         };
 
         try!(self.validate(params));

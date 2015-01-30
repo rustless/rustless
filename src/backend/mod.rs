@@ -7,9 +7,8 @@ pub use self::iron::{
     Handler, 
     HandleResult, 
     HandleSuccessResult, 
-    HandleExtendedResult,
-    WrapUrl,
-    ErrorResponse
+    HandleResultStrict,
+    WrapUrl
 };
 
 pub mod request;

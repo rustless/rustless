@@ -3,6 +3,25 @@ use std::old_io;
 pub use error::{Error};
 use std::error::Error as StdError;
 
+use super::backend;
+
+pub struct ErrorResponse {
+    pub error: Box<Error>,
+    pub response: Option<backend::Response>
+}
+
+pub struct StrictErrorResponse {
+    pub error: Box<Error>,
+    pub response: backend::Response
+}
+
+macro_rules! error_response{
+    ($error:expr) => ($crate::errors::ErrorResponse{
+        error: Box::new($error) as Box<$crate::errors::Error>,
+        response: None
+    })
+}
+
 macro_rules! impl_basic_err {
     ($err:ty, $code:expr) => {
         impl ::std::error::Error for $err {

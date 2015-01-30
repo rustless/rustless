@@ -6,22 +6,16 @@ pub use iron::{Url, Handler};
 use iron::{self};
 
 use backend::{self};
-use framework::Application;
+use super::super::framework;
 
 use server::method;
 use server::header;
 
 use super::request;
-use super::response;
 use super::super::errors;
 
-pub struct ErrorResponse {
-    pub error: Box<errors::Error>,
-    pub response: response::Response
-}
-
-pub type HandleExtendedResult<T> = Result<T, ErrorResponse>;
-pub type HandleResult<T> = Result<T, Box<errors::Error>>;
+pub type HandleResultStrict<T> = Result<T, errors::StrictErrorResponse>;
+pub type HandleResult<T> = Result<T, errors::ErrorResponse>;
 pub type HandleSuccessResult = HandleResult<()>;
 
 impl<'a> request::Body for iron::request::Body<'a> { }
@@ -61,7 +55,7 @@ impl<'a>  ::Extensible for iron::Request<'a> {
     fn ext_mut(&mut self) -> &mut ::typemap::TypeMap { self.extensions_mut() }
 }
 
-impl Handler for Application {
+impl Handler for framework::Application {
     fn handle<'a>(&self, req: &mut iron::Request<'a>) -> iron::IronResult<iron::Response> {
         self.call(req)
             .map(|resp| {
@@ -73,7 +67,7 @@ impl Handler for Application {
                 }
             })
             .map_err(|err_resp| {
-                let ErrorResponse{error, response} = err_resp;
+                let errors::StrictErrorResponse{error, response} = err_resp;
                 iron::IronError {
                     error: error,
                     response: iron::Response {

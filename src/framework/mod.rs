@@ -20,7 +20,6 @@ pub mod namespace;
 pub mod client;
 pub mod media;
 pub mod path;
-pub mod formatters;
 pub mod app;
 
 pub struct CallInfo<'a> {
