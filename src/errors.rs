@@ -1,47 +1,62 @@
 use serialize::json;
-use std::io;
+use std::old_io;
 pub use error::{Error};
-use std;
+use std::error::Error as StdError;
 
-#[derive(Show, Copy)]
+use super::backend;
+
+pub struct ErrorResponse {
+    pub error: Box<Error>,
+    pub response: Option<backend::Response>
+}
+
+pub struct StrictErrorResponse {
+    pub error: Box<Error>,
+    pub response: backend::Response
+}
+
+macro_rules! error_response{
+    ($error:expr) => ($crate::errors::ErrorResponse{
+        error: Box::new($error) as Box<$crate::errors::Error>,
+        response: None
+    })
+}
+
+macro_rules! impl_basic_err {
+    ($err:ty, $code:expr) => {
+        impl ::std::error::Error for $err {
+            fn description(&self) -> &str {
+                $code
+            }
+        }
+
+        impl ::std::fmt::Display for $err {
+            fn fmt(&self, formatter: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+                self.description().fmt(formatter)
+            }
+        }
+    }
+}
+
+#[derive(Debug, Copy)]
 pub struct NotMatch;
+impl_basic_err!(NotMatch, "NotMatch");
 
-impl std::error::Error for NotMatch {
-    fn description(&self) -> &str {
-        return "NotMatch";
-    }
-}
-
-#[derive(Show, Copy)]
+#[derive(Debug, Copy)]
 pub struct NotFound;
+impl_basic_err!(NotFound, "NotFound");
 
-impl std::error::Error for NotFound {
-    fn description(&self) -> &str {
-        return "NotFound";
-    }
-}
-
-#[derive(Show, Copy)]
+#[derive(Debug, Copy)]
 pub struct QueryString;
+impl_basic_err!(QueryString, "QueryString");
 
-impl std::error::Error for QueryString {
-    fn description(&self) -> &str {
-        return "QueryString";
-    }
-}
-
-#[derive(Show)]
+#[derive(Debug)]
 pub struct Validation {
     pub reason: json::Object
 }
+impl_basic_err!(Validation, "Validation");
 
-impl std::error::Error for Validation {
-    fn description(&self) -> &str {
-        return "Validation";
-    }
-}
-
-#[derive(Show)]
+#[derive(Debug)]
 pub struct Body {
     pub reason: String
 }
@@ -53,27 +68,12 @@ impl Body {
         }
     }
 }
+impl_basic_err!(Body, "Body");
 
-impl std::error::Error for Body {
-    fn description(&self) -> &str {
-        return "Body";
-    }
-}
+#[derive(Debug)]
+pub struct File(pub old_io::IoError);
+impl_basic_err!(File, "File");
 
-#[derive(Show)]
-pub struct File(pub io::IoError);
-
-impl std::error::Error for File {
-    fn description(&self) -> &str {
-        let &File(ref error) = self;
-        error.desc
-    }
-}
-
-#[derive(Show, Copy)]
+#[derive(Debug, Copy)]
 pub struct NotAcceptable;
-impl std::error::Error for NotAcceptable {
-    fn description(&self) -> &str {
-        "NotAcceptable"
-    }
-}
+impl_basic_err!(NotAcceptable, "NotAcceptable");

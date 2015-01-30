@@ -92,15 +92,17 @@ impl Endpoint {
             let coercer = self.coercer.as_ref().unwrap();
             match coercer.process(params) {
                 Ok(()) => Ok(()),
-                Err(err) => return Err(Box::new(errors::Validation{ reason: err }) as Box<errors::Error>)
+                Err(err) => return Err(error_response!(errors::Validation{ reason: err }))
             }   
         } else {
             Ok(())
         }
     }
 
-    pub fn call_decode(&self, params: &mut json::Object, req: &mut backend::Request, 
-                       info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
+    pub fn call_endpoint<'a>(&self, 
+        params: &mut json::Object, 
+        req: &'a mut (backend::Request + 'a), 
+        info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
         
         let mut client = framework::Client::new(info.app, self, req, &info.media);
 
@@ -128,8 +130,11 @@ impl Endpoint {
         Ok(client.move_response())
     }
 
-    fn call_callbacks(cbs: &Vec<framework::Callback>, client: &mut framework::Client, params: &mut json::Object) 
-    -> backend::HandleSuccessResult {
+    fn call_callbacks(
+        cbs: &Vec<framework::Callback>, 
+        client: &mut framework::Client, 
+        params: &mut json::Object) -> backend::HandleSuccessResult {
+
         for cb in cbs.iter() {
             try!(cb(client, params));
         }
@@ -140,20 +145,23 @@ impl Endpoint {
 }
 
 impl framework::ApiHandler for Endpoint {
-    fn api_call(&self, rest_path: &str, params: &mut json::Object, req: &mut backend::Request, 
-                info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
+    fn api_call<'r>(&self, 
+        rest_path: &str, 
+        params: &mut json::Object, 
+        req: &'r mut (backend::Request + 'r), 
+        info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
 
         // method::Method guard
         if req.method() != &self.method {
-            return Err(Box::new(errors::NotMatch) as Box<errors::Error>)
+            return Err(error_response!(errors::NotMatch))
         }
 
         match self.path.is_match(rest_path) {
             Some(captures) =>  {
                 self.path.apply_captures(params, captures);
-                self.call_decode(params, req, info)
+                self.call_endpoint(params, req, info)
             },
-            None => Err(Box::new(errors::NotMatch) as Box<errors::Error>)
+            None => Err(error_response!(errors::NotMatch))
         }
 
     }

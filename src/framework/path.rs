@@ -12,7 +12,7 @@ pub struct Path {
 
 pub fn normalize<'a>(path: &'a str) -> &'a str {
     if path.starts_with("/") {
-        path.slice_from(1)
+        &path[1..]
     } else {
         path
     }

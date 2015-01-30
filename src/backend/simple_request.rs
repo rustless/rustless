@@ -1,12 +1,13 @@
-use std::io;
+use std::old_io;
 use std::fmt;
-use std::io::net::ip;
+use std::old_io::net::ip;
 use typemap;
 
 use {Extensible};
 
 use server::method;
 use server::header;
+use super::request;
 use backend::{Request, Url, AsUrl, WrapUrl};
 
 #[allow(dead_code)]
@@ -16,10 +17,10 @@ pub struct SimpleRequest {
     pub remote_addr: ip::SocketAddr,
     pub headers: header::Headers,
     pub method: method::Method,
-    pub body: Vec<u8>
+    pub body: Box<Reader + 'static>
 }
 
-impl Request for SimpleRequest {
+impl<'a> Request for SimpleRequest {
 
     fn url(&self) -> &AsUrl {
         return &self.url;    
@@ -37,8 +38,12 @@ impl Request for SimpleRequest {
         return &self.method;
     }
 
-    fn body(&self) -> &Vec<u8> {
+    fn body(&self) -> &request::Body {
         return &self.body;
+    }
+
+    fn body_mut(&mut self) -> &mut request::Body {
+        return &mut self.body;
     }
 
 }
@@ -53,7 +58,7 @@ impl SimpleRequest {
             ext: typemap::TypeMap::new(),
             remote_addr: "127.0.0.1:8000".parse().unwrap(),
             headers: header::Headers::new(),
-            body: vec![]
+            body: Box::new(old_io::MemReader::new(vec![]))
         }
     }
 
@@ -78,12 +83,11 @@ impl SimpleRequest {
     }
 
     pub fn push_string(&mut self, body: String) {
-        self.body = body.into_bytes()
+        self.body = Box::new(old_io::MemReader::new(body.into_bytes()));
     }
 
-    pub fn push_file(&mut self, path: &Path) -> io::IoResult<()> {
-        let mut reader = Box::new(try!(io::File::open(path)));
-        self.body = try!(reader.read_to_end());
+    pub fn push_file(&mut self, path: &Path) -> old_io::IoResult<()> {
+        self.body = Box::new(try!(old_io::File::open(path)));
 
         Ok(())
     }
@@ -92,7 +96,7 @@ impl SimpleRequest {
 
 impl_extensible!(SimpleRequest);
 
-impl fmt::Show for SimpleRequest {
+impl fmt::Debug for SimpleRequest {
     fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
         try!(writeln!(f, "SimpleRequest ->"));
         try!(writeln!(f, "  url: {}", self.url));

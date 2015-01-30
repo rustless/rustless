@@ -183,7 +183,7 @@ struct Param {
 
 impl json::ToJson for Param {
     fn to_json(&self) -> json::Json {
-        jsonway::JsonWay::object(|param| {
+        jsonway::object(|param| {
             param.set("name", self.name.clone());
             param.set("in", self.place.to_string());
             if self.description.is_some() {
@@ -218,7 +218,7 @@ pub fn enable(app: &mut framework::Application, spec: Spec) {
 #[allow(unused_variables)]
 /// Build the basic Swagger 2.0 object
 pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
-    jsonway::JsonWay::object(|&: json| {
+    jsonway::object(|&: json| {
         // Required. Specifies the Swagger Specification version being used. 
         // It can be used by the Swagger UI and other clients to interpret the API listing. 
         // The value MUST be "2.0".
@@ -507,7 +507,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
 #[allow(unused_variables)]
 /// Creates Endpoint definition according to Swagger 2.0 specification
 fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkContext) -> json::Json {
-    jsonway::JsonWay::object(|: def| {
+    jsonway::object(|: def| {
         // A list of tags for API documentation control. Tags can be used for logical grouping 
         // of operations by resources or any other qualifier.
         // def.array("tags", |tags| { });

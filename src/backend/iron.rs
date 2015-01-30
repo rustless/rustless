@@ -1,18 +1,24 @@
 use url;
-use std::io::net::ip;
+use std::old_io::net::ip;
 use plugin::{Extensible};
 pub use iron::{Url, Handler};
 
 use iron::{self};
 
 use backend::{self};
-use framework::Application;
+use super::super::framework;
 
 use server::method;
 use server::header;
 
-pub type HandleResult<T> = iron::IronResult<T>;
-pub type HandleSuccessResult = iron::IronResult<()>;
+use super::request;
+use super::super::errors;
+
+pub type HandleResultStrict<T> = Result<T, errors::StrictErrorResponse>;
+pub type HandleResult<T> = Result<T, errors::ErrorResponse>;
+pub type HandleSuccessResult = HandleResult<()>;
+
+impl<'a> request::Body for iron::request::Body<'a> { }
 
 pub trait WrapUrl {
     fn wrap_url(self) -> Url;
@@ -35,28 +41,42 @@ impl backend::AsUrl for Url {
     fn fragment(&self) -> &Option<String> { &self.fragment }
 }
 
-impl backend::Request for iron::Request {
+impl<'a> backend::Request for iron::Request<'a> {
     fn remote_addr(&self) -> &ip::SocketAddr { &self.remote_addr }
     fn headers(&self) -> &header::Headers { &self.headers }
     fn method(&self) -> &method::Method { &self.method }
     fn url(&self) -> &backend::AsUrl { &self.url }
-    fn body(&self) -> &Vec<u8> { &self.body }
+    fn body(&self) -> &request::Body { &self.body }
+    fn body_mut(&mut self) -> &mut request::Body { &mut self.body }
 }
 
-impl ::Extensible for iron::Request {
+impl<'a>  ::Extensible for iron::Request<'a> {
     fn ext(&self) -> &::typemap::TypeMap { self.extensions() }
     fn ext_mut(&mut self) -> &mut ::typemap::TypeMap { self.extensions_mut() }
 }
 
-impl Handler for Application {
-    fn call(&self, req: &mut iron::Request) -> iron::IronResult<iron::Response> {
-        self.call_with_not_found(req).map(|resp| {
-            iron::Response {
-                status: Some(resp.status),
-                headers: resp.headers,
-                body: resp.body,
-                extensions: resp.ext
-            }
-        })
+impl Handler for framework::Application {
+    fn handle<'a>(&self, req: &mut iron::Request<'a>) -> iron::IronResult<iron::Response> {
+        self.call(req)
+            .map(|resp| {
+                iron::Response {
+                    status: Some(resp.status),
+                    headers: resp.headers,
+                    body: resp.body,
+                    extensions: resp.ext
+                }
+            })
+            .map_err(|err_resp| {
+                let errors::StrictErrorResponse{error, response} = err_resp;
+                iron::IronError {
+                    error: error,
+                    response: iron::Response {
+                        status: Some(response.status),
+                        headers: response.headers,
+                        body: response.body,
+                        extensions: response.ext
+                    }
+                }
+            })
     }
 }

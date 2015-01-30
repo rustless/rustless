@@ -128,21 +128,21 @@ pub trait Nesting: Node {
         self.get_after_validation_mut().push(Box::new(callback)); 
     }
 
-    fn call_handlers<'a>(&'a self, rest_path: &str, params: &mut json::Object, req: &mut backend::Request, 
+    fn call_handlers<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Object, req: &'r mut (backend::Request + 'r), 
                          info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
+        
         for handler in self.get_handlers().iter() {
             match handler.api_call(rest_path, params, req, info) {
                 Ok(response) => return Ok(response),
-                Err(err) => {
-                    match err.downcast::<errors::NotMatch>() {
-                        Some(_) => (),
-                        None => return Err(err),
+                Err(error_response) => {
+                    if !error_response.error.is::<errors::NotMatch>() {
+                        return Err(error_response)
                     }
                 }
             };
         }
 
-        Err(Box::new(errors::NotMatch) as Box<errors::Error>)
+        Err(error_response!(errors::NotMatch))
     }
 
 }

@@ -15,19 +15,19 @@ fn it_allows_to_create_namespace() {
 
     });
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns1/info").unwrap();
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns1/info").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns2/info").unwrap();
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns2/info").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns3/info").unwrap();
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns3/info").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns4/info").unwrap();
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns4/info").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns5/info").unwrap();
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns5/info").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
 }
@@ -50,7 +50,7 @@ fn it_allows_nested_namespaces() {
 
     });
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns1/ns2/ns3/ns4/ns5/info").unwrap();
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns1/ns2/ns3/ns4/ns5/info").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
 }
@@ -76,13 +76,13 @@ fn it_allows_grouping_with_zero_path() {
 
     });
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns1").unwrap();
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/ns1").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
-    let response = call_app!(app, Post, "http://127.0.0.1:3000/api/ns1").unwrap();
+    let response = call_app!(app, Post, "http://127.0.0.1:3000/api/ns1").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
-    let response = call_app!(app, Delete, "http://127.0.0.1:3000/api/ns1").unwrap();
-    assert_eq!(response.status, status::StatusCode::NotFound);
+    let err_resp = call_app!(app, Delete, "http://127.0.0.1:3000/api/ns1").err().unwrap();
+    assert_eq!(err_resp.response.status, status::StatusCode::NotFound);
 
 }

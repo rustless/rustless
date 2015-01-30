@@ -1,8 +1,12 @@
 #![crate_name = "rustless"]
 #![crate_type = "rlib"]
 #![feature(plugin)]
-#![allow(unstable)]
-#![deny(warnings)]
+#![feature(collections)]
+#![feature(core)]
+#![feature(io)]
+#![feature(std_misc)]
+#![feature(os)]
+// #![deny(warnings)]
 #![deny(bad_style)]
 
 #[plugin]
@@ -26,8 +30,8 @@ extern crate jsonway;
 #[macro_use] #[no_link]
 extern crate mopa;
 
-pub use backend::{Request, SimpleRequest, Response};
-pub use backend::{Handler, HandleResult, HandleSuccessResult};
+pub use backend::{Request, SimpleRequest, Response, Handler, HandleResult, HandleSuccessResult};
+pub use errors::{ErrorResponse};
 pub use framework::{
     Endpoint, Client, Api, Application, Namespace, Nesting, Media, Versioning
 };
@@ -46,8 +50,8 @@ macro_rules! impl_extensible {
     )
 }
 
-pub mod errors;
+#[macro_use] pub mod errors;
+#[macro_use] pub mod backend;
 pub mod server;
-pub mod backend;
 pub mod framework;
 pub mod batteries;

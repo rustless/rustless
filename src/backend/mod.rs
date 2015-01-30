@@ -7,6 +7,7 @@ pub use self::iron::{
     Handler, 
     HandleResult, 
     HandleSuccessResult, 
+    HandleResultStrict,
     WrapUrl
 };
 
