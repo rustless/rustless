@@ -49,33 +49,34 @@ git = "https://github.com/rustless/rustless"
 Below is a simple example showing some of the more common features of Rustless.
 
 ~~~rust
-#![feature(phase)]
+#![feature(plugin)]
 
-#[phase(plugin)]
-extern crate rustless;
+#[plugin]
 extern crate rustless;
 extern crate hyper;
-extern crate serialize;
+extern crate iron;
+extern crate "rustc-serialize" as rustc_serialize;
+extern crate valico;
 
-use std::io::net::ip::Ipv4Addr;
-use serialize::json::{JsonObject, ToJson};
+use hyper::status::StatusCode;
+use iron::Iron;
 use rustless::{
-    Server, Application, Valico, Api, Client, Nesting, 
-    HandleResult, HandleSuccessResult, AcceptHeader
+    Application, Api, Nesting, Versioning
 };
+use rustc_serialize::json::ToJson;
 
 fn main() {
 
-    let api = box Api::build(|api| {
+    let api = Api::build(|api| {
         // Specify API version
-        api.version("v1", AcceptHeader("chat"));
+        api.version("v1", Versioning::AcceptHeader("chat"));
         api.prefix("api");
 
         // Create API for chats
-        let chats_api = box Api::build(|chats_api| {
+        let chats_api = Api::build(|chats_api| {
 
             chats_api.after(|client, _params| {
-                client.set_status(hyper::status::NotFound);
+                client.set_status(StatusCode::NotFound);
                 Ok(())
             });
 
@@ -84,7 +85,7 @@ fn main() {
                 
                 // Valico settings for this namespace
                 chat_ns.params(|params| { 
-                    params.req_typed("id", Valico::u64())
+                    params.req_typed("id", valico::u64())
                 });
 
                 // Create endpoint for POST /chats/:id/users/:user_id
@@ -95,8 +96,8 @@ fn main() {
 
                     // Valico settings for endpoint params
                     endpoint.params(|params| { 
-                        params.req_typed("user_id", Valico::u64());
-                        params.req_typed("name", Valico::string())
+                        params.req_typed("user_id", valico::u64());
+                        params.req_typed("name", valico::string())
                     });
 
                     endpoint.handle(|client, params| {
@@ -110,7 +111,7 @@ fn main() {
         api.mount(chats_api);
     });
 
-    let mut app = Application::new(api);
+    let app = Application::new(api);
 
     Iron::new(app).listen("localhost:4000").unwrap();
     println!("On 4000");
