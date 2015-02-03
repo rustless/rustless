@@ -1,5 +1,5 @@
 use std::str;
-use valico;
+use valico::json_dsl;
 use rustless::server::status;
 use rustless::{Nesting};
 
@@ -36,8 +36,8 @@ fn it_validates_typed_endpoint_path_params() {
 
         api.get("users/:user_id/messages/:message_id", |endpoint| {
             endpoint.params(|params| {
-                params.req_typed("user_id", valico::u64());
-                params.req_typed("message_id", valico::u64());
+                params.req_typed("user_id", json_dsl::u64());
+                params.req_typed("message_id", json_dsl::u64());
             });
 
             edp_stub_handler!(endpoint)
@@ -63,7 +63,7 @@ fn it_validates_query_params() {
 
         api.get("users/:user_id", |endpoint| {
             endpoint.params(|params| {
-                params.req_typed("user_id", valico::u64());
+                params.req_typed("user_id", json_dsl::u64());
                 params.req("profile", |profile| {
                     profile.allow_values(&["simple".to_string(), "full".to_string()])
                 })
@@ -99,8 +99,8 @@ fn it_validates_common_namespace_params() {
         api.resources("users/:user_id", |users| {
             users.params(|params| {
                 // one parameter goes from path and one from query-string or body
-                params.req_typed("user_id", valico::u64());
-                params.req_typed("ext", valico::string());
+                params.req_typed("user_id", json_dsl::u64());
+                params.req_typed("ext", json_dsl::string());
             });
 
             users.get("profile/:profile", |endpoint| {

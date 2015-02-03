@@ -18,7 +18,7 @@ fn it_serializes_json_properly() {
             endpoint.handle(|client, params| {
                 client.json(&jsonway::object(|json| {
                     json.set("uptime", "Ok".to_string());
-                    json.set("echo_params", json::Json::Object(params.clone()));
+                    json.set("echo_params", params.clone());
                 }).unwrap())
             })
         })

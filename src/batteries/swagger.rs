@@ -1,5 +1,5 @@
 use std::ascii::AsciiExt;
-use valico;
+use valico::json_dsl;
 use collections;
 use serialize::json::{self, ToJson};
 use jsonway::{self, MutableJson};
@@ -643,16 +643,16 @@ fn encode_path_string(path: &framework::Path) -> String {
 }
 
 /// Converts `valico::Param` into Swagger's ParamType
-fn param_type(param: &valico::Param) -> ParamType {
+fn param_type(param: &json_dsl::Param) -> ParamType {
     match &param.coercer {
         &Some(ref coercer) => {
             match coercer.get_primitive_type() {
-                valico::PrimitiveType::String => ParamType::String,
-                valico::PrimitiveType::I64 => ParamType::Integer,
-                valico::PrimitiveType::F64 => ParamType::Number,
-                valico::PrimitiveType::Array => ParamType::Array,
-                valico::PrimitiveType::Boolean => ParamType::Boolean,
-                valico::PrimitiveType::File => ParamType::File,
+                json_dsl::PrimitiveType::String => ParamType::String,
+                json_dsl::PrimitiveType::I64 => ParamType::Integer,
+                json_dsl::PrimitiveType::F64 => ParamType::Number,
+                json_dsl::PrimitiveType::Array => ParamType::Array,
+                json_dsl::PrimitiveType::Boolean => ParamType::Boolean,
+                json_dsl::PrimitiveType::File => ParamType::File,
                 _ => ParamType::String
             }
         },
@@ -661,7 +661,7 @@ fn param_type(param: &valico::Param) -> ParamType {
 }
 
 /// Crate Swagger's `Param` from `valico::Param`
-fn build_param_from_coercer(param: &valico::Param, required: bool) -> Param {
+fn build_param_from_coercer(param: &json_dsl::Param, required: bool) -> Param {
     let swagger_param = Param {
         name: param.name.clone(),
         place: Place::Query,
@@ -678,7 +678,7 @@ fn build_param_from_coercer(param: &valico::Param, required: bool) -> Param {
 }
 
 /// Translates information from `coercer` and `path` to list of Swagger's Param objects
-fn extract_params(coercer: &Option<valico::Builder>, path: &framework::Path) -> Vec<Param> {
+fn extract_params(coercer: &Option<json_dsl::Builder>, path: &framework::Path) -> Vec<Param> {
     let mut params = collections::BTreeMap::new();
 
     if coercer.is_some() {

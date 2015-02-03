@@ -1,7 +1,7 @@
-use serialize::json;
 use std::old_io;
 pub use error::{Error};
 use std::error::Error as StdError;
+use valico;
 
 use super::backend;
 
@@ -52,7 +52,7 @@ impl_basic_err!(QueryString, "QueryString");
 
 #[derive(Debug)]
 pub struct Validation {
-    pub reason: json::Object
+    pub reason: valico::ValicoErrors
 }
 impl_basic_err!(Validation, "Validation");
 

@@ -25,7 +25,7 @@ pub fn is_form_data(mime: &mime::Mime) -> bool {
     }
 }
 
-#[derive(Show)]
+#[derive(Debug)]
 pub enum Format {
     JsonFormat,
     PlainTextFormat,

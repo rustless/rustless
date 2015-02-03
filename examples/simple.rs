@@ -13,7 +13,7 @@ extern crate cookie;
 use std::fmt;
 use std::error;
 use std::error::Error as StdError;
-use serialize::json;
+use valico::json_dsl;
 
 use rustless::server::status;
 use rustless::errors::{Error};
@@ -21,7 +21,7 @@ use rustless::batteries::swagger;
 use rustless::batteries::cookie::CookieExt;
 use rustless::{Nesting};
 
-#[derive(Show, Copy)]
+#[derive(Debug, Copy)]
 pub struct UnauthorizedError;
 
 impl error::Error for UnauthorizedError {
@@ -60,14 +60,14 @@ fn main() {
             endpoint.summary("Sends greeting");
             endpoint.desc("Use this to talk to yourself");
             endpoint.params(|params| {
-                params.req_typed("name", valico::string());
-                params.req_typed("greeting", valico::string());
+                params.req_typed("name", json_dsl::string());
+                params.req_typed("greeting", json_dsl::string());
             });
             endpoint.handle(|client, params| {
                 client.text(
                     format!("{}, {}", 
-                        params.get("greeting").unwrap().to_string(),
-                        params.get("name").unwrap().to_string())
+                        params.find("greeting").unwrap().to_string(),
+                        params.find("name").unwrap().to_string())
                 )
             })
         });
@@ -76,20 +76,20 @@ fn main() {
             endpoint.summary("Sends back what it gets");
             endpoint.desc("Use this to talk to yourself");
             endpoint.handle(|client, params| {
-                client.json(&json::Json::Object(params.clone()))
+                client.json(params)
             })
         });
 
         api.namespace("admin", |admin_ns| {
 
             admin_ns.params(|params| {
-                params.req_typed("token", valico::string())
+                params.req_typed("token", json_dsl::string())
             });
 
             // Using after_validation callback to check token
             admin_ns.after_validation(|&: _client, params| {
 
-                match params.get("token") {
+                match params.find("token") {
                     // We can unwrap() safely because token in validated already
                     Some(token) => if token.as_string().unwrap().as_slice() == "password1" { return Ok(()) },
                     None => ()

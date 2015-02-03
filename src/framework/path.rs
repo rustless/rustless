@@ -1,4 +1,4 @@
-
+use valico::MutableJson;
 use serialize::json::{self, ToJson};
 use regex;
 
@@ -20,9 +20,10 @@ pub fn normalize<'a>(path: &'a str) -> &'a str {
 
 impl Path {
 
-    pub fn apply_captures(&self, jobj: &mut json::Object, captures: regex::Captures) {
+    pub fn apply_captures(&self, params: &mut json::Json, captures: regex::Captures) {
+        let obj = params.as_object_mut().expect("Params must be object");
         for param in self.params.iter() {
-            jobj.insert(param.clone(), captures.name(param.as_slice()).unwrap_or("").to_string().to_json());
+            obj.insert(param.clone(), captures.name(param.as_slice()).unwrap_or("").to_string().to_json());
         }
     }
 

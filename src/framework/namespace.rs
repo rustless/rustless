@@ -1,5 +1,5 @@
 use serialize::json;
-use valico;
+use valico::json_dsl;
 
 use backend;
 use errors;
@@ -11,7 +11,7 @@ use framework::nesting::{self, Nesting, Node};
 pub struct Namespace {
     pub handlers: framework::ApiHandlers,
     pub path: path::Path,
-    pub coercer: Option<valico::Builder>,
+    pub coercer: Option<json_dsl::Builder>,
     before: framework::Callbacks,
     before_validation: framework::Callbacks,
     after_validation: framework::Callbacks,
@@ -34,8 +34,8 @@ impl Namespace {
         }
     }
 
-    pub fn params<F>(&mut self, builder: F) where F: FnOnce(&mut valico::Builder) {
-        self.coercer = Some(valico::Builder::build(builder));
+    pub fn params<F>(&mut self, builder: F) where F: FnOnce(&mut json_dsl::Builder) {
+        self.coercer = Some(json_dsl::Builder::build(builder));
     }
 
     pub fn build<F>(path: &str, builder: F) -> Namespace where F: FnOnce(&mut Namespace) {
@@ -45,7 +45,7 @@ impl Namespace {
         return namespace;
     }
 
-    fn validate(&self, params: &mut json::Object) -> backend::HandleResult<()> {
+    fn validate(&self, params: &mut json::Json) -> backend::HandleResult<()> {
         // Validate namespace params with valico
         if self.coercer.is_some() {
             // validate and coerce params
@@ -62,7 +62,7 @@ impl Namespace {
 }
 
 impl framework::ApiHandler for Namespace {
-    fn api_call<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Object, req: &'r mut (backend::Request + 'r), 
+    fn api_call<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Json, req: &'r mut (backend::Request + 'r), 
                     info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
 
         let rest_path: &str = match self.path.is_match(rest_path) {

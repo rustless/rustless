@@ -29,14 +29,14 @@ pub struct CallInfo<'a> {
 }
 
 pub trait ApiHandler: ::std::any::Any {
-    fn api_call<'a, 'b>(&'a self, &str, &mut json::Object, &'b mut (backend::Request + 'b), &mut CallInfo<'a>) -> backend::HandleResult<backend::Response>;
+    fn api_call<'a, 'b>(&'a self, &str, &mut json::Json, &'b mut (backend::Request + 'b), &mut CallInfo<'a>) -> backend::HandleResult<backend::Response>;
 }
 
 mopafy!(ApiHandler);
 
 pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 
-pub type Callback = Box<for<'a> Fn(&'a mut client::Client, &json::Object) -> backend::HandleSuccessResult + 'static + Sync + Send>;
+pub type Callback = Box<for<'a> Fn(&'a mut client::Client, &json::Json) -> backend::HandleSuccessResult + 'static + Sync + Send>;
 pub type Callbacks = Vec<Callback>;
 
 pub type ErrorFormatter = Box<Fn(&Box<errors::Error + 'static>, &media::Media) -> Option<backend::Response> + 'static + Sync + Send>;

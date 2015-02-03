@@ -111,24 +111,24 @@ pub trait Nesting: Node {
         self.mount(endpoint::Endpoint::build(method::Method::Head, path, builder));
     }
 
-    fn before<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Object) 
+    fn before<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json) 
     -> backend::HandleSuccessResult + Send+Sync { 
         self.get_before_mut().push(Box::new(callback)); 
     }
-    fn before_validation<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Object) 
+    fn before_validation<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json) 
     -> backend::HandleSuccessResult + Send+Sync { 
         self.get_before_validation_mut().push(Box::new(callback)); 
     }
-    fn after<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Object) 
+    fn after<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json) 
     -> backend::HandleSuccessResult + Send+Sync { 
         self.get_after_mut().push(Box::new(callback));
     }
-    fn after_validation<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Object) 
+    fn after_validation<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json) 
     -> backend::HandleSuccessResult + Send+Sync { 
         self.get_after_validation_mut().push(Box::new(callback)); 
     }
 
-    fn call_handlers<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Object, req: &'r mut (backend::Request + 'r), 
+    fn call_handlers<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Json, req: &'r mut (backend::Request + 'r), 
                          info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
         
         for handler in self.get_handlers().iter() {
