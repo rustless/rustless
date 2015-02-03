@@ -1,12 +1,12 @@
 use std::error;
 use std::error::Error as StdError;
 use std::fmt;
-use valico;
+use valico::json_dsl;
 use rustless::{self, Nesting};
 use rustless::server::status;
 use rustless::errors::{Error};
 
-#[derive(Show)]
+#[derive(Debug)]
 pub struct UnauthorizedError;
 
 impl error::Error for UnauthorizedError {
@@ -38,12 +38,12 @@ fn it_invokes_callbacks() {
         api.namespace("admin", |admin_ns| {
 
             admin_ns.params(|params| {
-                params.req_typed("token", valico::string())
+                params.req_typed("token", json_dsl::string())
             });
 
             // Using after_validation callback to check token
             admin_ns.after_validation(|_client, params| {
-                match params.get(&"token".to_string()) {
+                match params.find(&"token".to_string()) {
                     // We can.unwrap() safely because token in validated already
                     Some(token) => if token.as_string().unwrap().as_slice() == "password1" { return Ok(()) },
                     None => ()

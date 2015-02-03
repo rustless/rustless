@@ -1,6 +1,6 @@
 use serialize::json;
 
-use valico;
+use valico::json_dsl;
 
 use server::method;
 use server::mime;
@@ -9,7 +9,7 @@ use errors;
 use framework;
 use framework::path;
 
-pub type EndpointHandler = Box<for<'a> Fn(framework::Client<'a>, &json::Object) -> backend::HandleResult<framework::Client<'a>> + 'static + Sync>;
+pub type EndpointHandler = Box<for<'a> Fn(framework::Client<'a>, &json::Json) -> backend::HandleResult<framework::Client<'a>> + 'static + Sync>;
 
 #[allow(missing_copy_implementations)]
 pub enum EndpointHandlerPresent {
@@ -23,7 +23,7 @@ pub struct Endpoint {
     pub path: path::Path,
     pub summary: Option<String>,
     pub desc: Option<String>,
-    pub coercer: Option<valico::Builder>,
+    pub coercer: Option<json_dsl::Builder>,
     pub consumes: Option<Vec<mime::Mime>>,
     pub produces: Option<Vec<mime::Mime>>,
     handler: Option<EndpointHandler>,
@@ -70,12 +70,12 @@ impl Endpoint {
         self.produces = Some(mimes);
     }
 
-    pub fn params<F>(&mut self, builder: F) where F: FnOnce(&mut valico::Builder) + 'static {
-        self.coercer = Some(valico::Builder::build(builder));
+    pub fn params<F>(&mut self, builder: F) where F: FnOnce(&mut json_dsl::Builder) + 'static {
+        self.coercer = Some(json_dsl::Builder::build(builder));
     }
 
     pub fn handle<F>(&mut self, handler: F) -> EndpointHandlerPresent
-    where F: for<'a> Fn(framework::Client<'a>, &json::Object) -> backend::HandleResult<framework::Client<'a>> + Sync+Send {
+    where F: for<'a> Fn(framework::Client<'a>, &json::Json) -> backend::HandleResult<framework::Client<'a>> + Sync+Send {
         self.handler = Some(Box::new(handler));
         EndpointHandlerPresent::HandlerPresent
     }
@@ -85,7 +85,7 @@ impl Endpoint {
         EndpointHandlerPresent::HandlerPresent
     }
 
-    fn validate(&self, params: &mut json::Object) -> backend::HandleResult<()> {
+    fn validate(&self, params: &mut json::Json) -> backend::HandleResult<()> {
         // Validate namespace params with valico
         if self.coercer.is_some() {
             // validate and coerce params
@@ -100,7 +100,7 @@ impl Endpoint {
     }
 
     pub fn call_endpoint<'a>(&self, 
-        params: &mut json::Object, 
+        params: &mut json::Json, 
         req: &'a mut (backend::Request + 'a), 
         info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
         
@@ -133,7 +133,7 @@ impl Endpoint {
     fn call_callbacks(
         cbs: &Vec<framework::Callback>, 
         client: &mut framework::Client, 
-        params: &mut json::Object) -> backend::HandleSuccessResult {
+        params: &mut json::Json) -> backend::HandleSuccessResult {
 
         for cb in cbs.iter() {
             try!(cb(client, params));
@@ -147,7 +147,7 @@ impl Endpoint {
 impl framework::ApiHandler for Endpoint {
     fn api_call<'r>(&self, 
         rest_path: &str, 
-        params: &mut json::Object, 
+        params: &mut json::Json, 
         req: &'r mut (backend::Request + 'r), 
         info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
 

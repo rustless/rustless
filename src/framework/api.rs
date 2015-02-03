@@ -116,7 +116,7 @@ impl_nesting!(Api);
 impl framework::ApiHandler for Api {
     fn api_call<'a, 'r>(&'a self, 
         rest_path: &str, 
-        params: &mut json::Object, 
+        params: &mut json::Json, 
         req: &'r mut (backend::Request + 'r), 
         info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
 
@@ -149,7 +149,7 @@ impl framework::ApiHandler for Api {
                     }
                 },
                 &Versioning::Param(ref param_name) => {
-                    match params.get(*param_name) {
+                    match params.find(param_name) {
                         Some(obj) if obj.is_string() && obj.as_string().unwrap() == version.as_slice() => (),
                         _ => return Err(error_response!(errors::NotMatch))
                     }
