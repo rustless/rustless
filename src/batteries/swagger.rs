@@ -616,7 +616,7 @@ fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkC
                 _ => ()
             };
 
-            parameters.map(&mut final_params.iter(), |param| param.to_json());
+            parameters.map(final_params.iter(), |param| param.to_json());
         });
 
         // // The transfer protocol for the operation. Values MUST be from the list: "http", "https", 
