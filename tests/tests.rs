@@ -1,6 +1,5 @@
 // #![deny(warnings)]
 #![deny(bad_style)]
-#![feature(collections)]
 #![feature(core)]
 #![feature(io)]
 

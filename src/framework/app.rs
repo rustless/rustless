@@ -115,7 +115,7 @@ fn parse_json_body(req: &mut backend::Request, params: &mut json::Json) -> backe
     if utf8_string_body.len() > 0 {
       let maybe_json_body = utf8_string_body.parse::<json::Json>();
         match maybe_json_body {
-            Some(json_body) => {
+            Ok(json_body) => {
                 let params = params.as_object_mut().expect("Params must be object");
                 if json_body.is_object() {
                     for (key, value) in json_body.as_object().unwrap().iter() {
@@ -127,7 +127,7 @@ fn parse_json_body(req: &mut backend::Request, params: &mut json::Json) -> backe
                     params.insert("body".to_string(), json_body);
                 }
             },
-            None => return Err(error_response!(errors::Body::new(format!("Invalid JSON"))))
+            Err(e) => return Err(error_response!(errors::Body::new(format!("Invalid JSON: {}", e))))
         }  
     }
 
