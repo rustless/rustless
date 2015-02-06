@@ -12,10 +12,11 @@ use super::super::server::status;
 
 pub struct Application {
     pub ext: typemap::TypeMap,
-    pub root_api: api::Api 
+    pub root_api: api::Api,
 }
 
 unsafe impl Send for Application {}
+unsafe impl Sync for Application {}
 
 impl Application {
     pub fn new(root_api: api::Api) -> Application {

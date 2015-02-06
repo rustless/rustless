@@ -1,6 +1,6 @@
 use serialize::json;
 use typemap;
-use std::os;
+use std::env;
 
 use backend;
 use errors::{self, Error};
@@ -102,7 +102,7 @@ impl<'a> Client<'a> {
     }
 
     pub fn file(mut self, path: &Path) -> ClientResult<'a> {
-        let absolute_path = match os::make_absolute(path) {
+        let absolute_path = match env::current_dir().map(|curr_dir| curr_dir.join(path)) {
             Ok(path) => path,
             Err(err) => {
                 return Err(error_response!(errors::File(err)));
