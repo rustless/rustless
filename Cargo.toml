@@ -1,7 +1,7 @@
 [package]
 
 name = "rustless"
-version = "0.5.1"
+version = "0.5.2"
 authors = ["Stanislav Panferov <fnight.m@gmail.com>"]
 description = "Rustless is a REST-like API micro-framework for Rust."
 keywords = ["api", "web", "hyper", "iron", "rest"]
