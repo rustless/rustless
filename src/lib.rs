@@ -5,7 +5,8 @@
 #![feature(core)]
 #![feature(io)]
 #![feature(std_misc)]
-#![feature(os)]
+#![feature(env)]
+#![feature(path)]
 // #![deny(warnings)]
 #![deny(bad_style)]
 
