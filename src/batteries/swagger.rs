@@ -404,9 +404,9 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
 #[allow(unused_variables)]
 /// Create an API to handle doc requests
 pub fn create_api(path: &str) -> framework::Api {
-    framework::Api::build(|: api| {
-        api.namespace(path, |: docs| {
-            docs.get("", |: endpoint| {
+    framework::Api::build(|api| {
+        api.namespace(path, |docs| {
+            docs.get("", |endpoint| {
                 endpoint.summary("Get Swagger 2.0 specification of this API");
                 endpoint.handle(|&: mut client, _params| {
                     client.set_header(header::AccessControlAllowOrigin::AllowStar);
@@ -491,7 +491,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
             };
             
             if !exists {
-                paths.object(path.as_slice(), |: path_item| {
+                paths.object(path.as_slice(), |path_item| {
                     path_item.set(method.clone(), definition.to_json());
                     path_item.array("parameters", |parameters| {
                         for param in context.params.iter() {
@@ -507,7 +507,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
 #[allow(unused_variables)]
 /// Creates Endpoint definition according to Swagger 2.0 specification
 fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkContext) -> json::Json {
-    jsonway::object(|: def| {
+    jsonway::object(|def| {
         // A list of tags for API documentation control. Tags can be used for logical grouping 
         // of operations by resources or any other qualifier.
         // def.array("tags", |tags| { });
