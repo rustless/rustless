@@ -60,7 +60,7 @@ pub fn setup_db(connection_str: &str, pool_size: u32) -> PostgresPool {
 }
 
 /// The function creates and fills the main table of our data.
-fn setup_tables(cn: &postgres::Connection) {
+fn setup_tables(cn: &postgres::GenericConnection) {
    cn.batch_execute(r#"
         DROP TABLE IF EXISTS jedi CASCADE;
         CREATE TABLE jedi (
