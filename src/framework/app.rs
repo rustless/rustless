@@ -71,6 +71,11 @@ impl Application {
     }
 }
 
+impl super::super::Extensible for Application {
+    fn ext(&self) -> &::typemap::TypeMap { &self.ext }
+    fn ext_mut(&mut self) -> &mut ::typemap::TypeMap { &mut self.ext }
+}
+
 fn parse_query(query_str: &str, params: &mut json::Json) -> backend::HandleSuccessResult {
     let maybe_query_params = queryst::parse(query_str);
     match maybe_query_params {
