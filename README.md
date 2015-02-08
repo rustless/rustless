@@ -16,6 +16,8 @@
 - [Secure API example](#secure-api-example)
 - [JSON responses](#json-responses)
 - [Swagger 2.0 support](#swagger-20)
+- [Integration with PostgreSQL](#integration-with-postgresql)
+- [Integration with Deuterium ORM](#integration-with-deuterium-orm)
 
 ## What is Rustless?
 
@@ -435,3 +437,10 @@ swagger::enable(&mut app, swagger::Spec {
 
 After that you can use `/api-docs` path in Swagger UI to render your API structure.
 
+## Integration with PostgreSQL
+
+We have an annotated example of such integration in [postgres_example](https://github.com/rustless/rustless/tree/master/examples/postgres). Please try it and feel free to say your opinion. 
+
+## Integration with Deuterium ORM
+
+TODO: Example
