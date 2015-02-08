@@ -3,3 +3,5 @@ script:
   - cargo build --verbose
   - cargo test --verbose
   - cargo doc
+  - cd examples/postgres
+  - cargo build --verbose

@@ -37,6 +37,10 @@ pub use framework::{
     Endpoint, Client, Api, Application, Namespace, Nesting, Media, Versioning
 };
 
+pub mod prelude {
+    pub use {Nesting, Extensible};
+}
+
 pub trait Extensible {
     fn ext(&self) -> &::typemap::TypeMap;
     fn ext_mut(&mut self) -> &mut ::typemap::TypeMap;

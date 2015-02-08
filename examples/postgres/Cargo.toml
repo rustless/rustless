@@ -1,0 +1,17 @@
+[package]
+
+name = "postgres_example"
+version = "0.0.1"
+authors = ["Stanislav Panferov <fnight.m@gmail.com>"]
+
+[dependencies]
+postgres = "*"
+r2d2 = "*"
+r2d2_postgres = "*"
+typemap = "*"
+time = "*"
+rustc-serialize = "*"
+iron = "*"
+
+[dependencies.rustless]
+path = "../.."
