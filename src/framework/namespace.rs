@@ -58,7 +58,10 @@ impl Namespace {
             if state.is_strictly_valid() {
                 Ok(())
             } else {
-               Err(error_response!(errors::Validation{ reason: state.errors }))
+                if state.missing.len() > 0 {
+                    warn!("There are some missing JSON schemes: {:?}", state.missing);
+                }
+                Err(error_response!(errors::Validation{ reason: state.errors }))
             }
         } else {
             Ok(())
