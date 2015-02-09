@@ -1,6 +1,8 @@
 use std::str;
 use valico::json_dsl;
+use valico::json_schema;
 use rustless::server::status;
+use rustless::batteries::schemes;
 use rustless::{Nesting};
 
 #[test]
@@ -125,4 +127,58 @@ fn it_validates_common_namespace_params() {
     let mut response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100/profile/full?ext=some").ok().unwrap();
         println!("{}", resp_body!(response));
     assert_eq!(response.status, status::StatusCode::Ok);   
+}
+
+#[test]
+fn it_validates_params_with_json_schema() {
+
+    let mut app = app!(|api| {
+        api.prefix("api");
+
+        api.resources("users/:user_id", |users| {
+            users.params(|params| {
+                // one parameter goes from path and one from query-string or body
+                params.req("user_id", |user_id| {
+                    user_id.coerce(json_dsl::u64());
+                    user_id.schema(|schema| {
+                        schema.maximum(1000f64, false);
+                    })
+                });
+
+                params.schema(|schema| {
+                    schema.max_properties(1);
+                });
+            });
+
+            users.get("profile/:profile", |endpoint| {
+                endpoint.params(|params| {
+                    params.req("profile", |profile| {
+                        profile.schema(|schema| {
+                            schema.enum_(|values| {
+                                values.push("full".to_string());
+                                values.push("short".to_string());
+                            })
+                        })
+                    })
+                });
+
+                edp_stub_handler!(endpoint)
+            })
+        })
+    });
+
+    schemes::enable_schemes(&mut app, json_schema::Scope::new()).unwrap();
+
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100/profile/full").ok().unwrap();
+    assert_eq!(response.status, status::StatusCode::Ok);    
+
+    let err_resp = call_app!(app, Get, "http://127.0.0.1:3000/api/users/1001/profile/full").err().unwrap();
+    assert_eq!(err_resp.response.status, status::StatusCode::BadRequest);       
+
+    let err_resp = call_app!(app, Get, "http://127.0.0.1:3000/api/users/1000/profile/wrong").err().unwrap();
+    assert_eq!(err_resp.response.status, status::StatusCode::BadRequest);  
+
+    let err_resp = call_app!(app, Get, "http://127.0.0.1:3000/api/users/1000/profile/full?one_more=1").err().unwrap();
+    assert_eq!(err_resp.response.status, status::StatusCode::BadRequest);            
+
 }

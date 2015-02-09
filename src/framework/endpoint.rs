@@ -10,7 +10,7 @@ use errors;
 use framework;
 use framework::path;
 
-use batteries::json_schema as json_schema_battery;
+use batteries::schemes;
 
 pub type EndpointHandler = Box<for<'a> Fn(framework::Client<'a>, &json::Json) -> backend::HandleResult<framework::Client<'a>> + 'static + Sync>;
 
@@ -122,7 +122,7 @@ impl Endpoint {
             try!(Endpoint::call_callbacks(parent.get_before_validation(), &mut client, params));
         }
 
-        try!(self.validate(params, info.app.ext.get::<json_schema_battery::JsonSchemaScope>()));
+        try!(self.validate(params, info.app.ext.get::<schemes::SchemesScope>()));
 
         for parent in info.parents.iter() {
             try!(Endpoint::call_callbacks(parent.get_after_validation(), &mut client, params));

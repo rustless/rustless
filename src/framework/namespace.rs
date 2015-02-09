@@ -9,7 +9,7 @@ use framework;
 use framework::path;
 use framework::nesting::{self, Nesting, Node};
 
-use batteries::json_schema as json_schema_battery;
+use batteries::schemes;
 
 pub struct Namespace {
     pub handlers: framework::ApiHandlers,
@@ -82,7 +82,7 @@ impl framework::ApiHandler for Namespace {
             None => return Err(error_response!(errors::NotMatch))
         };
 
-        try!(self.validate(params, info.app.ext.get::<json_schema_battery::JsonSchemaScope>()));
+        try!(self.validate(params, info.app.ext.get::<schemes::SchemesScope>()));
 
         self.push_node(info);
         self.call_handlers(rest_path, params, req, info)
