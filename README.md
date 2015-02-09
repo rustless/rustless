@@ -5,6 +5,7 @@
 - [Basic Usage](#basic-usage)
 - [Mounting](#mounting)
 - [Parameters validation and coercion](#parameters-validation-and-coercion)
+- [Use JSON Schema](#use-json-schema)
 - [Query strings](#query-strings)
 - [API versioning](#api-versioning)
 - [Respond with custom HTTP Status Code](#respond-with-custom-http-status-code)
@@ -179,6 +180,23 @@ api.get("users/:user_id/messages/:message_id", |endpoint| {
     // ...
 })
 ~~~
+
+## Use JSON Schema
+
+Also you can use JSON Schema (IETF's draft v4) to validate your parameters. To use schemes in your application you need to make simple setup:
+
+~~~rust
+use valico::json_schema;
+use rustless::batteries::schemes;
+
+let scope = json_schema::Scope::new();
+
+// ... You can insert some external schemes here ...
+
+schemes::enable_schemes(&mut app, scope).unwrap();
+~~~
+
+See [Valico] for more info about JSON Scheme usage inside DSL blocks.
 
 [Valico]: https://github.com/rustless/valico
 

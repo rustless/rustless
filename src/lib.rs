@@ -28,6 +28,9 @@ extern crate valico;
 extern crate queryst;
 extern crate jsonway;
 
+#[macro_use]
+extern crate log;
+
 #[macro_use] #[no_link]
 extern crate mopa;
 

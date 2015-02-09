@@ -1,5 +1,6 @@
 use serialize::json;
 use valico::json_dsl;
+use valico::json_schema;
 
 use backend;
 use errors;
@@ -7,6 +8,8 @@ use errors;
 use framework;
 use framework::path;
 use framework::nesting::{self, Nesting, Node};
+
+use batteries::schemes;
 
 pub struct Namespace {
     pub handlers: framework::ApiHandlers,
@@ -45,16 +48,21 @@ impl Namespace {
         return namespace;
     }
 
-    fn validate(&self, params: &mut json::Json) -> backend::HandleResult<()> {
+    fn validate(&self, params: &mut json::Json, scope: Option<&json_schema::Scope>) -> backend::HandleResult<()> {
         // Validate namespace params with valico
         if self.coercer.is_some() {
             // validate and coerce params
             let coercer = self.coercer.as_ref().unwrap();
-            let val_result = coercer.process(params);
+            let state = coercer.process(params, &scope);
 
-            val_result.map_err(|err| {
-                error_response!(errors::Validation{ reason: err })
-            })
+            if state.is_strictly_valid() {
+                Ok(())
+            } else {
+                if state.missing.len() > 0 {
+                    warn!("There are some missing JSON schemes: {:?}", state.missing);
+                }
+                Err(error_response!(errors::Validation{ reason: state.errors }))
+            }
         } else {
             Ok(())
         }
@@ -74,7 +82,7 @@ impl framework::ApiHandler for Namespace {
             None => return Err(error_response!(errors::NotMatch))
         };
 
-        try!(self.validate(params));
+        try!(self.validate(params, info.app.ext.get::<schemes::SchemesScope>()));
 
         self.push_node(info);
         self.call_handlers(rest_path, params, req, info)

@@ -1,6 +1,7 @@
 use serialize::json;
 
 use valico::json_dsl;
+use valico::json_schema;
 
 use server::method;
 use server::mime;
@@ -8,6 +9,8 @@ use backend;
 use errors;
 use framework;
 use framework::path;
+
+use batteries::schemes;
 
 pub type EndpointHandler = Box<for<'a> Fn(framework::Client<'a>, &json::Json) -> backend::HandleResult<framework::Client<'a>> + 'static + Sync>;
 
@@ -85,15 +88,20 @@ impl Endpoint {
         EndpointHandlerPresent::HandlerPresent
     }
 
-    fn validate(&self, params: &mut json::Json) -> backend::HandleResult<()> {
+    fn validate(&self, params: &mut json::Json, scope: Option<&json_schema::Scope>) -> backend::HandleResult<()> {
         // Validate namespace params with valico
         if self.coercer.is_some() {
             // validate and coerce params
             let coercer = self.coercer.as_ref().unwrap();
-            match coercer.process(params) {
-                Ok(()) => Ok(()),
-                Err(err) => return Err(error_response!(errors::Validation{ reason: err }))
-            }   
+            let state = coercer.process(params, &scope);
+            if state.is_strictly_valid() {
+                Ok(())
+            } else {
+                if state.missing.len() > 0 {
+                    warn!("There are some missing JSON schemes: {:?}", state.missing);
+                }
+                Err(error_response!(errors::Validation{ reason: state.errors }))
+            }
         } else {
             Ok(())
         }
@@ -114,7 +122,7 @@ impl Endpoint {
             try!(Endpoint::call_callbacks(parent.get_before_validation(), &mut client, params));
         }
 
-        try!(self.validate(params));
+        try!(self.validate(params, info.app.ext.get::<schemes::SchemesScope>()));
 
         for parent in info.parents.iter() {
             try!(Endpoint::call_callbacks(parent.get_after_validation(), &mut client, params));
