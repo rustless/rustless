@@ -4,6 +4,10 @@ name = "postgres_example"
 version = "0.0.1"
 authors = ["Stanislav Panferov <fnight.m@gmail.com>"]
 
+[[bin]]
+name = "backend"
+path = "src/main.rs"
+
 [dependencies]
 postgres = "*"
 r2d2 = "*"
@@ -12,6 +16,13 @@ typemap = "*"
 time = "*"
 rustc-serialize = "*"
 iron = "*"
+deuterium_orm = "*"
+docopt = "*"
+docopt_macros = "*"
+uuid = "*"
+jsonway = "*"
+valico = "*"
+url = "*"
 
 [dependencies.rustless]
 path = "../.."

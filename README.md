@@ -5,6 +5,7 @@
 
 - [What is Rustless?](#what-is-rustless)
 - [Basic Usage](#basic-usage)
+- [Complex example](#complex-example)
 - [Mounting](#mounting)
 - [Parameters validation and coercion](#parameters-validation-and-coercion)
 - [Use JSON Schema](#use-json-schema)
@@ -124,6 +125,22 @@ fn main() {
     println!("Rustless server started!");
 }
 ~~~
+
+## Complex example
+
+If you want to see how you can write come complex application using Rustless please see the [example](https://github.com/rustless/rustless/tree/master/examples/postgres). 
+
+In that example please note these aspects:
+
+* Complex nested API with versioning.
+* CRUD operations with rust-postgres.
+* Swagger 2.0 intergration.
+* JSON Schema validations.
+* Error reporting.
+* Serializers.
+* File structure.
+* Integration with [docopt](https://github.com/docopt/docopt.rs).
+* Integration with [deuterium-orm](https://github.com/deuterium-orm/deuterium-orm). Database migrations.
 
 ## Mounting
 
