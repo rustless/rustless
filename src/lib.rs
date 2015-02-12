@@ -10,7 +10,7 @@
 // #![deny(warnings)]
 #![deny(bad_style)]
 
-#[plugin] #[no_link]
+#![plugin(regex_macros)]
 extern crate regex_macros;
 extern crate regex;
 extern crate hyper;
