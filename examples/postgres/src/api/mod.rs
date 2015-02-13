@@ -16,14 +16,14 @@ pub fn root() -> rustless::Api {
         api.error_formatter(|error, _media| {
             if error.is::<errors::Validation>() {
                 let val_err = error.downcast::<errors::Validation>().unwrap();
-                return Some(rustless::Response::from_json(status::StatusCode::Ok, &jsonway::object(|json| {
+                return Some(rustless::Response::from_json(status::StatusCode::BadRequest, &jsonway::object(|json| {
                     json.set_json("errors", val_err.reason.to_json())
                 }).unwrap()))
             }
 
             None
         });
-        
+
         api.mount(tweets::tweets("tweets"));
     })
 }
