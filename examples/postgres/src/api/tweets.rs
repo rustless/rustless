@@ -66,6 +66,9 @@ pub fn tweets(path: &str) -> rustless::Namespace {
             single.params(|params| {
                 params.req("tweet_id", |tweet_id| {
                     tweet_id.desc("Tweet ID in UUID format");
+                    tweet_id.schema(|schema| {
+                        schema.format("uuid");
+                    })
                 })
             });
 

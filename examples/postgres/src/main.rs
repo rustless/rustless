@@ -2,9 +2,12 @@
 #![feature(plugin)]
 #![feature(path)]
 #![feature(core)]
+#![feature(io)]
+
+#![plugin(deuterium_orm)]
+#![plugin(docopt_macros)]
 
 extern crate postgres;
-#[plugin] #[macro_use]
 extern crate deuterium_orm;
 extern crate rustless;
 extern crate typemap;
@@ -12,8 +15,6 @@ extern crate time;
 extern crate "rustc-serialize" as rustc_serialize;
 extern crate iron;
 extern crate docopt;
-#[plugin] #[no_link] 
-extern crate docopt_macros;
 extern crate uuid;
 extern crate jsonway;
 extern crate valico;
@@ -51,7 +52,7 @@ Options:
 ");
 
 fn run_db(app: &mut rustless::Application) {
-    let connection_str = env::var_string("POSTGRES_CONNECTION")
+    let connection_str = env::var("POSTGRES_CONNECTION")
         .ok().expect("Provide POSTGRES_CONNECTION environment variable");
     let pool = self::db::setup(&connection_str[], 5);
 
