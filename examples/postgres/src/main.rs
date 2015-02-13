@@ -4,11 +4,12 @@
 #![feature(core)]
 #![feature(io)]
 
-#![plugin(deuterium_orm)]
+#![plugin(deuterium_plugin)]
 #![plugin(docopt_macros)]
 
 extern crate postgres;
-extern crate deuterium_orm;
+#[macro_use] #[no_link] extern crate deuterium_plugin;
+#[macro_use] extern crate deuterium_orm;
 extern crate rustless;
 extern crate typemap;
 extern crate time;
