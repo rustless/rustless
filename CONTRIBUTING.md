@@ -46,6 +46,7 @@ The scope should refer to a module in rustless that is being touched. Examples:
 * framework
 * batteries
 * backend
+* examples
 * lib
 
 ### Subject
