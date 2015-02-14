@@ -5,3 +5,5 @@ script:
   - cargo doc
   - cd examples/postgres
   - cargo build --verbose
+after_success:
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && ./.travis/update_docs.sh
