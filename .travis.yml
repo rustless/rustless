@@ -1,9 +1,12 @@
 language: rust
 script:
-  - cargo build --verbose
-  - cargo test --verbose
-  - cargo doc
-  - cd examples/postgres
-  - cargo build --verbose
+- cargo build --verbose
+- cargo test --verbose
+- cargo doc
+- cd examples/postgres
+- cargo build --verbose
 after_success:
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && ./.travis/update_docs.sh
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && ./.travis/update_docs.sh
+env:
+  global:
+    secure: W8q5t4vCQF5wZ8DJ+UtIsVUQb2Nfrg8mkpg0lte/MXU8fiItpzBKRK5M8EGIT0pN4MdkKCwiHZP5k3JEi34pG88qzxzgWxSKouzOG5761QlZ0hgt8mAv2+czZerxwgkfTuErO64XODfJYQMyjH5hUmz4wFvjXGG2JGNQMA929rg=
