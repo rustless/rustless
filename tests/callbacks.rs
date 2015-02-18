@@ -60,7 +60,7 @@ fn it_invokes_callbacks() {
             admin_ns.get("server_status", |endpoint| {
 
                 endpoint.handle(|client, _params| {
-                    client.text("Everything is OK".to_string())  
+                    client.text("Everything is OK".to_string())
                 })
             });
         })

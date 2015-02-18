@@ -24,7 +24,7 @@ pub type ClientResult<'a> = backend::HandleResult<Client<'a>>;
 
 impl<'a> Client<'a> {
 
-    pub fn new<'r>(app: &'a app::Application, endpoint: &'a endpoint::Endpoint, 
+    pub fn new<'r>(app: &'a app::Application, endpoint: &'a endpoint::Endpoint,
                request: &'a mut (backend::Request + 'r), media: &'a media::Media) -> Client<'a> {
         Client {
             app: app,
@@ -114,7 +114,7 @@ impl<'a> Client<'a> {
             Err(err) => {
                 return Err(error_response!(errors::File(err)));
             }
-        } 
+        }
     }
 
     pub fn empty(self) -> ClientResult<'a> {
@@ -146,7 +146,7 @@ impl<'a> Client<'a> {
     pub fn ext_mut(&mut self) -> &mut typemap::TypeMap {
         &mut self.ext
     }
-    
+
 }
 
 impl<'a> ::Extensible for Client<'a> {

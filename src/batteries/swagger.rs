@@ -10,7 +10,7 @@ use server::method;
 
 #[derive(Copy)]
 #[allow(dead_code)]
-/// The transfer protocol for the operation. Values MUST be from the list: "http", "https", "ws", "wss". 
+/// The transfer protocol for the operation. Values MUST be from the list: "http", "https", "ws", "wss".
 /// The value overrides the Swagger Object schemes definition.
 pub enum Scheme {
     Http,
@@ -53,7 +53,7 @@ pub struct Spec {
 
 #[allow(dead_code)]
 #[derive(Default)]
-/// The object provides metadata about the API. The metadata can be used by the clients 
+/// The object provides metadata about the API. The metadata can be used by the clients
 /// if needed, and can be presented in the Swagger-UI for convenience.
 pub struct Info {
     pub title: String,
@@ -74,7 +74,7 @@ pub struct License {
 
 #[allow(dead_code)]
 #[derive(Clone)]
-/// The location of the parameter. Possible values are 
+/// The location of the parameter. Possible values are
 /// "query", "header", "path", "formData" or "body".
 enum Place {
     Query,
@@ -98,14 +98,14 @@ impl ToString for Place {
 
 #[allow(dead_code)]
 #[derive(Clone)]
-/// The type of the parameter. Since the parameter is not located at the request body, 
-/// it is limited to simple types (that is, not an object). 
-/// The value MUST be one of "string", "number", "integer", "boolean", "array" or "file". 
+/// The type of the parameter. Since the parameter is not located at the request body,
+/// it is limited to simple types (that is, not an object).
+/// The value MUST be one of "string", "number", "integer", "boolean", "array" or "file".
 enum ParamType {
-    String, 
-    Number, 
-    Integer, 
-    Boolean, 
+    String,
+    Number,
+    Integer,
+    Boolean,
     Array,
     File
 }
@@ -125,13 +125,13 @@ impl ToString for ParamType {
 
 #[allow(dead_code)]
 #[derive(Clone)]
-/// The internal type of the array. 
-/// The value MUST be one of "string", "number", "integer", "boolean", or "array". 
+/// The internal type of the array.
+/// The value MUST be one of "string", "number", "integer", "boolean", or "array".
 /// Files and models are not allowed.
 enum ItemType {
-    String, 
-    Number, 
-    Integer, 
+    String,
+    Number,
+    Integer,
     Boolean,
     Array
 }
@@ -150,7 +150,7 @@ impl ToString for ItemType {
 
 #[allow(dead_code)]
 #[derive(Clone)]
-/// An limited subset of JSON-Schema's items object. 
+/// An limited subset of JSON-Schema's items object.
 /// It is used by parameter definitions that are not located in "body".
 struct ItemParams {
     pub type_: ItemType,
@@ -219,8 +219,8 @@ pub fn enable(app: &mut framework::Application, spec: Spec) {
 /// Build the basic Swagger 2.0 object
 pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
     jsonway::object(|&: json| {
-        // Required. Specifies the Swagger Specification version being used. 
-        // It can be used by the Swagger UI and other clients to interpret the API listing. 
+        // Required. Specifies the Swagger Specification version being used.
+        // It can be used by the Swagger UI and other clients to interpret the API listing.
         // The value MUST be "2.0".
         json.set("swagger", "2.0".to_string());
 
@@ -236,7 +236,7 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
 
             if spec.info.terms_of_service.is_some() {
                 // The Terms of Service for the API.
-                info.set("termsOfService", spec.info.terms_of_service.as_ref().unwrap().clone());  
+                info.set("termsOfService", spec.info.terms_of_service.as_ref().unwrap().clone());
             }
 
             if spec.info.contact.is_some() {
@@ -248,9 +248,9 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
 
                     if contact_spec.url.is_some() {
                         // The URL pointing to the contact information. MUST be in the format of a URL.
-                        contact.set("url", contact_spec.url.as_ref().unwrap().clone());   
+                        contact.set("url", contact_spec.url.as_ref().unwrap().clone());
                     }
-                    
+
                     if contact_spec.email.is_some() {
                         // The email address of the contact person/organization. MUST be in the format of an email address.
                         contact.set("email", contact_spec.email.as_ref().unwrap().clone());
@@ -265,7 +265,7 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
                     // The license name used for the API.
                     license.set("name", license_spec.name.clone());
                     // An URL to the license used for the API. MUST be in the format of a URL.
-                    license.set("url", license_spec.url.clone());    
+                    license.set("url", license_spec.url.clone());
                 });
             }
 
@@ -276,15 +276,15 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
         });
 
         if spec.host.is_some() {
-            // The host (name or ip) serving the API. This MUST be the host only and does not 
-            // include the scheme nor sub-paths. It MAY include a port. If the host is not included, 
-            // the host serving the documentation is to be used (including the port). 
+            // The host (name or ip) serving the API. This MUST be the host only and does not
+            // include the scheme nor sub-paths. It MAY include a port. If the host is not included,
+            // the host serving the documentation is to be used (including the port).
             // The host does not support path templating.
-            json.set("host", spec.host.as_ref().unwrap().clone());   
+            json.set("host", spec.host.as_ref().unwrap().clone());
         }
 
-        // The base path on which the API is served, which is relative to the host. 
-        // If it is not included, the API is served directly under the host. 
+        // The base path on which the API is served, which is relative to the host.
+        // If it is not included, the API is served directly under the host.
         // The value MUST start with a leading slash (/). The basePath does not support path
         // templating.
         json.set("basePath", spec.base_path.clone().unwrap_or_else(|| {
@@ -310,8 +310,8 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
             base_path
         }));
 
-        // The transfer protocol of the API. Values MUST be from the list: 
-        // "http", "https", "ws", "wss". If the schemes is not included, the default 
+        // The transfer protocol of the API. Values MUST be from the list:
+        // "http", "https", "ws", "wss". If the schemes is not included, the default
         // scheme to be used is the one used to access the specification.
         if spec.schemes.is_some() {
             let schemes_spec = spec.schemes.as_ref().unwrap();
@@ -324,24 +324,24 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
 
         if spec.consumes.is_some() {
             let consumes_spec = spec.consumes.as_ref().unwrap();
-            // A list of MIME types the APIs can consume. This is global to all APIs but can be 
+            // A list of MIME types the APIs can consume. This is global to all APIs but can be
             // overridden on specific API calls. Value MUST be as described under Mime Types.
             json.array("consumes", |consumes| {
                 for mime in consumes_spec.iter() {
                     consumes.push(mime.to_string())
                 }
-            }); 
+            });
         }
 
         if spec.produces.is_some() {
             let produces_spec = spec.produces.as_ref().unwrap();
-            // A list of MIME types the APIs can produce. This is global to all APIs but can 
+            // A list of MIME types the APIs can produce. This is global to all APIs but can
             // be overridden on specific API calls. Value MUST be as described under Mime Types.
             json.array("produces", |produces| {
                 for mime in produces_spec.iter() {
                     produces.push(mime.to_string())
                 }
-            }); 
+            });
         }
 
         // Required. The available paths and operations for the API.
@@ -359,13 +359,13 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
 
         // });
 
-        // // An object to hold parameters that can be used across operations. 
+        // // An object to hold parameters that can be used across operations.
         // // This property does not define global parameters for all operations.
         // json.object("parameters", |parameters| {
 
         // });
 
-        // // An object to hold responses that can be used across operations. 
+        // // An object to hold responses that can be used across operations.
         // // This property does not define global responses for all operations.
         // json.object("responses", |responses| {
 
@@ -376,18 +376,18 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
 
         // });
 
-        // // A declaration of which security schemes are applied for the API as a whole. 
-        // // The list of values describes alternative security schemes that can be used 
-        // // (that is, there is a logical OR between the security requirements). 
+        // // A declaration of which security schemes are applied for the API as a whole.
+        // // The list of values describes alternative security schemes that can be used
+        // // (that is, there is a logical OR between the security requirements).
         // // Individual operations can override this definition.
         // json.array("security", |security| {
 
         // });
 
-        // // A list of tags used by the specification with additional metadata. 
-        // // The order of the tags can be used to reflect on their order by the parsing tools. 
-        // // Not all tags that are used by the Operation Object must be declared. 
-        // // The tags that are not declared may be organized randomly or based on the tools' logic. 
+        // // A list of tags used by the specification with additional metadata.
+        // // The order of the tags can be used to reflect on their order by the parsing tools.
+        // // Not all tags that are used by the Operation Object must be declared.
+        // // The tags that are not declared may be organized randomly or based on the tools' logic.
         // // Each tag name in the list MUST be unique.
         // json.array("tags", |tags| {
 
@@ -396,7 +396,7 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
         // // Additional external documentation.
         // json.object("externalDocs", |external_docs| {
 
-        // })  
+        // })
 
     }).unwrap()
 }
@@ -450,7 +450,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
             }
 
             fill_paths(WalkContext{
-                path: path.as_slice(), 
+                path: path.as_slice(),
                 params: context.params.clone()
             }, paths, &api.handlers);
 
@@ -464,10 +464,10 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
             params.append(&mut extract_params(&namespace.coercer, &namespace.path));
 
             fill_paths(WalkContext{
-                path: path.as_slice(), 
+                path: path.as_slice(),
                 params: params,
             }, paths, &namespace.handlers);
-        
+
         } else if handler.is::<framework::Endpoint>() {
             let mut path = context.path.to_string();
             let endpoint = handler.downcast_ref::<framework::Endpoint>().unwrap();
@@ -489,7 +489,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
                     false
                 }
             };
-            
+
             if !exists {
                 paths.object(path.as_slice(), |path_item| {
                     path_item.set(method.clone(), definition.to_json());
@@ -508,18 +508,18 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
 /// Creates Endpoint definition according to Swagger 2.0 specification
 fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkContext) -> json::Json {
     jsonway::object(|def| {
-        // A list of tags for API documentation control. Tags can be used for logical grouping 
+        // A list of tags for API documentation control. Tags can be used for logical grouping
         // of operations by resources or any other qualifier.
         // def.array("tags", |tags| { });
 
         if endpoint.summary.is_some() {
-            // A short summary of what the operation does. For maximum readability in the swagger-ui, 
+            // A short summary of what the operation does. For maximum readability in the swagger-ui,
             // this field SHOULD be less than 120 characters.
-            def.set("summary", endpoint.summary.as_ref().unwrap().clone());  
+            def.set("summary", endpoint.summary.as_ref().unwrap().clone());
         }
 
         if endpoint.desc.is_some() {
-            // A verbose explanation of the operation behavior. 
+            // A verbose explanation of the operation behavior.
             // GFM syntax can be used for rich text representation.
             def.set("description",  endpoint.desc.as_ref().unwrap().clone());
         }
@@ -527,13 +527,13 @@ fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkC
         // Required. The list of possible responses as they are returned from executing this operation.
         def.object("responses",  |responses| {
             responses.object("200", |default| {
-                // Required. A short description of the response. 
+                // Required. A short description of the response.
                 // GFM syntax can be used for rich text representation.
                 default.set("description", "Default response".to_string());
 
-                // A definition of the response structure. It can be a primitive, an array or an object. 
-                // If this field does not exist, it means no content is returned as part of the response. 
-                // As an extension to the Schema Object, its root type value may also be "file". 
+                // A definition of the response structure. It can be a primitive, an array or an object.
+                // If this field does not exist, it means no content is returned as part of the response.
+                // As an extension to the Schema Object, its root type value may also be "file".
                 // This SHOULD be accompanied by a relevant produces mime-type.
                 default.object("schema", |schema| {});
 
@@ -547,64 +547,64 @@ fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkC
 
         // TODO Implement the rest of the Swagger 2.0 spec
 
-        // // External Documentation Object   
+        // // External Documentation Object
         // // Additional external documentation for this operation.
         // def.object("externalDocs", |external_docs| {
-        //     // A short description of the target documentation. 
+        //     // A short description of the target documentation.
         //     // GFM syntax can be used for rich text representation.
-        //     external_docs.set("description", "Description".to_string()); 
+        //     external_docs.set("description", "Description".to_string());
         //     //  Required. The URL for the target documentation. Value MUST be in the format of a URL.
         //     external_docs.set("url", "http://google.com".to_string());
         // });
 
-        // // A friendly name for the operation. The id MUST be unique among all operations described 
+        // // A friendly name for the operation. The id MUST be unique among all operations described
         // // in the API. Tools and libraries MAY use the operation id to uniquely identify an operation.
         // def.set("operationId", "OP".to_string());
 
         if endpoint.consumes.is_some() {
-            // A list of MIME types the operation can consume. 
-            // This overrides the [consumes](#swaggerConsumes) definition at the Swagger Object. 
-            // An empty value MAY be used to clear the global definition. 
+            // A list of MIME types the operation can consume.
+            // This overrides the [consumes](#swaggerConsumes) definition at the Swagger Object.
+            // An empty value MAY be used to clear the global definition.
             // Value MUST be as described under Mime Types.
             def.array("consumes", |consumes| {
                 let consumes_spec = endpoint.consumes.as_ref().unwrap();
                 for mime in consumes_spec.iter() {
                     consumes.push(mime.to_string())
                 }
-            });     
+            });
         }
 
         if endpoint.produces.is_some() {
-            // A list of MIME types the operation can produce. 
-            // This overrides the [produces](#swaggerProduces) definition at the Swagger Object. 
-            // An empty value MAY be used to clear the global definition. 
+            // A list of MIME types the operation can produce.
+            // This overrides the [produces](#swaggerProduces) definition at the Swagger Object.
+            // An empty value MAY be used to clear the global definition.
             // Value MUST be as described under Mime Types.
             def.array("produces", |produces| {
                 let produces_spec = endpoint.produces.as_ref().unwrap();
                 for mime in produces_spec.iter() {
                     produces.push(mime.to_string())
                 }
-            });  
+            });
         }
 
-        // A list of parameters that are applicable for this operation. 
-        // If a parameter is already defined at the Path Item, the new definition will override it, 
-        // but can never remove it. The list MUST NOT include duplicated parameters. 
-        // A unique parameter is defined by a combination of a name and location. 
-        // The list can use the Reference Object to link to parameters that are 
+        // A list of parameters that are applicable for this operation.
+        // If a parameter is already defined at the Path Item, the new definition will override it,
+        // but can never remove it. The list MUST NOT include duplicated parameters.
+        // A unique parameter is defined by a combination of a name and location.
+        // The list can use the Reference Object to link to parameters that are
         // defined at the Swagger Object's parameters. There can be one "body" parameter at most.
         def.array("parameters", |parameters| {
             let params = extract_params(&endpoint.coercer, &endpoint.path);
             let mut final_params = vec![];
             for param in context.params.iter() {
-                final_params.push(param.clone()) 
+                final_params.push(param.clone())
             }
             for param in params.iter() {
-                final_params.push(param.clone()) 
+                final_params.push(param.clone())
             }
 
             match endpoint.method {
-                method::Method::Post | 
+                method::Method::Post |
                 method::Method::Put => {
                     for param in final_params.iter_mut() {
                         match param.place {
@@ -619,18 +619,18 @@ fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkC
             parameters.map(final_params.iter(), |param| param.to_json());
         });
 
-        // // The transfer protocol for the operation. Values MUST be from the list: "http", "https", 
+        // // The transfer protocol for the operation. Values MUST be from the list: "http", "https",
         // // "ws", "wss". The value overrides the Swagger Object schemes definition.
         // def.array("schemes", |schemes| {});
 
-        // // Declares this operation to be deprecated. Usage of the declared operation should be refrained. 
+        // // Declares this operation to be deprecated. Usage of the declared operation should be refrained.
         // // Default value is false.
         // def.set("deprecated", false);
 
-        // // A declaration of which security schemes are applied for this operation. 
-        // // The list of values describes alternative security schemes that can be used 
-        // // (that is, there is a logical OR between the security requirements). 
-        // // This definition overrides any declared top-level security. 
+        // // A declaration of which security schemes are applied for this operation.
+        // // The list of values describes alternative security schemes that can be used
+        // // (that is, there is a logical OR between the security requirements).
+        // // This definition overrides any declared top-level security.
         // // To remove a top-level security declaration, an empty array can be used.
         // def.array("security", |security| {});
     }).unwrap()
@@ -720,6 +720,6 @@ fn extract_params(coercer: &Option<json_dsl::Builder>, path: &framework::Path) -
             params.insert(param_name.clone(), param);
         }
     }
-    
+
     params.into_iter().map(|(_key, value)| value).collect::<Vec<Param>>()
 }

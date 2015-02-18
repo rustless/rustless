@@ -29,7 +29,7 @@ fn it_serializes_json_properly() {
 
     {
         let &header::ContentType(ref mime_type): &header::ContentType = response.headers.get().unwrap();
-        assert_eq!(*mime_type, mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, vec![]));    
+        assert_eq!(*mime_type, mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, vec![]));
     }
 
     let body: json::Json = from_utf8(response.read_to_end().unwrap().as_slice()).unwrap().parse().unwrap();

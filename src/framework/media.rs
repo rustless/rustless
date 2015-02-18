@@ -103,25 +103,25 @@ fn asset_regexp() {
     assert_eq!(captures.name("version").unwrap(), "v3");
     assert_eq!(captures.name("param").unwrap(), "raw");
     assert_eq!(captures.name("format").unwrap(), "json");
-    
+
     let captures = MEDIA_REGEX.captures("application/vnd.github.v3+json").unwrap();
     assert_eq!(captures.name("vendor").unwrap(), "github");
     assert_eq!(captures.name("version").unwrap(), "v3");
     assert_eq!(captures.name("param"), None);
     assert_eq!(captures.name("format").unwrap(), "json");
-    
+
     let captures = MEDIA_REGEX.captures("application/vnd.github+json").unwrap();
     assert_eq!(captures.name("vendor").unwrap(), "github");
     assert_eq!(captures.name("version"), None);
     assert_eq!(captures.name("param"), None);
     assert_eq!(captures.name("format").unwrap(), "json");
-    
+
     let captures = MEDIA_REGEX.captures("application/vnd.github").unwrap();
     assert_eq!(captures.name("vendor").unwrap(), "github");
     assert_eq!(captures.name("version"), None);
     assert_eq!(captures.name("param"), None);
     assert_eq!(captures.name("format"), None);
-    
+
     let captures = MEDIA_REGEX.captures("application/vnd");
     assert!(captures.is_none());
 }

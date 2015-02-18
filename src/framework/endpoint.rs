@@ -49,7 +49,7 @@ impl Endpoint {
         }
     }
 
-    pub fn build<F>(method: method::Method, path: &str, builder: F) -> Endpoint 
+    pub fn build<F>(method: method::Method, path: &str, builder: F) -> Endpoint
     where F: FnOnce(&mut Endpoint) -> EndpointHandlerPresent {
         let mut endpoint = Endpoint::new(method, path);
         builder(&mut endpoint);
@@ -107,11 +107,11 @@ impl Endpoint {
         }
     }
 
-    pub fn call_endpoint<'a>(&self, 
-        params: &mut json::Json, 
-        req: &'a mut (backend::Request + 'a), 
+    pub fn call_endpoint<'a>(&self,
+        params: &mut json::Json,
+        req: &'a mut (backend::Request + 'a),
         info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
-        
+
         let mut client = framework::Client::new(info.app, self, req, &info.media);
 
         for parent in info.parents.iter() {
@@ -139,8 +139,8 @@ impl Endpoint {
     }
 
     fn call_callbacks(
-        cbs: &Vec<framework::Callback>, 
-        client: &mut framework::Client, 
+        cbs: &Vec<framework::Callback>,
+        client: &mut framework::Client,
         params: &mut json::Json) -> backend::HandleSuccessResult {
 
         for cb in cbs.iter() {
@@ -153,10 +153,10 @@ impl Endpoint {
 }
 
 impl framework::ApiHandler for Endpoint {
-    fn api_call<'r>(&self, 
-        rest_path: &str, 
-        params: &mut json::Json, 
-        req: &'r mut (backend::Request + 'r), 
+    fn api_call<'r>(&self,
+        rest_path: &str,
+        params: &mut json::Json,
+        req: &'r mut (backend::Request + 'r),
         info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
 
         // method::Method guard

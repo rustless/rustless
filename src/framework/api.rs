@@ -83,7 +83,7 @@ impl Api {
         self.produces = Some(mimes);
     }
 
-    pub fn error_formatter<F>(&mut self, formatter: F) 
+    pub fn error_formatter<F>(&mut self, formatter: F)
     where F: Fn(&Box<Error + 'static>, &media::Media) -> Option<backend::Response> + Send+Sync {
         self.error_formatters.push(Box::new(formatter));
     }
@@ -114,10 +114,10 @@ impl Api {
 impl_nesting!(Api);
 
 impl framework::ApiHandler for Api {
-    fn api_call<'a, 'r>(&'a self, 
-        rest_path: &str, 
-        params: &mut json::Json, 
-        req: &'r mut (backend::Request + 'r), 
+    fn api_call<'a, 'r>(&'a self,
+        rest_path: &str,
+        params: &mut json::Json,
+        req: &'r mut (backend::Request + 'r),
         info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
 
         // Check prefix
@@ -162,13 +162,13 @@ impl framework::ApiHandler for Api {
                             for qual in quals.iter() {
                                 match media::Media::from_vendor(&qual.item) {
                                     Some(media) => {
-                                        if media.vendor.as_slice() == *vendor && 
-                                           media.version.is_some() && 
+                                        if media.vendor.as_slice() == *vendor &&
+                                           media.version.is_some() &&
                                            media.version.as_ref().unwrap() == version {
                                             matched_media = Some(media);
                                             break;
                                         }
-                                    }, 
+                                    },
                                     None => ()
                                 }
                             }
@@ -201,7 +201,7 @@ impl framework::ApiHandler for Api {
                 err_resp
             } else {
                 let resp = self.handle_error(&err_resp.error, &self.extract_media(req).unwrap_or_else(|| media::Media::default()));
-                errors::ErrorResponse { 
+                errors::ErrorResponse {
                     error: err_resp.error,
                     response: resp
                 }

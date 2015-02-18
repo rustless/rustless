@@ -62,7 +62,7 @@ pub trait Nesting: Node {
         self.get_handlers_mut().push(Box::new(edp))
     }
 
-    /* 
+    /*
      * namespace::Namespace aliases
      */
 
@@ -82,55 +82,55 @@ pub trait Nesting: Node {
         self.mount(namespace::Namespace::build(path, builder));
     }
 
-    /* 
+    /*
      * endpoint::Endpoints
      */
 
-    fn get<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
+    fn get<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint)
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Get, path, builder));
-    }    
-    fn post<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
+    }
+    fn post<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint)
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Post, path, builder));
-    }    
-    fn put<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
+    }
+    fn put<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint)
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Put, path, builder));
-    }    
-    fn delete<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
+    }
+    fn delete<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint)
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Delete, path, builder));
-    }    
-    fn options<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
+    }
+    fn options<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint)
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Options, path, builder));
-    }    
-    fn head<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint) 
+    }
+    fn head<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint)
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Head, path, builder));
     }
 
-    fn before<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json) 
-    -> backend::HandleSuccessResult + Send+Sync { 
-        self.get_before_mut().push(Box::new(callback)); 
+    fn before<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json)
+    -> backend::HandleSuccessResult + Send+Sync {
+        self.get_before_mut().push(Box::new(callback));
     }
-    fn before_validation<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json) 
-    -> backend::HandleSuccessResult + Send+Sync { 
-        self.get_before_validation_mut().push(Box::new(callback)); 
+    fn before_validation<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json)
+    -> backend::HandleSuccessResult + Send+Sync {
+        self.get_before_validation_mut().push(Box::new(callback));
     }
-    fn after<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json) 
-    -> backend::HandleSuccessResult + Send+Sync { 
+    fn after<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json)
+    -> backend::HandleSuccessResult + Send+Sync {
         self.get_after_mut().push(Box::new(callback));
     }
-    fn after_validation<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json) 
-    -> backend::HandleSuccessResult + Send+Sync { 
-        self.get_after_validation_mut().push(Box::new(callback)); 
+    fn after_validation<F>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &json::Json)
+    -> backend::HandleSuccessResult + Send+Sync {
+        self.get_after_validation_mut().push(Box::new(callback));
     }
 
-    fn call_handlers<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Json, req: &'r mut (backend::Request + 'r), 
+    fn call_handlers<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Json, req: &'r mut (backend::Request + 'r),
                          info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
-        
+
         for handler in self.get_handlers().iter() {
             match handler.api_call(rest_path, params, req, info) {
                 Ok(response) => return Ok(response),

@@ -66,7 +66,7 @@ impl Application {
                         error: error,
                         response: response
                     }
-                } 
+                }
             })
     }
 }
@@ -86,7 +86,7 @@ fn parse_query(query_str: &str, params: &mut json::Json) -> backend::HandleSucce
                     params.insert(key.to_string(), value.clone());
                 }
             }
-        }, 
+        },
         Err(_) => {
             return Err(error_response!(errors::QueryString));
         }
@@ -97,7 +97,7 @@ fn parse_query(query_str: &str, params: &mut json::Json) -> backend::HandleSucce
 
 fn parse_utf8(req: &mut backend::Request) -> backend::HandleResult<String> {
     // FIXME https://github.com/rustless/rustless/issues/19
-    //       We need to implement some common Iron middleware/plugin 
+    //       We need to implement some common Iron middleware/plugin
     //       and use it instead of `.read_to_end()`.
     match req.body_mut().read_to_end() {
         Ok(bytes) => {
@@ -134,7 +134,7 @@ fn parse_json_body(req: &mut backend::Request, params: &mut json::Json) -> backe
                 }
             },
             Err(e) => return Err(error_response!(errors::Body::new(format!("Invalid JSON: {}", e))))
-        }  
+        }
     }
 
     Ok(())
@@ -159,7 +159,7 @@ fn parse_urlencoded_body(req: &mut backend::Request, params: &mut json::Json) ->
                 }
             },
             Err(_) => return Err(error_response!(errors::Body::new(format!("Invalid encoded data"))))
-        }  
+        }
     }
 
     Ok(())
@@ -168,7 +168,7 @@ fn parse_urlencoded_body(req: &mut backend::Request, params: &mut json::Json) ->
 fn parse_request(req: &mut backend::Request, params: &mut json::Json) -> backend::HandleSuccessResult {
     // extend params with query-string params if any
     if req.url().query().is_some() {
-        try!(parse_query(req.url().query().as_ref().unwrap().as_slice(), params));   
+        try!(parse_query(req.url().query().as_ref().unwrap().as_slice(), params));
     }
 
     // extend params with json-encoded body params if any

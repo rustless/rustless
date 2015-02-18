@@ -33,7 +33,7 @@ impl Path {
 
     pub fn parse(path: &str, endpoint: bool) -> Result<Path,String> {
         let mut regex_body = "^".to_string() + Path::sub_regex(path).as_slice();
-        
+
         if endpoint {
             regex_body = regex_body + "$";
         }
@@ -45,7 +45,7 @@ impl Path {
 
         let mut params = vec![];
         for capture in MATCHER.captures_iter(path) {
-            params.push(capture.at(1).unwrap_or("").to_string()); 
+            params.push(capture.at(1).unwrap_or("").to_string());
         }
 
         Ok(Path {
@@ -79,10 +79,10 @@ fn parse_and_match() {
     let path = Path::parse(":user_id/messages/:message_id", true).unwrap();
     assert!(match path.is_match("1920/messages/100500") {
         Some(captures) => {
-            captures.name("user_id").unwrap() == "1920" && 
+            captures.name("user_id").unwrap() == "1920" &&
             captures.name("message_id").unwrap() == "100500"
         }
-        None => false   
+        None => false
     });
     assert!(match path.is_match("1920/messages/not_match/100500") {
         Some(_) => false,

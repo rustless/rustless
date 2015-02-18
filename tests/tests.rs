@@ -25,7 +25,7 @@ macro_rules! sr {
 macro_rules! call_app {
     ($app:ident, $method:ident, $url:expr) => {
         $app.call(&mut sr!($method, $url))
-    };    
+    };
     ($app:ident, $method:ident, $url:expr, $blk:expr) => {
         $app.call(&mut sr!($method, $url, $blk))
     };
@@ -60,7 +60,7 @@ macro_rules! edp_stub {
     ($api:ident) => ({
         $api.get("info", |endpoint| {
             edp_stub_handler!(endpoint)
-        });    
+        });
     })
 }
 

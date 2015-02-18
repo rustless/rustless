@@ -24,7 +24,7 @@ pub struct Namespace {
 impl_nesting!(Namespace);
 
 impl Namespace {
-    
+
     pub fn new(path: &str) -> Namespace {
         Namespace {
             handlers: vec![],
@@ -70,7 +70,7 @@ impl Namespace {
 }
 
 impl framework::ApiHandler for Namespace {
-    fn api_call<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Json, req: &'r mut (backend::Request + 'r), 
+    fn api_call<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Json, req: &'r mut (backend::Request + 'r),
                     info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
 
         let rest_path: &str = match self.path.is_match(rest_path) {

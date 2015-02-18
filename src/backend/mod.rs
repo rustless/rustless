@@ -3,10 +3,10 @@ pub use self::request::{Request, AsUrl};
 pub use self::response::{Response};
 
 pub use self::iron::{
-    Url, 
-    Handler, 
-    HandleResult, 
-    HandleSuccessResult, 
+    Url,
+    Handler,
+    HandleResult,
+    HandleSuccessResult,
     HandleResultStrict,
     WrapUrl
 };

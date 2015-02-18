@@ -23,7 +23,7 @@ pub struct SimpleRequest {
 impl<'a> Request for SimpleRequest {
 
     fn url(&self) -> &AsUrl {
-        return &self.url;    
+        return &self.url;
     }
 
     fn remote_addr(&self) -> &ip::SocketAddr {
@@ -50,7 +50,7 @@ impl<'a> Request for SimpleRequest {
 
 #[allow(dead_code)]
 impl SimpleRequest {
-    
+
     pub fn new(method: method::Method, url: ::url::Url) -> SimpleRequest {
         SimpleRequest {
             url: url.wrap_url(),
@@ -62,7 +62,7 @@ impl SimpleRequest {
         }
     }
 
-    pub fn build<F>(method: method::Method, url: ::url::Url, builder: F) -> SimpleRequest 
+    pub fn build<F>(method: method::Method, url: ::url::Url, builder: F) -> SimpleRequest
     where F: Fn(&mut SimpleRequest) {
         let mut srq = SimpleRequest::new(method, url);
         builder(&mut srq);

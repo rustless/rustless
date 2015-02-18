@@ -14,8 +14,8 @@ impl ::typemap::Key for CookieJarKey {
 pub trait CookieExt {
     fn find_cookie_jar(&mut self) -> Option<&mut cookie::CookieJar<'static>>;
     fn store_cookie_jar(&mut self, jar: cookie::CookieJar<'static>);
-    fn cookies<'a>(&'a mut self) -> &'a mut cookie::CookieJar<'static> { 
-        self.find_cookie_jar().unwrap()   
+    fn cookies<'a>(&'a mut self) -> &'a mut cookie::CookieJar<'static> {
+        self.find_cookie_jar().unwrap()
     }
 }
 
