@@ -10,7 +10,7 @@ use super::super::serializers::tweet_serializer;
 
 pub fn tweets(path: &str) -> rustless::Namespace {
     rustless::Namespace::build(path, |tweets| {
-        
+
         tweets.get("latest", |endpoint| {
             endpoint.desc("Get latest tweets");
             endpoint.handle(|client, _params| {
@@ -40,7 +40,7 @@ pub fn tweets(path: &str) -> rustless::Namespace {
                             })
                         });
                         tweet.required(vec![
-                            "author_name".to_string(), 
+                            "author_name".to_string(),
                             "content".to_string()
                         ]);
                         tweet.additional_properties(false);
@@ -142,6 +142,6 @@ pub fn tweets(path: &str) -> rustless::Namespace {
             });
 
         })
-        
+
     })
 }

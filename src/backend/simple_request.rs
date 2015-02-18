@@ -8,6 +8,7 @@ use {Extensible};
 use server::method;
 use server::header;
 use super::request;
+use super::super::errors;
 use backend::{Request, Url, AsUrl, WrapUrl};
 
 #[allow(dead_code)]
@@ -46,6 +47,11 @@ impl<'a> Request for SimpleRequest {
         return &mut self.body;
     }
 
+    fn read_to_end(&mut self) -> Result<Option<String>, Box<errors::Error>> {
+        String::from_utf8(self.body.read_to_end().unwrap())
+            .map(|body| Some(body))
+            .map_err(|err| Box::new(err) as Box<errors::Error>)
+    }
 }
 
 #[allow(dead_code)]

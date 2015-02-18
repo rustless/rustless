@@ -22,6 +22,14 @@ macro_rules! error_response{
     })
 }
 
+macro_rules! error_response_boxed{
+    ($error:expr) => ($crate::errors::ErrorResponse{
+        error: $error,
+        response: None
+    })
+}
+
+
 macro_rules! impl_basic_err {
     ($err:ty, $code:expr) => {
         impl ::std::error::Error for $err {

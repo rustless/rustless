@@ -11,7 +11,7 @@ impl RawMigration<Connection> for CreateTweets {
             author_name       VARCHAR(30),
             content          VARCHAR(140),
             created_at       timestamptz DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            updated_at       timestamptz DEFAULT CURRENT_TIMESTAMP NOT NULL 
+            updated_at       timestamptz DEFAULT CURRENT_TIMESTAMP NOT NULL
         )", &[]).unwrap();
 
         t.set_commit();
@@ -19,6 +19,6 @@ impl RawMigration<Connection> for CreateTweets {
     }
 
     fn down(&self, cn: &Connection) {
-        cn.execute("DROP TABLE tweets;", &[]).unwrap(); 
+        cn.execute("DROP TABLE tweets;", &[]).unwrap();
     }
 }

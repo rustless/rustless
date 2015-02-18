@@ -21,6 +21,7 @@ extern crate cookie;
 extern crate iron;
 extern crate typemap;
 extern crate plugin;
+extern crate bodyparser;
 
 extern crate collections;
 extern crate valico;
