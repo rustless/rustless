@@ -83,7 +83,7 @@ impl Api {
         self.produces = Some(mimes);
     }
 
-    pub fn error_formatter<F>(&mut self, formatter: F)
+    pub fn error_formatter<F: 'static>(&mut self, formatter: F)
     where F: Fn(&Box<Error + 'static>, &media::Media) -> Option<backend::Response> + Send+Sync {
         self.error_formatters.push(Box::new(formatter));
     }

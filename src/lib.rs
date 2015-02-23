@@ -3,15 +3,14 @@
 #![feature(plugin)]
 #![feature(collections)]
 #![feature(core)]
-#![feature(io)]
-#![feature(std_misc)]
 #![feature(env)]
-#![feature(path)]
+#![feature(old_io)]
+#![feature(old_path)]
 // #![deny(warnings)]
 #![deny(bad_style)]
 
 #![plugin(regex_macros)]
-extern crate regex_macros;
+
 extern crate regex;
 extern crate hyper;
 extern crate "rustc-serialize" as serialize;

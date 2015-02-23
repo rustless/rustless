@@ -1,7 +1,7 @@
 // #![deny(warnings)]
 #![deny(bad_style)]
 #![feature(core)]
-#![feature(io)]
+#![feature(old_io)]
 
 #[macro_use]
 extern crate rustless;

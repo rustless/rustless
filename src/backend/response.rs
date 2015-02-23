@@ -83,7 +83,7 @@ impl Reader for Response {
     fn read(&mut self, buf: &mut [u8]) -> old_io::IoResult<usize> {
         match self.body {
             Some(ref mut reader) => reader.read(buf),
-            None => Ok(0us)
+            None => Ok(0usize)
         }
     }
 }

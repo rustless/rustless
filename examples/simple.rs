@@ -40,14 +40,14 @@ fn main() {
     let mut app = rustless::Application::new(rustless::Api::build(|api| {
         api.prefix("api");
         api.version("v1", rustless::Versioning::Path);
-        
+
         api.mount(swagger::create_api("api-docs"));
 
         api.error_formatter(|err, _media| {
             match err.downcast::<UnauthorizedError>() {
                 Some(_) => {
                     return Some(rustless::Response::from_string(
-                        status::StatusCode::Unauthorized, 
+                        status::StatusCode::Unauthorized,
                         "Please provide correct `token` parameter".to_string()
                     ))
                 },
@@ -64,7 +64,7 @@ fn main() {
             });
             endpoint.handle(|client, params| {
                 client.text(
-                    format!("{}, {}", 
+                    format!("{}, {}",
                         params.find("greeting").unwrap().to_string(),
                         params.find("name").unwrap().to_string())
                 )
@@ -115,7 +115,7 @@ fn main() {
                         signed_cookies.add(user_cookie);
                     }
 
-                    client.text("Everything is OK".to_string())  
+                    client.text("Everything is OK".to_string())
                 })
             });
         })
@@ -142,7 +142,7 @@ fn main() {
     let mut chain = iron::Chain::new(app);
     chain.link(::rustless::batteries::cookie::new("secretsecretsecretsecretsecretsecretsecret".as_bytes()));
 
-    iron::Iron::new(chain).listen("localhost:4000").unwrap();
+    iron::Iron::new(chain).http("localhost:4000").unwrap();
     println!("On 4000");
 
 }

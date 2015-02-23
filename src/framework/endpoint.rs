@@ -77,7 +77,7 @@ impl Endpoint {
         self.coercer = Some(json_dsl::Builder::build(builder));
     }
 
-    pub fn handle<F>(&mut self, handler: F) -> EndpointHandlerPresent
+    pub fn handle<F: 'static>(&mut self, handler: F) -> EndpointHandlerPresent
     where F: for<'a> Fn(framework::Client<'a>, &json::Json) -> backend::HandleResult<framework::Client<'a>> + Sync+Send {
         self.handler = Some(Box::new(handler));
         EndpointHandlerPresent::HandlerPresent

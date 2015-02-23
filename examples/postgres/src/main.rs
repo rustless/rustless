@@ -1,8 +1,8 @@
 #![feature(env)]
 #![feature(plugin)]
-#![feature(path)]
 #![feature(core)]
-#![feature(io)]
+#![feature(old_io)]
+#![feature(old_path)]
 
 #![plugin(deuterium_plugin)]
 #![plugin(docopt_macros)]
@@ -55,7 +55,7 @@ Options:
 fn run_db(app: &mut rustless::Application) {
     let connection_str = env::var("POSTGRES_CONNECTION")
         .ok().expect("Provide POSTGRES_CONNECTION environment variable");
-    let pool = self::db::setup(&connection_str[], 5);
+    let pool = self::db::setup(&connection_str[..], 5);
 
     // Here we use TypeMap to store out database pool
     app.ext.insert::<self::db::AppDb>(pool);
@@ -103,7 +103,7 @@ fn main() {
         let host: ip::IpAddr = args.flag_ip.parse().unwrap();
         let port: u16 = args.flag_port.parse().unwrap();
 
-        iron::Iron::new(chain).listen((host, port)).unwrap();
+        iron::Iron::new(chain).http((host, port)).unwrap();
 
         println!("On {}", port);
 
@@ -116,7 +116,7 @@ fn main() {
 
         run_db(&mut app);
         deuterium_orm::migration::rollback(
-          args.arg_steps.parse().unwrap_or(1), 
+          args.arg_steps.parse().unwrap_or(1),
           &db::migrations::migrations(),
           &*app.db()
         );
@@ -124,7 +124,7 @@ fn main() {
     } else if args.cmd_g && args.cmd_migration {
 
         let name = deuterium_orm::migration::create_migration_file(
-          &args.arg_migration_name[], 
+          &args.arg_migration_name[..],
           Path::new("src/db/migrations")
         );
 
