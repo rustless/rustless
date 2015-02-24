@@ -1,18 +1,18 @@
 use url;
 use std::old_io::net::ip;
-use plugin::{Extensible};
+use plugin::{Extensible, Pluggable};
 pub use iron::{Url, Handler};
 
 use iron::{self};
+use bodyparser;
 
 use backend::{self};
 use super::super::framework;
 
 use server::method;
 use server::header;
-
-use super::request;
 use super::super::errors;
+use super::request;
 
 pub type HandleResultStrict<T> = Result<T, errors::StrictErrorResponse>;
 pub type HandleResult<T> = Result<T, errors::ErrorResponse>;
@@ -48,6 +48,9 @@ impl<'a> backend::Request for iron::Request<'a> {
     fn url(&self) -> &backend::AsUrl { &self.url }
     fn body(&self) -> &request::Body { &self.body }
     fn body_mut(&mut self) -> &mut request::Body { &mut self.body }
+    fn read_to_end(&mut self) -> Result<Option<String>, Box<errors::Error>> {
+        self.get::<bodyparser::Raw>().map_err(|err| Box::new(err) as Box<errors::Error>)
+    }
 }
 
 impl<'a>  ::Extensible for iron::Request<'a> {

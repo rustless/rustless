@@ -95,31 +95,12 @@ fn parse_query(query_str: &str, params: &mut json::Json) -> backend::HandleSucce
     Ok(())
 }
 
-fn parse_utf8(req: &mut backend::Request) -> backend::HandleResult<String> {
-    // FIXME https://github.com/rustless/rustless/issues/19
-    //       We need to implement some common Iron middleware/plugin
-    //       and use it instead of `.read_to_end()`.
-    match req.body_mut().read_to_end() {
-        Ok(bytes) => {
-             match String::from_utf8(bytes) {
-                Ok(e) => Ok(e),
-                Err(_) => Err(error_response!(
-                    errors::Body::new("Invalid UTF-8 sequence".to_string())
-                )),
-            }
-        },
-        Err(_) => Err(error_response!(
-            errors::Body::new("Invalid request body".to_string())
-        )),
-    }
-}
-
 fn parse_json_body(req: &mut backend::Request, params: &mut json::Json) -> backend::HandleSuccessResult {
+    let maybe_body = try!(req.read_to_end().map_err(|err| error_response_boxed!(err)))
+        .unwrap_or(String::new());
 
-    let utf8_string_body = try!(parse_utf8(req));
-
-    if utf8_string_body.len() > 0 {
-      let maybe_json_body = utf8_string_body.parse::<json::Json>();
+    if maybe_body.len() > 0 {
+      let maybe_json_body = maybe_body.parse::<json::Json>();
         match maybe_json_body {
             Ok(json_body) => {
                 let params = params.as_object_mut().expect("Params must be object");
@@ -141,10 +122,11 @@ fn parse_json_body(req: &mut backend::Request, params: &mut json::Json) -> backe
 }
 
 fn parse_urlencoded_body(req: &mut backend::Request, params: &mut json::Json) -> backend::HandleSuccessResult {
-    let utf8_string_body = try!(parse_utf8(req));
+    let maybe_body = try!(req.read_to_end().map_err(|err| error_response_boxed!(err)))
+        .unwrap_or(String::new());
 
-    if utf8_string_body.len() > 0 {
-        let maybe_json_body = queryst::parse(utf8_string_body.as_slice());
+    if maybe_body.len() > 0 {
+        let maybe_json_body = queryst::parse(maybe_body.as_slice());
         match maybe_json_body {
             Ok(json_body) => {
                 let params = params.as_object_mut().expect("Params must be object");

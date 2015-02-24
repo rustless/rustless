@@ -15,15 +15,15 @@ macro_rules! migrations {
                     box $m::$name as Box<::deuterium_orm::migration::RawMigration<::postgres::Connection>>
                 );
 
-                migrations.push(box migration);   
+                migrations.push(box migration);
             )*
 
             migrations
         }
-        
+
     )
 }
 
-load_migrations! { 
+load_migrations! {
     "src/db/migrations"
 }

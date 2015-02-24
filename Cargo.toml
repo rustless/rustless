@@ -15,6 +15,10 @@ path = "src/lib.rs"
 [[test]]
 name = "tests"
 
+[features]
+default = ["iron_backend"]
+iron_backend = ["iron", "bodyparser", "plugin"]
+
 [dependencies]
 regex = "*"
 regex_macros = "*"
@@ -25,9 +29,19 @@ jsonway = "*"
 url = "*"
 cookie = "*"
 hyper = "*"
-iron = "*"
 error = "*"
 typemap = "*"
-plugin = "*"
 mopa = "*"
 log = "*"
+
+[dependencies.iron]
+optional = true
+version = "*"
+
+[dependencies.bodyparser]
+optional = true
+version = "*"
+
+[dependencies.plugin]
+optional = true
+version = "*"

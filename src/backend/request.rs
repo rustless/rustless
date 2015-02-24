@@ -6,6 +6,7 @@ use framework::media;
 
 use server::method;
 use server::header;
+use super::super::errors;
 
 pub trait Body: Reader { }
 
@@ -29,6 +30,8 @@ pub trait Request: fmt::Debug + ::Extensible {
     fn url(&self) -> &AsUrl;
     fn body(&self) -> &Body;
     fn body_mut(&mut self) -> &mut Body;
+
+    fn read_to_end(&mut self) -> Result<Option<String>, Box<errors::Error>>;
 
     fn is_json_body(&self) -> bool {
         self.headers().get::<header::ContentType>().map_or(false, |ct| media::is_json(&ct.0))
