@@ -1,4 +1,3 @@
-use std::str;
 use valico::json_dsl;
 use valico::json_schema;
 use rustless::server::status;

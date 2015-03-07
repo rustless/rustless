@@ -1,6 +1,7 @@
 use serialize::json;
 use typemap;
 use std::env;
+use std::path::Path;
 
 use backend;
 use errors::{self, Error};

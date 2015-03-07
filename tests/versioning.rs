@@ -14,7 +14,7 @@ fn it_pass_accept_header_versioning() {
     // not found because accept-header is not present
     assert_eq!(err_resp.response.status, status::StatusCode::NotFound);
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/info", |&: rq| {
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/info", |rq| {
         rq.headers_mut().set(
             header::Accept( vec![mime!("application/vnd.infoapi.v1+json")] )
         );
@@ -125,7 +125,7 @@ fn it_pass_nesting_crazy_mixed_versioning_never_do_this() {
         }))
     });
 
-    let response = call_app!(app, Get, "http://127.0.0.1:3000/v2/info?ver=v3", |&: rq| {
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/v2/info?ver=v3", |rq| {
         rq.headers_mut().set(
             header::Accept( vec![mime!("application/vnd.infoapi.v1+json")] )
         );
@@ -133,7 +133,7 @@ fn it_pass_nesting_crazy_mixed_versioning_never_do_this() {
 
     assert_eq!(response.status, status::StatusCode::Ok);
 
-    let err_resp = call_app!(app, Get, "http://127.0.0.1:3000/v2/nested_nested_info", |&: rq| {
+    let err_resp = call_app!(app, Get, "http://127.0.0.1:3000/v2/nested_nested_info", |rq| {
         rq.headers_mut().set(
             header::Accept( vec![mime!("application/vnd.infoapi.v1+json")] )
         );

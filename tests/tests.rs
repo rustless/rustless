@@ -1,7 +1,7 @@
 // #![deny(warnings)]
 #![deny(bad_style)]
 #![feature(core)]
-#![feature(old_io)]
+#![feature(io)]
 
 #[macro_use]
 extern crate rustless;
@@ -33,7 +33,14 @@ macro_rules! call_app {
 
 #[macro_export]
 macro_rules! resp_body {
-    ($resp:ident) => (str::from_utf8($resp.read_to_end().unwrap().as_slice()).unwrap())
+    ($resp:ident) => {
+        {
+            use std::io::Read;
+            let mut bytes = Vec::new();
+            $resp.read_to_end(&mut bytes).unwrap();
+            String::from_utf8(bytes).unwrap()
+        }
+    }
 }
 
 #[macro_export]

@@ -3,9 +3,9 @@
 #![feature(plugin)]
 #![feature(collections)]
 #![feature(core)]
-#![feature(env)]
-#![feature(old_io)]
-#![feature(old_path)]
+#![feature(io)]
+#![feature(net)]
+#![feature(path)]
 // #![deny(warnings)]
 #![deny(bad_style)]
 

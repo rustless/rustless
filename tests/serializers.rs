@@ -1,5 +1,6 @@
 use serialize::json;
-use std::str::from_utf8;
+use std::io::Read;
+use std::str;
 
 use jsonway;
 
@@ -32,7 +33,9 @@ fn it_serializes_json_properly() {
         assert_eq!(*mime_type, mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, vec![]));
     }
 
-    let body: json::Json = from_utf8(response.read_to_end().unwrap().as_slice()).unwrap().parse().unwrap();
+    let mut bytes = Vec::new();
+    response.read_to_end(&mut bytes).unwrap();
+    let body: json::Json = str::from_utf8(&bytes).unwrap().parse().unwrap();
 
     assert!(body.find("uptime").is_some());
     assert!(body.find("echo_params").is_some());

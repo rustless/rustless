@@ -1,5 +1,7 @@
-use std::old_io;
 use serialize::json;
+use std::fs::File;
+use std::io;
+use std::path::Path;
 
 use server::header;
 use server::mime;
@@ -9,7 +11,7 @@ use typemap;
 pub struct Response {
     pub status: status::StatusCode,
     pub headers: header::Headers,
-    pub body: Option<Box<old_io::Reader + Send>>,
+    pub body: Option<Box<io::Read + Send>>,
     pub ext: typemap::TypeMap
 }
 
@@ -25,7 +27,7 @@ impl Response {
     }
 
     #[allow(dead_code)]
-    pub fn from_reader(status: status::StatusCode, body: Box<old_io::Reader + Send>) -> Response {
+    pub fn from_reader(status: status::StatusCode, body: Box<io::Read + Send>) -> Response {
         Response {
             status: status,
             headers: header::Headers::new(),
@@ -58,18 +60,18 @@ impl Response {
     }
 
     pub fn push_string(&mut self, body: String) {
-        self.body = Some(Box::new(old_io::MemReader::new(body.into_bytes())) as Box<old_io::Reader + Send>)
+        self.body = Some(Box::new(io::Cursor::new(body.into_bytes())) as Box<io::Read + Send>)
     }
 
-    pub fn push_file(&mut self, path: &Path) -> old_io::IoResult<()> {
-        let reader = Box::new(try!(old_io::File::open(path)));
-        self.body = Some(reader as Box<old_io::Reader + Send>);
+    pub fn push_file(&mut self, path: &Path) -> io::Result<()> {
+        let reader = Box::new(try!(File::open(path)));
+        self.body = Some(reader as Box<io::Read + Send>);
 
         Ok(())
     }
 
     #[allow(dead_code)]
-    pub fn from_file(path: &Path) -> old_io::IoResult<Response> {
+    pub fn from_file(path: &Path) -> io::Result<Response> {
         let mut response = Response::new(status::StatusCode::Ok);
         try!(response.push_file(path));
         Ok(response)
@@ -79,8 +81,8 @@ impl Response {
 
 impl_extensible!(Response);
 
-impl Reader for Response {
-    fn read(&mut self, buf: &mut [u8]) -> old_io::IoResult<usize> {
+impl io::Read for Response {
+    fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
         match self.body {
             Some(ref mut reader) => reader.read(buf),
             None => Ok(0usize)
