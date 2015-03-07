@@ -1,5 +1,6 @@
 use std::fmt;
-use std::old_io::net::ip;
+use std::io;
+use std::net;
 use url;
 
 use framework::media;
@@ -8,9 +9,9 @@ use server::method;
 use server::header;
 use super::super::errors;
 
-pub trait Body: Reader { }
+pub trait Body: io::Read { }
 
-impl Body for Box<Reader + 'static> { }
+impl Body for Box<io::Read + 'static> { }
 
 pub trait AsUrl {
     fn scheme(&self) -> &str;
@@ -24,7 +25,7 @@ pub trait AsUrl {
 }
 
 pub trait Request: fmt::Debug + ::Extensible {
-    fn remote_addr(&self) -> &ip::SocketAddr;
+    fn remote_addr(&self) -> &net::SocketAddr;
     fn headers(&self) -> &header::Headers;
     fn method(&self) -> &method::Method;
     fn url(&self) -> &AsUrl;

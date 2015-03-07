@@ -218,7 +218,7 @@ pub fn enable(app: &mut framework::Application, spec: Spec) {
 #[allow(unused_variables)]
 /// Build the basic Swagger 2.0 object
 pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
-    jsonway::object(|&: json| {
+    jsonway::object(|json| {
         // Required. Specifies the Swagger Specification version being used.
         // It can be used by the Swagger UI and other clients to interpret the API listing.
         // The value MUST be "2.0".
@@ -408,7 +408,7 @@ pub fn create_api(path: &str) -> framework::Api {
         api.namespace(path, |docs| {
             docs.get("", |endpoint| {
                 endpoint.summary("Get Swagger 2.0 specification of this API");
-                endpoint.handle(|&: mut client, _params| {
+                endpoint.handle(|mut client, _params| {
                     client.set_header(header::AccessControlAllowOrigin::AllowStar);
                     let swagger_spec = client.app.ext.get::<SwaggerSpecKey>();
                     if swagger_spec.is_some() {

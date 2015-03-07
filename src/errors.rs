@@ -1,4 +1,4 @@
-use std::old_io;
+use std::io;
 pub use error::{Error};
 use std::error::Error as StdError;
 use valico;
@@ -79,7 +79,7 @@ impl Body {
 impl_basic_err!(Body, "Body");
 
 #[derive(Debug)]
-pub struct File(pub old_io::IoError);
+pub struct File(pub io::Error);
 impl_basic_err!(File, "File");
 
 #[derive(Debug, Copy)]

@@ -1,10 +1,12 @@
-use std::old_io;
 use std::fmt;
-use std::old_io::net::ip;
+use std::fs::File;
+use std::io;
+use std::net;
+use std::path::Path;
+
 use typemap;
 
 use {Extensible};
-
 use server::method;
 use server::header;
 use super::request;
@@ -15,10 +17,10 @@ use backend::{Request, Url, AsUrl, WrapUrl};
 pub struct SimpleRequest {
     pub url: Url,
     pub ext: typemap::TypeMap,
-    pub remote_addr: ip::SocketAddr,
+    pub remote_addr: net::SocketAddr,
     pub headers: header::Headers,
     pub method: method::Method,
-    pub body: Box<Reader + 'static>
+    pub body: Box<io::Read + 'static>
 }
 
 impl<'a> Request for SimpleRequest {
@@ -27,7 +29,7 @@ impl<'a> Request for SimpleRequest {
         return &self.url;
     }
 
-    fn remote_addr(&self) -> &ip::SocketAddr {
+    fn remote_addr(&self) -> &net::SocketAddr {
         return &self.remote_addr;
     }
 
@@ -48,7 +50,9 @@ impl<'a> Request for SimpleRequest {
     }
 
     fn read_to_end(&mut self) -> Result<Option<String>, Box<errors::Error>> {
-        String::from_utf8(self.body.read_to_end().unwrap())
+        let mut bytes = Vec::new();
+        self.body.read_to_end(&mut bytes).unwrap();
+        String::from_utf8(bytes)
             .map(|body| Some(body))
             .map_err(|err| Box::new(err) as Box<errors::Error>)
     }
@@ -64,7 +68,7 @@ impl SimpleRequest {
             ext: typemap::TypeMap::new(),
             remote_addr: "127.0.0.1:8000".parse().unwrap(),
             headers: header::Headers::new(),
-            body: Box::new(old_io::MemReader::new(vec![]))
+            body: Box::new(io::Cursor::new(vec![]))
         }
     }
 
@@ -76,7 +80,7 @@ impl SimpleRequest {
         srq
     }
 
-    pub fn set_remote_addr(&mut self, addr: ip::SocketAddr) {
+    pub fn set_remote_addr(&mut self, addr: net::SocketAddr) {
         self.remote_addr = addr;
     }
 
@@ -89,11 +93,11 @@ impl SimpleRequest {
     }
 
     pub fn push_string(&mut self, body: String) {
-        self.body = Box::new(old_io::MemReader::new(body.into_bytes()));
+        self.body = Box::new(io::Cursor::new(body.into_bytes()));
     }
 
-    pub fn push_file(&mut self, path: &Path) -> old_io::IoResult<()> {
-        self.body = Box::new(try!(old_io::File::open(path)));
+    pub fn push_file(&mut self, path: &Path) -> io::Result<()> {
+        self.body = Box::new(try!(File::open(path)));
 
         Ok(())
     }

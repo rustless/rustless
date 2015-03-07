@@ -86,7 +86,7 @@ fn main() {
             });
 
             // Using after_validation callback to check token
-            admin_ns.after_validation(|&: _client, params| {
+            admin_ns.after_validation(|_client, params| {
 
                 match params.find("token") {
                     // We can unwrap() safely because token in validated already

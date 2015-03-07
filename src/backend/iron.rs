@@ -1,5 +1,5 @@
 use url;
-use std::old_io::net::ip;
+use std::net;
 use plugin::{Extensible, Pluggable};
 pub use iron::{Url, Handler};
 
@@ -42,7 +42,7 @@ impl backend::AsUrl for Url {
 }
 
 impl<'a> backend::Request for iron::Request<'a> {
-    fn remote_addr(&self) -> &ip::SocketAddr { &self.remote_addr }
+    fn remote_addr(&self) -> &net::SocketAddr { &self.remote_addr }
     fn headers(&self) -> &header::Headers { &self.headers }
     fn method(&self) -> &method::Method { &self.method }
     fn url(&self) -> &backend::AsUrl { &self.url }
