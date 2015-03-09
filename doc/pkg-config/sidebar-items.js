@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["find_library","Simple shortcut for using all default options for finding a library."],["target_supported",""]],"struct":[["Config",""],["Library",""]]});
+initSidebarItems({"struct":[["Config",""],["Library",""]],"fn":[["find_library","Simple shortcut for using all default options for finding a library."],["target_supported",""]]});
