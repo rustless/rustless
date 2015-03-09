@@ -75,11 +75,11 @@ fn main() {
 
     let api = Api::build(dsl!(|api| {
         // Specify API version
-        api.version("v1", Versioning::AcceptHeader("chat"));
-        api.prefix("api");
+        version("v1", Versioning::AcceptHeader("chat"));
+        prefix("api");
 
         // Create API for chats
-        let chats_api = Api::build(|chats_api| {
+        mount(Api::build(dsl!(|chats_api| {
 
             after(|client, _params| {
                 client.set_status(StatusCode::NotFound);
@@ -112,9 +112,7 @@ fn main() {
                 }));
 
             }));
-        });
-
-        api.mount(chats_api);
+        })));
     }));
 
     let app = Application::new(api);
