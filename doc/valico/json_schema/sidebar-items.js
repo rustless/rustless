@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["PrimitiveType",""]],"mod":[["builder",""],["errors",""],["helpers",""],["keywords",""],["schema",""],["scope",""],["validators",""]]});
+initSidebarItems({"mod":[["builder",""],["errors",""],["helpers",""],["keywords",""],["schema",""],["scope",""],["validators",""]],"enum":[["PrimitiveType",""]]});
