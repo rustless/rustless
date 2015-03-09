@@ -31,7 +31,7 @@ Rustless is a REST-like API micro-framework for Rust. It's designed to provide a
 
 Rustless in a port of [Grape] library from Ruby world. Based on [hyper] - an HTTP library for Rust.
 
-Like Rust itself, Rustless is still in the early stages of development, so don't be surprised if APIs change and things break. If something's not working properly, file an issue or submit a pull request! 
+Like Rust itself, Rustless is still in the early stages of development, so don't be surprised if APIs change and things break. If something's not working properly, file an issue or submit a pull request!
 
 [Grape]: https://github.com/intridea/grape
 [hyper]: https://github.com/hyperium/hyper
@@ -88,20 +88,20 @@ fn main() {
 
             // Add namespace
             chats_api.namespace("chats/:id", |chat_ns| {
-                
+
                 // Valico settings for this namespace
-                chat_ns.params(|params| { 
+                chat_ns.params(|params| {
                     params.req_typed("id", valico::u64())
                 });
 
                 // Create endpoint for POST /chats/:id/users/:user_id
                 chat_ns.post("users/:user_id", |endpoint| {
-                
+
                     // Add description
                     endpoint.desc("Update user");
 
                     // Valico settings for endpoint params
-                    endpoint.params(|params| { 
+                    endpoint.params(|params| {
                         params.req_typed("user_id", valico::u64());
                         params.req_typed("name", valico::string())
                     });
@@ -128,7 +128,7 @@ fn main() {
 
 ## Complex example
 
-If you want to see how you can write come complex application using Rustless please see the [example](https://github.com/rustless/rustless/tree/master/examples/postgres). 
+If you want to see how you can write come complex application using Rustless please see the [example](https://github.com/rustless/rustless-example).
 
 In that example please note these aspects:
 
@@ -144,7 +144,7 @@ In that example please note these aspects:
 
 ## Mounting
 
-In Rustless you can use three core entities to build your RESTful app: `Api`, `Namespace` and `Endpoint`. 
+In Rustless you can use three core entities to build your RESTful app: `Api`, `Namespace` and `Endpoint`.
 
 * Api can mount Api, Namespace and Endpoint
 * Namespace can mount Api, Namespace and Endpoint
@@ -168,8 +168,8 @@ Api::build(|api| {
 
     }))
 
-    // The namespace method has a number of aliases, including: group, 
-    // resource, resources, and segment. Use whichever reads the best 
+    // The namespace method has a number of aliases, including: group,
+    // resource, resources, and segment. Use whichever reads the best
     // for your API.
     api.namespace("ns1", |ns1| {
         ns1.group("ns2", |ns2| {
@@ -189,7 +189,7 @@ Api::build(|api| {
 
 You can define validations and coercion options for your parameters using a DSL block inside `Endpoint` and `Namespace` definition. See [Valico] for more info about things you can do.
 
-~~~rust 
+~~~rust
 api.get("users/:user_id/messages/:message_id", |endpoint| {
     endpoint.params(|params| {
         params.req_typed("user_id", Valico::u64());
@@ -221,14 +221,14 @@ See [Valico] for more info about JSON Scheme usage inside DSL blocks.
 
 ## Query strings
 
-Rustless is intergated with [queryst] to allow smart query-string parsing 
+Rustless is intergated with [queryst] to allow smart query-string parsing
 end decoding (even with nesting, like `foo[0][a]=a&foo[0][b]=b&foo[1][a]=aa&foo[1][b]=bb`). See [queryst] for more info.
 
 [queryst]: https://github.com/rustless/queryst
 
 ## API versioning
 
-There are three strategies in which clients can reach your API's endpoints: 
+There are three strategies in which clients can reach your API's endpoints:
 
 * Path
 * AcceptHeader
@@ -421,7 +421,7 @@ Api::build(|api| {
                     signed_cookies.add(user_cookie);
                 }
 
-                client.text("Everything is OK".to_string())  
+                client.text("Everything is OK".to_string())
             })
         });
     })
@@ -449,7 +449,7 @@ let mut app = rustless::Application::new(rustless::Api::build(|api| {
 
     api.mount(swagger::create_api("api-docs"));
 
-    // ... 
+    // ...
 }))
 
 swagger::enable(&mut app, swagger::Spec {
@@ -476,7 +476,7 @@ After that you can use `/api-docs` path in Swagger UI to render your API structu
 
 ## Integration with PostgreSQL
 
-We have an annotated example of such integration in [postgres_example](https://github.com/rustless/rustless/tree/master/examples/postgres). Please try it and feel free to say your opinion. 
+We have an annotated example of such integration in [postgres_example](https://github.com/rustless/rustless/tree/master/examples/postgres). Please try it and feel free to say your opinion.
 
 ## Integration with Deuterium ORM
 
