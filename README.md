@@ -73,7 +73,7 @@ use rustc_serialize::json::ToJson;
 
 fn main() {
 
-    let api = Api::build(|api| {
+    let api = Api::build(dsl!(|api| {
         // Specify API version
         api.version("v1", Versioning::AcceptHeader("chat"));
         api.prefix("api");
@@ -81,41 +81,41 @@ fn main() {
         // Create API for chats
         let chats_api = Api::build(|chats_api| {
 
-            chats_api.after(|client, _params| {
+            after(|client, _params| {
                 client.set_status(StatusCode::NotFound);
                 Ok(())
             });
 
             // Add namespace
-            chats_api.namespace("chats/:id", |chat_ns| {
+            namespace("chats/:id", dsl!(|chat_ns| {
 
                 // Valico settings for this namespace
-                chat_ns.params(|params| {
+                params(|params| {
                     params.req_typed("id", valico::u64())
                 });
 
                 // Create endpoint for POST /chats/:id/users/:user_id
-                chat_ns.post("users/:user_id", |endpoint| {
+                post("users/:user_id", dsl!(|endpoint| {
 
                     // Add description
-                    endpoint.desc("Update user");
+                    desc("Update user");
 
                     // Valico settings for endpoint params
-                    endpoint.params(|params| {
+                    params(|params| {
                         params.req_typed("user_id", valico::u64());
                         params.req_typed("name", valico::string())
                     });
 
-                    endpoint.handle(|client, params| {
+                    handle(|client, params| {
                         client.json(&params.to_json())
                     })
-                });
+                }));
 
-            });
+            }));
         });
 
         api.mount(chats_api);
-    });
+    }));
 
     let app = Application::new(api);
 
@@ -153,20 +153,20 @@ In Rustless you can use three core entities to build your RESTful app: `Api`, `N
 Api::build(|api| {
 
     // Api inside Api example
-    api.mount(Api::build(|nested_api| {
+    api.mount(Api::build(dsl!(|nested_api| {
 
         // Endpoint definition
-        nested_api.get("nested_info", |endpoint| {
+        get("nested_info", dsl!|endpoint| {
             // endpoint.params(|params| {});
             // endpoint.desc("Some description");
 
             // Endpoint handler
-            endpoint.handle(|client, _params| {
+            handle(|client, _params| {
                 client.text("Some usefull info".to_string())
             })
-        });
+        }));
 
-    }))
+    })))
 
     // The namespace method has a number of aliases, including: group,
     // resource, resources, and segment. Use whichever reads the best
@@ -377,11 +377,11 @@ The block applies to every API call within and below the current nesting level.
 ## Secure API example
 
 ~~~rust
-Api::build(|api| {
-    api.prefix("api");
-    api.version("v1", Versioning::Path);
+Api::build(dsl!(|api| {
+    prefix("api");
+    version("v1", Versioning::Path);
 
-    api.error_formatter(|err, _media| {
+    error_formatter(|err, _media| {
         match err.downcast::<UnauthorizedError>() {
             Some(_) => {
                 return Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
@@ -390,14 +390,14 @@ Api::build(|api| {
         }
     });
 
-    api.namespace("admin", |admin_ns| {
+    namespace("admin", dsl!(|admin_ns| {
 
-        admin_ns.params(|params| {
+        params(|params| {
             params.req_typed("token", Valico::string())
         });
 
         // Using after_validation callback to check token
-        admin_ns.after_validation(|&: _client, params| {
+        after_validation(|&: _client, params| {
 
             match params.get("token") {
                 // We can unwrap() safely because token in validated already
@@ -411,8 +411,8 @@ Api::build(|api| {
         });
 
         // This `/api/admin/server_status` endpoint is secure now
-        admin_ns.get("server_status", |endpoint| {
-            endpoint.handle(|client, _params| {
+        get("server_status", dsl!(|endpoint| {
+            handle(|client, _params| {
                 {
                     let cookies = client.request.cookies();
                     let signed_cookies = cookies.signed();
@@ -423,9 +423,9 @@ Api::build(|api| {
 
                 client.text("Everything is OK".to_string())
             })
-        });
-    })
-})
+        }));
+    }))
+}))
 ~~~
 
 ## JSON responses
