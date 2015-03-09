@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AcceptCharset","The `Accept-Charset` header"]]});

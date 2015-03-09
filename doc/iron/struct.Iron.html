@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='headers/index.html'>headers</a><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='middleware/index.html'>middleware</a><a class='mod ' href='mime/index.html'>mime</a><a class='mod ' href='modifier/index.html'>modifier</a><a class='mod ' href='modifiers/index.html'>modifiers</a><a class='mod ' href='prelude/index.html'>prelude</a><a class='mod ' href='response/index.html'>response</a><a class='mod ' href='status/index.html'>status</a><a class='mod ' href='typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Headers.html'>Headers</a><a class='struct current' href='struct.Iron.html'>Iron</a><a class='struct ' href='struct.Request.html'>Request</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Error.html'>Error</a><a class='trait ' href='trait.Plugin.html'>Plugin</a></div>
+        <p class='location'><a href='index.html'>iron</a></p><script>window.sidebarCurrent = {name: 'Iron', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,11 +42,12 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>iron</a>::<wbr><a class='struct' href=''>Iron</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-4355' href='../src/iron/iron.rs.html#21-25'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-3933' href='../src/iron/iron.rs.html#24-34'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Iron&lt;H&gt; {
     pub handler: H,
+    pub addr: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/net/addr/struct.SocketAddr.html' title='std::net::addr::SocketAddr'>SocketAddr</a>&gt;,
+    pub protocol: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../iron/enum.Protocol.html' title='iron::Protocol'>Protocol</a>&gt;,
 }</pre><div class='docblock'><p>The primary entrance point to <code>Iron</code>, a <code>struct</code> to instantiate a new server.</p>
 
 <p><code>Iron</code> contains the <code>Handler</code> which takes a <code>Request</code> and produces a
@@ -54,22 +55,47 @@
 </div><h2 class='fields'>Fields</h2>
 <table><tr><td id='structfield.handler'><a class='stability Unmarked' title='No stability level'></a><code>handler</code></td><td><div class='docblock'><p>Iron contains a <code>Handler</code>, which it uses to create responses for client
 requests.</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt; <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h3><div class='impl-items'><h4 id='method.listen' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.listen' class='fnname'>listen</a>&lt;A: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/net/ip/trait.ToSocketAddr.html' title='std::io::net::ip::ToSocketAddr'>ToSocketAddr</a>&gt;(self, addr: A) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../hyper/server/struct.Listening.html' title='hyper::server::Listening'>Listening</a>&gt;</code></h4>
-<div class='docblock'><p>Kick off the server process.</p>
+</div></td></tr><tr><td id='structfield.addr'><a class='stability Unmarked' title='No stability level'></a><code>addr</code></td><td><div class='docblock'><p>Once listening, the local address that this server is bound to.</p>
+</div></td></tr><tr><td id='structfield.protocol'><a class='stability Unmarked' title='No stability level'></a><code>protocol</code></td><td><div class='docblock'><p>Once listening, the protocol used to serve content.</p>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt; <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h3><div class='impl-items'><h4 id='method.http' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.http' class='fnname'>http</a>&lt;A: <a class='trait' href='http://doc.rust-lang.org/nightly/std/net/addr/trait.ToSocketAddrs.html' title='std::net::addr::ToSocketAddrs'>ToSocketAddrs</a> + 'static&gt;(self, addr: A) -&gt; <a class='type' href='../iron/error/type.HttpResult.html' title='iron::error::HttpResult'>HttpResult</a>&lt;<a class='struct' href='../hyper/server/struct.Listening.html' title='hyper::server::Listening'>Listening</a>&gt;</code></h4>
+<div class='docblock'><p>Kick off the server process using the HTTP protocol.</p>
 
 <p>Call this once to begin listening for requests on the server.
 This consumes the Iron instance, but does the listening on
 another task, so is not blocking.</p>
 
-<p>Defaults to a threadpool of size 100.</p>
-</div><h4 id='method.listen_with' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.listen_with' class='fnname'>listen_with</a>&lt;A: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/net/ip/trait.ToSocketAddr.html' title='std::io::net::ip::ToSocketAddr'>ToSocketAddr</a>&gt;(self, addr: A, threads: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../hyper/server/struct.Listening.html' title='hyper::server::Listening'>Listening</a>&gt;</code></h4>
+<p>Defaults to a threadpool of size <code>2 * num_cpus</code>.</p>
+
+<h2 id="panics" class='section-header'><a
+                           href="#panics">Panics</a></h2>
+<p>Panics if the provided address does not parse. To avoid this
+call <code>to_socket_addrs</code> yourself and pass a parsed <code>SocketAddr</code>.</p>
+</div><h4 id='method.https' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.https' class='fnname'>https</a>&lt;A: <a class='trait' href='http://doc.rust-lang.org/nightly/std/net/addr/trait.ToSocketAddrs.html' title='std::net::addr::ToSocketAddrs'>ToSocketAddrs</a> + 'static&gt;(self, addr: A, certificate: <a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.PathBuf.html' title='std::path::PathBuf'>PathBuf</a>, key: <a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.PathBuf.html' title='std::path::PathBuf'>PathBuf</a>) -&gt; <a class='type' href='../iron/error/type.HttpResult.html' title='iron::error::HttpResult'>HttpResult</a>&lt;<a class='struct' href='../hyper/server/struct.Listening.html' title='hyper::server::Listening'>Listening</a>&gt;</code></h4>
+<div class='docblock'><p>Kick off the server process using the HTTPS protocol.</p>
+
+<p>Call this once to begin listening for requests on the server.
+This consumes the Iron instance, but does the listening on
+another task, so is not blocking.</p>
+
+<p>Defaults to a threadpool of size <code>2 * num_cpus</code>.</p>
+
+<h2 id="panics" class='section-header'><a
+                           href="#panics">Panics</a></h2>
+<p>Panics if the provided address does not parse. To avoid this
+call <code>to_socket_addrs</code> yourself and pass a parsed <code>SocketAddr</code>.</p>
+</div><h4 id='method.listen_with' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.listen_with' class='fnname'>listen_with</a>&lt;A: <a class='trait' href='http://doc.rust-lang.org/nightly/std/net/addr/trait.ToSocketAddrs.html' title='std::net::addr::ToSocketAddrs'>ToSocketAddrs</a> + 'static&gt;(self, addr: A, threads: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, protocol: <a class='enum' href='../iron/enum.Protocol.html' title='iron::Protocol'>Protocol</a>) -&gt; <a class='type' href='../iron/error/type.HttpResult.html' title='iron::error::HttpResult'>HttpResult</a>&lt;<a class='struct' href='../hyper/server/struct.Listening.html' title='hyper::server::Listening'>Listening</a>&gt;</code></h4>
 <div class='docblock'><p>Kick off the server process with X threads.</p>
+
+<h2 id="panics" class='section-header'><a
+                           href="#panics">Panics</a></h2>
+<p>Panics if the provided address does not parse. To avoid this
+call <code>to_socket_addrs</code> yourself and pass a parsed <code>SocketAddr</code>.</p>
 </div><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(handler: H) -&gt; <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h4>
 <div class='docblock'><p>Instantiate a new instance of <code>Iron</code>.</p>
 
 <p>This will create a new <code>Iron</code>, the base unit of the server, using the
 passed in <code>Handler</code>.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt; <a class='trait' href='../hyper/server/trait.Handler.html' title='hyper::server::Handler'>Handler</a> for <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h3><div class='impl-items'><h4 id='method.handle' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.handle' class='fnname'>handle</a>(&amp;self, http_req: <a class='struct' href='../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>HttpRequest</a>, http_res: <a class='struct' href='../iron/response/struct.HttpResponse.html' title='iron::response::HttpResponse'>HttpResponse</a>&lt;<a class='struct' href='../hyper/net/struct.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;)</code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt; <a class='trait' href='../hyper/server/trait.Handler.html' title='hyper::server::Handler'>Handler</a> for <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h3><div class='impl-items'><h4 id='method.handle' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.handle' class='fnname'>handle</a>(&amp;self, http_req: <a class='struct' href='../iron/request/struct.HttpRequest.html' title='iron::request::HttpRequest'>HttpRequest</a>, http_res: <a class='struct' href='../iron/response/struct.HttpResponse.html' title='iron::response::HttpResponse'>HttpResponse</a>&lt;<a class='enum' href='../hyper/net/enum.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;)</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 

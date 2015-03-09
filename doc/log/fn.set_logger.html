@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../log/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>log</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='macros/index.html'>macros</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.LogLevel.html'>LogLevel</a><a class='struct ' href='struct.LogRecord.html'>LogRecord</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Logger.html'>Logger</a></div><div class='block fn'><h2>Functions</h2><a class='fn current' href='fn.set_logger.html'>set_logger</a></div><div class='block macro'><h2>Macros</h2><a class='macro ' href='macro.debug!.html'>debug!</a><a class='macro ' href='macro.error!.html'>error!</a><a class='macro ' href='macro.info!.html'>info!</a><a class='macro ' href='macro.log!.html'>log!</a><a class='macro ' href='macro.log_enabled!.html'>log_enabled!</a><a class='macro ' href='macro.warn!.html'>warn!</a></div>
+        <p class='location'><a href='index.html'>log</a></p><script>window.sidebarCurrent = {name: 'set_logger', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,11 +42,21 @@
 
     <section id='main' class="content fn">
 <h1 class='fqn'><span class='in-band'>Function <a href='index.html'>log</a>::<wbr><a class='fn' href=''>set_logger</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-1421' href='../src/log/lib.rs.html#310-315'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn set_logger(logger: <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../log/trait.Logger.html' title='log::Logger'>Logger</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../log/trait.Logger.html' title='log::Logger'>Logger</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>&gt;&gt;</pre><div class='docblock'><p>Replaces the task-local logger with the specified logger, returning the old
-logger.</p>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-1384' href='../src/log/lib.rs.html#526-547'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn set_logger&lt;M&gt;(make_logger: M) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../log/struct.SetLoggerError.html' title='log::SetLoggerError'>SetLoggerError</a>&gt; <span class='where'>where M: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(<a class='struct' href='../log/struct.MaxLogLevelFilter.html' title='log::MaxLogLevelFilter'>MaxLogLevelFilter</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../log/trait.Log.html' title='log::Log'>Log</a>&gt;</span></pre><div class='docblock'><p>Sets the global logger.</p>
+
+<p>The <code>make_logger</code> closure is passed a <code>MaxLogLevel</code> object, which the
+logger should use to keep the global maximum log level in sync with the
+highest log level that the logger will not ignore.</p>
+
+<p>This function may only be called once in the lifetime of a program. Any log
+events that occur before the call to <code>set_logger</code> completes will be
+ignored.</p>
+
+<p>This function does not typically need to be called manually. Logger
+implementations should provide an initialization method that calls
+<code>set_logger</code> internally.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 

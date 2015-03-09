@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["LimitReader","[Original impl](https://github.com/rust-lang/rust/blob/17bc7d8d5be3be9674d702ccad2fa88c487d23b0/src/libstd/old_io/util.rs#L20)"]]});

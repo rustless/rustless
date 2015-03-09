@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Upgrade","The `Upgrade` header."]],"enum":[["Protocol","Protocol values that can appear in the Upgrade header."]]});

@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../time/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>time</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.PreciseTime.html'>PreciseTime</a><a class='struct ' href='struct.Timespec.html'>Timespec</a><a class='struct ' href='struct.Tm.html'>Tm</a><a class='struct ' href='struct.TmFmt.html'>TmFmt</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.ParseError.html'>ParseError</a></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.at.html'>at</a><a class='fn ' href='fn.at_utc.html'>at_utc</a><a class='fn ' href='fn.empty_tm.html'>empty_tm</a><a class='fn ' href='fn.get_time.html'>get_time</a><a class='fn ' href='fn.now.html'>now</a><a class='fn ' href='fn.now_utc.html'>now_utc</a><a class='fn ' href='fn.precise_time_ns.html'>precise_time_ns</a><a class='fn ' href='fn.precise_time_s.html'>precise_time_s</a><a class='fn ' href='fn.strftime.html'>strftime</a><a class='fn ' href='fn.strptime.html'>strptime</a><a class='fn ' href='fn.tzset.html'>tzset</a></div>
+        <p class='location'><a href='index.html'>time</a></p><script>window.sidebarCurrent = {name: 'PreciseTime', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,9 +42,8 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>time</a>::<wbr><a class='struct' href=''>PreciseTime</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-1159' href='../src/time/lib.rs.html#271'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-1056' href='../src/time/lib.rs.html#303'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct PreciseTime(_);</pre><div class='docblock'><p>An opaque structure representing a moment in time.</p>
 
 <p>The only operation that can be performed on a <code>PreciseTime</code> is the
@@ -52,17 +51,17 @@ calculation of the <code>Duration</code> of time that lies between them.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1>
-<p>Repeatedly call a function for 1 second:
-```rust</p>
+<p>Repeatedly call a function for 1 second:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>time</span>::<span class='ident'>Duration</span>;
+<span class='kw'>use</span> <span class='ident'>time</span>::<span class='ident'>PreciseTime</span>;
 
-<h1 id="fn-do_some_work()-{}" class='section-header'><a
-                           href="#fn-do_some_work()-{}">fn do_some_work() {}</a></h1>
-<p>let start = PreciseTime::now();</p>
+<span class='kw'>let</span> <span class='ident'>start</span> <span class='op'>=</span> <span class='ident'>PreciseTime</span>::<span class='ident'>now</span>();
 
-<p>while start.to(PreciseTime::now()) &lt; Duration::seconds(1) {
-    do_some_work();
+<span class='kw'>while</span> <span class='ident'>start</span>.<span class='ident'>to</span>(<span class='ident'>PreciseTime</span>::<span class='ident'>now</span>()) <span class='op'>&lt;</span> <span class='ident'>Duration</span>::<span class='ident'>seconds</span>(<span class='number'>1</span>) {
+    <span class='ident'>do_some_work</span>();
 }
-```</p>
+</pre>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../time/struct.PreciseTime.html' title='time::PreciseTime'>PreciseTime</a></code></h3><div class='impl-items'><h4 id='method.now' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.now' class='fnname'>now</a>() -&gt; <a class='struct' href='../time/struct.PreciseTime.html' title='time::PreciseTime'>PreciseTime</a></code></h4>
 <div class='docblock'><p>Returns a <code>PreciseTime</code> representing the current moment in time.</p>
 </div><h4 id='method.to' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.to' class='fnname'>to</a>(&amp;self, later: <a class='struct' href='../time/struct.PreciseTime.html' title='time::PreciseTime'>PreciseTime</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a></code></h4>

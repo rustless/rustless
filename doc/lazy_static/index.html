@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `lazy_static` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, lazy_static">
+
+    <title>lazy_static - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'lazy_static', ty: 'mod', relpath: '../'};</script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>lazy_static</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-0' href='../src/lazy_static/lazy_static.rs.html#1-121'>[src]</a></span></h1>
+<div class='docblock'><p>A macro for declaring lazily evaluated statics.</p>
+
+<p>Using this macro, it is possible to have <code>static</code>s that require code to be
+executed at runtime in order to be initialized.
+This includes anything requiring heap allocations, like vectors or hash maps,
+as well as anything that requires function calls to be computed.</p>
+
+<h1 id="syntax" class='section-header'><a
+                           href="#syntax">Syntax</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='macro'>lazy_static</span><span class='macro'>!</span> {
+    [<span class='kw'>pub</span>] <span class='kw'>static</span> <span class='kw-2'>ref</span> <span class='ident'>NAME_1</span>: <span class='ident'>TYPE_1</span> <span class='op'>=</span> <span class='ident'>EXPR_1</span>;
+    [<span class='kw'>pub</span>] <span class='kw'>static</span> <span class='kw-2'>ref</span> <span class='ident'>NAME_2</span>: <span class='ident'>TYPE_2</span> <span class='op'>=</span> <span class='ident'>EXPR_2</span>;
+    ...
+    [<span class='kw'>pub</span>] <span class='kw'>static</span> <span class='kw-2'>ref</span> <span class='ident'>NAME_N</span>: <span class='ident'>TYPE_N</span> <span class='op'>=</span> <span class='ident'>EXPR_N</span>;
+}
+</pre>
+
+<h1 id="semantic" class='section-header'><a
+                           href="#semantic">Semantic</a></h1>
+<p>For a given <code>static ref NAME: TYPE = EXPR;</code>, the macro generates a
+unique type that implements <code>Deref&lt;TYPE&gt;</code> and stores it in a static with name <code>NAME</code>.</p>
+
+<p>On first deref, <code>EXPR</code> gets evaluated and stored internally, such that all further derefs
+can return a reference to the same object.</p>
+
+<p>Like regular <code>static mut</code>s, this macro only works for types that fulfill the <code>Sync</code>
+trait.</p>
+
+<h1 id="example" class='section-header'><a
+                           href="#example">Example</a></h1>
+<p>Using the macro:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>lazy_static</span>;
+
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>HashMap</span>;
+
+<span class='macro'>lazy_static</span><span class='macro'>!</span> {
+    <span class='kw'>static</span> <span class='kw-2'>ref</span> <span class='ident'>HASHMAP</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>u32</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='ident'>HashMap</span>::<span class='ident'>new</span>();
+        <span class='ident'>m</span>.<span class='ident'>insert</span>(<span class='number'>0</span>, <span class='string'>&quot;foo&quot;</span>);
+        <span class='ident'>m</span>.<span class='ident'>insert</span>(<span class='number'>1</span>, <span class='string'>&quot;bar&quot;</span>);
+        <span class='ident'>m</span>.<span class='ident'>insert</span>(<span class='number'>2</span>, <span class='string'>&quot;baz&quot;</span>);
+        <span class='ident'>m</span>
+    };
+    <span class='kw'>static</span> <span class='kw-2'>ref</span> <span class='ident'>COUNT</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='ident'>HASHMAP</span>.<span class='ident'>len</span>();
+    <span class='kw'>static</span> <span class='kw-2'>ref</span> <span class='ident'>NUMBER</span>: <span class='ident'>u32</span> <span class='op'>=</span> <span class='ident'>times_two</span>(<span class='number'>21</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>times_two</span>(<span class='ident'>n</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> { <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>2</span> }
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;The map has {} entries.&quot;</span>, <span class='op'>*</span><span class='ident'>COUNT</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;The entry for `0` is \&quot;{}\&quot;.&quot;</span>, <span class='ident'>HASHMAP</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='number'>0</span>).<span class='ident'>unwrap</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;A expensive calculation on a static results in: {}.&quot;</span>, <span class='op'>*</span><span class='ident'>NUMBER</span>);
+}
+</pre>
+
+<h1 id="implementation-details" class='section-header'><a
+                           href="#implementation-details">Implementation details</a></h1>
+<p>The <code>Deref</code> implementation uses a hidden <code>static mut</code> that is guarded by a atomic check
+using the <code>sync::Once</code> abstraction. All lazily evaluated values are currently
+put in a heap allocated box, due to the Rust language currently not providing any way to
+define uninitialized <code>static mut</code> values.</p>
+</div><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='macro' href='macro.lazy_static!.html'
+                               title='lazy_static::lazy_static!'>lazy_static!</a></td>
+                        <td class='docblock short'></td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "lazy_static";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

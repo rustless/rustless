@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Body",""],["ErrorResponse",""],["File",""],["NotAcceptable",""],["NotFound",""],["NotMatch",""],["QueryString",""],["StrictErrorResponse",""],["Validation",""]],"trait":[["Error","An extension to std::error::Error which provides dynamic downcasting of errors for use in highly generic contexts."]]});

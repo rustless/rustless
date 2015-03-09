@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../index.html'>hyper</a>::<wbr><a href='index.html'>net</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Fresh.html'>Fresh</a><a class='struct current' href='struct.HttpConnector.html'>HttpConnector</a><a class='struct ' href='struct.NetworkConnections.html'>NetworkConnections</a><a class='struct ' href='struct.Streaming.html'>Streaming</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.HttpAcceptor.html'>HttpAcceptor</a><a class='enum ' href='enum.HttpListener.html'>HttpListener</a><a class='enum ' href='enum.HttpStream.html'>HttpStream</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.NetworkAcceptor.html'>NetworkAcceptor</a><a class='trait ' href='trait.NetworkConnector.html'>NetworkConnector</a><a class='trait ' href='trait.NetworkListener.html'>NetworkListener</a><a class='trait ' href='trait.NetworkStream.html'>NetworkStream</a></div>
+        <p class='location'><a href='../index.html'>hyper</a>::<wbr><a href='index.html'>net</a></p><script>window.sidebarCurrent = {name: 'HttpConnector', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,12 +42,11 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>net</a>::<wbr><a class='struct' href=''>HttpConnector</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-25824' href='../../src/hyper/net.rs.html#311'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-31048' href='../../src/hyper/net.rs.html#300'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct HttpConnector&lt;'v&gt;(pub <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../hyper/net/type.ContextVerifier.html' title='hyper::net::ContextVerifier'>ContextVerifier</a>&lt;'v&gt;&gt;);</pre><div class='docblock'><p>A connector that will produce HttpStreams.</p>
 </div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'v&gt; <a class='trait' href='../../hyper/net/trait.NetworkConnector.html' title='hyper::net::NetworkConnector'>NetworkConnector</a> for <a class='struct' href='../../hyper/net/struct.HttpConnector.html' title='hyper::net::HttpConnector'>HttpConnector</a>&lt;'v&gt;</code></h3><div class='impl-items'><h4 id='assoc_type.Stream' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Stream = <a class='enum' href='../../hyper/net/enum.HttpStream.html' title='hyper::net::HttpStream'>HttpStream</a></code></h4>
-<h4 id='method.connect' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.connect' class='fnname'>connect</a>(&amp;mut self, host: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, port: <a class='type' href='../../hyper/type.Port.html' title='hyper::Port'>Port</a>, scheme: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/type.IoResult.html' title='std::io::IoResult'>IoResult</a>&lt;<a class='enum' href='../../hyper/net/enum.HttpStream.html' title='hyper::net::HttpStream'>HttpStream</a>&gt;</code></h4>
+<h4 id='method.connect' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.connect' class='fnname'>connect</a>(&amp;mut self, host: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, port: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, scheme: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='enum' href='../../hyper/net/enum.HttpStream.html' title='hyper::net::HttpStream'>HttpStream</a>&gt;</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 

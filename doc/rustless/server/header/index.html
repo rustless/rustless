@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a></p><div class='block mod'><h2>Modules</h2><a class='mod current' href='../header/index.html'>header</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../mime/index.html'>mime</a><a class='mod ' href='../net/index.html'>net</a><a class='mod ' href='../server/index.html'>server</a><a class='mod ' href='../status/index.html'>status</a><a class='mod ' href='../uri/index.html'>uri</a></div>
+        <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a></p><script>window.sidebarCurrent = {name: 'header', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,9 +42,8 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a class='mod' href=''>header</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-4471' href='../../../hyper/header/index.html?gotosrc=4471'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-4447' href='../../../hyper/header/index.html?gotosrc=4447'>[src]</a></span></h1>
 <div class='docblock'><p>Headers container, and common header fields.</p>
 
 <p>hyper has the opinion that Headers should be strongly-typed, because that&#39;s
@@ -69,9 +68,23 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                     </tr>
                 
                     <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AcceptCharset.html'
+                               title='rustless::server::header::AcceptCharset'>AcceptCharset</a></td>
+                        <td class='docblock short'><p>The <code>Accept-Charset</code> header</p>
+</td>
+                    </tr>
+                
+                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AcceptEncoding.html'
                                title='rustless::server::header::AcceptEncoding'>AcceptEncoding</a></td>
                         <td class='docblock short'><p>The <code>Accept-Encoding</code> header</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AcceptLanguage.html'
+                               title='rustless::server::header::AcceptLanguage'>AcceptLanguage</a></td>
+                        <td class='docblock short'><p>The <code>Accept-Language</code> header</p>
 </td>
                     </tr>
                 
@@ -166,8 +179,8 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Cookies.html'
-                               title='rustless::server::header::Cookies'>Cookies</a></td>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Cookie.html'
+                               title='rustless::server::header::Cookie'>Cookie</a></td>
                         <td class='docblock short'><p>The <code>Cookie</code> header. Defined in <a href="tools.ietf.org/html/rfc6265#section-5.4">RFC6265</a>:</p>
 </td>
                     </tr>
@@ -176,6 +189,13 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Date.html'
                                title='rustless::server::header::Date'>Date</a></td>
                         <td class='docblock short'><p>The <code>Date</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.EntityTag.html'
+                               title='rustless::server::header::EntityTag'>EntityTag</a></td>
+                        <td class='docblock short'><p>An entity tag</p>
 </td>
                     </tr>
                 
@@ -196,7 +216,7 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.HeaderFormatter.html'
                                title='rustless::server::header::HeaderFormatter'>HeaderFormatter</a></td>
-                        <td class='docblock short'><p>A wrapper around any Header with a Show impl that calls fmt_header.</p>
+                        <td class='docblock short'><p>A wrapper around any Header with a Display impl that calls fmt_header.</p>
 </td>
                     </tr>
                 
@@ -236,6 +256,13 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     </tr>
                 
                     <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.IfUnmodifiedSince.html'
+                               title='rustless::server::header::IfUnmodifiedSince'>IfUnmodifiedSince</a></td>
+                        <td class='docblock short'><p>The <code>If-Unmodified-Since</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.LastModified.html'
                                title='rustless::server::header::LastModified'>LastModified</a></td>
                         <td class='docblock short'><p>The <code>LastModified</code> header field.</p>
@@ -246,6 +273,13 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Location.html'
                                title='rustless::server::header::Location'>Location</a></td>
                         <td class='docblock short'><p>The <code>Location</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Quality.html'
+                               title='rustless::server::header::Quality'>Quality</a></td>
+                        <td class='docblock short'><p>Represents a quality used in quality values.</p>
 </td>
                     </tr>
                 
@@ -316,6 +350,13 @@ part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
                     </tr>
                 
                     <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Charset.html'
+                               title='rustless::server::header::Charset'>Charset</a></td>
+                        <td class='docblock short'><p>A Mime charset.</p>
+</td>
+                    </tr>
+                
+                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.ConnectionOption.html'
                                title='rustless::server::header::ConnectionOption'>ConnectionOption</a></td>
                         <td class='docblock short'><p>Values that can be in the <code>Connection</code> header.</p>
@@ -327,6 +368,27 @@ part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
                                title='rustless::server::header::Encoding'>Encoding</a></td>
                         <td class='docblock short'><p>A value to represent an encoding used in <code>Transfer-Encoding</code>
 or <code>Accept-Encoding</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.IfMatch.html'
+                               title='rustless::server::header::IfMatch'>IfMatch</a></td>
+                        <td class='docblock short'><p>The <code>If-Match</code> header</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.IfNoneMatch.html'
+                               title='rustless::server::header::IfNoneMatch'>IfNoneMatch</a></td>
+                        <td class='docblock short'><p>The <code>If-None-Match</code> header defined by HTTP/1.1.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Pragma.html'
+                               title='rustless::server::header::Pragma'>Pragma</a></td>
+                        <td class='docblock short'><p>The <code>Pragma</code> header defined by HTTP/1.0.</p>
 </td>
                     </tr>
                 
@@ -368,6 +430,13 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.1.4">https://too
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.q.html'
+                               title='rustless::server::header::q'>q</a></td>
+                        <td class='docblock short'><p>Convenience function to create a <code>Quality</code> fromt a float.</p>
+</td>
+                    </tr>
+                
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.qitem.html'
                                title='rustless::server::header::qitem'>qitem</a></td>

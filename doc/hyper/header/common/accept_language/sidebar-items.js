@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AcceptLanguage","The `Accept-Language` header"]]});

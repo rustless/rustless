@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Etag","The `Etag` header."]]});

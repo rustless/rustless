@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'></p>
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'url', ty: 'mod', relpath: '../'};</script>
     </section>
 
     <nav class="sub">
@@ -42,9 +42,8 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>url</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/url/lib.rs.html#9-1009'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-0' href='../src/url/lib.rs.html#9-1112'>[src]</a></span></h1>
 <div class='docblock'><p><a href="https://github.com/servo/rust-url"><img style="position: absolute; top: 0; left: 0; border: 0;" src="../github.png" alt="Fork me on GitHub"></a>
 <style>.sidebar { margin-top: 53px }</style></p>
 
@@ -92,9 +91,9 @@ features = [&quot;query_encoding&quot;]
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>issue_list_url</span>.<span class='ident'>scheme</span> <span class='op'>==</span> <span class='string'>&quot;https&quot;</span>.<span class='ident'>to_string</span>());
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>issue_list_url</span>.<span class='ident'>domain</span>() <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='string'>&quot;github.com&quot;</span>));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>issue_list_url</span>.<span class='ident'>port</span>() <span class='op'>==</span> <span class='prelude-val'>None</span>);
-<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>issue_list_url</span>.<span class='ident'>path</span>() <span class='op'>==</span> <span class='prelude-val'>Some</span>([<span class='string'>&quot;rust-lang&quot;</span>.<span class='ident'>to_string</span>(),
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>issue_list_url</span>.<span class='ident'>path</span>() <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span>[<span class='string'>&quot;rust-lang&quot;</span>.<span class='ident'>to_string</span>(),
                                         <span class='string'>&quot;rust&quot;</span>.<span class='ident'>to_string</span>(),
-                                        <span class='string'>&quot;issues&quot;</span>.<span class='ident'>to_string</span>()].<span class='ident'>as_slice</span>()));
+                                        <span class='string'>&quot;issues&quot;</span>.<span class='ident'>to_string</span>()][]));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>issue_list_url</span>.<span class='ident'>query</span> <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='string'>&quot;labels=E-easy&amp;state=open&quot;</span>.<span class='ident'>to_string</span>()));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>issue_list_url</span>.<span class='ident'>fragment</span> <span class='op'>==</span> <span class='prelude-val'>None</span>);
 <span class='kw'>match</span> <span class='ident'>issue_list_url</span>.<span class='ident'>scheme_data</span> {
@@ -170,6 +169,14 @@ as used by HTML forms.</p>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='punycode/index.html'
                                title='url::punycode'>punycode</a></td>
                         <td class='docblock short'><p>Punycode (<a href="http://tools.ietf.org/html/rfc3492">RFC 3492</a>) implementation.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='urlutils/index.html'
+                               title='url::urlutils'>urlutils</a></td>
+                        <td class='docblock short'><p>These methods are not meant for use in Rust code,
+only to help implement the JavaScript URLUtils API: <a href="http://url.spec.whatwg.org/#urlutils">http://url.spec.whatwg.org/#urlutils</a></p>
 </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>

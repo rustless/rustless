@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AnyOf",""],["Enum",""],["Format",""],["Items",""],["MaxItems",""],["MaxLength",""],["MaxProperties",""],["Maximum",""],["MinItems",""],["MinLength",""],["MinProperties",""],["Minimum",""],["MultipleOf",""],["Not",""],["OneOf",""],["Pattern",""],["Properties",""],["Required",""],["UniqueItems",""],["WrongType",""]]});

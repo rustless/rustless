@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../index.html'>url</a>::<wbr><a href='index.html'>punycode</a></p><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.decode.html'>decode</a><a class='fn ' href='fn.decode_to_string.html'>decode_to_string</a><a class='fn current' href='fn.encode.html'>encode</a><a class='fn ' href='fn.encode_str.html'>encode_str</a></div>
+        <p class='location'><a href='../index.html'>url</a>::<wbr><a href='index.html'>punycode</a></p><script>window.sidebarCurrent = {name: 'encode', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,10 +42,9 @@
 
     <section id='main' class="content fn">
 <h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>url</a>::<wbr><a href='index.html'>punycode</a>::<wbr><a class='fn' href=''>encode</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-10757' href='../../src/url/punycode.rs.html#142-202'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn encode(input: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/core/primitive.char.html'>char</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</pre><div class='docblock'><p>Convert Unicode to Punycode.</p>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-10755' href='../../src/url/punycode.rs.html#142-202'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn encode(input: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</pre><div class='docblock'><p>Convert Unicode to Punycode.</p>
 
 <p>Return None on overflow, which can only happen on inputs that would take more than
 63 encoded bytes, the DNS limit on domain name labels.</p>

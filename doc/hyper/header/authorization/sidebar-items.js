@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["Scheme","An Authorization scheme to be used in the header."]],"struct":[["Authorization","The `Authorization` header field."],["Basic","Credential holder for Basic Authentication"]]});

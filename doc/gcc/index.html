@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'></p>
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'gcc', ty: 'mod', relpath: '../'};</script>
     </section>
 
     <nav class="sub">
@@ -42,10 +42,49 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>gcc</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/gcc/lib.rs.html#1-225'>[src]</a></span></h1>
-<h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-0' href='../src/gcc/lib.rs.html#1-331'>[src]</a></span></h1>
+<div class='docblock'><p>A library for build scripts to compile custom C code</p>
+
+<p>This library is intended to be used as a <code>build-dependencies</code> entry in
+<code>Cargo.toml</code>:</p>
+
+<pre><code class="language-toml">[build-dependencies]
+gcc = &quot;0.2&quot;
+</code></pre>
+
+<p>The purpose of this crate is to provide the utility functions necessary to
+compile C code into a static archive which is then linked into a Rust crate.
+The top-level <code>compile_library</code> function serves as a convenience and more
+advanced configuration is available through the <code>Config</code> builder.</p>
+
+<p>This crate will automatically detect situations such as cross compilation or
+other environment variables set by Cargo and will build code appropriately.</p>
+
+<h1 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h1>
+<p>Use the default configuration:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>gcc</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>gcc</span>::<span class='ident'>compile_library</span>(<span class='string'>&quot;libfoo.a&quot;</span>, <span class='kw-2'>&amp;</span>[<span class='string'>&quot;src/foo.c&quot;</span>]);
+}
+</pre>
+
+<p>Use more advanced configuration:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>gcc</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>gcc</span>::<span class='ident'>Config</span>::<span class='ident'>new</span>()
+                .<span class='ident'>file</span>(<span class='string'>&quot;src/foo.c&quot;</span>)
+                .<span class='ident'>define</span>(<span class='string'>&quot;FOO&quot;</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;bar&quot;</span>))
+                .<span class='ident'>include</span>(<span class='string'>&quot;src&quot;</span>)
+                .<span class='ident'>compile</span>(<span class='string'>&quot;libfoo.a&quot;</span>);
+}
+</pre>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Config.html'

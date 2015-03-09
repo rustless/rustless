@@ -15,6 +15,27 @@
     "use strict";
     var resizeTimeout, interval;
 
+    // This mapping table should match the discriminants of
+    // `rustdoc::html::item_type::ItemType` type in Rust.
+    var itemTypes = ["mod",
+                     "externcrate",
+                     "import",
+                     "struct",
+                     "enum",
+                     "fn",
+                     "type",
+                     "static",
+                     "trait",
+                     "impl",
+                     "tymethod",
+                     "method",
+                     "structfield",
+                     "variant",
+                     "macro",
+                     "primitive",
+                     "associatedtype",
+                     "constant"];
+
     $('.js-only').removeClass('js-only');
 
     function getQueryStringParams() {
@@ -552,28 +573,6 @@
             showResults(results);
         }
 
-        // This mapping table should match the discriminants of
-        // `rustdoc::html::item_type::ItemType` type in Rust.
-        var itemTypes = ["mod",
-                         "struct",
-                         "enum",
-                         "fn",
-                         "type",
-                         "static",
-                         "trait",
-                         "impl",
-                         "viewitem",
-                         "tymethod",
-                         "method",
-                         "structfield",
-                         "variant",
-                         "ffi", // retained for backward compatibility
-                         "ffs", // retained for backward compatibility
-                         "macro",
-                         "primitive",
-                         "associatedtype",
-                         "constant"];
-
         function itemTypeFromName(typename) {
             for (var i = 0; i < itemTypes.length; ++i) {
                 if (itemTypes[i] === typename) return i;
@@ -669,6 +668,15 @@
             search();
         }
 
+        function plainSummaryLine(markdown) {
+            var str = markdown.replace(/\n/g, ' ')
+            str = str.replace(/'/g, "\'")
+            str = str.replace(/^#+? (.+?)/, "$1")
+            str = str.replace(/\[(.*?)\]\(.*?\)/g, "$1")
+            str = str.replace(/\[(.*?)\]\[.*?\]/g, "$1")
+            return str;
+        }
+
         index = buildIndex(rawSearchIndex);
         startSearch();
 
@@ -689,14 +697,60 @@
                 if (crates[i] == window.currentCrate) {
                     klass += ' current';
                 }
+                var desc = rawSearchIndex[crates[i]].items[0][3];
                 div.append($('<a>', {'href': '../' + crates[i] + '/index.html',
-                                    'class': klass}).text(crates[i]));
+                                     'title': plainSummaryLine(desc),
+                                     'class': klass}).text(crates[i]));
             }
             sidebar.append(div);
         }
     }
 
     window.initSearch = initSearch;
+
+    // delayed sidebar rendering.
+    function initSidebarItems(items) {
+        var sidebar = $('.sidebar');
+        var current = window.sidebarCurrent;
+
+        function block(shortty, longty) {
+            var filtered = items[shortty];
+            if (!filtered) return;
+
+            var div = $('<div>').attr('class', 'block ' + shortty);
+            div.append($('<h2>').text(longty));
+
+            for (var i = 0; i < filtered.length; ++i) {
+                var item = filtered[i];
+                var name = item[0];
+                var desc = item[1]; // can be null
+
+                var klass = shortty;
+                if (name === current.name && shortty == current.ty) {
+                    klass += ' current';
+                }
+                var path;
+                if (shortty === 'mod') {
+                    path = name + '/index.html';
+                } else {
+                    path = shortty + '.' + name + '.html';
+                }
+                div.append($('<a>', {'href': current.relpath + path,
+                                     'title': desc,
+                                     'class': klass}).text(name));
+            }
+            sidebar.append(div);
+        }
+
+        block("mod", "Modules");
+        block("struct", "Structs");
+        block("enum", "Enums");
+        block("trait", "Traits");
+        block("fn", "Functions");
+        block("macro", "Macros");
+    }
+
+    window.initSidebarItems = initSidebarItems;
 
     window.register_implementors = function(imp) {
         var list = $('#implementors-list');

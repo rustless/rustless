@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>net</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Fresh.html'>Fresh</a><a class='struct ' href='struct.HttpConnector.html'>HttpConnector</a><a class='struct ' href='struct.NetworkConnections.html'>NetworkConnections</a><a class='struct ' href='struct.Streaming.html'>Streaming</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.HttpAcceptor.html'>HttpAcceptor</a><a class='enum ' href='enum.HttpListener.html'>HttpListener</a><a class='enum ' href='enum.HttpStream.html'>HttpStream</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.NetworkAcceptor.html'>NetworkAcceptor</a><a class='trait ' href='trait.NetworkConnector.html'>NetworkConnector</a><a class='trait ' href='trait.NetworkListener.html'>NetworkListener</a><a class='trait current' href='trait.NetworkStream.html'>NetworkStream</a></div>
+        <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>net</a></p><script>window.sidebarCurrent = {name: 'NetworkStream', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,16 +42,15 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>net</a>::<wbr><a class='trait' href=''>NetworkStream</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-24742' href='../../../hyper/net/trait.NetworkStream.html?gotosrc=24742'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait NetworkStream: <a class='trait' href='../../../hyper/net/trait.StreamClone.html' title='hyper::net::StreamClone'>StreamClone</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Stream.html' title='std::io::Stream'>Stream</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> {
-    fn <a href='#tymethod.peer_name' class='fnname'>peer_name</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/io/net/ip/struct.SocketAddr.html' title='std::io::net::ip::SocketAddr'>SocketAddr</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/io/struct.IoError.html' title='std::io::IoError'>IoError</a>&gt;;
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-30215' href='../../../hyper/net/trait.NetworkStream.html?gotosrc=30215'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait NetworkStream <span class='where'>where Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>, Self: <a class='trait' href='../../../hyper/net/trait.StreamClone.html' title='hyper::net::StreamClone'>StreamClone</a>, Self: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>, Self: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Write.html' title='std::io::Write'>Write</a>, Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a></span> {
+    fn <a href='#tymethod.peer_addr' class='fnname'>peer_addr</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/net/addr/struct.SocketAddr.html' title='std::net::addr::SocketAddr'>SocketAddr</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>&gt;;
 }</pre><div class='docblock'><p>An abstraction over streams that a Server can utilize.</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.peer_name' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.peer_name' class='fnname'>peer_name</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/io/net/ip/struct.SocketAddr.html' title='std::io::net::ip::SocketAddr'>SocketAddr</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/io/struct.IoError.html' title='std::io::IoError'>IoError</a>&gt;</code></h3><div class='docblock'><p>Get the remote address of the underlying connection.</p>
+        <h3 id='tymethod.peer_addr' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.peer_addr' class='fnname'>peer_addr</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/net/addr/struct.SocketAddr.html' title='std::net::addr::SocketAddr'>SocketAddr</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>&gt;</code></h3><div class='docblock'><p>Get the remote address of the underlying connection.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>

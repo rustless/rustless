@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../log/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>log</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='macros/index.html'>macros</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.LogLevel.html'>LogLevel</a><a class='struct current' href='struct.LogRecord.html'>LogRecord</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Logger.html'>Logger</a></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.set_logger.html'>set_logger</a></div><div class='block macro'><h2>Macros</h2><a class='macro ' href='macro.debug!.html'>debug!</a><a class='macro ' href='macro.error!.html'>error!</a><a class='macro ' href='macro.info!.html'>info!</a><a class='macro ' href='macro.log!.html'>log!</a><a class='macro ' href='macro.log_enabled!.html'>log_enabled!</a><a class='macro ' href='macro.warn!.html'>warn!</a></div>
+        <p class='location'><a href='index.html'>log</a></p><script>window.sidebarCurrent = {name: 'LogRecord', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,25 +42,20 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>log</a>::<wbr><a class='struct' href=''>LogRecord</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-1463' href='../src/log/lib.rs.html#320-336'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-1077' href='../src/log/lib.rs.html#412-416'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct LogRecord&lt;'a&gt; {
-    pub module_path: &amp;'a <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,
-    pub level: <a class='struct' href='../log/struct.LogLevel.html' title='log::LogLevel'>LogLevel</a>,
-    pub args: <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Arguments.html' title='core::fmt::Arguments'>Arguments</a>&lt;'a&gt;,
-    pub file: &amp;'a <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>,
-    pub line: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>,
-}</pre><div class='docblock'><p>A LogRecord is created by the logging macros, and passed as the only
-argument to Loggers.</p>
-</div><h2 class='fields'>Fields</h2>
-<table><tr><td id='structfield.module_path'><a class='stability Unmarked' title='No stability level'></a><code>module_path</code></td><td><div class='docblock'><p>The module path of where the LogRecord originated.</p>
-</div></td></tr><tr><td id='structfield.level'><a class='stability Unmarked' title='No stability level'></a><code>level</code></td><td><div class='docblock'><p>The LogLevel of this record.</p>
-</div></td></tr><tr><td id='structfield.args'><a class='stability Unmarked' title='No stability level'></a><code>args</code></td><td><div class='docblock'><p>The arguments from the log line.</p>
-</div></td></tr><tr><td id='structfield.file'><a class='stability Unmarked' title='No stability level'></a><code>file</code></td><td><div class='docblock'><p>The file of where the LogRecord originated.</p>
-</div></td></tr><tr><td id='structfield.line'><a class='stability Unmarked' title='No stability level'></a><code>line</code></td><td><div class='docblock'><p>The line number of where the LogRecord originated.</p>
-</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>impl&lt;'a&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Show.html' title='core::fmt::Show'>Show</a> for <a class='struct' href='../log/struct.LogRecord.html' title='log::LogRecord'>LogRecord</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div></section>
+    // some fields omitted
+}</pre><div class='docblock'><p>The &quot;payload&quot; of a log message.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a&gt; <a class='struct' href='../log/struct.LogRecord.html' title='log::LogRecord'>LogRecord</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(level: <a class='enum' href='../log/enum.LogLevel.html' title='log::LogLevel'>LogLevel</a>, location: &amp;'a <a class='struct' href='../log/struct.LogLocation.html' title='log::LogLocation'>LogLocation</a>, args: <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Arguments.html' title='core::fmt::Arguments'>Arguments</a>&lt;'a&gt;) -&gt; <a class='struct' href='../log/struct.LogRecord.html' title='log::LogRecord'>LogRecord</a>&lt;'a&gt;</code></h4>
+<div class='docblock'><p>Creates a new <code>LogRecord</code>.</p>
+</div><h4 id='method.args' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.args' class='fnname'>args</a>(&amp;self) -&gt; &amp;<a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Arguments.html' title='core::fmt::Arguments'>Arguments</a>&lt;'a&gt;</code></h4>
+<div class='docblock'><p>The message body.</p>
+</div><h4 id='method.location' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.location' class='fnname'>location</a>(&amp;self) -&gt; &amp;<a class='struct' href='../log/struct.LogLocation.html' title='log::LogLocation'>LogLocation</a></code></h4>
+<div class='docblock'><p>The location of the log directive.</p>
+</div><h4 id='method.level' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.level' class='fnname'>level</a>(&amp;self) -&gt; <a class='enum' href='../log/enum.LogLevel.html' title='log::LogLevel'>LogLevel</a></code></h4>
+<div class='docblock'><p>The verbosity level of the message.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

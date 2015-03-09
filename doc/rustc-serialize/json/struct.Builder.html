@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../../rustc-serialize/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
-        <p class='location'><a href='../index.html'>rustc-serialize</a>::<wbr><a href='index.html'>json</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.AsJson.html'>AsJson</a><a class='struct ' href='struct.AsPrettyJson.html'>AsPrettyJson</a><a class='struct current' href='struct.Builder.html'>Builder</a><a class='struct ' href='struct.Decoder.html'>Decoder</a><a class='struct ' href='struct.Encoder.html'>Encoder</a><a class='struct ' href='struct.Parser.html'>Parser</a><a class='struct ' href='struct.PrettyEncoder.html'>PrettyEncoder</a><a class='struct ' href='struct.PrettyJson.html'>PrettyJson</a><a class='struct ' href='struct.Stack.html'>Stack</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.DecoderError.html'>DecoderError</a><a class='enum ' href='enum.ErrorCode.html'>ErrorCode</a><a class='enum ' href='enum.Json.html'>Json</a><a class='enum ' href='enum.JsonEvent.html'>JsonEvent</a><a class='enum ' href='enum.ParserError.html'>ParserError</a><a class='enum ' href='enum.StackElement.html'>StackElement</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.ToJson.html'>ToJson</a></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.as_json.html'>as_json</a><a class='fn ' href='fn.as_pretty_json.html'>as_pretty_json</a><a class='fn ' href='fn.decode.html'>decode</a><a class='fn ' href='fn.encode.html'>encode</a><a class='fn ' href='fn.error_str.html'>error_str</a></div>
+        <p class='location'><a href='../index.html'>rustc-serialize</a>::<wbr><a href='index.html'>json</a></p><script>window.sidebarCurrent = {name: 'Builder', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,13 +42,12 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>rustc-serialize</a>::<wbr><a href='index.html'>json</a>::<wbr><a class='struct' href=''>Builder</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-30321' href='../../src/rustc-serialize/json.rs.html#1913-1916'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-28480' href='../../src/rustc-serialize/json.rs.html#1899-1902'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Builder&lt;T&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>A Builder consumes a json::Parser to create a generic Json structure.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html' title='core::iter::Iterator'>Iterator</a>&lt;Item=<a href='http://doc.rust-lang.org/nightly/core/primitive.char.html'>char</a>&gt;&gt; <a class='struct' href='../../rustc-serialize/json/struct.Builder.html' title='rustc-serialize::json::Builder'>Builder</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(src: T) -&gt; <a class='struct' href='../../rustc-serialize/json/struct.Builder.html' title='rustc-serialize::json::Builder'>Builder</a>&lt;T&gt;</code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html' title='core::iter::Iterator'>Iterator</a>&lt;Item=<a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>&gt;&gt; <a class='struct' href='../../rustc-serialize/json/struct.Builder.html' title='rustc-serialize::json::Builder'>Builder</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(src: T) -&gt; <a class='struct' href='../../rustc-serialize/json/struct.Builder.html' title='rustc-serialize::json::Builder'>Builder</a>&lt;T&gt;</code></h4>
 <div class='docblock'><p>Create a JSON Builder.</p>
 </div><h4 id='method.build' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.build' class='fnname'>build</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='../../rustc-serialize/json/enum.Json.html' title='rustc-serialize::json::Json'>Json</a>, <a class='type' href='../../rustc-serialize/json/type.BuilderError.html' title='rustc-serialize::json::BuilderError'>BuilderError</a>&gt;</code></h4>
 </div></section>

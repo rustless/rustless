@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../index.html'>openssl</a>::<wbr><a href='index.html'>x509</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.X509.html'>X509</a><a class='struct current' href='struct.X509Generator.html'>X509Generator</a><a class='struct ' href='struct.X509Name.html'>X509Name</a><a class='struct ' href='struct.X509StoreContext.html'>X509StoreContext</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.ExtKeyUsage.html'>ExtKeyUsage</a><a class='enum ' href='enum.KeyUsage.html'>KeyUsage</a><a class='enum ' href='enum.X509FileType.html'>X509FileType</a><a class='enum ' href='enum.X509ValidationError.html'>X509ValidationError</a></div>
+        <p class='location'><a href='../index.html'>openssl</a>::<wbr><a href='index.html'>x509</a></p><script>window.sidebarCurrent = {name: 'X509Generator', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,35 +42,37 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>openssl</a>::<wbr><a href='index.html'>x509</a>::<wbr><a class='struct' href=''>X509Generator</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-11643' href='../../src/openssl/x509/mod.rs.html#178-185'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-12747' href='../../src/openssl/x509/mod.rs.html#183-190'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct X509Generator {
     // some fields omitted
 }</pre><div class='docblock'><p>Generator of private key/certificate pairs</p>
 
 <h1 id="example" class='section-header'><a
                            href="#example">Example</a></h1><pre id='rust-example-rendered' class='rust '>
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='ident'>File</span>, <span class='ident'>Open</span>, <span class='ident'>Write</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>File</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>Path</span>;
 
-<span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>HashType</span>;
+<span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>Type</span>;
 <span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>x509</span>::{<span class='ident'>KeyUsage</span>, <span class='ident'>X509Generator</span>};
 
 <span class='kw'>let</span> <span class='ident'>gen</span> <span class='op'>=</span> <span class='ident'>X509Generator</span>::<span class='ident'>new</span>()
        .<span class='ident'>set_bitlength</span>(<span class='number'>2048</span>)
        .<span class='ident'>set_valid_period</span>(<span class='number'>365</span><span class='op'>*</span><span class='number'>2</span>)
        .<span class='ident'>set_CN</span>(<span class='string'>&quot;SuperMegaCorp Inc.&quot;</span>)
-       .<span class='ident'>set_sign_hash</span>(<span class='ident'>HashType</span>::<span class='ident'>SHA256</span>)
+       .<span class='ident'>set_sign_hash</span>(<span class='ident'>Type</span>::<span class='ident'>SHA256</span>)
        .<span class='ident'>set_usage</span>(<span class='kw-2'>&amp;</span>[<span class='ident'>KeyUsage</span>::<span class='ident'>DigitalSignature</span>]);
 
 <span class='kw'>let</span> (<span class='ident'>cert</span>, <span class='ident'>pkey</span>) <span class='op'>=</span> <span class='ident'>gen</span>.<span class='ident'>generate</span>().<span class='ident'>unwrap</span>();
 
-<span class='kw'>let</span> <span class='ident'>cert_path</span> <span class='op'>=</span> <span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='string'>&quot;doc_cert.pem&quot;</span>);
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>open_mode</span>(<span class='kw-2'>&amp;</span><span class='ident'>cert_path</span>, <span class='ident'>Open</span>, <span class='ident'>Write</span>).<span class='ident'>unwrap</span>();
+<span class='kw'>let</span> <span class='ident'>cert_path</span> <span class='op'>=</span> <span class='string'>&quot;doc_cert.pem&quot;</span>;
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>create</span>(<span class='ident'>cert_path</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>cert</span>.<span class='ident'>write_pem</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>file</span>).<span class='ident'>is_ok</span>());
 
-<span class='kw'>let</span> <span class='ident'>pkey_path</span> <span class='op'>=</span> <span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='string'>&quot;doc_key.pem&quot;</span>);
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>open_mode</span>(<span class='kw-2'>&amp;</span><span class='ident'>pkey_path</span>, <span class='ident'>Open</span>, <span class='ident'>Write</span>).<span class='ident'>unwrap</span>();
+<span class='kw'>let</span> <span class='ident'>pkey_path</span> <span class='op'>=</span> <span class='string'>&quot;doc_key.pem&quot;</span>;
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>create</span>(<span class='ident'>pkey_path</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>pkey</span>.<span class='ident'>write_pem</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>file</span>).<span class='ident'>is_ok</span>());
 </pre>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
@@ -93,7 +95,7 @@
 <div class='docblock'><p>Sets what for certificate could be used</p>
 </div><h4 id='method.set_ext_usage' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_ext_usage' class='fnname'>set_ext_usage</a>(self, purposes: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='enum' href='../../openssl/x509/enum.ExtKeyUsage.html' title='openssl::x509::ExtKeyUsage'>ExtKeyUsage</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
 <div class='docblock'><p>Sets allowed extended usage of certificate</p>
-</div><h4 id='method.set_sign_hash' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_sign_hash' class='fnname'>set_sign_hash</a>(self, hash_type: <a class='enum' href='../../openssl/crypto/hash/enum.HashType.html' title='openssl::crypto::hash::HashType'>HashType</a>) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
+</div><h4 id='method.set_sign_hash' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_sign_hash' class='fnname'>set_sign_hash</a>(self, hash_type: <a class='enum' href='../../openssl/crypto/hash/enum.Type.html' title='openssl::crypto::hash::Type'>Type</a>) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
 <h4 id='method.generate' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.generate' class='fnname'>generate</a>&lt;'a&gt;(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='struct' href='../../openssl/x509/struct.X509.html' title='openssl::x509::X509'>X509</a>&lt;'a&gt;, <a class='struct' href='../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a>)</a>, <a class='enum' href='../../openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>&gt;</code></h4>
 <div class='docblock'><p>Generates a private key and a signed certificate and returns them</p>
 </div></div></section>

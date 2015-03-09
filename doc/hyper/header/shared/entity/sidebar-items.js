@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["EntityTag","An entity tag"]]});

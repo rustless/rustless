@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Protocol","Protocol used to serve content. Future versions of Iron may add new protocols to this enum. Thus you should not exhaustively match on its variants."]],"struct":[["Iron","The primary entrance point to `Iron`, a `struct` to instantiate a new server."],["Listening","A listening server, which can later be closed."]]});

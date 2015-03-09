@@ -1,6 +1,5 @@
 (function() {var implementors = {};
-implementors['mucell'] = ["<a class='stability Unstable' title='Unstable: trait is not stable'></a>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/rand/trait.Rand.html' title='rand::Rand'>Rand</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/rand/trait.Rand.html' title='rand::Rand'>Rand</a> for <a class='struct' href='mucell/struct.MuCell.html' title='mucell::MuCell'>MuCell</a>&lt;T&gt;",];
-implementors['hyper'] = [];
+implementors['rand'] = [];implementors['uuid'] = ["<a class='stability Unmarked' title='No stability level'></a>impl <a class='trait' href='rand/trait.Rand.html' title='rand::Rand'>Rand</a> for <a class='struct' href='uuid/struct.Uuid.html' title='uuid::Uuid'>Uuid</a>",];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

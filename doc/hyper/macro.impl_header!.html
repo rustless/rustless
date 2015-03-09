@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>hyper</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='client/index.html'>client</a><a class='mod ' href='header/index.html'>header</a><a class='mod ' href='http/index.html'>http</a><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='mime/index.html'>mime</a><a class='mod ' href='net/index.html'>net</a><a class='mod ' href='server/index.html'>server</a><a class='mod ' href='status/index.html'>status</a><a class='mod ' href='uri/index.html'>uri</a><a class='mod ' href='version/index.html'>version</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.SocketAddr.html'>SocketAddr</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.HttpError.html'>HttpError</a><a class='enum ' href='enum.IpAddr.html'>IpAddr</a></div><div class='block macro'><h2>Macros</h2><a class='macro ' href='macro.bench_header!.html'>bench_header!</a><a class='macro ' href='macro.deref!.html'>deref!</a><a class='macro current' href='macro.impl_header!.html'>impl_header!</a><a class='macro ' href='macro.impl_list_header!.html'>impl_list_header!</a></div>
+        <p class='location'><a href='index.html'>hyper</a></p><script>window.sidebarCurrent = {name: 'impl_header!', ty: 'macro', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,16 +42,15 @@
 
     <section id='main' class="content macro">
 <h1 class='fqn'><span class='in-band'><a href='index.html'>hyper</a>::<wbr><a class='macro' href=''>impl_header!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-47877' href='../src/hyper/header/common/mod.rs.html#114-141'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-38478' href='../src/hyper/header/common/mod.rs.html#120-147'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>impl_header</span>(
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>) <span class='op'>=&gt;</span> {
         <span class='macro'>deref</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>);
 
-        <span class='kw'>impl</span> <span class='ident'>header</span>::<span class='ident'>Header</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span> {
-            <span class='kw'>fn</span> <span class='ident'>header_name</span>(_: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> {
+        <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>Header</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span> {
+            <span class='kw'>fn</span> <span class='ident'>header_name</span>() <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> {
                 <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>
             }
 
@@ -60,15 +59,15 @@
             }
         }
 
-        <span class='kw'>impl</span> <span class='ident'>header</span>::<span class='ident'>HeaderFormat</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span> {
+        <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>HeaderFormat</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span> {
             <span class='kw'>fn</span> <span class='ident'>fmt_header</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
-                ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>String</span>::<span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>f</span>)
+                ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Display</span>::<span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>f</span>)
             }
         }
 
-        <span class='kw'>impl</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>String</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span> {
+        <span class='kw'>impl</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Display</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span> {
             <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
-                <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>HeaderFormat</span>;
+                <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>HeaderFormat</span>;
                 <span class='self'>self</span>.<span class='ident'>fmt_header</span>(<span class='ident'>f</span>)
             }
         }

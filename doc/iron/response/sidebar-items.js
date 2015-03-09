@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["HttpResponse","The outgoing half for a Tcp connection, created by a `Server` and given to a `Handler`."],["Response","The response representation given to `Middleware`"]]});

@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../index.html'>hyper</a>::<wbr><a href='index.html'>http</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.LineEnding.html'>LineEnding</a><a class='struct ' href='struct.RawStatus.html'>RawStatus</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.HttpReader.html'>HttpReader</a><a class='enum ' href='enum.HttpWriter.html'>HttpWriter</a></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.is_token.html'>is_token</a><a class='fn ' href='fn.read_header.html'>read_header</a><a class='fn ' href='fn.read_http_version.html'>read_http_version</a><a class='fn ' href='fn.read_method.html'>read_method</a><a class='fn current' href='fn.read_request_line.html'>read_request_line</a><a class='fn ' href='fn.read_status.html'>read_status</a><a class='fn ' href='fn.read_status_line.html'>read_status_line</a><a class='fn ' href='fn.read_uri.html'>read_uri</a></div>
+        <p class='location'><a href='../index.html'>hyper</a>::<wbr><a href='index.html'>http</a></p><script>window.sidebarCurrent = {name: 'read_request_line', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,10 +42,9 @@
 
     <section id='main' class="content fn">
 <h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>http</a>::<wbr><a class='fn' href=''>read_request_line</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-23527' href='../../src/hyper/http.rs.html#582-599'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn read_request_line&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Reader.html' title='std::io::Reader'>Reader</a>&gt;(stream: &amp;mut R) -&gt; <a class='type' href='../../hyper/type.HttpResult.html' title='hyper::HttpResult'>HttpResult</a>&lt;<a class='type' href='../../hyper/http/type.RequestLine.html' title='hyper::http::RequestLine'>RequestLine</a>&gt;</pre><div class='docblock'><p>Read the <code>RequestLine</code>, such as <code>GET / HTTP/1.1</code>.</p>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-28792' href='../../src/hyper/http.rs.html#615-642'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn read_request_line&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a>&gt;(stream: &amp;mut R) -&gt; <a class='type' href='../../hyper/type.HttpResult.html' title='hyper::HttpResult'>HttpResult</a>&lt;<a class='type' href='../../hyper/http/type.RequestLine.html' title='hyper::http::RequestLine'>RequestLine</a>&gt;</pre><div class='docblock'><p>Read the <code>RequestLine</code>, such as <code>GET / HTTP/1.1</code>.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 

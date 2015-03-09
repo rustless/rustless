@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../log/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>log</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='macros/index.html'>macros</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.LogLevel.html'>LogLevel</a><a class='struct ' href='struct.LogRecord.html'>LogRecord</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Logger.html'>Logger</a></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.set_logger.html'>set_logger</a></div><div class='block macro'><h2>Macros</h2><a class='macro ' href='macro.debug!.html'>debug!</a><a class='macro ' href='macro.error!.html'>error!</a><a class='macro current' href='macro.info!.html'>info!</a><a class='macro ' href='macro.log!.html'>log!</a><a class='macro ' href='macro.log_enabled!.html'>log_enabled!</a><a class='macro ' href='macro.warn!.html'>warn!</a></div>
+        <p class='location'><a href='index.html'>log</a></p><script>window.sidebarCurrent = {name: 'info!', ty: 'macro', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,31 +42,20 @@
 
     <section id='main' class="content macro">
 <h1 class='fqn'><span class='in-band'><a href='index.html'>log</a>::<wbr><a class='macro' href=''>info!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-1998' href='../src/log/macros.rs.html#134-136'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-1731' href='../src/log/macros.rs.html#65-69'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>info</span> {
-    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> (<span class='macro'>log</span><span class='macro'>!</span>(::<span class='ident'>log</span>::<span class='ident'>INFO</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>)<span class='op'>*</span>))
+    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> (
+        <span class='macro'>log</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLevel</span>::<span class='ident'>Info</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>)<span class='op'>*</span>);
+    )
 }
 </pre>
-<div class='docblock'><p>A convenience macro for logging at the info log level.</p>
+<div class='docblock'><p>Logs a message at the info level.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre id='rust-example-rendered' class='rust '>
-<span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>log</span>;
-
-<span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>ret</span> <span class='op'>=</span> <span class='number'>3i</span>;
-    <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;this function is about to return: {}&quot;</span>, <span class='ident'>ret</span>);
-}
-</pre>
-
-<p>Assumes the binary is <code>main</code>:</p>
-
-<pre><code class="language-{.bash}">$ RUST_LOG=info ./main
-INFO:main: this function is about to return: 3
-</code></pre>
+<p>Logging at this level is disabled if any of the following cfgs are present:
+<code>log_level = &quot;off&quot;</code>, <code>log_level = &quot;error&quot;</code>, or
+<code>log_level = &quot;warn&quot;</code>.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 

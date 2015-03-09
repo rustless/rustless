@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>modifier</a></p><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Modifier.html'>Modifier</a><a class='trait current' href='trait.Set.html'>Set</a></div>
+        <p class='location'><a href='index.html'>modifier</a></p><script>window.sidebarCurrent = {name: 'Set', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,11 +42,10 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>modifier</a>::<wbr><a class='trait' href=''>Set</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-17' href='../src/modifier/lib.rs.html#21-35'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait Set: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> {
-    fn <a href='#method.set' class='fnname'>set</a>&lt;M: <a class='trait' href='../modifier/trait.Modifier.html' title='modifier::Modifier'>Modifier</a>&lt;Self&gt;&gt;(self, modifier: M) -&gt; Self { ... }
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-17' href='../src/modifier/lib.rs.html#20-34'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait Set {
+    fn <a href='#method.set' class='fnname'>set</a>&lt;M: <a class='trait' href='../modifier/trait.Modifier.html' title='modifier::Modifier'>Modifier</a>&lt;Self&gt;&gt;(self, modifier: M) -&gt; Self <span class='where'>where Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a></span> { ... }
     fn <a href='#method.set_mut' class='fnname'>set_mut</a>&lt;M: <a class='trait' href='../modifier/trait.Modifier.html' title='modifier::Modifier'>Modifier</a>&lt;Self&gt;&gt;(&amp;mut self, modifier: M) -&gt; &amp;mut Self { ... }
 }</pre><div class='docblock'><p>A trait providing the set and set_mut methods for all types.</p>
 
@@ -55,7 +54,7 @@ with modifiers.</p>
 </div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.set' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set' class='fnname'>set</a>&lt;M: <a class='trait' href='../modifier/trait.Modifier.html' title='modifier::Modifier'>Modifier</a>&lt;Self&gt;&gt;(self, modifier: M) -&gt; Self</code></h3><div class='docblock'><p>Modify self using the provided modifier.</p>
+        <h3 id='method.set' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set' class='fnname'>set</a>&lt;M: <a class='trait' href='../modifier/trait.Modifier.html' title='modifier::Modifier'>Modifier</a>&lt;Self&gt;&gt;(self, modifier: M) -&gt; Self <span class='where'>where Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a></span></code></h3><div class='docblock'><p>Modify self using the provided modifier.</p>
 </div><h3 id='method.set_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_mut' class='fnname'>set_mut</a>&lt;M: <a class='trait' href='../modifier/trait.Modifier.html' title='modifier::Modifier'>Modifier</a>&lt;Self&gt;&gt;(&amp;mut self, modifier: M) -&gt; &amp;mut Self</code></h3><div class='docblock'><p>Modify self through a mutable reference with the provided modifier.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>

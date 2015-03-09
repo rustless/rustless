@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../../index.html'>openssl</a>::<wbr><a href='../index.html'>crypto</a></p><div class='block mod'><h2>Modules</h2><a class='mod current' href='../hash/index.html'>hash</a><a class='mod ' href='../hmac/index.html'>hmac</a><a class='mod ' href='../memcmp/index.html'>memcmp</a><a class='mod ' href='../pkcs5/index.html'>pkcs5</a><a class='mod ' href='../pkey/index.html'>pkey</a><a class='mod ' href='../rand/index.html'>rand</a><a class='mod ' href='../symm/index.html'>symm</a></div>
+        <p class='location'><a href='../../index.html'>openssl</a>::<wbr><a href='../index.html'>crypto</a></p><script>window.sidebarCurrent = {name: 'hash', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,42 +42,30 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../../index.html'>openssl</a>::<wbr><a href='../index.html'>crypto</a>::<wbr><a class='mod' href=''>hash</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-4020' href='../../../src/openssl/crypto/hash.rs.html#1-234'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-3747' href='../../../src/openssl/crypto/hash.rs.html#1-338'>[src]</a></span></h1>
 <h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Hasher.html'
                                title='openssl::crypto::hash::Hasher'>Hasher</a></td>
-                        <td class='docblock short'></td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.HasherContext.html'
-                               title='openssl::crypto::hash::HasherContext'>HasherContext</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'><p>Provides message digest (hash) computation.</p>
+</td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.HashType.html'
-                               title='openssl::crypto::hash::HashType'>HashType</a></td>
-                        <td class='docblock short'></td>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Type.html'
+                               title='openssl::crypto::hash::Type'>Type</a></td>
+                        <td class='docblock short'><p>Message digest (hash) type.</p>
+</td>
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.evpmd.html'
-                               title='openssl::crypto::hash::evpmd'>evpmd</a></td>
-                        <td class='docblock short'></td>
-                    </tr>
-                
-                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.hash.html'
                                title='openssl::crypto::hash::hash'>hash</a></td>
-                        <td class='docblock short'><p>Hashes the supplied input data using hash t, returning the resulting hash
-value</p>
+                        <td class='docblock short'><p>Computes the hash of the <code>data</code> with the hash <code>t</code>.</p>
 </td>
                     </tr>
                 </table></section>

@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>mopa</a></p><div class='block macro'><h2>Macros</h2><a class='macro current' href='macro.mopafy!.html'>mopafy!</a></div>
+        <p class='location'><a href='index.html'>mopa</a></p><script>window.sidebarCurrent = {name: 'mopafy!', ty: 'macro', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,9 +42,8 @@
 
     <section id='main' class="content macro">
 <h1 class='fqn'><span class='in-band'><a href='index.html'>mopa</a>::<wbr><a class='macro' href=''>mopafy!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-4' href='../src/mopa/lib.rs.html#197-313'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-4' href='../src/mopa/lib.rs.html#196-312'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>mopafy</span> {
     <span class='comment'>// Using libstd like a normal person? Here’s what you want, just a simple `mopafy!(Trait)`.</span>
@@ -136,9 +135,9 @@
             <span class='doccomment'>/// Returns the boxed value if it is of type `T`, or `Err(Self)` if it isn&#39;t.</span>
             <span class='attribute'>#[<span class='ident'>inline</span>]</span>
             <span class='attribute'>#[<span class='ident'>stable</span>]</span>
-            <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>downcast</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Self</span><span class='op'>&gt;</span>)
+            <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>downcast</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;</span>)
                     <span class='op'>-&gt;</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>,
-                                               ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Self</span><span class='op'>&gt;&gt;</span> {
+                                               ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;&gt;</span> {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>is</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() {
                     <span class='kw'>unsafe</span> {
                         ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span>::<span class='prelude-val'>Ok</span>(<span class='self'>self</span>.<span class='ident'>downcast_unchecked</span>())
@@ -152,7 +151,7 @@
             <span class='doccomment'>/// If you are not *absolutely certain* of `T`, you *must not* call this.</span>
             <span class='attribute'>#[<span class='ident'>inline</span>]</span>
             <span class='attribute'>#[<span class='ident'>unstable</span> <span class='op'>=</span> <span class='string'>&quot;method may be renamed with respect to other downcasting methods&quot;</span>]</span>
-            <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>downcast_unchecked</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Self</span><span class='op'>&gt;</span>)
+            <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>downcast_unchecked</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;</span>)
                     <span class='op'>-&gt;</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
                 <span class='comment'>// Get the raw representation of the trait object</span>
                 <span class='kw'>let</span> <span class='ident'>to</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>raw</span>::<span class='ident'>TraitObject</span> <span class='op'>=</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>);

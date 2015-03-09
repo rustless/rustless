@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'></p>
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'iron', ty: 'mod', relpath: '../'};</script>
     </section>
 
     <nav class="sub">
@@ -42,27 +42,71 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>iron</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/iron/lib.rs.html#1-123'>[src]</a></span></h1>
-<div class='docblock'><p>The main crate for the Iron library.</p>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-0' href='../src/iron/lib.rs.html#1-168'>[src]</a></span></h1>
+<div class='docblock'><p>The main crate for Iron.</p>
 
-<p>Iron is a high level web framework built in and for Rust.</p>
+<h2 id="overview" class='section-header'><a
+                           href="#overview">Overview</a></h2>
+<p>Iron is a high level web framework built in and for Rust, built on
+<a href="https://github.com/hyperium/hyper">hyper</a>. Iron is designed to take advantage
+of Rust&#39;s greatest features - it&#39;s excellent type system and its principled
+approach to ownership in both single threaded and multi threaded contexts.</p>
 
-<p>Iron provides a robust and efficient framework
-for creating and plugging in middleware.</p>
+<p>Iron is highly concurrent and can scale horizontally on more machines behind a
+load balancer or by running more threads on a more powerful machine. Iron
+avoids the bottlenecks encountered in highly concurrent code by avoiding shared
+writes and locking in the core framework.</p>
 
-<p>Obligatory Hello World:</p>
-<pre id='rust-example-rendered' class='rust '>
-<span class='kw'>fn</span> <span class='ident'>hello_world</span>(<span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='ident'>IronResult</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> {
-  <span class='ident'>Response</span>::<span class='ident'>new</span>().<span class='ident'>set</span>(<span class='ident'>Status</span>(<span class='ident'>status</span>::<span class='prelude-val'>Ok</span>)).<span class='ident'>set</span>(<span class='ident'>Body</span>(<span class='string'>&quot;Hello World!&quot;</span>))
-}
+<p>Iron is 100% safe code:</p>
 
-<span class='ident'>Iron</span>::<span class='ident'>new</span>(<span class='ident'>hello_world</span>).<span class='ident'>listen</span>(<span class='ident'>Ipv4Addr</span>(<span class='number'>127</span>, <span class='number'>0</span>, <span class='number'>0</span>, <span class='number'>1</span>), <span class='number'>3000</span>);
+<pre><code class="language-sh">$ ack unsafe src | wc
+       0       0       0
+</code></pre>
+
+<h2 id="hello-world" class='section-header'><a
+                           href="#hello-world">Hello World</a></h2><pre id='rust-example-rendered' class='rust '>
+<span class='ident'>Iron</span>::<span class='ident'>new</span>(<span class='op'>|</span><span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span><span class='op'>|</span> {
+    <span class='prelude-val'>Ok</span>(<span class='ident'>Response</span>::<span class='ident'>with</span>((<span class='ident'>status</span>::<span class='prelude-val'>Ok</span>, <span class='string'>&quot;Hello World!&quot;</span>)))
+}).<span class='ident'>http</span>(<span class='string'>&quot;localhost:3000&quot;</span>).<span class='ident'>unwrap</span>();
 </pre>
+
+<h2 id="design-philosophy" class='section-header'><a
+                           href="#design-philosophy">Design Philosophy</a></h2>
+<p>Iron is meant to be as extensible and pluggable as possible; Iron&#39;s core is
+concentrated and avoids unnecessary features by leaving them to middleware,
+plugins, and modifiers.</p>
+
+<p>Middleware, Plugins, and Modifiers are the main ways to extend Iron with new
+functionality. Most extensions that would be provided by middleware in other
+web frameworks are instead addressed by the much simpler Modifier and Plugin
+systems.</p>
+
+<p>Modifiers allow external code to manipulate Requests and Response in an ergonomic
+fashion, allowing third-party extensions to get the same treatment as modifiers
+defined in Iron itself. Plugins allow for lazily-evaluated, automically cached
+extensions to Requests and Responses, perfect for parsing, accessing, and
+otherwise lazily manipulating an http connection.</p>
+
+<p>Middleware are only used when it is necessary to modify the control flow of a
+Request flow, hijack the entire handling of a Request, check an incoming
+Request, or to do final post-processing. This covers areas such as routing,
+mounting, static asset serving, final template rendering, authentication, and
+logging.</p>
+
+<p>Iron comes with only basic modifiers for setting the status, body, and various
+headers, and the infrastructure for creating modifiers, plugins, and
+middleware. No plugins or middleware are bundled with Iron.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
-<table><tr><td><code>pub use response::<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>;</code></td></tr><tr><td><code>pub use middleware::{<a class='trait' href='../iron/middleware/trait.BeforeMiddleware.html' title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a>, <a class='trait' href='../iron/middleware/trait.AfterMiddleware.html' title='iron::middleware::AfterMiddleware'>AfterMiddleware</a>, <a class='trait' href='../iron/middleware/trait.AroundMiddleware.html' title='iron::middleware::AroundMiddleware'>AroundMiddleware</a>, <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, <a class='trait' href='../iron/middleware/trait.Chain.html' title='iron::middleware::Chain'>Chain</a>, <a class='struct' href='../iron/middleware/struct.ChainBuilder.html' title='iron::middleware::ChainBuilder'>ChainBuilder</a>};</code></td></tr><tr><td><code>pub use modifier::<a class='trait' href='../iron/modifier/trait.Set.html' title='iron::modifier::Set'>Set</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table><tr><td><code>pub use request::{<a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>};</code></td></tr><tr><td><code>pub use response::<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>;</code></td></tr><tr><td><code>pub use middleware::{<a class='trait' href='../iron/middleware/trait.BeforeMiddleware.html' title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a>, <a class='trait' href='../iron/middleware/trait.AfterMiddleware.html' title='iron::middleware::AfterMiddleware'>AfterMiddleware</a>, <a class='trait' href='../iron/middleware/trait.AroundMiddleware.html' title='iron::middleware::AroundMiddleware'>AroundMiddleware</a>, <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, <a class='struct' href='../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a>};</code></td></tr><tr><td><code>pub use error::<a class='struct' href='../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='error/index.html'
+                               title='iron::error'>error</a></td>
+                        <td class='docblock short'><p>Iron&#39;s error type and associated utilities.</p>
+</td>
+                    </tr>
+                
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='headers/index.html'
                                title='iron::headers'>headers</a></td>
@@ -85,7 +129,7 @@ for creating and plugging in middleware.</p>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='mime/index.html'
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='mime/index.html'
                                title='iron::mime'>mime</a></td>
                         <td class='docblock short'></td>
                     </tr>
@@ -93,9 +137,7 @@ for creating and plugging in middleware.</p>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='modifier/index.html'
                                title='iron::modifier'>modifier</a></td>
-                        <td class='docblock short'><p>Re-exports from the Modifier crate.
-Overloadable modification through both owned and mutable references
-to a type with minimal code duplication.</p>
+                        <td class='docblock short'><p>Re-exports from the Modifier crate.</p>
 </td>
                     </tr>
                 
@@ -110,6 +152,13 @@ to a type with minimal code duplication.</p>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='prelude/index.html'
                                title='iron::prelude'>prelude</a></td>
                         <td class='docblock short'><p>A module meant to be glob imported when using Iron, for instance:</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='request/index.html'
+                               title='iron::request'>request</a></td>
+                        <td class='docblock short'><p>Iron&#39;s HTTP Request representation and associated methods.</p>
 </td>
                     </tr>
                 
@@ -150,13 +199,6 @@ to a type with minimal code duplication.</p>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Request.html'
-                               title='iron::Request'>Request</a></td>
-                        <td class='docblock short'><p>The <code>Request</code> given to all <code>Middleware</code>.</p>
-</td>
-                    </tr>
-                
-                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.TypeMap.html'
                                title='iron::TypeMap'>TypeMap</a></td>
                         <td class='docblock short'><p>A map keyed by types.</p>
@@ -167,6 +209,15 @@ to a type with minimal code duplication.</p>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Url.html'
                                title='iron::Url'>Url</a></td>
                         <td class='docblock short'><p>HTTP/HTTPS URL type for Iron.</p>
+</td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Protocol.html'
+                               title='iron::Protocol'>Protocol</a></td>
+                        <td class='docblock short'><p>Protocol used to serve content. Future versions of Iron may add new protocols
+to this enum. Thus you should not exhaustively match on its variants.</p>
 </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
@@ -185,15 +236,15 @@ errors for use in highly generic contexts.</p>
                         <td class='docblock short'><p>An interface for plugins that cache values between calls.</p>
 </td>
                     </tr>
-                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
-<table>
+                
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.IronError.html'
-                               title='iron::IronError'>IronError</a></td>
-                        <td class='docblock short'><p>The type of Errors inside and when using Iron.</p>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Set.html'
+                               title='iron::Set'>Set</a></td>
+                        <td class='docblock short'><p>A trait providing the set and set_mut methods for all types.</p>
 </td>
                     </tr>
-                
+                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.IronResult.html'
                                title='iron::IronResult'>IronResult</a></td>

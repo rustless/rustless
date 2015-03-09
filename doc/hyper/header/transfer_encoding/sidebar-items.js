@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["TransferEncoding","The `Transfer-Encoding` header."]]});

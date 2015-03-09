@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AcceptEncoding","The `Accept-Encoding` header"]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Dependency",""]],"fn":[["schema",""],["schema_box",""]],"struct":[["Builder","Builder provides simple DSL to build Schema. It allows you not to use strings and raw JSON manipulation. It also prevent some kinds of spelling and type errors."],["Dependencies",""],["SchemaArray",""],["SchemaHash",""]]});

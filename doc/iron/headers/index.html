@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='../index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod current' href='../headers/index.html'>headers</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../middleware/index.html'>middleware</a><a class='mod ' href='../mime/index.html'>mime</a><a class='mod ' href='../modifier/index.html'>modifier</a><a class='mod ' href='../modifiers/index.html'>modifiers</a><a class='mod ' href='../prelude/index.html'>prelude</a><a class='mod ' href='../response/index.html'>response</a><a class='mod ' href='../status/index.html'>status</a><a class='mod ' href='../typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.Headers.html'>Headers</a><a class='struct ' href='../struct.Iron.html'>Iron</a><a class='struct ' href='../struct.Request.html'>Request</a><a class='struct ' href='../struct.TypeMap.html'>TypeMap</a><a class='struct ' href='../struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='../trait.Error.html'>Error</a><a class='trait ' href='../trait.Plugin.html'>Plugin</a></div>
+        <p class='location'><a href='../index.html'>iron</a></p><script>window.sidebarCurrent = {name: 'headers', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,9 +42,8 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>headers</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-4471' href='../../hyper/headers/index.html?gotosrc=4471'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-4447' href='../../hyper/headers/index.html?gotosrc=4447'>[src]</a></span></h1>
 <div class='docblock'><p>Headers container, and common header fields.</p>
 
 <p>hyper has the opinion that Headers should be strongly-typed, because that&#39;s
@@ -69,9 +68,23 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                     </tr>
                 
                     <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AcceptCharset.html'
+                               title='iron::headers::AcceptCharset'>AcceptCharset</a></td>
+                        <td class='docblock short'><p>The <code>Accept-Charset</code> header</p>
+</td>
+                    </tr>
+                
+                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AcceptEncoding.html'
                                title='iron::headers::AcceptEncoding'>AcceptEncoding</a></td>
                         <td class='docblock short'><p>The <code>Accept-Encoding</code> header</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AcceptLanguage.html'
+                               title='iron::headers::AcceptLanguage'>AcceptLanguage</a></td>
+                        <td class='docblock short'><p>The <code>Accept-Language</code> header</p>
 </td>
                     </tr>
                 
@@ -166,8 +179,8 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Cookies.html'
-                               title='iron::headers::Cookies'>Cookies</a></td>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Cookie.html'
+                               title='iron::headers::Cookie'>Cookie</a></td>
                         <td class='docblock short'><p>The <code>Cookie</code> header. Defined in <a href="tools.ietf.org/html/rfc6265#section-5.4">RFC6265</a>:</p>
 </td>
                     </tr>
@@ -176,6 +189,13 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Date.html'
                                title='iron::headers::Date'>Date</a></td>
                         <td class='docblock short'><p>The <code>Date</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.EntityTag.html'
+                               title='iron::headers::EntityTag'>EntityTag</a></td>
+                        <td class='docblock short'><p>An entity tag</p>
 </td>
                     </tr>
                 
@@ -196,7 +216,7 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.HeaderFormatter.html'
                                title='iron::headers::HeaderFormatter'>HeaderFormatter</a></td>
-                        <td class='docblock short'><p>A wrapper around any Header with a Show impl that calls fmt_header.</p>
+                        <td class='docblock short'><p>A wrapper around any Header with a Display impl that calls fmt_header.</p>
 </td>
                     </tr>
                 
@@ -236,6 +256,13 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     </tr>
                 
                     <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.IfUnmodifiedSince.html'
+                               title='iron::headers::IfUnmodifiedSince'>IfUnmodifiedSince</a></td>
+                        <td class='docblock short'><p>The <code>If-Unmodified-Since</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.LastModified.html'
                                title='iron::headers::LastModified'>LastModified</a></td>
                         <td class='docblock short'><p>The <code>LastModified</code> header field.</p>
@@ -246,6 +273,13 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Location.html'
                                title='iron::headers::Location'>Location</a></td>
                         <td class='docblock short'><p>The <code>Location</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Quality.html'
+                               title='iron::headers::Quality'>Quality</a></td>
+                        <td class='docblock short'><p>Represents a quality used in quality values.</p>
 </td>
                     </tr>
                 
@@ -316,6 +350,13 @@ part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
                     </tr>
                 
                     <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Charset.html'
+                               title='iron::headers::Charset'>Charset</a></td>
+                        <td class='docblock short'><p>A Mime charset.</p>
+</td>
+                    </tr>
+                
+                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.ConnectionOption.html'
                                title='iron::headers::ConnectionOption'>ConnectionOption</a></td>
                         <td class='docblock short'><p>Values that can be in the <code>Connection</code> header.</p>
@@ -327,6 +368,27 @@ part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
                                title='iron::headers::Encoding'>Encoding</a></td>
                         <td class='docblock short'><p>A value to represent an encoding used in <code>Transfer-Encoding</code>
 or <code>Accept-Encoding</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.IfMatch.html'
+                               title='iron::headers::IfMatch'>IfMatch</a></td>
+                        <td class='docblock short'><p>The <code>If-Match</code> header</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.IfNoneMatch.html'
+                               title='iron::headers::IfNoneMatch'>IfNoneMatch</a></td>
+                        <td class='docblock short'><p>The <code>If-None-Match</code> header defined by HTTP/1.1.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Pragma.html'
+                               title='iron::headers::Pragma'>Pragma</a></td>
+                        <td class='docblock short'><p>The <code>Pragma</code> header defined by HTTP/1.0.</p>
 </td>
                     </tr>
                 
@@ -368,6 +430,13 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.1.4">https://too
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.q.html'
+                               title='iron::headers::q'>q</a></td>
+                        <td class='docblock short'><p>Convenience function to create a <code>Quality</code> fromt a float.</p>
+</td>
+                    </tr>
+                
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.qitem.html'
                                title='iron::headers::qitem'>qitem</a></td>

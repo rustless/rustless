@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Accept","The `Accept` header."]]});

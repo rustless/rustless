@@ -64,8 +64,7 @@
 
 body {
     color: #333;
-    min-width: 500px;
-    font: 16px/1.4 "Source Serif Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 16px/1.4 "Source Serif Pro", Georgia, Times, "Times New Roman", serif;
     margin: 0;
     position: relative;
     padding: 10px 15px 20px 15px;
@@ -245,7 +244,6 @@ nav.sub {
 .content .highlighted.method { background-color: #c6afb3; }
 .content .highlighted.tymethod { background-color: #c6afb3; }
 .content .highlighted.type { background-color: #c6afb3; }
-.content .highlighted.ffi { background-color: #c6afb3; }
 
 .docblock.short.nowrap {
     display: block;
@@ -293,6 +291,27 @@ nav.sub {
 .content td:first-child { padding-right: 20px; }
 .content td p:first-child { margin-top: 0; }
 .content td h1, .content td h2 { margin-left: 0; font-size: 1.1em; }
+
+.docblock table {
+    border: 1px solid #ddd;
+    margin: .5em 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.docblock table td {
+    padding: .5em;
+    border-top: 1px dashed #ddd;
+    border-bottom: 1px dashed #ddd;
+
+}
+
+.docblock table th {
+    padding: .5em;
+    text-align: left;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
 
 .content .item-list {
     list-style-type: none;
@@ -355,8 +374,14 @@ a {
     color: #000;
     background: transparent;
 }
-p a { color: #4e8bca; }
-p a:hover { text-decoration: underline; }
+
+.docblock a {
+    color: #4e8bca;
+}
+
+.docblock a:hover {
+    text-decoration: underline;
+}
 
 .content span.trait, .content a.trait, .block a.current.trait { color: #ed9603; }
 .content span.mod, .content a.mod, block a.current.mod { color: #4d76ae; }
@@ -365,7 +390,6 @@ p a:hover { text-decoration: underline; }
 .content span.fn, .content a.fn, .block a.current.fn { color: #8c6067; }
 .content span.method, .content a.method, .block a.current.method { color: #8c6067; }
 .content span.tymethod, .content a.tymethod, .block a.current.tymethod { color: #8c6067; }
-.content span.ffi, .content a.ffi, .block a.current.ffi { color: #8c6067; }
 .content .fnname { color: #8c6067; }
 
 .search-input {
@@ -511,8 +535,17 @@ pre.rust { position: relative; }
     margin: 0 0 -5px;
     padding: 0;
 }
+
 .section-header:hover a:after {
     content: '\2002\00a7\2002';
+}
+
+.section-header:hover a {
+    text-decoration: none;
+}
+
+.section-header a {
+    color: inherit;
 }
 
 .collapse-toggle {
@@ -592,6 +625,14 @@ pre.rust { position: relative; }
 
     .content {
         margin-left: 0px;
+    }
+
+    .content .in-band {
+        width: 100%;
+    }
+
+    .content .out-of-band {
+        display: none;
     }
 
     .toggle-wrapper > .collapse-toggle {

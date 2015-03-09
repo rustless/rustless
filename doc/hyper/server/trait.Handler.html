@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../index.html'>hyper</a>::<wbr><a href='index.html'>server</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='request/index.html'>request</a><a class='mod ' href='response/index.html'>response</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Listening.html'>Listening</a><a class='struct ' href='struct.Server.html'>Server</a></div><div class='block trait'><h2>Traits</h2><a class='trait current' href='trait.Handler.html'>Handler</a></div>
+        <p class='location'><a href='../index.html'>hyper</a>::<wbr><a href='index.html'>server</a></p><script>window.sidebarCurrent = {name: 'Handler', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,22 +42,21 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>server</a>::<wbr><a class='trait' href=''>Handler</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-29018' href='../../src/hyper/server/mod.rs.html#174-179'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-34515' href='../../src/hyper/server/mod.rs.html#170-175'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Handler: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> {
-    fn <a href='#tymethod.handle' class='fnname'>handle</a>(&amp;self, <a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>, <a class='struct' href='../../hyper/server/response/struct.Response.html' title='hyper::server::response::Response'>Response</a>&lt;<a class='struct' href='../../hyper/net/struct.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;);
+    fn <a href='#tymethod.handle' class='fnname'>handle</a>&lt;'a&gt;(&amp;'a self, <a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>&lt;'a&gt;, <a class='struct' href='../../hyper/server/response/struct.Response.html' title='hyper::server::response::Response'>Response</a>&lt;'a, <a class='enum' href='../../hyper/net/enum.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;);
 }</pre><div class='docblock'><p>A handler that can handle incoming requests for a server.</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.handle' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.handle' class='fnname'>handle</a>(&amp;self, <a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>, <a class='struct' href='../../hyper/server/response/struct.Response.html' title='hyper::server::response::Response'>Response</a>&lt;<a class='struct' href='../../hyper/net/struct.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;)</code></h3><div class='docblock'><p>Receives a <code>Request</code>/<code>Response</code> pair, and should perform some action on them.</p>
+        <h3 id='tymethod.handle' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.handle' class='fnname'>handle</a>&lt;'a&gt;(&amp;'a self, <a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>&lt;'a&gt;, <a class='struct' href='../../hyper/server/response/struct.Response.html' title='hyper::server::response::Response'>Response</a>&lt;'a, <a class='enum' href='../../hyper/net/enum.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;)</code></h3><div class='docblock'><p>Receives a <code>Request</code>/<code>Response</code> pair, and should perform some action on them.</p>
 
 <p>This could reading from the request, and writing to the response.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;F&gt; <a class='trait' href='../../hyper/server/trait.Handler.html' title='hyper::server::Handler'>Handler</a> for F <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(<a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>, <a class='struct' href='../../hyper/server/response/struct.Response.html' title='hyper::server::response::Response'>Response</a>&lt;<a class='struct' href='../../hyper/net/struct.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;), F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a></span></code></li>
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;F&gt; <a class='trait' href='../../hyper/server/trait.Handler.html' title='hyper::server::Handler'>Handler</a> for F <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(<a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>, <a class='struct' href='../../hyper/server/response/struct.Response.html' title='hyper::server::response::Response'>Response</a>&lt;<a class='enum' href='../../hyper/net/enum.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;), F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a></span></code></li>
 </ul><script type="text/javascript" async
                               src="../../implementors/hyper/server/trait.Handler.js">
                       </script></section>

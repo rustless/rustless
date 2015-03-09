@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../index.html'>hyper</a>::<wbr><a href='index.html'>status</a></p><div class='block enum'><h2>Enums</h2><a class='enum current' href='enum.StatusClass.html'>StatusClass</a><a class='enum ' href='enum.StatusCode.html'>StatusCode</a></div>
+        <p class='location'><a href='../index.html'>hyper</a>::<wbr><a href='index.html'>status</a></p><script>window.sidebarCurrent = {name: 'StatusClass', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,83 +42,84 @@
 
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>status</a>::<wbr><a class='enum' href=''>StatusClass</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-45111' href='../../src/hyper/status.rs.html#1697-1712'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-35705' href='../../src/hyper/status.rs.html#671-689'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum StatusClass {
     Informational,
     Success,
     Redirection,
     ClientError,
     ServerError,
-}</pre><div class='docblock'><p>The class of an HTTP <code>Status-Code</code>.</p>
+    NoClass,
+}</pre><div class='docblock'><p>The class of an HTTP <code>status-code</code>.</p>
 
-<p><a href="https://tools.ietf.org/html/rfc2616#section-6.1.1">RFC 2616, section 6.1.1 (Status Code and Reason
-Phrase)</a>:</p>
+<p><a href="https://tools.ietf.org/html/rfc7231#section-6">RFC 7231, section 6 (Response Status Codes)</a>:</p>
 
 <blockquote>
-<p>The first digit of the Status-Code defines the class of response. The
-last two digits do not have any categorization role.</p>
+<p>The first digit of the status-code defines the class of response.
+The last two digits do not have any categorization role.</p>
+</blockquote>
 
-<p>...</p>
+<p>And:</p>
 
-<p>HTTP status codes are extensible. HTTP applications are not required
-to understand the meaning of all registered status codes, though such
-understanding is obviously desirable. However, applications MUST
+<blockquote>
+<p>HTTP status codes are extensible.  HTTP clients are not required to
+understand the meaning of all registered status codes, though such
+understanding is obviously desirable.  However, a client MUST
 understand the class of any status code, as indicated by the first
-digit, and treat any unrecognized response as being equivalent to the
-x00 status code of that class, with the exception that an
-unrecognized response MUST NOT be cached. For example, if an
-unrecognized status code of 431 is received by the client, it can
-safely assume that there was something wrong with its request and
-treat the response as if it had received a 400 status code. In such
-cases, user agents SHOULD present to the user the entity returned
-with the response, since that entity is likely to include human-
-readable information which will explain the unusual status.</p>
+digit, and treat an unrecognized status code as being equivalent to
+the x00 status code of that class, with the exception that a
+recipient MUST NOT cache a response with an unrecognized status code.</p>
+
+<p>For example, if an unrecognized status code of 471 is received by a
+client, the client can assume that there was something wrong with its
+request and treat the response as if it had received a 400 (Bad
+Request) status code.  The response message will usually contain a
+representation that explains the status.</p>
 </blockquote>
 
 <p>This can be used in cases where a status code’s meaning is unknown, also,
 to get the appropriate <em>category</em> of status.</p>
-
-<p>For HTTP/2.0, the 1xx Informational class is invalid.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Informational'><a class='stability Unmarked' title='No stability level'></a><code>Informational</code></td><td><div class='docblock'><p>1xx: Informational - Request received, continuing process</p>
-</div></td></tr><tr><td id='variant.Success'><a class='stability Unmarked' title='No stability level'></a><code>Success</code></td><td><div class='docblock'><p>2xx: Success - The action was successfully received, understood, and accepted</p>
-</div></td></tr><tr><td id='variant.Redirection'><a class='stability Unmarked' title='No stability level'></a><code>Redirection</code></td><td><div class='docblock'><p>3xx: Redirection - Further action must be taken in order to complete the request</p>
-</div></td></tr><tr><td id='variant.ClientError'><a class='stability Unmarked' title='No stability level'></a><code>ClientError</code></td><td><div class='docblock'><p>4xx: Client Error - The request contains bad syntax or cannot be fulfilled</p>
-</div></td></tr><tr><td id='variant.ServerError'><a class='stability Unmarked' title='No stability level'></a><code>ServerError</code></td><td><div class='docblock'><p>5xx: Server Error - The server failed to fulfill an apparently valid request</p>
+<table><tr><td id='variant.Informational'><a class='stability Unmarked' title='No stability level'></a><code>Informational</code></td><td><div class='docblock'><p>1xx (Informational): The request was received, continuing process</p>
+</div></td></tr><tr><td id='variant.Success'><a class='stability Unmarked' title='No stability level'></a><code>Success</code></td><td><div class='docblock'><p>2xx (Success): The request was successfully received, understood, and accepted</p>
+</div></td></tr><tr><td id='variant.Redirection'><a class='stability Unmarked' title='No stability level'></a><code>Redirection</code></td><td><div class='docblock'><p>3xx (Redirection): Further action needs to be taken in order to complete the request</p>
+</div></td></tr><tr><td id='variant.ClientError'><a class='stability Unmarked' title='No stability level'></a><code>ClientError</code></td><td><div class='docblock'><p>4xx (Client Error): The request contains bad syntax or cannot be fulfilled</p>
+</div></td></tr><tr><td id='variant.ServerError'><a class='stability Unmarked' title='No stability level'></a><code>ServerError</code></td><td><div class='docblock'><p>5xx (Server Error): The server failed to fulfill an apparently valid request</p>
+</div></td></tr><tr><td id='variant.NoClass'><a class='stability Unmarked' title='No stability level'></a><code>NoClass</code></td><td><div class='docblock'><p>A status code lower than 100 or higher than 599. These codes do no belong to any class.</p>
 </div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a></code></h3><div class='impl-items'><h4 id='method.default_code' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.default_code' class='fnname'>default_code</a>(&amp;self) -&gt; <a class='enum' href='../../hyper/status/enum.StatusCode.html' title='hyper::status::StatusCode'>StatusCode</a></code></h4>
 <div class='docblock'><p>Get the default status code for the class.</p>
 
-<p>This produces the x00 status code; thus, for <code>ClientError</code> (4xx), for example, this will
-produce <code>BadRequest</code> (400):</p>
+<p>This produces the x00 status code; thus, for <code>ClientError</code> (4xx), for
+example, this will produce <code>BadRequest</code> (400):</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>ClientError</span>.<span class='ident'>default_code</span>(), <span class='ident'>BadRequest</span>);
 </pre>
 
-<p>The use for this is outlined in <a href="https://tools.ietf.org/html/rfc2616#section-6.1.1">RFC 2616, section 6.1.1 (Status Code and Reason
-Phrase)</a>:</p>
+<p>The use for this is outlined in <a href="https://tools.ietf.org/html/rfc7231#section-6">RFC 7231, section 6 (Response Status
+Codes)</a>:</p>
 
 <blockquote>
-<p>HTTP status codes are extensible. HTTP applications are not required
-to understand the meaning of all registered status codes, though such
-understanding is obviously desirable. However, applications MUST
+<p>HTTP status codes are extensible.  HTTP clients are not required to
+understand the meaning of all registered status codes, though such
+understanding is obviously desirable.  However, a client MUST
 understand the class of any status code, as indicated by the first
-digit, and treat any unrecognized response as being equivalent to the
-x00 status code of that class, with the exception that an
-unrecognized response MUST NOT be cached. For example, if an
-unrecognized status code of 431 is received by the client, it can
-safely assume that there was something wrong with its request and
-treat the response as if it had received a 400 status code. In such
-cases, user agents SHOULD present to the user the entity returned
-with the response, since that entity is likely to include human-
-readable information which will explain the unusual status.</p>
+digit, and treat an unrecognized status code as being equivalent to
+the x00 status code of that class, with the exception that a
+recipient MUST NOT cache a response with an unrecognized status code.</p>
+
+<p>For example, if an unrecognized status code of 471 is received by a
+client, the client can assume that there was something wrong with its
+request and treat the response as if it had received a 400 (Bad
+Request) status code.  The response message will usually contain a
+representation that explains the status.</p>
 </blockquote>
 
-<p>This is demonstrated thusly (I’ll use 432 rather than 431 as 431 <em>is</em> now in use):</p>
+<p>This is demonstrated thusly:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='comment'>// Suppose we have received this status code.</span>
-<span class='kw'>let</span> <span class='ident'>status</span> <span class='op'>=</span> <span class='ident'>Code432</span>;
+<span class='comment'>// You will never directly create an unregistered status code.</span>
+<span class='kw'>let</span> <span class='ident'>status</span> <span class='op'>=</span> <span class='ident'>Unregistered</span>(<span class='number'>471</span>);
 
 <span class='comment'>// Uh oh! Don’t know what to do with it.</span>
 <span class='comment'>// Let’s fall back to the default:</span>
@@ -128,13 +129,19 @@ readable information which will explain the unusual status.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>status</span>, <span class='ident'>BadRequest</span>);
 <span class='comment'>// So now let’s treat it as that.</span>
 </pre>
+
+<p>All status codes that do not map to an existing status class are matched
+by a <code>NoClass</code>, variant that resolves to 200 (Ok) as default code.
+This is a common handling for unknown status codes in major browsers.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/num/trait.ToPrimitive.html' title='core::num::ToPrimitive'>ToPrimitive</a> for <a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a></code></h3><div class='impl-items'><h4 id='method.to_i64' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_i64' class='fnname'>to_i64</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>&gt;</code></h4>
 <h4 id='method.to_u64' class='method'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#method.to_u64' class='fnname'>to_u64</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
-<h4 id='method.to_int' class='tymethod'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#tymethod.to_int' class='fnname'>to_int</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a>&gt;</code></h4>
+<h4 id='method.to_int' class='tymethod'><a class='stability Deprecated' title='Deprecated: use to_isize'></a><code>fn <a href='#tymethod.to_int' class='fnname'>to_int</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a>&gt;</code></h4>
+<h4 id='method.to_isize' class='tymethod'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#tymethod.to_isize' class='fnname'>to_isize</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a>&gt;</code></h4>
 <h4 id='method.to_i8' class='tymethod'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#tymethod.to_i8' class='fnname'>to_i8</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>&gt;</code></h4>
 <h4 id='method.to_i16' class='tymethod'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#tymethod.to_i16' class='fnname'>to_i16</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>&gt;</code></h4>
 <h4 id='method.to_i32' class='tymethod'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#tymethod.to_i32' class='fnname'>to_i32</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>&gt;</code></h4>
-<h4 id='method.to_uint' class='tymethod'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#tymethod.to_uint' class='fnname'>to_uint</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<h4 id='method.to_uint' class='tymethod'><a class='stability Deprecated' title='Deprecated: use to_usize'></a><code>fn <a href='#tymethod.to_uint' class='fnname'>to_uint</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<h4 id='method.to_usize' class='tymethod'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#tymethod.to_usize' class='fnname'>to_usize</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
 <h4 id='method.to_u8' class='tymethod'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#tymethod.to_u8' class='fnname'>to_u8</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
 <h4 id='method.to_u16' class='tymethod'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#tymethod.to_u16' class='fnname'>to_u16</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>&gt;</code></h4>
 <h4 id='method.to_u32' class='tymethod'><a class='stability Unstable' title='Unstable: trait is likely to be removed'></a><code>fn <a href='#tymethod.to_u32' class='fnname'>to_u32</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>&gt;</code></h4>
@@ -146,7 +153,7 @@ readable information which will explain the unusual status.</p>
 <h4 id='method.le' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.le' class='fnname'>le</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <h4 id='method.gt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.gt' class='fnname'>gt</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <h4 id='method.ge' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.ge' class='fnname'>ge</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a></code></h3><div class='impl-items'><h4 id='method.assert_receiver_is_total_eq' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.assert_receiver_is_total_eq' class='fnname'>assert_receiver_is_total_eq</a>(&amp;self)</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a></code></h3><div class='impl-items'><h4 id='method.assert_receiver_is_total_eq' class='tymethod'><a class='stability Stable' title='Stable'></a><code>fn <a href='#tymethod.assert_receiver_is_total_eq' class='fnname'>assert_receiver_is_total_eq</a>(&amp;self)</code></h4>
 </div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <h4 id='method.ne' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 </div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a></code></h4>

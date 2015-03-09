@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../log/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
-        <p class='location'></p>
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'log', ty: 'mod', relpath: '../'};</script>
     </section>
 
     <nav class="sub">
@@ -42,278 +42,251 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>log</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/log/lib.rs.html#11-506'>[src]</a></span></h1>
-<div class='docblock'><p>Utilities for program-wide and customizable logging</p>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-0' href='../src/log/lib.rs.html#11-706'>[src]</a></span></h1>
+<div class='docblock'><p>A lightweight logging facade.</p>
 
-<h2 id="example" class='section-header'><a
-                           href="#example">Example</a></h2><pre id='rust-example-rendered' class='rust '>
-<span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>log</span>;
+<p>A logging facade provides a single logging API that abstracts over the
+actual logging implementation. Libraries can use the logging API provided
+by this crate, and the consumer of those libraries can choose the logging
+framework that is most suitable for its use case.</p>
 
-<span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;this is a debug {}&quot;</span>, <span class='string'>&quot;message&quot;</span>);
-    <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;this is printed by default&quot;</span>);
+<p>If no logging implementation is selected, the facade falls back to a &quot;noop&quot;
+implementation that ignores all log messages. The overhead in this case
+is very small - just an integer load, comparison and jump.</p>
 
-    <span class='kw'>if</span> <span class='macro'>log_enabled</span><span class='macro'>!</span>(<span class='ident'>log</span>::<span class='ident'>INFO</span>) {
-        <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>3i</span> <span class='op'>*</span> <span class='number'>4i</span>; <span class='comment'>// expensive computation</span>
-        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;the answer was: {}&quot;</span>, <span class='ident'>x</span>);
+<h1 id="use" class='section-header'><a
+                           href="#use">Use</a></h1>
+<h2 id="in-libraries" class='section-header'><a
+                           href="#in-libraries">In libraries</a></h2>
+<p>Libraries should link only to the <code>log</code> crate, and use the provided
+macros to log whatever information will be useful to downstream consumers.</p>
+
+<h3 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h3><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>log</span>;
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>shave_the_yak</span>(<span class='ident'>yak</span>: <span class='kw-2'>&amp;</span><span class='ident'>Yak</span>) {
+    <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;Commencing yak shaving&quot;</span>);
+
+    <span class='kw'>loop</span> {
+        <span class='kw'>match</span> <span class='ident'>find_a_razor</span>() {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>razor</span>) <span class='op'>=&gt;</span> {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;Razor located: {}&quot;</span>, <span class='ident'>razor</span>);
+                <span class='ident'>yak</span>.<span class='ident'>shave</span>(<span class='ident'>razor</span>);
+                <span class='kw'>break</span>;
+            }
+            <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> {
+                <span class='macro'>warn</span><span class='macro'>!</span>(<span class='string'>&quot;Unable to locate a razor: {}, retrying&quot;</span>, <span class='ident'>err</span>);
+            }
+        }
     }
 }
 </pre>
 
-<p>Assumes the binary is <code>main</code>:</p>
+<h2 id="in-executables" class='section-header'><a
+                           href="#in-executables">In executables</a></h2>
+<p>Executables should chose a logging framework and initialize it early in the
+runtime of the program. Logging frameworks will typically include a
+function to do this. Any log messages generated before the framework is
+initialized will be ignored.</p>
 
-<pre><code class="language-{.bash}">$ RUST_LOG=error ./main
-ERROR:main: this is printed by default
-</code></pre>
+<p>The executable itself may use the <code>log</code> crate to log as well.</p>
 
-<pre><code class="language-{.bash}">$ RUST_LOG=info ./main
-ERROR:main: this is printed by default
-INFO:main: the answer was: 12
-</code></pre>
+<h3 id="warning" class='section-header'><a
+                           href="#warning">Warning</a></h3>
+<p>The logging system may only be initialized once.</p>
 
-<pre><code class="language-{.bash}">$ RUST_LOG=debug ./main
-DEBUG:main: this is a debug message
-ERROR:main: this is printed by default
-INFO:main: the answer was: 12
-</code></pre>
+<h3 id="examples-1" class='section-header'><a
+                           href="#examples-1">Examples</a></h3><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>log</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>my_logger</span>;
 
-<p>You can also set the log level on a per module basis:</p>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>my_logger</span>::<span class='ident'>init</span>();
 
-<pre><code class="language-{.bash}">$ RUST_LOG=main=info ./main
-ERROR:main: this is printed by default
-INFO:main: the answer was: 12
-</code></pre>
+    <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;starting up&quot;</span>);
 
-<p>And enable all logging:</p>
-
-<pre><code class="language-{.bash}">$ RUST_LOG=main ./main
-DEBUG:main: this is a debug message
-ERROR:main: this is printed by default
-INFO:main: the answer was: 12
-</code></pre>
-
-<h2 id="logging-macros" class='section-header'><a
-                           href="#logging-macros">Logging Macros</a></h2>
-<p>There are five macros that the logging subsystem uses:</p>
-
-<ul>
-<li><code>log!(level, ...)</code> - the generic logging macro, takes a level as a u32 and any
-                   related <code>format!</code> arguments</li>
-<li><code>debug!(...)</code> - a macro hard-wired to the log level of <code>DEBUG</code></li>
-<li><code>info!(...)</code> - a macro hard-wired to the log level of <code>INFO</code></li>
-<li><code>warn!(...)</code> - a macro hard-wired to the log level of <code>WARN</code></li>
-<li><code>error!(...)</code> - a macro hard-wired to the log level of <code>ERROR</code></li>
-</ul>
-
-<p>All of these macros use the same style of syntax as the <code>format!</code> syntax
-extension. Details about the syntax can be found in the documentation of
-<code>std::fmt</code> along with the Rust tutorial/manual.</p>
-
-<p>If you want to check at runtime if a given logging level is enabled (e.g. if the
-information you would want to log is expensive to produce), you can use the
-following macro:</p>
-
-<ul>
-<li><code>log_enabled!(level)</code> - returns true if logging of the given level is enabled</li>
-</ul>
-
-<h2 id="enabling-logging" class='section-header'><a
-                           href="#enabling-logging">Enabling logging</a></h2>
-<p>Log levels are controlled on a per-module basis, and by default all logging is
-disabled except for <code>error!</code> (a log level of 1). Logging is controlled via the
-<code>RUST_LOG</code> environment variable. The value of this environment variable is a
-comma-separated list of logging directives. A logging directive is of the form:</p>
-
-<pre><code class="language-text">path::to::module=log_level
-</code></pre>
-
-<p>The path to the module is rooted in the name of the crate it was compiled for,
-so if your program is contained in a file <code>hello.rs</code>, for example, to turn on
-logging for this file you would use a value of <code>RUST_LOG=hello</code>.
-Furthermore, this path is a prefix-search, so all modules nested in the
-specified module will also have logging enabled.</p>
-
-<p>The actual <code>log_level</code> is optional to specify. If omitted, all logging will be
-enabled. If specified, the it must be either a numeric in the range of 1-255, or
-it must be one of the strings <code>debug</code>, <code>error</code>, <code>info</code>, or <code>warn</code>. If a numeric
-is specified, then all logging less than or equal to that numeral is enabled.
-For example, if logging level 3 is active, error, warn, and info logs will be
-printed, but debug will be omitted.</p>
-
-<p>As the log level for a module is optional, the module to enable logging for is
-also optional. If only a <code>log_level</code> is provided, then the global log level for
-all modules is set to this value.</p>
-
-<p>Some examples of valid values of <code>RUST_LOG</code> are:</p>
-
-<ul>
-<li><code>hello</code> turns on all logging for the &#39;hello&#39; module</li>
-<li><code>info</code> turns on all info logging</li>
-<li><code>hello=debug</code> turns on debug logging for &#39;hello&#39;</li>
-<li><code>hello=3</code> turns on info logging for &#39;hello&#39;</li>
-<li><code>hello,std::option</code> turns on hello, and std&#39;s option logging</li>
-<li><code>error,hello=warn</code> turn on global error logging and also warn for hello</li>
-</ul>
-
-<h2 id="filtering-results" class='section-header'><a
-                           href="#filtering-results">Filtering results</a></h2>
-<p>A RUST_LOG directive may include a regex filter. The syntax is to append <code>/</code>
-followed by a regex. Each message is checked against the regex, and is only
-logged if it matches. Note that the matching is done after formatting the log
-string but before adding any logging meta-data. There is a single filter for all
-modules.</p>
-
-<p>Some examples:</p>
-
-<ul>
-<li><code>hello/foo</code> turns on all logging for the &#39;hello&#39; module where the log message
-includes &#39;foo&#39;.</li>
-<li><code>info/f.o</code> turns on all info logging where the log message includes &#39;foo&#39;,
-&#39;f1o&#39;, &#39;fao&#39;, etc.</li>
-<li><code>hello=debug/foo*foo</code> turns on debug logging for &#39;hello&#39; where the log
-message includes &#39;foofoo&#39; or &#39;fofoo&#39; or &#39;fooooooofoo&#39;, etc.</li>
-<li><code>error,hello=warn/[0-9] scopes</code> turn on global error logging and also warn for
-hello. In both cases the log message must include a single digit number
-followed by &#39;scopes&#39;</li>
-</ul>
-
-<h2 id="performance-and-side-effects" class='section-header'><a
-                           href="#performance-and-side-effects">Performance and Side Effects</a></h2>
-<p>Each of these macros will expand to code similar to:</p>
-<pre id='rust-example-rendered' class='rust '>
-<span class='kw'>if</span> <span class='ident'>log_level</span> <span class='op'>&lt;=</span> <span class='ident'>my_module_log_level</span>() {
-    ::<span class='ident'>log</span>::<span class='ident'>log</span>(<span class='ident'>log_level</span>, <span class='macro'>format</span><span class='macro'>!</span>(...));
+    <span class='comment'>// ...</span>
 }
 </pre>
 
-<p>What this means is that each of these macros are very cheap at runtime if
-they&#39;re turned off (just a load and an integer comparison). This also means that
-if logging is disabled, none of the components of the log will be executed.</p>
-</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
-<table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='macros/index.html'
-                               title='log::macros'>macros</a></td>
-                        <td class='docblock short'><p>Logging macros</p>
-</td>
-                    </tr>
-                </table><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
+<h1 id="logger-implementations" class='section-header'><a
+                           href="#logger-implementations">Logger implementations</a></h1>
+<p>Loggers implement the <code>Log</code> trait. Here&#39;s a very basic example that simply
+logs all messages at the <code>Error</code>, <code>Warn</code> or <code>Info</code> levels to stdout:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>log</span>;
+
+<span class='kw'>use</span> <span class='ident'>log</span>::{<span class='ident'>LogRecord</span>, <span class='ident'>LogLevel</span>};
+
+<span class='kw'>struct</span> <span class='ident'>SimpleLogger</span>;
+
+<span class='kw'>impl</span> <span class='ident'>log</span>::<span class='ident'>Log</span> <span class='kw'>for</span> <span class='ident'>SimpleLogger</span> {
+    <span class='kw'>fn</span> <span class='ident'>enabled</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>level</span>: <span class='ident'>LogLevel</span>, <span class='ident'>_module</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+        <span class='ident'>level</span> <span class='op'>&lt;=</span> <span class='ident'>LogLevel</span>::<span class='ident'>Info</span>
+    }
+
+    <span class='kw'>fn</span> <span class='ident'>log</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>record</span>: <span class='kw-2'>&amp;</span><span class='ident'>LogRecord</span>) {
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>enabled</span>(<span class='ident'>record</span>.<span class='ident'>level</span>(), <span class='ident'>record</span>.<span class='ident'>location</span>().<span class='ident'>module_path</span>) {
+            <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} - {}&quot;</span>, <span class='ident'>record</span>.<span class='ident'>level</span>(), <span class='ident'>record</span>.<span class='ident'>args</span>());
+        }
+    }
+}
+</pre>
+
+<p>Loggers are installed by calling the <code>set_logger</code> function. It takes a
+closure which is provided a <code>MaxLogLevel</code> token and returns a <code>Log</code> trait
+object. The <code>MaxLogLevel</code> token controls the global maximum log level. The
+logging facade uses this as an optimization to improve performance of log
+messages at levels that are disabled. In the case of our example logger,
+we&#39;ll want to set the maximum log level to <code>Info</code>, since we ignore any
+<code>Debug</code> or <code>Trace</code> level log messages. A logging framework should provide a
+function that wraps a call to <code>set_logger</code>, handling initialization of the
+logger:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>init</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SetLoggerError</span><span class='op'>&gt;</span> {
+    <span class='ident'>log</span>::<span class='ident'>set_logger</span>(<span class='op'>|</span><span class='ident'>max_log_level</span><span class='op'>|</span> {
+        <span class='ident'>max_log_level</span>.<span class='ident'>set</span>(<span class='ident'>LogLevelFilter</span>::<span class='ident'>Info</span>);
+        <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>SimpleLogger</span>)
+    })
+}
+</pre>
+</div><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
 <table>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='macro' href='macro.debug!.html'
                                title='log::debug!'>debug!</a></td>
-                        <td class='docblock short'><p>A convenience macro for logging at the debug log level. This macro can also
-be omitted at compile time by passing <code>--cfg ndebug</code> to the compiler. If
-this option is not passed, then debug statements will be compiled.</p>
+                        <td class='docblock short'><p>Logs a message at the debug level.</p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='macro' href='macro.error!.html'
                                title='log::error!'>error!</a></td>
-                        <td class='docblock short'><p>A convenience macro for logging at the error log level.</p>
+                        <td class='docblock short'><p>Logs a message at the error level.</p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='macro' href='macro.info!.html'
                                title='log::info!'>info!</a></td>
-                        <td class='docblock short'><p>A convenience macro for logging at the info log level.</p>
+                        <td class='docblock short'><p>Logs a message at the info level.</p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='macro' href='macro.log!.html'
                                title='log::log!'>log!</a></td>
-                        <td class='docblock short'><p>The standard logging macro</p>
+                        <td class='docblock short'><p>The standard logging macro.</p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='macro' href='macro.log_enabled!.html'
                                title='log::log_enabled!'>log_enabled!</a></td>
-                        <td class='docblock short'><p>A macro to test whether a log level is enabled for the current module.</p>
+                        <td class='docblock short'><p>Determines if a message logged at the specified level in that module will
+be logged.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='macro' href='macro.trace!.html'
+                               title='log::trace!'>trace!</a></td>
+                        <td class='docblock short'><p>Logs a message at the trace level.</p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='macro' href='macro.warn!.html'
                                title='log::warn!'>warn!</a></td>
-                        <td class='docblock short'><p>A convenience macro for logging at the warning log level.</p>
+                        <td class='docblock short'><p>Logs a message at the warn level.</p>
 </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.LogLevel.html'
-                               title='log::LogLevel'>LogLevel</a></td>
-                        <td class='docblock short'><p>Wraps the log level with fmt implementations.</p>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.LogLocation.html'
+                               title='log::LogLocation'>LogLocation</a></td>
+                        <td class='docblock short'><p>The location of a log message.</p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.LogRecord.html'
                                title='log::LogRecord'>LogRecord</a></td>
-                        <td class='docblock short'><p>A LogRecord is created by the logging macros, and passed as the only
-argument to Loggers.</p>
+                        <td class='docblock short'><p>The &quot;payload&quot; of a log message.</p>
 </td>
                     </tr>
-                </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.MaxLogLevelFilter.html'
+                               title='log::MaxLogLevelFilter'>MaxLogLevelFilter</a></td>
+                        <td class='docblock short'><p>A token providing read and write access to the global maximum log level
+filter.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.SetLoggerError.html'
+                               title='log::SetLoggerError'>SetLoggerError</a></td>
+                        <td class='docblock short'><p>The type returned by <code>set_logger</code> if <code>set_logger</code> has already been called.</p>
+</td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.DEBUG.html'
-                               title='log::DEBUG'>DEBUG</a></td>
-                        <td class='docblock short'><p>Debug log level</p>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.LogLevel.html'
+                               title='log::LogLevel'>LogLevel</a></td>
+                        <td class='docblock short'><p>An enum representing the available verbosity levels of the logging framework</p>
 </td>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.ERROR.html'
-                               title='log::ERROR'>ERROR</a></td>
-                        <td class='docblock short'><p>Error log level</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.INFO.html'
-                               title='log::INFO'>INFO</a></td>
-                        <td class='docblock short'><p>Info log level</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.MAX_LOG_LEVEL.html'
-                               title='log::MAX_LOG_LEVEL'>MAX_LOG_LEVEL</a></td>
-                        <td class='docblock short'><p>Maximum logging level of a module that can be specified. Common logging
-levels are found in the DEBUG/INFO/WARN/ERROR constants.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.WARN.html'
-                               title='log::WARN'>WARN</a></td>
-                        <td class='docblock short'><p>Warn log level</p>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.LogLevelFilter.html'
+                               title='log::LogLevelFilter'>LogLevelFilter</a></td>
+                        <td class='docblock short'><p>An enum representing the available verbosity level filters of the logging
+framework.</p>
 </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Logger.html'
-                               title='log::Logger'>Logger</a></td>
-                        <td class='docblock short'><p>A trait used to represent an interface to a task-local logger. Each task
-can have its own custom logger which can respond to logging messages
-however it likes.</p>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Log.html'
+                               title='log::Log'>Log</a></td>
+                        <td class='docblock short'><p>A trait encapsulating the operations required of a logger</p>
 </td>
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
                     <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.enabled.html'
+                               title='log::enabled'>enabled</a></td>
+                        <td class='docblock short'><p>Determines if the current logger will ignore a log message at the specified
+level from the specified module.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.log.html'
+                               title='log::log'>log</a></td>
+                        <td class='docblock short'><p>Logs a message.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.max_log_level.html'
+                               title='log::max_log_level'>max_log_level</a></td>
+                        <td class='docblock short'><p>Returns the current maximum log level.</p>
+</td>
+                    </tr>
+                
+                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.set_logger.html'
                                title='log::set_logger'>set_logger</a></td>
-                        <td class='docblock short'><p>Replaces the task-local logger with the specified logger, returning the old
-logger.</p>
+                        <td class='docblock short'><p>Sets the global logger.</p>
 </td>
                     </tr>
                 </table></section>

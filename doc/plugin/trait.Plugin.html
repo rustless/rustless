@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>plugin</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Phantom.html'>Phantom</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Extensible.html'>Extensible</a><a class='trait ' href='trait.Pluggable.html'>Pluggable</a><a class='trait current' href='trait.Plugin.html'>Plugin</a></div>
+        <p class='location'><a href='index.html'>plugin</a></p><script>window.sidebarCurrent = {name: 'Plugin', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,19 +42,24 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>plugin</a>::<wbr><a class='trait' href=''>Plugin</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-10' href='../src/plugin/lib.rs.html#16-24'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-8' href='../src/plugin/lib.rs.html#13-24'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Plugin&lt;E: ?<a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt;: <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a> {
-    fn <a href='#tymethod.eval' class='fnname'>eval</a>(&amp;mut E, <a class='struct' href='../plugin/struct.Phantom.html' title='plugin::Phantom'>Phantom</a>&lt;Self&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='trait' href='../plugin/trait.Plugin.html' title='plugin::Plugin'>Value</a>&gt;;
+    type Error;
+
+    fn <a href='#tymethod.eval' class='fnname'>eval</a>(&amp;mut E) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;Self::Value, Self::Error&gt;;
 }</pre><div class='docblock'><p>Implementers of this trait can act as plugins for other types, via <code>OtherType::get&lt;P&gt;()</code>.</p>
 
 <p>To create a plugin, implement this trait and provide an empty implementation
 of <code>Key</code> to associate the plugin with its return type, <code>Key::Value</code>.</p>
 </div>
+            <h2 id='associated-types'>Associated Types</h2>
+            <div class='methods'>
+        <h3 id='associatedtype.Error' class='method'><a class='stability Unmarked' title='No stability level'></a><code>type Error</code></h3><div class='docblock'><p>The error type associated with this plugin.</p>
+</div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.eval' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.eval' class='fnname'>eval</a>(&amp;mut E, <a class='struct' href='../plugin/struct.Phantom.html' title='plugin::Phantom'>Phantom</a>&lt;Self&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='trait' href='../plugin/trait.Plugin.html' title='plugin::Plugin'>Value</a>&gt;</code></h3><div class='docblock'><p>Create the plugin from an instance of the extended type.</p>
+        <h3 id='tymethod.eval' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.eval' class='fnname'>eval</a>(&amp;mut E) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;Self::Value, Self::Error&gt;</code></h3><div class='docblock'><p>Create the plugin from an instance of the extended type.</p>
 
 <p>While <code>eval</code> is given a mutable reference to the extended
 type, it is important for implementers to remember that

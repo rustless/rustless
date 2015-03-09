@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `HttpError` enum in crate `iron`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, HttpError">
+
+    <title>iron::error::HttpError - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <p class='location'><a href='../index.html'>iron</a>::<wbr><a href='index.html'>error</a></p><script>window.sidebarCurrent = {name: 'HttpError', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>iron</a>::<wbr><a href='index.html'>error</a>::<wbr><a class='enum' href=''>HttpError</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-37853' href='../../hyper/enum.HttpError.html?gotosrc=37853'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum HttpError {
+    HttpMethodError,
+    HttpUriError(<a class='enum' href='../../url/parser/enum.ParseError.html' title='url::parser::ParseError'>ParseError</a>),
+    HttpVersionError,
+    HttpHeaderError,
+    HttpStatusError,
+    HttpIoError(<a class='struct' href='http://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>),
+}</pre><div class='docblock'><p>A set of errors that can occur parsing HTTP streams.</p>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.HttpMethodError'><a class='stability Unmarked' title='No stability level'></a><code>HttpMethodError</code></td><td><div class='docblock'><p>An invalid <code>Method</code>, such as <code>GE,T</code>.</p>
+</div></td></tr><tr><td id='variant.HttpUriError'><a class='stability Unmarked' title='No stability level'></a><code>HttpUriError</code></td><td><div class='docblock'><p>An invalid <code>RequestUri</code>, such as <code>exam ple.domain</code>.</p>
+</div></td></tr><tr><td id='variant.HttpVersionError'><a class='stability Unmarked' title='No stability level'></a><code>HttpVersionError</code></td><td><div class='docblock'><p>An invalid <code>HttpVersion</code>, such as <code>HTP/1.1</code></p>
+</div></td></tr><tr><td id='variant.HttpHeaderError'><a class='stability Unmarked' title='No stability level'></a><code>HttpHeaderError</code></td><td><div class='docblock'><p>An invalid <code>Header</code>.</p>
+</div></td></tr><tr><td id='variant.HttpStatusError'><a class='stability Unmarked' title='No stability level'></a><code>HttpStatusError</code></td><td><div class='docblock'><p>An invalid <code>Status</code>, such as <code>1337 ELITE</code>.</p>
+</div></td></tr><tr><td id='variant.HttpIoError'><a class='stability Unmarked' title='No stability level'></a><code>HttpIoError</code></td><td><div class='docblock'><p>An <code>IoError</code> that occured while trying to read or write to a network stream.</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Unstable' title='Unstable: the exact API of this trait may change'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/error/trait.Error.html' title='core::error::Error'>Error</a> for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a></code></h3><div class='impl-items'><h4 id='method.description' class='method'><a class='stability Unstable' title='Unstable: the exact API of this trait may change'></a><code>fn <a href='#method.description' class='fnname'>description</a>(&amp;self) -&gt; &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<h4 id='method.cause' class='method'><a class='stability Unstable' title='Unstable: the exact API of this trait may change'></a><code>fn <a href='#method.cause' class='fnname'>cause</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='trait' href='http://doc.rust-lang.org/nightly/core/error/trait.Error.html' title='core::error::Error'>Error</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/error/trait.FromError.html' title='core::error::FromError'>FromError</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>&gt; for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a></code></h3><div class='impl-items'><h4 id='method.from_error' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.from_error' class='fnname'>from_error</a>(err: <a class='struct' href='http://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>) -&gt; <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/error/trait.FromError.html' title='core::error::FromError'>FromError</a>&lt;<a class='enum' href='../../url/parser/enum.ParseError.html' title='url::parser::ParseError'>ParseError</a>&gt; for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a></code></h3><div class='impl-items'><h4 id='method.from_error' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.from_error' class='fnname'>from_error</a>(err: <a class='enum' href='../../url/parser/enum.ParseError.html' title='url::parser::ParseError'>ParseError</a>) -&gt; <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a></code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a></code></h4>
+<h4 id='method.clone_from' class='tymethod'><a class='stability Unstable' title='Unstable: this function is rarely used'></a><code>fn <a href='#tymethod.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;<a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a>&gt; for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>HttpError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "iron";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

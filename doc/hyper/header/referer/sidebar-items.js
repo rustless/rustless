@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Referer","The `Referer` header."]]});

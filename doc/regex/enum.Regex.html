@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../regex/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>regex</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Captures.html'>Captures</a><a class='struct ' href='struct.Error.html'>Error</a><a class='struct ' href='struct.FindCaptures.html'>FindCaptures</a><a class='struct ' href='struct.FindMatches.html'>FindMatches</a><a class='struct ' href='struct.NoExpand.html'>NoExpand</a><a class='struct ' href='struct.RegexSplits.html'>RegexSplits</a><a class='struct ' href='struct.RegexSplitsN.html'>RegexSplitsN</a><a class='struct ' href='struct.SubCaptures.html'>SubCaptures</a><a class='struct ' href='struct.SubCapturesPos.html'>SubCapturesPos</a></div><div class='block enum'><h2>Enums</h2><a class='enum current' href='enum.Regex.html'>Regex</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Replacer.html'>Replacer</a></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.is_match.html'>is_match</a><a class='fn ' href='fn.quote.html'>quote</a></div>
+        <p class='location'><a href='index.html'>regex</a></p><script>window.sidebarCurrent = {name: 'Regex', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,9 +42,8 @@
 
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>regex</a>::<wbr><a class='enum' href=''>Regex</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-8520' href='../src/regex/re.rs.html#109-119'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-8539' href='../src/regex/re.rs.html#106-116'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Regex {
     // some variants omitted
 }</pre><div class='docblock'><p>A compiled regular expression</p>
@@ -72,38 +71,31 @@ pointers into the string given.</p>
                            href="#examples">Examples</a></h1>
 <p>Find the location of a US phone number:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>&quot;[0-9]{3}-[0-9]{3}-[0-9]{4}&quot;</span>) {
-    <span class='prelude-val'>Ok</span>(<span class='ident'>re</span>) <span class='op'>=&gt;</span> <span class='ident'>re</span>,
-    <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>err</span>),
-};
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>&quot;[0-9]{3}-[0-9]{3}-[0-9]{4}&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>re</span>.<span class='ident'>find</span>(<span class='string'>&quot;phone: 111-222-3333&quot;</span>), <span class='prelude-val'>Some</span>((<span class='number'>7</span>, <span class='number'>19</span>)));
 </pre>
 
-<p>You can also use the <code>regex!</code> macro to compile a regular expression when
-you compile your program:</p>
+<h1 id="using-the-std::str::strext-methods-with-regex" class='section-header'><a
+                           href="#using-the-std::str::strext-methods-with-regex">Using the <code>std::str::StrExt</code> methods with <code>Regex</code></a></h1>
+<p>Since <code>Regex</code> implements <code>Pattern</code>, you can use regexes with methods
+defined on <code>std::str::StrExt</code>. For example, <code>is_match</code>, <code>find</code>, <code>find_iter</code>
+and <code>split</code> can be replaced with <code>StrExt::contains</code>, <code>StrExt::find</code>,
+<code>StrExt::match_indices</code> and <code>StrExt::split</code>.</p>
+
+<p>Here are some examples:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>plugin</span>)]</span>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex</span>;
-<span class='attribute'>#[<span class='ident'>plugin</span>]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex_macros</span>;
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;\d+&quot;</span>).<span class='ident'>unwrap</span>();
+<span class='kw'>let</span> <span class='ident'>haystack</span> <span class='op'>=</span> <span class='string'>&quot;a111b222c&quot;</span>;
 
-<span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;\d+&quot;</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>re</span>.<span class='ident'>find</span>(<span class='string'>&quot;123 abc&quot;</span>), <span class='prelude-val'>Some</span>((<span class='number'>0</span>, <span class='number'>3</span>)));
-}
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>haystack</span>.<span class='ident'>contains</span>(<span class='kw-2'>&amp;</span><span class='ident'>re</span>));
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>haystack</span>.<span class='ident'>find</span>(<span class='kw-2'>&amp;</span><span class='ident'>re</span>), <span class='prelude-val'>Some</span>(<span class='number'>1</span>));
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>haystack</span>.<span class='ident'>match_indices</span>(<span class='kw-2'>&amp;</span><span class='ident'>re</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>(),
+           <span class='macro'>vec</span><span class='macro'>!</span>[(<span class='number'>1</span>, <span class='number'>4</span>), (<span class='number'>5</span>, <span class='number'>8</span>)]);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>haystack</span>.<span class='ident'>split</span>(<span class='kw-2'>&amp;</span><span class='ident'>re</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>(), <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;a&quot;</span>, <span class='string'>&quot;b&quot;</span>, <span class='string'>&quot;c&quot;</span>]);
 </pre>
-
-<p>Given an incorrect regular expression, <code>regex!</code> will cause the Rust
-compiler to produce a compile time error.
-Note that <code>regex!</code> will compile the expression to native Rust code, which
-makes it much faster when searching text.
-More details about the <code>regex!</code> macro can be found in the <code>regex</code> crate
-documentation.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='enum' href='../regex/enum.Regex.html' title='regex::Regex'>Regex</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(re: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='../regex/enum.Regex.html' title='regex::Regex'>Regex</a>, <a class='struct' href='../regex/struct.Error.html' title='regex::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Compiles a dynamic regular expression. Once compiled, it can be
 used repeatedly to search, split or replace text in a string.</p>
-
-<p>When possible, you should prefer the <code>regex!</code> macro since it is
-safer and always faster.</p>
 
 <p>If an invalid expression is given, then an error is returned.</p>
 </div><h4 id='method.is_match' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.is_match' class='fnname'>is_match</a>(&amp;self, text: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
@@ -115,7 +107,7 @@ safer and always faster.</p>
 characters:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='string'>&quot;I categorically deny having triskaidekaphobia.&quot;</span>;
-<span class='kw'>let</span> <span class='ident'>matched</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;\b\w{13}\b&quot;</span>).<span class='ident'>is_match</span>(<span class='ident'>text</span>);
+<span class='kw'>let</span> <span class='ident'>matched</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;\b\w{13}\b&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>is_match</span>(<span class='ident'>text</span>);
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>matched</span>);
 </pre>
 </div><h4 id='method.find' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.find' class='fnname'>find</a>(&amp;self, text: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;</code></h4>
@@ -132,7 +124,7 @@ of the match. Testing the existence of a match is faster if you use
 characters:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='string'>&quot;I categorically deny having triskaidekaphobia.&quot;</span>;
-<span class='kw'>let</span> <span class='ident'>pos</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;\b\w{13}\b&quot;</span>).<span class='ident'>find</span>(<span class='ident'>text</span>);
+<span class='kw'>let</span> <span class='ident'>pos</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;\b\w{13}\b&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>find</span>(<span class='ident'>text</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>pos</span>, <span class='prelude-val'>Some</span>((<span class='number'>2</span>, <span class='number'>15</span>)));
 </pre>
 </div><h4 id='method.find_iter' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.find_iter' class='fnname'>find_iter</a>&lt;'r, 't&gt;(&amp;'r self, text: &amp;'t <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='struct' href='../regex/struct.FindMatches.html' title='regex::FindMatches'>FindMatches</a>&lt;'r, 't&gt;</code></h4>
@@ -146,7 +138,7 @@ characters:</p>
 characters:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='string'>&quot;Retroactively relinquishing remunerations is reprehensible.&quot;</span>;
-<span class='kw'>for</span> <span class='ident'>pos</span> <span class='kw'>in</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;\b\w{13}\b&quot;</span>).<span class='ident'>find_iter</span>(<span class='ident'>text</span>) {
+<span class='kw'>for</span> <span class='ident'>pos</span> <span class='kw'>in</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;\b\w{13}\b&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>find_iter</span>(<span class='ident'>text</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>pos</span>);
 }
 <span class='comment'>// Output:</span>
@@ -171,7 +163,7 @@ like &quot;&#39;Citizen Kane&#39; (1941)&quot;. It&#39;d be nice if we could sea
 looking like that, while also extracting the movie name and its release
 year separately.</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;&#39;([^&#39;]+)&#39;\s+\((\d{4})\)&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;&#39;([^&#39;]+)&#39;\s+\((\d{4})\)&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='string'>&quot;Not my favorite movie: &#39;Citizen Kane&#39; (1941).&quot;</span>;
 <span class='kw'>let</span> <span class='ident'>caps</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>captures</span>(<span class='ident'>text</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>caps</span>.<span class='ident'>at</span>(<span class='number'>1</span>), <span class='prelude-val'>Some</span>(<span class='string'>&quot;Citizen Kane&quot;</span>));
@@ -184,7 +176,8 @@ capture group is indexed by the order of its opening <code>(</code>.</p>
 
 <p>We can make this example a bit clearer by using <em>named</em> capture groups:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;&#39;(?P&lt;title&gt;[^&#39;]+)&#39;\s+\((?P&lt;year&gt;\d{4})\)&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;&#39;(?P&lt;title&gt;[^&#39;]+)&#39;\s+\((?P&lt;year&gt;\d{4})\)&quot;</span>)
+               .<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='string'>&quot;Not my favorite movie: &#39;Citizen Kane&#39; (1941).&quot;</span>;
 <span class='kw'>let</span> <span class='ident'>caps</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>captures</span>(<span class='ident'>text</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>caps</span>.<span class='ident'>name</span>(<span class='string'>&quot;title&quot;</span>), <span class='prelude-val'>Some</span>(<span class='string'>&quot;Citizen Kane&quot;</span>));
@@ -208,7 +201,8 @@ yields information about submatches).</p>
 <p>We can use this to find all movie titles and their release years in
 some text, where the movie is formatted like &quot;&#39;Title&#39; (xxxx)&quot;:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;&#39;(?P&lt;title&gt;[^&#39;]+)&#39;\s+\((?P&lt;year&gt;\d{4})\)&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;&#39;(?P&lt;title&gt;[^&#39;]+)&#39;\s+\((?P&lt;year&gt;\d{4})\)&quot;</span>)
+               .<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='string'>&quot;&#39;Citizen Kane&#39; (1941), &#39;The Wizard of Oz&#39; (1939), &#39;M&#39; (1931).&quot;</span>;
 <span class='kw'>for</span> <span class='ident'>caps</span> <span class='kw'>in</span> <span class='ident'>re</span>.<span class='ident'>captures_iter</span>(<span class='ident'>text</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Movie: {:?}, Released: {:?}&quot;</span>, <span class='ident'>caps</span>.<span class='ident'>name</span>(<span class='string'>&quot;title&quot;</span>), <span class='ident'>caps</span>.<span class='ident'>name</span>(<span class='string'>&quot;year&quot;</span>));
@@ -230,7 +224,7 @@ matched by the regular expression.</p>
                            href="#example">Example</a></h1>
 <p>To split a string delimited by arbitrary amounts of spaces or tabs:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;[ \t]+&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;[ \t]+&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>fields</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>split</span>(<span class='string'>&quot;a b \t  c\td    e&quot;</span>).<span class='ident'>collect</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>fields</span>, <span class='macro'>vec</span><span class='macro'>!</span>(<span class='string'>&quot;a&quot;</span>, <span class='string'>&quot;b&quot;</span>, <span class='string'>&quot;c&quot;</span>, <span class='string'>&quot;d&quot;</span>, <span class='string'>&quot;e&quot;</span>));
 </pre>
@@ -249,7 +243,7 @@ in the iterator.</p>
                            href="#example">Example</a></h1>
 <p>Get the first two words in some text:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;\W+&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;\W+&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>fields</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>splitn</span>(<span class='string'>&quot;Hey! How are you?&quot;</span>, <span class='number'>3</span>).<span class='ident'>collect</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>fields</span>, <span class='macro'>vec</span><span class='macro'>!</span>(<span class='string'>&quot;Hey&quot;</span>, <span class='string'>&quot;How&quot;</span>, <span class='string'>&quot;are you?&quot;</span>));
 </pre>
@@ -266,7 +260,7 @@ expanded to match capture groups) or a function that takes the matches&#39;
 <p>Note that this function is polymorphic with respect to the replacement.
 In typical usage, this can just be a normal string:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>&quot;[^01]+&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>&quot;[^01]+&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>re</span>.<span class='ident'>replace</span>(<span class='string'>&quot;1078910&quot;</span>, <span class='string'>&quot;&quot;</span>), <span class='string'>&quot;1010&quot;</span>);
 </pre>
 
@@ -275,8 +269,8 @@ a closure of type <code>|&amp;Captures| -&gt; String</code> provides direct acce
 captures corresponding to a match. This allows one to access
 submatches easily:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;([^,\s]+),\s+(\S+)&quot;</span>);
-<span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>replace</span>(<span class='string'>&quot;Springsteen, Bruce&quot;</span>, <span class='op'>|</span><span class='kw-2'>&amp;</span>: <span class='ident'>caps</span>: <span class='kw-2'>&amp;</span><span class='ident'>Captures</span><span class='op'>|</span> {
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;([^,\s]+),\s+(\S+)&quot;</span>).<span class='ident'>unwrap</span>();
+<span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>replace</span>(<span class='string'>&quot;Springsteen, Bruce&quot;</span>, <span class='op'>|</span><span class='ident'>caps</span>: <span class='kw-2'>&amp;</span><span class='ident'>Captures</span><span class='op'>|</span> {
     <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{} {}&quot;</span>, <span class='ident'>caps</span>.<span class='ident'>at</span>(<span class='number'>2</span>).<span class='ident'>unwrap_or</span>(<span class='string'>&quot;&quot;</span>), <span class='ident'>caps</span>.<span class='ident'>at</span>(<span class='number'>1</span>).<span class='ident'>unwrap_or</span>(<span class='string'>&quot;&quot;</span>))
 });
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>result</span>, <span class='string'>&quot;Bruce Springsteen&quot;</span>);
@@ -287,7 +281,7 @@ syntax is supported that expands <code>$name</code> into the corresponding captu
 group. Here&#39;s the last example, but using this expansion technique
 with named capture groups:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;(?P&lt;last&gt;[^,\s]+),\s+(?P&lt;first&gt;\S+)&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?P&lt;last&gt;[^,\s]+),\s+(?P&lt;first&gt;\S+)&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>replace</span>(<span class='string'>&quot;Springsteen, Bruce&quot;</span>, <span class='string'>&quot;$first $last&quot;</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>result</span>, <span class='string'>&quot;Bruce Springsteen&quot;</span>);
 </pre>
@@ -301,7 +295,7 @@ submatch expansion. This can be done by wrapping a string with
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>regex</span>::<span class='ident'>NoExpand</span>;
 
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;(?P&lt;last&gt;[^,\s]+),\s+(\S+)&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?P&lt;last&gt;[^,\s]+),\s+(\S+)&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>replace</span>(<span class='string'>&quot;Springsteen, Bruce&quot;</span>, <span class='ident'>NoExpand</span>(<span class='string'>&quot;$2 $last&quot;</span>));
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>result</span>, <span class='string'>&quot;$2 $last&quot;</span>);
 </pre>
@@ -321,9 +315,9 @@ are replaced.</p>
 submatches in the replacement string.</p>
 </div><h4 id='method.as_str' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.as_str' class='fnname'>as_str</a>&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
 <div class='docblock'><p>Returns the original string of this regex.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.String.html' title='core::fmt::String'>String</a> for <a class='enum' href='../regex/enum.Regex.html' title='regex::Regex'>Regex</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../regex/enum.Regex.html' title='regex::Regex'>Regex</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 <div class='docblock'><p>Shows the original regular expression.</p>
-</div></div><h3 class='impl'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Show.html' title='core::fmt::Show'>Show</a> for <a class='enum' href='../regex/enum.Regex.html' title='regex::Regex'>Regex</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Unstable' title='Unstable: I/O and core have yet to be reconciled'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../regex/enum.Regex.html' title='regex::Regex'>Regex</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 <div class='docblock'><p>Shows the original regular expression.</p>
 </div></div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../regex/enum.Regex.html' title='regex::Regex'>Regex</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../regex/enum.Regex.html' title='regex::Regex'>Regex</a></code></h4>
 <h4 id='method.clone_from' class='tymethod'><a class='stability Unstable' title='Unstable: this function is rarely used'></a><code>fn <a href='#tymethod.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>

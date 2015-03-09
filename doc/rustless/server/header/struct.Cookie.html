@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Cookie` struct in crate `rustless`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Cookie">
+
+    <title>rustless::server::header::Cookie - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>header</a></p><script>window.sidebarCurrent = {name: 'Cookie', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='struct' href=''>Cookie</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-10494' href='../../../hyper/header/common/cookie/struct.Cookie.html?gotosrc=10494'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Cookie(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;);</pre><div class='docblock'><p>The <code>Cookie</code> header. Defined in <a href="tools.ietf.org/html/rfc6265#section-5.4">RFC6265</a>:</p>
+
+<blockquote>
+<p>If the user agent does attach a Cookie header field to an HTTP
+request, the user agent must send the cookie-string
+as the value of the header field.</p>
+
+<p>When the user agent generates an HTTP request, the user agent MUST NOT
+attach more than one Cookie header field.</p>
+</blockquote>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='method.to_cookie_jar' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.to_cookie_jar' class='fnname'>to_cookie_jar</a>(&amp;self, key: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='../../../cookie/jar/struct.CookieJar.html' title='cookie::jar::CookieJar'>CookieJar</a>&lt;'static&gt;</code></h4>
+<div class='docblock'><p>This method can be used to create CookieJar that can be used
+to manipulate cookies and create a corresponding <code>SetCookie</code> header afterwards.</p>
+</div><h4 id='method.from_cookie_jar' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.from_cookie_jar' class='fnname'>from_cookie_jar</a>(jar: &amp;<a class='struct' href='../../../cookie/jar/struct.CookieJar.html' title='cookie::jar::CookieJar'>CookieJar</a>) -&gt; <a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a></code></h4>
+<div class='docblock'><p>Extracts all cookies from <code>CookieJar</code> and creates Cookie header.
+Useful for clients.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Target = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;</code></h4>
+<h4 id='method.deref' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.deref' class='fnname'>deref</a>(&amp;'a self) -&gt; &amp;'a <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.deref_mut' class='fnname'>deref_mut</a>(&amp;'a mut self) -&gt; &amp;'a mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rustless/server/header/trait.Header.html' title='rustless::server::header::Header'>Header</a> for <a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='method.header_name' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.header_name' class='fnname'>header_name</a>() -&gt; &amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<h4 id='method.parse_header' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.parse_header' class='fnname'>parse_header</a>(raw: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;<a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='method.fmt_header' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.fmt_header' class='fnname'>fmt_header</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;<a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a>&gt; for <a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../../rustless/server/header/struct.Cookie.html' title='rustless::server::header::Cookie'>Cookie</a></code></h4>
+<h4 id='method.clone_from' class='tymethod'><a class='stability Unstable' title='Unstable: this function is rarely used'></a><code>fn <a href='#tymethod.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "rustless";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    
+    <script async src="../../../search-index.js"></script>
+</body>
+</html>

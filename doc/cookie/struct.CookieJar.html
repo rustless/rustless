@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>cookie</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.AttrVal.html'>AttrVal</a><a class='struct ' href='struct.Cookie.html'>Cookie</a><a class='struct current' href='struct.CookieJar.html'>CookieJar</a></div>
+        <p class='location'><a href='index.html'>cookie</a></p><script>window.sidebarCurrent = {name: 'CookieJar', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,8 +42,7 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>cookie</a>::<wbr><a class='struct' href=''>CookieJar</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
         </span><a id='src-21' href='../src/cookie/jar.rs.html#49-51'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct CookieJar&lt;'a&gt; {
     // some fields omitted
@@ -59,7 +58,7 @@
 <span class='ident'>c</span>.<span class='ident'>add</span>(<span class='ident'>Cookie</span>::<span class='ident'>new</span>(<span class='string'>&quot;key&quot;</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;value&quot;</span>.<span class='ident'>to_string</span>()));
 
 <span class='comment'>// Remove the added cookie</span>
-<span class='ident'>c</span>.<span class='ident'>remove</span>(<span class='string'>&quot;test&quot;</span>);
+<span class='ident'>c</span>.<span class='ident'>remove</span>(<span class='string'>&quot;key&quot;</span>);
 
 <span class='comment'>// Add a signed cookie to the jar</span>
 <span class='ident'>c</span>.<span class='ident'>signed</span>().<span class='ident'>add</span>(<span class='ident'>Cookie</span>::<span class='ident'>new</span>(<span class='string'>&quot;key&quot;</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;value&quot;</span>.<span class='ident'>to_string</span>()));

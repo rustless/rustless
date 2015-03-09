@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../regex/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
-        <p class='location'></p>
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'regex', ty: 'mod', relpath: '../'};</script>
     </section>
 
     <nav class="sub">
@@ -42,9 +42,8 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>regex</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/regex/lib.rs.html#13-421'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-0' href='../src/regex/lib.rs.html#11-424'>[src]</a></span></h1>
 <div class='docblock'><p>This crate provides a native implementation of regular expressions that is
 heavily based on RE2 both in syntax and in implementation. Notably,
 backreferences and arbitrary lookahead/lookbehind assertions are not
@@ -55,6 +54,9 @@ documented further down.</p>
 <p>This crate&#39;s documentation provides some simple examples, describes Unicode
 support and exhaustively lists the supported syntax. For more specific
 details on the API, please see the documentation for the <code>Regex</code> type.</p>
+
+<p>This crates is <a href="https://crates.io/crates/regex">on crates.io</a> and can be
+used by adding <code>regex</code> to your dependencies in your projects <code>Cargo.toml</code>.</p>
 
 <h1 id="first-example:-find-a-date" class='section-header'><a
                            href="#first-example:-find-a-date">First example: find a date</a></h1>
@@ -91,18 +93,11 @@ invalid regular expression. Moreover, the <code>regex!</code> macro compiles the
 given expression to native Rust code, which makes it much faster for
 searching text.</p>
 
-<p>Since <code>regex!</code> provides compiled regular expressions that are both safer
-and faster to use, you should use them whenever possible. The only
-requirement for using them is that you have a string literal corresponding
-to your expression. Otherwise, it is indistinguishable from an expression
-compiled at runtime with <code>Regex::new</code>.</p>
-
-<p>To use the <code>regex!</code> macro, you must enable the <code>phase</code> feature and import
+<p>To use the <code>regex!</code> macro, you must enable the <code>plugin</code> feature and import
 the <code>regex_macros</code> crate as a syntax extension:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>plugin</span>)]</span>
-<span class='attribute'>#[<span class='ident'>plugin</span>]</span>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex_macros</span>;
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>plugin</span>(<span class='ident'>regex_macros</span>)]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex</span>;
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
@@ -122,6 +117,20 @@ The extra size probably won&#39;t be significant for a small number of
 expressions, but 100+ calls to <code>regex!</code> will probably result in a
 noticeably bigger binary.</p>
 
+<p><strong>NOTE</strong>: This is implemented using a compiler plugin, which will not be
+available on the Rust 1.0 beta/stable channels. Therefore, you&#39;ll only
+be able to use <code>regex!</code> on the nightlies. If you want to retain the
+<code>regex!</code> macro, you can cheat and define this:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>regex</span>(
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>s</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='ident'>regex</span>::<span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>s</span>).<span class='ident'>unwrap</span>());
+);
+</pre>
+
+<p>But this just replaces native regexes with dynamic regexes under the hood.
+Moreover, this will cause your program to panic <em>at runtime</em> if an invalid
+regular expression is given.</p>
+
 <h1 id="example:-iterating-over-capture-groups" class='section-header'><a
                            href="#example:-iterating-over-capture-groups">Example: iterating over capture groups</a></h1>
 <p>This crate provides convenient iterators for matching an expression
@@ -129,7 +138,7 @@ repeatedly against a search string to find successive non-overlapping
 matches. For example, to find all dates in a string and be able to access
 them by their component pieces:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;(\d{4})-(\d{2})-(\d{2})&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(\d{4})-(\d{2})-(\d{2})&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='string'>&quot;2012-03-14, 2013-01-01 and 2014-07-05&quot;</span>;
 <span class='kw'>for</span> <span class='ident'>cap</span> <span class='kw'>in</span> <span class='ident'>re</span>.<span class='ident'>captures_iter</span>(<span class='ident'>text</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Month: {} Day: {} Year: {}&quot;</span>,
@@ -152,7 +161,7 @@ formats. This can be done with text replacement. But to make the code
 clearer, we can <em>name</em>  our capture groups and use those names as variables
 in our replacement text:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;(?P&lt;y&gt;\d{4})-(?P&lt;m&gt;\d{2})-(?P&lt;d&gt;\d{2})&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?P&lt;y&gt;\d{4})-(?P&lt;m&gt;\d{2})-(?P&lt;d&gt;\d{2})&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>before</span> <span class='op'>=</span> <span class='string'>&quot;2012-03-14, 2013-01-01 and 2014-07-05&quot;</span>;
 <span class='kw'>let</span> <span class='ident'>after</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>replace_all</span>(<span class='ident'>before</span>, <span class='string'>&quot;$m/$d/$y&quot;</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>after</span>.<span class='ident'>as_slice</span>(), <span class='string'>&quot;03/14/2012, 01/01/2013 and 07/05/2014&quot;</span>);
@@ -196,7 +205,7 @@ forms and then compared.</p>
 of Unicode code points. This means you can use Unicode characters
 directly in your expression:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;(?i)Δ+&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?i)Δ+&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>re</span>.<span class='ident'>find</span>(<span class='string'>&quot;ΔδΔ&quot;</span>), <span class='prelude-val'>Some</span>((<span class='number'>0</span>, <span class='number'>6</span>)));
 </pre>
 
@@ -204,7 +213,7 @@ directly in your expression:</p>
 classes. For example, you can match a sequence of numerals, Greek or
 Cherokee letters:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;[\pN\p{Greek}\p{Cherokee}]+&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;[\pN\p{Greek}\p{Cherokee}]+&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>re</span>.<span class='ident'>find</span>(<span class='string'>&quot;abcΔᎠβⅠᏴγδⅡxyz&quot;</span>), <span class='prelude-val'>Some</span>((<span class='number'>3</span>, <span class='number'>23</span>)));
 </pre>
 
@@ -296,7 +305,7 @@ U     swap the meaning of x* and x*?
 <p>Here&#39;s an example that matches case insensitively for only part of the
 expression:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='macro'>regex</span><span class='macro'>!</span>(<span class='string'>r&quot;(?i)a+(?-i)b+&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?i)a+(?-i)b+&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>cap</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>captures</span>(<span class='string'>&quot;AaAaAbbBBBb&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cap</span>.<span class='ident'>at</span>(<span class='number'>0</span>), <span class='prelude-val'>Some</span>(<span class='string'>&quot;AaAaAbb&quot;</span>));
 </pre>

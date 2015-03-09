@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["alter_fragment_path",""],["connect","Encode and connect"],["encode","http://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-07"],["generate_id",""],["parse_url_key",""],["parse_url_key_with_base",""],["serialize_schema_path",""],["whatwg_extended_scheme_type_mapper","Stub function to add our \"json-schema\" to the url::UrlParser"]]});

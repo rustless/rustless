@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ReaderRng","An RNG that reads random bytes straight from a `Reader`. This will work best with an infinite reader, but this is not required."]]});

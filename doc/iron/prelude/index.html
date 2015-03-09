@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='../index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='../headers/index.html'>headers</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../middleware/index.html'>middleware</a><a class='mod ' href='../mime/index.html'>mime</a><a class='mod ' href='../modifier/index.html'>modifier</a><a class='mod ' href='../modifiers/index.html'>modifiers</a><a class='mod current' href='../prelude/index.html'>prelude</a><a class='mod ' href='../response/index.html'>response</a><a class='mod ' href='../status/index.html'>status</a><a class='mod ' href='../typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.Headers.html'>Headers</a><a class='struct ' href='../struct.Iron.html'>Iron</a><a class='struct ' href='../struct.Request.html'>Request</a><a class='struct ' href='../struct.TypeMap.html'>TypeMap</a><a class='struct ' href='../struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='../trait.Error.html'>Error</a><a class='trait ' href='../trait.Plugin.html'>Plugin</a></div>
+        <p class='location'><a href='../index.html'>iron</a></p><script>window.sidebarCurrent = {name: 'prelude', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -42,12 +42,10 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>prelude</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-45' href='../../src/iron/lib.rs.html#87-90'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-197' href='../../src/iron/lib.rs.html#128-131'>[src]</a></span></h1>
 <div class='docblock'><p>A module meant to be glob imported when using Iron, for instance:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>globs</span>)]</span>
 <span class='kw'>use</span> <span class='ident'>iron</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
 </pre>
 
@@ -55,12 +53,19 @@
 of the convenience methods in Iron, as well as <code>Request</code>, <code>Response</code>
 <code>IronResult</code>, <code>IronError</code> and <code>Iron</code>.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
-<table><tr><td><code>pub use ::{<a class='trait' href='../../iron/modifier/trait.Set.html' title='iron::modifier::Set'>Set</a>, <a class='trait' href='../../iron/middleware/trait.Chain.html' title='iron::middleware::Chain'>Chain</a>, <a class='struct' href='../../iron/struct.Request.html' title='iron::Request'>Request</a>, <a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>, <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>, <a class='type' href='../../iron/type.IronError.html' title='iron::IronError'>IronError</a>, <a class='struct' href='../../iron/struct.Iron.html' title='iron::Iron'>Iron</a>};</code></td></tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table><tr><td><code>pub use ::{<a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a>, <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>, <a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>, <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>, <a class='struct' href='../../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>, <a class='struct' href='../../iron/struct.Iron.html' title='iron::Iron'>Iron</a>};</code></td></tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Pluggable.html'
                                title='iron::prelude::Pluggable'>Pluggable</a></td>
                         <td class='docblock short'><p>An interface for plugins that cache values between calls.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Set.html'
+                               title='iron::prelude::Set'>Set</a></td>
+                        <td class='docblock short'><p>A trait providing the set and set_mut methods for all types.</p>
 </td>
                     </tr>
                 </table></section>
