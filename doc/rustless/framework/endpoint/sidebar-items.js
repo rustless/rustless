@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Endpoint",""]],"enum":[["EndpointHandlerPresent",""]],"type":[["EndpointBuilder",""],["EndpointHandler",""]]});
+initSidebarItems({"type":[["EndpointBuilder",""],["EndpointHandler",""]],"enum":[["EndpointHandlerPresent",""]],"struct":[["Endpoint",""]]});

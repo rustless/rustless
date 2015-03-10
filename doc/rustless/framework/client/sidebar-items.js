@@ -1,1 +1,1 @@
-initSidebarItems({"type":[["ClientResult",""]],"struct":[["Client",""]]});
+initSidebarItems({"struct":[["Client",""]],"type":[["ClientResult",""]]});

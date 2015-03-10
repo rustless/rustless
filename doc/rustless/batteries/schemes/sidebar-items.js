@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["SchemesScope",""]],"fn":[["enable_schemes",""]]});
+initSidebarItems({"fn":[["enable_schemes",""]],"struct":[["SchemesScope",""]]});
