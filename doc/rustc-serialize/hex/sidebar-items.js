@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["FromHex","A trait for converting hexadecimal encoded values"],["ToHex","A trait for converting a value to hexadecimal encoding"]],"enum":[["FromHexError","Errors that can occur when decoding a hex encoded string"]]});
+initSidebarItems({"enum":[["FromHexError","Errors that can occur when decoding a hex encoded string"]],"trait":[["FromHex","A trait for converting hexadecimal encoded values"],["ToHex","A trait for converting a value to hexadecimal encoding"]]});
