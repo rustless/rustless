@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Key",""]],"struct":[["Entry",""]],"fn":[["create_map",""],["create_ordered_map",""],["create_ordered_set",""],["create_set",""]]});
+initSidebarItems({"struct":[["Entry",""]],"fn":[["create_map",""],["create_ordered_map",""],["create_ordered_set",""],["create_set",""]],"enum":[["Key",""]]});

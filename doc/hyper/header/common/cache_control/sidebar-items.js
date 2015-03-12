@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["CacheControl","The Cache-Control header."]],"enum":[["CacheDirective","CacheControl contains a list of these directives."]]});
+initSidebarItems({"enum":[["CacheDirective","CacheControl contains a list of these directives."]],"struct":[["CacheControl","The Cache-Control header."]]});
