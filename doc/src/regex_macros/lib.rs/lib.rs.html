@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex_macros-0.1.11/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex_macros-0.1.12/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -682,6 +682,11 @@
 <span id="640">640</span>
 <span id="641">641</span>
 <span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -700,7 +705,7 @@
        <span class='ident'>html_favicon_url</span> <span class='op'>=</span> <span class='string'>&quot;http://www.rust-lang.org/favicon.ico&quot;</span>,
        <span class='ident'>html_root_url</span> <span class='op'>=</span> <span class='string'>&quot;http://doc.rust-lang.org/nightly/&quot;</span>)]</span>
 
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>plugin_registrar</span>, <span class='ident'>quote</span>, <span class='ident'>rustc_private</span>, <span class='ident'>unicode</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>plugin_registrar</span>, <span class='ident'>quote</span>, <span class='ident'>rustc_private</span>)]</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>syntax</span>;
@@ -1144,9 +1149,11 @@
                 }
                 <span class='ident'>OneChar</span>(<span class='ident'>c</span>, <span class='ident'>flags</span>) <span class='op'>=&gt;</span> {
                     <span class='kw'>if</span> <span class='ident'>flags</span> <span class='kw-2'>&amp;</span> <span class='ident'>FLAG_NOCASE</span> <span class='op'>&gt;</span> <span class='number'>0</span> {
-                        <span class='kw'>let</span> <span class='ident'>upc</span> <span class='op'>=</span> <span class='ident'>c</span>.<span class='ident'>to_uppercase</span>();
+                        <span class='kw'>let</span> <span class='ident'>upc</span> <span class='op'>=</span> <span class='ident'>c</span>.<span class='ident'>to_uppercase</span>().<span class='ident'>next</span>().<span class='ident'>unwrap</span>();
                         <span class='macro'>quote_expr</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>cx</span>, {
-                            <span class='kw'>let</span> <span class='ident'>upc</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>chars</span>.<span class='ident'>prev</span>.<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> <span class='ident'>c</span>.<span class='ident'>to_uppercase</span>());
+                            <span class='kw'>let</span> <span class='ident'>upc</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>chars</span>.<span class='ident'>prev</span>.<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> {
+                                <span class='ident'>c</span>.<span class='ident'>to_uppercase</span>().<span class='ident'>next</span>().<span class='ident'>unwrap</span>()
+                            });
                             <span class='kw'>if</span> <span class='ident'>upc</span> <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>upc</span>) {
                                 <span class='self'>self</span>.<span class='ident'>add</span>(<span class='ident'>nlist</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>nextpc</span>, <span class='ident'>caps</span>);
                             }
@@ -1164,7 +1171,10 @@
                     <span class='kw'>let</span> <span class='ident'>casei</span> <span class='op'>=</span> <span class='ident'>flags</span> <span class='kw-2'>&amp;</span> <span class='ident'>FLAG_NOCASE</span> <span class='op'>&gt;</span> <span class='number'>0</span>;
                     <span class='kw'>let</span> <span class='ident'>get_char</span> <span class='op'>=</span>
                         <span class='kw'>if</span> <span class='ident'>casei</span> {
-                            <span class='macro'>quote_expr</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>cx</span>, <span class='self'>self</span>.<span class='ident'>chars</span>.<span class='ident'>prev</span>.<span class='ident'>unwrap</span>().<span class='ident'>to_uppercase</span>())
+                            <span class='macro'>quote_expr</span><span class='macro'>!</span>(
+                                <span class='self'>self</span>.<span class='ident'>cx</span>,
+                                <span class='self'>self</span>.<span class='ident'>chars</span>.<span class='ident'>prev</span>.<span class='ident'>unwrap</span>()
+                                    .<span class='ident'>to_uppercase</span>().<span class='ident'>next</span>().<span class='ident'>unwrap</span>())
                         } <span class='kw'>else</span> {
                             <span class='macro'>quote_expr</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>cx</span>, <span class='self'>self</span>.<span class='ident'>chars</span>.<span class='ident'>prev</span>.<span class='ident'>unwrap</span>())
                         };
@@ -1212,8 +1222,8 @@
     <span class='kw'>fn</span> <span class='ident'>match_class</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>casei</span>: <span class='ident'>bool</span>, <span class='ident'>ranges</span>: <span class='kw-2'>&amp;</span>[(<span class='ident'>char</span>, <span class='ident'>char</span>)]) <span class='op'>-&gt;</span> <span class='ident'>P</span><span class='op'>&lt;</span><span class='ident'>ast</span>::<span class='ident'>Expr</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>arms</span> <span class='op'>=</span> <span class='ident'>ranges</span>.<span class='ident'>iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span>(<span class='kw-2'>mut</span> <span class='ident'>start</span>, <span class='kw-2'>mut</span> <span class='ident'>end</span>)<span class='op'>|</span> {
             <span class='kw'>if</span> <span class='ident'>casei</span> {
-                <span class='ident'>start</span> <span class='op'>=</span> <span class='ident'>start</span>.<span class='ident'>to_uppercase</span>();
-                <span class='ident'>end</span> <span class='op'>=</span> <span class='ident'>end</span>.<span class='ident'>to_uppercase</span>();
+                <span class='ident'>start</span> <span class='op'>=</span> <span class='ident'>start</span>.<span class='ident'>to_uppercase</span>().<span class='ident'>next</span>().<span class='ident'>unwrap</span>();
+                <span class='ident'>end</span> <span class='op'>=</span> <span class='ident'>end</span>.<span class='ident'>to_uppercase</span>().<span class='ident'>next</span>().<span class='ident'>unwrap</span>();
             }
             <span class='kw'>let</span> <span class='ident'>pat</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>cx</span>.<span class='ident'>pat</span>(<span class='self'>self</span>.<span class='ident'>sp</span>, <span class='ident'>ast</span>::<span class='ident'>PatRange</span>(<span class='macro'>quote_expr</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>cx</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>start</span>),
                                                          <span class='macro'>quote_expr</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>cx</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>end</span>)));

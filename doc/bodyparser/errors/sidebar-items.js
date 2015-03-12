@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["BodyError",""]],"enum":[["BodyErrorCause",""]]});
+initSidebarItems({"enum":[["BodyErrorCause",""]],"struct":[["BodyError",""]]});

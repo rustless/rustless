@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["AccessControlAllowOrigin","The `Access-Control-Allow-Origin` response header, part of [CORS](http://www.w3.org/TR/cors/)."]]});
+initSidebarItems({"enum":[["AccessControlAllowOrigin","The `Access-Control-Allow-Origin` response header, part of CORS."]]});

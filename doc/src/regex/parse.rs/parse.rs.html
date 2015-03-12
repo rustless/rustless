@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-0.1.18/src/parse.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-0.1.19/src/parse.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>parse.rs.html -- source</title>
@@ -2171,10 +2171,10 @@
 <span class='comment'>// Constructs a Unicode friendly Perl character class from \d, \s or \w</span>
 <span class='comment'>// (or any of their negated forms). Note that this does not handle negation.</span>
 <span class='kw'>fn</span> <span class='ident'>perl_unicode_class</span>(<span class='ident'>which</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span>(<span class='ident'>char</span>, <span class='ident'>char</span>)<span class='op'>&gt;</span> {
-    <span class='kw'>match</span> <span class='ident'>which</span>.<span class='ident'>to_lowercase</span>() {
-        <span class='string'>&#39;d&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>PERLD</span>.<span class='ident'>to_vec</span>(),
-        <span class='string'>&#39;s&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>PERLS</span>.<span class='ident'>to_vec</span>(),
-        <span class='string'>&#39;w&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>PERLW</span>.<span class='ident'>to_vec</span>(),
+    <span class='kw'>match</span> <span class='ident'>which</span> {
+        <span class='string'>&#39;d&#39;</span> <span class='op'>|</span> <span class='string'>&#39;D&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>PERLD</span>.<span class='ident'>to_vec</span>(),
+        <span class='string'>&#39;s&#39;</span> <span class='op'>|</span> <span class='string'>&#39;S&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>PERLS</span>.<span class='ident'>to_vec</span>(),
+        <span class='string'>&#39;w&#39;</span> <span class='op'>|</span> <span class='string'>&#39;W&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>PERLW</span>.<span class='ident'>to_vec</span>(),
         _ <span class='op'>=&gt;</span> <span class='macro'>unreachable</span><span class='macro'>!</span>(),
     }
 }
