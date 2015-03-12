@@ -4,6 +4,7 @@
 ## Table of Contents
 
 - [What is Rustless?](#what-is-rustless)
+- [Usage warning](#usage-warning)
 - [Basic Usage](#basic-usage)
 - [Complex example](#complex-example)
 - [Mounting](#mounting)
@@ -49,6 +50,10 @@ git = "https://github.com/rustless/rustless"
 * [Valico](https://github.com/rustless/valico) - Rust JSON validator and coercer. See [Api docs](http://rustless.org/valico/doc/valico).
 * [Queryst](https://github.com/rustless/queryst) - Rust query string parser with nesting support. See [Api docs](http://rustless.org/queryst/doc/queryst).
 * [JsonWay](https://github.com/rustless/jsonway) - JSON building DSL and configurable serializers for Rust. See [Api docs](http://rustless.org/jsonway/doc/jsonway).
+
+## Usage warning
+
+Rustless is based on Iron, which is based on Hyper, which is **synchronous**. Hyper has a lot of limitations right now, and can't handle many simultaneous connections, especially with keep-alive. So it is **highly recommended** to use light asynchronous web server such as **Nginx** as a reverse proxy server with Rustless.
 
 ## Basic Usage
 
