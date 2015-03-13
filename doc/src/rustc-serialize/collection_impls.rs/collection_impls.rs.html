@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/rustc-serialize-0.3.1/src/collection_impls.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/rustc-serialize-0.3.2/src/collection_impls.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>collection_impls.rs.html -- source</title>
@@ -226,43 +226,6 @@
 <span id="184">184</span>
 <span id="185">185</span>
 <span id="186">186</span>
-<span id="187">187</span>
-<span id="188">188</span>
-<span id="189">189</span>
-<span id="190">190</span>
-<span id="191">191</span>
-<span id="192">192</span>
-<span id="193">193</span>
-<span id="194">194</span>
-<span id="195">195</span>
-<span id="196">196</span>
-<span id="197">197</span>
-<span id="198">198</span>
-<span id="199">199</span>
-<span id="200">200</span>
-<span id="201">201</span>
-<span id="202">202</span>
-<span id="203">203</span>
-<span id="204">204</span>
-<span id="205">205</span>
-<span id="206">206</span>
-<span id="207">207</span>
-<span id="208">208</span>
-<span id="209">209</span>
-<span id="210">210</span>
-<span id="211">211</span>
-<span id="212">212</span>
-<span id="213">213</span>
-<span id="214">214</span>
-<span id="215">215</span>
-<span id="216">216</span>
-<span id="217">217</span>
-<span id="218">218</span>
-<span id="219">219</span>
-<span id="220">220</span>
-<span id="221">221</span>
-<span id="222">222</span>
-<span id="223">223</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -276,12 +239,10 @@
 
 <span class='doccomment'>//! Implementations of serialization for structures found in libcollections</span>
 
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>default</span>::<span class='ident'>Default</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>hash</span>::<span class='ident'>Hash</span>;
 
 <span class='kw'>use</span> {<span class='ident'>Decodable</span>, <span class='ident'>Encodable</span>, <span class='ident'>Decoder</span>, <span class='ident'>Encoder</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::{<span class='ident'>LinkedList</span>, <span class='ident'>VecDeque</span>, <span class='ident'>BTreeMap</span>, <span class='ident'>BTreeSet</span>, <span class='ident'>HashMap</span>, <span class='ident'>HashSet</span>, <span class='ident'>VecMap</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>hash_state</span>::<span class='ident'>HashState</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::{<span class='ident'>LinkedList</span>, <span class='ident'>VecDeque</span>, <span class='ident'>BTreeMap</span>, <span class='ident'>BTreeSet</span>, <span class='ident'>HashMap</span>, <span class='ident'>HashSet</span>};
 
 <span class='kw'>impl</span><span class='op'>&lt;</span>
     <span class='ident'>T</span>: <span class='ident'>Encodable</span>
@@ -394,10 +355,9 @@
     }
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span>, <span class='ident'>S</span><span class='op'>&gt;</span> <span class='ident'>Encodable</span> <span class='kw'>for</span> <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span>, <span class='ident'>S</span><span class='op'>&gt;</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span><span class='op'>&gt;</span> <span class='ident'>Encodable</span> <span class='kw'>for</span> <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>K</span>: <span class='ident'>Encodable</span> <span class='op'>+</span> <span class='ident'>Hash</span> <span class='op'>+</span> <span class='ident'>Eq</span>,
           <span class='ident'>V</span>: <span class='ident'>Encodable</span>,
-          <span class='ident'>S</span>: <span class='ident'>HashState</span>,
 {
     <span class='kw'>fn</span> <span class='ident'>encode</span><span class='op'>&lt;</span><span class='ident'>E</span>: <span class='ident'>Encoder</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>e</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>E</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>E</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>e</span>.<span class='ident'>emit_map</span>(<span class='self'>self</span>.<span class='ident'>len</span>(), <span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> {
@@ -412,15 +372,13 @@
     }
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span>, <span class='ident'>S</span><span class='op'>&gt;</span> <span class='ident'>Decodable</span> <span class='kw'>for</span> <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span>, <span class='ident'>S</span><span class='op'>&gt;</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span><span class='op'>&gt;</span> <span class='ident'>Decodable</span> <span class='kw'>for</span> <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>K</span>: <span class='ident'>Decodable</span> <span class='op'>+</span> <span class='ident'>Hash</span> <span class='op'>+</span> <span class='ident'>Eq</span>,
           <span class='ident'>V</span>: <span class='ident'>Decodable</span>,
-          <span class='ident'>S</span>: <span class='ident'>HashState</span> <span class='op'>+</span> <span class='ident'>Default</span>,
 {
-    <span class='kw'>fn</span> <span class='ident'>decode</span><span class='op'>&lt;</span><span class='ident'>D</span>: <span class='ident'>Decoder</span><span class='op'>&gt;</span>(<span class='ident'>d</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>D</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span>, <span class='ident'>S</span><span class='op'>&gt;</span>, <span class='ident'>D</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>decode</span><span class='op'>&lt;</span><span class='ident'>D</span>: <span class='ident'>Decoder</span><span class='op'>&gt;</span>(<span class='ident'>d</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>D</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span><span class='op'>&gt;</span>, <span class='ident'>D</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>d</span>.<span class='ident'>read_map</span>(<span class='op'>|</span><span class='ident'>d</span>, <span class='ident'>len</span><span class='op'>|</span> {
-            <span class='kw'>let</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Default</span>::<span class='ident'>default</span>();
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>map</span> <span class='op'>=</span> <span class='ident'>HashMap</span>::<span class='ident'>with_capacity_and_hash_state</span>(<span class='ident'>len</span>, <span class='ident'>state</span>);
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>map</span> <span class='op'>=</span> <span class='ident'>HashMap</span>::<span class='ident'>with_capacity</span>(<span class='ident'>len</span>);
             <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>len</span> {
                 <span class='kw'>let</span> <span class='ident'>key</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>d</span>.<span class='ident'>read_map_elt_key</span>(<span class='ident'>i</span>, <span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>)));
                 <span class='kw'>let</span> <span class='ident'>val</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>d</span>.<span class='ident'>read_map_elt_val</span>(<span class='ident'>i</span>, <span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>)));
@@ -431,10 +389,7 @@
     }
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>S</span><span class='op'>&gt;</span> <span class='ident'>Encodable</span> <span class='kw'>for</span> <span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>S</span><span class='op'>&gt;</span>
-    <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Encodable</span> <span class='op'>+</span> <span class='ident'>Hash</span> <span class='op'>+</span> <span class='ident'>Eq</span>,
-          <span class='ident'>S</span>: <span class='ident'>HashState</span>,
-{
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Encodable</span> <span class='kw'>for</span> <span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Encodable</span> <span class='op'>+</span> <span class='ident'>Hash</span> <span class='op'>+</span> <span class='ident'>Eq</span> {
     <span class='kw'>fn</span> <span class='ident'>encode</span><span class='op'>&lt;</span><span class='ident'>E</span>: <span class='ident'>Encoder</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>E</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>E</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>s</span>.<span class='ident'>emit_seq</span>(<span class='self'>self</span>.<span class='ident'>len</span>(), <span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> {
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>i</span> <span class='op'>=</span> <span class='number'>0</span>;
@@ -447,43 +402,14 @@
     }
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>S</span><span class='op'>&gt;</span> <span class='ident'>Decodable</span> <span class='kw'>for</span> <span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>S</span><span class='op'>&gt;</span>
-    <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Decodable</span> <span class='op'>+</span> <span class='ident'>Hash</span> <span class='op'>+</span> <span class='ident'>Eq</span>,
-          <span class='ident'>S</span>: <span class='ident'>HashState</span> <span class='op'>+</span> <span class='ident'>Default</span>,
-{
-    <span class='kw'>fn</span> <span class='ident'>decode</span><span class='op'>&lt;</span><span class='ident'>D</span>: <span class='ident'>Decoder</span><span class='op'>&gt;</span>(<span class='ident'>d</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>D</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>S</span><span class='op'>&gt;</span>, <span class='ident'>D</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Decodable</span> <span class='kw'>for</span> <span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Decodable</span> <span class='op'>+</span> <span class='ident'>Hash</span> <span class='op'>+</span> <span class='ident'>Eq</span>, {
+    <span class='kw'>fn</span> <span class='ident'>decode</span><span class='op'>&lt;</span><span class='ident'>D</span>: <span class='ident'>Decoder</span><span class='op'>&gt;</span>(<span class='ident'>d</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>D</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>, <span class='ident'>D</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>d</span>.<span class='ident'>read_seq</span>(<span class='op'>|</span><span class='ident'>d</span>, <span class='ident'>len</span><span class='op'>|</span> {
-            <span class='kw'>let</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Default</span>::<span class='ident'>default</span>();
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>set</span> <span class='op'>=</span> <span class='ident'>HashSet</span>::<span class='ident'>with_capacity_and_hash_state</span>(<span class='ident'>len</span>, <span class='ident'>state</span>);
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>set</span> <span class='op'>=</span> <span class='ident'>HashSet</span>::<span class='ident'>with_capacity</span>(<span class='ident'>len</span>);
             <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>len</span> {
                 <span class='ident'>set</span>.<span class='ident'>insert</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>d</span>.<span class='ident'>read_seq_elt</span>(<span class='ident'>i</span>, <span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>))));
             }
             <span class='prelude-val'>Ok</span>(<span class='ident'>set</span>)
-        })
-    }
-}
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>V</span>: <span class='ident'>Encodable</span><span class='op'>&gt;</span> <span class='ident'>Encodable</span> <span class='kw'>for</span> <span class='ident'>VecMap</span><span class='op'>&lt;</span><span class='ident'>V</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>encode</span><span class='op'>&lt;</span><span class='ident'>S</span>: <span class='ident'>Encoder</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>e</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>S</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>S</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='ident'>e</span>.<span class='ident'>emit_map</span>(<span class='self'>self</span>.<span class='ident'>len</span>(), <span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> {
-                <span class='kw'>for</span> (<span class='ident'>i</span>, (<span class='ident'>key</span>, <span class='ident'>val</span>)) <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>iter</span>().<span class='ident'>enumerate</span>() {
-                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>e</span>.<span class='ident'>emit_map_elt_key</span>(<span class='ident'>i</span>, <span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='ident'>key</span>.<span class='ident'>encode</span>(<span class='ident'>e</span>)));
-                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>e</span>.<span class='ident'>emit_map_elt_val</span>(<span class='ident'>i</span>, <span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='ident'>val</span>.<span class='ident'>encode</span>(<span class='ident'>e</span>)));
-                }
-                <span class='prelude-val'>Ok</span>(())
-            })
-    }
-}
-
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>V</span>: <span class='ident'>Decodable</span><span class='op'>&gt;</span> <span class='ident'>Decodable</span> <span class='kw'>for</span> <span class='ident'>VecMap</span><span class='op'>&lt;</span><span class='ident'>V</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>decode</span><span class='op'>&lt;</span><span class='ident'>D</span>: <span class='ident'>Decoder</span><span class='op'>&gt;</span>(<span class='ident'>d</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>D</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>VecMap</span><span class='op'>&lt;</span><span class='ident'>V</span><span class='op'>&gt;</span>, <span class='ident'>D</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='ident'>d</span>.<span class='ident'>read_map</span>(<span class='op'>|</span><span class='ident'>d</span>, <span class='ident'>len</span><span class='op'>|</span> {
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>map</span> <span class='op'>=</span> <span class='ident'>VecMap</span>::<span class='ident'>new</span>();
-            <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>len</span> {
-                <span class='kw'>let</span> <span class='ident'>key</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>d</span>.<span class='ident'>read_map_elt_key</span>(<span class='ident'>i</span>, <span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>)));
-                <span class='kw'>let</span> <span class='ident'>val</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>d</span>.<span class='ident'>read_map_elt_val</span>(<span class='ident'>i</span>, <span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='ident'>d</span>)));
-                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='ident'>key</span>, <span class='ident'>val</span>);
-            }
-            <span class='prelude-val'>Ok</span>(<span class='ident'>map</span>)
         })
     }
 }

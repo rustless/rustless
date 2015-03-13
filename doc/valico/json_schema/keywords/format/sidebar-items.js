@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Format",""]],"type":[["FormatBuilders",""]]});
+initSidebarItems({"type":[["FormatBuilders",""]],"struct":[["Format",""]]});

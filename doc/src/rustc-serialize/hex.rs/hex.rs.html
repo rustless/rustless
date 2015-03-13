@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/rustc-serialize-0.3.1/src/hex.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/rustc-serialize-0.3.2/src/hex.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>hex.rs.html -- source</title>
@@ -271,6 +271,9 @@
 <span id="229">229</span>
 <span id="230">230</span>
 <span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -411,7 +414,10 @@
                     <span class='ident'>buf</span> <span class='op'>&gt;&gt;=</span> <span class='number'>4</span>;
                     <span class='kw'>continue</span>
                 }
-                _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>InvalidHexCharacter</span>(<span class='self'>self</span>.<span class='ident'>char_at</span>(<span class='ident'>idx</span>), <span class='ident'>idx</span>)),
+                _ <span class='op'>=&gt;</span> {
+                    <span class='kw'>let</span> <span class='ident'>ch</span> <span class='op'>=</span> <span class='self'>self</span>[<span class='ident'>idx</span>..].<span class='ident'>chars</span>().<span class='ident'>next</span>().<span class='ident'>unwrap</span>();
+                    <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>InvalidHexCharacter</span>(<span class='ident'>ch</span>, <span class='ident'>idx</span>))
+                }
             }
 
             <span class='ident'>modulus</span> <span class='op'>+=</span> <span class='number'>1</span>;
