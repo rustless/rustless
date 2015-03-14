@@ -43,7 +43,7 @@
     <section id='main' class="content fn">
 <h1 class='fqn'><span class='in-band'>Function <a href='index.html'>log</a>::<wbr><a class='fn' href=''>set_logger</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-1384' href='../src/log/lib.rs.html#526-547'>[src]</a></span></h1>
+        </span><a id='src-1144' href='../src/log/lib.rs.html#526-547'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn set_logger&lt;M&gt;(make_logger: M) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../log/struct.SetLoggerError.html' title='log::SetLoggerError'>SetLoggerError</a>&gt; <span class='where'>where M: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(<a class='struct' href='../log/struct.MaxLogLevelFilter.html' title='log::MaxLogLevelFilter'>MaxLogLevelFilter</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../log/trait.Log.html' title='log::Log'>Log</a>&gt;</span></pre><div class='docblock'><p>Sets the global logger.</p>
 
 <p>The <code>make_logger</code> closure is passed a <code>MaxLogLevel</code> object, which the

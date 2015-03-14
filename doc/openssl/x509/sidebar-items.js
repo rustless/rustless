@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["X509","A public key certificate"],["X509Generator","Generator of private key/certificate pairs"],["X509Name",""],["X509StoreContext",""]],"enum":[["ExtKeyUsage",""],["KeyUsage",""],["X509FileType",""],["X509ValidationError",""]]});
+initSidebarItems({"enum":[["ExtKeyUsage",""],["KeyUsage",""],["X509FileType",""],["X509ValidationError",""]],"struct":[["X509","A public key certificate"],["X509Generator","Generator of private key/certificate pairs"],["X509Name",""],["X509StoreContext",""]]});
