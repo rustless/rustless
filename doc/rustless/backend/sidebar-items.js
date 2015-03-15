@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["request",""]],"trait":[["Handler","`Handler`s are responsible for handling requests by creating Responses from Requests."],["WrapUrl",""]],"type":[["HandleResultStrict",""]],"struct":[["Url","HTTP/HTTPS URL type for Iron."]]});
+initSidebarItems({"mod":[["request",""]],"struct":[["Url","HTTP/HTTPS URL type for Iron."]],"type":[["HandleResultStrict",""]],"trait":[["Handler","`Handler`s are responsible for handling requests by creating Responses from Requests."],["WrapUrl",""]]});

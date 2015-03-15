@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["StrCharRanges",""]],"type":[["ErrorHandler","This is called on non-fatal parse errors."],["ParseResult",""]],"enum":[["ParseError","Errors that can occur during parsing."]]});
+initSidebarItems({"type":[["ErrorHandler","This is called on non-fatal parse errors."],["ParseResult",""]],"trait":[["StrCharRanges",""]],"enum":[["ParseError","Errors that can occur during parsing."]]});

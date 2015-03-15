@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["MutableJson",""]],"mod":[["common",""],["json_dsl",""],["json_schema",""]]});
+initSidebarItems({"mod":[["common",""],["json_dsl",""],["json_schema",""]],"trait":[["MutableJson",""]]});
