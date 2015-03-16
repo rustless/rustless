@@ -1,1 +1,1 @@
-initSidebarItems({"type":[["ParseResult",""]],"struct":[["ParseError",""]],"enum":[["ParseErrorKind",""]],"fn":[["parse",""]]});
+initSidebarItems({"struct":[["ParseError",""]],"enum":[["ParseErrorKind",""]],"type":[["ParseResult",""]],"fn":[["parse",""]]});

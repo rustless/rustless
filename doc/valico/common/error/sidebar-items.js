@@ -1,1 +1,1 @@
-initSidebarItems({"type":[["ValicoErrors",""]],"trait":[["ValicoError",""]]});
+initSidebarItems({"trait":[["ValicoError",""]],"type":[["ValicoErrors",""]]});

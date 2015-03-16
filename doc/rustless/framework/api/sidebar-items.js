@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Versioning",""]],"struct":[["Api",""],["Version",""]]});
+initSidebarItems({"struct":[["Api",""],["Version",""]],"enum":[["Versioning",""]]});

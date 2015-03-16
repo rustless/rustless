@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ArrayCoercer",""],["BooleanCoercer",""],["F64Coercer",""],["I64Coercer",""],["NullCoercer",""],["ObjectCoercer",""],["StringCoercer",""],["U64Coercer",""]],"enum":[["PrimitiveType",""]],"trait":[["Coercer",""]]});
+initSidebarItems({"trait":[["Coercer",""]],"enum":[["PrimitiveType",""]],"struct":[["ArrayCoercer",""],["BooleanCoercer",""],["F64Coercer",""],["I64Coercer",""],["NullCoercer",""],["ObjectCoercer",""],["StringCoercer",""],["U64Coercer",""]]});
