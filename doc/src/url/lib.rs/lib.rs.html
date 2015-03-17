@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/url-0.2.23/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/url-0.2.25/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -1053,105 +1053,6 @@
 <span id="1011">1011</span>
 <span id="1012">1012</span>
 <span id="1013">1013</span>
-<span id="1014">1014</span>
-<span id="1015">1015</span>
-<span id="1016">1016</span>
-<span id="1017">1017</span>
-<span id="1018">1018</span>
-<span id="1019">1019</span>
-<span id="1020">1020</span>
-<span id="1021">1021</span>
-<span id="1022">1022</span>
-<span id="1023">1023</span>
-<span id="1024">1024</span>
-<span id="1025">1025</span>
-<span id="1026">1026</span>
-<span id="1027">1027</span>
-<span id="1028">1028</span>
-<span id="1029">1029</span>
-<span id="1030">1030</span>
-<span id="1031">1031</span>
-<span id="1032">1032</span>
-<span id="1033">1033</span>
-<span id="1034">1034</span>
-<span id="1035">1035</span>
-<span id="1036">1036</span>
-<span id="1037">1037</span>
-<span id="1038">1038</span>
-<span id="1039">1039</span>
-<span id="1040">1040</span>
-<span id="1041">1041</span>
-<span id="1042">1042</span>
-<span id="1043">1043</span>
-<span id="1044">1044</span>
-<span id="1045">1045</span>
-<span id="1046">1046</span>
-<span id="1047">1047</span>
-<span id="1048">1048</span>
-<span id="1049">1049</span>
-<span id="1050">1050</span>
-<span id="1051">1051</span>
-<span id="1052">1052</span>
-<span id="1053">1053</span>
-<span id="1054">1054</span>
-<span id="1055">1055</span>
-<span id="1056">1056</span>
-<span id="1057">1057</span>
-<span id="1058">1058</span>
-<span id="1059">1059</span>
-<span id="1060">1060</span>
-<span id="1061">1061</span>
-<span id="1062">1062</span>
-<span id="1063">1063</span>
-<span id="1064">1064</span>
-<span id="1065">1065</span>
-<span id="1066">1066</span>
-<span id="1067">1067</span>
-<span id="1068">1068</span>
-<span id="1069">1069</span>
-<span id="1070">1070</span>
-<span id="1071">1071</span>
-<span id="1072">1072</span>
-<span id="1073">1073</span>
-<span id="1074">1074</span>
-<span id="1075">1075</span>
-<span id="1076">1076</span>
-<span id="1077">1077</span>
-<span id="1078">1078</span>
-<span id="1079">1079</span>
-<span id="1080">1080</span>
-<span id="1081">1081</span>
-<span id="1082">1082</span>
-<span id="1083">1083</span>
-<span id="1084">1084</span>
-<span id="1085">1085</span>
-<span id="1086">1086</span>
-<span id="1087">1087</span>
-<span id="1088">1088</span>
-<span id="1089">1089</span>
-<span id="1090">1090</span>
-<span id="1091">1091</span>
-<span id="1092">1092</span>
-<span id="1093">1093</span>
-<span id="1094">1094</span>
-<span id="1095">1095</span>
-<span id="1096">1096</span>
-<span id="1097">1097</span>
-<span id="1098">1098</span>
-<span id="1099">1099</span>
-<span id="1100">1100</span>
-<span id="1101">1101</span>
-<span id="1102">1102</span>
-<span id="1103">1103</span>
-<span id="1104">1104</span>
-<span id="1105">1105</span>
-<span id="1106">1106</span>
-<span id="1107">1107</span>
-<span id="1108">1108</span>
-<span id="1109">1109</span>
-<span id="1110">1110</span>
-<span id="1111">1111</span>
-<span id="1112">1112</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2015 Simon Sapin.</span>
 <span class='comment'>//</span>
@@ -1274,7 +1175,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 */</span>
 
 
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>core</span>, <span class='ident'>std_misc</span>, <span class='ident'>collections</span>, <span class='ident'>old_path</span>, <span class='ident'>path</span>, <span class='ident'>os</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>core</span>, <span class='ident'>std_misc</span>)]</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='string'>&quot;rustc-serialize&quot;</span> <span class='kw'>as</span> <span class='ident'>rustc_serialize</span>;
 
@@ -1283,8 +1184,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='self'>self</span>, <span class='ident'>Formatter</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>hash</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>old_path</span> <span class='kw'>as</span> <span class='ident'>path</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span> <span class='kw'>as</span> <span class='ident'>new_path</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::{<span class='ident'>Path</span>, <span class='ident'>PathBuf</span>, <span class='ident'>AsPath</span>};
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>host</span>::{<span class='ident'>Host</span>, <span class='ident'>Ipv6Address</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>parser</span>::{<span class='ident'>ErrorHandler</span>, <span class='ident'>ParseResult</span>, <span class='ident'>ParseError</span>};
@@ -1635,8 +1535,8 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// This returns `Err` if the given path is not absolute</span>
     <span class='doccomment'>/// or, with a Windows path, if the prefix is not a disk prefix (e.g. `C:`).</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_file_path</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>ToUrlPath</span> <span class='op'>+</span> ?<span class='ident'>Sized</span><span class='op'>&gt;</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Url</span>, ()<span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>path</span>.<span class='ident'>to_url_path</span>());
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_file_path</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>AsPath</span> <span class='op'>+</span> ?<span class='ident'>Sized</span><span class='op'>&gt;</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Url</span>, ()<span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>path_to_file_url_path</span>(<span class='ident'>path</span>.<span class='ident'>as_path</span>()));
         <span class='prelude-val'>Ok</span>(<span class='ident'>Url</span>::<span class='ident'>from_path_common</span>(<span class='ident'>path</span>))
     }
 
@@ -1657,8 +1557,8 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='doccomment'>///   as the base URL is `file:///var/index.html`, which might not be what was intended.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// (Note that `Path::new` removes any trailing slash.)</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_directory_path</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>ToUrlPath</span> <span class='op'>+</span> ?<span class='ident'>Sized</span><span class='op'>&gt;</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Url</span>, ()<span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>path</span>.<span class='ident'>to_url_path</span>());
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_directory_path</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>AsPath</span> <span class='op'>+</span> ?<span class='ident'>Sized</span><span class='op'>&gt;</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Url</span>, ()<span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>path_to_file_url_path</span>(<span class='ident'>path</span>.<span class='ident'>as_path</span>()));
         <span class='comment'>// Add an empty path component (i.e. a trailing slash in serialization)</span>
         <span class='comment'>// so that the entire path is used as a base URL.</span>
         <span class='ident'>path</span>.<span class='ident'>push</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>());
@@ -1702,7 +1602,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='doccomment'>/// (That is, if the percent-decoded path contains a NUL byte or,</span>
     <span class='doccomment'>/// for a Windows path, is not UTF-8.)</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>to_file_path</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>FromUrlPath</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, ()<span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>to_file_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PathBuf</span>, ()<span class='op'>&gt;</span> {
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>scheme_data</span> {
             <span class='ident'>SchemeData</span>::<span class='ident'>Relative</span>(<span class='kw-2'>ref</span> <span class='ident'>scheme_data</span>) <span class='op'>=&gt;</span> <span class='ident'>scheme_data</span>.<span class='ident'>to_file_path</span>(),
             <span class='ident'>SchemeData</span>::<span class='ident'>NonRelative</span>(..) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(()),
@@ -1994,12 +1894,12 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='doccomment'>/// (That is, if the percent-decoded path contains a NUL byte or,</span>
     <span class='doccomment'>/// for a Windows path, is not UTF-8.)</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>to_file_path</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>FromUrlPath</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, ()<span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>to_file_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PathBuf</span>, ()<span class='op'>&gt;</span> {
         <span class='comment'>// FIXME: Figure out what to do w.r.t host.</span>
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>domain</span>() {
-            <span class='prelude-val'>Some</span>(<span class='string'>&quot;&quot;</span>) <span class='op'>|</span> <span class='prelude-val'>Some</span>(<span class='string'>&quot;localhost&quot;</span>) <span class='op'>=&gt;</span> <span class='ident'>FromUrlPath</span>::<span class='ident'>from_url_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>path</span>),
-            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(())
+        <span class='kw'>if</span> <span class='op'>!</span><span class='macro'>matches</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>domain</span>(), <span class='prelude-val'>Some</span>(<span class='string'>&quot;&quot;</span>) <span class='op'>|</span> <span class='prelude-val'>Some</span>(<span class='string'>&quot;localhost&quot;</span>)) {
+            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
         }
+        <span class='ident'>file_url_path_to_pathbuf</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>path</span>)
     }
 
     <span class='doccomment'>/// If the host is a domain, return the domain as a string.</span>
@@ -2079,191 +1979,93 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 }
 
 
-<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ToUrlPath</span> {
-    <span class='kw'>fn</span> <span class='ident'>to_url_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span>;
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>unix</span>)]</span>
+<span class='kw'>fn</span> <span class='ident'>path_to_file_url_path</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> {
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>unix</span>::<span class='ident'>OsStrExt</span>;
+    <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>path</span>.<span class='ident'>is_absolute</span>() {
+        <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
+    }
+    <span class='comment'>// skip the root component</span>
+    <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>.<span class='ident'>components</span>().<span class='ident'>skip</span>(<span class='number'>1</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> {
+        <span class='ident'>percent_encode</span>(<span class='ident'>c</span>.<span class='ident'>as_os_str</span>().<span class='ident'>as_bytes</span>(), <span class='ident'>DEFAULT_ENCODE_SET</span>)
+    }).<span class='ident'>collect</span>())
 }
 
-
-<span class='kw'>impl</span> <span class='ident'>ToUrlPath</span> <span class='kw'>for</span> <span class='ident'>new_path</span>::<span class='ident'>Path</span> {
-    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>unix</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>to_url_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> {
-        <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>unix</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
-        <span class='kw'>if</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>is_absolute</span>() {
-            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
-        }
-        <span class='comment'>// skip the root component</span>
-        <span class='prelude-val'>Ok</span>(<span class='self'>self</span>.<span class='ident'>components</span>().<span class='ident'>skip</span>(<span class='number'>1</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> {
-            <span class='ident'>percent_encode</span>(<span class='ident'>c</span>.<span class='ident'>as_os_str</span>().<span class='ident'>as_bytes</span>(), <span class='ident'>DEFAULT_ENCODE_SET</span>)
-        }).<span class='ident'>collect</span>())
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>windows</span>)]</span>
+<span class='kw'>fn</span> <span class='ident'>path_to_file_url_path</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> {
+    <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>path</span>.<span class='ident'>is_absolute</span>() {
+        <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
     }
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>components</span> <span class='op'>=</span> <span class='ident'>path</span>.<span class='ident'>components</span>();
+    <span class='kw'>let</span> <span class='ident'>disk</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>components</span>.<span class='ident'>next</span>() {
+        <span class='prelude-val'>Some</span>(<span class='ident'>new_path</span>::<span class='ident'>Component</span>::<span class='ident'>Prefix</span> {
+            <span class='ident'>parsed</span>: <span class='ident'>new_path</span>::<span class='ident'>Prefix</span>::<span class='ident'>Disk</span>(<span class='ident'>byte</span>), ..
+        }) <span class='op'>=&gt;</span> <span class='ident'>byte</span>,
 
-    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>windows</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>to_url_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>is_absolute</span>() {
-            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
-        }
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>components</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>components</span>();
-        <span class='kw'>let</span> <span class='ident'>disk</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>components</span>.<span class='ident'>next</span>() {
-            <span class='prelude-val'>Some</span>(<span class='ident'>new_path</span>::<span class='ident'>Component</span>::<span class='ident'>Prefix</span> {
-                <span class='ident'>parsed</span>: <span class='ident'>new_path</span>::<span class='ident'>Prefix</span>::<span class='ident'>Disk</span>(<span class='ident'>byte</span>), ..
-            }) <span class='op'>=&gt;</span> <span class='ident'>byte</span>,
+        <span class='comment'>// FIXME: do something with UNC and other prefixes?</span>
+        _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
+    };
 
-            <span class='comment'>// FIXME: do something with UNC and other prefixes?</span>
-            _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
+    <span class='comment'>// Start with the prefix, e.g. &quot;C:&quot;</span>
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}:&quot;</span>, <span class='ident'>disk</span> <span class='kw'>as</span> <span class='ident'>char</span>)];
+
+    <span class='kw'>for</span> <span class='ident'>component</span> <span class='kw'>in</span> <span class='ident'>components</span> {
+        <span class='kw'>if</span> <span class='ident'>component</span> <span class='op'>==</span> <span class='ident'>new_path</span>::<span class='ident'>Component</span>::<span class='ident'>RootDir</span> { <span class='kw'>continue</span> }
+        <span class='comment'>// FIXME: somehow work with non-unicode?</span>
+        <span class='kw'>let</span> <span class='ident'>part</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>component</span>.<span class='ident'>as_os_str</span>().<span class='ident'>to_str</span>() {
+            <span class='prelude-val'>Some</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='ident'>s</span>,
+            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(()),
         };
-
-        <span class='comment'>// Start with the prefix, e.g. &quot;C:&quot;</span>
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}:&quot;</span>, <span class='ident'>disk</span> <span class='kw'>as</span> <span class='ident'>char</span>)];
-
-        <span class='kw'>for</span> <span class='ident'>component</span> <span class='kw'>in</span> <span class='ident'>components</span> {
-            <span class='kw'>if</span> <span class='ident'>component</span> <span class='op'>==</span> <span class='ident'>new_path</span>::<span class='ident'>Component</span>::<span class='ident'>RootDir</span> { <span class='kw'>continue</span> }
-            <span class='comment'>// FIXME: somehow work with non-unicode?</span>
-            <span class='kw'>let</span> <span class='ident'>part</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>component</span>.<span class='ident'>as_os_str</span>().<span class='ident'>to_str</span>() {
-                <span class='prelude-val'>Some</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='ident'>s</span>,
-                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(()),
-            };
-            <span class='ident'>path</span>.<span class='ident'>push</span>(<span class='ident'>percent_encode</span>(<span class='ident'>part</span>.<span class='ident'>as_bytes</span>(), <span class='ident'>DEFAULT_ENCODE_SET</span>));
-        }
-        <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>)
+        <span class='ident'>path</span>.<span class='ident'>push</span>(<span class='ident'>percent_encode</span>(<span class='ident'>part</span>.<span class='ident'>as_bytes</span>(), <span class='ident'>DEFAULT_ENCODE_SET</span>));
     }
+    <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>)
 }
 
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>unix</span>)]</span>
+<span class='kw'>fn</span> <span class='ident'>file_url_path_to_pathbuf</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>String</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PathBuf</span>, ()<span class='op'>&gt;</span> {
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::<span class='ident'>OsStr</span>;
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>unix</span>::<span class='ident'>OsStrExt</span>;
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>PathBuf</span>;
 
-<span class='kw'>impl</span> <span class='ident'>ToUrlPath</span> <span class='kw'>for</span> <span class='ident'>path</span>::<span class='ident'>posix</span>::<span class='ident'>Path</span> {
-    <span class='kw'>fn</span> <span class='ident'>to_url_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>is_absolute</span>() {
-            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
-        }
-        <span class='prelude-val'>Ok</span>(<span class='self'>self</span>.<span class='ident'>components</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> <span class='ident'>percent_encode</span>(<span class='ident'>c</span>, <span class='ident'>DEFAULT_ENCODE_SET</span>)).<span class='ident'>collect</span>())
+    <span class='kw'>if</span> <span class='ident'>path</span>.<span class='ident'>is_empty</span>() {
+        <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>PathBuf</span>::<span class='ident'>new</span>(<span class='string'>&quot;/&quot;</span>))
     }
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bytes</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
+    <span class='kw'>for</span> <span class='ident'>path_part</span> <span class='kw'>in</span> <span class='ident'>path</span>.<span class='ident'>iter</span>() {
+        <span class='ident'>bytes</span>.<span class='ident'>push</span>(<span class='string'>b&#39;/&#39;</span>);
+        <span class='ident'>percent_decode_to</span>(<span class='ident'>path_part</span>.<span class='ident'>as_bytes</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bytes</span>);
+    }
+    <span class='kw'>let</span> <span class='ident'>os_str</span> <span class='op'>=</span> <span class='op'>&lt;</span><span class='ident'>OsStr</span> <span class='kw'>as</span> <span class='ident'>OsStrExt</span><span class='op'>&gt;</span>::<span class='ident'>from_bytes</span>(<span class='kw-2'>&amp;</span><span class='ident'>bytes</span>);
+    <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>PathBuf</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>os_str</span>);
+    <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>path</span>.<span class='ident'>is_absolute</span>(),
+                  <span class='string'>&quot;to_file_path() failed to produce an absolute Path&quot;</span>);
+    <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>)
 }
 
-
-<span class='kw'>impl</span> <span class='ident'>ToUrlPath</span> <span class='kw'>for</span> <span class='ident'>path</span>::<span class='ident'>windows</span>::<span class='ident'>Path</span> {
-    <span class='kw'>fn</span> <span class='ident'>to_url_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>is_absolute</span>() {
-            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
-        }
-        <span class='kw'>if</span> <span class='ident'>path</span>::<span class='ident'>windows</span>::<span class='ident'>prefix</span>(<span class='self'>self</span>) <span class='op'>!=</span> <span class='prelude-val'>Some</span>(<span class='ident'>path</span>::<span class='ident'>windows</span>::<span class='ident'>PathPrefix</span>::<span class='ident'>DiskPrefix</span>) {
-            <span class='comment'>// FIXME: do something with UNC and other prefixes?</span>
-            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
-        }
-        <span class='comment'>// Start with the prefix, e.g. &quot;C:&quot;</span>
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='self'>self</span>.<span class='ident'>as_str</span>().<span class='ident'>unwrap</span>()[..<span class='number'>2</span>].<span class='ident'>to_string</span>()];
-        <span class='comment'>// self.components() does not include the prefix</span>
-        <span class='kw'>for</span> <span class='ident'>component</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>components</span>() {
-            <span class='ident'>path</span>.<span class='ident'>push</span>(<span class='ident'>percent_encode</span>(<span class='ident'>component</span>, <span class='ident'>DEFAULT_ENCODE_SET</span>));
-        }
-        <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>)
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>windows</span>)]</span>
+<span class='kw'>fn</span> <span class='ident'>file_url_path_to_pathbuf</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>String</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PathBuf</span>, ()<span class='op'>&gt;</span> {
+    <span class='kw'>if</span> <span class='ident'>path</span>.<span class='ident'>is_empty</span>() {
+        <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
     }
-}
-
-
-<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>FromUrlPath</span> {
-    <span class='kw'>fn</span> <span class='ident'>from_url_path</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>String</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw'>Self</span>, ()<span class='op'>&gt;</span>;
-}
-
-
-<span class='kw'>impl</span> <span class='ident'>FromUrlPath</span> <span class='kw'>for</span> <span class='ident'>new_path</span>::<span class='ident'>PathBuf</span> {
-    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>unix</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>from_url_path</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>String</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>new_path</span>::<span class='ident'>PathBuf</span>, ()<span class='op'>&gt;</span> {
-        <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::<span class='ident'>OsStr</span>;
-        <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>unix</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
-        <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>PathBuf</span>;
-
-        <span class='kw'>if</span> <span class='ident'>path</span>.<span class='ident'>is_empty</span>() {
-            <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>PathBuf</span>::<span class='ident'>new</span>(<span class='string'>&quot;/&quot;</span>))
-        }
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bytes</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
-        <span class='kw'>for</span> <span class='ident'>path_part</span> <span class='kw'>in</span> <span class='ident'>path</span>.<span class='ident'>iter</span>() {
-            <span class='ident'>bytes</span>.<span class='ident'>push</span>(<span class='string'>b&#39;/&#39;</span>);
-            <span class='ident'>percent_decode_to</span>(<span class='ident'>path_part</span>.<span class='ident'>as_bytes</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bytes</span>);
-        }
-        <span class='kw'>let</span> <span class='ident'>os_str</span> <span class='op'>=</span> <span class='op'>&lt;</span><span class='ident'>OsStr</span> <span class='kw'>as</span> <span class='ident'>OsStrExt</span><span class='op'>&gt;</span>::<span class='ident'>from_bytes</span>(<span class='kw-2'>&amp;</span><span class='ident'>bytes</span>);
-        <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>PathBuf</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>os_str</span>);
-        <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>path</span>.<span class='ident'>is_absolute</span>(),
-                      <span class='string'>&quot;to_file_path() failed to produce an absolute Path&quot;</span>);
-        <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>)
+    <span class='kw'>let</span> <span class='ident'>prefix</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>path</span>[<span class='number'>0</span>];
+    <span class='kw'>if</span> <span class='ident'>prefix</span>.<span class='ident'>len</span>() <span class='op'>!=</span> <span class='number'>2</span> <span class='op'>||</span> <span class='op'>!</span><span class='ident'>parser</span>::<span class='ident'>starts_with_ascii_alpha</span>(<span class='ident'>prefix</span>)
+            <span class='op'>||</span> <span class='ident'>prefix</span>.<span class='ident'>as_bytes</span>()[<span class='number'>1</span>] <span class='op'>!=</span> <span class='string'>b&#39;:&#39;</span> {
+        <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
     }
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>string</span> <span class='op'>=</span> <span class='ident'>prefix</span>.<span class='ident'>to_string</span>();
+    <span class='kw'>for</span> <span class='ident'>path_part</span> <span class='kw'>in</span> <span class='ident'>path</span>[<span class='number'>1</span>..].<span class='ident'>iter</span>() {
+        <span class='ident'>string</span>.<span class='ident'>push</span>(<span class='string'>&#39;\\&#39;</span>);
 
-    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>windows</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>from_url_path</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>String</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>new_path</span>::<span class='ident'>PathBuf</span>, ()<span class='op'>&gt;</span> {
-        <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>PathBuf</span>;
-
-        <span class='kw'>if</span> <span class='ident'>path</span>.<span class='ident'>is_empty</span>() {
-            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
-        }
-        <span class='kw'>let</span> <span class='ident'>prefix</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>path</span>[<span class='number'>0</span>];
-        <span class='kw'>if</span> <span class='ident'>prefix</span>.<span class='ident'>len</span>() <span class='op'>!=</span> <span class='number'>2</span> <span class='op'>||</span> <span class='op'>!</span><span class='ident'>parser</span>::<span class='ident'>starts_with_ascii_alpha</span>(<span class='ident'>prefix</span>)
-                <span class='op'>||</span> <span class='ident'>prefix</span>.<span class='ident'>as_bytes</span>()[<span class='number'>1</span>] <span class='op'>!=</span> <span class='string'>b&#39;:&#39;</span> {
-            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
-        }
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>string</span> <span class='op'>=</span> <span class='ident'>prefix</span>.<span class='ident'>to_string</span>();
-        <span class='kw'>for</span> <span class='ident'>path_part</span> <span class='kw'>in</span> <span class='ident'>path</span>[<span class='number'>1</span>..].<span class='ident'>iter</span>() {
-            <span class='ident'>string</span>.<span class='ident'>push</span>(<span class='string'>&#39;\\&#39;</span>);
-
-            <span class='comment'>// Currently non-unicode windows paths cannot be represented</span>
-            <span class='kw'>match</span> <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>percent_decode</span>(<span class='ident'>path_part</span>.<span class='ident'>as_bytes</span>())) {
-                <span class='prelude-val'>Ok</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='ident'>string</span>.<span class='ident'>push_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>s</span>),
-                <span class='prelude-val'>Err</span>(..) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(()),
-            }
-        }
-        <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>PathBuf</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>string</span>);
-        <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>path</span>.<span class='ident'>is_absolute</span>(),
-                      <span class='string'>&quot;to_file_path() failed to produce an absolute Path&quot;</span>);
-        <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>)
-    }
-}
-
-
-<span class='kw'>impl</span> <span class='ident'>FromUrlPath</span> <span class='kw'>for</span> <span class='ident'>path</span>::<span class='ident'>posix</span>::<span class='ident'>Path</span> {
-    <span class='kw'>fn</span> <span class='ident'>from_url_path</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>String</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>path</span>::<span class='ident'>posix</span>::<span class='ident'>Path</span>, ()<span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='ident'>path</span>.<span class='ident'>is_empty</span>() {
-            <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>::<span class='ident'>posix</span>::<span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='string'>&quot;/&quot;</span>))
-        }
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bytes</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
-        <span class='kw'>for</span> <span class='ident'>path_part</span> <span class='kw'>in</span> <span class='ident'>path</span>.<span class='ident'>iter</span>() {
-            <span class='ident'>bytes</span>.<span class='ident'>push</span>(<span class='string'>b&#39;/&#39;</span>);
-            <span class='ident'>percent_decode_to</span>(<span class='ident'>path_part</span>.<span class='ident'>as_bytes</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bytes</span>);
-        }
-        <span class='kw'>match</span> <span class='ident'>path</span>::<span class='ident'>posix</span>::<span class='ident'>Path</span>::<span class='ident'>new_opt</span>(<span class='ident'>bytes</span>) {
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(()),  <span class='comment'>// Path contains a NUL byte</span>
-            <span class='prelude-val'>Some</span>(<span class='ident'>path</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>path</span>.<span class='ident'>is_absolute</span>(),
-                              <span class='string'>&quot;to_file_path() failed to produce an absolute Path&quot;</span>);
-                <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>)
-            }
+        <span class='comment'>// Currently non-unicode windows paths cannot be represented</span>
+        <span class='kw'>match</span> <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>percent_decode</span>(<span class='ident'>path_part</span>.<span class='ident'>as_bytes</span>())) {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='ident'>string</span>.<span class='ident'>push_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>s</span>),
+            <span class='prelude-val'>Err</span>(..) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(()),
         }
     }
-}
-
-
-<span class='kw'>impl</span> <span class='ident'>FromUrlPath</span> <span class='kw'>for</span> <span class='ident'>path</span>::<span class='ident'>windows</span>::<span class='ident'>Path</span> {
-    <span class='kw'>fn</span> <span class='ident'>from_url_path</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>String</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>path</span>::<span class='ident'>windows</span>::<span class='ident'>Path</span>, ()<span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='ident'>path</span>.<span class='ident'>is_empty</span>() {
-            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
-        }
-        <span class='kw'>let</span> <span class='ident'>prefix</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>path</span>[<span class='number'>0</span>];
-        <span class='kw'>if</span> <span class='ident'>prefix</span>.<span class='ident'>len</span>() <span class='op'>!=</span> <span class='number'>2</span> <span class='op'>||</span> <span class='op'>!</span><span class='ident'>parser</span>::<span class='ident'>starts_with_ascii_alpha</span>(<span class='ident'>prefix</span>)
-                <span class='op'>||</span> <span class='ident'>prefix</span>.<span class='ident'>as_bytes</span>()[<span class='number'>1</span>] <span class='op'>!=</span> <span class='string'>b&#39;:&#39;</span> {
-            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
-        }
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bytes</span> <span class='op'>=</span> <span class='ident'>prefix</span>.<span class='ident'>as_bytes</span>().<span class='ident'>to_vec</span>();
-        <span class='kw'>for</span> <span class='ident'>path_part</span> <span class='kw'>in</span> <span class='ident'>path</span>[<span class='number'>1</span>..].<span class='ident'>iter</span>() {
-            <span class='ident'>bytes</span>.<span class='ident'>push</span>(<span class='string'>b&#39;\\&#39;</span>);
-            <span class='ident'>percent_decode_to</span>(<span class='ident'>path_part</span>.<span class='ident'>as_bytes</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bytes</span>);
-        }
-        <span class='kw'>match</span> <span class='ident'>path</span>::<span class='ident'>windows</span>::<span class='ident'>Path</span>::<span class='ident'>new_opt</span>(<span class='ident'>bytes</span>) {
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(()),  <span class='comment'>// Path contains a NUL byte or invalid UTF-8</span>
-            <span class='prelude-val'>Some</span>(<span class='ident'>path</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>path</span>.<span class='ident'>is_absolute</span>(),
-                              <span class='string'>&quot;to_file_path() failed to produce an absolute Path&quot;</span>);
-                <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>path</span>::<span class='ident'>windows</span>::<span class='ident'>prefix</span>(<span class='kw-2'>&amp;</span><span class='ident'>path</span>) <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='ident'>path</span>::<span class='ident'>windows</span>::<span class='ident'>PathPrefix</span>::<span class='ident'>DiskPrefix</span>),
-                              <span class='string'>&quot;to_file_path() failed to produce a Path with a disk prefix&quot;</span>);
-                <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>)
-            }
-        }
-    }
+    <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>PathBuf</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>string</span>);
+    <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='ident'>path</span>.<span class='ident'>is_absolute</span>(),
+                  <span class='string'>&quot;to_file_path() failed to produce an absolute Path&quot;</span>);
+    <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>)
 }
 </pre>
 </section>

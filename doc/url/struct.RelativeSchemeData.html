@@ -43,7 +43,7 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>url</a>::<wbr><a class='struct' href=''>RelativeSchemeData</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-11537' href='../src/url/lib.rs.html#208-244'>[src]</a></span></h1>
+        </span><a id='src-11550' href='../src/url/lib.rs.html#207-243'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct RelativeSchemeData {
     pub username: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>,
     pub password: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
@@ -87,7 +87,7 @@ will be replaced � U+FFFD, the replacement character.</p>
 
 <p>This is “lossy”: invalid UTF-8 percent-encoded byte sequences
 will be replaced � U+FFFD, the replacement character.</p>
-</div><h4 id='method.to_file_path' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.to_file_path' class='fnname'>to_file_path</a>&lt;T: <a class='trait' href='../url/trait.FromUrlPath.html' title='url::FromUrlPath'>FromUrlPath</a>&gt;(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;T, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+</div><h4 id='method.to_file_path' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.to_file_path' class='fnname'>to_file_path</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.PathBuf.html' title='std::path::PathBuf'>PathBuf</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
 <div class='docblock'><p>Assuming the URL is in the <code>file</code> scheme or similar,
 convert its path to an absolute <code>std::path::Path</code>.</p>
 

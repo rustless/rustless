@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-0.1.19/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-0.1.20/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -462,8 +462,6 @@
 <span id="420">420</span>
 <span id="421">421</span>
 <span id="422">422</span>
-<span id="423">423</span>
-<span id="424">424</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -838,10 +836,7 @@
        <span class='ident'>html_favicon_url</span> <span class='op'>=</span> <span class='string'>&quot;http://www.rust-lang.org/favicon.ico&quot;</span>,
        <span class='ident'>html_root_url</span> <span class='op'>=</span> <span class='string'>&quot;http://doc.rust-lang.org/regex/&quot;</span>)]</span>
 
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>core</span>, <span class='ident'>unicode</span>)]</span>
-
-<span class='comment'>// Unicode tables for character classes are defined in libunicode</span>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>unicode</span>;
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>core</span>)]</span>
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>parse</span>::<span class='ident'>Error</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>re</span>::{<span class='ident'>Regex</span>, <span class='ident'>Captures</span>, <span class='ident'>SubCaptures</span>, <span class='ident'>SubCapturesPos</span>};
@@ -852,6 +847,7 @@
 <span class='kw'>mod</span> <span class='ident'>compile</span>;
 <span class='kw'>mod</span> <span class='ident'>parse</span>;
 <span class='kw'>mod</span> <span class='ident'>re</span>;
+<span class='kw'>mod</span> <span class='ident'>unicode</span>;
 <span class='kw'>mod</span> <span class='ident'>vm</span>;
 
 <span class='doccomment'>/// The `native` module exists to support the `regex!` macro. Do not use.</span>

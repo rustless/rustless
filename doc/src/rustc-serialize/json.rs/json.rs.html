@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/rustc-serialize-0.3.3/src/json.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/rustc-serialize-0.3.4/src/json.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>json.rs.html -- source</title>
@@ -3965,6 +3965,7 @@
 <span id="3923">3923</span>
 <span id="3924">3924</span>
 <span id="3925">3925</span>
+<span id="3926">3926</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -3978,9 +3979,6 @@
 
 <span class='comment'>// Rust JSON serialization library</span>
 <span class='comment'>// Copyright (c) 2011 Google Inc.</span>
-
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>forbid</span>(<span class='ident'>non_camel_case_types</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
 
 <span class='doccomment'>//! JSON parsing and serialization</span>
 <span class='doccomment'>//!</span>
@@ -4054,7 +4052,6 @@
 <span class='doccomment'>//! from JSON using the serialization API, using the derived serialization code.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```rust</span>
-<span class='doccomment'>//! # #![allow(unstable)]</span>
 <span class='doccomment'>//! extern crate &quot;rustc-serialize&quot; as rustc_serialize;</span>
 <span class='doccomment'>//! use rustc_serialize::json;</span>
 <span class='doccomment'>//!</span>
@@ -4090,7 +4087,6 @@
 <span class='doccomment'>//! ### Simple example of `ToJson` usage</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```rust</span>
-<span class='doccomment'>//! # #![allow(unstable)]</span>
 <span class='doccomment'>//! extern crate &quot;rustc-serialize&quot; as rustc_serialize;</span>
 <span class='doccomment'>//! use rustc_serialize::json::{self, ToJson, Json};</span>
 <span class='doccomment'>//!</span>
@@ -4130,7 +4126,6 @@
 <span class='doccomment'>//! ### Verbose example of `ToJson` usage</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```rust</span>
-<span class='doccomment'>//! # #![allow(unstable)]</span>
 <span class='doccomment'>//! extern crate &quot;rustc-serialize&quot; as rustc_serialize;</span>
 <span class='doccomment'>//! use std::collections::BTreeMap;</span>
 <span class='doccomment'>//! use rustc_serialize::json::{self, Json, ToJson};</span>
@@ -4173,7 +4168,6 @@
 <span class='doccomment'>//! ## Parsing a `str` to `Json` and reading the result</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```rust</span>
-<span class='doccomment'>//! # #![allow(unstable)]</span>
 <span class='doccomment'>//! extern crate &quot;rustc-serialize&quot; as rustc_serialize;</span>
 <span class='doccomment'>//! use rustc_serialize::json::Json;</span>
 <span class='doccomment'>//!</span>
@@ -4264,6 +4258,7 @@
     <span class='ident'>UnexpectedEndOfHexEscape</span>,
     <span class='ident'>UnrecognizedHex</span>,
     <span class='ident'>NotFourDigit</span>,
+    <span class='ident'>ControlCharacterInString</span>,
     <span class='ident'>NotUtf8</span>,
 }
 
@@ -4309,6 +4304,7 @@
         <span class='ident'>InvalidEscape</span> <span class='op'>=&gt;</span> <span class='string'>&quot;invalid escape&quot;</span>,
         <span class='ident'>UnrecognizedHex</span> <span class='op'>=&gt;</span> <span class='string'>&quot;invalid \\u{ esc}ape (unrecognized hex)&quot;</span>,
         <span class='ident'>NotFourDigit</span> <span class='op'>=&gt;</span> <span class='string'>&quot;invalid \\u{ esc}ape (not four digits)&quot;</span>,
+        <span class='ident'>ControlCharacterInString</span> <span class='op'>=&gt;</span> <span class='string'>&quot;unescaped control character in string&quot;</span>,
         <span class='ident'>NotUtf8</span> <span class='op'>=&gt;</span> <span class='string'>&quot;contents not utf-8&quot;</span>,
         <span class='ident'>InvalidUnicodeCodePoint</span> <span class='op'>=&gt;</span> <span class='string'>&quot;invalid Unicode code point&quot;</span>,
         <span class='ident'>LoneLeadingSurrogateInHexEscape</span> <span class='op'>=&gt;</span> <span class='string'>&quot;lone leading surrogate in hex escape&quot;</span>,
@@ -5553,25 +5549,16 @@
     <span class='kw'>fn</span> <span class='ident'>decode_hex_escape</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span>, <span class='ident'>ParserError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>i</span> <span class='op'>=</span> <span class='number'>0</span>;
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0</span>;
-        <span class='kw'>while</span> <span class='ident'>i</span> <span class='op'>&lt;</span> <span class='number'>4</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>eof</span>() {
+        <span class='kw'>while</span> <span class='ident'>i</span> <span class='op'>&lt;</span> <span class='number'>4</span> {
             <span class='self'>self</span>.<span class='ident'>bump</span>();
             <span class='ident'>n</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>ch_or_null</span>() {
                 <span class='ident'>c</span> <span class='kw-2'>@</span> <span class='string'>&#39;0&#39;</span> ... <span class='string'>&#39;9&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>16</span> <span class='op'>+</span> ((<span class='ident'>c</span> <span class='kw'>as</span> <span class='ident'>u16</span>) <span class='op'>-</span> (<span class='string'>&#39;0&#39;</span> <span class='kw'>as</span> <span class='ident'>u16</span>)),
-                <span class='string'>&#39;a&#39;</span> <span class='op'>|</span> <span class='string'>&#39;A&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>16</span> <span class='op'>+</span> <span class='number'>10</span>,
-                <span class='string'>&#39;b&#39;</span> <span class='op'>|</span> <span class='string'>&#39;B&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>16</span> <span class='op'>+</span> <span class='number'>11</span>,
-                <span class='string'>&#39;c&#39;</span> <span class='op'>|</span> <span class='string'>&#39;C&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>16</span> <span class='op'>+</span> <span class='number'>12</span>,
-                <span class='string'>&#39;d&#39;</span> <span class='op'>|</span> <span class='string'>&#39;D&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>16</span> <span class='op'>+</span> <span class='number'>13</span>,
-                <span class='string'>&#39;e&#39;</span> <span class='op'>|</span> <span class='string'>&#39;E&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>16</span> <span class='op'>+</span> <span class='number'>14</span>,
-                <span class='string'>&#39;f&#39;</span> <span class='op'>|</span> <span class='string'>&#39;F&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>16</span> <span class='op'>+</span> <span class='number'>15</span>,
+                <span class='ident'>c</span> <span class='kw-2'>@</span> <span class='string'>&#39;a&#39;</span> ... <span class='string'>&#39;f&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>16</span> <span class='op'>+</span> (<span class='number'>10</span> <span class='op'>+</span> (<span class='ident'>c</span> <span class='kw'>as</span> <span class='ident'>u16</span>) <span class='op'>-</span> (<span class='string'>&#39;a&#39;</span> <span class='kw'>as</span> <span class='ident'>u16</span>)),
+                <span class='ident'>c</span> <span class='kw-2'>@</span> <span class='string'>&#39;A&#39;</span> ... <span class='string'>&#39;F&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>16</span> <span class='op'>+</span> (<span class='number'>10</span> <span class='op'>+</span> (<span class='ident'>c</span> <span class='kw'>as</span> <span class='ident'>u16</span>) <span class='op'>-</span> (<span class='string'>&#39;A&#39;</span> <span class='kw'>as</span> <span class='ident'>u16</span>)),
                 _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>error</span>(<span class='ident'>InvalidEscape</span>)
             };
 
             <span class='ident'>i</span> <span class='op'>+=</span> <span class='number'>1</span>;
-        }
-
-        <span class='comment'>// Error out if we didn&#39;t parse 4 digits.</span>
-        <span class='kw'>if</span> <span class='ident'>i</span> <span class='op'>!=</span> <span class='number'>4</span> {
-            <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>error</span>(<span class='ident'>InvalidEscape</span>);
         }
 
         <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>)
@@ -5635,6 +5622,8 @@
                         <span class='self'>self</span>.<span class='ident'>bump</span>();
                         <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>);
                     },
+                    <span class='prelude-val'>Some</span>(<span class='ident'>c</span>) <span class='kw'>if</span> <span class='ident'>c</span>.<span class='ident'>is_control</span>() <span class='op'>=&gt;</span>
+                        <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>error</span>(<span class='ident'>ControlCharacterInString</span>),
                     <span class='prelude-val'>Some</span>(<span class='ident'>c</span>) <span class='op'>=&gt;</span> <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='ident'>c</span>),
                     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='macro'>unreachable</span><span class='macro'>!</span>()
                 }
@@ -6901,8 +6890,9 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_read_str</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Json</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;\&quot;&quot;</span>),    <span class='prelude-val'>Err</span>(<span class='ident'>SyntaxError</span>(<span class='ident'>EOFWhileParsingString</span>, <span class='number'>1</span>, <span class='number'>2</span>)));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Json</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;\&quot;lol&quot;</span>), <span class='prelude-val'>Err</span>(<span class='ident'>SyntaxError</span>(<span class='ident'>EOFWhileParsingString</span>, <span class='number'>1</span>, <span class='number'>5</span>)));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Json</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;\&quot;&quot;</span>),     <span class='prelude-val'>Err</span>(<span class='ident'>SyntaxError</span>(<span class='ident'>EOFWhileParsingString</span>, <span class='number'>1</span>, <span class='number'>2</span>)));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Json</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;\&quot;lol&quot;</span>),  <span class='prelude-val'>Err</span>(<span class='ident'>SyntaxError</span>(<span class='ident'>EOFWhileParsingString</span>, <span class='number'>1</span>, <span class='number'>5</span>)));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Json</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;\&quot;\n\&quot;&quot;</span>), <span class='prelude-val'>Err</span>(<span class='ident'>SyntaxError</span>(<span class='ident'>ControlCharacterInString</span>, <span class='number'>2</span>, <span class='number'>1</span>)));
 
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Json</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;\&quot;\&quot;&quot;</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>String</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>())));
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Json</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;\&quot;foo\&quot;&quot;</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>String</span>(<span class='string'>&quot;foo&quot;</span>.<span class='ident'>to_string</span>())));
@@ -7859,6 +7849,18 @@
                     { &quot;c&quot;: {&quot;d&quot;: null} }
                 ]
             }&quot;#</span>);
+        });
+    }
+
+    <span class='attribute'>#[<span class='ident'>bench</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>bench_decode_hex_escape</span>(<span class='ident'>b</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Bencher</span>) {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>src</span> <span class='op'>=</span> <span class='string'>&quot;\&quot;&quot;</span>.<span class='ident'>to_string</span>();
+        <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>10</span> {
+            <span class='ident'>src</span>.<span class='ident'>push_str</span>(<span class='string'>&quot;\\uF975\\uf9bc\\uF9A0\\uF9C4\\uF975\\uf9bc\\uF9A0\\uF9C4&quot;</span>);
+        }
+        <span class='ident'>src</span>.<span class='ident'>push_str</span>(<span class='string'>&quot;\&quot;&quot;</span>);
+        <span class='ident'>b</span>.<span class='ident'>iter</span>( <span class='op'>||</span> {
+            <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>Json</span>::<span class='ident'>from_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>src</span>);
         });
     }
 

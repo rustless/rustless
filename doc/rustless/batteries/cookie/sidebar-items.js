@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["new",""]],"struct":[["CookieDecodeMiddleware",""],["CookieEncodeMiddleware",""]],"trait":[["CookieExt",""]]});
+initSidebarItems({"struct":[["CookieDecodeMiddleware",""],["CookieEncodeMiddleware",""]],"fn":[["new",""]],"trait":[["CookieExt",""]]});

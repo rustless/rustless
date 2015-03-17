@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-0.1.19/src/re.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-0.1.20/src/re.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>re.rs.html -- source</title>
@@ -1064,8 +1064,6 @@
 <span id="1022">1022</span>
 <span id="1023">1023</span>
 <span id="1024">1024</span>
-<span id="1025">1025</span>
-<span id="1026">1026</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1082,8 +1080,6 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>hash_map</span>::<span class='ident'>Iter</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::{<span class='ident'>Pattern</span>, <span class='ident'>Searcher</span>, <span class='ident'>SearchStep</span>};
-
-<span class='kw'>use</span> <span class='ident'>unicode</span>::<span class='ident'>str</span>::<span class='ident'>utf8_char_width</span>;
 
 <span class='kw'>use</span> <span class='ident'>compile</span>::<span class='ident'>Program</span>;
 <span class='kw'>use</span> <span class='ident'>parse</span>;
@@ -1963,8 +1959,8 @@
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>last_end</span> <span class='op'>&gt;=</span> <span class='self'>self</span>.<span class='ident'>search</span>.<span class='ident'>len</span>() {
                 <span class='kw'>return</span> <span class='prelude-val'>None</span>;
             }
-            <span class='self'>self</span>.<span class='ident'>last_end</span> <span class='op'>+=</span>
-                <span class='ident'>utf8_char_width</span>(<span class='self'>self</span>.<span class='ident'>search</span>.<span class='ident'>as_bytes</span>()[<span class='self'>self</span>.<span class='ident'>last_end</span>]);
+            <span class='self'>self</span>.<span class='ident'>last_end</span> <span class='op'>+=</span> <span class='self'>self</span>.<span class='ident'>search</span>[<span class='self'>self</span>.<span class='ident'>last_end</span>..].<span class='ident'>chars</span>()
+                                 .<span class='ident'>next</span>().<span class='ident'>unwrap</span>().<span class='ident'>len_utf8</span>();
             <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>next</span>()
         }
         <span class='self'>self</span>.<span class='ident'>last_end</span> <span class='op'>=</span> <span class='ident'>e</span>;
@@ -2011,8 +2007,8 @@
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>last_end</span> <span class='op'>&gt;=</span> <span class='self'>self</span>.<span class='ident'>search</span>.<span class='ident'>len</span>() {
                 <span class='kw'>return</span> <span class='prelude-val'>None</span>;
             }
-            <span class='self'>self</span>.<span class='ident'>last_end</span> <span class='op'>+=</span>
-                <span class='ident'>utf8_char_width</span>(<span class='self'>self</span>.<span class='ident'>search</span>.<span class='ident'>as_bytes</span>()[<span class='self'>self</span>.<span class='ident'>last_end</span>]);
+            <span class='self'>self</span>.<span class='ident'>last_end</span> <span class='op'>+=</span> <span class='self'>self</span>.<span class='ident'>search</span>[<span class='self'>self</span>.<span class='ident'>last_end</span>..].<span class='ident'>chars</span>()
+                                 .<span class='ident'>next</span>().<span class='ident'>unwrap</span>().<span class='ident'>len_utf8</span>();
             <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>next</span>()
         }
         <span class='self'>self</span>.<span class='ident'>last_end</span> <span class='op'>=</span> <span class='ident'>e</span>;

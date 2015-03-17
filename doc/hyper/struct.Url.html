@@ -43,7 +43,7 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>hyper</a>::<wbr><a class='struct' href=''>Url</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-10979' href='../url/struct.Url.html?gotosrc=10979'>[src]</a></span></h1>
+        </span><a id='src-10992' href='../url/struct.Url.html?gotosrc=10992'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Url {
     pub scheme: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>,
     pub scheme_data: <a class='enum' href='../url/enum.SchemeData.html' title='url::SchemeData'>SchemeData</a>,
@@ -74,12 +74,12 @@ otherwise a possibly empty, pecent-encoded string.</p>
 <div class='docblock'><p>Parse an URL with the default <code>UrlParser</code> parameters.</p>
 
 <p>In particular, relative URL references are parse errors since no base URL is provided.</p>
-</div><h4 id='method.from_file_path' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.from_file_path' class='fnname'>from_file_path</a>&lt;T&gt;(path: &amp;T) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../hyper/struct.Url.html' title='hyper::Url'>Url</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where T: <a class='trait' href='../url/trait.ToUrlPath.html' title='url::ToUrlPath'>ToUrlPath</a>, T: ?<a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a></span></code></h4>
+</div><h4 id='method.from_file_path' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.from_file_path' class='fnname'>from_file_path</a>&lt;P&gt;(path: &amp;P) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../hyper/struct.Url.html' title='hyper::Url'>Url</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where P: <a class='trait' href='http://doc.rust-lang.org/nightly/std/path/trait.AsPath.html' title='std::path::AsPath'>AsPath</a>, P: ?<a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a></span></code></h4>
 <div class='docblock'><p>Convert a file name as <code>std::path::Path</code> into an URL in the <code>file</code> scheme.</p>
 
 <p>This returns <code>Err</code> if the given path is not absolute
 or, with a Windows path, if the prefix is not a disk prefix (e.g. <code>C:</code>).</p>
-</div><h4 id='method.from_directory_path' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.from_directory_path' class='fnname'>from_directory_path</a>&lt;T&gt;(path: &amp;T) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../hyper/struct.Url.html' title='hyper::Url'>Url</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where T: <a class='trait' href='../url/trait.ToUrlPath.html' title='url::ToUrlPath'>ToUrlPath</a>, T: ?<a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a></span></code></h4>
+</div><h4 id='method.from_directory_path' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.from_directory_path' class='fnname'>from_directory_path</a>&lt;P&gt;(path: &amp;P) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../hyper/struct.Url.html' title='hyper::Url'>Url</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where P: <a class='trait' href='http://doc.rust-lang.org/nightly/std/path/trait.AsPath.html' title='std::path::AsPath'>AsPath</a>, P: ?<a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a></span></code></h4>
 <div class='docblock'><p>Convert a directory name as <code>std::path::Path</code> into an URL in the <code>file</code> scheme.</p>
 
 <p>This returns <code>Err</code> if the given path is not absolute
@@ -99,7 +99,7 @@ as the base URL is <code>file:///var/index.html</code>, which might not be what 
 </ul>
 
 <p>(Note that <code>Path::new</code> removes any trailing slash.)</p>
-</div><h4 id='method.to_file_path' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.to_file_path' class='fnname'>to_file_path</a>&lt;T&gt;(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;T, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where T: <a class='trait' href='../url/trait.FromUrlPath.html' title='url::FromUrlPath'>FromUrlPath</a></span></code></h4>
+</div><h4 id='method.to_file_path' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.to_file_path' class='fnname'>to_file_path</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.PathBuf.html' title='std::path::PathBuf'>PathBuf</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
 <div class='docblock'><p>Assuming the URL is in the <code>file</code> scheme or similar,
 convert its path to an absolute <code>std::path::Path</code>.</p>
 
