@@ -18,7 +18,7 @@ pub type HandleResultStrict<T> = Result<T, errors::StrictErrorResponse>;
 pub type HandleResult<T> = Result<T, errors::ErrorResponse>;
 pub type HandleSuccessResult = HandleResult<()>;
 
-impl<'a> request::Body for iron::request::Body<'a> { }
+impl<'a, 'b> request::Body for iron::request::Body<'a, 'b> { }
 
 pub trait WrapUrl {
     fn wrap_url(self) -> Url;
@@ -41,7 +41,7 @@ impl backend::AsUrl for Url {
     fn fragment(&self) -> &Option<String> { &self.fragment }
 }
 
-impl<'a> backend::Request for iron::Request<'a> {
+impl<'a, 'b> backend::Request for iron::Request<'a, 'b> {
     fn remote_addr(&self) -> &net::SocketAddr { &self.remote_addr }
     fn headers(&self) -> &header::Headers { &self.headers }
     fn method(&self) -> &method::Method { &self.method }
@@ -53,13 +53,13 @@ impl<'a> backend::Request for iron::Request<'a> {
     }
 }
 
-impl<'a>  ::Extensible for iron::Request<'a> {
+impl<'a, 'b>  ::Extensible for iron::Request<'a, 'b> {
     fn ext(&self) -> &::typemap::TypeMap { self.extensions() }
     fn ext_mut(&mut self) -> &mut ::typemap::TypeMap { self.extensions_mut() }
 }
 
 impl Handler for framework::Application {
-    fn handle<'a>(&self, req: &mut iron::Request<'a>) -> iron::IronResult<iron::Response> {
+    fn handle<'a, 'b>(&self, req: &mut iron::Request<'a, 'b>) -> iron::IronResult<iron::Response> {
         self.call(req)
             .map(|resp| {
                 iron::Response {
