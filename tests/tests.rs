@@ -1,12 +1,10 @@
 // #![deny(warnings)]
 #![deny(bad_style)]
-#![feature(core)]
-#![feature(io)]
 
 #[macro_use]
 extern crate rustless;
 extern crate hyper;
-extern crate "rustc-serialize" as serialize;
+extern crate rustc_serialize as serialize;
 extern crate url;
 extern crate valico;
 extern crate jsonway;

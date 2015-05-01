@@ -23,7 +23,7 @@ impl Path {
     pub fn apply_captures(&self, params: &mut json::Json, captures: regex::Captures) {
         let obj = params.as_object_mut().expect("Params must be object");
         for param in self.params.iter() {
-            obj.insert(param.clone(), captures.name(param.as_slice()).unwrap_or("").to_string().to_json());
+            obj.insert(param.clone(), captures.name(&param).unwrap_or("").to_string().to_json());
         }
     }
 
@@ -32,13 +32,13 @@ impl Path {
     }
 
     pub fn parse(path: &str, endpoint: bool) -> Result<Path,String> {
-        let mut regex_body = "^".to_string() + Path::sub_regex(path).as_slice();
+        let mut regex_body = "^".to_string() + &Path::sub_regex(path);
 
         if endpoint {
             regex_body = regex_body + "$";
         }
 
-        let regex = match regex::Regex::new(regex_body.as_slice()) {
+        let regex = match regex::Regex::new(&regex_body) {
             Ok(re) => re,
             Err(err) => return Err(format!("{}", err))
         };
@@ -71,7 +71,7 @@ fn it_normalize() {
 #[test]
 fn sub_regex() {
     let res = Path::sub_regex(":user_id/messages/:message_id");
-    assert_eq!(res.as_slice(), "(?P<user_id>[^/?&]+)/messages/(?P<message_id>[^/?&]+)")
+    assert_eq!(&res, "(?P<user_id>[^/?&]+)/messages/(?P<message_id>[^/?&]+)")
 }
 
 #[test]

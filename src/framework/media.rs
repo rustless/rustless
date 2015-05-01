@@ -67,7 +67,7 @@ impl Media {
     pub fn from_vendor(mime: &mime::Mime) -> Option<Media> {
         match mime {
             &mime::Mime(mime::TopLevel::Application, mime::SubLevel::Ext(ref ext), _) => {
-                match MEDIA_REGEX.captures(ext.as_slice()) {
+                match MEDIA_REGEX.captures(&ext) {
                     Some(captures) => {
                         let vendor = captures.name("vendor");
                         let version = captures.name("version").map(|s| s.to_string());
@@ -75,8 +75,8 @@ impl Media {
                         let format_str = captures.name("format").map(|s| s.to_string());
 
                         let format = match format_str {
-                            Some(format) => if format.as_slice() == "json" { Format::JsonFormat }
-                                            else if format.as_slice() == "txt" { Format::PlainTextFormat }
+                            Some(format) => if &format == "json" { Format::JsonFormat }
+                                            else if &format == "txt" { Format::PlainTextFormat }
                                             else { Format::from_mime(mime) },
                             None => Format::from_mime(mime)
                         };

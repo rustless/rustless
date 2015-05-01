@@ -3,9 +3,6 @@
 #![feature(plugin)]
 #![feature(collections)]
 #![feature(core)]
-#![feature(io)]
-#![feature(net)]
-#![feature(path)]
 // #![deny(warnings)]
 #![deny(bad_style)]
 
@@ -13,7 +10,7 @@
 
 extern crate regex;
 extern crate hyper;
-extern crate "rustc-serialize" as serialize;
+extern crate rustc_serialize as serialize;
 extern crate url;
 extern crate error;
 extern crate cookie;

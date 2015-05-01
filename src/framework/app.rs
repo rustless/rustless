@@ -31,7 +31,7 @@ impl Application {
         let parse_result = parse_request(req, &mut params);
 
         parse_result.and_then(|_| {
-            self.root_api.api_call((req.url().path().connect("/").as_slice()).as_slice(), &mut params, req, &mut super::CallInfo::new(self))
+            self.root_api.api_call(&(req.url().path().connect("/")), &mut params, req, &mut super::CallInfo::new(self))
         })
     }
 
@@ -48,11 +48,11 @@ impl Application {
                     let errors::ErrorResponse{error, ..} = error_response;
 
                     // Simple default error responses for common errors
-                    let response = if error.is::<errors::NotMatch>() {
+                    let response = if (&*error as &errors::Error).is::<errors::NotMatch>() {
                         backend::Response::new(
                             status::StatusCode::NotFound
                         )
-                    } else if error.is::<errors::Validation>() {
+                    } else if (&*error as &errors::Error).is::<errors::Validation>() {
                         backend::Response::new(
                             status::StatusCode::BadRequest
                         )
@@ -126,7 +126,7 @@ fn parse_urlencoded_body(req: &mut backend::Request, params: &mut json::Json) ->
         .unwrap_or(String::new());
 
     if maybe_body.len() > 0 {
-        let maybe_json_body = queryst::parse(maybe_body.as_slice());
+        let maybe_json_body = queryst::parse(&maybe_body);
         match maybe_json_body {
             Ok(json_body) => {
                 let params = params.as_object_mut().expect("Params must be object");
@@ -150,7 +150,7 @@ fn parse_urlencoded_body(req: &mut backend::Request, params: &mut json::Json) ->
 fn parse_request(req: &mut backend::Request, params: &mut json::Json) -> backend::HandleSuccessResult {
     // extend params with query-string params if any
     if req.url().query().is_some() {
-        try!(parse_query(req.url().query().as_ref().unwrap().as_slice(), params));
+        try!(parse_query(&req.url().query().as_ref().unwrap(), params));
     }
 
     // extend params with json-encoded body params if any

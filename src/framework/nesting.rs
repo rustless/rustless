@@ -135,7 +135,7 @@ pub trait Nesting: Node {
             match handler.api_call(rest_path, params, req, info) {
                 Ok(response) => return Ok(response),
                 Err(error_response) => {
-                    if !error_response.error.is::<errors::NotMatch>() {
+                    if !errors::Error::is::<errors::NotMatch>(&*error_response.error) {
                         return Err(error_response)
                     }
                 }

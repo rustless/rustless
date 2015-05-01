@@ -39,7 +39,7 @@ pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 pub type Callback = Box<for<'a> Fn(&'a mut client::Client, &json::Json) -> backend::HandleSuccessResult + 'static + Sync + Send>;
 pub type Callbacks = Vec<Callback>;
 
-pub type ErrorFormatter = Box<Fn(&Box<errors::Error + 'static>, &media::Media) -> Option<backend::Response> + 'static + Sync + Send>;
+pub type ErrorFormatter = Box<Fn(&errors::Error, &media::Media) -> Option<backend::Response> + 'static + Sync + Send>;
 pub type ErrorFormatters = Vec<ErrorFormatter>;
 
 impl<'a> CallInfo<'a> {
