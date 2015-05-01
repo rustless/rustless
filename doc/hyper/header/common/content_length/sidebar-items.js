@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ContentLength","The `Content-Length` header."]]});
+initSidebarItems({"struct":[["ContentLength","`Content-Length` header, defined in RFC7230"]]});

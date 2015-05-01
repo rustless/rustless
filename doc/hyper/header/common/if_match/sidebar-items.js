@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["IfMatch","The `If-Match` header"]]});
+initSidebarItems({"enum":[["IfMatch","`If-Match` header, defined in RFC7232"]]});

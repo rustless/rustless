@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Expires","The `Expires` header field."]]});
+initSidebarItems({"struct":[["Expires","`Expires` header, defined in RFC7234"]]});

@@ -41,9 +41,9 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>middleware</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-198' href='../../src/iron/middleware/mod.rs.html#1-340'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>middleware</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-201' class='srclink' href='../../src/iron/middleware/mod.rs.html#1-348' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Iron&#39;s Middleware and Handler System</p>
 
 <p>Iron&#39;s Middleware system is best modeled with a diagram.</p>
@@ -97,40 +97,50 @@ be run during both the normal and error flow by implementing the <code>catch</co
 also do the necessary action.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Chain.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Chain.html'
                                title='iron::middleware::Chain'>Chain</a></td>
-                        <td class='docblock short'><p>The middleware chain used in Iron.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>The middleware chain used in Iron.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.AfterMiddleware.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.AfterMiddleware.html'
                                title='iron::middleware::AfterMiddleware'>AfterMiddleware</a></td>
-                        <td class='docblock short'><p><code>AfterMiddleware</code> are fired after a <code>Handler</code> is called inside of a Chain.</p>
-</td>
+                        <td class='docblock short'>
+                             <p><code>AfterMiddleware</code> are fired after a <code>Handler</code> is called inside of a Chain.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.AroundMiddleware.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.AroundMiddleware.html'
                                title='iron::middleware::AroundMiddleware'>AroundMiddleware</a></td>
-                        <td class='docblock short'><p>AroundMiddleware are used to wrap and replace the <code>Handler</code> in a <code>Chain</code>.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>AroundMiddleware are used to wrap and replace the <code>Handler</code> in a <code>Chain</code>.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.BeforeMiddleware.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.BeforeMiddleware.html'
                                title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a></td>
-                        <td class='docblock short'><p><code>BeforeMiddleware</code> are fired before a <code>Handler</code> is called inside of a Chain.</p>
-</td>
+                        <td class='docblock short'>
+                             <p><code>BeforeMiddleware</code> are fired before a <code>Handler</code> is called inside of a Chain.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Handler.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.Handler.html'
                                title='iron::middleware::Handler'>Handler</a></td>
-                        <td class='docblock short'><p><code>Handler</code>s are responsible for handling requests by creating Responses from Requests.</p>
-</td>
+                        <td class='docblock short'>
+                             <p><code>Handler</code>s are responsible for handling requests by creating Responses from Requests.</p>
+
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>

@@ -41,146 +41,107 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>hyper</a>::<wbr><a class='mod' href=''>http</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-22796' href='../../src/hyper/http.rs.html#1-949'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>hyper</a>::<wbr><a class='mod' href=''>http</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-25399' class='srclink' href='../../src/hyper/http.rs.html#1-552' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Pieces pertaining to the HTTP message protocol.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.RawStatus.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Incoming.html'
+                               title='hyper::http::Incoming'>Incoming</a></td>
+                        <td class='docblock short'>
+                             <p>An Incoming Message head. Includes request/status line, and headers.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.RawStatus.html'
                                title='hyper::http::RawStatus'>RawStatus</a></td>
-                        <td class='docblock short'><p>The raw status code and reason-phrase.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>The raw status code and reason-phrase.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.HttpReader.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.HttpReader.html'
                                title='hyper::http::HttpReader'>HttpReader</a></td>
-                        <td class='docblock short'><p>Readers to handle different Transfer-Encodings.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Readers to handle different Transfer-Encodings.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.HttpWriter.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.HttpWriter.html'
                                title='hyper::http::HttpWriter'>HttpWriter</a></td>
-                        <td class='docblock short'><p>Writers to handle different Transfer-Encodings.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Writers to handle different Transfer-Encodings.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.CR.html'
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.CR.html'
                                title='hyper::http::CR'>CR</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.LF.html'
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.LF.html'
                                title='hyper::http::LF'>LF</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.LINE_ENDING.html'
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.LINE_ENDING.html'
                                title='hyper::http::LINE_ENDING'>LINE_ENDING</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.SP.html'
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.SP.html'
                                title='hyper::http::SP'>SP</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='constant' href='constant.STAR.html'
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.STAR.html'
                                title='hyper::http::STAR'>STAR</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.is_token.html'
-                               title='hyper::http::is_token'>is_token</a></td>
-                        <td class='docblock short'><p>Determines if byte is a token char.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_header.html'
-                               title='hyper::http::read_header'>read_header</a></td>
-                        <td class='docblock short'><p>Read a RawHeaderLine from a Reader.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_http_version.html'
-                               title='hyper::http::read_http_version'>read_http_version</a></td>
-                        <td class='docblock short'><p>Read the <code>HttpVersion</code> from a raw stream, such as <code>HTTP/1.1</code>.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_method.html'
-                               title='hyper::http::read_method'>read_method</a></td>
-                        <td class='docblock short'><p>Read a <code>Method</code> from a raw stream, such as <code>GET</code>.</p>
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.parse_request.html'
+                               title='hyper::http::parse_request'>parse_request</a></td>
+                        <td class='docblock short'>
+                             <p>Parses a request into an Incoming message head.</p>
 
-<h3 id="note:" class='section-header'><a
-                           href="#note:">Note:</a></h3>
-<p>Extension methods are only parsed to 16 characters.</p>
-</td>
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_request_line.html'
-                               title='hyper::http::read_request_line'>read_request_line</a></td>
-                        <td class='docblock short'><p>Read the <code>RequestLine</code>, such as <code>GET / HTTP/1.1</code>.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_status.html'
-                               title='hyper::http::read_status'>read_status</a></td>
-                        <td class='docblock short'><p>Read the StatusCode from a stream.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_status_line.html'
-                               title='hyper::http::read_status_line'>read_status_line</a></td>
-                        <td class='docblock short'><p>Read the StatusLine, such as <code>HTTP/1.1 200 OK</code>.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.read_uri.html'
-                               title='hyper::http::read_uri'>read_uri</a></td>
-                        <td class='docblock short'><p>Read a <code>RequestUri</code> from a raw stream.</p>
-</td>
-                    </tr>
-                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
-<table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.RawHeaderLine.html'
-                               title='hyper::http::RawHeaderLine'>RawHeaderLine</a></td>
-                        <td class='docblock short'><p>The raw bytes when parsing a header line.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.RequestLine.html'
-                               title='hyper::http::RequestLine'>RequestLine</a></td>
-                        <td class='docblock short'><p><code>request-line   = method SP request-target SP HTTP-version CRLF</code></p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.StatusLine.html'
-                               title='hyper::http::StatusLine'>StatusLine</a></td>
-                        <td class='docblock short'><p><code>status-line = HTTP-version SP status-code SP reason-phrase CRLF</code></p>
-</td>
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.parse_response.html'
+                               title='hyper::http::parse_response'>parse_response</a></td>
+                        <td class='docblock short'>
+                             <p>Parses a response into an Incoming message head.</p>
+
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>

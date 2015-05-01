@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["LastModified","The `LastModified` header field."]]});
+initSidebarItems({"struct":[["LastModified","`Last-Modified` header, defined in RFC7232"]]});

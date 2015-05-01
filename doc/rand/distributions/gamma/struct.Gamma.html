@@ -41,9 +41,9 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rand</a>::<wbr><a href='../index.html'>distributions</a>::<wbr><a href='index.html'>gamma</a>::<wbr><a class='struct' href=''>Gamma</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-1326' href='../../../src/rand/distributions/gamma.rs.html#54-56'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rand</a>::<wbr><a href='../index.html'>distributions</a>::<wbr><a href='index.html'>gamma</a>::<wbr><a class='struct' href=''>Gamma</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-1367' class='srclink' href='../../../src/rand/distributions/gamma.rs.html#53-55' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Gamma {
     // some fields omitted
 }</pre><div class='docblock'><p>The Gamma distribution <code>Gamma(shape, scale)</code> distribution.</p>
@@ -57,8 +57,7 @@
 scale and both <code>k</code> and <code>θ</code> are strictly positive.</p>
 
 <p>The algorithm used is that described by Marsaglia &amp; Tsang 2000[1],
-falling back to directly sampling from an Exponential for <code>shape
-== 1</code>, and using the boosting technique described in [1] for
+falling back to directly sampling from an Exponential for <code>shape == 1</code>, and using the boosting technique described in [1] for
 <code>shape &lt; 1</code>.</p>
 
 <h1 id="example" class='section-header'><a
@@ -74,13 +73,15 @@ falling back to directly sampling from an Exponential for <code>shape
 for Generating Gamma Variables&quot; <em>ACM Trans. Math. Softw.</em> 26, 3
 (September 2000),
 363-372. DOI:<a href="http://doi.acm.org/10.1145/358407.358414">10.1145/358407.358414</a></p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(shape: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>, scale: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(shape: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>, scale: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h4>
 <div class='docblock'><p>Construct an object representing the <code>Gamma(shape, scale)</code>
 distribution.</p>
 
 <p>Panics if <code>shape &lt;= 0</code> or <code>scale &lt;= 0</code>.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rand/distributions/trait.Sample.html' title='rand::distributions::Sample'>Sample</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>&gt; for <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h3><div class='impl-items'><h4 id='method.sample' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.sample' class='fnname'>sample</a>&lt;R: <a class='trait' href='../../../rand/trait.Rng.html' title='rand::Rng'>Rng</a>&gt;(&amp;mut self, rng: &amp;mut R) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a></code></h4>
-</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rand/distributions/trait.IndependentSample.html' title='rand::distributions::IndependentSample'>IndependentSample</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>&gt; for <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h3><div class='impl-items'><h4 id='method.ind_sample' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.ind_sample' class='fnname'>ind_sample</a>&lt;R: <a class='trait' href='../../../rand/trait.Rng.html' title='rand::Rng'>Rng</a>&gt;(&amp;self, rng: &amp;mut R) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a></code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../../rand/distributions/trait.Sample.html' title='rand::distributions::Sample'>Sample</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>&gt; for <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h3><div class='impl-items'><h4 id='method.sample' class='method'><code>fn <a href='../../../rand/distributions/trait.Sample.html#method.sample' class='fnname'>sample</a>&lt;R: <a class='trait' href='../../../rand/trait.Rng.html' title='rand::Rng'>Rng</a>&gt;(&amp;mut self, rng: &amp;mut R) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='../../../rand/distributions/trait.IndependentSample.html' title='rand::distributions::IndependentSample'>IndependentSample</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>&gt; for <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h3><div class='impl-items'><h4 id='method.ind_sample' class='method'><code>fn <a href='../../../rand/distributions/trait.IndependentSample.html#method.ind_sample' class='fnname'>ind_sample</a>&lt;R: <a class='trait' href='../../../rand/trait.Rng.html' title='rand::Rng'>Rng</a>&gt;(&amp;self, rng: &amp;mut R) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a></code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../../rand/distributions/gamma/struct.Gamma.html' title='rand::distributions::gamma::Gamma'>Gamma</a></code></h4>
+<h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `pkg_config` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, pkg_config">
+
+    <title>pkg_config - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'pkg_config', ty: 'mod', relpath: '../'};</script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>pkg_config</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-0' class='srclink' href='../src/pkg_config/lib.rs.html#1-229' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>A build dependency for Cargo libraries to find system artifacts through the
+<code>pkg-config</code> utility.</p>
+
+<p>This library will shell out to <code>pkg-config</code> as part of build scripts and
+probe the system to determine how to link to a specified library. The
+<code>Config</code> structure serves as a method of configuring how <code>pkg-config</code> is
+invoked in a builder style.</p>
+
+<p>A number of environment variables are available to globally configure how
+this crate will invoke <code>pkg-config</code>:</p>
+
+<ul>
+<li><code>PKG_CONFIG_ALLOW_CROSS</code> - if this variable is not set, then <code>pkg-config</code>
+will automatically be disabled for all cross compiles.</li>
+<li><code>FOO_NO_PKG_CONFIG</code> - if set, this will disable running <code>pkg-config</code> when
+probing for the library named <code>foo</code>.</li>
+</ul>
+
+<p>There are also a number of environment variables which can configure how a
+library is linked to (dynamically vs statically). These variables control
+whether the <code>--static</code> flag is passed. Note that this behavior can be
+overridden by configuring explicitly on <code>Config</code>. The variables are checked
+in the following order:</p>
+
+<ul>
+<li><code>FOO_STATIC</code> - pass <code>--static</code> for the library <code>foo</code></li>
+<li><code>FOO_DYNAMIC</code> - do not pass <code>--static</code> for the library <code>foo</code></li>
+<li><code>PKG_CONFIG_ALL_STATIC</code> - pass <code>--static</code> for all libraries</li>
+<li><code>PKG_CONFIG_ALL_DYNAMIC</code> - do not pass <code>--static</code> for all libraries</li>
+</ul>
+
+<p>After running <code>pkg-config</code> all appropriate Cargo metadata will be printed on
+stdout if the search was successful.</p>
+
+<h1 id="example" class='section-header'><a
+                           href="#example">Example</a></h1>
+<p>Find the system library named <code>foo</code>.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>pkg_config</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>pkg_config</span>::<span class='ident'>find_library</span>(<span class='string'>&quot;foo&quot;</span>).<span class='ident'>unwrap</span>();
+}
+</pre>
+
+<p>Configure how library <code>foo</code> is linked to.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>pkg_config</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>pkg_config</span>::<span class='ident'>Config</span>::<span class='ident'>new</span>().<span class='ident'>statik</span>(<span class='boolval'>true</span>).<span class='ident'>find</span>(<span class='string'>&quot;foo&quot;</span>).<span class='ident'>unwrap</span>();
+}
+</pre>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Config.html'
+                               title='pkg_config::Config'>Config</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Library.html'
+                               title='pkg_config::Library'>Library</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.find_library.html'
+                               title='pkg_config::find_library'>find_library</a></td>
+                        <td class='docblock short'>
+                             <p>Simple shortcut for using all default options for finding a library.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.target_supported.html'
+                               title='pkg_config::target_supported'>target_supported</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "pkg_config";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

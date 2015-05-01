@@ -41,9 +41,9 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>mopa</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/mopa/lib.rs.html#16-312'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>mopa</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-0' class='srclink' href='../src/mopa/lib.rs.html#16-373' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p><strong>MOPA: My Own Personal Any.</strong> A macro to implement all the <code>Any</code> methods on your own trait.</p>
 
 <p>You like <code>Any</code>—its ability to store any <code>&#39;static</code> type as a trait object and then downcast it
@@ -81,6 +81,7 @@ to your heart’s content. Simple, huh?</p>
 <p>Oh, by the way, it was actually the person on the bear’s plate. There wasn’t really anything on
 <code>Person</code>’s plate after all.</p>
 <pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>core</span>)]</span>
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='attribute'>#[<span class='ident'>no_link</span>]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>mopa</span>;
 
@@ -166,11 +167,13 @@ types across a variety of libraries. But the question of purpose and suitability
 don’t have a really good example of such a use case here at present. TODO.</p>
 </div><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='macro' href='macro.mopafy!.html'
+                    <tr class=' module-item'>
+                        <td><a class='macro' href='macro.mopafy!.html'
                                title='mopa::mopafy!'>mopafy!</a></td>
-                        <td class='docblock short'><p>The macro for implementing all the <code>Any</code> methods on your own trait.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>The macro for implementing all the <code>Any</code> methods on your own trait.</p>
+
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>

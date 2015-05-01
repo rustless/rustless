@@ -41,10 +41,10 @@
     </nav>
 
     <section id='main' class="content fn">
-<h1 class='fqn'><span class='in-band'><a href='../../../index.html'>libc</a>::<wbr><a href='../../index.html'>funcs</a>::<wbr><a href='../index.html'>c95</a>::<wbr><a href='index.html'>stdlib</a>::<wbr><a class='fn' href=''>exit</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-2210' href='../../../../src/libc/lib.rs.html#4755'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe fn exit(status: <a class='type' href='../../../../libc/types/os/arch/c95/type.c_int.html' title='libc::types::os::arch::c95::c_int'>c_int</a>) -&gt; !</pre><div class='docblock'><p>Exits the running program in a possibly dangerous manner.</p>
+<h1 class='fqn'><span class='in-band'><a href='../../../index.html'>libc</a>::<wbr><a href='../../index.html'>funcs</a>::<wbr><a href='../index.html'>c95</a>::<wbr><a href='index.html'>stdlib</a>::<wbr><a class='fn' href=''>exit</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-3344' class='srclink' href='../../../../src/libc/lib.rs.html#5237' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn exit(status: <a class='type' href='../../../../libc/types/os/arch/c95/type.c_int.html' title='libc::types::os::arch::c95::c_int'>c_int</a>) -&gt; !</pre><div class='docblock'><p>Exits the running program in a possibly dangerous manner.</p>
 
 <h1 id="unsafety" class='section-header'><a
                            href="#unsafety">Unsafety</a></h1>
@@ -60,7 +60,8 @@ fn main() {
     unsafe {
         libc::exit(1);
     }
-}</span><pre id='rust-example-rendered' class='rust '>
+}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {

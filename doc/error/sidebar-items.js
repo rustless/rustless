@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Error","An extension to std::error::Error which provides dynamic downcasting of errors for use in highly generic contexts."]],"macro":[["match_error!",""]]});
+initSidebarItems({"macro":[["match_error!",""]],"trait":[["Error","An extension to std::error::Error which provides dynamic downcasting of errors for use in highly generic contexts."]]});

@@ -41,9 +41,9 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>regex</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/regex/lib.rs.html#11-422'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>regex</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-0' class='srclink' href='../src/regex/lib.rs.html#11-421' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>This crate provides a native implementation of regular expressions that is
 heavily based on RE2 both in syntax and in implementation. Notably,
 backreferences and arbitrary lookahead/lookbehind assertions are not
@@ -164,7 +164,7 @@ in our replacement text:</p>
 <span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?P&lt;y&gt;\d{4})-(?P&lt;m&gt;\d{2})-(?P&lt;d&gt;\d{2})&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>before</span> <span class='op'>=</span> <span class='string'>&quot;2012-03-14, 2013-01-01 and 2014-07-05&quot;</span>;
 <span class='kw'>let</span> <span class='ident'>after</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>replace_all</span>(<span class='ident'>before</span>, <span class='string'>&quot;$m/$d/$y&quot;</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>after</span>.<span class='ident'>as_slice</span>(), <span class='string'>&quot;03/14/2012, 01/01/2013 and 07/05/2014&quot;</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>after</span>, <span class='string'>&quot;03/14/2012, 01/01/2013 and 07/05/2014&quot;</span>);
 </pre>
 
 <p>The <code>replace</code> methods are actually polymorphic in the replacement, which
@@ -229,8 +229,8 @@ with the syntax supported by RE2.</p>
 [xyz]       A character class matching either x, y or z.
 [^xyz]      A character class matching any character except x, y and z.
 [a-z]       A character class matching any character in range a-z.
-\d          Perl character class ([0-9])
-\D          Negated Perl character class ([^0-9])
+\d          digit (\p{Nd})
+\D          not digit
 [:alpha:]   ASCII character class ([A-Za-z])
 [:^alpha:]  Negated ASCII character class ([^A-Za-z])
 \pN         One letter name Unicode character class
@@ -381,102 +381,138 @@ characters in the search text and <code>m</code> is the number of instructions i
 compiled expression.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Captures.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Captures.html'
                                title='regex::Captures'>Captures</a></td>
-                        <td class='docblock short'><p>Captures represents a group of captured strings for a single match.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Captures represents a group of captured strings for a single match.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Error.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Error.html'
                                title='regex::Error'>Error</a></td>
-                        <td class='docblock short'><p>Error corresponds to something that can go wrong while parsing
+                        <td class='docblock short'>
+                             <p>Error corresponds to something that can go wrong while parsing
 a regular expression.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.FindCaptures.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.FindCaptures.html'
                                title='regex::FindCaptures'>FindCaptures</a></td>
-                        <td class='docblock short'><p>An iterator that yields all non-overlapping capture groups matching a
+                        <td class='docblock short'>
+                             <p>An iterator that yields all non-overlapping capture groups matching a
 particular regular expression.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.FindMatches.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.FindMatches.html'
                                title='regex::FindMatches'>FindMatches</a></td>
-                        <td class='docblock short'><p>An iterator over all non-overlapping matches for a particular string.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>An iterator over all non-overlapping matches for a particular string.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.NoExpand.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.NoExpand.html'
                                title='regex::NoExpand'>NoExpand</a></td>
-                        <td class='docblock short'><p>NoExpand indicates literal string replacement.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>NoExpand indicates literal string replacement.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.RegexSplits.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.RegexSplits.html'
                                title='regex::RegexSplits'>RegexSplits</a></td>
-                        <td class='docblock short'><p>Yields all substrings delimited by a regular expression match.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Yields all substrings delimited by a regular expression match.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.RegexSplitsN.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.RegexSplitsN.html'
                                title='regex::RegexSplitsN'>RegexSplitsN</a></td>
-                        <td class='docblock short'><p>Yields at most <code>N</code> substrings delimited by a regular expression match.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Yields at most <code>N</code> substrings delimited by a regular expression match.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.SubCaptures.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.SubCaptures.html'
                                title='regex::SubCaptures'>SubCaptures</a></td>
-                        <td class='docblock short'><p>An iterator over capture groups for a particular match of a regular
+                        <td class='docblock short'>
+                             <p>An iterator over capture groups for a particular match of a regular
 expression.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.SubCapturesPos.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.SubCapturesNamed.html'
+                               title='regex::SubCapturesNamed'>SubCapturesNamed</a></td>
+                        <td class='docblock short'>
+                             <p>An Iterator over named capture groups as a tuple with the group
+name and the value.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.SubCapturesPos.html'
                                title='regex::SubCapturesPos'>SubCapturesPos</a></td>
-                        <td class='docblock short'><p>An iterator over capture group positions for a particular match of a
+                        <td class='docblock short'>
+                             <p>An iterator over capture group positions for a particular match of a
 regular expression.</p>
-</td>
+
+                        </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Regex.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.Regex.html'
                                title='regex::Regex'>Regex</a></td>
-                        <td class='docblock short'><p>A compiled regular expression</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A compiled regular expression</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Replacer.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.Replacer.html'
                                title='regex::Replacer'>Replacer</a></td>
-                        <td class='docblock short'><p>Replacer describes types that can be used to replace matches in a string.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Replacer describes types that can be used to replace matches in a string.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.is_match.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.is_match.html'
                                title='regex::is_match'>is_match</a></td>
-                        <td class='docblock short'><p>Tests if the given regular expression matches somewhere in the text given.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Tests if the given regular expression matches somewhere in the text given.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.quote.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.quote.html'
                                title='regex::quote'>quote</a></td>
-                        <td class='docblock short'><p>Escapes all regular expression meta characters in <code>text</code>.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Escapes all regular expression meta characters in <code>text</code>.</p>
+
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>

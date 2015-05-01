@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Mime","Mime, or Media Type. Encapsulates common registers types."]],"enum":[["Attr",""],["SubLevel",""],["TopLevel",""],["Value",""]],"type":[["Param",""]]});
+initSidebarItems({"enum":[["Attr",""],["SubLevel",""],["TopLevel",""],["Value",""]],"struct":[["Mime","Mime, or Media Type. Encapsulates common registers types."]],"type":[["Param",""]]});

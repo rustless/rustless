@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Type","Message digest (hash) type."]],"struct":[["Hasher","Provides message digest (hash) computation."]],"fn":[["hash","Computes the hash of the `data` with the hash `t`."]]});
+initSidebarItems({"enum":[["Type","Message digest (hash) type."]],"fn":[["hash","Computes the hash of the `data` with the hash `t`."]],"struct":[["Hasher","Provides message digest (hash) computation."]]});

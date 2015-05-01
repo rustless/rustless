@@ -41,73 +41,36 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>jsonway</a>::<wbr><a class='mod' href=''>serializer</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-893' href='../../src/jsonway/serializer.rs.html#1-183'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>jsonway</a>::<wbr><a class='mod' href=''>serializer</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-893' class='srclink' href='../../src/jsonway/serializer.rs.html#1-183' title='goto source code'>[src]</a></span></h1>
 <h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.ObjectScopeSerializer.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.ObjectScopeSerializer.html'
                                title='jsonway::serializer::ObjectScopeSerializer'>ObjectScopeSerializer</a></td>
-                        <td class='docblock short'><p>Provides functionality to create custom JSON presenters for your structs.</p>
+                        <td class='docblock short'>
+                             <p>Provides functionality to create custom JSON presenters for your structs.</p>
 
-<h2 id="example" class='section-header'><a
-                           href="#example">Example</a></h2><pre id='rust-example-rendered' class='rust '>
-<span class='kw'>use</span> <span class='ident'>jsonway</span>::{<span class='self'>self</span>, <span class='ident'>ObjectScopeSerializer</span>};
- 
-<span class='kw'>struct</span> <span class='ident'>User</span> {
-    <span class='ident'>id</span>: <span class='ident'>u64</span>,
-    <span class='ident'>is_admin</span>: <span class='ident'>bool</span>
-}
- 
-<span class='kw'>struct</span> <span class='ident'>Jedi</span> {
-    <span class='ident'>name</span>: <span class='ident'>String</span>,
-    <span class='ident'>secret</span>: <span class='ident'>String</span>
-}
- 
-<span class='kw'>struct</span> <span class='ident'>JediSerializer</span>;
- 
-<span class='kw'>impl</span> <span class='ident'>jsonway</span>::<span class='ident'>ObjectScopeSerializer</span><span class='op'>&lt;</span><span class='ident'>Jedi</span>, <span class='ident'>User</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>JediSerializer</span> {
-    <span class='kw'>fn</span> <span class='ident'>root</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> { <span class='prelude-val'>Some</span>(<span class='string'>&quot;jedi&quot;</span>) }
-    <span class='kw'>fn</span> <span class='ident'>build</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>jedi</span>: <span class='kw-2'>&amp;</span><span class='ident'>Jedi</span>, <span class='ident'>current_user</span>: <span class='kw-2'>&amp;</span><span class='ident'>User</span>, <span class='ident'>json</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>jsonway</span>::<span class='ident'>ObjectBuilder</span>) {
-        <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;name&quot;</span>, <span class='ident'>jedi</span>.<span class='ident'>name</span>.<span class='ident'>to_string</span>());
- 
-        <span class='kw'>if</span> <span class='ident'>current_user</span>.<span class='ident'>is_admin</span> {
-            <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;secret&quot;</span>, <span class='ident'>jedi</span>.<span class='ident'>secret</span>.<span class='ident'>to_string</span>());
-        }
-    }
-}
- 
-<span class='kw'>let</span> <span class='ident'>jedi</span> <span class='op'>=</span> <span class='ident'>Jedi</span> { 
-    <span class='ident'>name</span>: <span class='string'>&quot;Palpatine&quot;</span>.<span class='ident'>to_string</span>(), 
-    <span class='ident'>secret</span>: <span class='string'>&quot;Dark side&quot;</span>.<span class='ident'>to_string</span>() 
-};
-</pre>
-</td>
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.ObjectSerializer.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.ObjectSerializer.html'
                                title='jsonway::serializer::ObjectSerializer'>ObjectSerializer</a></td>
-                        <td class='docblock short'><p>Provides functionality to create custom JSON presenters for your structs.</p>
+                        <td class='docblock short'>
+                             <p>Provides functionality to create custom JSON presenters for your structs.</p>
 
-<h2 id="example" class='section-header'><a
-                           href="#example">Example</a></h2><pre id='rust-example-rendered' class='rust '>
-<span class='kw'>use</span> <span class='ident'>jsonway</span>::{<span class='self'>self</span>, <span class='ident'>ObjectSerializer</span>};
-</pre>
-</td>
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Serializer.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.Serializer.html'
                                title='jsonway::serializer::Serializer'>Serializer</a></td>
-                        <td class='docblock short'><p>Provides functionality to create custom JSON presenters for your structs.</p>
+                        <td class='docblock short'>
+                             <p>Provides functionality to create custom JSON presenters for your structs.</p>
 
-<h2 id="example" class='section-header'><a
-                           href="#example">Example</a></h2><pre id='rust-example-rendered' class='rust '>
-<span class='kw'>use</span> <span class='ident'>jsonway</span>::{<span class='self'>self</span>, <span class='ident'>Serializer</span>};
-</pre>
-</td>
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>

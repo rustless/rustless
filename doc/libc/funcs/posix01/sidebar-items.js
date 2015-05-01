@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["glob",""],["mman",""],["signal",""],["stat_",""],["unistd",""]]});
+initSidebarItems({"mod":[["glob",""],["mman",""],["resource",""],["signal",""],["stat_",""],["unistd",""]]});

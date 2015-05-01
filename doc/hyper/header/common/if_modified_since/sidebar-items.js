@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["IfModifiedSince","The `If-Modified-Since` header field."]]});
+initSidebarItems({"struct":[["IfModifiedSince","`If-Modified-Since` header, defined in RFC7232"]]});

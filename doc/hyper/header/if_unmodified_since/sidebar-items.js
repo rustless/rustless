@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["IfUnmodifiedSince","The `If-Unmodified-Since` header field."]]});
+initSidebarItems({"struct":[["IfUnmodifiedSince","`If-Unmodified-Since` header, defined in RFC7232"]]});

@@ -41,9 +41,9 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>iron</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/iron/lib.rs.html#1-168'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>iron</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-0' class='srclink' href='../src/iron/lib.rs.html#1-157' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>The main crate for Iron.</p>
 
 <h2 id="overview" class='section-header'><a
@@ -57,12 +57,6 @@ approach to ownership in both single threaded and multi threaded contexts.</p>
 load balancer or by running more threads on a more powerful machine. Iron
 avoids the bottlenecks encountered in highly concurrent code by avoiding shared
 writes and locking in the core framework.</p>
-
-<p>Iron is 100% safe code:</p>
-
-<pre><code class="language-sh">$ ack unsafe src | wc
-       0       0       0
-</code></pre>
 
 <h2 id="hello-world" class='section-header'><a
                            href="#hello-world">Hello World</a></h2><pre id='rust-example-rendered' class='rust '>
@@ -100,156 +94,198 @@ middleware. No plugins or middleware are bundled with Iron.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use request::{<a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>};</code></td></tr><tr><td><code>pub use response::<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>;</code></td></tr><tr><td><code>pub use middleware::{<a class='trait' href='../iron/middleware/trait.BeforeMiddleware.html' title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a>, <a class='trait' href='../iron/middleware/trait.AfterMiddleware.html' title='iron::middleware::AfterMiddleware'>AfterMiddleware</a>, <a class='trait' href='../iron/middleware/trait.AroundMiddleware.html' title='iron::middleware::AroundMiddleware'>AroundMiddleware</a>, <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, <a class='struct' href='../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a>};</code></td></tr><tr><td><code>pub use error::<a class='struct' href='../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='error/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='error/index.html'
                                title='iron::error'>error</a></td>
-                        <td class='docblock short'><p>Iron&#39;s error type and associated utilities.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Iron&#39;s error type and associated utilities.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='headers/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='headers/index.html'
                                title='iron::headers'>headers</a></td>
-                        <td class='docblock short'><p>Headers container, and common header fields.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Headers container, and common header fields.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='method/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='method/index.html'
                                title='iron::method'>method</a></td>
-                        <td class='docblock short'><p>HTTP Methods</p>
-</td>
+                        <td class='docblock short'>
+                             <p>HTTP Methods</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='middleware/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='middleware/index.html'
                                title='iron::middleware'>middleware</a></td>
-                        <td class='docblock short'><p>Iron&#39;s Middleware and Handler System</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Iron&#39;s Middleware and Handler System</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='mime/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='mime/index.html'
                                title='iron::mime'>mime</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'>
+                             
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='modifier/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='modifier/index.html'
                                title='iron::modifier'>modifier</a></td>
-                        <td class='docblock short'><p>Re-exports from the Modifier crate.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Re-exports from the Modifier crate.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='modifiers/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='modifiers/index.html'
                                title='iron::modifiers'>modifiers</a></td>
-                        <td class='docblock short'><p>Defines a series of convenience modifiers for editing Responses</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Defines a series of convenience modifiers for editing Responses</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='prelude/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='prelude/index.html'
                                title='iron::prelude'>prelude</a></td>
-                        <td class='docblock short'><p>A module meant to be glob imported when using Iron, for instance:</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A module meant to be glob imported when using Iron, for instance:</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='request/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='request/index.html'
                                title='iron::request'>request</a></td>
-                        <td class='docblock short'><p>Iron&#39;s HTTP Request representation and associated methods.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Iron&#39;s HTTP Request representation and associated methods.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='response/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='response/index.html'
                                title='iron::response'>response</a></td>
-                        <td class='docblock short'><p>Iron&#39;s HTTP Response representation and associated methods.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Iron&#39;s HTTP Response representation and associated methods.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='status/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='status/index.html'
                                title='iron::status'>status</a></td>
-                        <td class='docblock short'><p>Status Codes</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Status Codes</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='typemap/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='typemap/index.html'
                                title='iron::typemap'>typemap</a></td>
-                        <td class='docblock short'><p>Re-exports from the TypeMap crate.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Re-exports from the TypeMap crate.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Headers.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Headers.html'
                                title='iron::Headers'>Headers</a></td>
-                        <td class='docblock short'><p>A map of header fields on requests and responses.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A map of header fields on requests and responses.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Iron.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Iron.html'
                                title='iron::Iron'>Iron</a></td>
-                        <td class='docblock short'><p>The primary entrance point to <code>Iron</code>, a <code>struct</code> to instantiate a new server.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>The primary entrance point to <code>Iron</code>, a <code>struct</code> to instantiate a new server.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.TypeMap.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.TypeMap.html'
                                title='iron::TypeMap'>TypeMap</a></td>
-                        <td class='docblock short'><p>A map keyed by types.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A map keyed by types.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Url.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Url.html'
                                title='iron::Url'>Url</a></td>
-                        <td class='docblock short'><p>HTTP/HTTPS URL type for Iron.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>HTTP/HTTPS URL type for Iron.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Protocol.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.Protocol.html'
                                title='iron::Protocol'>Protocol</a></td>
-                        <td class='docblock short'><p>Protocol used to serve content. Future versions of Iron may add new protocols
+                        <td class='docblock short'>
+                             <p>Protocol used to serve content. Future versions of Iron may add new protocols
 to this enum. Thus you should not exhaustively match on its variants.</p>
-</td>
+
+                        </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Error.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.Error.html'
                                title='iron::Error'>Error</a></td>
-                        <td class='docblock short'><p>An extension to std::error::Error which provides dynamic downcasting of
+                        <td class='docblock short'>
+                             <p>An extension to std::error::Error which provides dynamic downcasting of
 errors for use in highly generic contexts.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Plugin.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.Plugin.html'
                                title='iron::Plugin'>Plugin</a></td>
-                        <td class='docblock short'><p>An interface for plugins that cache values between calls.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>An interface for plugins that cache values between calls.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Set.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.Set.html'
                                title='iron::Set'>Set</a></td>
-                        <td class='docblock short'><p>A trait providing the set and set_mut methods for all types.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A trait providing the set and set_mut methods for all types.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.IronResult.html'
+                    <tr class=' module-item'>
+                        <td><a class='type' href='type.IronResult.html'
                                title='iron::IronResult'>IronResult</a></td>
-                        <td class='docblock short'><p>The Result alias used throughout Iron and in clients of Iron.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>The Result alias used throughout Iron and in clients of Iron.</p>
+
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>

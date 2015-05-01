@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["IfNoneMatch","The `If-None-Match` header defined by HTTP/1.1."]]});
+initSidebarItems({"enum":[["IfNoneMatch","`If-None-Match` header, defined in RFC7232"]]});

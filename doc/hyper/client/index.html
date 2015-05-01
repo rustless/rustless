@@ -41,89 +41,107 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>hyper</a>::<wbr><a class='mod' href=''>client</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-36' href='../../src/hyper/client/mod.rs.html#1-404'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>hyper</a>::<wbr><a class='mod' href=''>client</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-658' class='srclink' href='../../src/hyper/client/mod.rs.html#1-440' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>HTTP Client</p>
 
 <h1 id="usage" class='section-header'><a
                            href="#usage">Usage</a></h1>
 <p>The <code>Client</code> API is designed for most people to make HTTP requests.
 It utilizes the lower level <code>Request</code> API.</p>
-<pre id='rust-example-rendered' class='rust '>
-<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>Client</span>;
 
+<h2 id="get" class='section-header'><a
+                           href="#get">GET</a></h2><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>client</span> <span class='op'>=</span> <span class='ident'>Client</span>::<span class='ident'>new</span>();
 
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>get</span>(<span class='string'>&quot;http://example.domain&quot;</span>).<span class='ident'>send</span>().<span class='ident'>unwrap</span>();
+<span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>get</span>(<span class='string'>&quot;http://example.domain&quot;</span>).<span class='ident'>send</span>().<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>status</span>, <span class='ident'>hyper</span>::<span class='prelude-val'>Ok</span>);
 </pre>
 
-<p>The returned value from is a <code>Response</code>, which provides easy access
-to the <code>status</code>, the <code>headers</code>, and the response body via the <code>Writer</code>
+<p>The returned value is a <code>Response</code>, which provides easy access to
+the <code>status</code>, the <code>headers</code>, and the response body via the <code>Read</code>
 trait.</p>
+
+<h2 id="post" class='section-header'><a
+                           href="#post">POST</a></h2><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>client</span> <span class='op'>=</span> <span class='ident'>Client</span>::<span class='ident'>new</span>();
+
+<span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>post</span>(<span class='string'>&quot;http://exmaple.domain&quot;</span>)
+    .<span class='ident'>body</span>(<span class='string'>&quot;foo=bar&quot;</span>)
+    .<span class='ident'>send</span>()
+    .<span class='ident'>unwrap</span>();
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>status</span>, <span class='ident'>hyper</span>::<span class='prelude-val'>Ok</span>);
+</pre>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use self::<a class='mod'
                                             href='./request/index.html'>request</a>::<a class='struct' href='../../hyper/client/request/struct.Request.html' title='hyper::client::request::Request'>Request</a>;</code></td></tr><tr><td><code>pub use self::<a class='mod'
                                             href='./response/index.html'>response</a>::<a class='struct' href='../../hyper/client/response/struct.Response.html' title='hyper::client::response::Response'>Response</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='request/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='request/index.html'
                                title='hyper::client::request'>request</a></td>
-                        <td class='docblock short'><p>Client Requests</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Client Requests</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='response/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='response/index.html'
                                title='hyper::client::response'>response</a></td>
-                        <td class='docblock short'><p>Client Responses</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Client Responses</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Client.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Client.html'
                                title='hyper::client::Client'>Client</a></td>
-                        <td class='docblock short'><p>A Client to use additional features with Requests.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A Client to use additional features with Requests.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.RequestBuilder.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.RequestBuilder.html'
                                title='hyper::client::RequestBuilder'>RequestBuilder</a></td>
-                        <td class='docblock short'><p>Options for an individual Request.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Options for an individual Request.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.Body.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.Body.html'
                                title='hyper::client::Body'>Body</a></td>
-                        <td class='docblock short'><p>The target enum for the IntoBody trait.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>An enum of possible body types for a Request.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.RedirectPolicy.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.RedirectPolicy.html'
                                title='hyper::client::RedirectPolicy'>RedirectPolicy</a></td>
-                        <td class='docblock short'><p>Behavior regarding how to handle redirects within a Client.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Behavior regarding how to handle redirects within a Client.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.IntoBody.html'
-                               title='hyper::client::IntoBody'>IntoBody</a></td>
-                        <td class='docblock short'><p>A helper trait to allow overloading of the body parameter.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.IntoUrl.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.IntoUrl.html'
                                title='hyper::client::IntoUrl'>IntoUrl</a></td>
-                        <td class='docblock short'><p>A helper trait to convert common objects into a Url.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A helper trait to convert common objects into a Url.</p>
+
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>

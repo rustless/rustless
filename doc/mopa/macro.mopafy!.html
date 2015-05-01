@@ -41,42 +41,31 @@
     </nav>
 
     <section id='main' class="content macro">
-<h1 class='fqn'><span class='in-band'><a href='index.html'>mopa</a>::<wbr><a class='macro' href=''>mopafy!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-4' href='../src/mopa/lib.rs.html#196-312'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'><a href='index.html'>mopa</a>::<wbr><a class='macro' href=''>mopafy!</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-4' class='srclink' href='../src/mopa/lib.rs.html#199-292' title='goto source code'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>mopafy</span> {
     <span class='comment'>// Using libstd like a normal person? Here’s what you want, just a simple `mopafy!(Trait)`.</span>
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span>:<span class='ident'>ty</span>) <span class='op'>=&gt;</span> {
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> {
         <span class='macro'>mopafy</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span>, <span class='ident'>core</span> <span class='op'>=</span> <span class='ident'>std</span>, <span class='ident'>alloc</span> <span class='op'>=</span> <span class='ident'>std</span>);
     };
 
     <span class='comment'>// Not using libstd or liballoc? You can get the &amp;Any and &amp;mut Any methods by specifying what</span>
     <span class='comment'>// libcore is here, e.g. `mopafy!(Trait, core = core)`, but you won’t get the `Box&lt;Any&gt;`</span>
     <span class='comment'>// methods.</span>
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span>:<span class='ident'>ty</span>, <span class='ident'>core</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> {
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span>:<span class='ident'>ident</span>, <span class='ident'>core</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> {
         <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span> {
             <span class='doccomment'>/// Returns true if the boxed type is the same as `T`</span>
-            <span class='attribute'>#[<span class='ident'>stable</span>]</span>
             <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-            <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-                <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>any</span>::<span class='ident'>Any</span>;
-
-                <span class='comment'>// Get TypeId of the type this function is instantiated with</span>
-                <span class='kw'>let</span> <span class='ident'>t</span> <span class='op'>=</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>any</span>::<span class='ident'>TypeId</span>::<span class='ident'>of</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>();
-
-                <span class='comment'>// Get TypeId of the type in the trait object</span>
-                <span class='kw'>let</span> <span class='ident'>boxed</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>get_type_id</span>();
-
-                <span class='comment'>// Compare both TypeIds on equality</span>
-                <span class='ident'>t</span> <span class='op'>==</span> <span class='ident'>boxed</span>
+            <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+                ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>any</span>::<span class='ident'>TypeId</span>::<span class='ident'>of</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>get_type_id</span>()
             }
 
             <span class='doccomment'>/// Returns some reference to the boxed value if it is of type `T`, or</span>
             <span class='doccomment'>/// `None` if it isn&#39;t.</span>
-            <span class='attribute'>#[<span class='ident'>stable</span>]</span>
             <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-            <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>downcast_ref</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+            <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>downcast_ref</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>is</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() {
                     <span class='kw'>unsafe</span> {
                         ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span>::<span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>downcast_ref_unchecked</span>())
@@ -88,21 +77,17 @@
 
             <span class='doccomment'>/// Returns a reference to the boxed value, blindly assuming it to be of type `T`.</span>
             <span class='doccomment'>/// If you are not *absolutely certain* of `T`, you *must not* call this.</span>
-            <span class='attribute'>#[<span class='ident'>unstable</span> <span class='op'>=</span> <span class='string'>&quot;naming conventions around acquiring references may change&quot;</span>]</span>
             <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-            <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>downcast_ref_unchecked</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>T</span> {
-                <span class='comment'>// Get the raw representation of the trait object</span>
-                <span class='kw'>let</span> <span class='ident'>to</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>raw</span>::<span class='ident'>TraitObject</span> <span class='op'>=</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>);
-
-                <span class='comment'>// Extract the data pointer</span>
-                ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>to</span>.<span class='ident'>data</span>)
+            <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>downcast_ref_unchecked</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span><span class='op'>&gt;</span>
+                                                (<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>T</span> {
+                <span class='kw'>let</span> <span class='ident'>trait_object</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>raw</span>::<span class='ident'>TraitObject</span> <span class='op'>=</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>);
+                ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>trait_object</span>.<span class='ident'>data</span>)
             }
 
             <span class='doccomment'>/// Returns some mutable reference to the boxed value if it is of type `T`, or</span>
             <span class='doccomment'>/// `None` if it isn&#39;t.</span>
-            <span class='attribute'>#[<span class='ident'>stable</span>]</span>
             <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-            <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>downcast_mut</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>T</span><span class='op'>&gt;</span> {
+            <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>downcast_mut</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>T</span><span class='op'>&gt;</span> {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>is</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() {
                     <span class='kw'>unsafe</span> {
                         ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span>::<span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>downcast_mut_unchecked</span>())
@@ -114,28 +99,24 @@
 
             <span class='doccomment'>/// Returns a mutable reference to the boxed value, blindly assuming it to be of type `T`.</span>
             <span class='doccomment'>/// If you are not *absolutely certain* of `T`, you *must not* call this.</span>
-            <span class='attribute'>#[<span class='ident'>unstable</span> <span class='op'>=</span> <span class='string'>&quot;naming conventions around acquiring references may change&quot;</span>]</span>
             <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-            <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>downcast_mut_unchecked</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>T</span> {
-                <span class='comment'>// Get the raw representation of the trait object</span>
-                <span class='kw'>let</span> <span class='ident'>to</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>raw</span>::<span class='ident'>TraitObject</span> <span class='op'>=</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>);
-
-                <span class='comment'>// Extract the data pointer</span>
-                ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>to</span>.<span class='ident'>data</span>)
+            <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>downcast_mut_unchecked</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span><span class='op'>&gt;</span>
+                                                (<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>T</span> {
+                <span class='kw'>let</span> <span class='ident'>trait_object</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>raw</span>::<span class='ident'>TraitObject</span> <span class='op'>=</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>);
+                ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>trait_object</span>.<span class='ident'>data</span>)
             }
         }
     };
 
     <span class='comment'>// Not using libstd? You can get the Box&lt;Any&gt; methods by specifying what liballoc is here,</span>
     <span class='comment'>// e.g. `mopafy!(Trait, alloc = alloc)`</span>
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span>:<span class='ident'>ty</span>, <span class='ident'>core</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>:<span class='ident'>ident</span>, <span class='ident'>alloc</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> {
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span>:<span class='ident'>ident</span>, <span class='ident'>core</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>:<span class='ident'>ident</span>, <span class='ident'>alloc</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> {
         <span class='macro'>mopafy</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span>, <span class='ident'>core</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>);
 
         <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span> {
             <span class='doccomment'>/// Returns the boxed value if it is of type `T`, or `Err(Self)` if it isn&#39;t.</span>
             <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-            <span class='attribute'>#[<span class='ident'>stable</span>]</span>
-            <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>downcast</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;</span>)
+            <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>downcast</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span><span class='op'>&gt;</span>(<span class='self'>self</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;</span>)
                     <span class='op'>-&gt;</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>,
                                                ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;&gt;</span> {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>is</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() {
@@ -150,14 +131,10 @@
             <span class='doccomment'>/// Returns the boxed value, blindly assuming it to be of type `T`.</span>
             <span class='doccomment'>/// If you are not *absolutely certain* of `T`, you *must not* call this.</span>
             <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-            <span class='attribute'>#[<span class='ident'>unstable</span> <span class='op'>=</span> <span class='string'>&quot;method may be renamed with respect to other downcasting methods&quot;</span>]</span>
-            <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>downcast_unchecked</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;</span>)
+            <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>downcast_unchecked</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trait_</span><span class='op'>&gt;</span>(<span class='self'>self</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;</span>)
                     <span class='op'>-&gt;</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>alloc</span>::<span class='ident'>boxed</span>::<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-                <span class='comment'>// Get the raw representation of the trait object</span>
-                <span class='kw'>let</span> <span class='ident'>to</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>raw</span>::<span class='ident'>TraitObject</span> <span class='op'>=</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>);
-
-                <span class='comment'>// Extract the data pointer</span>
-                ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>to</span>.<span class='ident'>data</span>)
+                <span class='kw'>let</span> <span class='ident'>trait_object</span>: ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>raw</span>::<span class='ident'>TraitObject</span> <span class='op'>=</span> ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>);
+                ::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>core</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>trait_object</span>.<span class='ident'>data</span>)
             }
         }
     };

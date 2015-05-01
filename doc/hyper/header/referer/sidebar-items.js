@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Referer","The `Referer` header."]]});
+initSidebarItems({"struct":[["Referer","`Referer` header, defined in RFC7231"]]});

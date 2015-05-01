@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["TransferEncoding","The `Transfer-Encoding` header."]]});
+initSidebarItems({"struct":[["TransferEncoding","`Transfer-Encoding` header, defined in RFC7230"]]});

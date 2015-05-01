@@ -41,20 +41,22 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>log</a>::<wbr><a class='struct' href=''>LogRecord</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-868' href='../src/log/lib.rs.html#412-416'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>log</a>::<wbr><a class='struct' href=''>LogRecord</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-863' class='srclink' href='../src/log/lib.rs.html#424-428' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct LogRecord&lt;'a&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>The &quot;payload&quot; of a log message.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a&gt; <a class='struct' href='../log/struct.LogRecord.html' title='log::LogRecord'>LogRecord</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(level: <a class='enum' href='../log/enum.LogLevel.html' title='log::LogLevel'>LogLevel</a>, location: &amp;'a <a class='struct' href='../log/struct.LogLocation.html' title='log::LogLocation'>LogLocation</a>, args: <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Arguments.html' title='core::fmt::Arguments'>Arguments</a>&lt;'a&gt;) -&gt; <a class='struct' href='../log/struct.LogRecord.html' title='log::LogRecord'>LogRecord</a>&lt;'a&gt;</code></h4>
-<div class='docblock'><p>Creates a new <code>LogRecord</code>.</p>
-</div><h4 id='method.args' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.args' class='fnname'>args</a>(&amp;self) -&gt; &amp;<a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Arguments.html' title='core::fmt::Arguments'>Arguments</a>&lt;'a&gt;</code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../log/struct.LogRecord.html' title='log::LogRecord'>LogRecord</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.args' class='method'><code>fn <a href='#method.args' class='fnname'>args</a>(&amp;self) -&gt; &amp;<a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Arguments.html' title='core::fmt::Arguments'>Arguments</a>&lt;'a&gt;</code></h4>
 <div class='docblock'><p>The message body.</p>
-</div><h4 id='method.location' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.location' class='fnname'>location</a>(&amp;self) -&gt; &amp;<a class='struct' href='../log/struct.LogLocation.html' title='log::LogLocation'>LogLocation</a></code></h4>
+</div><h4 id='method.metadata' class='method'><code>fn <a href='#method.metadata' class='fnname'>metadata</a>(&amp;self) -&gt; &amp;<a class='struct' href='../log/struct.LogMetadata.html' title='log::LogMetadata'>LogMetadata</a></code></h4>
+<div class='docblock'><p>Metadata about the log directive.</p>
+</div><h4 id='method.location' class='method'><code>fn <a href='#method.location' class='fnname'>location</a>(&amp;self) -&gt; &amp;<a class='struct' href='../log/struct.LogLocation.html' title='log::LogLocation'>LogLocation</a></code></h4>
 <div class='docblock'><p>The location of the log directive.</p>
-</div><h4 id='method.level' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.level' class='fnname'>level</a>(&amp;self) -&gt; <a class='enum' href='../log/enum.LogLevel.html' title='log::LogLevel'>LogLevel</a></code></h4>
+</div><h4 id='method.level' class='method'><code>fn <a href='#method.level' class='fnname'>level</a>(&amp;self) -&gt; <a class='enum' href='../log/enum.LogLevel.html' title='log::LogLevel'>LogLevel</a></code></h4>
 <div class='docblock'><p>The verbosity level of the message.</p>
+</div><h4 id='method.target' class='method'><code>fn <a href='#method.target' class='fnname'>target</a>(&amp;self) -&gt; &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<div class='docblock'><p>The name of the target of the directive.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 

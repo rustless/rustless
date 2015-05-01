@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Location","The `Location` header."]]});
+initSidebarItems({"struct":[["Location","`Location` header, defined in RFC7231"]]});

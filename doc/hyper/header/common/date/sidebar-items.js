@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Date","The `Date` header field."]]});
+initSidebarItems({"struct":[["Date","`Date` header, defined in RFC7231"]]});

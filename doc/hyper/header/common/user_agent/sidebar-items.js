@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["UserAgent","The `User-Agent` header field."]]});
+initSidebarItems({"struct":[["UserAgent","`User-Agent` header, defined in RFC7231"]]});

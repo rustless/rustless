@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Items",""]],"enum":[["AdditionalKind",""],["ItemsKind",""]]});
+initSidebarItems({"enum":[["AdditionalKind",""],["ItemsKind",""]],"struct":[["Items",""]]});

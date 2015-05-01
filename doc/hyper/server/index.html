@@ -41,50 +41,79 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>hyper</a>::<wbr><a class='mod' href=''>server</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-29233' href='../../src/hyper/server/mod.rs.html#1-181'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>hyper</a>::<wbr><a class='mod' href=''>server</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+        </span><a id='src-29580' class='srclink' href='../../src/hyper/server/mod.rs.html#1-329' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>HTTP Server</p>
+
+<h1 id="example" class='section-header'><a
+                           href="#example">Example</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>server</span>::{<span class='ident'>Server</span>, <span class='ident'>Request</span>, <span class='ident'>Response</span>};
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>status</span>::<span class='ident'>StatusCode</span>;
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>uri</span>::<span class='ident'>RequestUri</span>;
+
+<span class='kw'>let</span> <span class='ident'>server</span> <span class='op'>=</span> <span class='ident'>Server</span>::<span class='ident'>http</span>(<span class='op'>|</span><span class='ident'>req</span>: <span class='ident'>Request</span>, <span class='kw-2'>mut</span> <span class='ident'>res</span>: <span class='ident'>Response</span><span class='op'>|</span> {
+    <span class='op'>*</span><span class='ident'>res</span>.<span class='ident'>status_mut</span>() <span class='op'>=</span> <span class='kw'>match</span> (<span class='ident'>req</span>.<span class='ident'>method</span>, <span class='ident'>req</span>.<span class='ident'>uri</span>) {
+        (<span class='ident'>hyper</span>::<span class='ident'>Get</span>, <span class='ident'>RequestUri</span>::<span class='ident'>AbsolutePath</span>(<span class='kw-2'>ref</span> <span class='ident'>path</span>)) <span class='kw'>if</span> <span class='ident'>path</span> <span class='op'>==</span> <span class='string'>&quot;/&quot;</span>  <span class='op'>=&gt;</span> {
+            <span class='ident'>StatusCode</span>::<span class='prelude-val'>Ok</span>
+        },
+        (<span class='ident'>hyper</span>::<span class='ident'>Get</span>, _) <span class='op'>=&gt;</span> <span class='ident'>StatusCode</span>::<span class='ident'>NotFound</span>,
+        _ <span class='op'>=&gt;</span> <span class='ident'>StatusCode</span>::<span class='ident'>MethodNotAllowed</span>
+    };
+
+    <span class='ident'>res</span>.<span class='ident'>start</span>().<span class='ident'>unwrap</span>().<span class='ident'>end</span>().<span class='ident'>unwrap</span>();
+}).<span class='ident'>listen</span>(<span class='string'>&quot;0.0.0.0:8080&quot;</span>).<span class='ident'>unwrap</span>();
+</pre>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use self::<a class='mod'
                                             href='./request/index.html'>request</a>::<a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>;</code></td></tr><tr><td><code>pub use self::<a class='mod'
                                             href='./response/index.html'>response</a>::<a class='struct' href='../../hyper/server/response/struct.Response.html' title='hyper::server::response::Response'>Response</a>;</code></td></tr><tr><td><code>pub use net::{<a class='enum' href='../../hyper/net/enum.Fresh.html' title='hyper::net::Fresh'>Fresh</a>, <a class='enum' href='../../hyper/net/enum.Streaming.html' title='hyper::net::Streaming'>Streaming</a>};</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='request/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='request/index.html'
                                title='hyper::server::request'>request</a></td>
-                        <td class='docblock short'><p>Server Requests</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Server Requests</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='response/index.html'
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='response/index.html'
                                title='hyper::server::response'>response</a></td>
-                        <td class='docblock short'><p>Server Responses</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Server Responses</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Listening.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Listening.html'
                                title='hyper::server::Listening'>Listening</a></td>
-                        <td class='docblock short'><p>A listening server, which can later be closed.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A listening server, which can later be closed.</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Server.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Server.html'
                                title='hyper::server::Server'>Server</a></td>
-                        <td class='docblock short'><p>A server can listen on a TCP socket.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A server can listen on a TCP socket.</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Handler.html'
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.Handler.html'
                                title='hyper::server::Handler'>Handler</a></td>
-                        <td class='docblock short'><p>A handler that can handle incoming requests for a server.</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A handler that can handle incoming requests for a server.</p>
+
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>

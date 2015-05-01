@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["array_builder",""],["array_serializer",""],["mutable_json",""],["object_builder",""],["serializer",""]],"fn":[["array",""],["object","Create and return new ObjectBuilder"]]});
+initSidebarItems({"fn":[["array",""],["object","Create and return new ObjectBuilder"]],"mod":[["array_builder",""],["array_serializer",""],["mutable_json",""],["object_builder",""],["serializer",""]]});

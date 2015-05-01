@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ContentType","The `Content-Type` header."]]});
+initSidebarItems({"struct":[["ContentType","`Content-Type` header, defined in RFC7231"]]});
