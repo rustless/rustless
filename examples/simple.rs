@@ -1,4 +1,3 @@
-#![feature(core)]
 #![feature(plugin)]
 
 #![plugin(dsl_macros)]
@@ -8,7 +7,7 @@ extern crate rustless;
 
 extern crate iron;
 extern crate url;
-extern crate "rustc-serialize" as serialize;
+extern crate rustc_serialize as serialize;
 extern crate valico;
 extern crate cookie;
 
@@ -23,7 +22,7 @@ use rustless::batteries::swagger;
 use rustless::batteries::cookie::CookieExt;
 use rustless::{Nesting};
 
-#[derive(Debug, Copy)]
+#[derive(Debug)]
 pub struct UnauthorizedError;
 
 impl error::Error for UnauthorizedError {
@@ -93,13 +92,13 @@ fn main() {
 
                 match params.find("token") {
                     // We can unwrap() safely because token in validated already
-                    Some(token) => if token.as_string().unwrap().as_slice() == "password1" { return Ok(()) },
+                    Some(token) => if token.as_string().unwrap() == "password1" { return Ok(()) },
                     None => ()
                 }
 
                 // Fire error from callback is token is wrong
                 return Err(rustless::ErrorResponse{
-                    error: Box::new(UnauthorizedError) as Box<Error>,
+                    error: Box::new(UnauthorizedError) as Box<Error + Send>,
                     response: None
                 })
 

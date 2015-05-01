@@ -32,7 +32,7 @@ pub trait Request: fmt::Debug + ::Extensible {
     fn body(&self) -> &Body;
     fn body_mut(&mut self) -> &mut Body;
 
-    fn read_to_end(&mut self) -> Result<Option<String>, Box<errors::Error>>;
+    fn read_to_end(&mut self) -> Result<Option<String>, Box<errors::Error + Send>>;
 
     fn is_json_body(&self) -> bool {
         self.headers().get::<header::ContentType>().map_or(false, |ct| media::is_json(&ct.0))

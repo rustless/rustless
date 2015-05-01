@@ -84,11 +84,11 @@ impl Api {
     }
 
     pub fn error_formatter<F: 'static>(&mut self, formatter: F)
-    where F: Fn(&Box<Error + 'static>, &media::Media) -> Option<backend::Response> + Send+Sync {
+    where F: Fn(&errors::Error, &media::Media) -> Option<backend::Response> + Send+Sync {
         self.error_formatters.push(Box::new(formatter));
     }
 
-    fn handle_error(&self, err: &Box<Error>, media: &media::Media) -> Option<backend::Response>  {
+    fn handle_error(&self, err: &errors::Error, media: &media::Media) -> Option<backend::Response>  {
         for err_formatter in self.error_formatters.iter() {
             match err_formatter(err, media) {
                 Some(resp) => return Some(resp),
@@ -123,7 +123,7 @@ impl framework::ApiHandler for Api {
         // Check prefix
         let mut rest_path = match self.prefix.as_ref() {
             Some(prefix) => {
-                if rest_path.starts_with(prefix.as_slice()) {
+                if rest_path.starts_with(&prefix[..]) {
                     path::normalize(&rest_path[(prefix.len())..])
                 } else {
                    return Err(error_response!(errors::NotMatch))
@@ -142,7 +142,7 @@ impl framework::ApiHandler for Api {
 
             match versioning {
                 &Versioning::Path => {
-                    if rest_path.starts_with(version.as_slice()) {
+                    if rest_path.starts_with(&version[..]) {
                         rest_path = path::normalize(&rest_path[(version.len())..])
                     } else {
                        return Err(error_response!(errors::NotMatch))
@@ -150,7 +150,7 @@ impl framework::ApiHandler for Api {
                 },
                 &Versioning::Param(ref param_name) => {
                     match params.find(param_name) {
-                        Some(obj) if obj.is_string() && obj.as_string().unwrap() == version.as_slice() => (),
+                        Some(obj) if obj.is_string() && obj.as_string().unwrap() == &version[..] => (),
                         _ => return Err(error_response!(errors::NotMatch))
                     }
                 },
@@ -162,7 +162,7 @@ impl framework::ApiHandler for Api {
                             for qual in quals.iter() {
                                 match media::Media::from_vendor(&qual.item) {
                                     Some(media) => {
-                                        if media.vendor.as_slice() == *vendor &&
+                                        if &media.vendor[..] == *vendor &&
                                            media.version.is_some() &&
                                            media.version.as_ref().unwrap() == version {
                                             matched_media = Some(media);
@@ -200,7 +200,7 @@ impl framework::ApiHandler for Api {
             if err_resp.response.is_some() {
                 err_resp
             } else {
-                let resp = self.handle_error(&err_resp.error, &self.extract_media(req).unwrap_or_else(|| media::Media::default()));
+                let resp = self.handle_error(&*err_resp.error, &self.extract_media(req).unwrap_or_else(|| media::Media::default()));
                 errors::ErrorResponse {
                     error: err_resp.error,
                     response: resp

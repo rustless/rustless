@@ -3,12 +3,11 @@ use valico::json_dsl;
 use collections;
 use serialize::json::{self, ToJson};
 use jsonway::{self, MutableJson};
-use framework::{self, Nesting};
+use framework::{self, Nesting, ApiHandler};
 use server::mime;
 use server::header;
 use server::method;
 
-#[derive(Copy)]
 #[allow(dead_code)]
 /// The transfer protocol for the operation. Values MUST be from the list: "http", "https", "ws", "wss".
 /// The value overrides the Swagger Object schemes definition.
@@ -204,7 +203,6 @@ impl json::ToJson for Param {
     }
 }
 
-#[derive(Copy)]
 pub struct SwaggerSpecKey;
 impl ::typemap::Key for SwaggerSpecKey {
     type Value = json::Json;
@@ -293,7 +291,7 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
 
             let mut base_path = "/".to_string();
             if app.root_api.prefix.is_some() {
-                base_path.push_str(app.root_api.prefix.as_ref().unwrap().as_slice());
+                base_path.push_str(&app.root_api.prefix.as_ref().unwrap());
             }
             if app.root_api.version.is_some() {
                 match app.root_api.version.as_ref().unwrap() {
@@ -301,7 +299,7 @@ pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
                         if base_path.len() > 1 {
                             base_path.push_str("/")
                         }
-                        base_path.push_str(version.as_slice());
+                        base_path.push_str(&version);
                     },
                     _ => ()
                 }
@@ -409,7 +407,7 @@ pub fn create_api(path: &str) -> framework::Api {
             docs.get("", |endpoint| {
                 endpoint.summary("Get Swagger 2.0 specification of this API");
                 endpoint.handle(|mut client, _params| {
-                    client.set_header(header::AccessControlAllowOrigin::AllowStar);
+                    client.set_header(header::AccessControlAllowOrigin::Any);
                     let swagger_spec = client.app.ext.get::<SwaggerSpecKey>();
                     if swagger_spec.is_some() {
                         client.json(swagger_spec.unwrap())
@@ -430,19 +428,20 @@ struct WalkContext<'a> {
 
 /// Walks through the tree and collects the info about Endpoints
 fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuilder, handlers: &framework::ApiHandlers) {
-    for handler in handlers.iter() {
+    for handler_ in handlers.iter() {
+        let handler = &**handler_ as &framework::ApiHandler;
         if handler.is::<framework::Api>() {
             let mut path = context.path.to_string();
 
             let api = handler.downcast_ref::<framework::Api>().unwrap();
             if api.prefix.is_some() {
-                path.push_str(api.prefix.as_ref().unwrap().as_slice());
+                path.push_str(&api.prefix.as_ref().unwrap());
             }
 
             if api.version.is_some() {
                 match api.version.as_ref().unwrap() {
                     &framework::Version{ref version, versioning: framework::Versioning::Path} => {
-                        path.push_str(version.as_slice());
+                        path.push_str(&version);
                         path.push_str("/");
                     },
                     _ => ()
@@ -450,7 +449,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
             }
 
             fill_paths(WalkContext{
-                path: path.as_slice(),
+                path: &path,
                 params: context.params.clone()
             }, paths, &api.handlers);
 
@@ -458,13 +457,13 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
 
             let mut path = context.path.to_string();
             let namespace = handler.downcast_ref::<framework::Namespace>().unwrap();
-            path.push_str(("/".to_string() + encode_path_string(&namespace.path).as_slice()).as_slice());
+            path.push_str(&("/".to_string() + &encode_path_string(&namespace.path)));
 
             let mut params = context.params.clone();
             params.append(&mut extract_params(&namespace.coercer, &namespace.path));
 
             fill_paths(WalkContext{
-                path: path.as_slice(),
+                path: &path,
                 params: params,
             }, paths, &namespace.handlers);
 
@@ -473,14 +472,14 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
             let endpoint = handler.downcast_ref::<framework::Endpoint>().unwrap();
 
             if endpoint.path.path.len() > 0 {
-                path.push_str(("/".to_string() + encode_path_string(&endpoint.path).as_slice()).as_slice());
+                path.push_str(&("/".to_string() + &encode_path_string(&endpoint.path)));
             }
 
             let definition = build_endpoint_definition(endpoint, &mut context);
 
             let method = format!("{:?}", endpoint.method).to_ascii_lowercase();
             let exists = {
-                let maybe_path_obj = paths.object.get_mut(path.as_slice());
+                let maybe_path_obj = paths.object.get_mut(&path);
                 if maybe_path_obj.is_some() {
                     let path_obj = maybe_path_obj.unwrap().as_object_mut().unwrap();
                     path_obj.insert(method.to_string(), definition.to_json());
@@ -491,7 +490,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
             };
 
             if !exists {
-                paths.object(path.as_slice(), |path_item| {
+                paths.object(&path, |path_item| {
                     path_item.set(method.clone(), definition.to_json());
                     path_item.array("parameters", |parameters| {
                         for param in context.params.iter() {
@@ -639,7 +638,7 @@ fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkC
 /// Encodes path string to Swagger 2.0 format (e.g. '/user/:user_id' becomes '/user/{user_id}')
 fn encode_path_string(path: &framework::Path) -> String {
     let ref original_path = path.path;
-    return framework::path::MATCHER.replace_all(original_path.as_slice(), "{$1}");
+    return framework::path::MATCHER.replace_all(&original_path, "{$1}");
 }
 
 /// Converts `valico::Param` into Swagger's ParamType

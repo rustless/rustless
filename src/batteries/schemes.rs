@@ -10,7 +10,8 @@ impl typemap::Key for SchemesScope {
 }
 
 fn build_schemes(handlers: &mut framework::ApiHandlers, scope: &mut json_schema::Scope) -> Result<(), json_schema::SchemaError> {
-    for handler in handlers.iter_mut() {
+    for handler_ in handlers.iter_mut() {
+        let mut handler = &mut **handler_ as &mut framework::ApiHandler;
         if handler.is::<framework::Api>() {
             let api = handler.downcast_mut::<framework::Api>().unwrap();
             try!(build_schemes(&mut api.handlers, scope))

@@ -35,7 +35,7 @@ pub struct CookieDecodeMiddleware {
 
 impl iron::BeforeMiddleware for CookieDecodeMiddleware {
     fn before(&self, req: &mut iron::Request) -> iron::IronResult<()> {
-        let token = self.secret_token.as_slice();
+        let token = &self.secret_token;
         let jar = req.headers().get::<header::Cookie>()
             .map(|cookies| cookies.to_cookie_jar(token))
             .unwrap_or_else(|| cookie::CookieJar::new(token));

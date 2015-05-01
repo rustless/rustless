@@ -49,12 +49,12 @@ impl<'a> Request for SimpleRequest {
         return &mut self.body;
     }
 
-    fn read_to_end(&mut self) -> Result<Option<String>, Box<errors::Error>> {
+    fn read_to_end(&mut self) -> Result<Option<String>, Box<errors::Error + Send>> {
         let mut bytes = Vec::new();
         self.body.read_to_end(&mut bytes).unwrap();
         String::from_utf8(bytes)
             .map(|body| Some(body))
-            .map_err(|err| Box::new(err) as Box<errors::Error>)
+            .map_err(|err| Box::new(err) as Box<errors::Error + Send>)
     }
 }
 

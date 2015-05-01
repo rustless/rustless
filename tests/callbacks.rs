@@ -45,13 +45,13 @@ fn it_invokes_callbacks() {
             admin_ns.after_validation(|_client, params| {
                 match params.find(&"token".to_string()) {
                     // We can.unwrap() safely because token in validated already
-                    Some(token) => if token.as_string().unwrap().as_slice() == "password1" { return Ok(()) },
+                    Some(token) => if token.as_string().unwrap() == "password1" { return Ok(()) },
                     None => ()
                 }
 
                 // Fire error from callback is token is wrong
                 return Err(rustless::ErrorResponse{
-                    error: Box::new(UnauthorizedError) as Box<Error>,
+                    error: Box::new(UnauthorizedError) as Box<Error + Send>,
                     response: None
                 })
             });

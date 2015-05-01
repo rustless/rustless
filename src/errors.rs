@@ -6,18 +6,18 @@ use valico;
 use super::backend;
 
 pub struct ErrorResponse {
-    pub error: Box<Error>,
+    pub error: Box<Error + Send>,
     pub response: Option<backend::Response>
 }
 
 pub struct StrictErrorResponse {
-    pub error: Box<Error>,
+    pub error: Box<Error + Send>,
     pub response: backend::Response
 }
 
 macro_rules! error_response{
     ($error:expr) => ($crate::errors::ErrorResponse{
-        error: Box::new($error) as Box<$crate::errors::Error>,
+        error: Box::new($error) as Box<$crate::errors::Error + Send>,
         response: None
     })
 }
@@ -46,15 +46,15 @@ macro_rules! impl_basic_err {
     }
 }
 
-#[derive(Debug, Copy)]
+#[derive(Debug)]
 pub struct NotMatch;
 impl_basic_err!(NotMatch, "NotMatch");
 
-#[derive(Debug, Copy)]
+#[derive(Debug)]
 pub struct NotFound;
 impl_basic_err!(NotFound, "NotFound");
 
-#[derive(Debug, Copy)]
+#[derive(Debug)]
 pub struct QueryString;
 impl_basic_err!(QueryString, "QueryString");
 
@@ -82,6 +82,6 @@ impl_basic_err!(Body, "Body");
 pub struct File(pub io::Error);
 impl_basic_err!(File, "File");
 
-#[derive(Debug, Copy)]
+#[derive(Debug)]
 pub struct NotAcceptable;
 impl_basic_err!(NotAcceptable, "NotAcceptable");

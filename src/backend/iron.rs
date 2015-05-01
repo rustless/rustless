@@ -31,7 +31,7 @@ impl WrapUrl for url::Url {
 }
 
 impl backend::AsUrl for Url {
-    fn scheme(&self) -> &str { self.scheme.as_slice() }
+    fn scheme(&self) -> &str { &self.scheme }
     fn host(&self) -> &url::Host { &self.host }
     fn port(&self) -> &u16 { &self.port }
     fn path(&self) -> &Vec<String> { &self.path }
@@ -48,8 +48,8 @@ impl<'a, 'b> backend::Request for iron::Request<'a, 'b> {
     fn url(&self) -> &backend::AsUrl { &self.url }
     fn body(&self) -> &request::Body { &self.body }
     fn body_mut(&mut self) -> &mut request::Body { &mut self.body }
-    fn read_to_end(&mut self) -> Result<Option<String>, Box<errors::Error>> {
-        self.get::<bodyparser::Raw>().map_err(|err| Box::new(err) as Box<errors::Error>)
+    fn read_to_end(&mut self) -> Result<Option<String>, Box<errors::Error + Send>> {
+        self.get::<bodyparser::Raw>().map_err(|err| Box::new(err) as Box<errors::Error + Send>)
     }
 }
 
