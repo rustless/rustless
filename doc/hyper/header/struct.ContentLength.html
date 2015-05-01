@@ -44,10 +44,10 @@
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='struct' href=''>ContentLength</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
         </span><a id='src-11936' class='srclink' href='../../src/hyper/header/common/mod.rs.html#211' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct ContentLength(pub <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>);</pre><div class='docblock'><p><code>Content-Length</code> header, defined in
+<pre class='rust struct'>pub struct ContentLength(pub <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>);</pre><div class='docblock'><p><code>Content-Length</code>`Content-Length` header, defined in
 <a href="http://tools.ietf.org/html/rfc7230#section-3.3.2">RFC7230</a></p>
 
-<p>When a message does not have a <code>Transfer-Encoding</code> header field, a
+<p>When a message does not have a <code>Transfer-Encoding</code>`Transfer-Encoding` header field, a
 Content-Length header field can provide the anticipated size, as a
 decimal number of octets, for a potential payload body.  For messages
 that do include a payload body, the Content-Length field-value
@@ -64,7 +64,7 @@ representation.</p>
 <h1 id="example-values" class='section-header'><a
                            href="#example-values">Example values</a></h1>
 <ul>
-<li><code>3495</code></li>
+<li><code>3495</code>`3495`</li>
 </ul>
 </div><h2 id='deref-methods'>Methods from <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</h2><div class='impl-items'><h4 id='method.min_value' class='method'><code>fn <a href='#method.min_value' class='fnname'>min_value</a>() -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
 <div class='docblock'><p>Returns the smallest value that can be represented by this integer type.</p>
@@ -84,10 +84,10 @@ representation.</p>
 
 <h1 id="return-value" class='section-header'><a
                            href="#return-value">Return value</a></h1>
-<p><code>Err(ParseIntError)</code> if the string did not represent a valid number.
-Otherwise, <code>Ok(n)</code> where <code>n</code> is the integer represented by <code>src</code>.</p>
+<p><code>Err(ParseIntError)</code>`Err(ParseIntError)<code>if the string did not represent a valid number. Otherwise,</code>` if the string did not represent a valid number.
+Otherwise, <code>Ok(n)</code>`Ok(n)<code>where</code>` where <code>n</code>`n<code>is the integer represented by</code>` is the integer represented by <code>src</code>`src`.</p>
 </div><h4 id='method.count_ones' class='method'><code>fn <a href='#method.count_ones' class='fnname'>count_ones</a>(self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
-<div class='docblock'><p>Returns the number of ones in the binary representation of <code>self</code>.</p>
+<div class='docblock'><p>Returns the number of ones in the binary representation of <code>self</code>`self`.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -96,7 +96,7 @@ Otherwise, <code>Ok(n)</code> where <code>n</code> is the integer represented by
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>count_ones</span>(), <span class='number'>3</span>);
 </pre>
 </div><h4 id='method.count_zeros' class='method'><code>fn <a href='#method.count_zeros' class='fnname'>count_zeros</a>(self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
-<div class='docblock'><p>Returns the number of zeros in the binary representation of <code>self</code>.</p>
+<div class='docblock'><p>Returns the number of zeros in the binary representation of <code>self</code>`self`.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -106,7 +106,7 @@ Otherwise, <code>Ok(n)</code> where <code>n</code> is the integer represented by
 </pre>
 </div><h4 id='method.leading_zeros' class='method'><code>fn <a href='#method.leading_zeros' class='fnname'>leading_zeros</a>(self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
 <div class='docblock'><p>Returns the number of leading zeros in the binary representation
-of <code>self</code>.</p>
+of <code>self</code>`self`.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -116,7 +116,7 @@ of <code>self</code>.</p>
 </pre>
 </div><h4 id='method.trailing_zeros' class='method'><code>fn <a href='#method.trailing_zeros' class='fnname'>trailing_zeros</a>(self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>
 <div class='docblock'><p>Returns the number of trailing zeros in the binary representation
-of <code>self</code>.</p>
+of <code>self</code>`self`.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -125,7 +125,7 @@ of <code>self</code>.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>trailing_zeros</span>(), <span class='number'>3</span>);
 </pre>
 </div><h4 id='method.rotate_left' class='method'><code>fn <a href='#method.rotate_left' class='fnname'>rotate_left</a>(self, n: <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Shifts the bits to the left by a specified amount, <code>n</code>,
+<div class='docblock'><p>Shifts the bits to the left by a specified amount, <code>n</code>`n`,
 wrapping the truncated bits to the end of the resulting integer.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -136,7 +136,7 @@ wrapping the truncated bits to the end of the resulting integer.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>n</span>.<span class='ident'>rotate_left</span>(<span class='number'>12</span>), <span class='ident'>m</span>);
 </pre>
 </div><h4 id='method.rotate_right' class='method'><code>fn <a href='#method.rotate_right' class='fnname'>rotate_right</a>(self, n: <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Shifts the bits to the right by a specified amount, <code>n</code>,
+<div class='docblock'><p>Shifts the bits to the right by a specified amount, <code>n</code>`n`,
 wrapping the truncated bits to the beginning of the resulting
 integer.</p>
 
@@ -190,7 +190,7 @@ swapped.</p>
 }
 </pre>
 </div><h4 id='method.to_be' class='method'><code>fn <a href='#method.to_be' class='fnname'>to_be</a>(self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Converts <code>self</code> to big endian from the target&#39;s endianness.</p>
+<div class='docblock'><p>Converts <code>self</code>`self` to big endian from the target&#39;s endianness.</p>
 
 <p>On big endian this is a no-op. On little endian the bytes are
 swapped.</p>
@@ -206,7 +206,7 @@ swapped.</p>
 }
 </pre>
 </div><h4 id='method.to_le' class='method'><code>fn <a href='#method.to_le' class='fnname'>to_le</a>(self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Converts <code>self</code> to little endian from the target&#39;s endianness.</p>
+<div class='docblock'><p>Converts <code>self</code>`self` to little endian from the target&#39;s endianness.</p>
 
 <p>On little endian this is a no-op. On big endian the bytes are
 swapped.</p>
@@ -222,7 +222,7 @@ swapped.</p>
 }
 </pre>
 </div><h4 id='method.checked_add' class='method'><code>fn <a href='#method.checked_add' class='fnname'>checked_add</a>(self, other: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
-<div class='docblock'><p>Checked integer addition. Computes <code>self + other</code>, returning <code>None</code>
+<div class='docblock'><p>Checked integer addition. Computes <code>self + other</code>`self + other<code>, returning</code>`, returning <code>None</code>`None`
 if overflow occurred.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -231,8 +231,8 @@ if overflow occurred.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>6u16</span>.<span class='ident'>checked_add</span>(<span class='number'>65530</span>), <span class='prelude-val'>None</span>);
 </pre>
 </div><h4 id='method.checked_sub' class='method'><code>fn <a href='#method.checked_sub' class='fnname'>checked_sub</a>(self, other: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
-<div class='docblock'><p>Checked integer subtraction. Computes <code>self - other</code>, returning
-<code>None</code> if underflow occurred.</p>
+<div class='docblock'><p>Checked integer subtraction. Computes <code>self - other</code>`self - other<code>, returning</code>`, returning
+<code>None</code>`None` if underflow occurred.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -240,8 +240,8 @@ if overflow occurred.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>((<span class='op'>-</span><span class='number'>128i8</span>).<span class='ident'>checked_sub</span>(<span class='number'>1</span>), <span class='prelude-val'>None</span>);
 </pre>
 </div><h4 id='method.checked_mul' class='method'><code>fn <a href='#method.checked_mul' class='fnname'>checked_mul</a>(self, other: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
-<div class='docblock'><p>Checked integer multiplication. Computes <code>self * other</code>, returning
-<code>None</code> if underflow or overflow occurred.</p>
+<div class='docblock'><p>Checked integer multiplication. Computes <code>self * other</code>`self * other<code>, returning</code>`, returning
+<code>None</code>`None` if underflow or overflow occurred.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -249,8 +249,8 @@ if overflow occurred.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>5u8</span>.<span class='ident'>checked_mul</span>(<span class='number'>52</span>), <span class='prelude-val'>None</span>);
 </pre>
 </div><h4 id='method.checked_div' class='method'><code>fn <a href='#method.checked_div' class='fnname'>checked_div</a>(self, v: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
-<div class='docblock'><p>Checked integer division. Computes <code>self / other</code>, returning <code>None</code>
-if <code>other == 0</code> or the operation results in underflow or overflow.</p>
+<div class='docblock'><p>Checked integer division. Computes <code>self / other</code>`self / other<code>, returning</code>`, returning <code>None</code>`None<code>if</code>`
+if <code>other == 0</code>`other == 0` or the operation results in underflow or overflow.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -259,69 +259,71 @@ if <code>other == 0</code> or the operation results in underflow or overflow.</p
 <span class='macro'>assert_eq</span><span class='macro'>!</span>((<span class='number'>1i8</span>).<span class='ident'>checked_div</span>(<span class='number'>0</span>), <span class='prelude-val'>None</span>);
 </pre>
 </div><h4 id='method.saturating_add' class='method'><code>fn <a href='#method.saturating_add' class='fnname'>saturating_add</a>(self, other: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Saturating integer addition. Computes <code>self + other</code>, saturating at
+<div class='docblock'><p>Saturating integer addition. Computes <code>self + other</code>`self + other`, saturating at
 the numeric bounds instead of overflowing.</p>
 </div><h4 id='method.saturating_sub' class='method'><code>fn <a href='#method.saturating_sub' class='fnname'>saturating_sub</a>(self, other: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Saturating integer subtraction. Computes <code>self - other</code>, saturating
+<div class='docblock'><p>Saturating integer subtraction. Computes <code>self - other</code>`self - other`, saturating
 at the numeric bounds instead of overflowing.</p>
 </div><h4 id='method.wrapping_add' class='method'><code>fn <a href='#method.wrapping_add' class='fnname'>wrapping_add</a>(self, rhs: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Wrapping (modular) addition. Computes <code>self + other</code>,
+<div class='docblock'><p>Wrapping (modular) addition. Computes <code>self + other</code>`self + other`,
 wrapping around at the boundary of the type.</p>
 </div><h4 id='method.wrapping_sub' class='method'><code>fn <a href='#method.wrapping_sub' class='fnname'>wrapping_sub</a>(self, rhs: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Wrapping (modular) subtraction. Computes <code>self - other</code>,
+<div class='docblock'><p>Wrapping (modular) subtraction. Computes <code>self - other</code>`self - other`,
 wrapping around at the boundary of the type.</p>
 </div><h4 id='method.wrapping_mul' class='method'><code>fn <a href='#method.wrapping_mul' class='fnname'>wrapping_mul</a>(self, rhs: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Wrapping (modular) multiplication. Computes <code>self * other</code>, wrapping around at the boundary of the type.</p>
+<div class='docblock'><p>Wrapping (modular) multiplication. Computes <code>self * other</code>`self *
+other`, wrapping around at the boundary of the type.</p>
 </div><h4 id='method.wrapping_div' class='method'><code>fn <a href='#method.wrapping_div' class='fnname'>wrapping_div</a>(self, rhs: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Wrapping (modular) division. Computes <code>floor(self / other)</code>,
+<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Wrapping (modular) division. Computes <code>floor(self / other)</code>`floor(self / other)`,
 wrapping around at the boundary of the type.</p>
 
 <p>The only case where such wrapping can occur is when one
-divides <code>MIN / -1</code> on a signed type (where <code>MIN</code> is the
+divides <code>MIN / -1</code>`MIN / -1<code>on a signed type (where</code>` on a signed type (where <code>MIN</code>`MIN<code>is the negative minimal value for the type); this is equivalent to</code>` is the
 negative minimal value for the type); this is equivalent
-to <code>-MIN</code>, a positive value that is too large to represent
-in the type. In such a case, this function returns <code>MIN</code>
+to <code>-MIN</code>`-MIN<code>, a positive value that is too large to represent in the type. In such a case, this function returns</code>`, a positive value that is too large to represent
+in the type. In such a case, this function returns <code>MIN</code>`MIN`
 itself..</p>
 </div><h4 id='method.wrapping_rem' class='method'><code>fn <a href='#method.wrapping_rem' class='fnname'>wrapping_rem</a>(self, rhs: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Wrapping (modular) remainder. Computes <code>self % other</code>,
+<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Wrapping (modular) remainder. Computes <code>self % other</code>`self % other`,
 wrapping around at the boundary of the type.</p>
 
 <p>Such wrap-around never actually occurs mathematically;
-implementation artifacts make <code>x % y</code> illegal for <code>MIN / -1</code> on a signed type illegal (where <code>MIN</code> is the negative
-minimal value). In such a case, this function returns <code>0</code>.</p>
+implementation artifacts make <code>x % y</code>`x % y<code>illegal for</code>` illegal for <code>MIN / -1</code>`MIN /
+-1<code>on a signed type illegal (where</code>` on a signed type illegal (where <code>MIN</code>`MIN<code>is the negative minimal value). In such a case, this function returns</code>` is the negative
+minimal value). In such a case, this function returns <code>0</code>`0`.</p>
 </div><h4 id='method.wrapping_neg' class='method'><code>fn <a href='#method.wrapping_neg' class='fnname'>wrapping_neg</a>(self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Wrapping (modular) negation. Computes <code>-self</code>,
+<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Wrapping (modular) negation. Computes <code>-self</code>`-self`,
 wrapping around at the boundary of the type.</p>
 
 <p>The only case where such wrapping can occur is when one
-negates <code>MIN</code> on a signed type (where <code>MIN</code> is the
+negates <code>MIN</code>`MIN<code>on a signed type (where</code>` on a signed type (where <code>MIN</code>`MIN<code>is the negative minimal value for the type); this is a positive value that is too large to represent in the type. In such a case, this function returns</code>` is the
 negative minimal value for the type); this is a positive
 value that is too large to represent in the type. In such
-a case, this function returns <code>MIN</code> itself.</p>
+a case, this function returns <code>MIN</code>`MIN` itself.</p>
 </div><h4 id='method.wrapping_shl' class='method'><code>fn <a href='#method.wrapping_shl' class='fnname'>wrapping_shl</a>(self, rhs: <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Panic-free bitwise shift-left; yields <code>self &lt;&lt; mask(rhs)</code>,
-where <code>mask</code> removes any high-order bits of <code>rhs</code> that
+<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Panic-free bitwise shift-left; yields <code>self &lt;&lt; mask(rhs)</code>`self &lt;&lt; mask(rhs)<code>, where</code>`,
+where <code>mask</code>`mask<code>removes any high-order bits of</code>` removes any high-order bits of <code>rhs</code>`rhs` that
 would cause the shift to exceed the bitwidth of the type.</p>
 </div><h4 id='method.wrapping_shr' class='method'><code>fn <a href='#method.wrapping_shr' class='fnname'>wrapping_shr</a>(self, rhs: <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Panic-free bitwise shift-left; yields <code>self &gt;&gt; mask(rhs)</code>,
-where <code>mask</code> removes any high-order bits of <code>rhs</code> that
+<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Panic-free bitwise shift-left; yields <code>self &gt;&gt; mask(rhs)</code>`self &gt;&gt; mask(rhs)<code>, where</code>`,
+where <code>mask</code>`mask<code>removes any high-order bits of</code>` removes any high-order bits of <code>rhs</code>`rhs` that
 would cause the shift to exceed the bitwidth of the type.</p>
 </div><h4 id='method.pow' class='method'><code>fn <a href='#method.pow' class='fnname'>pow</a>(self, exp: <a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Raises self to the power of <code>exp</code>, using exponentiation by squaring.</p>
+<div class='docblock'><p>Raises self to the power of <code>exp</code>`exp`, using exponentiation by squaring.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2i32</span>.<span class='ident'>pow</span>(<span class='number'>4</span>), <span class='number'>16</span>);
 </pre>
 </div><h4 id='method.is_power_of_two' class='method'><code>fn <a href='#method.is_power_of_two' class='fnname'>is_power_of_two</a>(self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<div class='docblock'><p>Returns <code>true</code> iff <code>self == 2^k</code> for some <code>k</code>.</p>
+<div class='docblock'><p>Returns <code>true</code>`true<code>iff</code>` iff <code>self == 2^k</code> for some <code>k</code>`k`.</p>
 </div><h4 id='method.next_power_of_two' class='method'><code>fn <a href='#method.next_power_of_two' class='fnname'>next_power_of_two</a>(self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
-<div class='docblock'><p>Returns the smallest power of two greater than or equal to <code>self</code>.
+<div class='docblock'><p>Returns the smallest power of two greater than or equal to <code>self</code>`self`.
 Unspecified behavior on overflow.</p>
 </div><h4 id='method.checked_next_power_of_two' class='method'><code>fn <a href='#method.checked_next_power_of_two' class='fnname'>checked_next_power_of_two</a>(self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</code></h4>
-<div class='docblock'><p>Returns the smallest power of two greater than or equal to <code>n</code>. If
+<div class='docblock'><p>Returns the smallest power of two greater than or equal to <code>n</code>`n<code>. If the next power of two is greater than the type&#39;s maximum value,</code>`. If
 the next power of two is greater than the type&#39;s maximum value,
-<code>None</code> is returned, otherwise the power of two is wrapped in <code>Some</code>.</p>
+<code>None</code>`None<code>is returned, otherwise the power of two is wrapped in</code>` is returned, otherwise the power of two is wrapped in <code>Some</code>`Some`.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../hyper/header/struct.ContentLength.html' title='hyper::header::ContentLength'>ContentLength</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><code>type Target = <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
 <h4 id='method.deref' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../hyper/header/struct.ContentLength.html' title='hyper::header::ContentLength'>ContentLength</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>&lt;'a&gt;(&amp;'a mut self) -&gt; &amp;'a mut <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></h4>

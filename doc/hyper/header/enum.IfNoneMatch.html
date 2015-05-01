@@ -47,10 +47,10 @@
 <pre class='rust enum'>pub enum IfNoneMatch {
     Any,
     Items(<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../hyper/header/struct.EntityTag.html' title='hyper::header::EntityTag'>EntityTag</a>&gt;),
-}</pre><div class='docblock'><p><code>If-None-Match</code> header, defined in
+}</pre><div class='docblock'><p><code>If-None-Match</code>`If-None-Match` header, defined in
 <a href="https://tools.ietf.org/html/rfc7232#section-3.2">RFC7232</a></p>
 
-<p>The <code>If-None-Match</code> header field makes the request method conditional
+<p>The <code>If-None-Match</code>`If-None-Match` header field makes the request method conditional
 on a recipient cache or origin server either not having any current
 representation of the target resource, when the field-value is &quot;*&quot;,
 or having a selected representation with an entity-tag that does not
@@ -69,11 +69,11 @@ the representation data.</p>
 <h1 id="example-values" class='section-header'><a
                            href="#example-values">Example values</a></h1>
 <ul>
-<li><code>&quot;xyzzy&quot;</code></li>
-<li><code>W/&quot;xyzzy&quot;</code></li>
-<li><code>&quot;xyzzy&quot;, &quot;r2d2xxxx&quot;, &quot;c3piozzzz&quot;</code></li>
-<li><code>W/&quot;xyzzy&quot;, W/&quot;r2d2xxxx&quot;, W/&quot;c3piozzzz&quot;</code></li>
-<li><code>*</code></li>
+<li><code>&quot;xyzzy&quot;</code>`&quot;xyzzy&quot;`</li>
+<li><code>W/&quot;xyzzy&quot;</code>`W/&quot;xyzzy&quot;`</li>
+<li><code>&quot;xyzzy&quot;, &quot;r2d2xxxx&quot;, &quot;c3piozzzz&quot;</code>`&quot;xyzzy&quot;, &quot;r2d2xxxx&quot;, &quot;c3piozzzz&quot;`</li>
+<li><code>W/&quot;xyzzy&quot;, W/&quot;r2d2xxxx&quot;, W/&quot;c3piozzzz&quot;</code>`W/&quot;xyzzy&quot;, W/&quot;r2d2xxxx&quot;, W/&quot;c3piozzzz&quot;`</li>
+<li><code>*</code>`*`</li>
 </ul>
 </div><h2 class='variants'>Variants</h2>
 <table><tr><td id='variant.Any'><code>Any</code></td><td><div class='docblock'><p>Any value is a match</p>

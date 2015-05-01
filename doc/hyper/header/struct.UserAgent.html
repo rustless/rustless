@@ -44,10 +44,10 @@
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='struct' href=''>UserAgent</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
         </span><a id='src-17492' class='srclink' href='../../src/hyper/header/common/mod.rs.html#211' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct UserAgent(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>);</pre><div class='docblock'><p><code>User-Agent</code> header, defined in
+<pre class='rust struct'>pub struct UserAgent(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>);</pre><div class='docblock'><p><code>User-Agent</code>`User-Agent` header, defined in
 <a href="http://tools.ietf.org/html/rfc7231#section-5.5.3">RFC7231</a></p>
 
-<p>The <code>User-Agent</code> header field contains information about the user
+<p>The <code>User-Agent</code>`User-Agent` header field contains information about the user
 agent originating the request, which is often used by servers to help
 identify the scope of reported interoperability problems, to work
 around or tailor responses to avoid particular user agent
@@ -65,8 +65,8 @@ product-version = token
 <h1 id="example-values" class='section-header'><a
                            href="#example-values">Example values</a></h1>
 <ul>
-<li><code>CERN-LineMode/2.15 libwww/2.17b3</code></li>
-<li><code>Bunnies</code></li>
+<li><code>CERN-LineMode/2.15 libwww/2.17b3</code>`CERN-LineMode/2.15 libwww/2.17b3`</li>
+<li><code>Bunnies</code>`Bunnies`</li>
 </ul>
 
 <h1 id="notes" class='section-header'><a
@@ -83,8 +83,8 @@ product-version = token
 </pre>
 </div><h4 id='method.with_capacity' class='method'><code>fn <a href='#method.with_capacity' class='fnname'>with_capacity</a>(capacity: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 <div class='docblock'><p>Creates a new string buffer with the given capacity.
-The string will be able to hold exactly <code>capacity</code> bytes without
-reallocating. If <code>capacity</code> is 0, the string will not allocate.</p>
+The string will be able to hold exactly <code>capacity</code>`capacity<code>bytes without reallocating. If</code>` bytes without
+reallocating. If <code>capacity</code>`capacity` is 0, the string will not allocate.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -132,8 +132,8 @@ Any invalid UTF-8 sequences are replaced with U+FFFD REPLACEMENT CHARACTER.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>output</span>, <span class='string'>&quot;Hello \u{FFFD}World&quot;</span>);
 </pre>
 </div><h4 id='method.from_utf16' class='method'><code>fn <a href='#method.from_utf16' class='fnname'>from_utf16</a>(v: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.FromUtf16Error.html' title='collections::string::FromUtf16Error'>FromUtf16Error</a>&gt;</code></h4>
-<div class='docblock'><p>Decode a UTF-16 encoded vector <code>v</code> into a <code>String</code>, returning <code>None</code>
-if <code>v</code> contains any invalid data.</p>
+<div class='docblock'><p>Decode a UTF-16 encoded vector <code>v</code>`v<code>into a</code>` into a <code>String</code>`String<code>, returning</code>`, returning <code>None</code>`None<code>if</code>`
+if <code>v</code>`v` contains any invalid data.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -148,7 +148,7 @@ if <code>v</code> contains any invalid data.</p>
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>String</span>::<span class='ident'>from_utf16</span>(<span class='ident'>v</span>).<span class='ident'>is_err</span>());
 </pre>
 </div><h4 id='method.from_utf16_lossy' class='method'><code>fn <a href='#method.from_utf16_lossy' class='fnname'>from_utf16_lossy</a>(v: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
-<div class='docblock'><p>Decode a UTF-16 encoded vector <code>v</code> into a string, replacing
+<div class='docblock'><p>Decode a UTF-16 encoded vector <code>v</code>`v` into a string, replacing
 invalid data with the replacement character (U+FFFD).</p>
 
 <h1 id="examples" class='section-header'><a
@@ -162,16 +162,16 @@ invalid data with the replacement character (U+FFFD).</p>
            <span class='string'>&quot;𝄞mus\u{FFFD}ic\u{FFFD}&quot;</span>.<span class='ident'>to_string</span>());
 </pre>
 </div><h4 id='method.from_raw_parts' class='method'><code>unsafe fn <a href='#method.from_raw_parts' class='fnname'>from_raw_parts</a>(buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></a>, length: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, capacity: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
-<div class='docblock'><p>Creates a new <code>String</code> from a length, capacity, and pointer.</p>
+<div class='docblock'><p>Creates a new <code>String</code>`String` from a length, capacity, and pointer.</p>
 
 <p>This is unsafe because:</p>
 
 <ul>
-<li>We call <code>Vec::from_raw_parts</code> to get a <code>Vec&lt;u8&gt;</code>;</li>
-<li>We assume that the <code>Vec</code> contains valid UTF-8.</li>
+<li>We call <code>Vec::from_raw_parts</code>`Vec::from_raw_parts<code>to get a</code>` to get a <code>Vec&lt;u8&gt;</code>`Vec<u8>`;</li>
+<li>We assume that the <code>Vec</code>`Vec` contains valid UTF-8.</li>
 </ul>
 </div><h4 id='method.from_utf8_unchecked' class='method'><code>unsafe fn <a href='#method.from_utf8_unchecked' class='fnname'>from_utf8_unchecked</a>(bytes: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
-<div class='docblock'><p>Converts a vector of bytes to a new <code>String</code> without checking if
+<div class='docblock'><p>Converts a vector of bytes to a new <code>String</code>`String` without checking if
 it contains valid UTF-8. This is unsafe because it assumes that
 the UTF-8-ness of the vector has already been validated.</p>
 </div><h4 id='method.into_bytes' class='method'><code>fn <a href='#method.into_bytes' class='fnname'>into_bytes</a>(self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
@@ -205,13 +205,13 @@ reallocating.</p>
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>s</span>.<span class='ident'>capacity</span>() <span class='op'>&gt;=</span> <span class='number'>10</span>);
 </pre>
 </div><h4 id='method.reserve' class='method'><code>fn <a href='#method.reserve' class='fnname'>reserve</a>(&amp;mut self, additional: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></h4>
-<div class='docblock'><p>Reserves capacity for at least <code>additional</code> more bytes to be inserted
-in the given <code>String</code>. The collection may reserve more space to avoid
+<div class='docblock'><p>Reserves capacity for at least <code>additional</code>`additional<code>more bytes to be inserted in the given</code>` more bytes to be inserted
+in the given <code>String</code>`String`. The collection may reserve more space to avoid
 frequent reallocations.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if the new capacity overflows <code>usize</code>.</p>
+<p>Panics if the new capacity overflows <code>usize</code>`usize`.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -220,17 +220,17 @@ frequent reallocations.</p>
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>s</span>.<span class='ident'>capacity</span>() <span class='op'>&gt;=</span> <span class='number'>10</span>);
 </pre>
 </div><h4 id='method.reserve_exact' class='method'><code>fn <a href='#method.reserve_exact' class='fnname'>reserve_exact</a>(&amp;mut self, additional: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></h4>
-<div class='docblock'><p>Reserves the minimum capacity for exactly <code>additional</code> more bytes to be
-inserted in the given <code>String</code>. Does nothing if the capacity is already
+<div class='docblock'><p>Reserves the minimum capacity for exactly <code>additional</code>`additional<code>more bytes to be inserted in the given</code>` more bytes to be
+inserted in the given <code>String</code>`String`. Does nothing if the capacity is already
 sufficient.</p>
 
 <p>Note that the allocator may give the collection more space than it
 requests. Therefore capacity can not be relied upon to be precisely
-minimal. Prefer <code>reserve</code> if future insertions are expected.</p>
+minimal. Prefer <code>reserve</code>`reserve` if future insertions are expected.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if the new capacity overflows <code>usize</code>.</p>
+<p>Panics if the new capacity overflows <code>usize</code>`usize`.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -274,8 +274,8 @@ minimal. Prefer <code>reserve</code> if future insertions are expected.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if <code>new_len</code> &gt; current length,
-or if <code>new_len</code> is not a character boundary.</p>
+<p>Panics if <code>new_len</code>`new_len<code>&gt; current length, or if</code>` &gt; current length,
+or if <code>new_len</code>`new_len` is not a character boundary.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -285,7 +285,7 @@ or if <code>new_len</code> is not a character boundary.</p>
 </pre>
 </div><h4 id='method.pop' class='method'><code>fn <a href='#method.pop' class='fnname'>pop</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>&gt;</code></h4>
 <div class='docblock'><p>Removes the last character from the string buffer and returns it.
-Returns <code>None</code> if this string buffer is empty.</p>
+Returns <code>None</code>`None` if this string buffer is empty.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -296,7 +296,7 @@ Returns <code>None</code> if this string buffer is empty.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>.<span class='ident'>pop</span>(), <span class='prelude-val'>None</span>);
 </pre>
 </div><h4 id='method.remove' class='method'><code>fn <a href='#method.remove' class='fnname'>remove</a>(&amp;mut self, idx: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a></code></h4>
-<div class='docblock'><p>Removes the character from the string buffer at byte position <code>idx</code> and
+<div class='docblock'><p>Removes the character from the string buffer at byte position <code>idx</code>`idx` and
 returns it.</p>
 
 <h1 id="warning" class='section-header'><a
@@ -306,7 +306,7 @@ buffer.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>If <code>idx</code> does not lie on a character boundary, or if it is out of
+<p>If <code>idx</code>`idx` does not lie on a character boundary, or if it is out of
 bounds, then this function will panic.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -317,7 +317,7 @@ bounds, then this function will panic.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>.<span class='ident'>remove</span>(<span class='number'>0</span>), <span class='string'>&#39;o&#39;</span>);
 </pre>
 </div><h4 id='method.insert' class='method'><code>fn <a href='#method.insert' class='fnname'>insert</a>(&amp;mut self, idx: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>)</code></h4>
-<div class='docblock'><p>Inserts a character into the string buffer at byte position <code>idx</code>.</p>
+<div class='docblock'><p>Inserts a character into the string buffer at byte position <code>idx</code>`idx`.</p>
 
 <h1 id="warning" class='section-header'><a
                            href="#warning">Warning</a></h1>
@@ -326,7 +326,7 @@ buffer.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>If <code>idx</code> does not lie on a character boundary or is out of bounds, then
+<p>If <code>idx</code>`idx` does not lie on a character boundary or is out of bounds, then
 this function will panic.</p>
 </div><h4 id='method.as_mut_vec' class='method'><code>unsafe fn <a href='#method.as_mut_vec' class='fnname'>as_mut_vec</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
 <div class='docblock'><p>Views the string buffer as a mutable sequence of bytes.</p>

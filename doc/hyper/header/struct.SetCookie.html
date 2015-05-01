@@ -44,7 +44,7 @@
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='struct' href=''>SetCookie</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
         </span><a id='src-16257' class='srclink' href='../../src/hyper/header/common/set_cookie.rs.html#14' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct SetCookie(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;);</pre><div class='docblock'><p>The <code>Set-Cookie</code> header</p>
+<pre class='rust struct'>pub struct SetCookie(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;);</pre><div class='docblock'><p>The <code>Set-Cookie</code>`Set-Cookie` header</p>
 
 <p>Informally, the Set-Cookie response header contains the header name
 &quot;Set-Cookie&quot; followed by a &quot;:&quot; and a cookie.  Each cookie begins with
@@ -54,9 +54,9 @@ a name-value-pair, followed by zero or more attribute-value pairs.</p>
 calculated delta.</p>
 </div><h4 id='method.apply_to_cookie_jar' class='method'><code>fn <a href='#method.apply_to_cookie_jar' class='fnname'>apply_to_cookie_jar</a>(&amp;self, jar: &amp;mut <a class='struct' href='../../cookie/jar/struct.CookieJar.html' title='cookie::jar::CookieJar'>CookieJar</a>)</code></h4>
 <div class='docblock'><p>Use this on client to apply changes from SetCookie to CookieJar.
-Note that this will <code>panic!</code> if <code>CookieJar</code> is not root.</p>
+Note that this will <code>panic!</code>`panic!<code>if</code>` if <code>CookieJar</code>`CookieJar` is not root.</p>
 </div></div><h2 id='deref-methods'>Methods from <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;&gt;</h2><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;</code></h4>
-<div class='docblock'><p>Constructs a new, empty <code>Vec&lt;T&gt;</code>.</p>
+<div class='docblock'><p>Constructs a new, empty <code>Vec&lt;T&gt;</code>`Vec<T>`.</p>
 
 <p>The vector will not allocate until elements are pushed onto it.</p>
 
@@ -65,14 +65,14 @@ Note that this will <code>panic!</code> if <code>CookieJar</code> is not root.</
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>vec</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
 </pre>
 </div><h4 id='method.with_capacity' class='method'><code>fn <a href='#method.with_capacity' class='fnname'>with_capacity</a>(capacity: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;</code></h4>
-<div class='docblock'><p>Constructs a new, empty <code>Vec&lt;T&gt;</code> with the specified capacity.</p>
+<div class='docblock'><p>Constructs a new, empty <code>Vec&lt;T&gt;</code>`Vec<T>` with the specified capacity.</p>
 
-<p>The vector will be able to hold exactly <code>capacity</code> elements without reallocating. If
-<code>capacity</code> is 0, the vector will not allocate.</p>
+<p>The vector will be able to hold exactly <code>capacity</code>`capacity<code>elements without reallocating. If</code>` elements without reallocating. If
+<code>capacity</code>`capacity` is 0, the vector will not allocate.</p>
 
 <p>It is important to note that this function does not specify the <em>length</em> of the returned
 vector, but only the <em>capacity</em>. (For an explanation of the difference between length and
-capacity, see the main <code>Vec&lt;T&gt;</code> docs above, &#39;Capacity and reallocation&#39;.)</p>
+capacity, see the main <code>Vec&lt;T&gt;</code>`Vec<T>` docs above, &#39;Capacity and reallocation&#39;.)</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -90,7 +90,7 @@ capacity, see the main <code>Vec&lt;T&gt;</code> docs above, &#39;Capacity and r
 <span class='ident'>vec</span>.<span class='ident'>push</span>(<span class='number'>11</span>);
 </pre>
 </div><h4 id='method.from_raw_parts' class='method'><code>unsafe fn <a href='#method.from_raw_parts' class='fnname'>from_raw_parts</a>(ptr: <a href='http://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut T</a>, length: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, capacity: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;</code></h4>
-<div class='docblock'><p>Creates a <code>Vec&lt;T&gt;</code> directly from the raw components of another vector.</p>
+<div class='docblock'><p>Creates a <code>Vec&lt;T&gt;</code>`Vec<T>` directly from the raw components of another vector.</p>
 
 <p>This is highly unsafe, due to the number of invariants that aren&#39;t checked.</p>
 
@@ -127,10 +127,10 @@ capacity, see the main <code>Vec&lt;T&gt;</code> docs above, &#39;Capacity and r
 <div class='stability'><em class='stab unstable'>Unstable<p>: may be better expressed via composition</p>
 </em></div><div class='docblock'><p>Creates a vector by copying the elements from a raw pointer.</p>
 
-<p>This function will copy <code>elts</code> contiguous elements starting at <code>ptr</code>
-into a new allocation owned by the returned <code>Vec&lt;T&gt;</code>. The elements of
+<p>This function will copy <code>elts</code>`elts<code>contiguous elements starting at</code>` contiguous elements starting at <code>ptr</code>`ptr<code>into a new allocation owned by the returned</code>`
+into a new allocation owned by the returned <code>Vec&lt;T&gt;</code>`Vec<T><code>. The elements of the buffer are copied into the vector without cloning, as if</code>`. The elements of
 the buffer are copied into the vector without cloning, as if
-<code>ptr::read()</code> were called on them.</p>
+<code>ptr::read()</code>`ptr::read()` were called on them.</p>
 </div><h4 id='method.capacity' class='method'><code>fn <a href='#method.capacity' class='fnname'>capacity</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
 <div class='docblock'><p>Returns the number of elements the vector can hold without
 reallocating.</p>
@@ -141,13 +141,13 @@ reallocating.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>vec</span>.<span class='ident'>capacity</span>(), <span class='number'>10</span>);
 </pre>
 </div><h4 id='method.reserve' class='method'><code>fn <a href='#method.reserve' class='fnname'>reserve</a>(&amp;mut self, additional: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></h4>
-<div class='docblock'><p>Reserves capacity for at least <code>additional</code> more elements to be inserted
-in the given <code>Vec&lt;T&gt;</code>. The collection may reserve more space to avoid
+<div class='docblock'><p>Reserves capacity for at least <code>additional</code>`additional<code>more elements to be inserted in the given</code>` more elements to be inserted
+in the given <code>Vec&lt;T&gt;</code>`Vec<T>`. The collection may reserve more space to avoid
 frequent reallocations.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if the new capacity overflows <code>usize</code>.</p>
+<p>Panics if the new capacity overflows <code>usize</code>`usize`.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -156,17 +156,17 @@ frequent reallocations.</p>
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>vec</span>.<span class='ident'>capacity</span>() <span class='op'>&gt;=</span> <span class='number'>11</span>);
 </pre>
 </div><h4 id='method.reserve_exact' class='method'><code>fn <a href='#method.reserve_exact' class='fnname'>reserve_exact</a>(&amp;mut self, additional: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></h4>
-<div class='docblock'><p>Reserves the minimum capacity for exactly <code>additional</code> more elements to
-be inserted in the given <code>Vec&lt;T&gt;</code>. Does nothing if the capacity is already
+<div class='docblock'><p>Reserves the minimum capacity for exactly <code>additional</code>`additional<code>more elements to be inserted in the given</code>` more elements to
+be inserted in the given <code>Vec&lt;T&gt;</code>`Vec<T>`. Does nothing if the capacity is already
 sufficient.</p>
 
 <p>Note that the allocator may give the collection more space than it
 requests. Therefore capacity can not be relied upon to be precisely
-minimal. Prefer <code>reserve</code> if future insertions are expected.</p>
+minimal. Prefer <code>reserve</code>`reserve` if future insertions are expected.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if the new capacity overflows <code>usize</code>.</p>
+<p>Panics if the new capacity overflows <code>usize</code>`usize`.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -192,12 +192,12 @@ may still inform the vector that there is space for a few more elements.</p>
 <div class='docblock'><p>Converts the vector into Box&lt;[T]&gt;.</p>
 
 <p>Note that this will drop any excess capacity. Calling this and
-converting back to a vector with <code>into_vec()</code> is equivalent to calling
-<code>shrink_to_fit()</code>.</p>
+converting back to a vector with <code>into_vec()</code>`into_vec()<code>is equivalent to calling</code>` is equivalent to calling
+<code>shrink_to_fit()</code>`shrink_to_fit()`.</p>
 </div><h4 id='method.truncate' class='method'><code>fn <a href='#method.truncate' class='fnname'>truncate</a>(&amp;mut self, len: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></h4>
 <div class='docblock'><p>Shorten a vector, dropping excess elements.</p>
 
-<p>If <code>len</code> is greater than the vector&#39;s current length, this has no
+<p>If <code>len</code>`len` is greater than the vector&#39;s current length, this has no
 effect.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -211,7 +211,7 @@ effect.</p>
 </em></div><div class='docblock'><p>Extracts a slice containing the entire vector.</p>
 </div><h4 id='method.as_mut_slice' class='method'><code>fn <a href='#method.as_mut_slice' class='fnname'>as_mut_slice</a>(&amp;mut self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a></code></h4>
 <div class='stability'><em class='stab unstable'>Unstable<p>: waiting on RFC revision</p>
-</em></div><div class='docblock'><p>Deprecated: use <code>&amp;mut s[..]</code> instead.</p>
+</em></div><div class='docblock'><p>Deprecated: use <code>&amp;mut s[..]</code>`&amp;mut s[..]` instead.</p>
 </div><h4 id='method.set_len' class='method'><code>unsafe fn <a href='#method.set_len' class='fnname'>set_len</a>(&amp;mut self, len: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></h4>
 <div class='docblock'><p>Sets the length of a vector.</p>
 
@@ -234,7 +234,7 @@ it with the last element.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if <code>index</code> is out of bounds.</p>
+<p>Panics if <code>index</code>`index` is out of bounds.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -247,12 +247,12 @@ it with the last element.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>v</span>, [<span class='string'>&quot;baz&quot;</span>, <span class='string'>&quot;qux&quot;</span>]);
 </pre>
 </div><h4 id='method.insert' class='method'><code>fn <a href='#method.insert' class='fnname'>insert</a>(&amp;mut self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, element: T)</code></h4>
-<div class='docblock'><p>Inserts an element at position <code>index</code> within the vector, shifting all
-elements after position <code>i</code> one position to the right.</p>
+<div class='docblock'><p>Inserts an element at position <code>index</code>`index<code>within the vector, shifting all elements after position</code>` within the vector, shifting all
+elements after position <code>i</code>`i` one position to the right.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if <code>index</code> is greater than the vector&#39;s length.</p>
+<p>Panics if <code>index</code>`index` is greater than the vector&#39;s length.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -263,12 +263,12 @@ elements after position <code>i</code> one position to the right.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>vec</span>, [<span class='number'>1</span>, <span class='number'>4</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>5</span>]);
 </pre>
 </div><h4 id='method.remove' class='method'><code>fn <a href='#method.remove' class='fnname'>remove</a>(&amp;mut self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; T</code></h4>
-<div class='docblock'><p>Removes and returns the element at position <code>index</code> within the vector,
-shifting all elements after position <code>index</code> one position to the left.</p>
+<div class='docblock'><p>Removes and returns the element at position <code>index</code>`index<code>within the vector, shifting all elements after position</code>` within the vector,
+shifting all elements after position <code>index</code>`index` one position to the left.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if <code>index</code> is out of bounds.</p>
+<p>Panics if <code>index</code>`index` is out of bounds.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -279,7 +279,7 @@ shifting all elements after position <code>index</code> one position to the left
 </div><h4 id='method.retain' class='method'><code>fn <a href='#method.retain' class='fnname'>retain</a>&lt;F&gt;(&amp;mut self, f: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
 <div class='docblock'><p>Retains only the elements specified by the predicate.</p>
 
-<p>In other words, remove all elements <code>e</code> such that <code>f(&amp;e)</code> returns false.
+<p>In other words, remove all elements <code>e</code>`e<code>such that</code>` such that <code>f(&amp;e)</code>`f(&amp;e)` returns false.
 This method operates in place and preserves the order of the retained
 elements.</p>
 
@@ -303,7 +303,7 @@ elements.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>vec</span>, [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]);
 </pre>
 </div><h4 id='method.pop' class='method'><code>fn <a href='#method.pop' class='fnname'>pop</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;T&gt;</code></h4>
-<div class='docblock'><p>Removes the last element from a vector and returns it, or <code>None</code> if it is empty.</p>
+<div class='docblock'><p>Removes the last element from a vector and returns it, or <code>None</code>`None` if it is empty.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -313,11 +313,11 @@ elements.</p>
 </pre>
 </div><h4 id='method.append' class='method'><code>fn <a href='#method.append' class='fnname'>append</a>(&amp;mut self, other: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;)</code></h4>
 <div class='stability'><em class='stab unstable'>Unstable<p>: new API, waiting for dust to settle</p>
-</em></div><div class='docblock'><p>Moves all the elements of <code>other</code> into <code>Self</code>, leaving <code>other</code> empty.</p>
+</em></div><div class='docblock'><p>Moves all the elements of <code>other</code>`other<code>into</code>` into <code>Self</code>`Self<code>, leaving</code>`, leaving <code>other</code>`other` empty.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if the number of elements in the vector overflows a <code>usize</code>.</p>
+<p>Panics if the number of elements in the vector overflows a <code>usize</code>`usize`.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -334,7 +334,7 @@ and yields the removed items from start to end. The element range is
 removed even if the iterator is not consumed until the end.</p>
 
 <p>Note: It is unspecified how many elements are removed from the vector,
-if the <code>Drain</code> value is leaked.</p>
+if the <code>Drain</code>`Drain` value is leaked.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
@@ -370,7 +370,7 @@ the end point is greater than the length of the vector.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>a</span>.<span class='ident'>len</span>(), <span class='number'>3</span>);
 </pre>
 </div><h4 id='method.is_empty' class='method'><code>fn <a href='#method.is_empty' class='fnname'>is_empty</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<div class='docblock'><p>Returns <code>true</code> if the vector contains no elements.</p>
+<div class='docblock'><p>Returns <code>true</code>`true` if the vector contains no elements.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -382,12 +382,12 @@ the end point is greater than the length of the vector.</p>
 </pre>
 </div><h4 id='method.map_in_place' class='method'><code>fn <a href='#method.map_in_place' class='fnname'>map_in_place</a>&lt;U, F&gt;(self, f: F) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;U&gt; <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(T) -&gt; U</span></code></h4>
 <div class='stability'><em class='stab unstable'>Unstable<p>: API may change to provide stronger guarantees</p>
-</em></div><div class='docblock'><p>Converts a <code>Vec&lt;T&gt;</code> to a <code>Vec&lt;U&gt;</code> where <code>T</code> and <code>U</code> have the same
+</em></div><div class='docblock'><p>Converts a <code>Vec&lt;T&gt;</code>`Vec<T><code>to a</code>` to a <code>Vec&lt;U&gt;</code>`Vec<U><code>where</code>` where <code>T</code>`T<code>and</code>` and <code>U</code>`U` have the same
 size and in case they are not zero-sized the same minimal alignment.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if <code>T</code> and <code>U</code> have differing sizes or are not zero-sized and
+<p>Panics if <code>T</code>`T<code>and</code>` and <code>U</code>`U` have differing sizes or are not zero-sized and
 have differing minimal alignments.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -406,14 +406,14 @@ have differing minimal alignments.</p>
 <div class='stability'><em class='stab unstable'>Unstable<p>: new API, waiting for dust to settle</p>
 </em></div><div class='docblock'><p>Splits the collection into two at the given index.</p>
 
-<p>Returns a newly allocated <code>Self</code>. <code>self</code> contains elements <code>[0, at)</code>,
-and the returned <code>Self</code> contains elements <code>[at, len)</code>.</p>
+<p>Returns a newly allocated <code>Self</code>`Self<code>.</code>`. <code>self</code>`self<code>contains elements</code>` contains elements <code>[0, at)</code>`[0, at)<code>, and the returned</code>`,
+and the returned <code>Self</code>`Self<code>contains elements</code>` contains elements <code>[at, len)</code>`[at, len)`.</p>
 
-<p>Note that the capacity of <code>self</code> does not change.</p>
+<p>Note that the capacity of <code>self</code>`self` does not change.</p>
 
 <h1 id="panics" class='section-header'><a
                            href="#panics">Panics</a></h1>
-<p>Panics if <code>at &gt; len</code>.</p>
+<p>Panics if <code>at &gt; len</code>`at &gt; len`.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -424,10 +424,10 @@ and the returned <code>Self</code> contains elements <code>[at, len)</code>.</p>
 </pre>
 </div></div><div class='impl-items'><h4 id='method.resize' class='method'><code>fn <a href='#method.resize' class='fnname'>resize</a>(&amp;mut self, new_len: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, value: T)</code></h4>
 <div class='stability'><em class='stab unstable'>Unstable<p>: matches collection reform specification; waiting for dust to settle</p>
-</em></div><div class='docblock'><p>Resizes the <code>Vec</code> in-place so that <code>len()</code> is equal to <code>new_len</code>.</p>
+</em></div><div class='docblock'><p>Resizes the <code>Vec</code>`Vec<code>in-place so that</code>` in-place so that <code>len()</code>`len()<code>is equal to</code>` is equal to <code>new_len</code>`new_len`.</p>
 
-<p>Calls either <code>extend()</code> or <code>truncate()</code> depending on whether <code>new_len</code>
-is larger than the current value of <code>len()</code> or not.</p>
+<p>Calls either <code>extend()</code>`extend()<code>or</code>` or <code>truncate()</code>`truncate()<code>depending on whether</code>` depending on whether <code>new_len</code>`new_len<code>is larger than the current value of</code>`
+is larger than the current value of <code>len()</code>`len()` or not.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
@@ -441,10 +441,10 @@ is larger than the current value of <code>len()</code> or not.</p>
 </pre>
 </div><h4 id='method.push_all' class='method'><code>fn <a href='#method.push_all' class='fnname'>push_all</a>(&amp;mut self, other: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>)</code></h4>
 <div class='stability'><em class='stab unstable'>Unstable<p>: likely to be replaced by a more optimized extend</p>
-</em></div><div class='docblock'><p>Appends all elements in a slice to the <code>Vec</code>.</p>
+</em></div><div class='docblock'><p>Appends all elements in a slice to the <code>Vec</code>`Vec`.</p>
 
-<p>Iterates over the slice <code>other</code>, clones each element, and then appends
-it to this <code>Vec</code>. The <code>other</code> vector is traversed in-order.</p>
+<p>Iterates over the slice <code>other</code>`other<code>, clones each element, and then appends it to this</code>`, clones each element, and then appends
+it to this <code>Vec</code>`Vec<code>. The</code>`. The <code>other</code>`other` vector is traversed in-order.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>

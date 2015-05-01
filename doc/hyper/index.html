@@ -64,32 +64,32 @@ possible, and should not irrevocably hide any information from its users.</p>
 <h3 id="common-functionality" class='section-header'><a
                            href="#common-functionality">Common Functionality</a></h3>
 <p>Functionality and code shared between the Server and Client implementations
-can be found in <code>src</code> directly - this includes <code>NetworkStream</code>s, <code>Method</code>s,
-<code>StatusCode</code>, and so on.</p>
+can be found in <code>src</code>`src<code>directly - this includes</code>` directly - this includes <code>NetworkStream</code>`NetworkStream<code>s,</code>`s, <code>Method</code>`Method<code>s,</code>`s,
+<code>StatusCode</code>`StatusCode`, and so on.</p>
 
 <h4 id="methods" class='section-header'><a
                            href="#methods">Methods</a></h4>
-<p>Methods are represented as a single <code>enum</code> to remain as simple as possible.
-Extension Methods are represented as raw <code>String</code>s. A method&#39;s safety and
-idempotence can be accessed using the <code>safe</code> and <code>idempotent</code> methods.</p>
+<p>Methods are represented as a single <code>enum</code>`enum<code>to remain as simple as possible. Extension Methods are represented as raw</code>` to remain as simple as possible.
+Extension Methods are represented as raw <code>String</code>`String<code>s. A method&#39;s safety and idempotence can be accessed using the</code>`s. A method&#39;s safety and
+idempotence can be accessed using the <code>safe</code>`safe<code>and</code>` and <code>idempotent</code>`idempotent` methods.</p>
 
 <h4 id="statuscode" class='section-header'><a
                            href="#statuscode">StatusCode</a></h4>
 <p>Status codes are also represented as a single, exhaustive, <code>enum</code>. This
 representation is efficient, typesafe, and ergonomic as it allows the use of
-<code>match</code> to disambiguate known status codes.</p>
+<code>match</code>`match` to disambiguate known status codes.</p>
 
 <h4 id="headers" class='section-header'><a
                            href="#headers">Headers</a></h4>
 <p>Hyper&#39;s <a href="header/index.html">header</a> representation is likely the most
 complex API exposed by Hyper.</p>
 
-<p>Hyper&#39;s headers are an abstraction over an internal <code>HashMap</code> and provides a
+<p>Hyper&#39;s headers are an abstraction over an internal <code>HashMap</code>`HashMap` and provides a
 typesafe API for interacting with headers that does not rely on the use of
 &quot;string-typing.&quot;</p>
 
 <p>Each HTTP header in Hyper has an associated type and implementation of the
-<code>Header</code> trait, which defines an HTTP headers name as a string, how to parse
+<code>Header</code>`Header` trait, which defines an HTTP headers name as a string, how to parse
 that header, and how to format that header.</p>
 
 <p>Headers are then parsed from the string representation lazily when the typed
@@ -98,19 +98,19 @@ representation when headers are written back to the client.</p>
 
 <h4 id="networkstream-and-networkacceptor" class='section-header'><a
                            href="#networkstream-and-networkacceptor">NetworkStream and NetworkAcceptor</a></h4>
-<p>These are found in <code>src/net.rs</code> and define the interface that acceptors and
+<p>These are found in <code>src/net.rs</code>`src/net.rs<code>and define the interface that acceptors and streams must fulfill for them to be used within Hyper. They are by and large internal tools and you should only need to mess around with them if you want to mock or replace</code>` and define the interface that acceptors and
 streams must fulfill for them to be used within Hyper. They are by and large
 internal tools and you should only need to mess around with them if you want to
-mock or replace <code>TcpStream</code> and <code>TcpAcceptor</code>.</p>
+mock or replace <code>TcpStream</code>`TcpStream<code>and</code>` and <code>TcpAcceptor</code>`TcpAcceptor`.</p>
 
 <h3 id="server" class='section-header'><a
                            href="#server">Server</a></h3>
-<p>Server-specific functionality, such as <code>Request</code> and <code>Response</code>
-representations, are found in in <code>src/server</code>.</p>
+<p>Server-specific functionality, such as <code>Request</code>`Request<code>and</code>` and <code>Response</code>`Response<code>representations, are found in in</code>`
+representations, are found in in <code>src/server</code>`src/server`.</p>
 
 <h4 id="handler-+-server" class='section-header'><a
                            href="#handler-+-server">Handler + Server</a></h4>
-<p>A <code>Handler</code> in Hyper accepts a <code>Request</code> and <code>Response</code>. This is where
+<p>A <code>Handler</code>`Handler<code>in Hyper accepts a</code>` in Hyper accepts a <code>Request</code>`Request<code>and</code>` and <code>Response</code>`Response`. This is where
 user-code can handle each connection. The server accepts connections in a
 task pool with a customizable number of threads, and passes the Request /
 Response to the handler.</p>
@@ -118,17 +118,17 @@ Response to the handler.</p>
 <h4 id="request" class='section-header'><a
                            href="#request">Request</a></h4>
 <p>An incoming HTTP Request is represented as a struct containing
-a <code>Reader</code> over a <code>NetworkStream</code>, which represents the body, headers, a remote
-address, an HTTP version, and a <code>Method</code> - relatively standard stuff.</p>
+a <code>Reader</code>`Reader<code>over a</code>` over a <code>NetworkStream</code>`NetworkStream<code>, which represents the body, headers, a remote address, an HTTP version, and a</code>`, which represents the body, headers, a remote
+address, an HTTP version, and a <code>Method</code>`Method` - relatively standard stuff.</p>
 
-<p><code>Request</code> implements <code>Reader</code> itself, meaning that you can ergonomically get
-the body out of a <code>Request</code> using standard <code>Reader</code> methods and helpers.</p>
+<p><code>Request</code>`Request<code>implements</code>` implements <code>Reader</code>`Reader<code>itself, meaning that you can ergonomically get the body out of a</code>` itself, meaning that you can ergonomically get
+the body out of a <code>Request</code>`Request<code>using standard</code>` using standard <code>Reader</code>`Reader` methods and helpers.</p>
 
 <h4 id="response" class='section-header'><a
                            href="#response">Response</a></h4>
-<p>An outgoing HTTP Response is also represented as a struct containing a <code>Writer</code>
-over a <code>NetworkStream</code> which represents the Response body in addition to
-standard items such as the <code>StatusCode</code> and HTTP version. <code>Response</code>&#39;s <code>Writer</code>
+<p>An outgoing HTTP Response is also represented as a struct containing a <code>Writer</code>`Writer<code>over a</code>`
+over a <code>NetworkStream</code>`NetworkStream<code>which represents the Response body in addition to standard items such as the</code>` which represents the Response body in addition to
+standard items such as the <code>StatusCode</code>`StatusCode<code>and HTTP version.</code>` and HTTP version. <code>Response</code>`Response<code>&#39;s</code>`&#39;s <code>Writer</code>`Writer`
 implementation provides a streaming interface for sending data over to the
 client.</p>
 
@@ -140,19 +140,19 @@ you have started writing to the body or vice versa.</p>
 
 <p>Hyper does this through a phantom type parameter in the definition of Response,
 which tracks whether you are allowed to write to the headers or the body. This
-phantom type can have two values <code>Fresh</code> or <code>Streaming</code>, with <code>Fresh</code>
-indicating that you can write the headers and <code>Streaming</code> indicating that you
+phantom type can have two values <code>Fresh</code>`Fresh<code>or</code>` or <code>Streaming</code>`Streaming<code>, with</code>`, with <code>Fresh</code>`Fresh<code>indicating that you can write the headers and</code>`
+indicating that you can write the headers and <code>Streaming</code>`Streaming` indicating that you
 may write to the body, but not the headers.</p>
 
 <h3 id="client" class='section-header'><a
                            href="#client">Client</a></h3>
-<p>Client-specific functionality, such as <code>Request</code> and <code>Response</code>
-representations, are found in <code>src/client</code>.</p>
+<p>Client-specific functionality, such as <code>Request</code>`Request<code>and</code>` and <code>Response</code>`Response<code>representations, are found in</code>`
+representations, are found in <code>src/client</code>`src/client`.</p>
 
 <h4 id="request-1" class='section-header'><a
                            href="#request-1">Request</a></h4>
-<p>An outgoing HTTP Request is represented as a struct containing a <code>Writer</code> over
-a <code>NetworkStream</code> which represents the Request body in addition to the standard
+<p>An outgoing HTTP Request is represented as a struct containing a <code>Writer</code>`Writer<code>over a</code>` over
+a <code>NetworkStream</code>`NetworkStream` which represents the Request body in addition to the standard
 information such as headers and the request method.</p>
 
 <p>Outgoing Requests track their write-status in almost exactly the same way as
@@ -165,9 +165,9 @@ the API exposed by core Hyper.</p>
 
 <h4 id="response-1" class='section-header'><a
                            href="#response-1">Response</a></h4>
-<p>Incoming HTTP Responses are represented as a struct containing a <code>Reader</code> over
-a <code>NetworkStream</code> and contain headers, a status, and an http version. They
-implement <code>Reader</code> and can be read to get the data out of a <code>Response</code>.</p>
+<p>Incoming HTTP Responses are represented as a struct containing a <code>Reader</code>`Reader<code>over a</code>` over
+a <code>NetworkStream</code>`NetworkStream<code>and contain headers, a status, and an http version. They implement</code>` and contain headers, a status, and an http version. They
+implement <code>Reader</code>`Reader<code>and can be read to get the data out of a</code>` and can be read to get the data out of a <code>Response</code>`Response`.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use client::<a class='struct' href='../hyper/client/struct.Client.html' title='hyper::client::Client'>Client</a>;</code></td></tr><tr><td><code>pub use error::{<a class='type' href='../hyper/error/type.HttpResult.html' title='hyper::error::HttpResult'>HttpResult</a>, <a class='enum' href='../hyper/error/enum.HttpError.html' title='hyper::error::HttpError'>HttpError</a>};</code></td></tr><tr><td><code>pub use method::Method::{<a class='enum' href='../hyper/method/enum.Method.html' title='hyper::method::Method'>Get</a>, <a class='enum' href='../hyper/method/enum.Method.html' title='hyper::method::Method'>Head</a>, <a class='enum' href='../hyper/method/enum.Method.html' title='hyper::method::Method'>Post</a>, <a class='enum' href='../hyper/method/enum.Method.html' title='hyper::method::Method'>Delete</a>};</code></td></tr><tr><td><code>pub use status::StatusCode::{<a class='enum' href='../hyper/status/enum.StatusCode.html' title='hyper::status::StatusCode'>Ok</a>, <a class='enum' href='../hyper/status/enum.StatusCode.html' title='hyper::status::StatusCode'>BadRequest</a>, <a class='enum' href='../hyper/status/enum.StatusCode.html' title='hyper::status::StatusCode'>NotFound</a>};</code></td></tr><tr><td><code>pub use server::<a class='struct' href='../hyper/server/struct.Server.html' title='hyper::server::Server'>Server</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>

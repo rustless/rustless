@@ -51,7 +51,7 @@
 
 <p>An entity tag consists of a string enclosed by two literal double quotes.
 Preceding the first double quote is an optional weakness indicator,
-which always looks like <code>W/</code>. Examples for valid tags are <code>&quot;xyzzy&quot;</code> and <code>W/&quot;xyzzy&quot;</code>.</p>
+which always looks like <code>W/</code>`W/<code>. Examples for valid tags are</code>`. Examples for valid tags are <code>&quot;xyzzy&quot;</code>`&quot;xyzzy&quot;<code>and</code>` and <code>W/&quot;xyzzy&quot;</code>`W/&quot;xyzzy&quot;`.</p>
 
 <h1 id="abnf" class='section-header'><a
                            href="#abnf">ABNF</a></h1>
@@ -64,8 +64,8 @@ etagc      = %x21 / %x23-7E / obs-text
 
 <h1 id="comparison" class='section-header'><a
                            href="#comparison">Comparison</a></h1>
-<p>To check if two entity tags are equivalent in an application always use the <code>strong_eq</code> or
-<code>weak_eq</code> methods based on the context of the Tag. Only use <code>==</code> to check if two tags are
+<p>To check if two entity tags are equivalent in an application always use the <code>strong_eq</code>`strong_eq<code>or</code>` or
+<code>weak_eq</code>`weak_eq<code>methods based on the context of the Tag. Only use</code>` methods based on the context of the Tag. Only use <code>==</code>`==` to check if two tags are
 identical.</p>
 
 <p>The example below shows the results for a set of entity-tag pairs and
@@ -80,26 +80,26 @@ both the weak and strong comparison function results:</p>
 </tr>
 </thead><tbody>
 <tr>
-<td><code>W/&quot;1&quot;</code></td>
-<td><code>W/&quot;1&quot;</code></td>
+<td><code>W/&quot;1&quot;</code>`W/&quot;1&quot;`</td>
+<td><code>W/&quot;1&quot;</code>`W/&quot;1&quot;`</td>
 <td>no match</td>
 <td>match</td>
 </tr>
 <tr>
-<td><code>W/&quot;1&quot;</code></td>
-<td><code>W/&quot;2&quot;</code></td>
+<td><code>W/&quot;1&quot;</code>`W/&quot;1&quot;`</td>
+<td><code>W/&quot;2&quot;</code>`W/&quot;2&quot;`</td>
 <td>no match</td>
 <td>no match</td>
 </tr>
 <tr>
-<td><code>W/&quot;1&quot;</code></td>
-<td><code>&quot;1&quot;</code></td>
+<td><code>W/&quot;1&quot;</code>`W/&quot;1&quot;`</td>
+<td><code>&quot;1&quot;</code>`&quot;1&quot;`</td>
 <td>no match</td>
 <td>match</td>
 </tr>
 <tr>
-<td><code>&quot;1&quot;</code></td>
-<td><code>&quot;1&quot;</code></td>
+<td><code>&quot;1&quot;</code>`&quot;1&quot;`</td>
+<td><code>&quot;1&quot;</code>`&quot;1&quot;`</td>
 <td>match</td>
 <td>match</td>
 </tr>
@@ -129,9 +129,9 @@ opaque-tags match character-by-character.</p>
 opaque-tags match character-by-character, regardless of either or
 both being tagged as &quot;weak&quot;.</p>
 </div><h4 id='method.strong_ne' class='method'><code>fn <a href='#method.strong_ne' class='fnname'>strong_ne</a>(&amp;self, other: &amp;<a class='struct' href='../../hyper/header/struct.EntityTag.html' title='hyper::header::EntityTag'>EntityTag</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<div class='docblock'><p>The inverse of <code>EntityTag.strong_eq()</code>.</p>
+<div class='docblock'><p>The inverse of <code>EntityTag.strong_eq()</code>`EntityTag.strong_eq()`.</p>
 </div><h4 id='method.weak_ne' class='method'><code>fn <a href='#method.weak_ne' class='fnname'>weak_ne</a>(&amp;self, other: &amp;<a class='struct' href='../../hyper/header/struct.EntityTag.html' title='hyper::header::EntityTag'>EntityTag</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<div class='docblock'><p>The inverse of <code>EntityTag.weak_eq()</code>.</p>
+<div class='docblock'><p>The inverse of <code>EntityTag.weak_eq()</code>`EntityTag.weak_eq()`.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='struct' href='../../hyper/header/struct.EntityTag.html' title='hyper::header::EntityTag'>EntityTag</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#method.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.FromStr.html' title='core::str::FromStr'>FromStr</a> for <a class='struct' href='../../hyper/header/struct.EntityTag.html' title='hyper::header::EntityTag'>EntityTag</a></code></h3><div class='impl-items'><h4 id='assoc_type.Err' class='type'><code>type Err = <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a></code></h4>
 <h4 id='method.from_str' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/str/trait.FromStr.html#method.from_str' class='fnname'>from_str</a>(s: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../hyper/header/struct.EntityTag.html' title='hyper::header::EntityTag'>EntityTag</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>

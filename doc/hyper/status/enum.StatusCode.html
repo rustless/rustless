@@ -104,18 +104,18 @@
     NotExtended,
     NetworkAuthenticationRequired,
     Unregistered(<a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>),
-}</pre><div class='docblock'><p>An HTTP status code (<code>status-code</code> in RFC 7230 et al.).</p>
+}</pre><div class='docblock'><p>An HTTP status code (<code>status-code</code>`status-code` in RFC 7230 et al.).</p>
 
 <p>This enum contains all common status codes and an Unregistered
 extension variant. It allows status codes in the range [0, 65535], as any
-<code>u16</code> integer may be used as a status code for XHR requests. It is
+<code>u16</code>`u16` integer may be used as a status code for XHR requests. It is
 recommended to only use values between [100, 599], since only these are
 defined as valid status codes with a status class by HTTP.</p>
 
 <p>If you encounter a status code that you do not know how to deal with, you
-should treat it as the <code>x00</code> status code—e.g. for code 123, treat it as
+should treat it as the <code>x00</code>`x00<code>status code—e.g. for code 123, treat it as 100 (Continue). This can be achieved with</code>` status code—e.g. for code 123, treat it as
 100 (Continue). This can be achieved with
-<code>self.class().default_code()</code>:</p>
+<code>self.class().default_code()</code>`self.class().default_code()`:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>status</span> <span class='op'>=</span> <span class='ident'>StatusCode</span>::<span class='ident'>Unregistered</span>(<span class='number'>123</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>status</span>.<span class='ident'>class</span>().<span class='ident'>default_code</span>(), <span class='ident'>StatusCode</span>::<span class='ident'>Continue</span>);
@@ -244,7 +244,7 @@ inexplicably not in the register).</p>
 [<a href="https://tools.ietf.org/html/rfc6585">RFC6585</a>]</p>
 </div></td></tr><tr><td id='variant.Unregistered'><code>Unregistered</code></td><td><div class='docblock'><p>A status code not in the IANA HTTP status code registry or very well known</p>
 </div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='enum' href='../../hyper/status/enum.StatusCode.html' title='hyper::status::StatusCode'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.canonical_reason' class='method'><code>fn <a href='#method.canonical_reason' class='fnname'>canonical_reason</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h4>
-<div class='docblock'><p>Get the standardised <code>reason-phrase</code> for this status code.</p>
+<div class='docblock'><p>Get the standardised <code>reason-phrase</code>`reason-phrase` for this status code.</p>
 
 <p>This is mostly here for servers writing responses, but could potentially have application
 at other times.</p>
