@@ -43,7 +43,7 @@
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>http</a>::<wbr><a class='enum' href=''>HttpReader</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-25437' class='srclink' href='../../src/hyper/http.rs.html#25-49' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-27088' class='srclink' href='../../src/hyper/http.rs.html#26-50' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum HttpReader&lt;R&gt; {
     SizedReader(R, <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>),
     ChunkedReader(R, <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;),
@@ -55,12 +55,12 @@
 include a Content-Length header.</p>
 </div><h2 class='variants'>Variants</h2>
 <table><tr><td id='variant.SizedReader'><code>SizedReader</code></td><td><div class='docblock'><p>A Reader used when a Content-Length header is passed with a positive integer.</p>
-</div></td></tr><tr><td id='variant.ChunkedReader'><code>ChunkedReader</code></td><td><div class='docblock'><p>A Reader used when Transfer-Encoding is <code>chunked</code>`chunked`.</p>
+</div></td></tr><tr><td id='variant.ChunkedReader'><code>ChunkedReader</code></td><td><div class='docblock'><p>A Reader used when Transfer-Encoding is <code>chunked</code>.</p>
 </div></td></tr><tr><td id='variant.EofReader'><code>EofReader</code></td><td><div class='docblock'><p>A Reader used for responses that don&#39;t indicate a length or chunked.</p>
 
-<p>Note: This should only used for <code>Response</code>`Response<code>s. It is illegal for a</code>`s. It is illegal for a
-<code>Request</code>`Request<code>to be made with both</code>` to be made with both <code>Content-Length</code>`Content-Length<code>and</code>` and
-<code>Transfer-Encoding: chunked</code>`Transfer-Encoding: chunked` missing, as explained from the spec:</p>
+<p>Note: This should only used for <code>Response</code>s. It is illegal for a
+<code>Request</code> to be made with both <code>Content-Length</code> and
+<code>Transfer-Encoding: chunked</code> missing, as explained from the spec:</p>
 
 <blockquote>
 <p>If a Transfer-Encoding header field is present in a response and

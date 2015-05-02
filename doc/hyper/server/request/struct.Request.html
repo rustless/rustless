@@ -43,7 +43,7 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>hyper</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>request</a>::<wbr><a class='struct' href=''>Request</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-29653' class='srclink' href='../../../src/hyper/server/request.rs.html#19-31' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-31384' class='srclink' href='../../../src/hyper/server/request.rs.html#19-31' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Request&lt;'a, 'b&gt; {
     pub remote_addr: <a class='enum' href='http://doc.rust-lang.org/nightly/std/net/addr/enum.SocketAddr.html' title='std::net::addr::SocketAddr'>SocketAddr</a>,
     pub method: <a class='enum' href='../../../hyper/method/enum.Method.html' title='hyper::method::Method'>Method</a>,
@@ -51,12 +51,12 @@
     pub uri: <a class='enum' href='../../../hyper/uri/enum.RequestUri.html' title='hyper::uri::RequestUri'>RequestUri</a>,
     pub version: <a class='enum' href='../../../hyper/version/enum.HttpVersion.html' title='hyper::version::HttpVersion'>HttpVersion</a>,
     // some fields omitted
-}</pre><div class='docblock'><p>A request bundles several parts of an incoming <code>NetworkStream</code>`NetworkStream<code>, given to a</code>`, given to a <code>Handler</code>`Handler`.</p>
+}</pre><div class='docblock'><p>A request bundles several parts of an incoming <code>NetworkStream</code>, given to a <code>Handler</code>.</p>
 </div><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                                   <td id='structfield.remote_addr'><code>remote_addr</code></td><td><div class='docblock'><p>The IP address of the remote connection.</p>
 </div></td></tr><tr class='stab '>
-                                  <td id='structfield.method'><code>method</code></td><td><div class='docblock'><p>The <code>Method</code>`Method<code>, such as</code>`, such as <code>Get</code>`Get<code>,</code>`, <code>Post</code>`Post`, etc.</p>
+                                  <td id='structfield.method'><code>method</code></td><td><div class='docblock'><p>The <code>Method</code>, such as <code>Get</code>, <code>Post</code>, etc.</p>
 </div></td></tr><tr class='stab '>
                                   <td id='structfield.headers'><code>headers</code></td><td><div class='docblock'><p>The headers of the incoming request.</p>
 </div></td></tr><tr class='stab '>

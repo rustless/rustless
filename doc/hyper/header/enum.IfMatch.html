@@ -43,14 +43,14 @@
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='enum' href=''>IfMatch</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-13723' class='srclink' href='../../src/hyper/header/common/mod.rs.html#245-250' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-14937' class='srclink' href='../../src/hyper/header/common/mod.rs.html#234-239' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum IfMatch {
     Any,
     Items(<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../hyper/header/struct.EntityTag.html' title='hyper::header::EntityTag'>EntityTag</a>&gt;),
-}</pre><div class='docblock'><p><code>If-Match</code>`If-Match` header, defined in
+}</pre><div class='docblock'><p><code>If-Match</code> header, defined in
 <a href="https://tools.ietf.org/html/rfc7232#section-3.1">RFC7232</a></p>
 
-<p>The <code>If-Match</code>`If-Match` header field makes the request method conditional on
+<p>The <code>If-Match</code> header field makes the request method conditional on
 the recipient origin server either having at least one current
 representation of the target resource, when the field-value is &quot;*&quot;,
 or having a current representation of the target resource that has an
@@ -58,7 +58,7 @@ entity-tag matching a member of the list of entity-tags provided in
 the field-value.</p>
 
 <p>An origin server MUST use the strong comparison function when
-comparing entity-tags for <code>If-Match</code>`If-Match`, since the client
+comparing entity-tags for <code>If-Match</code>, since the client
 intends this precondition to prevent the method from being applied if
 there have been any changes to the representation data.</p>
 
@@ -70,7 +70,7 @@ there have been any changes to the representation data.</p>
 <h1 id="example-values" class='section-header'><a
                            href="#example-values">Example values</a></h1>
 <ul>
-<li><code>&quot;xyzzy&quot;</code>`&quot;xyzzy&quot;`</li>
+<li><code>&quot;xyzzy&quot;</code></li>
 <li>&quot;xyzzy&quot;, &quot;r2d2xxxx&quot;, &quot;c3piozzzz&quot;</li>
 </ul>
 </div><h2 class='variants'>Variants</h2>

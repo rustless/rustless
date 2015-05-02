@@ -43,7 +43,7 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='struct' href=''>QualityItem</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-22793' class='srclink' href='../../src/hyper/header/shared/quality_item.rs.html#44-49' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-24439' class='srclink' href='../../src/hyper/header/shared/quality_item.rs.html#44-49' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct QualityItem&lt;T&gt; {
     pub item: T,
     pub quality: <a class='struct' href='../../hyper/header/struct.Quality.html' title='hyper::header::Quality'>Quality</a>,
@@ -55,7 +55,7 @@
 </div></td></tr><tr class='stab '>
                                   <td id='structfield.quality'><code>quality</code></td><td><div class='docblock'><p>The quality (client or server preference) for the value.</p>
 </div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;T&gt; <a class='struct' href='../../hyper/header/struct.QualityItem.html' title='hyper::header::QualityItem'>QualityItem</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(item: T, quality: <a class='struct' href='../../hyper/header/struct.Quality.html' title='hyper::header::Quality'>Quality</a>) -&gt; <a class='struct' href='../../hyper/header/struct.QualityItem.html' title='hyper::header::QualityItem'>QualityItem</a>&lt;T&gt;</code></h4>
-<div class='docblock'><p>Creates a new <code>QualityItem</code>`QualityItem` from an item and a quality.
+<div class='docblock'><p>Creates a new <code>QualityItem</code> from an item and a quality.
 The item can be of any type.
 The quality should be a value in the range [0, 1].</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html' title='core::cmp::PartialOrd'>PartialOrd</a> for <a class='struct' href='../../hyper/header/struct.QualityItem.html' title='hyper::header::QualityItem'>QualityItem</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.partial_cmp' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#method.partial_cmp' class='fnname'>partial_cmp</a>(&amp;self, other: &amp;<a class='struct' href='../../hyper/header/struct.QualityItem.html' title='hyper::header::QualityItem'>QualityItem</a>&lt;T&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a>&gt;</code></h4>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.15/src/header/common/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/header/common/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -370,6 +370,22 @@
 <span id="328">328</span>
 <span id="329">329</span>
 <span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A Collection of Header implementations for common HTTP Headers.</span>
 <span class='doccomment'>//!</span>
@@ -407,6 +423,7 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>if_modified_since</span>::<span class='ident'>IfModifiedSince</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>if_none_match</span>::<span class='ident'>IfNoneMatch</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>if_unmodified_since</span>::<span class='ident'>IfUnmodifiedSince</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>if_range</span>::<span class='ident'>IfRange</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>last_modified</span>::<span class='ident'>LastModified</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>location</span>::<span class='ident'>Location</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>pragma</span>::<span class='ident'>Pragma</span>;
@@ -468,6 +485,22 @@
     }
 );
 
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>tm</span> {
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
+        <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused_imports</span>)]</span>
+        <span class='kw'>mod</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>{
+            <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
+            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='op'>*</span>;
+            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>mime</span>::<span class='op'>*</span>;
+            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>method</span>::<span class='ident'>Method</span>;
+            <span class='kw'>use</span> <span class='ident'>super</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='kw'>as</span> <span class='ident'>HeaderField</span>;
+            $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span>
+        }
+
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>test_header</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>raw</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
         <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -507,7 +540,7 @@
     <span class='comment'>// $nn:expr: Nice name of the header</span>
 
     <span class='comment'>// List header, zero or more items</span>
-    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>*</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
+    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> {
         $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
         <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
         <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>(<span class='kw'>pub</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span><span class='op'>&gt;</span>);
@@ -531,19 +564,9 @@
                 <span class='self'>self</span>.<span class='ident'>fmt_header</span>(<span class='ident'>f</span>)
             }
         }
-        <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused_imports</span>)]</span>
-        <span class='kw'>mod</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>{
-            <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='op'>*</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>mime</span>::<span class='op'>*</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>method</span>::<span class='ident'>Method</span>;
-            <span class='kw'>use</span> <span class='ident'>super</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='kw'>as</span> <span class='ident'>HeaderField</span>;
-            $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span>
-        }
-
     };
     <span class='comment'>// List header, one or more items</span>
-    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>+</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
+    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>+</span>) <span class='op'>=&gt;</span> {
         $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
         <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
         <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>(<span class='kw'>pub</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span><span class='op'>&gt;</span>);
@@ -566,19 +589,10 @@
                 <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>HeaderFormat</span>;
                 <span class='self'>self</span>.<span class='ident'>fmt_header</span>(<span class='ident'>f</span>)
             }
-        }
-        <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused_imports</span>)]</span>
-        <span class='kw'>mod</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>{
-            <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='op'>*</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>mime</span>::<span class='op'>*</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>method</span>::<span class='ident'>Method</span>;
-            <span class='kw'>use</span> <span class='ident'>super</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='kw'>as</span> <span class='ident'>HeaderField</span>;
-            $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span>
         }
     };
     <span class='comment'>// Single value header</span>
-    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> [<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>value</span>:<span class='ident'>ty</span>] <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
+    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> [<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>value</span>:<span class='ident'>ty</span>]) <span class='op'>=&gt;</span> {
         $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
         <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
         <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>(<span class='kw'>pub</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>value</span>);
@@ -601,18 +615,9 @@
                 ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Display</span>::<span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>, <span class='ident'>f</span>)
             }
         }
-        <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused_imports</span>)]</span>
-        <span class='kw'>mod</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>{
-            <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='op'>*</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>mime</span>::<span class='op'>*</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>method</span>::<span class='ident'>Method</span>;
-            <span class='kw'>use</span> <span class='ident'>super</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='kw'>as</span> <span class='ident'>HeaderField</span>;
-            $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span>
-        }
     };
     <span class='comment'>// List header, one or more items with &quot;*&quot; option</span>
-    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {<span class='ident'>Any</span> <span class='op'>/</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>+</span>} <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
+    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {<span class='ident'>Any</span> <span class='op'>/</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>+</span>}) <span class='op'>=&gt;</span> {
         $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
         <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
         <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> {
@@ -651,17 +656,43 @@
                 <span class='self'>self</span>.<span class='ident'>fmt_header</span>(<span class='ident'>f</span>)
             }
         }
-        <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused_imports</span>)]</span>
-        <span class='kw'>mod</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>{
-            <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='op'>*</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>mime</span>::<span class='op'>*</span>;
-            <span class='kw'>use</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>method</span>::<span class='ident'>Method</span>;
-            <span class='kw'>use</span> <span class='ident'>super</span>::<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='kw'>as</span> <span class='ident'>HeaderField</span>;
-            $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span>
+    };
+
+    <span class='comment'>// optional test module</span>
+    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>*</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
+        <span class='macro'>header</span><span class='macro'>!</span> {
+            $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
+            (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>)<span class='op'>*</span>
         }
+
+        <span class='macro'>tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
+    };
+    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>+</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
+        <span class='macro'>header</span><span class='macro'>!</span> {
+            $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
+            (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>)<span class='op'>+</span>
+        }
+
+        <span class='macro'>tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
+    };
+    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> [<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>] <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
+        <span class='macro'>header</span><span class='macro'>!</span> {
+            $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
+            (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>) <span class='op'>=&gt;</span> [<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>]
+        }
+
+        <span class='macro'>tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
+    };
+    ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {<span class='ident'>Any</span> <span class='op'>/</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>+</span>} <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
+        <span class='macro'>header</span><span class='macro'>!</span> {
+            $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
+            (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>) <span class='op'>=&gt;</span> {<span class='ident'>Any</span> <span class='op'>/</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>)<span class='op'>+</span>}
+        }
+
+        <span class='macro'>tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
     };
 }
+
 
 <span class='kw'>mod</span> <span class='ident'>accept</span>;
 <span class='kw'>mod</span> <span class='ident'>access_control_allow_headers</span>;
@@ -688,10 +719,11 @@
 <span class='kw'>mod</span> <span class='ident'>expires</span>;
 <span class='kw'>mod</span> <span class='ident'>host</span>;
 <span class='kw'>mod</span> <span class='ident'>if_match</span>;
-<span class='kw'>mod</span> <span class='ident'>last_modified</span>;
 <span class='kw'>mod</span> <span class='ident'>if_modified_since</span>;
 <span class='kw'>mod</span> <span class='ident'>if_none_match</span>;
+<span class='kw'>mod</span> <span class='ident'>if_range</span>;
 <span class='kw'>mod</span> <span class='ident'>if_unmodified_since</span>;
+<span class='kw'>mod</span> <span class='ident'>last_modified</span>;
 <span class='kw'>mod</span> <span class='ident'>location</span>;
 <span class='kw'>mod</span> <span class='ident'>pragma</span>;
 <span class='kw'>mod</span> <span class='ident'>referer</span>;

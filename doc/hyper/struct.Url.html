@@ -58,69 +58,69 @@
 </div></td></tr><tr class='stab '>
                                   <td id='structfield.query'><code>query</code></td><td><div class='docblock'><p>The query string of the URL.</p>
 
-<p><code>None</code>`None<code>if the</code>` if the <code>?</code>`?` delimiter character was not part of the parsed input,
+<p><code>None</code> if the <code>?</code> delimiter character was not part of the parsed input,
 otherwise a possibly empty, pecent-encoded string.</p>
 
 <p>Percent encoded strings are within the ASCII range.</p>
 
-<p>See also the <code>query_pairs</code>`query_pairs<code>,</code>`, <code>set_query_from_pairs</code>`set_query_from_pairs<code>, and</code>`,
-and <code>lossy_percent_decode_query</code>`lossy_percent_decode_query` methods.</p>
+<p>See also the <code>query_pairs</code>, <code>set_query_from_pairs</code>,
+and <code>lossy_percent_decode_query</code> methods.</p>
 </div></td></tr><tr class='stab '>
                                   <td id='structfield.fragment'><code>fragment</code></td><td><div class='docblock'><p>The fragment identifier of the URL.</p>
 
-<p><code>None</code>`None<code>if the</code>` if the <code>#</code>`#` delimiter character was not part of the parsed input,
+<p><code>None</code> if the <code>#</code> delimiter character was not part of the parsed input,
 otherwise a possibly empty, pecent-encoded string.</p>
 
 <p>Percent encoded strings are within the ASCII range.</p>
 
-<p>See also the <code>lossy_percent_decode_fragment</code>`lossy_percent_decode_fragment` method.</p>
+<p>See also the <code>lossy_percent_decode_fragment</code> method.</p>
 </div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../hyper/struct.Url.html' title='hyper::Url'>Url</a></code></h3><div class='impl-items'><h4 id='method.parse' class='method'><code>fn <a href='#method.parse' class='fnname'>parse</a>(input: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../hyper/struct.Url.html' title='hyper::Url'>Url</a>, <a class='enum' href='../url/parser/enum.ParseError.html' title='url::parser::ParseError'>ParseError</a>&gt;</code></h4>
-<div class='docblock'><p>Parse an URL with the default <code>UrlParser</code>`UrlParser` parameters.</p>
+<div class='docblock'><p>Parse an URL with the default <code>UrlParser</code> parameters.</p>
 
 <p>In particular, relative URL references are parse errors since no base URL is provided.</p>
 </div><h4 id='method.from_file_path' class='method'><code>fn <a href='#method.from_file_path' class='fnname'>from_file_path</a>&lt;P&gt;(path: P) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../hyper/struct.Url.html' title='hyper::Url'>Url</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;</span></code></h4>
-<div class='docblock'><p>Convert a file name as <code>std::path::Path</code>`std::path::Path<code>into an URL in the</code>` into an URL in the <code>file</code>`file` scheme.</p>
+<div class='docblock'><p>Convert a file name as <code>std::path::Path</code> into an URL in the <code>file</code> scheme.</p>
 
-<p>This returns <code>Err</code>`Err<code>if the given path is not absolute or, with a Windows path, if the prefix is not a disk prefix (e.g.</code>` if the given path is not absolute
-or, with a Windows path, if the prefix is not a disk prefix (e.g. <code>C:</code>`C:`).</p>
+<p>This returns <code>Err</code> if the given path is not absolute
+or, with a Windows path, if the prefix is not a disk prefix (e.g. <code>C:</code>).</p>
 </div><h4 id='method.from_directory_path' class='method'><code>fn <a href='#method.from_directory_path' class='fnname'>from_directory_path</a>&lt;P&gt;(path: P) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../hyper/struct.Url.html' title='hyper::Url'>Url</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; <span class='where'>where P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;</span></code></h4>
-<div class='docblock'><p>Convert a directory name as <code>std::path::Path</code>`std::path::Path<code>into an URL in the</code>` into an URL in the <code>file</code>`file` scheme.</p>
+<div class='docblock'><p>Convert a directory name as <code>std::path::Path</code> into an URL in the <code>file</code> scheme.</p>
 
-<p>This returns <code>Err</code>`Err<code>if the given path is not absolute or, with a Windows path, if the prefix is not a disk prefix (e.g.</code>` if the given path is not absolute
-or, with a Windows path, if the prefix is not a disk prefix (e.g. <code>C:</code>`C:`).</p>
+<p>This returns <code>Err</code> if the given path is not absolute
+or, with a Windows path, if the prefix is not a disk prefix (e.g. <code>C:</code>).</p>
 
-<p>Compared to <code>from_file_path</code>`from_file_path`, this adds an empty component to the path
+<p>Compared to <code>from_file_path</code>, this adds an empty component to the path
 (or, in terms of URL syntax, adds a trailing slash)
 so that the entire path is considered when using this URL as a base URL.</p>
 
 <p>For example:</p>
 
 <ul>
-<li><code>&quot;index.html&quot;</code>`&quot;index.html&quot;<code>parsed with</code>` parsed with <code>Url::from_directory_path(Path::new(&quot;/var/www&quot;))</code>`Url::from_directory_path(Path::new(&quot;/var/www&quot;))<code>as the base URL is</code>`
-as the base URL is <code>file:///var/www/index.html</code>`file:///var/www/index.html`</li>
-<li><code>&quot;index.html&quot;</code>`&quot;index.html&quot;<code>parsed with</code>` parsed with <code>Url::from_file_path(Path::new(&quot;/var/www/&quot;))</code>`Url::from_file_path(Path::new(&quot;/var/www/&quot;))<code>as the base URL is</code>`
-as the base URL is <code>file:///var/index.html</code>`file:///var/index.html`, which might not be what was intended.</li>
+<li><code>&quot;index.html&quot;</code> parsed with <code>Url::from_directory_path(Path::new(&quot;/var/www&quot;))</code>
+as the base URL is <code>file:///var/www/index.html</code></li>
+<li><code>&quot;index.html&quot;</code> parsed with <code>Url::from_file_path(Path::new(&quot;/var/www/&quot;))</code>
+as the base URL is <code>file:///var/index.html</code>, which might not be what was intended.</li>
 </ul>
 
-<p>(Note that <code>Path::new</code>`Path::new` removes any trailing slash.)</p>
+<p>(Note that <code>Path::new</code> removes any trailing slash.)</p>
 </div><h4 id='method.to_file_path' class='method'><code>fn <a href='#method.to_file_path' class='fnname'>to_file_path</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.PathBuf.html' title='std::path::PathBuf'>PathBuf</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
-<div class='docblock'><p>Assuming the URL is in the <code>file</code>`file<code>scheme or similar, convert its path to an absolute</code>` scheme or similar,
-convert its path to an absolute <code>std::path::Path</code>`std::path::Path`.</p>
+<div class='docblock'><p>Assuming the URL is in the <code>file</code> scheme or similar,
+convert its path to an absolute <code>std::path::Path</code>.</p>
 
-<p><strong>Note:</strong> This does not actually check the URL’s <code>scheme</code>`scheme`,
+<p><strong>Note:</strong> This does not actually check the URL’s <code>scheme</code>,
 and may give nonsensical results for other schemes.
 It is the user’s responsibility to check the URL’s scheme before calling this.</p>
 
-<p>The return type (when <code>Ok()</code>`Ok()<code>) is generic and can be either</code>`) is generic and can be either <code>std::path::posix::Path</code>`std::path::posix::Path<code>or</code>`
-or <code>std::path::windows::Path</code>`std::path::windows::Path<code>. (Use</code>`.
-(Use <code>std::path::Path</code>`std::path::Path` to pick one of them depending on the local system.)
+<p>The return type (when <code>Ok()</code>) is generic and can be either <code>std::path::posix::Path</code>
+or <code>std::path::windows::Path</code>.
+(Use <code>std::path::Path</code> to pick one of them depending on the local system.)
 If the compiler can not infer the desired type from context, you may have to specifiy it:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>to_file_path</span>::<span class='op'>&lt;</span><span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>posix</span>::<span class='ident'>Path</span><span class='op'>&gt;</span>();
 </pre>
 
-<p>Returns <code>Err</code>`Err<code>if the host is neither empty nor</code>` if the host is neither empty nor <code>&quot;localhost&quot;</code>`&quot;localhost&quot;<code>, or if</code>`,
-or if <code>Path::new_opt()</code>`Path::new_opt()<code>returns</code>` returns <code>None</code>`None`.
+<p>Returns <code>Err</code> if the host is neither empty nor <code>&quot;localhost&quot;</code>,
+or if <code>Path::new_opt()</code> returns <code>None</code>.
 (That is, if the percent-decoded path contains a NUL byte or,
 for a Windows path, is not UTF-8.)</p>
 </div><h4 id='method.serialize' class='method'><code>fn <a href='#method.serialize' class='fnname'>serialize</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
@@ -189,10 +189,10 @@ return its port number, even if it is the default.</p>
 <p>The returned string starts with a &quot;/&quot; slash, and components are separated by slashes.
 A trailing slash represents an empty last component.</p>
 </div><h4 id='method.query_pairs' class='method'><code>fn <a href='#method.query_pairs' class='fnname'>query_pairs</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>)</a>&gt;&gt;</code></h4>
-<div class='docblock'><p>Parse the URL’s query string, if any, as <code>application/x-www-form-urlencoded</code>`application/x-www-form-urlencoded`
+<div class='docblock'><p>Parse the URL’s query string, if any, as <code>application/x-www-form-urlencoded</code>
 and return a vector of (key, value) pairs.</p>
 </div><h4 id='method.set_query_from_pairs' class='method'><code>fn <a href='#method.set_query_from_pairs' class='fnname'>set_query_from_pairs</a>&lt;'a, I&gt;(&amp;mut self, pairs: I) <span class='where'>where I: <a class='trait' href='http://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html' title='core::iter::Iterator'>Iterator</a>&lt;Item=<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;'a <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, &amp;'a <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</a>&gt;</span></code></h4>
-<div class='docblock'><p>Serialize an iterator of (key, value) pairs as <code>application/x-www-form-urlencoded</code>`application/x-www-form-urlencoded`
+<div class='docblock'><p>Serialize an iterator of (key, value) pairs as <code>application/x-www-form-urlencoded</code>
 and set it as the URL’s query string.</p>
 </div><h4 id='method.lossy_percent_decode_query' class='method'><code>fn <a href='#method.lossy_percent_decode_query' class='fnname'>lossy_percent_decode_query</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
 <div class='docblock'><p>Percent-decode the URL’s query string, if any.</p>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.15/src/http.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/http.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>http.rs.html -- source</title>
@@ -592,6 +592,32 @@
 <span id="550">550</span>
 <span id="551">551</span>
 <span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
+<span id="574">574</span>
+<span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
+<span id="578">578</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Pieces pertaining to the HTTP message protocol.</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::{<span class='ident'>Cow</span>, <span class='ident'>ToOwned</span>};
@@ -602,7 +628,8 @@
 <span class='kw'>use</span> <span class='ident'>httparse</span>;
 
 <span class='kw'>use</span> <span class='ident'>buffer</span>::<span class='ident'>BufReader</span>;
-<span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>Headers</span>;
+<span class='kw'>use</span> <span class='ident'>header</span>::{<span class='ident'>Headers</span>, <span class='ident'>Connection</span>};
+<span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>ConnectionOption</span>::{<span class='ident'>Close</span>, <span class='ident'>KeepAlive</span>};
 <span class='kw'>use</span> <span class='ident'>method</span>::<span class='ident'>Method</span>;
 <span class='kw'>use</span> <span class='ident'>status</span>::<span class='ident'>StatusCode</span>;
 <span class='kw'>use</span> <span class='ident'>uri</span>::<span class='ident'>RequestUri</span>;
@@ -1003,8 +1030,8 @@
             <span class='ident'>httparse</span>::<span class='ident'>Status</span>::<span class='ident'>Complete</span>(<span class='ident'>len</span>) <span class='op'>=&gt;</span> {
                 <span class='kw'>let</span> <span class='ident'>code</span> <span class='op'>=</span> <span class='ident'>res</span>.<span class='ident'>code</span>.<span class='ident'>unwrap</span>();
                 <span class='kw'>let</span> <span class='ident'>reason</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>StatusCode</span>::<span class='ident'>from_u16</span>(<span class='ident'>code</span>).<span class='ident'>canonical_reason</span>() {
-                    <span class='prelude-val'>Some</span>(<span class='ident'>reason</span>) <span class='op'>=&gt;</span> <span class='ident'>Cow</span>::<span class='ident'>Borrowed</span>(<span class='ident'>reason</span>),
-                    <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='ident'>Cow</span>::<span class='ident'>Owned</span>(<span class='ident'>res</span>.<span class='ident'>reason</span>.<span class='ident'>unwrap</span>().<span class='ident'>to_owned</span>())
+                    <span class='prelude-val'>Some</span>(<span class='ident'>reason</span>) <span class='kw'>if</span> <span class='ident'>reason</span> <span class='op'>==</span> <span class='ident'>res</span>.<span class='ident'>reason</span>.<span class='ident'>unwrap</span>() <span class='op'>=&gt;</span> <span class='ident'>Cow</span>::<span class='ident'>Borrowed</span>(<span class='ident'>reason</span>),
+                    _ <span class='op'>=&gt;</span> <span class='ident'>Cow</span>::<span class='ident'>Owned</span>(<span class='ident'>res</span>.<span class='ident'>reason</span>.<span class='ident'>unwrap</span>().<span class='ident'>to_owned</span>())
                 };
                 <span class='ident'>httparse</span>::<span class='ident'>Status</span>::<span class='ident'>Complete</span>((<span class='ident'>Incoming</span> {
                     <span class='ident'>version</span>: <span class='kw'>if</span> <span class='ident'>res</span>.<span class='ident'>version</span>.<span class='ident'>unwrap</span>() <span class='op'>==</span> <span class='number'>1</span> { <span class='ident'>Http11</span> } <span class='kw'>else</span> { <span class='ident'>Http10</span> },
@@ -1038,6 +1065,15 @@
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>RawStatus</span>(<span class='kw'>pub</span> <span class='ident'>u16</span>, <span class='kw'>pub</span> <span class='ident'>Cow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;static</span>, <span class='ident'>str</span><span class='op'>&gt;</span>);
 
+<span class='doccomment'>/// Checks if a connection should be kept alive.</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>should_keep_alive</span>(<span class='ident'>version</span>: <span class='ident'>HttpVersion</span>, <span class='ident'>headers</span>: <span class='kw-2'>&amp;</span><span class='ident'>Headers</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+    <span class='kw'>match</span> (<span class='ident'>version</span>, <span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>Connection</span><span class='op'>&gt;</span>()) {
+        (<span class='ident'>Http10</span>, <span class='prelude-val'>Some</span>(<span class='ident'>conn</span>)) <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>conn</span>.<span class='ident'>contains</span>(<span class='kw-2'>&amp;</span><span class='ident'>KeepAlive</span>) <span class='op'>=&gt;</span> <span class='boolval'>false</span>,
+        (<span class='ident'>Http11</span>, <span class='prelude-val'>Some</span>(<span class='ident'>conn</span>)) <span class='kw'>if</span> <span class='ident'>conn</span>.<span class='ident'>contains</span>(<span class='kw-2'>&amp;</span><span class='ident'>Close</span>)  <span class='op'>=&gt;</span> <span class='boolval'>false</span>,
+        _ <span class='op'>=&gt;</span> <span class='boolval'>true</span>
+    }
+}
+
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Write</span>};
@@ -1045,7 +1081,7 @@
     <span class='kw'>use</span> <span class='ident'>buffer</span>::<span class='ident'>BufReader</span>;
     <span class='kw'>use</span> <span class='ident'>mock</span>::<span class='ident'>MockStream</span>;
 
-    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>read_chunk_size</span>, <span class='ident'>parse_request</span>};
+    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>read_chunk_size</span>, <span class='ident'>parse_request</span>, <span class='ident'>parse_response</span>};
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_write_chunked</span>() {
@@ -1117,6 +1153,22 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='ident'>BufReader</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>raw</span>);
         <span class='ident'>parse_request</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>).<span class='ident'>unwrap</span>();
     }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_parse_raw_status</span>() {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>MockStream</span>::<span class='ident'>with_input</span>(<span class='string'>b&quot;HTTP/1.1 200 OK\r\n\r\n&quot;</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='ident'>BufReader</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>raw</span>);
+        <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>parse_response</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>).<span class='ident'>unwrap</span>();
+
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>subject</span>.<span class='number'>1</span>, <span class='string'>&quot;OK&quot;</span>);
+
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>MockStream</span>::<span class='ident'>with_input</span>(<span class='string'>b&quot;HTTP/1.1 200 Howdy\r\n\r\n&quot;</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='ident'>BufReader</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>raw</span>);
+        <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>parse_response</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>).<span class='ident'>unwrap</span>();
+
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>subject</span>.<span class='number'>1</span>, <span class='string'>&quot;Howdy&quot;</span>);
+    }
+
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_parse_tcp_closed</span>() {

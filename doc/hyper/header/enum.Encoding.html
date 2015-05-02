@@ -43,7 +43,7 @@
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='enum' href=''>Encoding</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-20359' class='srclink' href='../../src/hyper/header/shared/encoding.rs.html#11-24' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-22005' class='srclink' href='../../src/hyper/header/shared/encoding.rs.html#11-24' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Encoding {
     Chunked,
     Gzip,
@@ -51,13 +51,14 @@
     Compress,
     Identity,
     EncodingExt(<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>),
-}</pre><div class='docblock'><p>A value to represent an encoding used in <code>Transfer-Encoding</code>`Transfer-Encoding<code>or</code>Accept-Encoding` header.</p>
+}</pre><div class='docblock'><p>A value to represent an encoding used in <code>Transfer-Encoding</code>
+or <code>Accept-Encoding</code> header.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Chunked'><code>Chunked</code></td><td><div class='docblock'><p>The <code>chunked</code>`chunked` encoding.</p>
-</div></td></tr><tr><td id='variant.Gzip'><code>Gzip</code></td><td><div class='docblock'><p>The <code>gzip</code>`gzip` encoding.</p>
-</div></td></tr><tr><td id='variant.Deflate'><code>Deflate</code></td><td><div class='docblock'><p>The <code>deflate</code>`deflate` encoding.</p>
-</div></td></tr><tr><td id='variant.Compress'><code>Compress</code></td><td><div class='docblock'><p>The <code>compress</code>`compress` encoding.</p>
-</div></td></tr><tr><td id='variant.Identity'><code>Identity</code></td><td><div class='docblock'><p>The <code>identity</code>`identity` encoding.</p>
+<table><tr><td id='variant.Chunked'><code>Chunked</code></td><td><div class='docblock'><p>The <code>chunked</code> encoding.</p>
+</div></td></tr><tr><td id='variant.Gzip'><code>Gzip</code></td><td><div class='docblock'><p>The <code>gzip</code> encoding.</p>
+</div></td></tr><tr><td id='variant.Deflate'><code>Deflate</code></td><td><div class='docblock'><p>The <code>deflate</code> encoding.</p>
+</div></td></tr><tr><td id='variant.Compress'><code>Compress</code></td><td><div class='docblock'><p>The <code>compress</code> encoding.</p>
+</div></td></tr><tr><td id='variant.Identity'><code>Identity</code></td><td><div class='docblock'><p>The <code>identity</code> encoding.</p>
 </div></td></tr><tr><td id='variant.EncodingExt'><code>EncodingExt</code></td><td><div class='docblock'><p>Some other encoding that is less common, can be any String.</p>
 </div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../../hyper/header/enum.Encoding.html' title='hyper::header::Encoding'>Encoding</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#method.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.FromStr.html' title='core::str::FromStr'>FromStr</a> for <a class='enum' href='../../hyper/header/enum.Encoding.html' title='hyper::header::Encoding'>Encoding</a></code></h3><div class='impl-items'><h4 id='assoc_type.Err' class='type'><code>type Err = <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a></code></h4>

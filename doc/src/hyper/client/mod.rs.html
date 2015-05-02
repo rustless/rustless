@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.15/src/client/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/client/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -480,6 +480,16 @@
 <span id="438">438</span>
 <span id="439">439</span>
 <span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP Client</span>
 <span class='doccomment'>//!</span>
@@ -529,15 +539,17 @@
 <span class='kw'>use</span> {<span class='ident'>Url</span>, <span class='ident'>HttpResult</span>};
 <span class='kw'>use</span> <span class='ident'>HttpError</span>::<span class='ident'>HttpUriError</span>;
 
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>pool</span>::<span class='ident'>Pool</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>request</span>::<span class='ident'>Request</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>response</span>::<span class='ident'>Response</span>;
 
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>pool</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>request</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>response</span>;
 
 <span class='doccomment'>/// A Client to use additional features with Requests.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Clients can handle things such as: redirect policy.</span>
+<span class='doccomment'>/// Clients can handle things such as: redirect policy, connection pooling.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Client</span> {
     <span class='ident'>connector</span>: <span class='ident'>Connector</span>,
     <span class='ident'>redirect_policy</span>: <span class='ident'>RedirectPolicy</span>,
@@ -547,7 +559,12 @@
 
     <span class='doccomment'>/// Create a new Client.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>Client</span> {
-        <span class='ident'>Client</span>::<span class='ident'>with_connector</span>(<span class='ident'>HttpConnector</span>(<span class='prelude-val'>None</span>))
+        <span class='ident'>Client</span>::<span class='ident'>with_pool_config</span>(<span class='ident'>Default</span>::<span class='ident'>default</span>())
+    }
+
+    <span class='doccomment'>/// Create a new Client with a configured Pool Config.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_pool_config</span>(<span class='ident'>config</span>: <span class='ident'>pool</span>::<span class='ident'>Config</span>) <span class='op'>-&gt;</span> <span class='ident'>Client</span> {
+        <span class='ident'>Client</span>::<span class='ident'>with_connector</span>(<span class='ident'>Pool</span>::<span class='ident'>new</span>(<span class='ident'>config</span>))
     }
 
     <span class='doccomment'>/// Create a new client with a specific connector.</span>
@@ -561,7 +578,10 @@
 
     <span class='doccomment'>/// Set the SSL verifier callback for use with OpenSSL.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_ssl_verifier</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>verifier</span>: <span class='ident'>ContextVerifier</span>) {
-        <span class='self'>self</span>.<span class='ident'>connector</span> <span class='op'>=</span> <span class='ident'>with_connector</span>(<span class='ident'>HttpConnector</span>(<span class='prelude-val'>Some</span>(<span class='ident'>verifier</span>)));
+        <span class='self'>self</span>.<span class='ident'>connector</span> <span class='op'>=</span> <span class='ident'>with_connector</span>(<span class='ident'>Pool</span>::<span class='ident'>with_connector</span>(
+            <span class='ident'>Default</span>::<span class='ident'>default</span>(),
+            <span class='ident'>HttpConnector</span>(<span class='prelude-val'>Some</span>(<span class='ident'>verifier</span>))
+        ));
     }
 
     <span class='doccomment'>/// Set the RedirectPolicy.</span>

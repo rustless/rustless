@@ -43,11 +43,11 @@
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='enum' href=''>Pragma</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-15417' class='srclink' href='../../src/hyper/header/common/pragma.rs.html#20-25' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-17063' class='srclink' href='../../src/hyper/header/common/pragma.rs.html#20-25' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Pragma {
     NoCache,
     Ext(<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>),
-}</pre><div class='docblock'><p>The <code>Pragma</code>`Pragma` header defined by HTTP/1.0.</p>
+}</pre><div class='docblock'><p>The <code>Pragma</code> header defined by HTTP/1.0.</p>
 
 <blockquote>
 <p>The &quot;Pragma&quot; header field allows backwards compatibility with
@@ -62,8 +62,8 @@ specification deprecates such extensions to improve interoperability.</p>
 
 <p>Spec: <a href="https://tools.ietf.org/html/rfc7234#section-5.4">https://tools.ietf.org/html/rfc7234#section-5.4</a></p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.NoCache'><code>NoCache</code></td><td><div class='docblock'><p>Corresponds to the <code>no-cache</code>`no-cache` value.</p>
-</div></td></tr><tr><td id='variant.Ext'><code>Ext</code></td><td><div class='docblock'><p>Every value other than <code>no-cache</code>`no-cache`.</p>
+<table><tr><td id='variant.NoCache'><code>NoCache</code></td><td><div class='docblock'><p>Corresponds to the <code>no-cache</code> value.</p>
+</div></td></tr><tr><td id='variant.Ext'><code>Ext</code></td><td><div class='docblock'><p>Every value other than <code>no-cache</code>.</p>
 </div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../hyper/header/trait.Header.html' title='hyper::header::Header'>Header</a> for <a class='enum' href='../../hyper/header/enum.Pragma.html' title='hyper::header::Pragma'>Pragma</a></code></h3><div class='impl-items'><h4 id='method.header_name' class='method'><code>fn <a href='../../hyper/header/trait.Header.html#method.header_name' class='fnname'>header_name</a>() -&gt; &amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
 <h4 id='method.parse_header' class='method'><code>fn <a href='../../hyper/header/trait.Header.html#method.parse_header' class='fnname'>parse_header</a>(raw: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;<a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../hyper/header/enum.Pragma.html' title='hyper::header::Pragma'>Pragma</a>&gt;</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='../../hyper/header/trait.HeaderFormat.html' title='hyper::header::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../hyper/header/enum.Pragma.html' title='hyper::header::Pragma'>Pragma</a></code></h3><div class='impl-items'><h4 id='method.fmt_header' class='method'><code>fn <a href='../../hyper/header/trait.HeaderFormat.html#method.fmt_header' class='fnname'>fmt_header</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>

@@ -43,7 +43,7 @@
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>server</a>::<wbr><a class='trait' href=''>Handler</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-33169' class='srclink' href='../../src/hyper/server/mod.rs.html#251-264' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-34878' class='srclink' href='../../src/hyper/server/mod.rs.html#247-260' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Handler: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> {
     fn <a href='#tymethod.handle' class='fnname'>handle</a>&lt;'a, 'k&gt;(&amp;'a self, <a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>&lt;'a, 'k&gt;, <a class='struct' href='../../hyper/server/response/struct.Response.html' title='hyper::server::response::Response'>Response</a>&lt;'a, <a class='enum' href='../../hyper/net/enum.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;);
 
@@ -52,15 +52,15 @@
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.handle' class='method stab '><code>fn <a href='#tymethod.handle' class='fnname'>handle</a>&lt;'a, 'k&gt;(&amp;'a self, <a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>&lt;'a, 'k&gt;, <a class='struct' href='../../hyper/server/response/struct.Response.html' title='hyper::server::response::Response'>Response</a>&lt;'a, <a class='enum' href='../../hyper/net/enum.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;)</code></h3><div class='docblock'><p>Receives a <code>Request</code>`Request<code>/</code>`/<code>Response</code>`Response` pair, and should perform some action on them.</p>
+        <h3 id='tymethod.handle' class='method stab '><code>fn <a href='#tymethod.handle' class='fnname'>handle</a>&lt;'a, 'k&gt;(&amp;'a self, <a class='struct' href='../../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>Request</a>&lt;'a, 'k&gt;, <a class='struct' href='../../hyper/server/response/struct.Response.html' title='hyper::server::response::Response'>Response</a>&lt;'a, <a class='enum' href='../../hyper/net/enum.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;)</code></h3><div class='docblock'><p>Receives a <code>Request</code>/<code>Response</code> pair, and should perform some action on them.</p>
 
 <p>This could reading from the request, and writing to the response.</p>
 </div></div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.check_continue' class='method stab '><code>fn <a href='#method.check_continue' class='fnname'>check_continue</a>(&amp;self, _: <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;<a class='enum' href='../../hyper/method/enum.Method.html' title='hyper::method::Method'>Method</a>, &amp;<a class='enum' href='../../hyper/uri/enum.RequestUri.html' title='hyper::uri::RequestUri'>RequestUri</a>, &amp;<a class='struct' href='../../hyper/header/struct.Headers.html' title='hyper::header::Headers'>Headers</a>)</a>) -&gt; <a class='enum' href='../../hyper/status/enum.StatusCode.html' title='hyper::status::StatusCode'>StatusCode</a></code></h3><div class='docblock'><p>Called when a Request includes a <code>Expect: 100-continue</code>`Expect: 100-continue` header.</p>
+        <h3 id='method.check_continue' class='method stab '><code>fn <a href='#method.check_continue' class='fnname'>check_continue</a>(&amp;self, _: <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;<a class='enum' href='../../hyper/method/enum.Method.html' title='hyper::method::Method'>Method</a>, &amp;<a class='enum' href='../../hyper/uri/enum.RequestUri.html' title='hyper::uri::RequestUri'>RequestUri</a>, &amp;<a class='struct' href='../../hyper/header/struct.Headers.html' title='hyper::header::Headers'>Headers</a>)</a>) -&gt; <a class='enum' href='../../hyper/status/enum.StatusCode.html' title='hyper::status::StatusCode'>StatusCode</a></code></h3><div class='docblock'><p>Called when a Request includes a <code>Expect: 100-continue</code> header.</p>
 
-<p>By default, this will always immediately response with a <code>StatusCode::Continue</code>`StatusCode::Continue`,
+<p>By default, this will always immediately response with a <code>StatusCode::Continue</code>,
 but can be overridden with custom behavior.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
