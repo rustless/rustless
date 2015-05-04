@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/uuid-0.1.16/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/uuid-0.1.17/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -851,6 +851,9 @@
 <span id="809">809</span>
 <span id="810">810</span>
 <span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2014 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1332,7 +1335,10 @@
 <span class='kw'>impl</span> <span class='ident'>Decodable</span> <span class='kw'>for</span> <span class='ident'>Uuid</span> {
     <span class='doccomment'>/// Decode a UUID from a string</span>
     <span class='kw'>fn</span> <span class='ident'>decode</span><span class='op'>&lt;</span><span class='ident'>D</span>: <span class='ident'>Decoder</span><span class='op'>&gt;</span>(<span class='ident'>d</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>D</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Uuid</span>, <span class='ident'>D</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>d</span>.<span class='ident'>read_str</span>()).<span class='ident'>parse</span>().<span class='ident'>unwrap</span>())
+        <span class='kw'>let</span> <span class='ident'>string</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>d</span>.<span class='ident'>read_str</span>());
+        <span class='ident'>string</span>.<span class='ident'>parse</span>().<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> {
+            <span class='ident'>d</span>.<span class='ident'>error</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>err</span>))
+        })
     }
 }
 

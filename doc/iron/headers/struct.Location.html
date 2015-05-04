@@ -360,6 +360,32 @@ to ensure that the resulting string will be valid UTF-8.</p>
 <span class='ident'>s</span>.<span class='ident'>clear</span>();
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>s</span>.<span class='ident'>is_empty</span>());
 </pre>
+</div><h4 id='method.drain' class='method'><code>fn <a href='#method.drain' class='fnname'>drain</a>&lt;R&gt;(&amp;mut self, range: R) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.Drain.html' title='collections::string::Drain'>Drain</a> <span class='where'>where R: <a class='trait' href='http://doc.rust-lang.org/nightly/collections/range/trait.RangeArgument.html' title='collections::range::RangeArgument'>RangeArgument</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</span></code></h4>
+<div class='stability'><em class='stab unstable'>Unstable<p>: recently added, matches RFC</p>
+</em></div><div class='docblock'><p>Create a draining iterator that removes the specified range in the string
+and yields the removed chars from start to end. The element range is
+removed even if the iterator is not consumed until the end.</p>
+
+<h1 id="panics" class='section-header'><a
+                           href="#panics">Panics</a></h1>
+<p>Panics if the starting point or end point are not on character boundaries,
+or if they are out of bounds.</p>
+
+<h1 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from</span>(<span class='string'>&quot;α is alpha, β is beta&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>beta_offset</span> <span class='op'>=</span> <span class='ident'>s</span>.<span class='ident'>find</span>(<span class='string'>&#39;β&#39;</span>).<span class='ident'>unwrap_or</span>(<span class='ident'>s</span>.<span class='ident'>len</span>());
+
+<span class='comment'>// Remove the range up until the β from the string</span>
+<span class='kw'>let</span> <span class='ident'>t</span>: <span class='ident'>String</span> <span class='op'>=</span> <span class='ident'>s</span>.<span class='ident'>drain</span>(..<span class='ident'>beta_offset</span>).<span class='ident'>collect</span>();
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>t</span>, <span class='string'>&quot;α is alpha, &quot;</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='string'>&quot;β is beta&quot;</span>);
+
+<span class='comment'>// A full range clears the string</span>
+<span class='ident'>s</span>.<span class='ident'>drain</span>(..);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>, <span class='string'>&quot;&quot;</span>);
+</pre>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../iron/headers/struct.Location.html' title='iron::headers::Location'>Location</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><code>type Target = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 <h4 id='method.deref' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;'a self) -&gt; &amp;'a <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../iron/headers/struct.Location.html' title='iron::headers::Location'>Location</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>(&amp;'a mut self) -&gt; &amp;'a mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
