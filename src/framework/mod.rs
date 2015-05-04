@@ -2,6 +2,7 @@ use serialize::json;
 
 use backend;
 use errors;
+use mopa;
 
 pub use self::app::{Application};
 pub use self::api::{Api, Versioning, Version};
@@ -28,7 +29,7 @@ pub struct CallInfo<'a> {
     pub app: &'a app::Application
 }
 
-pub trait ApiHandler: ::std::any::Any {
+pub trait ApiHandler : mopa::Any {
     fn api_call<'a, 'b>(&'a self, &str, &mut json::Json, &'b mut (backend::Request + 'b), &mut CallInfo<'a>) -> backend::HandleResult<backend::Response>;
 }
 

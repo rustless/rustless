@@ -1,7 +1,3 @@
-#![feature(plugin)]
-
-#![plugin(dsl_macros)]
-
 #[macro_use]
 extern crate rustless;
 
@@ -39,13 +35,13 @@ impl fmt::Display for UnauthorizedError {
 
 fn main() {
 
-    let mut app = rustless::Application::new(rustless::Api::build(dsl!(|api| {
-        prefix("api");
-        version("v1", rustless::Versioning::Path);
+    let mut app = rustless::Application::new(rustless::Api::build(|api| {
+        api.prefix("api");
+        api.version("v1", rustless::Versioning::Path);
 
-        mount(swagger::create_api("api-docs"));
+        api.mount(swagger::create_api("api-docs"));
 
-        error_formatter(|err, _media| {
+        api.error_formatter(|err, _media| {
             match err.downcast::<UnauthorizedError>() {
                 Some(_) => {
                     return Some(rustless::Response::from_string(
@@ -57,38 +53,38 @@ fn main() {
             }
         });
 
-        post("greet/:name", dsl!(|endpoint| {
-            summary("Sends greeting");
-            desc("Use this to talk to yourself");
-            params(|params| {
+        api.post("greet/:name", |endpoint| {
+            endpoint.summary("Sends greeting");
+            endpoint.desc("Use this to talk to yourself");
+            endpoint.params(|params| {
                 params.req_typed("name", json_dsl::string());
                 params.req_typed("greeting", json_dsl::string());
             });
-            handle(|client, params| {
+            endpoint.handle(|client, params| {
                 client.text(
                     format!("{}, {}",
                         params.find("greeting").unwrap().to_string(),
                         params.find("name").unwrap().to_string())
                 )
             })
-        }));
+        });
 
-        get("echo", dsl!(|endpoint| {
-            summary("Sends back what it gets");
-            desc("Use this to talk to yourself");
-            handle(|client, params| {
+        api.get("echo", |endpoint| {
+            endpoint.summary("Sends back what it gets");
+            endpoint.desc("Use this to talk to yourself");
+            endpoint.handle(|client, params| {
                 client.json(params)
             })
-        }));
+        });
 
-        namespace("admin", dsl!(|admin_ns| {
+        api.namespace("admin", |admin_ns| {
 
-            params(|params| {
+            admin_ns.params(|params| {
                 params.req_typed("token", json_dsl::string())
             });
 
             // Using after_validation callback to check token
-            after_validation(|_client, params| {
+            admin_ns.after_validation(|_client, params| {
 
                 match params.find("token") {
                     // We can unwrap() safely because token in validated already
@@ -105,10 +101,10 @@ fn main() {
             });
 
             // This `/api/admin/server_status` endpoint is secure now
-            get("server_status", dsl!(|endpoint| {
-                summary("Get server status");
-                desc("Use this API to receive some useful information about the state of our server");
-                handle(|client, _params| {
+            admin_ns.get("server_status", |endpoint| {
+                endpoint.summary("Get server status");
+                endpoint.desc("Use this API to receive some useful information about the state of our server");
+                endpoint.handle(|client, _params| {
                     {
                         let cookies = client.request.cookies();
                         let signed_cookies = cookies.signed();
@@ -119,9 +115,9 @@ fn main() {
 
                     client.text("Everything is OK".to_string())
                 })
-            }));
-        }))
-    })));
+            });
+        })
+    }));
 
     swagger::enable(&mut app, swagger::Spec {
         info: swagger::Info {

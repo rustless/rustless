@@ -21,7 +21,7 @@ iron_backend = ["iron", "bodyparser", "plugin"]
 
 [dependencies]
 regex = "*"
-regex_macros = "*"
+lazy_static = "*"
 rustc-serialize = "*"
 valico = "*"
 queryst = "*"
@@ -45,6 +45,3 @@ version = "*"
 [dependencies.plugin]
 optional = true
 version = "*"
-
-[dev-dependencies]
-dsl_macros = "*"

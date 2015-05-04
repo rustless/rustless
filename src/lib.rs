@@ -1,12 +1,7 @@
 #![crate_name = "rustless"]
 #![crate_type = "rlib"]
-#![feature(plugin)]
-#![feature(collections)]
-#![feature(core)]
 // #![deny(warnings)]
 #![deny(bad_style)]
-
-#![plugin(regex_macros)]
 
 extern crate regex;
 extern crate hyper;
@@ -20,15 +15,17 @@ extern crate typemap;
 extern crate plugin;
 extern crate bodyparser;
 
-extern crate collections;
 extern crate valico;
 extern crate queryst;
 extern crate jsonway;
 
 #[macro_use]
+extern crate lazy_static;
+
+#[macro_use]
 extern crate log;
 
-#[macro_use] #[no_link]
+#[macro_use]
 extern crate mopa;
 
 pub use backend::{Request, SimpleRequest, Response, Handler, HandleResult, HandleSuccessResult};

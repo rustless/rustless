@@ -1,6 +1,6 @@
 use std::ascii::AsciiExt;
 use valico::json_dsl;
-use collections;
+use std::collections;
 use serialize::json::{self, ToJson};
 use jsonway::{self, MutableJson};
 use framework::{self, Nesting, ApiHandler};
@@ -460,7 +460,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
             path.push_str(&("/".to_string() + &encode_path_string(&namespace.path)));
 
             let mut params = context.params.clone();
-            params.append(&mut extract_params(&namespace.coercer, &namespace.path));
+            params.extend(extract_params(&namespace.coercer, &namespace.path));
 
             fill_paths(WalkContext{
                 path: &path,

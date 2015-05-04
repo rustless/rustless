@@ -2,7 +2,9 @@
 use regex;
 use server::mime;
 
-static MEDIA_REGEX: regex::Regex = regex!(r"vnd\.(?P<vendor>[a-zA-Z_-]+)(?:\.(?P<version>[a-zA-Z0-9]+)(?:\.(?P<param>[a-zA-Z0-9]+))?)?(?:\+(?P<format>[a-zA-Z0-9]+))?");
+lazy_static! {
+    static ref MEDIA_REGEX: regex::Regex = regex::Regex::new(r"vnd\.(?P<vendor>[a-zA-Z_-]+)(?:\.(?P<version>[a-zA-Z0-9]+)(?:\.(?P<param>[a-zA-Z0-9]+))?)?(?:\+(?P<format>[a-zA-Z0-9]+))?").unwrap();
+}
 
 pub fn is_json(mime: &mime::Mime) -> bool {
     match mime {
