@@ -43,7 +43,7 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>url</a>::<wbr><a class='struct' href=''>Url</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-10873' class='srclink' href='../src/url/lib.rs.html#153-180' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-10854' class='srclink' href='../src/url/lib.rs.html#153-180' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Url {
     pub scheme: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>,
     pub scheme_data: <a class='enum' href='../url/enum.SchemeData.html' title='url::SchemeData'>SchemeData</a>,
@@ -59,7 +59,7 @@
                                   <td id='structfield.query'><code>query</code></td><td><div class='docblock'><p>The query string of the URL.</p>
 
 <p><code>None</code> if the <code>?</code> delimiter character was not part of the parsed input,
-otherwise a possibly empty, pecent-encoded string.</p>
+otherwise a possibly empty, percent-encoded string.</p>
 
 <p>Percent encoded strings are within the ASCII range.</p>
 
@@ -69,7 +69,7 @@ and <code>lossy_percent_decode_query</code> methods.</p>
                                   <td id='structfield.fragment'><code>fragment</code></td><td><div class='docblock'><p>The fragment identifier of the URL.</p>
 
 <p><code>None</code> if the <code>#</code> delimiter character was not part of the parsed input,
-otherwise a possibly empty, pecent-encoded string.</p>
+otherwise a possibly empty, percent-encoded string.</p>
 
 <p>Percent encoded strings are within the ASCII range.</p>
 
@@ -114,7 +114,7 @@ It is the user’s responsibility to check the URL’s scheme before calling thi
 <p>The return type (when <code>Ok()</code>) is generic and can be either <code>std::path::posix::Path</code>
 or <code>std::path::windows::Path</code>.
 (Use <code>std::path::Path</code> to pick one of them depending on the local system.)
-If the compiler can not infer the desired type from context, you may have to specifiy it:</p>
+If the compiler can not infer the desired type from context, you may have to specify it:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>to_file_path</span>::<span class='op'>&lt;</span><span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>posix</span>::<span class='ident'>Path</span><span class='op'>&gt;</span>();
 </pre>

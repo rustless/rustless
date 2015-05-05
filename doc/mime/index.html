@@ -43,7 +43,7 @@
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>mime</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-0' class='srclink' href='../src/mime/lib.rs.html#1-407' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/mime/lib.rs.html#1-448' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'>
 <h1 id="mime" class='section-header'><a
                            href="#mime">Mime</a></h1>
@@ -54,10 +54,20 @@ understandable, so the main type here is <code>Mime</code>.</p>
                            href="#what-is-mime?">What is Mime?</a></h2>
 <p>Example mime string: <code>text/plain;charset=utf-8</code></p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>mime</span>: <span class='ident'>Mime</span> <span class='op'>=</span> <span class='string'>&quot;text/plain;charset=utf-8&quot;</span>.<span class='ident'>parse</span>().<span class='ident'>unwrap</span>();
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>mime</span>, <span class='ident'>Mime</span>(<span class='ident'>Text</span>, <span class='ident'>Plain</span>, <span class='macro'>vec</span><span class='macro'>!</span>[(<span class='ident'>Charset</span>, <span class='ident'>Utf8</span>)]));
+<span class='kw'>let</span> <span class='ident'>plain_text</span>: <span class='ident'>mime</span>::<span class='ident'>Mime</span> <span class='op'>=</span> <span class='string'>&quot;text/plain;charset=utf-8&quot;</span>.<span class='ident'>parse</span>().<span class='ident'>unwrap</span>();
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>plain_text</span>, <span class='macro'>mime</span><span class='macro'>!</span>(<span class='ident'>Text</span><span class='op'>/</span><span class='ident'>Plain</span>; <span class='ident'>Charset</span><span class='op'>=</span><span class='ident'>Utf8</span>));
 </pre>
-</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+</div><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='macro' href='macro.mime!.html'
+                               title='mime::mime!'>mime!</a></td>
+                        <td class='docblock short'>
+                             <p>Easily create a Mime without having to import so many enums.</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr class=' module-item'>
                         <td><a class='struct' href='struct.Mime.html'

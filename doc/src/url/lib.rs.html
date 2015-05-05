@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/url-0.2.31/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/url-0.2.33/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -1050,6 +1050,18 @@
 <span id="1008">1008</span>
 <span id="1009">1009</span>
 <span id="1010">1010</span>
+<span id="1011">1011</span>
+<span id="1012">1012</span>
+<span id="1013">1013</span>
+<span id="1014">1014</span>
+<span id="1015">1015</span>
+<span id="1016">1016</span>
+<span id="1017">1017</span>
+<span id="1018">1018</span>
+<span id="1019">1019</span>
+<span id="1020">1020</span>
+<span id="1021">1021</span>
+<span id="1022">1022</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2015 Simon Sapin.</span>
 <span class='comment'>//</span>
@@ -1213,7 +1225,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='doccomment'>/// The query string of the URL.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// `None` if the `?` delimiter character was not part of the parsed input,</span>
-    <span class='doccomment'>/// otherwise a possibly empty, pecent-encoded string.</span>
+    <span class='doccomment'>/// otherwise a possibly empty, percent-encoded string.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Percent encoded strings are within the ASCII range.</span>
     <span class='doccomment'>///</span>
@@ -1224,7 +1236,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='doccomment'>/// The fragment identifier of the URL.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// `None` if the `#` delimiter character was not part of the parsed input,</span>
-    <span class='doccomment'>/// otherwise a possibly empty, pecent-encoded string.</span>
+    <span class='doccomment'>/// otherwise a possibly empty, percent-encoded string.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Percent encoded strings are within the ASCII range.</span>
     <span class='doccomment'>///</span>
@@ -1249,7 +1261,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 <span class='doccomment'>/// Components for URLs in a *relative* scheme such as HTTP.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>RelativeSchemeData</span> {
-    <span class='doccomment'>/// The username of the URL, as a possibly empty, pecent-encoded string.</span>
+    <span class='doccomment'>/// The username of the URL, as a possibly empty, percent-encoded string.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Percent encoded strings are within the ASCII range.</span>
     <span class='doccomment'>///</span>
@@ -1259,7 +1271,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='doccomment'>/// The password of the URL.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// `None` if the `:` delimiter character was not part of the parsed input,</span>
-    <span class='doccomment'>/// otherwise a possibly empty, pecent-encoded string.</span>
+    <span class='doccomment'>/// otherwise a possibly empty, percent-encoded string.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Percent encoded strings are within the ASCII range.</span>
     <span class='doccomment'>///</span>
@@ -1277,7 +1289,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='doccomment'>/// `None` for file-like schemes.</span>
     <span class='kw'>pub</span> <span class='ident'>default_port</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span>,
 
-    <span class='doccomment'>/// The path of the URL, as vector of pecent-encoded strings.</span>
+    <span class='doccomment'>/// The path of the URL, as vector of percent-encoded strings.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Percent encoded strings are within the ASCII range.</span>
     <span class='doccomment'>///</span>
@@ -1579,7 +1591,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='doccomment'>/// The return type (when `Ok()`) is generic and can be either `std::path::posix::Path`</span>
     <span class='doccomment'>/// or `std::path::windows::Path`.</span>
     <span class='doccomment'>/// (Use `std::path::Path` to pick one of them depending on the local system.)</span>
-    <span class='doccomment'>/// If the compiler can not infer the desired type from context, you may have to specifiy it:</span>
+    <span class='doccomment'>/// If the compiler can not infer the desired type from context, you may have to specify it:</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```ignore</span>
     <span class='doccomment'>/// let path = url.to_file_path::&lt;std::path::posix::Path&gt;();</span>
@@ -1669,7 +1681,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>password</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>relative_scheme_data</span>().<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>scheme_data</span><span class='op'>|</span>
-            <span class='ident'>scheme_data</span>.<span class='ident'>password</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>password</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>password</span>))
+            <span class='ident'>scheme_data</span>.<span class='ident'>password</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>password</span><span class='op'>|</span> <span class='ident'>password</span> <span class='kw'>as</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>))
     }
 
     <span class='doccomment'>/// If the URL is in a *relative scheme*, return a mutable reference to its password, if any.</span>
@@ -1931,7 +1943,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>serialize_userinfo</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>String</span> {
         <span class='ident'>UserInfoFormatter</span> {
             <span class='ident'>username</span>: <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>username</span>,
-            <span class='ident'>password</span>: <span class='self'>self</span>.<span class='ident'>password</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>s</span>)
+            <span class='ident'>password</span>: <span class='self'>self</span>.<span class='ident'>password</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span> <span class='kw'>as</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>)
         }.<span class='ident'>to_string</span>()
     }
 }
@@ -1945,7 +1957,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
         <span class='comment'>// Write the user info.</span>
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>UserInfoFormatter</span> {
             <span class='ident'>username</span>: <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>username</span>,
-            <span class='ident'>password</span>: <span class='self'>self</span>.<span class='ident'>password</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>s</span>)
+            <span class='ident'>password</span>: <span class='self'>self</span>.<span class='ident'>password</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span> <span class='kw'>as</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>)
         }.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
 
         <span class='comment'>// Write the host.</span>
@@ -1981,6 +1993,12 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>windows</span>)]</span>
 <span class='kw'>fn</span> <span class='ident'>path_to_file_url_path</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> {
+    <span class='ident'>path_to_file_url_path_windows</span>(<span class='ident'>path</span>)
+}
+
+<span class='comment'>// Build this unconditionally to alleviate https://github.com/servo/rust-url/issues/102</span>
+<span class='attribute'>#[<span class='ident'>cfg_attr</span>(<span class='ident'>not</span>(<span class='ident'>windows</span>), <span class='ident'>allow</span>(<span class='ident'>dead_code</span>))]</span>
+<span class='kw'>fn</span> <span class='ident'>path_to_file_url_path_windows</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> {
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::{<span class='ident'>Prefix</span>, <span class='ident'>Component</span>};
     <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>path</span>.<span class='ident'>is_absolute</span>() {
         <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
@@ -2023,7 +2041,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
         <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>PathBuf</span>::<span class='ident'>from</span>(<span class='string'>&quot;/&quot;</span>))
     }
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bytes</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
-    <span class='kw'>for</span> <span class='ident'>path_part</span> <span class='kw'>in</span> <span class='ident'>path</span>.<span class='ident'>iter</span>() {
+    <span class='kw'>for</span> <span class='ident'>path_part</span> <span class='kw'>in</span> <span class='ident'>path</span> {
         <span class='ident'>bytes</span>.<span class='ident'>push</span>(<span class='string'>b&#39;/&#39;</span>);
         <span class='ident'>percent_decode_to</span>(<span class='ident'>path_part</span>.<span class='ident'>as_bytes</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bytes</span>);
     }
@@ -2036,6 +2054,12 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>windows</span>)]</span>
 <span class='kw'>fn</span> <span class='ident'>file_url_path_to_pathbuf</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>String</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PathBuf</span>, ()<span class='op'>&gt;</span> {
+    <span class='ident'>file_url_path_to_pathbuf_windows</span>(<span class='ident'>path</span>)
+}
+
+<span class='comment'>// Build this unconditionally to alleviate https://github.com/servo/rust-url/issues/102</span>
+<span class='attribute'>#[<span class='ident'>cfg_attr</span>(<span class='ident'>not</span>(<span class='ident'>windows</span>), <span class='ident'>allow</span>(<span class='ident'>dead_code</span>))]</span>
+<span class='kw'>fn</span> <span class='ident'>file_url_path_to_pathbuf_windows</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>String</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PathBuf</span>, ()<span class='op'>&gt;</span> {
     <span class='kw'>use</span> <span class='ident'>percent_encoding</span>::<span class='ident'>percent_decode</span>;
 
     <span class='kw'>if</span> <span class='ident'>path</span>.<span class='ident'>is_empty</span>() {
@@ -2047,7 +2071,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
         <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
     }
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>string</span> <span class='op'>=</span> <span class='ident'>prefix</span>.<span class='ident'>to_string</span>();
-    <span class='kw'>for</span> <span class='ident'>path_part</span> <span class='kw'>in</span> <span class='ident'>path</span>[<span class='number'>1</span>..].<span class='ident'>iter</span>() {
+    <span class='kw'>for</span> <span class='ident'>path_part</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>path</span>[<span class='number'>1</span>..] {
         <span class='ident'>string</span>.<span class='ident'>push</span>(<span class='string'>&#39;\\&#39;</span>);
 
         <span class='comment'>// Currently non-unicode windows paths cannot be represented</span>
