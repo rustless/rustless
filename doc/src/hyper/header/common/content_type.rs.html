@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/header/common/content_type.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/header/common/content_type.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>content_type.rs.html -- source</title>
@@ -74,6 +74,9 @@
 <span id="32">32</span>
 <span id="33">33</span>
 <span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>mime</span>::<span class='ident'>Mime</span>;
 
@@ -104,7 +107,10 @@
             <span class='comment'>// FIXME: Should be b&quot;text/html; charset=ISO-8859-4&quot; but mime crate lowercases</span>
             <span class='comment'>// the whole value so parsing and formatting the value gives a different result</span>
             <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&quot;text/html; charset=iso-8859-4&quot;</span>],
-            <span class='prelude-val'>Some</span>(<span class='ident'>HeaderField</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Html</span>, <span class='macro'>vec</span><span class='macro'>!</span>[(<span class='ident'>Attr</span>::<span class='ident'>Charset</span>, <span class='ident'>Value</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;iso-8859-4&quot;</span>.<span class='ident'>to_string</span>()))]))));
+            <span class='prelude-val'>Some</span>(<span class='ident'>HeaderField</span>(<span class='ident'>Mime</span>(
+                <span class='ident'>TopLevel</span>::<span class='ident'>Text</span>,
+                <span class='ident'>SubLevel</span>::<span class='ident'>Html</span>,
+                <span class='macro'>vec</span><span class='macro'>!</span>[(<span class='ident'>Attr</span>::<span class='ident'>Charset</span>, <span class='ident'>Value</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;iso-8859-4&quot;</span>.<span class='ident'>to_string</span>()))]))));
     }
 }
 

@@ -43,7 +43,7 @@
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>headers</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-6373' class='srclink' href='../../hyper/headers/index.html?gotosrc=6373' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-6460' class='srclink' href='../../hyper/headers/index.html?gotosrc=6460' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Headers container, and common header fields.</p>
 
 <p>hyper has the opinion that Headers should be strongly-typed, because that&#39;s
@@ -102,11 +102,21 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                     </tr>
                 
                     <tr class=' module-item'>
+                        <td><a class='struct' href='struct.AcceptRanges.html'
+                               title='iron::headers::AcceptRanges'>AcceptRanges</a></td>
+                        <td class='docblock short'>
+                             <p><code>Accept-Ranges</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7233#section-2.3">RFC7233</a></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
                         <td><a class='struct' href='struct.AccessControlAllowHeaders.html'
                                title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></td>
                         <td class='docblock short'>
                              <p><code>Access-Control-Allow-Headers</code> header, part of
-<a href="www.w3.org/TR/cors/#access-control-allow-headers-response-header">CORS</a></p>
+<a href="http://www.w3.org/TR/cors/#access-control-allow-headers-response-header">CORS</a></p>
 
                         </td>
                     </tr>
@@ -116,7 +126,7 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                                title='iron::headers::AccessControlAllowMethods'>AccessControlAllowMethods</a></td>
                         <td class='docblock short'>
                              <p><code>Access-Control-Allow-Methods</code> header, part of
-<a href="www.w3.org/TR/cors/#access-control-allow-methods-response-header">CORS</a></p>
+<a href="http://www.w3.org/TR/cors/#access-control-allow-methods-response-header">CORS</a></p>
 
                         </td>
                     </tr>
@@ -126,7 +136,7 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                                title='iron::headers::AccessControlMaxAge'>AccessControlMaxAge</a></td>
                         <td class='docblock short'>
                              <p><code>Access-Control-Max-Age</code> header, part of
-<a href="www.w3.org/TR/cors/#access-control-max-age-response-header">CORS</a></p>
+<a href="http://www.w3.org/TR/cors/#access-control-max-age-response-header">CORS</a></p>
 
                         </td>
                     </tr>
@@ -136,7 +146,7 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                                title='iron::headers::AccessControlRequestHeaders'>AccessControlRequestHeaders</a></td>
                         <td class='docblock short'>
                              <p><code>Access-Control-Request-Headers</code> header, part of
-<a href="www.w3.org/TR/cors/#access-control-request-headers-request-header">CORS</a></p>
+<a href="http://www.w3.org/TR/cors/#access-control-request-headers-request-header">CORS</a></p>
 
                         </td>
                     </tr>
@@ -146,7 +156,7 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                                title='iron::headers::AccessControlRequestMethod'>AccessControlRequestMethod</a></td>
                         <td class='docblock short'>
                              <p><code>Access-Control-Request-Method</code> header, part of
-<a href="www.w3.org/TR/cors/#access-control-request-method-request-header">CORS</a></p>
+<a href="http://www.w3.org/TR/cors/#access-control-request-method-request-header">CORS</a></p>
 
                         </td>
                     </tr>
@@ -164,7 +174,7 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                         <td><a class='struct' href='struct.Authorization.html'
                                title='iron::headers::Authorization'>Authorization</a></td>
                         <td class='docblock short'>
-                             <p>The <code>Authorization</code> header field.</p>
+                             <p><code>Authorization</code> header, defined in <a href="https://tools.ietf.org/html/rfc7235#section-4.2">RFC7235</a></p>
 
                         </td>
                     </tr>
@@ -182,7 +192,7 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                         <td><a class='struct' href='struct.CacheControl.html'
                                title='iron::headers::CacheControl'>CacheControl</a></td>
                         <td class='docblock short'>
-                             <p>The Cache-Control header.</p>
+                             <p><code>Cache-Control</code> header, defined in <a href="https://tools.ietf.org/html/rfc7234#section-5.2">RFC7234</a></p>
 
                         </td>
                     </tr>
@@ -191,7 +201,8 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                         <td><a class='struct' href='struct.Connection.html'
                                title='iron::headers::Connection'>Connection</a></td>
                         <td class='docblock short'>
-                             <p>The <code>Connection</code> header.</p>
+                             <p><code>Connection</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7230#section-6.1">RFC7230</a></p>
 
                         </td>
                     </tr>
@@ -240,7 +251,7 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                         <td><a class='struct' href='struct.Cookie.html'
                                title='iron::headers::Cookie'>Cookie</a></td>
                         <td class='docblock short'>
-                             <p>The <code>Cookie</code> header. Defined in <a href="tools.ietf.org/html/rfc6265#section-5.4">RFC6265</a>:</p>
+                             <p><code>Cookie</code> header, defined in <a href="http://tools.ietf.org/html/rfc6265#section-5.4">RFC6265</a></p>
 
                         </td>
                     </tr>
@@ -277,6 +288,15 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                                title='iron::headers::Expires'>Expires</a></td>
                         <td class='docblock short'>
                              <p><code>Expires</code> header, defined in <a href="http://tools.ietf.org/html/rfc7234#section-5.3">RFC7234</a></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.From.html'
+                               title='iron::headers::From'>From</a></td>
+                        <td class='docblock short'>
+                             <p><code>From</code> header, defined in <a href="http://tools.ietf.org/html/rfc7231#section-5.5.1">RFC7231</a></p>
 
                         </td>
                     </tr>
@@ -369,7 +389,8 @@ See <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.10">http
                         <td><a class='struct' href='struct.LastModified.html'
                                title='iron::headers::LastModified'>LastModified</a></td>
                         <td class='docblock short'>
-                             <p><code>Last-Modified</code> header, defined in <a href="http://tools.ietf.org/html/rfc7232#section-2.2">RFC7232</a></p>
+                             <p><code>Last-Modified</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7232#section-2.2">RFC7232</a></p>
 
                         </td>
                     </tr>
@@ -380,6 +401,15 @@ See <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.10">http
                         <td class='docblock short'>
                              <p><code>Location</code> header, defined in
 <a href="http://tools.ietf.org/html/rfc7231#section-7.1.2">RFC7231</a></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Protocol.html'
+                               title='iron::headers::Protocol'>Protocol</a></td>
+                        <td class='docblock short'>
+                             <p>Protocols that appear in the <code>Upgrade</code> header field</p>
 
                         </td>
                     </tr>
@@ -426,7 +456,7 @@ See <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.10">http
                         <td><a class='struct' href='struct.SetCookie.html'
                                title='iron::headers::SetCookie'>SetCookie</a></td>
                         <td class='docblock short'>
-                             <p>The <code>Set-Cookie</code> header</p>
+                             <p><code>Set-Cookie</code> header, defined <a href="http://tools.ietf.org/html/rfc6265#section-4.1">RFC6265</a></p>
 
                         </td>
                     </tr>
@@ -466,7 +496,7 @@ See <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.10">http
                                title='iron::headers::AccessControlAllowOrigin'>AccessControlAllowOrigin</a></td>
                         <td class='docblock short'>
                              <p>The <code>Access-Control-Allow-Origin</code> response header,
-part of <a href="www.w3.org/TR/cors/#access-control-allow-origin-response-header">CORS</a></p>
+part of <a href="http://www.w3.org/TR/cors/#access-control-allow-origin-response-header">CORS</a></p>
 
                         </td>
                     </tr>
@@ -556,10 +586,11 @@ or <code>Accept-Encoding</code> header.</p>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='enum' href='enum.Protocol.html'
-                               title='iron::headers::Protocol'>Protocol</a></td>
+                        <td><a class='enum' href='enum.ProtocolName.html'
+                               title='iron::headers::ProtocolName'>ProtocolName</a></td>
                         <td class='docblock short'>
-                             <p>Protocol values that can appear in the Upgrade header.</p>
+                             <p>A protocol name used to identify a spefic protocol. Names are case-sensitive
+except for the <code>WebSocket</code> value.</p>
 
                         </td>
                     </tr>

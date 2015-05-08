@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/header/common/pragma.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/header/common/pragma.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>pragma.rs.html -- source</title>
@@ -101,6 +101,7 @@
 <span id="59">59</span>
 <span id="60">60</span>
 <span id="61">61</span>
+<span id="62">62</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ascii</span>::<span class='ident'>AsciiExt</span>;
@@ -137,7 +138,6 @@
         <span class='ident'>parsing</span>::<span class='ident'>from_one_raw_str</span>(<span class='ident'>raw</span>).<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>s</span>: <span class='ident'>String</span><span class='op'>|</span> {
             <span class='kw'>let</span> <span class='ident'>slice</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>s</span>.<span class='ident'>to_ascii_lowercase</span>()[..];
             <span class='kw'>match</span> <span class='ident'>slice</span> {
-                <span class='string'>&quot;&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
                 <span class='string'>&quot;no-cache&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>Pragma</span>::<span class='ident'>NoCache</span>),
                 _ <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>Pragma</span>::<span class='ident'>Ext</span>(<span class='ident'>s</span>)),
             }
@@ -147,10 +147,10 @@
 
 <span class='kw'>impl</span> <span class='ident'>HeaderFormat</span> <span class='kw'>for</span> <span class='ident'>Pragma</span> {
     <span class='kw'>fn</span> <span class='ident'>fmt_header</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
-        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>Pragma</span>::<span class='ident'>NoCache</span> <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;no-cache&quot;</span>),
-            <span class='ident'>Pragma</span>::<span class='ident'>Ext</span>(<span class='kw-2'>ref</span> <span class='ident'>string</span>) <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>string</span>),
-        }
+        <span class='ident'>f</span>.<span class='ident'>write_str</span>(<span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>Pragma</span>::<span class='ident'>NoCache</span> <span class='op'>=&gt;</span> <span class='string'>&quot;no-cache&quot;</span>,
+            <span class='ident'>Pragma</span>::<span class='ident'>Ext</span>(<span class='kw-2'>ref</span> <span class='ident'>string</span>) <span class='op'>=&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>string</span>[..],
+        })
     }
 }
 
@@ -162,6 +162,8 @@
     <span class='kw'>let</span> <span class='ident'>c</span>: <span class='ident'>Pragma</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>([<span class='string'>b&quot;FoObar&quot;</span>.<span class='ident'>to_vec</span>()].<span class='ident'>as_ref</span>()).<span class='ident'>unwrap</span>();
     <span class='kw'>let</span> <span class='ident'>d</span> <span class='op'>=</span> <span class='ident'>Pragma</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;FoObar&quot;</span>.<span class='ident'>to_string</span>());
     <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>c</span>, <span class='ident'>d</span>);
+    <span class='kw'>let</span> <span class='ident'>e</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Pragma</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>([<span class='string'>b&quot;&quot;</span>.<span class='ident'>to_vec</span>()].<span class='ident'>as_ref</span>());
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>e</span>, <span class='prelude-val'>None</span>);
 }
 </pre>
 </section>

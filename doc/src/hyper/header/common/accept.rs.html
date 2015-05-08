@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/header/common/accept.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/header/common/accept.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>accept.rs.html -- source</title>
@@ -110,6 +110,10 @@
 <span id="68">68</span>
 <span id="69">69</span>
 <span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>mime</span>::<span class='ident'>Mime</span>;
 
@@ -161,7 +165,9 @@
             <span class='prelude-val'>Some</span>(<span class='ident'>HeaderField</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
                 <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Plain</span>, <span class='macro'>vec</span><span class='macro'>!</span>[]), <span class='ident'>Quality</span>(<span class='number'>500</span>)),
                 <span class='ident'>qitem</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Html</span>, <span class='macro'>vec</span><span class='macro'>!</span>[])),
-                <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;x-dvi&quot;</span>.<span class='ident'>to_string</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[]), <span class='ident'>Quality</span>(<span class='number'>800</span>)),
+                <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(
+                    <span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;x-dvi&quot;</span>.<span class='ident'>to_string</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[]),
+                    <span class='ident'>Quality</span>(<span class='number'>800</span>)),
                 <span class='ident'>qitem</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;x-c&quot;</span>.<span class='ident'>to_string</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[])),
                 ])));
         <span class='comment'>// Custom tests</span>
@@ -175,7 +181,9 @@
             <span class='ident'>test4</span>,
             <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&quot;text/plain; charset=utf-8; q=0.5&quot;</span>],
             <span class='prelude-val'>Some</span>(<span class='ident'>Accept</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
-                <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Plain</span>, <span class='macro'>vec</span><span class='macro'>!</span>[(<span class='ident'>Attr</span>::<span class='ident'>Charset</span>, <span class='ident'>Value</span>::<span class='ident'>Utf8</span>)]), <span class='ident'>Quality</span>(<span class='number'>500</span>)),
+                <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>,
+                    <span class='ident'>SubLevel</span>::<span class='ident'>Plain</span>, <span class='macro'>vec</span><span class='macro'>!</span>[(<span class='ident'>Attr</span>::<span class='ident'>Charset</span>, <span class='ident'>Value</span>::<span class='ident'>Utf8</span>)]),
+                    <span class='ident'>Quality</span>(<span class='number'>500</span>)),
             ])));
     }
 }

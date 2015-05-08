@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/http.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/http.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>http.rs.html -- source</title>
@@ -617,7 +617,6 @@
 <span id="575">575</span>
 <span id="576">576</span>
 <span id="577">577</span>
-<span id="578">578</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Pieces pertaining to the HTTP message protocol.</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::{<span class='ident'>Cow</span>, <span class='ident'>ToOwned</span>};
@@ -634,8 +633,7 @@
 <span class='kw'>use</span> <span class='ident'>status</span>::<span class='ident'>StatusCode</span>;
 <span class='kw'>use</span> <span class='ident'>uri</span>::<span class='ident'>RequestUri</span>;
 <span class='kw'>use</span> <span class='ident'>version</span>::<span class='ident'>HttpVersion</span>::{<span class='self'>self</span>, <span class='ident'>Http10</span>, <span class='ident'>Http11</span>};
-<span class='kw'>use</span> <span class='ident'>HttpError</span>::{<span class='ident'>HttpIoError</span>, <span class='ident'>HttpTooLargeError</span>};
-<span class='kw'>use</span> {<span class='ident'>HttpError</span>, <span class='ident'>HttpResult</span>};
+<span class='kw'>use</span> {<span class='ident'>Error</span>};
 
 <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>HttpReader</span>::{<span class='ident'>SizedReader</span>, <span class='ident'>ChunkedReader</span>, <span class='ident'>EofReader</span>, <span class='ident'>EmptyReader</span>};
 <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>HttpWriter</span>::{<span class='ident'>ThroughWriter</span>, <span class='ident'>ChunkedWriter</span>, <span class='ident'>SizedWriter</span>, <span class='ident'>EmptyWriter</span>};
@@ -921,7 +919,7 @@
                 }
             },
             <span class='ident'>EmptyWriter</span>(..) <span class='op'>=&gt;</span> {
-                <span class='kw'>if</span> <span class='ident'>msg</span>.<span class='ident'>len</span>() <span class='op'>!=</span> <span class='number'>0</span> {
+                <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>msg</span>.<span class='ident'>is_empty</span>() {
                     <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Cannot include a body with this kind of message&quot;</span>);
                 }
                 <span class='prelude-val'>Ok</span>(<span class='number'>0</span>)
@@ -955,17 +953,17 @@
 
 <span class='doccomment'>/// Parses a request into an Incoming message head.</span>
 <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse_request</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Incoming</span><span class='op'>&lt;</span>(<span class='ident'>Method</span>, <span class='ident'>RequestUri</span>)<span class='op'>&gt;&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse_request</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Incoming</span><span class='op'>&lt;</span>(<span class='ident'>Method</span>, <span class='ident'>RequestUri</span>)<span class='op'>&gt;&gt;</span> {
     <span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>httparse</span>::<span class='ident'>Request</span>, (<span class='ident'>Method</span>, <span class='ident'>RequestUri</span>)<span class='op'>&gt;</span>(<span class='ident'>buf</span>)
 }
 
 <span class='doccomment'>/// Parses a response into an Incoming message head.</span>
 <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse_response</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Incoming</span><span class='op'>&lt;</span><span class='ident'>RawStatus</span><span class='op'>&gt;&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse_response</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Incoming</span><span class='op'>&lt;</span><span class='ident'>RawStatus</span><span class='op'>&gt;&gt;</span> {
     <span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>httparse</span>::<span class='ident'>Response</span>, <span class='ident'>RawStatus</span><span class='op'>&gt;</span>(<span class='ident'>buf</span>)
 }
 
-<span class='kw'>fn</span> <span class='ident'>parse</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span>, <span class='ident'>T</span>: <span class='ident'>TryParse</span><span class='op'>&lt;</span><span class='ident'>Subject</span><span class='op'>=</span><span class='ident'>I</span><span class='op'>&gt;</span>, <span class='ident'>I</span><span class='op'>&gt;</span>(<span class='ident'>rdr</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Incoming</span><span class='op'>&lt;</span><span class='ident'>I</span><span class='op'>&gt;&gt;</span> {
+<span class='kw'>fn</span> <span class='ident'>parse</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span>, <span class='ident'>T</span>: <span class='ident'>TryParse</span><span class='op'>&lt;</span><span class='ident'>Subject</span><span class='op'>=</span><span class='ident'>I</span><span class='op'>&gt;</span>, <span class='ident'>I</span><span class='op'>&gt;</span>(<span class='ident'>rdr</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Incoming</span><span class='op'>&lt;</span><span class='ident'>I</span><span class='op'>&gt;&gt;</span> {
     <span class='kw'>loop</span> {
         <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>try_parse</span>::<span class='op'>&lt;</span><span class='ident'>R</span>, <span class='ident'>T</span>, <span class='ident'>I</span><span class='op'>&gt;</span>(<span class='ident'>rdr</span>)) {
             <span class='ident'>httparse</span>::<span class='ident'>Status</span>::<span class='ident'>Complete</span>((<span class='ident'>inc</span>, <span class='ident'>len</span>)) <span class='op'>=&gt;</span> {
@@ -975,13 +973,13 @@
             <span class='ident'>_partial</span> <span class='op'>=&gt;</span> ()
         }
         <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>rdr</span>.<span class='ident'>read_into_buf</span>()) {
-            <span class='number'>0</span> <span class='kw'>if</span> <span class='ident'>rdr</span>.<span class='ident'>get_buf</span>().<span class='ident'>len</span>() <span class='op'>==</span> <span class='number'>0</span> <span class='op'>=&gt;</span> {
-                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>HttpIoError</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(
+            <span class='number'>0</span> <span class='kw'>if</span> <span class='ident'>rdr</span>.<span class='ident'>get_buf</span>().<span class='ident'>is_empty</span>() <span class='op'>=&gt;</span> {
+                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Io</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(
                     <span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>ConnectionAborted</span>,
                     <span class='string'>&quot;Connection closed&quot;</span>
                 )))
             },
-            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>HttpTooLargeError</span>),
+            <span class='number'>0</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>TooLarge</span>),
             _ <span class='op'>=&gt;</span> ()
         }
     }
@@ -998,7 +996,7 @@
     <span class='kw'>fn</span> <span class='ident'>try_parse</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>headers</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> [<span class='ident'>httparse</span>::<span class='ident'>Header</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>], <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>TryParseResult</span><span class='op'>&lt;</span><span class='ident'>Self</span>::<span class='ident'>Subject</span><span class='op'>&gt;</span>;
 }
 
-<span class='kw'>type</span> <span class='ident'>TryParseResult</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>httparse</span>::<span class='ident'>Status</span><span class='op'>&lt;</span>(<span class='ident'>Incoming</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>HttpError</span><span class='op'>&gt;</span>;
+<span class='kw'>type</span> <span class='ident'>TryParseResult</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>httparse</span>::<span class='ident'>Status</span><span class='op'>&lt;</span>(<span class='ident'>Incoming</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span>;
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>TryParse</span> <span class='kw'>for</span> <span class='ident'>httparse</span>::<span class='ident'>Request</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='kw'>type</span> <span class='ident'>Subject</span> <span class='op'>=</span> (<span class='ident'>Method</span>, <span class='ident'>RequestUri</span>);
@@ -1173,12 +1171,12 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_parse_tcp_closed</span>() {
         <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>;
-        <span class='kw'>use</span> <span class='ident'>error</span>::<span class='ident'>HttpError</span>::<span class='ident'>HttpIoError</span>;
+        <span class='kw'>use</span> <span class='ident'>error</span>::<span class='ident'>Error</span>;
 
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>empty</span> <span class='op'>=</span> <span class='ident'>MockStream</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='ident'>BufReader</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>empty</span>);
         <span class='kw'>match</span> <span class='ident'>parse_request</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>) {
-            <span class='prelude-val'>Err</span>(<span class='ident'>HttpIoError</span>(<span class='kw-2'>ref</span> <span class='ident'>e</span>)) <span class='kw'>if</span> <span class='ident'>e</span>.<span class='ident'>kind</span>() <span class='op'>==</span> <span class='ident'>ErrorKind</span>::<span class='ident'>ConnectionAborted</span> <span class='op'>=&gt;</span> (),
+            <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Io</span>(<span class='kw-2'>ref</span> <span class='ident'>e</span>)) <span class='kw'>if</span> <span class='ident'>e</span>.<span class='ident'>kind</span>() <span class='op'>==</span> <span class='ident'>ErrorKind</span>::<span class='ident'>ConnectionAborted</span> <span class='op'>=&gt;</span> (),
             <span class='ident'>other</span> <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;unexpected result: {:?}&quot;</span>, <span class='ident'>other</span>)
         }
     }

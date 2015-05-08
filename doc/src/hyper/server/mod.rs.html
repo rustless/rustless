@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/server/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/server/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -362,9 +362,6 @@
 <span id="320">320</span>
 <span id="321">321</span>
 <span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP Server</span>
 <span class='doccomment'>//!</span>
@@ -383,8 +380,6 @@
 <span class='doccomment'>//!         (hyper::Get, _) =&gt; StatusCode::NotFound,</span>
 <span class='doccomment'>//!         _ =&gt; StatusCode::MethodNotAllowed</span>
 <span class='doccomment'>//!     };</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//!     res.start().unwrap().end().unwrap();</span>
 <span class='doccomment'>//! }).listen(&quot;0.0.0.0:8080&quot;).unwrap();</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='ident'>ErrorKind</span>, <span class='ident'>BufWriter</span>, <span class='ident'>Write</span>};
@@ -401,8 +396,7 @@
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>net</span>::{<span class='ident'>Fresh</span>, <span class='ident'>Streaming</span>};
 
-<span class='kw'>use</span> <span class='ident'>HttpError</span>::<span class='ident'>HttpIoError</span>;
-<span class='kw'>use</span> {<span class='ident'>HttpResult</span>};
+<span class='kw'>use</span> <span class='ident'>Error</span>;
 <span class='kw'>use</span> <span class='ident'>buffer</span>::<span class='ident'>BufReader</span>;
 <span class='kw'>use</span> <span class='ident'>header</span>::{<span class='ident'>Headers</span>, <span class='ident'>Expect</span>};
 <span class='kw'>use</span> <span class='ident'>http</span>;
@@ -481,7 +475,7 @@
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>H</span>: <span class='ident'>Handler</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span> <span class='ident'>Server</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>H</span>, <span class='ident'>HttpListener</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// Binds to a socket, and starts handling connections using a task pool.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen_threads</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>T</span>, <span class='ident'>threads</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen_threads</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>T</span>, <span class='ident'>threads</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>listener</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>ssl</span> {
             <span class='prelude-val'>Some</span>(<span class='ident'>SslConfig</span>::<span class='ident'>CertAndKey</span>(<span class='ident'>cert</span>, <span class='ident'>key</span>)) <span class='op'>=&gt;</span> <span class='ident'>HttpListener</span>::<span class='ident'>https</span>(<span class='ident'>addr</span>, <span class='ident'>cert</span>, <span class='ident'>key</span>),
             <span class='prelude-val'>Some</span>(<span class='ident'>SslConfig</span>::<span class='ident'>Context</span>(<span class='ident'>ssl_context</span>)) <span class='op'>=&gt;</span> <span class='ident'>HttpListener</span>::<span class='ident'>https_with_context</span>(<span class='ident'>addr</span>, <span class='ident'>ssl_context</span>),
@@ -491,7 +485,7 @@
     }
 
     <span class='doccomment'>/// Binds to a socket and starts handling connections.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>listen_threads</span>(<span class='ident'>addr</span>, <span class='ident'>num_cpus</span>::<span class='ident'>get</span>() <span class='op'>*</span> <span class='number'>5</span> <span class='op'>/</span> <span class='number'>4</span>)
     }
 }
@@ -501,12 +495,12 @@
 <span class='ident'>L</span>: <span class='ident'>NetworkListener</span><span class='op'>&lt;</span><span class='ident'>Stream</span><span class='op'>=</span><span class='ident'>S</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span>,
 <span class='ident'>S</span>: <span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span> <span class='ident'>Server</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>H</span>, <span class='ident'>L</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// Creates a new server that will handle `HttpStream`s.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_listener</span>(<span class='self'>self</span>, <span class='ident'>listener</span>: <span class='ident'>L</span>, <span class='ident'>threads</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_listener</span>(<span class='self'>self</span>, <span class='ident'>listener</span>: <span class='ident'>L</span>, <span class='ident'>threads</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
         <span class='ident'>with_listener</span>(<span class='self'>self</span>.<span class='ident'>handler</span>, <span class='ident'>listener</span>, <span class='ident'>threads</span>)
     }
 }
 
-<span class='kw'>fn</span> <span class='ident'>with_listener</span><span class='op'>&lt;</span><span class='ident'>H</span>, <span class='ident'>L</span><span class='op'>&gt;</span>(<span class='ident'>handler</span>: <span class='ident'>H</span>, <span class='kw-2'>mut</span> <span class='ident'>listener</span>: <span class='ident'>L</span>, <span class='ident'>threads</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span>
+<span class='kw'>fn</span> <span class='ident'>with_listener</span><span class='op'>&lt;</span><span class='ident'>H</span>, <span class='ident'>L</span><span class='op'>&gt;</span>(<span class='ident'>handler</span>: <span class='ident'>H</span>, <span class='kw-2'>mut</span> <span class='ident'>listener</span>: <span class='ident'>L</span>, <span class='ident'>threads</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span>
 <span class='kw'>where</span> <span class='ident'>H</span>: <span class='ident'>Handler</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span>,
 <span class='ident'>L</span>: <span class='ident'>NetworkListener</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span> {
     <span class='kw'>let</span> <span class='ident'>socket</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>listener</span>.<span class='ident'>local_addr</span>());
@@ -543,11 +537,11 @@
     <span class='kw'>while</span> <span class='ident'>keep_alive</span> {
         <span class='kw'>let</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>Request</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>rdr</span>, <span class='ident'>addr</span>) {
             <span class='prelude-val'>Ok</span>(<span class='ident'>req</span>) <span class='op'>=&gt;</span> <span class='ident'>req</span>,
-            <span class='prelude-val'>Err</span>(<span class='ident'>HttpIoError</span>(<span class='kw-2'>ref</span> <span class='ident'>e</span>)) <span class='kw'>if</span> <span class='ident'>e</span>.<span class='ident'>kind</span>() <span class='op'>==</span> <span class='ident'>ErrorKind</span>::<span class='ident'>ConnectionAborted</span> <span class='op'>=&gt;</span> {
+            <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Io</span>(<span class='kw-2'>ref</span> <span class='ident'>e</span>)) <span class='kw'>if</span> <span class='ident'>e</span>.<span class='ident'>kind</span>() <span class='op'>==</span> <span class='ident'>ErrorKind</span>::<span class='ident'>ConnectionAborted</span> <span class='op'>=&gt;</span> {
                 <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;tcp closed, cancelling keep-alive loop&quot;</span>);
                 <span class='kw'>break</span>;
             }
-            <span class='prelude-val'>Err</span>(<span class='ident'>HttpIoError</span>(<span class='ident'>e</span>)) <span class='op'>=&gt;</span> {
+            <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Io</span>(<span class='ident'>e</span>)) <span class='op'>=&gt;</span> {
                 <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;ioerror in keepalive loop = {:?}&quot;</span>, <span class='ident'>e</span>);
                 <span class='kw'>break</span>;
             }
@@ -603,7 +597,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Listening</span> {
     <span class='doccomment'>/// Stop the server from listening to its socket address.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>close</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>close</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='kw'>let</span> _ <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>_guard</span>.<span class='ident'>take</span>();
         <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;closing server&quot;</span>);
         <span class='comment'>//try!(self.acceptor.close());</span>

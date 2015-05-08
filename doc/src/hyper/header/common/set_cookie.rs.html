@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/header/common/set_cookie.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/header/common/set_cookie.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>set_cookie.rs.html -- source</title>
@@ -153,19 +153,105 @@
 <span id="111">111</span>
 <span id="112">112</span>
 <span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>header</span>::{<span class='ident'>Header</span>, <span class='ident'>HeaderFormat</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='self'>self</span>, <span class='ident'>Display</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>from_utf8</span>;
 
 <span class='kw'>use</span> <span class='ident'>cookie</span>::<span class='ident'>Cookie</span>;
 <span class='kw'>use</span> <span class='ident'>cookie</span>::<span class='ident'>CookieJar</span>;
 
-<span class='doccomment'>/// The `Set-Cookie` header</span>
+<span class='doccomment'>/// `Set-Cookie` header, defined [RFC6265](http://tools.ietf.org/html/rfc6265#section-4.1)</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// The Set-Cookie HTTP response header is used to send cookies from the</span>
+<span class='doccomment'>/// server to the user agent.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Informally, the Set-Cookie response header contains the header name</span>
 <span class='doccomment'>/// &quot;Set-Cookie&quot; followed by a &quot;:&quot; and a cookie.  Each cookie begins with</span>
 <span class='doccomment'>/// a name-value-pair, followed by zero or more attribute-value pairs.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # ABNF</span>
+<span class='doccomment'>/// ```plain</span>
+<span class='doccomment'>///  set-cookie-header = &quot;Set-Cookie:&quot; SP set-cookie-string</span>
+<span class='doccomment'>/// set-cookie-string = cookie-pair *( &quot;;&quot; SP cookie-av )</span>
+<span class='doccomment'>/// cookie-pair       = cookie-name &quot;=&quot; cookie-value</span>
+<span class='doccomment'>/// cookie-name       = token</span>
+<span class='doccomment'>/// cookie-value      = *cookie-octet / ( DQUOTE *cookie-octet DQUOTE )</span>
+<span class='doccomment'>/// cookie-octet      = %x21 / %x23-2B / %x2D-3A / %x3C-5B / %x5D-7E</span>
+<span class='doccomment'>///                       ; US-ASCII characters excluding CTLs,</span>
+<span class='doccomment'>///                       ; whitespace DQUOTE, comma, semicolon,</span>
+<span class='doccomment'>///                       ; and backslash</span>
+<span class='doccomment'>/// token             = &lt;token, defined in [RFC2616], Section 2.2&gt;</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// cookie-av         = expires-av / max-age-av / domain-av /</span>
+<span class='doccomment'>///                    path-av / secure-av / httponly-av /</span>
+<span class='doccomment'>///                     extension-av</span>
+<span class='doccomment'>/// expires-av        = &quot;Expires=&quot; sane-cookie-date</span>
+<span class='doccomment'>/// sane-cookie-date  = &lt;rfc1123-date, defined in [RFC2616], Section 3.3.1&gt;</span>
+<span class='doccomment'>/// max-age-av        = &quot;Max-Age=&quot; non-zero-digit *DIGIT</span>
+<span class='doccomment'>///                       ; In practice, both expires-av and max-age-av</span>
+<span class='doccomment'>///                       ; are limited to dates representable by the</span>
+<span class='doccomment'>///                       ; user agent.</span>
+<span class='doccomment'>/// non-zero-digit    = %x31-39</span>
+<span class='doccomment'>///                       ; digits 1 through 9</span>
+<span class='doccomment'>/// domain-av         = &quot;Domain=&quot; domain-value</span>
+<span class='doccomment'>/// domain-value      = &lt;subdomain&gt;</span>
+<span class='doccomment'>///                       ; defined in [RFC1034], Section 3.5, as</span>
+<span class='doccomment'>///                       ; enhanced by [RFC1123], Section 2.1</span>
+<span class='doccomment'>/// path-av           = &quot;Path=&quot; path-value</span>
+<span class='doccomment'>/// path-value        = &lt;any CHAR except CTLs or &quot;;&quot;&gt;</span>
+<span class='doccomment'>/// secure-av         = &quot;Secure&quot;</span>
+<span class='doccomment'>/// httponly-av       = &quot;HttpOnly&quot;</span>
+<span class='doccomment'>/// extension-av      = &lt;any CHAR except CTLs or &quot;;&quot;&gt;</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Example values</span>
+<span class='doccomment'>/// * `SID=31d4d96e407aad42`</span>
+<span class='doccomment'>/// * `lang=en-US; Expires=Wed, 09 Jun 2021 10:18:14 GMT`</span>
+<span class='doccomment'>/// * `lang=; Expires=Sun, 06 Nov 1994 08:49:37 GMT`</span>
+<span class='doccomment'>/// * `lang=en-US; Path=/; Domain=example.com`</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SetCookie</span>(<span class='kw'>pub</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cookie</span><span class='op'>&gt;</span>);
 
@@ -178,16 +264,12 @@
 
     <span class='kw'>fn</span> <span class='ident'>parse_header</span>(<span class='ident'>raw</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SetCookie</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>set_cookies</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>with_capacity</span>(<span class='ident'>raw</span>.<span class='ident'>len</span>());
-        <span class='kw'>for</span> <span class='ident'>set_cookies_raw</span> <span class='kw'>in</span> <span class='ident'>raw</span>.<span class='ident'>iter</span>() {
-            <span class='kw'>match</span> <span class='ident'>from_utf8</span>(<span class='kw-2'>&amp;</span><span class='ident'>set_cookies_raw</span>[..]) {
-                <span class='prelude-val'>Ok</span>(<span class='ident'>s</span>) <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>s</span>.<span class='ident'>is_empty</span>() <span class='op'>=&gt;</span> {
-                    <span class='kw'>match</span> <span class='ident'>s</span>.<span class='ident'>parse</span>() {
-                        <span class='prelude-val'>Ok</span>(<span class='ident'>cookie</span>) <span class='op'>=&gt;</span> <span class='ident'>set_cookies</span>.<span class='ident'>push</span>(<span class='ident'>cookie</span>),
-                        <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> ()
-                    }
-                },
-                _ <span class='op'>=&gt;</span> ()
-            };
+        <span class='kw'>for</span> <span class='ident'>set_cookies_raw</span> <span class='kw'>in</span> <span class='ident'>raw</span> {
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>s</span>) <span class='op'>=</span> <span class='ident'>from_utf8</span>(<span class='kw-2'>&amp;</span><span class='ident'>set_cookies_raw</span>[..]) {
+                <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>cookie</span>) <span class='op'>=</span> <span class='ident'>s</span>.<span class='ident'>parse</span>() {
+                    <span class='ident'>set_cookies</span>.<span class='ident'>push</span>(<span class='ident'>cookie</span>);
+                }
+            }
         }
 
         <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>set_cookies</span>.<span class='ident'>is_empty</span>() {
@@ -206,7 +288,7 @@
             <span class='kw'>if</span> <span class='ident'>i</span> <span class='op'>!=</span> <span class='number'>0</span> {
                 <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>f</span>.<span class='ident'>write_str</span>(<span class='string'>&quot;\r\nSet-Cookie: &quot;</span>));
             }
-            <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>cookie</span>));
+            <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Display</span>::<span class='ident'>fmt</span>(<span class='ident'>cookie</span>, <span class='ident'>f</span>));
         }
         <span class='prelude-val'>Ok</span>(())
     }
@@ -250,7 +332,9 @@
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
     <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>cookies</span>);
 
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='ident'>headers</span>.<span class='ident'>to_string</span>()[..], <span class='string'>&quot;Set-Cookie: foo=bar; HttpOnly; Path=/p\r\nSet-Cookie: baz=quux; Path=/\r\n&quot;</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(
+        <span class='kw-2'>&amp;</span><span class='ident'>headers</span>.<span class='ident'>to_string</span>()[..],
+        <span class='string'>&quot;Set-Cookie: foo=bar; HttpOnly; Path=/p\r\nSet-Cookie: baz=quux; Path=/\r\n&quot;</span>);
 }
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>

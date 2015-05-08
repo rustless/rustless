@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/iron-0.1.16/src/iron.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/iron-0.1.17/src/iron.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>iron.rs.html -- source</title>
@@ -206,6 +206,12 @@
 <span id="164">164</span>
 <span id="165">165</span>
 <span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Exposes the `Iron` type, the main entrance point of the</span>
 <span class='doccomment'>//! `Iron` library.</span>
@@ -273,13 +279,16 @@
     <span class='doccomment'>/// This consumes the Iron instance, but does the listening on</span>
     <span class='doccomment'>/// another task, so is not blocking.</span>
     <span class='doccomment'>///</span>
+    <span class='doccomment'>/// The thread returns a guard that will automatically join with the parent</span>
+    <span class='doccomment'>/// once it is dropped, blocking until this happens.</span>
+    <span class='doccomment'>///</span>
     <span class='doccomment'>/// Defaults to a threadpool of size `2 * num_cpus`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ## Panics</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Panics if the provided address does not parse. To avoid this</span>
     <span class='doccomment'>/// call `to_socket_addrs` yourself and pass a parsed `SocketAddr`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>http</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>http</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>2</span> <span class='op'>*</span> ::<span class='ident'>num_cpus</span>::<span class='ident'>get</span>(), <span class='ident'>Protocol</span>::<span class='ident'>Http</span>)
     }
 
@@ -289,14 +298,17 @@
     <span class='doccomment'>/// This consumes the Iron instance, but does the listening on</span>
     <span class='doccomment'>/// another task, so is not blocking.</span>
     <span class='doccomment'>///</span>
+    <span class='doccomment'>/// The thread returns a guard that will automatically join with the parent</span>
+    <span class='doccomment'>/// once it is dropped, blocking until this happens.</span>
+    <span class='doccomment'>///</span>
     <span class='doccomment'>/// Defaults to a threadpool of size `2 * num_cpus`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ## Panics</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Panics if the provided address does not parse. To avoid this</span>
     <span class='doccomment'>/// call `to_socket_addrs` yourself and pass a parsed `SocketAddr`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>https</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>, <span class='ident'>certificate</span>: <span class='ident'>PathBuf</span>, <span class='ident'>key</span>: <span class='ident'>PathBuf</span>)
-                                            <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>https</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>, <span class='ident'>certificate</span>: <span class='ident'>PathBuf</span>, <span class='ident'>key</span>: <span class='ident'>PathBuf</span>)
+                                   <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>2</span> <span class='op'>*</span> ::<span class='ident'>num_cpus</span>::<span class='ident'>get</span>(),
                          <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { <span class='ident'>certificate</span>: <span class='ident'>certificate</span>, <span class='ident'>key</span>: <span class='ident'>key</span> })
     }
@@ -307,8 +319,8 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Panics if the provided address does not parse. To avoid this</span>
     <span class='doccomment'>/// call `to_socket_addrs` yourself and pass a parsed `SocketAddr`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen_with</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>, <span class='ident'>threads</span>: <span class='ident'>usize</span>,
-                                                  <span class='ident'>protocol</span>: <span class='ident'>Protocol</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen_with</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>, <span class='ident'>threads</span>: <span class='ident'>usize</span>,
+                                         <span class='ident'>protocol</span>: <span class='ident'>Protocol</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>sock_addr</span> <span class='op'>=</span> <span class='ident'>addr</span>.<span class='ident'>to_socket_addrs</span>()
             .<span class='ident'>ok</span>().<span class='ident'>and_then</span>(<span class='op'>|</span><span class='kw-2'>mut</span> <span class='ident'>addrs</span><span class='op'>|</span> <span class='ident'>addrs</span>.<span class='ident'>next</span>()).<span class='ident'>expect</span>(<span class='string'>&quot;Could not parse socket address.&quot;</span>);
 

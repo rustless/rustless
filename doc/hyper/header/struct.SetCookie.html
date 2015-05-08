@@ -43,12 +43,59 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='struct' href=''>SetCookie</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-17903' class='srclink' href='../../src/hyper/header/common/set_cookie.rs.html#14' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct SetCookie(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;);</pre><div class='docblock'><p>The <code>Set-Cookie</code> header</p>
+        </span><a id='src-18569' class='srclink' href='../../src/hyper/header/common/set_cookie.rs.html#58' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SetCookie(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;);</pre><div class='docblock'><p><code>Set-Cookie</code> header, defined <a href="http://tools.ietf.org/html/rfc6265#section-4.1">RFC6265</a></p>
+
+<p>The Set-Cookie HTTP response header is used to send cookies from the
+server to the user agent.</p>
 
 <p>Informally, the Set-Cookie response header contains the header name
 &quot;Set-Cookie&quot; followed by a &quot;:&quot; and a cookie.  Each cookie begins with
 a name-value-pair, followed by zero or more attribute-value pairs.</p>
+
+<h1 id="abnf" class='section-header'><a
+                           href="#abnf">ABNF</a></h1>
+<pre><code class="language-plain"> set-cookie-header = &quot;Set-Cookie:&quot; SP set-cookie-string
+set-cookie-string = cookie-pair *( &quot;;&quot; SP cookie-av )
+cookie-pair       = cookie-name &quot;=&quot; cookie-value
+cookie-name       = token
+cookie-value      = *cookie-octet / ( DQUOTE *cookie-octet DQUOTE )
+cookie-octet      = %x21 / %x23-2B / %x2D-3A / %x3C-5B / %x5D-7E
+                      ; US-ASCII characters excluding CTLs,
+                      ; whitespace DQUOTE, comma, semicolon,
+                      ; and backslash
+token             = &lt;token, defined in [RFC2616], Section 2.2&gt;
+
+cookie-av         = expires-av / max-age-av / domain-av /
+                   path-av / secure-av / httponly-av /
+                    extension-av
+expires-av        = &quot;Expires=&quot; sane-cookie-date
+sane-cookie-date  = &lt;rfc1123-date, defined in [RFC2616], Section 3.3.1&gt;
+max-age-av        = &quot;Max-Age=&quot; non-zero-digit *DIGIT
+                      ; In practice, both expires-av and max-age-av
+                      ; are limited to dates representable by the
+                      ; user agent.
+non-zero-digit    = %x31-39
+                      ; digits 1 through 9
+domain-av         = &quot;Domain=&quot; domain-value
+domain-value      = &lt;subdomain&gt;
+                      ; defined in [RFC1034], Section 3.5, as
+                      ; enhanced by [RFC1123], Section 2.1
+path-av           = &quot;Path=&quot; path-value
+path-value        = &lt;any CHAR except CTLs or &quot;;&quot;&gt;
+secure-av         = &quot;Secure&quot;
+httponly-av       = &quot;HttpOnly&quot;
+extension-av      = &lt;any CHAR except CTLs or &quot;;&quot;&gt;
+</code></pre>
+
+<h1 id="example-values" class='section-header'><a
+                           href="#example-values">Example values</a></h1>
+<ul>
+<li><code>SID=31d4d96e407aad42</code></li>
+<li><code>lang=en-US; Expires=Wed, 09 Jun 2021 10:18:14 GMT</code></li>
+<li><code>lang=; Expires=Sun, 06 Nov 1994 08:49:37 GMT</code></li>
+<li><code>lang=en-US; Path=/; Domain=example.com</code></li>
+</ul>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../hyper/header/struct.SetCookie.html' title='hyper::header::SetCookie'>SetCookie</a></code></h3><div class='impl-items'><h4 id='method.from_cookie_jar' class='method'><code>fn <a href='#method.from_cookie_jar' class='fnname'>from_cookie_jar</a>(jar: &amp;<a class='struct' href='../../cookie/jar/struct.CookieJar.html' title='cookie::jar::CookieJar'>CookieJar</a>) -&gt; <a class='struct' href='../../hyper/header/struct.SetCookie.html' title='hyper::header::SetCookie'>SetCookie</a></code></h4>
 <div class='docblock'><p>Use this to create SetCookie header from CookieJar using
 calculated delta.</p>

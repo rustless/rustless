@@ -43,7 +43,7 @@
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>iron</a>::<wbr><a href='index.html'>middleware</a>::<wbr><a class='trait' href=''>AroundMiddleware</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-304' class='srclink' href='../../src/iron/middleware/mod.rs.html#115-124' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-303' class='srclink' href='../../src/iron/middleware/mod.rs.html#115-124' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait AroundMiddleware {
     fn <a href='#tymethod.around' class='fnname'>around</a>(self, handler: <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;;
 }</pre><div class='docblock'><p>AroundMiddleware are used to wrap and replace the <code>Handler</code> in a <code>Chain</code>.</p>

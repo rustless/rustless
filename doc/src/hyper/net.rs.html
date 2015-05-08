@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/net.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/net.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>net.rs.html -- source</title>
@@ -413,11 +413,12 @@
 <span id="371">371</span>
 <span id="372">372</span>
 <span id="373">373</span>
+<span id="374">374</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A collection of traits abstracting over Listeners and Streams.</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>any</span>::{<span class='ident'>Any</span>, <span class='ident'>TypeId</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Read</span>, <span class='ident'>Write</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>ErrorKind</span>, <span class='ident'>Read</span>, <span class='ident'>Write</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::{<span class='ident'>SocketAddr</span>, <span class='ident'>ToSocketAddrs</span>, <span class='ident'>TcpStream</span>, <span class='ident'>TcpListener</span>, <span class='ident'>Shutdown</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>Path</span>;
@@ -425,7 +426,7 @@
 
 <span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>ssl</span>::{<span class='ident'>Ssl</span>, <span class='ident'>SslStream</span>, <span class='ident'>SslContext</span>, <span class='ident'>SSL_VERIFY_NONE</span>};
 <span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>ssl</span>::<span class='ident'>SslMethod</span>::<span class='ident'>Sslv23</span>;
-<span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>ssl</span>::<span class='ident'>error</span>::{<span class='ident'>SslError</span>, <span class='ident'>StreamError</span>, <span class='ident'>OpenSslErrors</span>, <span class='ident'>SslSessionClosed</span>};
+<span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>ssl</span>::<span class='ident'>error</span>::<span class='ident'>StreamError</span> <span class='kw'>as</span> <span class='ident'>SslIoError</span>;
 <span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>x509</span>::<span class='ident'>X509FileType</span>;
 
 <span class='kw'>use</span> <span class='ident'>typeable</span>::<span class='ident'>Typeable</span>;
@@ -445,7 +446,7 @@
     <span class='comment'>//fn listen&lt;To: ToSocketAddrs&gt;(&amp;mut self, addr: To) -&gt; io::Result&lt;Self::Acceptor&gt;;</span>
 
     <span class='doccomment'>/// Returns an iterator of streams.</span>
-    <span class='kw'>fn</span> <span class='ident'>accept</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Self</span>::<span class='ident'>Stream</span><span class='op'>&gt;</span>;
+    <span class='kw'>fn</span> <span class='ident'>accept</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Self</span>::<span class='ident'>Stream</span><span class='op'>&gt;</span>;
 
     <span class='doccomment'>/// Get the address this Listener ended up listening on.</span>
     <span class='kw'>fn</span> <span class='ident'>local_addr</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>SocketAddr</span><span class='op'>&gt;</span>;
@@ -463,8 +464,8 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>NetworkConnections</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>N</span>: <span class='ident'>NetworkListener</span> <span class='op'>+</span> <span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>N</span>);
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>N</span>: <span class='ident'>NetworkListener</span> <span class='op'>+</span> <span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>NetworkConnections</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>N</span><span class='op'>&gt;</span> {
-    <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>N</span>::<span class='ident'>Stream</span><span class='op'>&gt;</span>;
-    <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>N</span>::<span class='ident'>Stream</span><span class='op'>&gt;&gt;</span> {
+    <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>N</span>::<span class='ident'>Stream</span><span class='op'>&gt;</span>;
+    <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>N</span>::<span class='ident'>Stream</span><span class='op'>&gt;&gt;</span> {
         <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='number'>0</span>.<span class='ident'>accept</span>())
     }
 }
@@ -474,6 +475,7 @@
     <span class='doccomment'>/// Get the remote address of the underlying connection.</span>
     <span class='kw'>fn</span> <span class='ident'>peer_addr</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>SocketAddr</span><span class='op'>&gt;</span>;
     <span class='doccomment'>/// This will be called when Stream should no longer be kept alive.</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>close</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>_how</span>: <span class='ident'>Shutdown</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='prelude-val'>Ok</span>(())
     }
@@ -484,7 +486,7 @@
     <span class='doccomment'>/// Type of Stream to create</span>
     <span class='kw'>type</span> <span class='ident'>Stream</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span>;
     <span class='doccomment'>/// Connect to a remote address.</span>
-    <span class='kw'>fn</span> <span class='ident'>connect</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>host</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>port</span>: <span class='ident'>u16</span>, <span class='ident'>scheme</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Self</span>::<span class='ident'>Stream</span><span class='op'>&gt;</span>;
+    <span class='kw'>fn</span> <span class='ident'>connect</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>host</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>port</span>: <span class='ident'>u16</span>, <span class='ident'>scheme</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Self</span>::<span class='ident'>Stream</span><span class='op'>&gt;</span>;
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span> <span class='ident'>From</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span> {
@@ -574,22 +576,22 @@
 <span class='kw'>impl</span> <span class='ident'>HttpListener</span> {
 
     <span class='doccomment'>/// Start listening to an address over HTTP.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>http</span><span class='op'>&lt;</span><span class='ident'>To</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='ident'>addr</span>: <span class='ident'>To</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HttpListener</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>http</span><span class='op'>&lt;</span><span class='ident'>To</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='ident'>addr</span>: <span class='ident'>To</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HttpListener</span><span class='op'>&gt;</span> {
         <span class='prelude-val'>Ok</span>(<span class='ident'>HttpListener</span>::<span class='ident'>Http</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>TcpListener</span>::<span class='ident'>bind</span>(<span class='ident'>addr</span>))))
     }
 
     <span class='doccomment'>/// Start listening to an address over HTTPS.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>https</span><span class='op'>&lt;</span><span class='ident'>To</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='ident'>addr</span>: <span class='ident'>To</span>, <span class='ident'>cert</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>, <span class='ident'>key</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HttpListener</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>ssl_context</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>SslContext</span>::<span class='ident'>new</span>(<span class='ident'>Sslv23</span>).<span class='ident'>map_err</span>(<span class='ident'>lift_ssl_error</span>));
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>ssl_context</span>.<span class='ident'>set_cipher_list</span>(<span class='string'>&quot;DEFAULT&quot;</span>).<span class='ident'>map_err</span>(<span class='ident'>lift_ssl_error</span>));
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>ssl_context</span>.<span class='ident'>set_certificate_file</span>(<span class='ident'>cert</span>, <span class='ident'>X509FileType</span>::<span class='ident'>PEM</span>).<span class='ident'>map_err</span>(<span class='ident'>lift_ssl_error</span>));
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>ssl_context</span>.<span class='ident'>set_private_key_file</span>(<span class='ident'>key</span>, <span class='ident'>X509FileType</span>::<span class='ident'>PEM</span>).<span class='ident'>map_err</span>(<span class='ident'>lift_ssl_error</span>));
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>https</span><span class='op'>&lt;</span><span class='ident'>To</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='ident'>addr</span>: <span class='ident'>To</span>, <span class='ident'>cert</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>, <span class='ident'>key</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HttpListener</span><span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>ssl_context</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>SslContext</span>::<span class='ident'>new</span>(<span class='ident'>Sslv23</span>));
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>ssl_context</span>.<span class='ident'>set_cipher_list</span>(<span class='string'>&quot;DEFAULT&quot;</span>));
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>ssl_context</span>.<span class='ident'>set_certificate_file</span>(<span class='ident'>cert</span>, <span class='ident'>X509FileType</span>::<span class='ident'>PEM</span>));
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>ssl_context</span>.<span class='ident'>set_private_key_file</span>(<span class='ident'>key</span>, <span class='ident'>X509FileType</span>::<span class='ident'>PEM</span>));
         <span class='ident'>ssl_context</span>.<span class='ident'>set_verify</span>(<span class='ident'>SSL_VERIFY_NONE</span>, <span class='prelude-val'>None</span>);
         <span class='ident'>HttpListener</span>::<span class='ident'>https_with_context</span>(<span class='ident'>addr</span>, <span class='ident'>ssl_context</span>)
     }
 
     <span class='doccomment'>/// Start listening to an address of HTTPS using the given SslContext</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>https_with_context</span><span class='op'>&lt;</span><span class='ident'>To</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='ident'>addr</span>: <span class='ident'>To</span>, <span class='ident'>ssl_context</span>: <span class='ident'>SslContext</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HttpListener</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>https_with_context</span><span class='op'>&lt;</span><span class='ident'>To</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='ident'>addr</span>: <span class='ident'>To</span>, <span class='ident'>ssl_context</span>: <span class='ident'>SslContext</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HttpListener</span><span class='op'>&gt;</span> {
         <span class='prelude-val'>Ok</span>(<span class='ident'>HttpListener</span>::<span class='ident'>Https</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>TcpListener</span>::<span class='ident'>bind</span>(<span class='ident'>addr</span>)), <span class='ident'>Arc</span>::<span class='ident'>new</span>(<span class='ident'>ssl_context</span>)))
     }
 }
@@ -598,21 +600,20 @@
     <span class='kw'>type</span> <span class='ident'>Stream</span> <span class='op'>=</span> <span class='ident'>HttpStream</span>;
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='kw'>fn</span> <span class='ident'>accept</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HttpStream</span><span class='op'>&gt;</span> {
-        <span class='prelude-val'>Ok</span>(<span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>HttpListener</span>::<span class='ident'>Http</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>tcp</span>) <span class='op'>=&gt;</span> <span class='ident'>HttpStream</span>::<span class='ident'>Http</span>(<span class='ident'>CloneTcpStream</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>tcp</span>.<span class='ident'>accept</span>()).<span class='number'>0</span>)),
+    <span class='kw'>fn</span> <span class='ident'>accept</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HttpStream</span><span class='op'>&gt;</span> {
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>HttpListener</span>::<span class='ident'>Http</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>tcp</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>HttpStream</span>::<span class='ident'>Http</span>(<span class='ident'>CloneTcpStream</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>tcp</span>.<span class='ident'>accept</span>()).<span class='number'>0</span>))),
             <span class='ident'>HttpListener</span>::<span class='ident'>Https</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>tcp</span>, <span class='kw-2'>ref</span> <span class='ident'>ssl_context</span>) <span class='op'>=&gt;</span> {
                 <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>CloneTcpStream</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>tcp</span>.<span class='ident'>accept</span>()).<span class='number'>0</span>);
                 <span class='kw'>match</span> <span class='ident'>SslStream</span>::<span class='ident'>new_server</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>ssl_context</span>, <span class='ident'>stream</span>) {
-                    <span class='prelude-val'>Ok</span>(<span class='ident'>ssl_stream</span>) <span class='op'>=&gt;</span> <span class='ident'>HttpStream</span>::<span class='ident'>Https</span>(<span class='ident'>ssl_stream</span>),
-                    <span class='prelude-val'>Err</span>(<span class='ident'>StreamError</span>(<span class='ident'>e</span>)) <span class='op'>=&gt;</span> {
-                        <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>ConnectionAborted</span>,
-                                                  <span class='ident'>e</span>));
+                    <span class='prelude-val'>Ok</span>(<span class='ident'>ssl_stream</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>HttpStream</span>::<span class='ident'>Https</span>(<span class='ident'>ssl_stream</span>)),
+                    <span class='prelude-val'>Err</span>(<span class='ident'>SslIoError</span>(<span class='ident'>e</span>)) <span class='op'>=&gt;</span> {
+                        <span class='prelude-val'>Err</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>ConnectionAborted</span>, <span class='ident'>e</span>).<span class='ident'>into</span>())
                     },
-                    <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>lift_ssl_error</span>(<span class='ident'>e</span>))
+                    <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>.<span class='ident'>into</span>())
                 }
             }
-        })
+        }
     }
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
@@ -708,10 +709,21 @@
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>close</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>how</span>: <span class='ident'>Shutdown</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>HttpStream</span>::<span class='ident'>Http</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>inner</span>) <span class='op'>=&gt;</span> <span class='ident'>inner</span>.<span class='number'>0</span>.<span class='ident'>shutdown</span>(<span class='ident'>how</span>),
-            <span class='ident'>HttpStream</span>::<span class='ident'>Https</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>inner</span>) <span class='op'>=&gt;</span> <span class='ident'>inner</span>.<span class='ident'>get_mut</span>().<span class='number'>0</span>.<span class='ident'>shutdown</span>(<span class='ident'>how</span>)
+        <span class='attribute'>#[<span class='ident'>inline</span>]</span>
+        <span class='kw'>fn</span> <span class='ident'>shutdown</span>(<span class='ident'>tcp</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>TcpStream</span>, <span class='ident'>how</span>: <span class='ident'>Shutdown</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+            <span class='kw'>match</span> <span class='ident'>tcp</span>.<span class='ident'>shutdown</span>(<span class='ident'>how</span>) {
+                <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(()),
+                <span class='comment'>// see https://github.com/hyperium/hyper/issues/508</span>
+                <span class='prelude-val'>Err</span>(<span class='kw-2'>ref</span> <span class='ident'>e</span>) <span class='kw'>if</span> <span class='ident'>e</span>.<span class='ident'>kind</span>() <span class='op'>==</span> <span class='ident'>ErrorKind</span>::<span class='ident'>NotConnected</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(()),
+                <span class='ident'>err</span> <span class='op'>=&gt;</span> <span class='ident'>err</span>
+            }
         }
+
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>HttpStream</span>::<span class='ident'>Http</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>inner</span>) <span class='op'>=&gt;</span> <span class='ident'>shutdown</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>inner</span>.<span class='number'>0</span>, <span class='ident'>how</span>),
+            <span class='ident'>HttpStream</span>::<span class='ident'>Https</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>inner</span>) <span class='op'>=&gt;</span> <span class='ident'>shutdown</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>inner</span>.<span class='ident'>get_mut</span>().<span class='number'>0</span>, <span class='ident'>how</span>)
+        }
+
     }
 }
 
@@ -724,9 +736,9 @@
 <span class='kw'>impl</span> <span class='ident'>NetworkConnector</span> <span class='kw'>for</span> <span class='ident'>HttpConnector</span> {
     <span class='kw'>type</span> <span class='ident'>Stream</span> <span class='op'>=</span> <span class='ident'>HttpStream</span>;
 
-    <span class='kw'>fn</span> <span class='ident'>connect</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>host</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>port</span>: <span class='ident'>u16</span>, <span class='ident'>scheme</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HttpStream</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>connect</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>host</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>port</span>: <span class='ident'>u16</span>, <span class='ident'>scheme</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>HttpStream</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>addr</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span>(<span class='ident'>host</span>, <span class='ident'>port</span>);
-        <span class='kw'>match</span> <span class='ident'>scheme</span> {
+        <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='kw'>match</span> <span class='ident'>scheme</span> {
             <span class='string'>&quot;http&quot;</span> <span class='op'>=&gt;</span> {
                 <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;http scheme&quot;</span>);
                 <span class='prelude-val'>Ok</span>(<span class='ident'>HttpStream</span>::<span class='ident'>Http</span>(<span class='ident'>CloneTcpStream</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>TcpStream</span>::<span class='ident'>connect</span>(<span class='ident'>addr</span>)))))
@@ -734,30 +746,20 @@
             <span class='string'>&quot;https&quot;</span> <span class='op'>=&gt;</span> {
                 <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;https scheme&quot;</span>);
                 <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>CloneTcpStream</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>TcpStream</span>::<span class='ident'>connect</span>(<span class='ident'>addr</span>)));
-                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>context</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>SslContext</span>::<span class='ident'>new</span>(<span class='ident'>Sslv23</span>).<span class='ident'>map_err</span>(<span class='ident'>lift_ssl_error</span>));
+                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>context</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>SslContext</span>::<span class='ident'>new</span>(<span class='ident'>Sslv23</span>));
                 <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>verifier</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='number'>0</span> {
                     <span class='ident'>verifier</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>context</span>);
                 }
-                <span class='kw'>let</span> <span class='ident'>ssl</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Ssl</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>context</span>).<span class='ident'>map_err</span>(<span class='ident'>lift_ssl_error</span>));
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>ssl</span>.<span class='ident'>set_hostname</span>(<span class='ident'>host</span>).<span class='ident'>map_err</span>(<span class='ident'>lift_ssl_error</span>));
-                <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>SslStream</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>context</span>, <span class='ident'>stream</span>).<span class='ident'>map_err</span>(<span class='ident'>lift_ssl_error</span>));
+                <span class='kw'>let</span> <span class='ident'>ssl</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Ssl</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>context</span>));
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>ssl</span>.<span class='ident'>set_hostname</span>(<span class='ident'>host</span>));
+                <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>SslStream</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>context</span>, <span class='ident'>stream</span>));
                 <span class='prelude-val'>Ok</span>(<span class='ident'>HttpStream</span>::<span class='ident'>Https</span>(<span class='ident'>stream</span>))
             },
             _ <span class='op'>=&gt;</span> {
                 <span class='prelude-val'>Err</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>InvalidInput</span>,
                                 <span class='string'>&quot;Invalid scheme for Http&quot;</span>))
             }
-        }
-    }
-}
-
-<span class='kw'>fn</span> <span class='ident'>lift_ssl_error</span>(<span class='ident'>ssl</span>: <span class='ident'>SslError</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='ident'>Error</span> {
-    <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;lift_ssl_error: {:?}&quot;</span>, <span class='ident'>ssl</span>);
-    <span class='kw'>match</span> <span class='ident'>ssl</span> {
-        <span class='ident'>StreamError</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='ident'>err</span>,
-        <span class='ident'>SslSessionClosed</span> <span class='op'>=&gt;</span> <span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>ConnectionAborted</span>,
-                                         <span class='string'>&quot;SSL Connection Closed&quot;</span>),
-        <span class='ident'>e</span><span class='kw-2'>@</span><span class='ident'>OpenSslErrors</span>(..) <span class='op'>=&gt;</span> <span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Other</span>, <span class='ident'>e</span>)
+        }))
     }
 }
 

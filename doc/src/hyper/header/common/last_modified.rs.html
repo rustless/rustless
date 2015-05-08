@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/header/common/last_modified.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/header/common/last_modified.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>last_modified.rs.html -- source</title>
@@ -67,11 +67,13 @@
 <span id="25">25</span>
 <span id="26">26</span>
 <span id="27">27</span>
+<span id="28">28</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>HttpDate</span>;
 
 <span class='macro'>header</span><span class='macro'>!</span> {
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`Last-Modified` header, defined in [RFC7232](http://tools.ietf.org/html/rfc7232#section-2.2)&quot;</span>]</span>
+    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`Last-Modified` header, defined in&quot;</span>]</span>
+    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;[RFC7232](http://tools.ietf.org/html/rfc7232#section-2.2)&quot;</span>]</span>
     <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
     <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The `Last-Modified` header field in a response provides a timestamp&quot;</span>]</span>
     <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;indicating the date and time at which the origin server believes the&quot;</span>]</span>

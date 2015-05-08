@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/server/request.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/server/request.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>request.rs.html -- source</title>
@@ -307,7 +307,6 @@
 <span id="265">265</span>
 <span id="266">266</span>
 <span id="267">267</span>
-<span id="268">268</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Server Requests</span>
 <span class='doccomment'>//!</span>
@@ -316,7 +315,6 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Read</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::<span class='ident'>SocketAddr</span>;
 
-<span class='kw'>use</span> {<span class='ident'>HttpResult</span>};
 <span class='kw'>use</span> <span class='ident'>buffer</span>::<span class='ident'>BufReader</span>;
 <span class='kw'>use</span> <span class='ident'>net</span>::<span class='ident'>NetworkStream</span>;
 <span class='kw'>use</span> <span class='ident'>version</span>::{<span class='ident'>HttpVersion</span>};
@@ -346,7 +344,7 @@
     <span class='doccomment'>/// Create a new Request, reading the StartLine and Headers so they are</span>
     <span class='doccomment'>/// immediately useful.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='kw-2'>mut</span> <span class='ident'>stream</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='kw-2'>mut</span> <span class='ident'>NetworkStream</span><span class='op'>&gt;</span>, <span class='ident'>addr</span>: <span class='ident'>SocketAddr</span>)
-        <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;&gt;</span> {
+        <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;&gt;</span> {
 
         <span class='kw'>let</span> <span class='ident'>Incoming</span> { <span class='ident'>version</span>, <span class='ident'>subject</span>: (<span class='ident'>method</span>, <span class='ident'>uri</span>), <span class='ident'>headers</span> } <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>http</span>::<span class='ident'>parse_request</span>(<span class='ident'>stream</span>));
         <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;Request Line: {:?} {:?} {:?}&quot;</span>, <span class='ident'>method</span>, <span class='ident'>uri</span>, <span class='ident'>version</span>);

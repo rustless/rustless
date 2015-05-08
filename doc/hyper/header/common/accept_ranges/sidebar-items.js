@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AcceptRanges","`Accept-Ranges` header, defined in RFC7233"]]});

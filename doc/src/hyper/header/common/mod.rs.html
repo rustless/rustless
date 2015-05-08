@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/header/common/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/header/common/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -386,6 +386,17 @@
 <span id="344">344</span>
 <span id="345">345</span>
 <span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A Collection of Header implementations for common HTTP Headers.</span>
 <span class='doccomment'>//!</span>
@@ -405,6 +416,7 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>accept_charset</span>::<span class='ident'>AcceptCharset</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>accept_encoding</span>::<span class='ident'>AcceptEncoding</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>accept_language</span>::<span class='ident'>AcceptLanguage</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>accept_ranges</span>::<span class='ident'>AcceptRanges</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>allow</span>::<span class='ident'>Allow</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>authorization</span>::{<span class='ident'>Authorization</span>, <span class='ident'>Scheme</span>, <span class='ident'>Basic</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>cache_control</span>::{<span class='ident'>CacheControl</span>, <span class='ident'>CacheDirective</span>};
@@ -418,6 +430,7 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>etag</span>::<span class='ident'>ETag</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>expect</span>::<span class='ident'>Expect</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>expires</span>::<span class='ident'>Expires</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>from</span>::<span class='ident'>From</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>host</span>::<span class='ident'>Host</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>if_match</span>::<span class='ident'>IfMatch</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>if_modified_since</span>::<span class='ident'>IfModifiedSince</span>;
@@ -431,7 +444,7 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>server</span>::<span class='ident'>Server</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>set_cookie</span>::<span class='ident'>SetCookie</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>transfer_encoding</span>::<span class='ident'>TransferEncoding</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>upgrade</span>::{<span class='ident'>Upgrade</span>, <span class='ident'>Protocol</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>upgrade</span>::{<span class='ident'>Upgrade</span>, <span class='ident'>Protocol</span>, <span class='ident'>ProtocolName</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>user_agent</span>::<span class='ident'>UserAgent</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>vary</span>::<span class='ident'>Vary</span>;
 
@@ -511,8 +524,16 @@
             <span class='kw'>let</span> <span class='ident'>value</span> <span class='op'>=</span> <span class='ident'>HeaderField</span>::<span class='ident'>parse_header</span>(<span class='kw-2'>&amp;</span><span class='ident'>a</span>[..]);
             <span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>value</span>.<span class='ident'>unwrap</span>());
             <span class='kw'>let</span> <span class='ident'>expected</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>raw</span>[<span class='number'>0</span>].<span class='ident'>to_vec</span>()).<span class='ident'>unwrap</span>();
-            <span class='kw'>let</span> <span class='ident'>result_cmp</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>result</span>.<span class='ident'>to_ascii_lowercase</span>().<span class='ident'>split</span>(<span class='string'>&#39; &#39;</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_string</span>()).<span class='ident'>collect</span>();
-            <span class='kw'>let</span> <span class='ident'>expected_cmp</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>expected</span>.<span class='ident'>to_ascii_lowercase</span>().<span class='ident'>split</span>(<span class='string'>&#39; &#39;</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_string</span>()).<span class='ident'>collect</span>();
+            <span class='kw'>let</span> <span class='ident'>result_cmp</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>result</span>
+                .<span class='ident'>to_ascii_lowercase</span>()
+                .<span class='ident'>split</span>(<span class='string'>&#39; &#39;</span>)
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_string</span>())
+                .<span class='ident'>collect</span>();
+            <span class='kw'>let</span> <span class='ident'>expected_cmp</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>expected</span>
+                .<span class='ident'>to_ascii_lowercase</span>()
+                .<span class='ident'>split</span>(<span class='string'>&#39; &#39;</span>)
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_string</span>())
+                .<span class='ident'>collect</span>();
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>result_cmp</span>.<span class='ident'>concat</span>(), <span class='ident'>expected_cmp</span>.<span class='ident'>concat</span>());
         }
     };
@@ -635,8 +656,6 @@
                 <span class='kw'>if</span> <span class='ident'>raw</span>.<span class='ident'>len</span>() <span class='op'>==</span> <span class='number'>1</span> {
                     <span class='kw'>if</span> <span class='ident'>raw</span>[<span class='number'>0</span>] <span class='op'>==</span> <span class='string'>b&quot;*&quot;</span> {
                         <span class='kw'>return</span> <span class='prelude-val'>Some</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>::<span class='ident'>Any</span>)
-                    } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>raw</span>[<span class='number'>0</span>] <span class='op'>==</span> <span class='string'>b&quot;&quot;</span> {
-                        <span class='kw'>return</span> <span class='prelude-val'>None</span>
                     }
                 }
                 <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>parsing</span>::<span class='ident'>from_comma_delimited</span>(<span class='ident'>raw</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>vec</span><span class='op'>|</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>::<span class='ident'>Items</span>(<span class='ident'>vec</span>))
@@ -645,8 +664,9 @@
         <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>HeaderFormat</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> {
             <span class='kw'>fn</span> <span class='ident'>fmt_header</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> ::<span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
                 <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-                    <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>::<span class='ident'>Any</span> <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;*&quot;</span>),
-                    <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>::<span class='ident'>Items</span>(<span class='kw-2'>ref</span> <span class='ident'>fields</span>) <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>parsing</span>::<span class='ident'>fmt_comma_delimited</span>(<span class='ident'>f</span>, <span class='kw-2'>&amp;</span><span class='ident'>fields</span>[..])
+                    <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>::<span class='ident'>Any</span> <span class='op'>=&gt;</span> <span class='ident'>f</span>.<span class='ident'>write_str</span>(<span class='string'>&quot;*&quot;</span>),
+                    <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>::<span class='ident'>Items</span>(<span class='kw-2'>ref</span> <span class='ident'>fields</span>) <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>parsing</span>::<span class='ident'>fmt_comma_delimited</span>(
+                        <span class='ident'>f</span>, <span class='kw-2'>&amp;</span><span class='ident'>fields</span>[..])
                 }
             }
         }
@@ -704,6 +724,7 @@
 <span class='kw'>mod</span> <span class='ident'>accept_charset</span>;
 <span class='kw'>mod</span> <span class='ident'>accept_encoding</span>;
 <span class='kw'>mod</span> <span class='ident'>accept_language</span>;
+<span class='kw'>mod</span> <span class='ident'>accept_ranges</span>;
 <span class='kw'>mod</span> <span class='ident'>allow</span>;
 <span class='kw'>mod</span> <span class='ident'>authorization</span>;
 <span class='kw'>mod</span> <span class='ident'>cache_control</span>;
@@ -717,6 +738,7 @@
 <span class='kw'>mod</span> <span class='ident'>etag</span>;
 <span class='kw'>mod</span> <span class='ident'>expect</span>;
 <span class='kw'>mod</span> <span class='ident'>expires</span>;
+<span class='kw'>mod</span> <span class='ident'>from</span>;
 <span class='kw'>mod</span> <span class='ident'>host</span>;
 <span class='kw'>mod</span> <span class='ident'>if_match</span>;
 <span class='kw'>mod</span> <span class='ident'>if_modified_since</span>;

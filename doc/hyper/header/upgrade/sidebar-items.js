@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Protocol","Protocol values that can appear in the Upgrade header."]],"struct":[["Upgrade","`Upgrade` header, defined in RFC7230"]]});
+initSidebarItems({"enum":[["ProtocolName","A protocol name used to identify a spefic protocol. Names are case-sensitive except for the `WebSocket` value."]],"struct":[["Protocol","Protocols that appear in the `Upgrade` header field"],["Upgrade","`Upgrade` header, defined in RFC7230"]]});

@@ -43,7 +43,7 @@
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>hyper</a>::<wbr><a class='mod' href=''>server</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
-        </span><a id='src-31316' class='srclink' href='../../src/hyper/server/mod.rs.html#1-325' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-32180' class='srclink' href='../../src/hyper/server/mod.rs.html#1-322' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>HTTP Server</p>
 
 <h1 id="example" class='section-header'><a
@@ -60,8 +60,6 @@
         (<span class='ident'>hyper</span>::<span class='ident'>Get</span>, _) <span class='op'>=&gt;</span> <span class='ident'>StatusCode</span>::<span class='ident'>NotFound</span>,
         _ <span class='op'>=&gt;</span> <span class='ident'>StatusCode</span>::<span class='ident'>MethodNotAllowed</span>
     };
-
-    <span class='ident'>res</span>.<span class='ident'>start</span>().<span class='ident'>unwrap</span>().<span class='ident'>end</span>().<span class='ident'>unwrap</span>();
 }).<span class='ident'>listen</span>(<span class='string'>&quot;0.0.0.0:8080&quot;</span>).<span class='ident'>unwrap</span>();
 </pre>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>

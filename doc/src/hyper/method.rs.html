@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/method.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/method.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>method.rs.html -- source</title>
@@ -190,12 +190,45 @@
 <span id="148">148</span>
 <span id="149">149</span>
 <span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! The HTTP request method</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>FromStr</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>convert</span>::<span class='ident'>AsRef</span>;
 
-<span class='kw'>use</span> <span class='ident'>error</span>::<span class='ident'>HttpError</span>;
+<span class='kw'>use</span> <span class='ident'>error</span>::<span class='ident'>Error</span>;
 <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>Method</span>::{<span class='ident'>Options</span>, <span class='ident'>Get</span>, <span class='ident'>Post</span>, <span class='ident'>Put</span>, <span class='ident'>Delete</span>, <span class='ident'>Head</span>, <span class='ident'>Trace</span>, <span class='ident'>Connect</span>, <span class='ident'>Patch</span>,
                    <span class='ident'>Extension</span>};
 
@@ -227,8 +260,25 @@
     <span class='ident'>Connect</span>,
     <span class='doccomment'>/// PATCH</span>
     <span class='ident'>Patch</span>,
-    <span class='doccomment'>/// Method extentions. An example would be `let m = Extension(&quot;FOO&quot;.to_string())`.</span>
+    <span class='doccomment'>/// Method extensions. An example would be `let m = Extension(&quot;FOO&quot;.to_string())`.</span>
     <span class='ident'>Extension</span>(<span class='ident'>String</span>)
+}
+
+<span class='kw'>impl</span> <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>str</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Method</span> {
+    <span class='kw'>fn</span> <span class='ident'>as_ref</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> {
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>Options</span> <span class='op'>=&gt;</span> <span class='string'>&quot;OPTIONS&quot;</span>,
+            <span class='ident'>Get</span> <span class='op'>=&gt;</span> <span class='string'>&quot;GET&quot;</span>,
+            <span class='ident'>Post</span> <span class='op'>=&gt;</span> <span class='string'>&quot;POST&quot;</span>,
+            <span class='ident'>Put</span> <span class='op'>=&gt;</span> <span class='string'>&quot;PUT&quot;</span>,
+            <span class='ident'>Delete</span> <span class='op'>=&gt;</span> <span class='string'>&quot;DELETE&quot;</span>,
+            <span class='ident'>Head</span> <span class='op'>=&gt;</span> <span class='string'>&quot;HEAD&quot;</span>,
+            <span class='ident'>Trace</span> <span class='op'>=&gt;</span> <span class='string'>&quot;TRACE&quot;</span>,
+            <span class='ident'>Connect</span> <span class='op'>=&gt;</span> <span class='string'>&quot;CONNECT&quot;</span>,
+            <span class='ident'>Patch</span> <span class='op'>=&gt;</span> <span class='string'>&quot;PATCH&quot;</span>,
+            <span class='ident'>Extension</span>(<span class='kw-2'>ref</span> <span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='ident'>s</span>.<span class='ident'>as_ref</span>()
+        }
+    }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Method</span> {
@@ -262,10 +312,10 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>FromStr</span> <span class='kw'>for</span> <span class='ident'>Method</span> {
-    <span class='kw'>type</span> <span class='prelude-val'>Err</span> <span class='op'>=</span> <span class='ident'>HttpError</span>;
-    <span class='kw'>fn</span> <span class='ident'>from_str</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Method</span>, <span class='ident'>HttpError</span><span class='op'>&gt;</span> {
+    <span class='kw'>type</span> <span class='prelude-val'>Err</span> <span class='op'>=</span> <span class='ident'>Error</span>;
+    <span class='kw'>fn</span> <span class='ident'>from_str</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Method</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='ident'>s</span> <span class='op'>==</span> <span class='string'>&quot;&quot;</span> {
-            <span class='prelude-val'>Err</span>(<span class='ident'>HttpError</span>::<span class='ident'>HttpMethodError</span>)
+            <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Method</span>)
         } <span class='kw'>else</span> {
             <span class='prelude-val'>Ok</span>(<span class='kw'>match</span> <span class='ident'>s</span> {
                 <span class='string'>&quot;OPTIONS&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>Options</span>,
@@ -304,6 +354,7 @@
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>HashMap</span>;
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>FromStr</span>;
+    <span class='kw'>use</span> <span class='ident'>error</span>::<span class='ident'>Error</span>;
     <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>Method</span>;
     <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>Method</span>::{<span class='ident'>Get</span>, <span class='ident'>Post</span>, <span class='ident'>Put</span>, <span class='ident'>Extension</span>};
 
@@ -325,6 +376,11 @@
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Get</span>, <span class='ident'>FromStr</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;GET&quot;</span>).<span class='ident'>unwrap</span>());
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Extension</span>(<span class='string'>&quot;MOVE&quot;</span>.<span class='ident'>to_string</span>()),
                    <span class='ident'>FromStr</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;MOVE&quot;</span>).<span class='ident'>unwrap</span>());
+        <span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Method</span>, _<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>FromStr</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;&quot;</span>);
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Method</span>) <span class='op'>=</span> <span class='ident'>x</span> {
+        } <span class='kw'>else</span> {
+            <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;An empty method is invalid!&quot;</span>)
+        }
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -339,6 +395,14 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>counter</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>Method</span>,<span class='ident'>usize</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>HashMap</span>::<span class='ident'>new</span>();
         <span class='ident'>counter</span>.<span class='ident'>insert</span>(<span class='ident'>Get</span>, <span class='number'>1</span>);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='number'>1</span>), <span class='ident'>counter</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>Get</span>));
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_as_str</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Get</span>.<span class='ident'>as_ref</span>(), <span class='string'>&quot;GET&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Post</span>.<span class='ident'>as_ref</span>(), <span class='string'>&quot;POST&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Put</span>.<span class='ident'>as_ref</span>(), <span class='string'>&quot;PUT&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Extension</span>(<span class='string'>&quot;MOVE&quot;</span>.<span class='ident'>to_string</span>()).<span class='ident'>as_ref</span>(), <span class='string'>&quot;MOVE&quot;</span>);
     }
 }
 </pre>

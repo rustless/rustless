@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.3.16/src/header/common/allow.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/header/common/allow.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>allow.rs.html -- source</title>
@@ -90,6 +90,7 @@
 <span id="48">48</span>
 <span id="49">49</span>
 <span id="50">50</span>
+<span id="51">51</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>method</span>::<span class='ident'>Method</span>;
 
@@ -140,7 +141,8 @@
     }
 }
 
-<span class='macro'>bench_header</span><span class='macro'>!</span>(<span class='ident'>bench</span>, <span class='ident'>Allow</span>, { <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&quot;OPTIONS,GET,PUT,POST,DELETE,HEAD,TRACE,CONNECT,PATCH,fOObAr&quot;</span>.<span class='ident'>to_vec</span>()] });
+<span class='macro'>bench_header</span><span class='macro'>!</span>(<span class='ident'>bench</span>,
+    <span class='ident'>Allow</span>, { <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&quot;OPTIONS,GET,PUT,POST,DELETE,HEAD,TRACE,CONNECT,PATCH,fOObAr&quot;</span>.<span class='ident'>to_vec</span>()] });
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
