@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/typemap-0.3.0/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/typemap-0.3.1/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -335,6 +335,17 @@
 <span id="293">293</span>
 <span id="294">294</span>
 <span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>, <span class='ident'>warnings</span>)]</span>
 
@@ -349,7 +360,8 @@
 
 <span class='kw'>use</span> <span class='ident'>Entry</span>::{<span class='ident'>Occupied</span>, <span class='ident'>Vacant</span>};
 
-<span class='kw'>use</span> <span class='ident'>internals</span>::{<span class='ident'>Implements</span>, <span class='ident'>CloneAny</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>internals</span>::{<span class='ident'>CloneAny</span>, <span class='ident'>DebugAny</span>};
+<span class='kw'>use</span> <span class='ident'>internals</span>::<span class='ident'>Implements</span>;
 
 <span class='doccomment'>/// A map keyed by types.</span>
 <span class='doccomment'>///</span>
@@ -360,7 +372,7 @@
 <span class='doccomment'>/// can be used to add bounds to the possible value types that can</span>
 <span class='doccomment'>/// be stored in this map. Usually, you are looking for `ShareMap`, which</span>
 <span class='doccomment'>/// is `Send + Sync`.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Default</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Default</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>TypeMap</span><span class='op'>&lt;</span><span class='ident'>A</span>: ?<span class='ident'>Sized</span> <span class='op'>=</span> <span class='ident'>UnsafeAny</span><span class='op'>&gt;</span>
 <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>UnsafeAnyExt</span> {
     <span class='ident'>data</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>TypeId</span>, <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;&gt;</span>
@@ -388,17 +400,27 @@
 <span class='doccomment'>/// A version of `TypeMap` containing only `Clone + Send + Sync` types.</span>
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>ShareCloneMap</span> <span class='op'>=</span> <span class='ident'>TypeMap</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>;
 
+<span class='doccomment'>/// A version of `TypeMap` containing only `Debug` types.</span>
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>DebugMap</span> <span class='op'>=</span> <span class='ident'>TypeMap</span><span class='op'>&lt;</span><span class='ident'>DebugAny</span><span class='op'>&gt;</span>;
+
+<span class='doccomment'>/// A version of `TypeMap` containing only `Debug + Send + Sync` types.</span>
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>ShareDebugMap</span> <span class='op'>=</span> <span class='ident'>TypeMap</span><span class='op'>&lt;</span><span class='ident'>DebugAny</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>;
+
 <span class='comment'>// Assert some properties on SyncMap, SendMap and ShareMap.</span>
 <span class='kw'>fn</span> <span class='ident'>_assert_types</span>() {
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
+
     <span class='kw'>fn</span> <span class='ident'>_assert_send</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Send</span><span class='op'>&gt;</span>() { }
     <span class='kw'>fn</span> <span class='ident'>_assert_sync</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Sync</span><span class='op'>&gt;</span>() { }
     <span class='kw'>fn</span> <span class='ident'>_assert_clone</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span><span class='op'>&gt;</span>() { }
+    <span class='kw'>fn</span> <span class='ident'>_assert_debug</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Debug</span><span class='op'>&gt;</span>() { }
 
     <span class='ident'>_assert_send</span>::<span class='op'>&lt;</span><span class='ident'>SendMap</span><span class='op'>&gt;</span>();
     <span class='ident'>_assert_sync</span>::<span class='op'>&lt;</span><span class='ident'>SyncMap</span><span class='op'>&gt;</span>();
     <span class='ident'>_assert_send</span>::<span class='op'>&lt;</span><span class='ident'>ShareMap</span><span class='op'>&gt;</span>();
     <span class='ident'>_assert_sync</span>::<span class='op'>&lt;</span><span class='ident'>ShareMap</span><span class='op'>&gt;</span>();
     <span class='ident'>_assert_clone</span>::<span class='op'>&lt;</span><span class='ident'>CloneMap</span><span class='op'>&gt;</span>();
+    <span class='ident'>_assert_debug</span>::<span class='op'>&lt;</span><span class='ident'>DebugMap</span><span class='op'>&gt;</span>();
 }
 
 <span class='doccomment'>/// This trait defines the relationship between keys and values in a TypeMap.</span>
