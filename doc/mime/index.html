@@ -49,12 +49,12 @@
 <div class='docblock'>
 <h1 id="mime" class='section-header'><a
                            href="#mime">Mime</a></h1>
-<p>Mime is now Media Type, technically, but <code>Mime</code>`Mime<code>is more immediately understandable, so the main type here is</code>` is more immediately
-understandable, so the main type here is <code>Mime</code>`Mime`.</p>
+<p>Mime is now Media Type, technically, but <code>Mime</code> is more immediately
+understandable, so the main type here is <code>Mime</code>.</p>
 
 <h2 id="what-is-mime?" class='section-header'><a
                            href="#what-is-mime?">What is Mime?</a></h2>
-<p>Example mime string: <code>text/plain;charset=utf-8</code>`text/plain;charset=utf-8`</p>
+<p>Example mime string: <code>text/plain;charset=utf-8</code></p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>plain_text</span>: <span class='ident'>mime</span>::<span class='ident'>Mime</span> <span class='op'>=</span> <span class='string'>&quot;text/plain;charset=utf-8&quot;</span>.<span class='ident'>parse</span>().<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>plain_text</span>, <span class='macro'>mime</span><span class='macro'>!</span>(<span class='ident'>Text</span><span class='op'>/</span><span class='ident'>Plain</span>; <span class='ident'>Charset</span><span class='op'>=</span><span class='ident'>Utf8</span>));
