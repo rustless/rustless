@@ -42,7 +42,9 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>rustless</a>::<wbr><a href='index.html'>framework</a>::<wbr><a class='trait' href=''>ApiHandler</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
         </span><a id='src-10274' class='srclink' href='../../src/rustless/framework/mod.rs.html#31-33' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ApiHandler: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> {
     fn <a href='#tymethod.api_call' class='fnname'>api_call</a>&lt;'a, 'b&gt;(&amp;'a self, &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, &amp;mut <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, &amp;'b mut <a class='trait' href='../../rustless/backend/request/trait.Request.html' title='rustless::backend::request::Request'>Request</a> + 'b, &amp;mut <a class='struct' href='../../rustless/framework/struct.CallInfo.html' title='rustless::framework::CallInfo'>CallInfo</a>&lt;'a&gt;) -&gt; <a class='type' href='../../rustless/type.HandleResult.html' title='rustless::HandleResult'>HandleResult</a>&lt;<a class='struct' href='../../rustless/struct.Response.html' title='rustless::Response'>Response</a>&gt;;
@@ -108,6 +110,10 @@ If you are not <em>absolutely certain</em> of <code>T</code>, you <em>must not</
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

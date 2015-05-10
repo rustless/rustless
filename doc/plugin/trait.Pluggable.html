@@ -42,7 +42,9 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>plugin</a>::<wbr><a class='trait' href=''>Pluggable</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
         </span><a id='src-40' class='srclink' href='../src/plugin/lib.rs.html#41-90' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Pluggable {
     fn <a href='#method.get' class='fnname'>get</a>&lt;P: <a class='trait' href='../plugin/trait.Plugin.html' title='plugin::Plugin'>Plugin</a>&lt;Self&gt;&gt;(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;P, P&gt; <span class='where'>where P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>, Self: <a class='trait' href='../plugin/trait.Extensible.html' title='plugin::Extensible'>Extensible</a></span> { ... }
@@ -111,6 +113,10 @@ If plugin creation fail an error is returned.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

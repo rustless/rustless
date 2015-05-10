@@ -42,7 +42,9 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>valico</a>::<wbr><a href='../index.html'>json_schema</a>::<wbr><a href='index.html'>keywords</a>::<wbr><a class='trait' href=''>Keyword</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="#" title="collapse all docs">[&minus;]</a>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
         </span><a id='src-6579' class='srclink' href='../../../src/valico/json_schema/keywords/mod.rs.html#16-18' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Keyword: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> {
     fn <a href='#tymethod.compile' class='fnname'>compile</a>(&amp;self, &amp;<a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, &amp;<a class='struct' href='../../../valico/json_schema/schema/struct.WalkContext.html' title='valico::json_schema::schema::WalkContext'>WalkContext</a>) -&gt; <a class='type' href='../../../valico/json_schema/keywords/type.KeywordResult.html' title='valico::json_schema::keywords::KeywordResult'>KeywordResult</a>;
@@ -130,6 +132,10 @@ If you are not <em>absolutely certain</em> of <code>T</code>, you <em>must not</
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>
