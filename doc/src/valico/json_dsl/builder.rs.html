@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.7.6/src/json_dsl/builder.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.0/src/json_dsl/builder.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>builder.rs.html -- source</title>
@@ -481,8 +481,8 @@
             <span class='kw'>for</span> (<span class='ident'>idx</span>, <span class='ident'>item</span>) <span class='kw'>in</span> <span class='ident'>array</span>.<span class='ident'>iter_mut</span>().<span class='ident'>enumerate</span>() {
                 <span class='kw'>let</span> <span class='ident'>item_path</span> <span class='op'>=</span> [<span class='ident'>path</span>, <span class='ident'>idx</span>.<span class='ident'>to_string</span>().<span class='ident'>as_ref</span>()].<span class='ident'>connect</span>(<span class='string'>&quot;/&quot;</span>);
                 <span class='kw'>if</span> <span class='ident'>item</span>.<span class='ident'>is_object</span>() {
-                    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>process_state</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>process_object</span>(<span class='ident'>item</span>, <span class='ident'>item_path</span>.<span class='ident'>as_ref</span>(), <span class='ident'>scope</span>);
-                    <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>process_state</span>);
+                    <span class='kw'>let</span> <span class='ident'>process_state</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>process_object</span>(<span class='ident'>item</span>, <span class='ident'>item_path</span>.<span class='ident'>as_ref</span>(), <span class='ident'>scope</span>);
+                    <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='ident'>process_state</span>);
                 } <span class='kw'>else</span> {
                     <span class='ident'>state</span>.<span class='ident'>errors</span>.<span class='ident'>push</span>(
                         <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>errors</span>::<span class='ident'>WrongType</span> {
@@ -502,7 +502,7 @@
                 <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>errors</span>::<span class='ident'>WrongType</span> {
                     <span class='ident'>path</span>: <span class='ident'>path</span>.<span class='ident'>to_string</span>(),
                     <span class='ident'>detail</span>: <span class='string'>&quot;Value is not an object or an array&quot;</span>.<span class='ident'>to_string</span>()
-                }) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>super</span>::<span class='ident'>super</span>::<span class='ident'>common</span>::<span class='ident'>error</span>::<span class='ident'>ValicoError</span><span class='op'>&gt;</span>
+                })
             );
 
             <span class='ident'>state</span>
@@ -518,7 +518,7 @@
             <span class='kw'>let</span> <span class='ident'>id</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>schema_id</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>();
             <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='ident'>scope</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>resolve</span>(<span class='ident'>id</span>);
             <span class='kw'>match</span> <span class='ident'>schema</span> {
-                <span class='prelude-val'>Some</span>(<span class='ident'>schema</span>) <span class='op'>=&gt;</span> <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>schema</span>.<span class='ident'>validate_in</span>(<span class='ident'>val</span>, <span class='ident'>path</span>)),
+                <span class='prelude-val'>Some</span>(<span class='ident'>schema</span>) <span class='op'>=&gt;</span> <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='ident'>schema</span>.<span class='ident'>validate_in</span>(<span class='ident'>val</span>, <span class='ident'>path</span>)),
                 <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='ident'>state</span>.<span class='ident'>missing</span>.<span class='ident'>push</span>(<span class='ident'>id</span>.<span class='ident'>clone</span>())
             }
         }
@@ -537,13 +537,13 @@
                 <span class='kw'>let</span> <span class='ident'>present</span> <span class='op'>=</span> <span class='ident'>helpers</span>::<span class='ident'>has_value</span>(<span class='ident'>object</span>, <span class='ident'>name</span>);
                 <span class='kw'>let</span> <span class='ident'>param_path</span> <span class='op'>=</span> [<span class='ident'>path</span>, <span class='ident'>name</span>.<span class='ident'>as_ref</span>()].<span class='ident'>connect</span>(<span class='string'>&quot;/&quot;</span>);
                 <span class='kw'>if</span> <span class='ident'>present</span> {
-                    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>process_result</span> <span class='op'>=</span> <span class='ident'>param</span>.<span class='ident'>process</span>(<span class='ident'>object</span>.<span class='ident'>get_mut</span>(<span class='ident'>name</span>).<span class='ident'>unwrap</span>(), <span class='ident'>param_path</span>.<span class='ident'>as_ref</span>(), <span class='ident'>scope</span>);
+                    <span class='kw'>let</span> <span class='ident'>process_result</span> <span class='op'>=</span> <span class='ident'>param</span>.<span class='ident'>process</span>(<span class='ident'>object</span>.<span class='ident'>get_mut</span>(<span class='ident'>name</span>).<span class='ident'>unwrap</span>(), <span class='ident'>param_path</span>.<span class='ident'>as_ref</span>(), <span class='ident'>scope</span>);
                     <span class='kw'>match</span> <span class='ident'>process_result</span>.<span class='ident'>value</span>  {
                         <span class='prelude-val'>Some</span>(<span class='ident'>new_value</span>) <span class='op'>=&gt;</span> { <span class='ident'>object</span>.<span class='ident'>insert</span>(<span class='ident'>name</span>.<span class='ident'>clone</span>(), <span class='ident'>new_value</span>); },
                         <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> ()
                     }
 
-                    <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>process_result</span>.<span class='ident'>state</span>);
+                    <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='ident'>process_result</span>.<span class='ident'>state</span>);
                 } <span class='kw'>else</span> {
                     <span class='ident'>state</span>.<span class='ident'>errors</span>.<span class='ident'>push</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>errors</span>::<span class='ident'>Required</span> {
                         <span class='ident'>path</span>: <span class='ident'>param_path</span>.<span class='ident'>clone</span>()
@@ -556,13 +556,13 @@
                 <span class='kw'>let</span> <span class='ident'>present</span> <span class='op'>=</span> <span class='ident'>helpers</span>::<span class='ident'>has_value</span>(<span class='ident'>object</span>, <span class='ident'>name</span>);
                 <span class='kw'>let</span> <span class='ident'>param_path</span> <span class='op'>=</span> [<span class='ident'>path</span>, <span class='ident'>name</span>.<span class='ident'>as_ref</span>()].<span class='ident'>connect</span>(<span class='string'>&quot;/&quot;</span>);
                 <span class='kw'>if</span> <span class='ident'>present</span> {
-                    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>process_result</span> <span class='op'>=</span> <span class='ident'>param</span>.<span class='ident'>process</span>(<span class='ident'>object</span>.<span class='ident'>get_mut</span>(<span class='ident'>name</span>).<span class='ident'>unwrap</span>(), <span class='ident'>param_path</span>.<span class='ident'>as_ref</span>(), <span class='ident'>scope</span>);
+                    <span class='kw'>let</span> <span class='ident'>process_result</span> <span class='op'>=</span> <span class='ident'>param</span>.<span class='ident'>process</span>(<span class='ident'>object</span>.<span class='ident'>get_mut</span>(<span class='ident'>name</span>).<span class='ident'>unwrap</span>(), <span class='ident'>param_path</span>.<span class='ident'>as_ref</span>(), <span class='ident'>scope</span>);
                     <span class='kw'>match</span> <span class='ident'>process_result</span>.<span class='ident'>value</span>  {
                         <span class='prelude-val'>Some</span>(<span class='ident'>new_value</span>) <span class='op'>=&gt;</span> { <span class='ident'>object</span>.<span class='ident'>insert</span>(<span class='ident'>name</span>.<span class='ident'>clone</span>(), <span class='ident'>new_value</span>); },
                         <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> ()
                     }
 
-                    <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>process_result</span>.<span class='ident'>state</span>);
+                    <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='ident'>process_result</span>.<span class='ident'>state</span>);
                 }
             }
         }
@@ -576,8 +576,8 @@
         <span class='kw'>for</span> <span class='ident'>validator</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>validators</span>.<span class='ident'>iter</span>() {
             <span class='kw'>match</span> <span class='ident'>validator</span>.<span class='ident'>validate</span>(<span class='ident'>val</span>, <span class='ident'>path</span>) {
                 <span class='prelude-val'>Ok</span>(()) <span class='op'>=&gt;</span> (),
-                <span class='prelude-val'>Err</span>(<span class='kw-2'>mut</span> <span class='ident'>err</span>) <span class='op'>=&gt;</span> {
-                    <span class='ident'>state</span>.<span class='ident'>errors</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>err</span>);
+                <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> {
+                    <span class='ident'>state</span>.<span class='ident'>errors</span>.<span class='ident'>extend</span>(<span class='ident'>err</span>);
                 }
             };
         }

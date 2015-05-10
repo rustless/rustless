@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["api",""],["app",""],["client",""],["endpoint",""],["media",""],["namespace",""],["nesting",""],["path",""]],"struct":[["CallInfo",""]],"trait":[["ApiHandler",""]],"type":[["ApiHandlers",""],["Callback",""],["Callbacks",""],["ErrorFormatter",""],["ErrorFormatters",""]]});
+initSidebarItems({"mod":[["api",""],["api_handler",""],["app",""],["client",""],["endpoint",""],["media",""],["namespace",""],["nesting",""],["path",""]],"struct":[["CallInfo",""]],"type":[["Callback",""],["Callbacks",""],["ErrorFormatter",""],["ErrorFormatters",""]]});

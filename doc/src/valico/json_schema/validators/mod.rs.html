@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.7.6/src/json_schema/validators/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.0/src/json_schema/validators/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -280,9 +280,9 @@
         <span class='self'>self</span>.<span class='ident'>errors</span>.<span class='ident'>len</span>() <span class='op'>==</span> <span class='number'>0</span> <span class='op'>&amp;&amp;</span> <span class='self'>self</span>.<span class='ident'>missing</span>.<span class='ident'>len</span>() <span class='op'>==</span> <span class='number'>0</span>
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>second</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ValidationState</span>) {
-        <span class='self'>self</span>.<span class='ident'>errors</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>second</span>.<span class='ident'>errors</span>);
-        <span class='self'>self</span>.<span class='ident'>missing</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>second</span>.<span class='ident'>missing</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>second</span>: <span class='ident'>ValidationState</span>) {
+        <span class='self'>self</span>.<span class='ident'>errors</span>.<span class='ident'>extend</span>(<span class='ident'>second</span>.<span class='ident'>errors</span>);
+        <span class='self'>self</span>.<span class='ident'>missing</span>.<span class='ident'>extend</span>(<span class='ident'>second</span>.<span class='ident'>missing</span>);
     }
 }
 

@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `create_ordered_map` fn in crate `phf_macros`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, create_ordered_map">
+    <meta name="description" content="API documentation for the Rust `ApiHandlers` type in crate `rustless`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ApiHandlers">
 
-    <title>phf_macros::util::create_ordered_map - Rust</title>
+    <title>rustless::framework::api_handler::ApiHandlers - Rust</title>
 
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
     
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../index.html'>phf_macros</a>::<wbr><a href='index.html'>util</a></p><script>window.sidebarCurrent = {name: 'create_ordered_map', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>framework</a>::<wbr><a href='index.html'>api_handler</a></p><script>window.sidebarCurrent = {name: 'ApiHandlers', ty: 'type', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -40,13 +40,13 @@
         </form>
     </nav>
 
-    <section id='main' class="content fn">
-<h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>phf_macros</a>::<wbr><a href='index.html'>util</a>::<wbr><a class='fn' href=''>create_ordered_map</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content type">
+<h1 class='fqn'><span class='in-band'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>framework</a>::<wbr><a href='index.html'>api_handler</a>::<wbr><a class='type' href=''>ApiHandlers</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-1662' class='srclink' href='../../src/phf_macros/util.rs.html#107-129' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn create_ordered_map(cx: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/syntax/ext/base/struct.ExtCtxt.html' title='syntax::ext::base::ExtCtxt'>ExtCtxt</a>, sp: <a class='struct' href='http://doc.rust-lang.org/nightly/syntax/codemap/struct.Span.html' title='syntax::codemap::Span'>Span</a>, entries: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../phf_macros/util/struct.Entry.html' title='phf_macros::util::Entry'>Entry</a>&gt;, state: <a class='struct' href='../../phf_generator/struct.HashState.html' title='phf_generator::HashState'>HashState</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='http://doc.rust-lang.org/nightly/syntax/ext/base/trait.MacResult.html' title='syntax::ext::base::MacResult'>MacResult</a> + 'static&gt;</pre></section>
+        </span><a id='src-2910' class='srclink' href='../../../src/rustless/framework/api_handler.rs.html#48' title='goto source code'>[src]</a></span></h1>
+<pre class='rust typedef'>type ApiHandlers = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../../rustless/framework/api_handler/trait.ApiHandler.html' title='rustless::framework::api_handler::ApiHandler'>ApiHandler</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a>&gt;&gt;;</pre></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -89,13 +89,13 @@
     
 
     <script>
-        window.rootPath = "../../";
-        window.currentCrate = "phf_macros";
+        window.rootPath = "../../../";
+        window.currentCrate = "rustless";
         window.playgroundUrl = "";
     </script>
-    <script src="../../jquery.js"></script>
-    <script src="../../main.js"></script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script async src="../../../search-index.js"></script>
 </body>
 </html>

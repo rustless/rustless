@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.7.6/src/common/error.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.0/src/common/error.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>error.rs.html -- source</title>
@@ -148,17 +148,49 @@
 <span id="106">106</span>
 <span id="107">107</span>
 <span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>error</span>::{<span class='self'>self</span>, <span class='ident'>Error</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>any</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
 <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
+<span class='kw'>use</span> <span class='ident'>typeable</span>::<span class='ident'>Typeable</span>;
+<span class='kw'>use</span> <span class='ident'>traitobject</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>any</span>::<span class='ident'>TypeId</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>;
 
-<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ValicoError</span>: <span class='ident'>error</span>::<span class='ident'>Error</span> <span class='op'>+</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>any</span>::<span class='ident'>Any</span> <span class='op'>+</span> <span class='ident'>json</span>::<span class='ident'>ToJson</span> {
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ValicoError</span> : <span class='ident'>Error</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Debug</span> <span class='op'>+</span> <span class='ident'>Typeable</span> <span class='op'>+</span> <span class='ident'>json</span>::<span class='ident'>ToJson</span> {
     <span class='kw'>fn</span> <span class='ident'>get_code</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>;
     <span class='kw'>fn</span> <span class='ident'>get_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>;
     <span class='kw'>fn</span> <span class='ident'>get_title</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>;
     <span class='kw'>fn</span> <span class='ident'>get_detail</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> { <span class='prelude-val'>None</span> }
+}
+
+<span class='kw'>impl</span> <span class='ident'>ValicoError</span> {
+    <span class='doccomment'>/// Is this `Error` object of type `E`?</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is</span><span class='op'>&lt;</span><span class='ident'>E</span>: <span class='ident'>ValicoError</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> { <span class='self'>self</span>.<span class='ident'>get_type</span>() <span class='op'>==</span> <span class='ident'>TypeId</span>::<span class='ident'>of</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>() }
+
+    <span class='doccomment'>/// If this error is `E`, downcast this error to `E`, by reference.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>downcast</span><span class='op'>&lt;</span><span class='ident'>E</span>: <span class='ident'>ValicoError</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>E</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>is</span>::<span class='op'>&lt;</span><span class='ident'>E</span><span class='op'>&gt;</span>() {
+            <span class='kw'>unsafe</span> { <span class='prelude-val'>Some</span>(<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>traitobject</span>::<span class='ident'>data</span>(<span class='self'>self</span>))) }
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>None</span>
+        }
+    }
 }
 
 <span class='kw'>impl</span> <span class='ident'>json</span>::<span class='ident'>ToJson</span> <span class='kw'>for</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>ValicoError</span><span class='op'>&gt;</span> {
@@ -168,8 +200,6 @@
 }
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>ValicoErrors</span> <span class='op'>=</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>ValicoError</span><span class='op'>&gt;&gt;</span>;
-
-<span class='macro'>mopafy</span><span class='macro'>!</span>(<span class='ident'>ValicoError</span>);
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>impl_basic_err</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>code</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {

@@ -99,19 +99,11 @@
 <span id="57">57</span>
 <span id="58">58</span>
 <span id="59">59</span>
-<span id="60">60</span>
-<span id="61">61</span>
-<span id="62">62</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_name</span> <span class='op'>=</span> <span class='string'>&quot;rustless&quot;</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_type</span> <span class='op'>=</span> <span class='string'>&quot;rlib&quot;</span>]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>plugin</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>collections</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>core</span>)]</span>
 <span class='comment'>// #![deny(warnings)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>bad_style</span>)]</span>
-
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>plugin</span>(<span class='ident'>regex_macros</span>)]</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>hyper</span>;
@@ -125,16 +117,18 @@
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>plugin</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>bodyparser</span>;
 
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>collections</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>valico</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>queryst</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>jsonway</span>;
 
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>typeable</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>traitobject</span>;
+
+<span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>lazy_static</span>;
+
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>log</span>;
-
-<span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='attribute'>#[<span class='ident'>no_link</span>]</span>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>mopa</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>backend</span>::{<span class='ident'>Request</span>, <span class='ident'>SimpleRequest</span>, <span class='ident'>Response</span>, <span class='ident'>Handler</span>, <span class='ident'>HandleResult</span>, <span class='ident'>HandleSuccessResult</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>errors</span>::{<span class='ident'>ErrorResponse</span>};

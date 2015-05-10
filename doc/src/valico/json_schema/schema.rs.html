@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.7.6/src/json_schema/schema.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.0/src/json_schema/schema.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>schema.rs.html -- source</title>
@@ -377,34 +377,6 @@
 <span id="335">335</span>
 <span id="336">336</span>
 <span id="337">337</span>
-<span id="338">338</span>
-<span id="339">339</span>
-<span id="340">340</span>
-<span id="341">341</span>
-<span id="342">342</span>
-<span id="343">343</span>
-<span id="344">344</span>
-<span id="345">345</span>
-<span id="346">346</span>
-<span id="347">347</span>
-<span id="348">348</span>
-<span id="349">349</span>
-<span id="350">350</span>
-<span id="351">351</span>
-<span id="352">352</span>
-<span id="353">353</span>
-<span id="354">354</span>
-<span id="355">355</span>
-<span id="356">356</span>
-<span id="357">357</span>
-<span id="358">358</span>
-<span id="359">359</span>
-<span id="360">360</span>
-<span id="361">361</span>
-<span id="362">362</span>
-<span id="363">363</span>
-<span id="364">364</span>
-<span id="365">365</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>url</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>;
@@ -486,35 +458,7 @@
     <span class='ident'>scopes</span>: <span class='ident'>collections</span>::<span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;&gt;</span>
 }
 
-<span class='kw'>static</span> <span class='ident'>PROPERTY_KEYS</span>: <span class='ident'>phf</span>::<span class='ident'>Set</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>phf_set</span><span class='macro'>!</span> {
-    <span class='string'>&quot;properties&quot;</span>,
-    <span class='string'>&quot;patternProperties&quot;</span>,
-};
-
-<span class='kw'>static</span> <span class='ident'>NON_SCHEMA_KEYS</span>: <span class='ident'>phf</span>::<span class='ident'>Set</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>phf_set</span><span class='macro'>!</span> {
-    <span class='string'>&quot;properties&quot;</span>,
-    <span class='string'>&quot;patternProperties&quot;</span>,
-    <span class='string'>&quot;dependencies&quot;</span>,
-    <span class='string'>&quot;definitions&quot;</span>,
-    <span class='string'>&quot;anyOf&quot;</span>,
-    <span class='string'>&quot;allOf&quot;</span>,
-    <span class='string'>&quot;oneOf&quot;</span>,
-};
-
-<span class='kw'>static</span> <span class='ident'>FINAL_KEYS</span>: <span class='ident'>phf</span>::<span class='ident'>Set</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>phf_set</span><span class='macro'>!</span> {
-    <span class='string'>&quot;enum&quot;</span>,
-    <span class='string'>&quot;required&quot;</span>,
-    <span class='string'>&quot;type&quot;</span>
-};
-
-<span class='kw'>const</span> <span class='ident'>ALLOW_NON_CONSUMED_KEYS</span>: <span class='ident'>phf</span>::<span class='ident'>Set</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>phf_set</span><span class='macro'>!</span> {
-    <span class='string'>&quot;definitions&quot;</span>,
-    <span class='string'>&quot;$schema&quot;</span>,
-    <span class='string'>&quot;id&quot;</span>,
-    <span class='string'>&quot;default&quot;</span>,
-    <span class='string'>&quot;description&quot;</span>,
-    <span class='string'>&quot;format&quot;</span>,
-};
+<span class='macro'>include</span><span class='macro'>!</span>(<span class='macro'>concat</span><span class='macro'>!</span>(<span class='macro'>env</span><span class='macro'>!</span>(<span class='string'>&quot;OUT_DIR&quot;</span>), <span class='string'>&quot;/codegen.rs&quot;</span>));
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>CompilationSettings</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='ident'>keywords</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>keywords</span>::<span class='ident'>KeywordMap</span>,
@@ -756,7 +700,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>validators</span>::<span class='ident'>ValidationState</span>::<span class='ident'>new</span>();
 
         <span class='kw'>for</span> <span class='ident'>validator</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>validators</span>.<span class='ident'>iter</span>() {
-            <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>validator</span>.<span class='ident'>validate</span>(<span class='ident'>data</span>, <span class='ident'>path</span>, <span class='ident'>scope</span>))
+            <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='ident'>validator</span>.<span class='ident'>validate</span>(<span class='ident'>data</span>, <span class='ident'>path</span>, <span class='ident'>scope</span>))
         }
 
         <span class='ident'>state</span>

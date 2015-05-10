@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.7.6/src/json_schema/validators/items.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.0/src/json_schema/validators/items.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>items.rs.html -- source</title>
@@ -176,7 +176,7 @@
                     <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='ident'>schema</span>.<span class='ident'>unwrap</span>();
                     <span class='kw'>for</span> (<span class='ident'>idx</span>, <span class='ident'>item</span>) <span class='kw'>in</span> <span class='ident'>array</span>.<span class='ident'>iter</span>().<span class='ident'>enumerate</span>() {
                         <span class='kw'>let</span> <span class='ident'>item_path</span> <span class='op'>=</span> [<span class='ident'>path</span>, <span class='ident'>idx</span>.<span class='ident'>to_string</span>().<span class='ident'>as_ref</span>()].<span class='ident'>connect</span>(<span class='string'>&quot;/&quot;</span>);
-                        <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>schema</span>.<span class='ident'>validate_in</span>(<span class='ident'>item</span>, <span class='ident'>item_path</span>.<span class='ident'>as_ref</span>()));
+                        <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='ident'>schema</span>.<span class='ident'>validate_in</span>(<span class='ident'>item</span>, <span class='ident'>item_path</span>.<span class='ident'>as_ref</span>()));
                     }
                 } <span class='kw'>else</span> {
                     <span class='ident'>state</span>.<span class='ident'>missing</span>.<span class='ident'>push</span>(<span class='ident'>url</span>.<span class='ident'>clone</span>());
@@ -192,7 +192,7 @@
 
                     <span class='kw'>if</span> <span class='ident'>schema</span>.<span class='ident'>is_some</span>() {
                         <span class='kw'>let</span> <span class='ident'>item_path</span> <span class='op'>=</span> [<span class='ident'>path</span>, <span class='ident'>idx</span>.<span class='ident'>to_string</span>().<span class='ident'>as_ref</span>()].<span class='ident'>connect</span>(<span class='string'>&quot;/&quot;</span>);
-                        <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>schema</span>.<span class='ident'>unwrap</span>().<span class='ident'>validate_in</span>(<span class='ident'>item</span>, <span class='ident'>item_path</span>.<span class='ident'>as_ref</span>()))
+                        <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='ident'>schema</span>.<span class='ident'>unwrap</span>().<span class='ident'>validate_in</span>(<span class='ident'>item</span>, <span class='ident'>item_path</span>.<span class='ident'>as_ref</span>()))
                     } <span class='kw'>else</span> {
                         <span class='ident'>state</span>.<span class='ident'>missing</span>.<span class='ident'>push</span>(<span class='ident'>urls</span>[<span class='ident'>idx</span>].<span class='ident'>clone</span>())
                     }
@@ -215,7 +215,7 @@
                                 <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='ident'>schema</span>.<span class='ident'>unwrap</span>();
                                 <span class='kw'>for</span> (<span class='ident'>idx</span>, <span class='ident'>item</span>) <span class='kw'>in</span> <span class='ident'>array</span>[<span class='ident'>urls</span>.<span class='ident'>len</span>()..].<span class='ident'>iter</span>().<span class='ident'>enumerate</span>() {
                                     <span class='kw'>let</span> <span class='ident'>item_path</span> <span class='op'>=</span> [<span class='ident'>path</span>, <span class='ident'>idx</span>.<span class='ident'>to_string</span>().<span class='ident'>as_ref</span>()].<span class='ident'>connect</span>(<span class='string'>&quot;/&quot;</span>);
-                                    <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>schema</span>.<span class='ident'>validate_in</span>(<span class='ident'>item</span>, <span class='ident'>item_path</span>.<span class='ident'>as_ref</span>()))
+                                    <span class='ident'>state</span>.<span class='ident'>append</span>(<span class='ident'>schema</span>.<span class='ident'>validate_in</span>(<span class='ident'>item</span>, <span class='ident'>item_path</span>.<span class='ident'>as_ref</span>()))
                                 }
                             } <span class='kw'>else</span> {
                                 <span class='ident'>state</span>.<span class='ident'>missing</span>.<span class='ident'>push</span>(<span class='ident'>url</span>.<span class='ident'>clone</span>())

@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["normalize",""]],"static":[["MATCHER",""]],"struct":[["Path",""]]});
+initSidebarItems({"fn":[["normalize",""]],"static":[["MATCHER",""]],"struct":[["MATCHER",""],["Path",""]]});
