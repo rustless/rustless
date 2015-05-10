@@ -19,14 +19,14 @@ extern crate valico;
 extern crate queryst;
 extern crate jsonway;
 
+extern crate typeable;
+extern crate traitobject;
+
 #[macro_use]
 extern crate lazy_static;
 
 #[macro_use]
 extern crate log;
-
-#[macro_use]
-extern crate mopa;
 
 pub use backend::{Request, SimpleRequest, Response, Handler, HandleResult, HandleSuccessResult};
 pub use errors::{ErrorResponse};

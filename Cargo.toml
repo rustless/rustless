@@ -31,8 +31,9 @@ cookie = "*"
 hyper = "*"
 error = "*"
 typemap = "*"
-mopa = "*"
 log = "*"
+typeable = "*"
+traitobject = "*"
 
 [dependencies.iron]
 optional = true
