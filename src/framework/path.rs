@@ -2,7 +2,9 @@ use valico::MutableJson;
 use serialize::json::{self, ToJson};
 use regex;
 
-pub static MATCHER: regex::Regex = regex!(r":([a-z][a-z_]*)");
+lazy_static! {
+    pub static ref MATCHER: regex::Regex = regex::Regex::new(r":([a-z][a-z_]*)").unwrap();
+}
 
 pub struct Path {
     regex: regex::Regex,

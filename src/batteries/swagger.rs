@@ -1,6 +1,6 @@
 use std::ascii::AsciiExt;
 use valico::json_dsl;
-use collections;
+use std::collections;
 use serialize::json::{self, ToJson};
 use jsonway::{self, MutableJson};
 use framework::{self, Nesting, ApiHandler};
@@ -433,7 +433,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
         if handler.is::<framework::Api>() {
             let mut path = context.path.to_string();
 
-            let api = handler.downcast_ref::<framework::Api>().unwrap();
+            let api = handler.downcast::<framework::Api>().unwrap();
             if api.prefix.is_some() {
                 path.push_str(&api.prefix.as_ref().unwrap());
             }
@@ -456,11 +456,11 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
         } else if handler.is::<framework::Namespace>() {
 
             let mut path = context.path.to_string();
-            let namespace = handler.downcast_ref::<framework::Namespace>().unwrap();
+            let namespace = handler.downcast::<framework::Namespace>().unwrap();
             path.push_str(&("/".to_string() + &encode_path_string(&namespace.path)));
 
             let mut params = context.params.clone();
-            params.append(&mut extract_params(&namespace.coercer, &namespace.path));
+            params.extend(extract_params(&namespace.coercer, &namespace.path));
 
             fill_paths(WalkContext{
                 path: &path,
@@ -469,7 +469,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
 
         } else if handler.is::<framework::Endpoint>() {
             let mut path = context.path.to_string();
-            let endpoint = handler.downcast_ref::<framework::Endpoint>().unwrap();
+            let endpoint = handler.downcast::<framework::Endpoint>().unwrap();
 
             if endpoint.path.path.len() > 0 {
                 path.push_str(&("/".to_string() + &encode_path_string(&endpoint.path)));

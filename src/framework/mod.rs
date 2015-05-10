@@ -3,6 +3,7 @@ use serialize::json;
 use backend;
 use errors;
 
+pub use self::api_handler::{ApiHandler, ApiHandlers};
 pub use self::app::{Application};
 pub use self::api::{Api, Versioning, Version};
 pub use self::endpoint::{Endpoint, EndpointHandler, EndpointBuilder};
@@ -14,6 +15,7 @@ pub use self::path::Path;
 
 #[macro_use]
 pub mod nesting;
+pub mod api_handler;
 pub mod api;
 pub mod endpoint;
 pub mod namespace;
@@ -27,14 +29,6 @@ pub struct CallInfo<'a> {
     pub parents: Vec<&'a (nesting::Node + 'static)>,
     pub app: &'a app::Application
 }
-
-pub trait ApiHandler: ::std::any::Any {
-    fn api_call<'a, 'b>(&'a self, &str, &mut json::Json, &'b mut (backend::Request + 'b), &mut CallInfo<'a>) -> backend::HandleResult<backend::Response>;
-}
-
-mopafy!(ApiHandler);
-
-pub type ApiHandlers = Vec<Box<ApiHandler + Send + Sync>>;
 
 pub type Callback = Box<for<'a> Fn(&'a mut client::Client, &json::Json) -> backend::HandleSuccessResult + 'static + Sync + Send>;
 pub type Callbacks = Vec<Callback>;
