@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/server/response.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/server/response.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>response.rs.html -- source</title>
@@ -369,6 +369,11 @@
 <span id="327">327</span>
 <span id="328">328</span>
 <span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Server Responses</span>
 <span class='doccomment'>//!</span>
@@ -400,7 +405,7 @@
     <span class='comment'>// The status code for the request.</span>
     <span class='ident'>status</span>: <span class='ident'>status</span>::<span class='ident'>StatusCode</span>,
     <span class='comment'>// The outgoing headers on this response.</span>
-    <span class='ident'>headers</span>: <span class='ident'>header</span>::<span class='ident'>Headers</span>,
+    <span class='ident'>headers</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>header</span>::<span class='ident'>Headers</span>,
 
     <span class='ident'>_writing</span>: <span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='ident'>W</span><span class='op'>&gt;</span>
 }
@@ -411,13 +416,13 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>status</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>status</span>::<span class='ident'>StatusCode</span> { <span class='self'>self</span>.<span class='ident'>status</span> }
 
     <span class='doccomment'>/// The headers of this response.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>headers</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>header</span>::<span class='ident'>Headers</span> { <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>headers</span> }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>headers</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>header</span>::<span class='ident'>Headers</span> { <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='self'>self</span>.<span class='ident'>headers</span> }
 
     <span class='doccomment'>/// Construct a Response from its constituent parts.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>construct</span>(<span class='ident'>version</span>: <span class='ident'>version</span>::<span class='ident'>HttpVersion</span>,
                      <span class='ident'>body</span>: <span class='ident'>HttpWriter</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> (<span class='ident'>Write</span> <span class='op'>+</span> <span class='lifetime'>&#39;a</span>)<span class='op'>&gt;</span>,
                      <span class='ident'>status</span>: <span class='ident'>status</span>::<span class='ident'>StatusCode</span>,
-                     <span class='ident'>headers</span>: <span class='ident'>header</span>::<span class='ident'>Headers</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>Fresh</span><span class='op'>&gt;</span> {
+                     <span class='ident'>headers</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>header</span>::<span class='ident'>Headers</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>Fresh</span><span class='op'>&gt;</span> {
         <span class='ident'>Response</span> {
             <span class='ident'>status</span>: <span class='ident'>status</span>,
             <span class='ident'>version</span>: <span class='ident'>version</span>,
@@ -429,7 +434,7 @@
 
     <span class='doccomment'>/// Deconstruct this Response into its constituent parts.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>deconstruct</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>version</span>::<span class='ident'>HttpVersion</span>, <span class='ident'>HttpWriter</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> (<span class='ident'>Write</span> <span class='op'>+</span> <span class='lifetime'>&#39;a</span>)<span class='op'>&gt;</span>,
-                                 <span class='ident'>status</span>::<span class='ident'>StatusCode</span>, <span class='ident'>header</span>::<span class='ident'>Headers</span>) {
+                                 <span class='ident'>status</span>::<span class='ident'>StatusCode</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>header</span>::<span class='ident'>Headers</span>) {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>parts</span> <span class='op'>=</span> (
                 <span class='self'>self</span>.<span class='ident'>version</span>,
@@ -486,11 +491,11 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Response</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>Fresh</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// Creates a new Response that can be used to write to a network stream.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>stream</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> (<span class='ident'>Write</span> <span class='op'>+</span> <span class='lifetime'>&#39;a</span>)) <span class='op'>-&gt;</span> <span class='ident'>Response</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>Fresh</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>stream</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> (<span class='ident'>Write</span> <span class='op'>+</span> <span class='lifetime'>&#39;a</span>), <span class='ident'>headers</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>header</span>::<span class='ident'>Headers</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>Fresh</span><span class='op'>&gt;</span> {
         <span class='ident'>Response</span> {
             <span class='ident'>status</span>: <span class='ident'>status</span>::<span class='ident'>StatusCode</span>::<span class='prelude-val'>Ok</span>,
             <span class='ident'>version</span>: <span class='ident'>version</span>::<span class='ident'>HttpVersion</span>::<span class='ident'>Http11</span>,
-            <span class='ident'>headers</span>: <span class='ident'>header</span>::<span class='ident'>Headers</span>::<span class='ident'>new</span>(),
+            <span class='ident'>headers</span>: <span class='ident'>headers</span>,
             <span class='ident'>body</span>: <span class='ident'>ThroughWriter</span>(<span class='ident'>stream</span>),
             <span class='ident'>_writing</span>: <span class='ident'>PhantomData</span>,
         }
@@ -537,7 +542,7 @@
 
     <span class='doccomment'>/// Get a mutable reference to the Headers.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>headers_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>header</span>::<span class='ident'>Headers</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>headers</span> }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>headers_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>header</span>::<span class='ident'>Headers</span> { <span class='self'>self</span>.<span class='ident'>headers</span> }
 }
 
 
@@ -603,6 +608,7 @@
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
+    <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>Headers</span>;
     <span class='kw'>use</span> <span class='ident'>mock</span>::<span class='ident'>MockStream</span>;
     <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>Response</span>;
 
@@ -624,9 +630,10 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_fresh_start</span>() {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>MockStream</span>::<span class='ident'>new</span>();
         {
-            <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>);
+            <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>headers</span>);
             <span class='ident'>res</span>.<span class='ident'>start</span>().<span class='ident'>unwrap</span>().<span class='ident'>deconstruct</span>();
         }
 
@@ -640,9 +647,10 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_streaming_end</span>() {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>MockStream</span>::<span class='ident'>new</span>();
         {
-            <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>);
+            <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>headers</span>);
             <span class='ident'>res</span>.<span class='ident'>start</span>().<span class='ident'>unwrap</span>().<span class='ident'>end</span>().<span class='ident'>unwrap</span>();
         }
 
@@ -659,9 +667,10 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_fresh_drop</span>() {
         <span class='kw'>use</span> <span class='ident'>status</span>::<span class='ident'>StatusCode</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>MockStream</span>::<span class='ident'>new</span>();
         {
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>);
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>headers</span>);
             <span class='op'>*</span><span class='ident'>res</span>.<span class='ident'>status_mut</span>() <span class='op'>=</span> <span class='ident'>StatusCode</span>::<span class='ident'>NotFound</span>;
         }
 
@@ -679,9 +688,10 @@
     <span class='kw'>fn</span> <span class='ident'>test_streaming_drop</span>() {
         <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>Write</span>;
         <span class='kw'>use</span> <span class='ident'>status</span>::<span class='ident'>StatusCode</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>MockStream</span>::<span class='ident'>new</span>();
         {
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>);
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>headers</span>);
             <span class='op'>*</span><span class='ident'>res</span>.<span class='ident'>status_mut</span>() <span class='op'>=</span> <span class='ident'>StatusCode</span>::<span class='ident'>NotFound</span>;
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>res</span>.<span class='ident'>start</span>().<span class='ident'>unwrap</span>();
             <span class='ident'>stream</span>.<span class='ident'>write_all</span>(<span class='string'>b&quot;foo&quot;</span>).<span class='ident'>unwrap</span>();

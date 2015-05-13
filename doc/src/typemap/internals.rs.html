@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/typemap-0.3.1/src/internals.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/typemap-0.3.2/src/internals.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>internals.rs.html -- source</title>
@@ -221,19 +221,19 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>clone_any</span>() }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span><span class='op'>&gt;</span> { (<span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>).<span class='ident'>clone_any</span>() }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>clone_any_send</span>() }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span> { (<span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>).<span class='ident'>clone_any_send</span>() }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>clone_any_sync</span>() }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span> { (<span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>).<span class='ident'>clone_any_sync</span>() }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>clone_any_send_sync</span>() }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>CloneAny</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span> { (<span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>).<span class='ident'>clone_any_send_sync</span>() }
 }
 
 <span class='kw'>unsafe</span> <span class='kw'>impl</span> <span class='ident'>UnsafeAnyExt</span> <span class='kw'>for</span> <span class='ident'>CloneAny</span> {}

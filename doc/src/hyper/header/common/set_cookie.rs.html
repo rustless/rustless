@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/header/common/set_cookie.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/set_cookie.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>set_cookie.rs.html -- source</title>
@@ -255,7 +255,7 @@
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SetCookie</span>(<span class='kw'>pub</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cookie</span><span class='op'>&gt;</span>);
 
-<span class='macro'>deref</span><span class='macro'>!</span>(<span class='ident'>SetCookie</span> <span class='op'>=&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cookie</span><span class='op'>&gt;</span>);
+<span class='macro'>__hyper__deref</span><span class='macro'>!</span>(<span class='ident'>SetCookie</span> <span class='op'>=&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cookie</span><span class='op'>&gt;</span>);
 
 <span class='kw'>impl</span> <span class='ident'>Header</span> <span class='kw'>for</span> <span class='ident'>SetCookie</span> {
     <span class='kw'>fn</span> <span class='ident'>header_name</span>() <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> {

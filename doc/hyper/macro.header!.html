@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-40172' class='srclink' href='../src/hyper/header/common/mod.rs.html#157-314' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-40783' class='srclink' href='../src/hyper/header/common/mod.rs.html#158-315' title='goto source code'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>header</span> {
     <span class='comment'>// $a:meta: Attributes associated with the header item (usually docs)</span>
@@ -58,7 +58,7 @@
         $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
         <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
         <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>(<span class='kw'>pub</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span><span class='op'>&gt;</span>);
-        <span class='macro'>deref</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='op'>=&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span><span class='op'>&gt;</span>);
+        <span class='macro'>__hyper__deref</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='op'>=&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span><span class='op'>&gt;</span>);
         <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>Header</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> {
             <span class='kw'>fn</span> <span class='ident'>header_name</span>() <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> {
                 <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>
@@ -84,7 +84,7 @@
         $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
         <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
         <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>(<span class='kw'>pub</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span><span class='op'>&gt;</span>);
-        <span class='macro'>deref</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='op'>=&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span><span class='op'>&gt;</span>);
+        <span class='macro'>__hyper__deref</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='op'>=&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span><span class='op'>&gt;</span>);
         <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>Header</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> {
             <span class='kw'>fn</span> <span class='ident'>header_name</span>() <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> {
                 <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>
@@ -110,7 +110,7 @@
         $(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>]</span>)<span class='op'>*</span>
         <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
         <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>(<span class='kw'>pub</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>value</span>);
-        <span class='macro'>deref</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>value</span>);
+        <span class='macro'>__hyper__deref</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>value</span>);
         <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>header</span>::<span class='ident'>Header</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span> {
             <span class='kw'>fn</span> <span class='ident'>header_name</span>() <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> {
                 <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>
@@ -178,7 +178,7 @@
             (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>)<span class='op'>*</span>
         }
 
-        <span class='macro'>tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
+        <span class='macro'>__hyper__tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
     };
     ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>+</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
         <span class='macro'>header</span><span class='macro'>!</span> {
@@ -186,7 +186,7 @@
             (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>) <span class='op'>=&gt;</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>)<span class='op'>+</span>
         }
 
-        <span class='macro'>tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
+        <span class='macro'>__hyper__tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
     };
     ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> [<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>] <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
         <span class='macro'>header</span><span class='macro'>!</span> {
@@ -194,7 +194,7 @@
             (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>) <span class='op'>=&gt;</span> [<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>]
         }
 
-        <span class='macro'>tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
+        <span class='macro'>__hyper__tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
     };
     ($(<span class='attribute'>#[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>a</span>:<span class='ident'>meta</span>]</span>)<span class='op'>*</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {<span class='ident'>Any</span> <span class='op'>/</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>:<span class='ident'>ty</span>)<span class='op'>+</span>} <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span>:<span class='ident'>ident</span>{$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>:<span class='ident'>item</span>)<span class='op'>*</span>}) <span class='op'>=&gt;</span> {
         <span class='macro'>header</span><span class='macro'>!</span> {
@@ -202,7 +202,7 @@
             (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>n</span>) <span class='op'>=&gt;</span> {<span class='ident'>Any</span> <span class='op'>/</span> (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>item</span>)<span class='op'>+</span>}
         }
 
-        <span class='macro'>tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
+        <span class='macro'>__hyper__tm</span><span class='macro'>!</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tm</span> { $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tf</span>)<span class='op'>*</span> }}
     };
 }
 </pre>

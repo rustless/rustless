@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-13017' class='srclink' href='../../src/hyper/header/common/mod.rs.html#193' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-13258' class='srclink' href='../../src/hyper/header/common/mod.rs.html#194' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Connection(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../hyper/header/enum.ConnectionOption.html' title='hyper::header::ConnectionOption'>ConnectionOption</a>&gt;);</pre><div class='docblock'><p><code>Connection</code> header, defined in
 <a href="http://tools.ietf.org/html/rfc7230#section-6.1">RFC7230</a></p>
 
@@ -65,7 +65,11 @@ connection-option = token
 * `keep-alive`
 * `upgrade`
 </code></pre>
-</div><h2 id='deref-methods'>Methods from <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../hyper/header/enum.ConnectionOption.html' title='hyper::header::ConnectionOption'>ConnectionOption</a>&gt;&gt;</h2><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;</code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../hyper/header/struct.Connection.html' title='hyper::header::Connection'>Connection</a></code></h3><div class='impl-items'><h4 id='method.close' class='method'><code>fn <a href='#method.close' class='fnname'>close</a>() -&gt; <a class='struct' href='../../hyper/header/struct.Connection.html' title='hyper::header::Connection'>Connection</a></code></h4>
+<div class='docblock'><p>A constructor to easily create a <code>Connection: close</code> header.</p>
+</div><h4 id='method.keep_alive' class='method'><code>fn <a href='#method.keep_alive' class='fnname'>keep_alive</a>() -&gt; <a class='struct' href='../../hyper/header/struct.Connection.html' title='hyper::header::Connection'>Connection</a></code></h4>
+<div class='docblock'><p>A constructor to easily create a <code>Connection: keep-alive</code> header.</p>
+</div></div><h2 id='deref-methods'>Methods from <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../hyper/header/enum.ConnectionOption.html' title='hyper::header::ConnectionOption'>ConnectionOption</a>&gt;&gt;</h2><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;</code></h4>
 <div class='docblock'><p>Constructs a new, empty <code>Vec&lt;T&gt;</code>.</p>
 
 <p>The vector will not allocate until elements are pushed onto it.</p>

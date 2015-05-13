@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.4.0/src/client/request.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/client/request.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>request.rs.html -- source</title>
@@ -248,15 +248,10 @@
 <span id="206">206</span>
 <span id="207">207</span>
 <span id="208">208</span>
-<span id="209">209</span>
-<span id="210">210</span>
-<span id="211">211</span>
-<span id="212">212</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Client Requests</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Write</span>, <span class='ident'>BufWriter</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::<span class='ident'>Shutdown</span>;
 
 <span class='kw'>use</span> <span class='ident'>url</span>::<span class='ident'>Url</span>;
 
@@ -264,7 +259,7 @@
 <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>Headers</span>;
 <span class='kw'>use</span> <span class='ident'>header</span>::{<span class='self'>self</span>, <span class='ident'>Host</span>};
 <span class='kw'>use</span> <span class='ident'>net</span>::{<span class='ident'>NetworkStream</span>, <span class='ident'>NetworkConnector</span>, <span class='ident'>HttpConnector</span>, <span class='ident'>Fresh</span>, <span class='ident'>Streaming</span>};
-<span class='kw'>use</span> <span class='ident'>http</span>::{<span class='self'>self</span>, <span class='ident'>HttpWriter</span>, <span class='ident'>LINE_ENDING</span>};
+<span class='kw'>use</span> <span class='ident'>http</span>::{<span class='ident'>HttpWriter</span>, <span class='ident'>LINE_ENDING</span>};
 <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>HttpWriter</span>::{<span class='ident'>ThroughWriter</span>, <span class='ident'>ChunkedWriter</span>, <span class='ident'>SizedWriter</span>, <span class='ident'>EmptyWriter</span>};
 <span class='kw'>use</span> <span class='ident'>version</span>;
 <span class='kw'>use</span> <span class='ident'>client</span>::{<span class='ident'>Response</span>, <span class='ident'>get_host_and_port</span>};
@@ -303,7 +298,7 @@
     }
 
     <span class='doccomment'>/// Create a new client request with a specific underlying NetworkStream.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_connector</span><span class='op'>&lt;</span><span class='ident'>C</span>, <span class='ident'>S</span><span class='op'>&gt;</span>(<span class='ident'>method</span>: <span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>url</span>: <span class='ident'>Url</span>, <span class='ident'>connector</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>C</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_connector</span><span class='op'>&lt;</span><span class='ident'>C</span>, <span class='ident'>S</span><span class='op'>&gt;</span>(<span class='ident'>method</span>: <span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>url</span>: <span class='ident'>Url</span>, <span class='ident'>connector</span>: <span class='kw-2'>&amp;</span><span class='ident'>C</span>)
         <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;&gt;</span> <span class='kw'>where</span>
         <span class='ident'>C</span>: <span class='ident'>NetworkConnector</span><span class='op'>&lt;</span><span class='ident'>Stream</span><span class='op'>=</span><span class='ident'>S</span><span class='op'>&gt;</span>,
         <span class='ident'>S</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span> {
@@ -409,10 +404,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Consumes the Request.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>body</span>.<span class='ident'>end</span>()).<span class='ident'>into_inner</span>().<span class='ident'>unwrap</span>(); <span class='comment'>// end() already flushes</span>
-        <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>http</span>::<span class='ident'>should_keep_alive</span>(<span class='self'>self</span>.<span class='ident'>version</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>headers</span>) {
-            <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>raw</span>.<span class='ident'>close</span>(<span class='ident'>Shutdown</span>::<span class='ident'>Write</span>));
-        }
+        <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>body</span>.<span class='ident'>end</span>()).<span class='ident'>into_inner</span>().<span class='ident'>unwrap</span>(); <span class='comment'>// end() already flushes</span>
         <span class='ident'>Response</span>::<span class='ident'>new</span>(<span class='ident'>raw</span>)
     }
 }

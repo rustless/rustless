@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `deref!` macro in crate `hyper`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, deref!">
+    <meta name="description" content="API documentation for the Rust `__hyper__deref!` macro in crate `hyper`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, __hyper__deref!">
 
-    <title>hyper::deref! - Rust</title>
+    <title>hyper::__hyper__deref! - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>hyper</a></p><script>window.sidebarCurrent = {name: 'deref!', ty: 'macro', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='index.html'>hyper</a></p><script>window.sidebarCurrent = {name: '__hyper__deref!', ty: 'macro', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -41,13 +41,13 @@
     </nav>
 
     <section id='main' class="content macro">
-<h1 class='fqn'><span class='in-band'><a href='index.html'>hyper</a>::<wbr><a class='macro' href=''>deref!</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'><a href='index.html'>hyper</a>::<wbr><a class='macro' href=''>__hyper__deref!</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-40170' class='srclink' href='../src/hyper/header/common/mod.rs.html#83-99' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-40780' class='srclink' href='../src/hyper/header/common/mod.rs.html#83-99' title='goto source code'>[src]</a></span></h1>
 <pre class='rust macro'>
-<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>deref</span>(
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>__hyper__deref</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span>:<span class='ident'>ty</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>to</span>:<span class='ident'>ty</span>) <span class='op'>=&gt;</span> {
         <span class='kw'>impl</span> ::<span class='ident'>std</span>::<span class='ident'>ops</span>::<span class='ident'>Deref</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>from</span> {
             <span class='kw'>type</span> <span class='ident'>Target</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>to</span>;
@@ -63,7 +63,7 @@
             }
         }
     }
-);
+}
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
