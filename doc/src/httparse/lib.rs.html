@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-0.1.1/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-0.1.2/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -622,6 +622,28 @@
 <span id="580">580</span>
 <span id="581">581</span>
 <span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
+<span id="590">590</span>
+<span id="591">591</span>
+<span id="592">592</span>
+<span id="593">593</span>
+<span id="594">594</span>
+<span id="595">595</span>
+<span id="596">596</span>
+<span id="597">597</span>
+<span id="598">598</span>
+<span id="599">599</span>
+<span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>unused_assignments</span>)]</span>
 
@@ -710,13 +732,20 @@
     })
 }
 
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>space</span> {
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>:<span class='ident'>ident</span> <span class='ident'>or</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> ({
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>i</span> <span class='op'>=</span> <span class='number'>0</span>;
+        <span class='macro'>expect</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>[<span class='ident'>i</span>] <span class='op'>==</span> <span class='string'>b&#39; &#39;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>));
+        <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>slice</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>, <span class='number'>1</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>.<span class='ident'>len</span>()) };
+    })
+}
+
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>newline</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> ({
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>i</span> <span class='op'>=</span> <span class='number'>0</span>;
-        <span class='macro'>eof</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>, <span class='ident'>i</span>);
         <span class='kw'>match</span> <span class='macro'>next</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>, <span class='ident'>i</span>) {
             <span class='string'>b&#39;\r&#39;</span> <span class='op'>=&gt;</span> {
-                <span class='macro'>expect</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>[<span class='ident'>i</span>] <span class='op'>==</span> <span class='string'>b&#39;\n&#39;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Partial</span>));
+                <span class='macro'>expect</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>[<span class='ident'>i</span>] <span class='op'>==</span> <span class='string'>b&#39;\n&#39;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>NewLine</span>));
                 <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>slice</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>, <span class='number'>2</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>buf</span>.<span class='ident'>len</span>()) };
             },
             <span class='string'>b&#39;\n&#39;</span> <span class='op'>=&gt;</span> {
@@ -726,7 +755,6 @@
         }
     })
 }
-
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Error</span> {
@@ -830,9 +858,9 @@
         <span class='kw'>let</span> <span class='ident'>orig_len</span> <span class='op'>=</span> <span class='ident'>buf</span>.<span class='ident'>len</span>();
 
         <span class='macro'>parse</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>version</span> <span class='op'>=</span> <span class='ident'>parse_version</span>(<span class='ident'>buf</span>));
-        <span class='ident'>buf</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>slice</span>(<span class='ident'>buf</span>, <span class='number'>1</span>, <span class='ident'>buf</span>.<span class='ident'>len</span>()) };
+        <span class='macro'>space</span><span class='macro'>!</span>(<span class='ident'>buf</span> <span class='ident'>or</span> <span class='ident'>Error</span>::<span class='ident'>Version</span>);
         <span class='macro'>parse</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>code</span> <span class='op'>=</span> <span class='ident'>parse_code</span>(<span class='ident'>buf</span>));
-        <span class='ident'>buf</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>slice</span>(<span class='ident'>buf</span>, <span class='number'>1</span>, <span class='ident'>buf</span>.<span class='ident'>len</span>()) };
+        <span class='macro'>space</span><span class='macro'>!</span>(<span class='ident'>buf</span> <span class='ident'>or</span> <span class='ident'>Error</span>::<span class='ident'>Status</span>);
         <span class='macro'>parse</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>reason</span> <span class='op'>=</span> <span class='ident'>parse_reason</span>(<span class='ident'>buf</span>));
         <span class='macro'>newline</span><span class='macro'>!</span>(<span class='ident'>buf</span>);
 
@@ -864,11 +892,13 @@
     <span class='macro'>expect</span><span class='macro'>!</span>(<span class='ident'>buf</span>[<span class='ident'>i</span>] <span class='op'>==</span> <span class='string'>b&#39;/&#39;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Version</span>));
     <span class='macro'>expect</span><span class='macro'>!</span>(<span class='ident'>buf</span>[<span class='ident'>i</span>] <span class='op'>==</span> <span class='string'>b&#39;1&#39;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Version</span>));
     <span class='macro'>expect</span><span class='macro'>!</span>(<span class='ident'>buf</span>[<span class='ident'>i</span>] <span class='op'>==</span> <span class='string'>b&#39;.&#39;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Version</span>));
-    <span class='kw'>match</span> <span class='macro'>next</span><span class='macro'>!</span>(<span class='ident'>buf</span>, <span class='ident'>i</span>) {
-        <span class='string'>b&#39;0&#39;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>(<span class='number'>0</span>)),
-        <span class='string'>b&#39;1&#39;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>(<span class='number'>1</span>)),
-        _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Version</span>)
-    }
+    <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='macro'>next</span><span class='macro'>!</span>(<span class='ident'>buf</span>, <span class='ident'>i</span>) {
+        <span class='string'>b&#39;0&#39;</span> <span class='op'>=&gt;</span> <span class='number'>0</span>,
+        <span class='string'>b&#39;1&#39;</span> <span class='op'>=&gt;</span> <span class='number'>1</span>,
+        _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Version</span>)
+    };
+    <span class='comment'>//expect!(buf[i] == (b&#39; &#39; | b&#39;\r&#39; | b&#39;\n&#39;) =&gt; Err(Error::Version));</span>
+    <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>(<span class='ident'>v</span>))
 }
 
 <span class='comment'>// From [RFC 7230](https://tools.ietf.org/html/rfc7230):</span>
@@ -1202,6 +1232,20 @@
         <span class='ident'>test_response_reason_with_nul_byte</span>,
         <span class='string'>b&quot;HTTP/1.1 200 \x00\r\n\r\n&quot;</span>,
         <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Status</span>),
+        <span class='op'>|</span><span class='ident'>_res</span><span class='op'>|</span> {}
+    }
+
+    <span class='macro'>res</span><span class='macro'>!</span> {
+        <span class='ident'>test_response_version_missing_space</span>,
+        <span class='string'>b&quot;HTTP/1.1&quot;</span>,
+        <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Partial</span>),
+        <span class='op'>|</span><span class='ident'>_res</span><span class='op'>|</span> {}
+    }
+
+    <span class='macro'>res</span><span class='macro'>!</span> {
+        <span class='ident'>test_response_code_missing_space</span>,
+        <span class='string'>b&quot;HTTP/1.1 200&quot;</span>,
+        <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Partial</span>),
         <span class='op'>|</span><span class='ident'>_res</span><span class='op'>|</span> {}
     }
 }
