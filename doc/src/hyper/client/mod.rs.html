@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/client/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/client/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -521,6 +521,10 @@
 <span id="479">479</span>
 <span id="480">480</span>
 <span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP Client</span>
 <span class='doccomment'>//!</span>
@@ -657,6 +661,10 @@
 
 <span class='kw'>fn</span> <span class='ident'>with_connector</span><span class='op'>&lt;</span><span class='ident'>C</span>: <span class='ident'>NetworkConnector</span><span class='op'>&lt;</span><span class='ident'>Stream</span><span class='op'>=</span><span class='ident'>S</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span>, <span class='ident'>S</span>: <span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>(<span class='ident'>c</span>: <span class='ident'>C</span>) <span class='op'>-&gt;</span> <span class='ident'>Connector</span> {
     <span class='ident'>Connector</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>ConnAdapter</span>(<span class='ident'>c</span>)))
+}
+
+<span class='kw'>impl</span> <span class='ident'>Default</span> <span class='kw'>for</span> <span class='ident'>Client</span> {
+    <span class='kw'>fn</span> <span class='ident'>default</span>() <span class='op'>-&gt;</span> <span class='ident'>Client</span> { <span class='ident'>Client</span>::<span class='ident'>new</span>() }
 }
 
 <span class='kw'>struct</span> <span class='ident'>ConnAdapter</span><span class='op'>&lt;</span><span class='ident'>C</span>: <span class='ident'>NetworkConnector</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>(<span class='ident'>C</span>);
@@ -896,7 +904,7 @@
     <span class='ident'>FollowIf</span>(<span class='kw'>fn</span>(<span class='kw-2'>&amp;</span><span class='ident'>Url</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span>),
 }
 
-<span class='comment'>// This is a hack because of upstream typesystem issues. </span>
+<span class='comment'>// This is a hack because of upstream typesystem issues.</span>
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>RedirectPolicy</span> {
     <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>RedirectPolicy</span> {
         <span class='op'>*</span><span class='self'>self</span>
@@ -954,7 +962,7 @@
         <span class='ident'>client</span>.<span class='ident'>set_redirect_policy</span>(<span class='ident'>RedirectPolicy</span>::<span class='ident'>FollowAll</span>);
 
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>get</span>(<span class='string'>&quot;http://127.0.0.1&quot;</span>).<span class='ident'>send</span>().<span class='ident'>unwrap</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>(), <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>Server</span>(<span class='string'>&quot;mock3&quot;</span>.<span class='ident'>to_string</span>())));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>(), <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>Server</span>(<span class='string'>&quot;mock3&quot;</span>.<span class='ident'>to_owned</span>())));
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -962,7 +970,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>client</span> <span class='op'>=</span> <span class='ident'>Client</span>::<span class='ident'>with_connector</span>(<span class='ident'>MockRedirectPolicy</span>);
         <span class='ident'>client</span>.<span class='ident'>set_redirect_policy</span>(<span class='ident'>RedirectPolicy</span>::<span class='ident'>FollowNone</span>);
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>get</span>(<span class='string'>&quot;http://127.0.0.1&quot;</span>).<span class='ident'>send</span>().<span class='ident'>unwrap</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>(), <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>Server</span>(<span class='string'>&quot;mock1&quot;</span>.<span class='ident'>to_string</span>())));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>(), <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>Server</span>(<span class='string'>&quot;mock1&quot;</span>.<span class='ident'>to_owned</span>())));
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -973,7 +981,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>client</span> <span class='op'>=</span> <span class='ident'>Client</span>::<span class='ident'>with_connector</span>(<span class='ident'>MockRedirectPolicy</span>);
         <span class='ident'>client</span>.<span class='ident'>set_redirect_policy</span>(<span class='ident'>RedirectPolicy</span>::<span class='ident'>FollowIf</span>(<span class='ident'>follow_if</span>));
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>get</span>(<span class='string'>&quot;http://127.0.0.1&quot;</span>).<span class='ident'>send</span>().<span class='ident'>unwrap</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>(), <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>Server</span>(<span class='string'>&quot;mock2&quot;</span>.<span class='ident'>to_string</span>())));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>(), <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>Server</span>(<span class='string'>&quot;mock2&quot;</span>.<span class='ident'>to_owned</span>())));
     }
 
     <span class='doccomment'>/// Tests that the `Client::set_ssl_verifier` method does not drop the</span>
@@ -1036,10 +1044,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

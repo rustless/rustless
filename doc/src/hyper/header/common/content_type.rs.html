@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/content_type.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/content_type.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>content_type.rs.html -- source</title>
@@ -108,6 +108,12 @@
 <span id="66">66</span>
 <span id="67">67</span>
 <span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>mime</span>::<span class='ident'>Mime</span>;
 
@@ -141,7 +147,7 @@
             <span class='prelude-val'>Some</span>(<span class='ident'>HeaderField</span>(<span class='ident'>Mime</span>(
                 <span class='ident'>TopLevel</span>::<span class='ident'>Text</span>,
                 <span class='ident'>SubLevel</span>::<span class='ident'>Html</span>,
-                <span class='macro'>vec</span><span class='macro'>!</span>[(<span class='ident'>Attr</span>::<span class='ident'>Charset</span>, <span class='ident'>Value</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;iso-8859-4&quot;</span>.<span class='ident'>to_string</span>()))]))));
+                <span class='macro'>vec</span><span class='macro'>!</span>[(<span class='ident'>Attr</span>::<span class='ident'>Charset</span>, <span class='ident'>Value</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;iso-8859-4&quot;</span>.<span class='ident'>to_owned</span>()))]))));
     }
 }
 
@@ -164,6 +170,11 @@
         <span class='ident'>ContentType</span>(<span class='macro'>mime</span><span class='macro'>!</span>(<span class='ident'>Text</span><span class='op'>/</span><span class='ident'>Html</span>; <span class='ident'>Charset</span><span class='op'>=</span><span class='ident'>Utf8</span>))
     }
 
+    <span class='doccomment'>/// A constructor  to easily create a `Content-Type: application/www-form-url-encoded` header.</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>form_url_encoded</span>() <span class='op'>-&gt;</span> <span class='ident'>ContentType</span> {
+        <span class='ident'>ContentType</span>(<span class='macro'>mime</span><span class='macro'>!</span>(<span class='ident'>Application</span><span class='op'>/</span><span class='ident'>WwwFormUrlEncoded</span>))
+    }
     <span class='doccomment'>/// A constructor  to easily create a `Content-Type: image/jpeg` header.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>jpeg</span>() <span class='op'>-&gt;</span> <span class='ident'>ContentType</span> {
@@ -176,6 +187,7 @@
         <span class='ident'>ContentType</span>(<span class='macro'>mime</span><span class='macro'>!</span>(<span class='ident'>Image</span><span class='op'>/</span><span class='ident'>Png</span>))
     }
 }
+
 <span class='macro'>bench_header</span><span class='macro'>!</span>(<span class='ident'>bench</span>, <span class='ident'>ContentType</span>, { <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&quot;application/json; charset=utf-8&quot;</span>.<span class='ident'>to_vec</span>()] });
 </pre>
 </section>
@@ -210,10 +222,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

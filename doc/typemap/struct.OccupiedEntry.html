@@ -41,23 +41,21 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>typemap</a>::<wbr><a class='struct' href=''>OccupiedEntry</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-580' class='srclink' href='../src/typemap/lib.rs.html#208-211' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>typemap</a>::<wbr><a class='struct' href=''>OccupiedEntry</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-580' href='../src/typemap/lib.rs.html#208-211'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct OccupiedEntry&lt;'a, K, A: ?<a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> + <a class='trait' href='../unsafe_any/trait.UnsafeAnyExt.html' title='unsafe_any::UnsafeAnyExt'>UnsafeAnyExt</a> + 'a = <a class='trait' href='../unsafe_any/trait.UnsafeAny.html' title='unsafe_any::UnsafeAny'>UnsafeAny</a>&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>A view onto an occupied entry in a TypeMap.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a, K: <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a>, A: <a class='trait' href='../unsafe_any/trait.UnsafeAnyExt.html' title='unsafe_any::UnsafeAnyExt'>UnsafeAnyExt</a> + ?<a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; <a class='struct' href='../typemap/struct.OccupiedEntry.html' title='typemap::OccupiedEntry'>OccupiedEntry</a>&lt;'a, K, A&gt;</code></h3><div class='impl-items'><h4 id='method.get' class='method'><code>fn <a href='#method.get' class='fnname'>get</a>(&amp;self) -&gt; &amp;K <span class='where'>where K: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a, K: <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a>, A: <a class='trait' href='../unsafe_any/trait.UnsafeAnyExt.html' title='unsafe_any::UnsafeAnyExt'>UnsafeAnyExt</a> + ?<a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; <a class='struct' href='../typemap/struct.OccupiedEntry.html' title='typemap::OccupiedEntry'>OccupiedEntry</a>&lt;'a, K, A&gt;</code></h3><div class='impl-items'><h4 id='method.get' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get' class='fnname'>get</a>(&amp;self) -&gt; &amp;K <span class='where'>where K: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
 <div class='docblock'><p>Get a reference to the entry&#39;s value.</p>
-</div><h4 id='method.get_mut' class='method'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; &amp;mut K <span class='where'>where K: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
+</div><h4 id='method.get_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; &amp;mut K <span class='where'>where K: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
 <div class='docblock'><p>Get a mutable reference to the entry&#39;s value.</p>
-</div><h4 id='method.into_mut' class='method'><code>fn <a href='#method.into_mut' class='fnname'>into_mut</a>(self) -&gt; &amp;'a mut K <span class='where'>where K: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
+</div><h4 id='method.into_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.into_mut' class='fnname'>into_mut</a>(self) -&gt; &amp;'a mut K <span class='where'>where K: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
 <div class='docblock'><p>Transform the entry into a mutable reference with the same lifetime as the map.</p>
-</div><h4 id='method.insert' class='method'><code>fn <a href='#method.insert' class='fnname'>insert</a>(&amp;mut self, value: K) -&gt; K <span class='where'>where K: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
+</div><h4 id='method.insert' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.insert' class='fnname'>insert</a>(&amp;mut self, value: K) -&gt; K <span class='where'>where K: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
 <div class='docblock'><p>Set the entry&#39;s value and return the previous value.</p>
-</div><h4 id='method.remove' class='method'><code>fn <a href='#method.remove' class='fnname'>remove</a>(self) -&gt; K <span class='where'>where K: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
+</div><h4 id='method.remove' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.remove' class='fnname'>remove</a>(self) -&gt; K <span class='where'>where K: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
 <div class='docblock'><p>Move the entry&#39;s value out of the map, consuming the entry.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
@@ -91,10 +89,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

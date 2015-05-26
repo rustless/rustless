@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/method.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/method.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>method.rs.html -- source</title>
@@ -327,7 +327,7 @@
                 <span class='string'>&quot;TRACE&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>Trace</span>,
                 <span class='string'>&quot;CONNECT&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>Connect</span>,
                 <span class='string'>&quot;PATCH&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>Patch</span>,
-                _ <span class='op'>=&gt;</span> <span class='ident'>Extension</span>(<span class='ident'>s</span>.<span class='ident'>to_string</span>())
+                _ <span class='op'>=&gt;</span> <span class='ident'>Extension</span>(<span class='ident'>s</span>.<span class='ident'>to_owned</span>())
             })
         }
     }
@@ -374,7 +374,7 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_from_str</span>() {
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Get</span>, <span class='ident'>FromStr</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;GET&quot;</span>).<span class='ident'>unwrap</span>());
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Extension</span>(<span class='string'>&quot;MOVE&quot;</span>.<span class='ident'>to_string</span>()),
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Extension</span>(<span class='string'>&quot;MOVE&quot;</span>.<span class='ident'>to_owned</span>()),
                    <span class='ident'>FromStr</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;MOVE&quot;</span>).<span class='ident'>unwrap</span>());
         <span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Method</span>, _<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>FromStr</span>::<span class='ident'>from_str</span>(<span class='string'>&quot;&quot;</span>);
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Method</span>) <span class='op'>=</span> <span class='ident'>x</span> {
@@ -385,9 +385,9 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_fmt</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;GET&quot;</span>.<span class='ident'>to_string</span>(), <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>Get</span>));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;MOVE&quot;</span>.<span class='ident'>to_string</span>(),
-                   <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>Extension</span>(<span class='string'>&quot;MOVE&quot;</span>.<span class='ident'>to_string</span>())));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;GET&quot;</span>.<span class='ident'>to_owned</span>(), <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>Get</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;MOVE&quot;</span>.<span class='ident'>to_owned</span>(),
+                   <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>Extension</span>(<span class='string'>&quot;MOVE&quot;</span>.<span class='ident'>to_owned</span>())));
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -402,7 +402,7 @@
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Get</span>.<span class='ident'>as_ref</span>(), <span class='string'>&quot;GET&quot;</span>);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Post</span>.<span class='ident'>as_ref</span>(), <span class='string'>&quot;POST&quot;</span>);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Put</span>.<span class='ident'>as_ref</span>(), <span class='string'>&quot;PUT&quot;</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Extension</span>(<span class='string'>&quot;MOVE&quot;</span>.<span class='ident'>to_string</span>()).<span class='ident'>as_ref</span>(), <span class='string'>&quot;MOVE&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Extension</span>(<span class='string'>&quot;MOVE&quot;</span>.<span class='ident'>to_owned</span>()).<span class='ident'>as_ref</span>(), <span class='string'>&quot;MOVE&quot;</span>);
     }
 }
 </pre>
@@ -438,10 +438,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

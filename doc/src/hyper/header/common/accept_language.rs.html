@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/accept_language.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/accept_language.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>accept_language.rs.html -- source</title>
@@ -106,9 +106,9 @@
         <span class='macro'>test_header</span><span class='macro'>!</span>(
             <span class='ident'>test2</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&quot;en-us, en; q=0.5, fr&quot;</span>],
             <span class='prelude-val'>Some</span>(<span class='ident'>AcceptLanguage</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
-                <span class='ident'>qitem</span>(<span class='ident'>Language</span> {<span class='ident'>primary</span>: <span class='string'>&quot;en&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>sub</span>: <span class='prelude-val'>Some</span>(<span class='string'>&quot;us&quot;</span>.<span class='ident'>to_string</span>())}),
-                <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>Language</span>{<span class='ident'>primary</span>: <span class='string'>&quot;en&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>sub</span>: <span class='prelude-val'>None</span>}, <span class='ident'>Quality</span>(<span class='number'>500</span>)),
-                <span class='ident'>qitem</span>(<span class='ident'>Language</span> {<span class='ident'>primary</span>: <span class='string'>&quot;fr&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>sub</span>: <span class='prelude-val'>None</span>}),
+                <span class='ident'>qitem</span>(<span class='ident'>Language</span> {<span class='ident'>primary</span>: <span class='string'>&quot;en&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>sub</span>: <span class='prelude-val'>Some</span>(<span class='string'>&quot;us&quot;</span>.<span class='ident'>to_owned</span>())}),
+                <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>Language</span>{<span class='ident'>primary</span>: <span class='string'>&quot;en&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>sub</span>: <span class='prelude-val'>None</span>}, <span class='ident'>Quality</span>(<span class='number'>500</span>)),
+                <span class='ident'>qitem</span>(<span class='ident'>Language</span> {<span class='ident'>primary</span>: <span class='string'>&quot;fr&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>sub</span>: <span class='prelude-val'>None</span>}),
         ])));
     }
 }
@@ -148,10 +148,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/server/request.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/server/request.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>request.rs.html -- source</title>
@@ -424,7 +424,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>BufReader</span>::<span class='ident'>new</span>(<span class='ident'>mock</span>);
 
         <span class='kw'>let</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='ident'>Request</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='ident'>sock</span>(<span class='string'>&quot;127.0.0.1:80&quot;</span>)).<span class='ident'>unwrap</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>read_to_string</span>(<span class='ident'>req</span>).<span class='ident'>unwrap</span>(), <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>read_to_string</span>(<span class='ident'>req</span>).<span class='ident'>unwrap</span>(), <span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -441,7 +441,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>BufReader</span>::<span class='ident'>new</span>(<span class='ident'>mock</span>);
 
         <span class='kw'>let</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='ident'>Request</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='ident'>sock</span>(<span class='string'>&quot;127.0.0.1:80&quot;</span>)).<span class='ident'>unwrap</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>read_to_string</span>(<span class='ident'>req</span>).<span class='ident'>unwrap</span>(), <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>read_to_string</span>(<span class='ident'>req</span>).<span class='ident'>unwrap</span>(), <span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -458,7 +458,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>BufReader</span>::<span class='ident'>new</span>(<span class='ident'>mock</span>);
 
         <span class='kw'>let</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='ident'>Request</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='ident'>sock</span>(<span class='string'>&quot;127.0.0.1:80&quot;</span>)).<span class='ident'>unwrap</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>read_to_string</span>(<span class='ident'>req</span>).<span class='ident'>unwrap</span>(), <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>read_to_string</span>(<span class='ident'>req</span>).<span class='ident'>unwrap</span>(), <span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -499,7 +499,7 @@
             <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Transfer-Encoding: chunked expected!&quot;</span>),
         };
         <span class='comment'>// The content is correctly read?</span>
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>read_to_string</span>(<span class='ident'>req</span>).<span class='ident'>unwrap</span>(), <span class='string'>&quot;qwert&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>read_to_string</span>(<span class='ident'>req</span>).<span class='ident'>unwrap</span>(), <span class='string'>&quot;qwert&quot;</span>.<span class='ident'>to_owned</span>());
     }
 
     <span class='doccomment'>/// Tests that when a chunk size is not a valid radix-16 number, an error</span>
@@ -571,7 +571,7 @@
 
         <span class='kw'>let</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='ident'>Request</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='ident'>sock</span>(<span class='string'>&quot;127.0.0.1:80&quot;</span>)).<span class='ident'>unwrap</span>();
 
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>read_to_string</span>(<span class='ident'>req</span>).<span class='ident'>unwrap</span>(), <span class='string'>&quot;1&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>read_to_string</span>(<span class='ident'>req</span>).<span class='ident'>unwrap</span>(), <span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
     }
 
 }
@@ -608,10 +608,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

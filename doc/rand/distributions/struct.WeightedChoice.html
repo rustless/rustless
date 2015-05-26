@@ -41,11 +41,9 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>rand</a>::<wbr><a href='index.html'>distributions</a>::<wbr><a class='struct' href=''>WeightedChoice</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-3251' class='srclink' href='../../src/rand/distributions/mod.rs.html#116-119' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>rand</a>::<wbr><a href='index.html'>distributions</a>::<wbr><a class='struct' href=''>WeightedChoice</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-3251' href='../../src/rand/distributions/mod.rs.html#116-119'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct WeightedChoice&lt;'a, T: 'a&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>A distribution that selects from a finite collection of weighted items.</p>
@@ -72,15 +70,15 @@ another vector.</p>
      <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>wc</span>.<span class='ident'>ind_sample</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>rng</span>));
 }
 </pre>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a, T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; <a class='struct' href='../../rand/distributions/struct.WeightedChoice.html' title='rand::distributions::WeightedChoice'>WeightedChoice</a>&lt;'a, T&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(items: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a mut [</a><a class='struct' href='../../rand/distributions/struct.Weighted.html' title='rand::distributions::Weighted'>Weighted</a>&lt;T&gt;<a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='../../rand/distributions/struct.WeightedChoice.html' title='rand::distributions::WeightedChoice'>WeightedChoice</a>&lt;'a, T&gt;</code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a, T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; <a class='struct' href='../../rand/distributions/struct.WeightedChoice.html' title='rand::distributions::WeightedChoice'>WeightedChoice</a>&lt;'a, T&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(items: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a mut [</a><a class='struct' href='../../rand/distributions/struct.Weighted.html' title='rand::distributions::Weighted'>Weighted</a>&lt;T&gt;<a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='../../rand/distributions/struct.WeightedChoice.html' title='rand::distributions::WeightedChoice'>WeightedChoice</a>&lt;'a, T&gt;</code></h4>
 <div class='docblock'><p>Create a new <code>WeightedChoice</code>.</p>
 
 <p>Panics if:
 - <code>v</code> is empty
 - the total weight is 0
 - the total weight is larger than a <code>u32</code> can contain.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;'a, T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; <a class='trait' href='../../rand/distributions/trait.Sample.html' title='rand::distributions::Sample'>Sample</a>&lt;T&gt; for <a class='struct' href='../../rand/distributions/struct.WeightedChoice.html' title='rand::distributions::WeightedChoice'>WeightedChoice</a>&lt;'a, T&gt;</code></h3><div class='impl-items'><h4 id='method.sample' class='method'><code>fn <a href='../../rand/distributions/trait.Sample.html#method.sample' class='fnname'>sample</a>&lt;R: <a class='trait' href='../../rand/trait.Rng.html' title='rand::Rng'>Rng</a>&gt;(&amp;mut self, rng: &amp;mut R) -&gt; T</code></h4>
-</div><h3 class='impl'><code>impl&lt;'a, T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; <a class='trait' href='../../rand/distributions/trait.IndependentSample.html' title='rand::distributions::IndependentSample'>IndependentSample</a>&lt;T&gt; for <a class='struct' href='../../rand/distributions/struct.WeightedChoice.html' title='rand::distributions::WeightedChoice'>WeightedChoice</a>&lt;'a, T&gt;</code></h3><div class='impl-items'><h4 id='method.ind_sample' class='method'><code>fn <a href='../../rand/distributions/trait.IndependentSample.html#method.ind_sample' class='fnname'>ind_sample</a>&lt;R: <a class='trait' href='../../rand/trait.Rng.html' title='rand::Rng'>Rng</a>&gt;(&amp;self, rng: &amp;mut R) -&gt; T</code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a, T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; <a class='trait' href='../../rand/distributions/trait.Sample.html' title='rand::distributions::Sample'>Sample</a>&lt;T&gt; for <a class='struct' href='../../rand/distributions/struct.WeightedChoice.html' title='rand::distributions::WeightedChoice'>WeightedChoice</a>&lt;'a, T&gt;</code></h3><div class='impl-items'><h4 id='method.sample' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='../../rand/distributions/trait.Sample.html#method.sample' class='fnname'>sample</a>&lt;R: <a class='trait' href='../../rand/trait.Rng.html' title='rand::Rng'>Rng</a>&gt;(&amp;mut self, rng: &amp;mut R) -&gt; T</code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a, T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt; <a class='trait' href='../../rand/distributions/trait.IndependentSample.html' title='rand::distributions::IndependentSample'>IndependentSample</a>&lt;T&gt; for <a class='struct' href='../../rand/distributions/struct.WeightedChoice.html' title='rand::distributions::WeightedChoice'>WeightedChoice</a>&lt;'a, T&gt;</code></h3><div class='impl-items'><h4 id='method.ind_sample' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='../../rand/distributions/trait.IndependentSample.html#method.ind_sample' class='fnname'>ind_sample</a>&lt;R: <a class='trait' href='../../rand/trait.Rng.html' title='rand::Rng'>Rng</a>&gt;(&amp;self, rng: &amp;mut R) -&gt; T</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -113,10 +111,6 @@ another vector.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

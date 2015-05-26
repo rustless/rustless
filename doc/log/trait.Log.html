@@ -41,11 +41,9 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>log</a>::<wbr><a class='trait' href=''>Log</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-968' class='srclink' href='../src/log/lib.rs.html#476-491' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>log</a>::<wbr><a class='trait' href=''>Log</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-968' href='../src/log/lib.rs.html#476-491'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Log: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> {
     fn <a href='#tymethod.enabled' class='fnname'>enabled</a>(&amp;self, metadata: &amp;<a class='struct' href='../log/struct.LogMetadata.html' title='log::LogMetadata'>LogMetadata</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>;
     fn <a href='#tymethod.log' class='fnname'>log</a>(&amp;self, record: &amp;<a class='struct' href='../log/struct.LogRecord.html' title='log::LogRecord'>LogRecord</a>);
@@ -53,13 +51,13 @@
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.enabled' class='method stab '><code>fn <a href='#tymethod.enabled' class='fnname'>enabled</a>(&amp;self, metadata: &amp;<a class='struct' href='../log/struct.LogMetadata.html' title='log::LogMetadata'>LogMetadata</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h3><div class='docblock'><p>Determines if a log message with the specified metadata would be
+        <h3 id='tymethod.enabled' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.enabled' class='fnname'>enabled</a>(&amp;self, metadata: &amp;<a class='struct' href='../log/struct.LogMetadata.html' title='log::LogMetadata'>LogMetadata</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h3><div class='docblock'><p>Determines if a log message with the specified metadata would be
 logged.</p>
 
 <p>This is used by the <code>log_enabled!</code> macro to allow callers to avoid
 expensive computation of log message arguments if the message would be
 discarded anyway.</p>
-</div><h3 id='tymethod.log' class='method stab '><code>fn <a href='#tymethod.log' class='fnname'>log</a>(&amp;self, record: &amp;<a class='struct' href='../log/struct.LogRecord.html' title='log::LogRecord'>LogRecord</a>)</code></h3><div class='docblock'><p>Logs the <code>LogRecord</code>.</p>
+</div><h3 id='tymethod.log' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.log' class='fnname'>log</a>(&amp;self, record: &amp;<a class='struct' href='../log/struct.LogRecord.html' title='log::LogRecord'>LogRecord</a>)</code></h3><div class='docblock'><p>Logs the <code>LogRecord</code>.</p>
 
 <p>Note that <code>enabled</code> is <em>not</em> necessarily called before this method.
 Implementations of <code>log</code> should perform all necessary filtering
@@ -101,10 +99,6 @@ internally.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

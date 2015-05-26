@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/libc-0.1.7/rust/src/liblibc/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/libc-0.1.8/rust/src/liblibc/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
-    <link rel="shortcut icon" href="http://www.rust-lang.org/favicon.ico">
+    <link rel="shortcut icon" href="https://doc.rust-lang.org/favicon.ico">
     
 </head>
 <body class="rustdoc">
@@ -6395,6 +6395,37 @@
 <span id="6353">6353</span>
 <span id="6354">6354</span>
 <span id="6355">6355</span>
+<span id="6356">6356</span>
+<span id="6357">6357</span>
+<span id="6358">6358</span>
+<span id="6359">6359</span>
+<span id="6360">6360</span>
+<span id="6361">6361</span>
+<span id="6362">6362</span>
+<span id="6363">6363</span>
+<span id="6364">6364</span>
+<span id="6365">6365</span>
+<span id="6366">6366</span>
+<span id="6367">6367</span>
+<span id="6368">6368</span>
+<span id="6369">6369</span>
+<span id="6370">6370</span>
+<span id="6371">6371</span>
+<span id="6372">6372</span>
+<span id="6373">6373</span>
+<span id="6374">6374</span>
+<span id="6375">6375</span>
+<span id="6376">6376</span>
+<span id="6377">6377</span>
+<span id="6378">6378</span>
+<span id="6379">6379</span>
+<span id="6380">6380</span>
+<span id="6381">6381</span>
+<span id="6382">6382</span>
+<span id="6383">6383</span>
+<span id="6384">6384</span>
+<span id="6385">6385</span>
+<span id="6386">6386</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2012-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -6410,12 +6441,13 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>stage0</span>, <span class='ident'>feature</span>(<span class='ident'>custom_attribute</span>))]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_name</span> <span class='op'>=</span> <span class='string'>&quot;libc&quot;</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_type</span> <span class='op'>=</span> <span class='string'>&quot;rlib&quot;</span>]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;cargo-build&quot;</span>), <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;libc&quot;</span>))]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;cargo-build&quot;</span>), <span class='ident'>unstable</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;libc&quot;</span>,
+                                                   <span class='ident'>reason</span> <span class='op'>=</span> <span class='string'>&quot;use `libc` from crates.io&quot;</span>))]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;cargo-build&quot;</span>), <span class='ident'>feature</span>(<span class='ident'>staged_api</span>, <span class='ident'>core</span>, <span class='ident'>no_std</span>))]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;cargo-build&quot;</span>), <span class='ident'>staged_api</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;cargo-build&quot;</span>), <span class='ident'>no_std</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_logo_url</span> <span class='op'>=</span> <span class='string'>&quot;http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png&quot;</span>,
-       <span class='ident'>html_favicon_url</span> <span class='op'>=</span> <span class='string'>&quot;http://www.rust-lang.org/favicon.ico&quot;</span>,
+       <span class='ident'>html_favicon_url</span> <span class='op'>=</span> <span class='string'>&quot;https://doc.rust-lang.org/favicon.ico&quot;</span>,
        <span class='ident'>html_root_url</span> <span class='op'>=</span> <span class='string'>&quot;http://doc.rust-lang.org/nightly/&quot;</span>,
        <span class='ident'>html_playground_url</span> <span class='op'>=</span> <span class='string'>&quot;http://play.rust-lang.org/&quot;</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>test</span>, <span class='ident'>feature</span>(<span class='ident'>test</span>))]</span>
@@ -10022,6 +10054,30 @@
             <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>IPV6_DROP_MEMBERSHIP</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>21</span>;
 
             <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_NODELAY</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>1</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_MAXSEG</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>2</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_CORK</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>3</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_KEEPIDLE</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>4</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_KEEPINTVL</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>5</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_KEEPCNT</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>6</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_SYNCNT</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>7</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_LINGER2</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>8</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_DEFER_ACCEPT</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>9</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_WINDOW_CLAMP</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>10</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_INFO</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>11</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_QUICKACK</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>12</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_CONGESTION</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>13</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_MD5SIG</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>14</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_COOKIE_TRANSACTIONS</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>15</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_THIN_LINEAR_TIMEOUTS</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>16</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_THIN_DUPACK</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>17</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_USER_TIMEOUT</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>18</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_REPAIR</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>19</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_REPAIR_QUEUE</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>20</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_QUEUE_SEQ</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>21</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_REPAIR_OPTIONS</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>22</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_FASTOPEN</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>23</span>;
+            <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TCP_TIMESTAMP</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>24</span>;
+
             <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>SOL_SOCKET</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>65535</span>;
 
             <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>SO_DEBUG</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>0x0001</span>;
@@ -12095,6 +12151,9 @@
                 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>tcgetpgrp</span>(<span class='ident'>fd</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='ident'>pid_t</span>;
                 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ttyname</span>(<span class='ident'>fd</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>;
                 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>unlink</span>(<span class='ident'>c</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+                <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>wait</span>(<span class='ident'>status</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='ident'>pid_t</span>;
+                <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>waitpid</span>(<span class='ident'>pid</span>: <span class='ident'>pid_t</span>, <span class='ident'>status</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_int</span>, <span class='ident'>options</span>: <span class='ident'>c_int</span>)
+                               <span class='op'>-&gt;</span> <span class='ident'>pid_t</span>;
                 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write</span>(<span class='ident'>fd</span>: <span class='ident'>c_int</span>, <span class='ident'>buf</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>, <span class='ident'>count</span>: <span class='ident'>size_t</span>)
                              <span class='op'>-&gt;</span> <span class='ident'>ssize_t</span>;
                 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>pread</span>(<span class='ident'>fd</span>: <span class='ident'>c_int</span>, <span class='ident'>buf</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='ident'>count</span>: <span class='ident'>size_t</span>,
@@ -12146,6 +12205,9 @@
                 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>sysconf</span>(<span class='ident'>name</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
                 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ttyname</span>(<span class='ident'>fd</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>;
                 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>unlink</span>(<span class='ident'>c</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+                <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>wait</span>(<span class='ident'>status</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='ident'>pid_t</span>;
+                <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>waitpid</span>(<span class='ident'>pid</span>: <span class='ident'>pid_t</span>, <span class='ident'>status</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_int</span>, <span class='ident'>options</span>: <span class='ident'>c_int</span>)
+                               <span class='op'>-&gt;</span> <span class='ident'>pid_t</span>;
                 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write</span>(<span class='ident'>fd</span>: <span class='ident'>c_int</span>, <span class='ident'>buf</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>, <span class='ident'>count</span>: <span class='ident'>size_t</span>)
                              <span class='op'>-&gt;</span> <span class='ident'>ssize_t</span>;
                 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>pread</span>(<span class='ident'>fd</span>: <span class='ident'>c_int</span>, <span class='ident'>buf</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='ident'>count</span>: <span class='ident'>size_t</span>,
@@ -12784,10 +12846,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

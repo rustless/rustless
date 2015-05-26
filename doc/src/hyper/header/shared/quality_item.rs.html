@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/shared/quality_item.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/shared/quality_item.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>quality_item.rs.html -- source</title>
@@ -253,14 +253,7 @@
 <span id="211">211</span>
 <span id="212">212</span>
 <span id="213">213</span>
-<span id="214">214</span>
-<span id="215">215</span>
 </pre><pre class='rust '>
-<span class='doccomment'>//! Provides a struct for quality values.</span>
-<span class='doccomment'>//!</span>
-<span class='doccomment'>//! [RFC7231 Section 5.3.1](https://tools.ietf.org/html/rfc7231#section-5.3.1)</span>
-<span class='doccomment'>//! gives more information on quality values in HTTP header fields.</span>
-
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>default</span>::<span class='ident'>Default</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
@@ -277,6 +270,9 @@
 <span class='doccomment'>/// floating point data type (`f32`) consumes four bytes, hyper uses an `u16` value to store the</span>
 <span class='doccomment'>/// quality internally. For performance reasons you may set quality directly to a value between</span>
 <span class='doccomment'>/// 0 and 1000 e.g. `Quality(532)` matches the quality `q=0.532`.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// [RFC7231 Section 5.3.1](https://tools.ietf.org/html/rfc7231#section-5.3.1)</span>
+<span class='doccomment'>/// gives more information on quality values in HTTP header fields.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>Eq</span>, <span class='ident'>Ord</span>, <span class='ident'>PartialEq</span>, <span class='ident'>PartialOrd</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Quality</span>(<span class='kw'>pub</span> <span class='ident'>u16</span>);
 
@@ -331,8 +327,8 @@
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>str</span>::<span class='ident'>FromStr</span><span class='op'>&gt;</span> <span class='ident'>str</span>::<span class='ident'>FromStr</span> <span class='kw'>for</span> <span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='kw'>type</span> <span class='prelude-val'>Err</span> <span class='op'>=</span> ();
-    <span class='kw'>fn</span> <span class='ident'>from_str</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw'>Self</span>, ()<span class='op'>&gt;</span> {
+    <span class='kw'>type</span> <span class='prelude-val'>Err</span> <span class='op'>=</span> ::<span class='ident'>Error</span>;
+    <span class='kw'>fn</span> <span class='ident'>from_str</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span> {
         <span class='comment'>// Set defaults used if parsing fails.</span>
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>raw_item</span> <span class='op'>=</span> <span class='ident'>s</span>;
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>quality</span> <span class='op'>=</span> <span class='number'>1f32</span>;
@@ -343,7 +339,7 @@
             <span class='kw'>if</span> <span class='ident'>start</span> <span class='op'>==</span> <span class='string'>&quot;q=&quot;</span> <span class='op'>||</span> <span class='ident'>start</span> <span class='op'>==</span> <span class='string'>&quot;Q=&quot;</span> {
                 <span class='kw'>let</span> <span class='ident'>q_part</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>parts</span>[<span class='number'>0</span>][<span class='number'>2</span>..<span class='ident'>parts</span>[<span class='number'>0</span>].<span class='ident'>len</span>()];
                 <span class='kw'>if</span> <span class='ident'>q_part</span>.<span class='ident'>len</span>() <span class='op'>&gt;</span> <span class='number'>5</span> {
-                    <span class='kw'>return</span> <span class='prelude-val'>Err</span>(());
+                    <span class='kw'>return</span> <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Header</span>);
                 }
                 <span class='kw'>match</span> <span class='ident'>q_part</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>f32</span><span class='op'>&gt;</span>() {
                     <span class='prelude-val'>Ok</span>(<span class='ident'>q_value</span>) <span class='op'>=&gt;</span> {
@@ -351,17 +347,17 @@
                             <span class='ident'>quality</span> <span class='op'>=</span> <span class='ident'>q_value</span>;
                             <span class='ident'>raw_item</span> <span class='op'>=</span> <span class='ident'>parts</span>[<span class='number'>1</span>];
                             } <span class='kw'>else</span> {
-                                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(());
+                                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Header</span>);
                             }
                         },
-                    <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(()),
+                    <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Header</span>),
                 }
             }
         }
         <span class='kw'>match</span> <span class='ident'>raw_item</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() {
             <span class='comment'>// we already checked above that the quality is within range</span>
             <span class='prelude-val'>Ok</span>(<span class='ident'>item</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>item</span>, <span class='ident'>from_f32</span>(<span class='ident'>quality</span>))),
-            <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(()),
+            <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Header</span>),
         }
     }
 }
@@ -405,7 +401,7 @@
     <span class='kw'>fn</span> <span class='ident'>test_quality_item_show3</span>() {
         <span class='comment'>// Custom value</span>
         <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>QualityItem</span>{
-            <span class='ident'>item</span>: <span class='ident'>EncodingExt</span>(<span class='string'>&quot;identity&quot;</span>.<span class='ident'>to_string</span>()),
+            <span class='ident'>item</span>: <span class='ident'>EncodingExt</span>(<span class='string'>&quot;identity&quot;</span>.<span class='ident'>to_owned</span>()),
             <span class='ident'>quality</span>: <span class='ident'>Quality</span>(<span class='number'>500</span>),
         };
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>), <span class='string'>&quot;identity; q=0.5&quot;</span>);
@@ -413,40 +409,40 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_quality_item_from_str1</span>() {
-        <span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> <span class='op'>=</span> <span class='string'>&quot;chunked&quot;</span>.<span class='ident'>parse</span>();
+        <span class='kw'>let</span> <span class='ident'>x</span>: ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='string'>&quot;chunked&quot;</span>.<span class='ident'>parse</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>.<span class='ident'>unwrap</span>(), <span class='ident'>QualityItem</span>{ <span class='ident'>item</span>: <span class='ident'>Chunked</span>, <span class='ident'>quality</span>: <span class='ident'>Quality</span>(<span class='number'>1000</span>), });
     }
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_quality_item_from_str2</span>() {
-        <span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> <span class='op'>=</span> <span class='string'>&quot;chunked; q=1&quot;</span>.<span class='ident'>parse</span>();
+        <span class='kw'>let</span> <span class='ident'>x</span>: ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='string'>&quot;chunked; q=1&quot;</span>.<span class='ident'>parse</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>.<span class='ident'>unwrap</span>(), <span class='ident'>QualityItem</span>{ <span class='ident'>item</span>: <span class='ident'>Chunked</span>, <span class='ident'>quality</span>: <span class='ident'>Quality</span>(<span class='number'>1000</span>), });
     }
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_quality_item_from_str3</span>() {
-        <span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> <span class='op'>=</span> <span class='string'>&quot;gzip; q=0.5&quot;</span>.<span class='ident'>parse</span>();
+        <span class='kw'>let</span> <span class='ident'>x</span>: ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='string'>&quot;gzip; q=0.5&quot;</span>.<span class='ident'>parse</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>.<span class='ident'>unwrap</span>(), <span class='ident'>QualityItem</span>{ <span class='ident'>item</span>: <span class='ident'>Gzip</span>, <span class='ident'>quality</span>: <span class='ident'>Quality</span>(<span class='number'>500</span>), });
     }
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_quality_item_from_str4</span>() {
-        <span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> <span class='op'>=</span> <span class='string'>&quot;gzip; q=0.273&quot;</span>.<span class='ident'>parse</span>();
+        <span class='kw'>let</span> <span class='ident'>x</span>: ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='string'>&quot;gzip; q=0.273&quot;</span>.<span class='ident'>parse</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>.<span class='ident'>unwrap</span>(), <span class='ident'>QualityItem</span>{ <span class='ident'>item</span>: <span class='ident'>Gzip</span>, <span class='ident'>quality</span>: <span class='ident'>Quality</span>(<span class='number'>273</span>), });
     }
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_quality_item_from_str5</span>() {
-        <span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> <span class='op'>=</span> <span class='string'>&quot;gzip; q=0.2739999&quot;</span>.<span class='ident'>parse</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>, <span class='prelude-val'>Err</span>(()));
+        <span class='kw'>let</span> <span class='ident'>x</span>: ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='string'>&quot;gzip; q=0.2739999&quot;</span>.<span class='ident'>parse</span>();
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>x</span>.<span class='ident'>is_err</span>());
     }
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_quality_item_from_str6</span>() {
-        <span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;</span>, ()<span class='op'>&gt;</span> <span class='op'>=</span> <span class='string'>&quot;gzip; q=2&quot;</span>.<span class='ident'>parse</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>x</span>, <span class='prelude-val'>Err</span>(()));
+        <span class='kw'>let</span> <span class='ident'>x</span>: ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='string'>&quot;gzip; q=2&quot;</span>.<span class='ident'>parse</span>();
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>x</span>.<span class='ident'>is_err</span>());
     }
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_quality_item_ordering</span>() {
         <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='string'>&quot;gzip; q=0.5&quot;</span>.<span class='ident'>parse</span>().<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
         <span class='kw'>let</span> <span class='ident'>y</span>: <span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Encoding</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='string'>&quot;gzip; q=0.273&quot;</span>.<span class='ident'>parse</span>().<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
         <span class='kw'>let</span> <span class='ident'>comparision_result</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>gt</span>(<span class='kw-2'>&amp;</span><span class='ident'>y</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>comparision_result</span>, <span class='boolval'>true</span>)
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>comparision_result</span>)
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -504,10 +500,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

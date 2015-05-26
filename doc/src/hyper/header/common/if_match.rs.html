@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/if_match.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/if_match.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>if_match.rs.html -- source</title>
@@ -123,14 +123,14 @@
             <span class='ident'>test1</span>,
             <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&quot;\&quot;xyzzy\&quot;&quot;</span>],
             <span class='prelude-val'>Some</span>(<span class='ident'>HeaderField</span>::<span class='ident'>Items</span>(
-                <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;xyzzy&quot;</span>.<span class='ident'>to_string</span>())])));
+                <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;xyzzy&quot;</span>.<span class='ident'>to_owned</span>())])));
         <span class='macro'>test_header</span><span class='macro'>!</span>(
             <span class='ident'>test2</span>,
             <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&quot;\&quot;xyzzy\&quot;, \&quot;r2d2xxxx\&quot;, \&quot;c3piozzzz\&quot;&quot;</span>],
             <span class='prelude-val'>Some</span>(<span class='ident'>HeaderField</span>::<span class='ident'>Items</span>(
-                <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;xyzzy&quot;</span>.<span class='ident'>to_string</span>()),
-                     <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;r2d2xxxx&quot;</span>.<span class='ident'>to_string</span>()),
-                     <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;c3piozzzz&quot;</span>.<span class='ident'>to_string</span>())])));
+                <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;xyzzy&quot;</span>.<span class='ident'>to_owned</span>()),
+                     <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;r2d2xxxx&quot;</span>.<span class='ident'>to_owned</span>()),
+                     <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;c3piozzzz&quot;</span>.<span class='ident'>to_owned</span>())])));
         <span class='macro'>test_header</span><span class='macro'>!</span>(<span class='ident'>test3</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&quot;*&quot;</span>], <span class='prelude-val'>Some</span>(<span class='ident'>IfMatch</span>::<span class='ident'>Any</span>));
     }
 }
@@ -172,10 +172,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

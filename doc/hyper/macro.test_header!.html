@@ -41,11 +41,9 @@
     </nav>
 
     <section id='main' class="content macro">
-<h1 class='fqn'><span class='in-band'><a href='index.html'>hyper</a>::<wbr><a class='macro' href=''>test_header!</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-40782' class='srclink' href='../src/hyper/header/common/mod.rs.html#118-155' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'><a href='index.html'>hyper</a>::<wbr><a class='macro' href=''>test_header!</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-40917' href='../src/hyper/header/common/mod.rs.html#118-155'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>test_header</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>id</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>raw</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
@@ -60,12 +58,12 @@
             <span class='kw'>let</span> <span class='ident'>result_cmp</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>result</span>
                 .<span class='ident'>to_ascii_lowercase</span>()
                 .<span class='ident'>split</span>(<span class='string'>&#39; &#39;</span>)
-                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_string</span>())
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_owned</span>())
                 .<span class='ident'>collect</span>();
             <span class='kw'>let</span> <span class='ident'>expected_cmp</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>expected</span>
                 .<span class='ident'>to_ascii_lowercase</span>()
                 .<span class='ident'>split</span>(<span class='string'>&#39; &#39;</span>)
-                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_string</span>())
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_owned</span>())
                 .<span class='ident'>collect</span>();
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>result_cmp</span>.<span class='ident'>concat</span>(), <span class='ident'>expected_cmp</span>.<span class='ident'>concat</span>());
         }
@@ -118,10 +116,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

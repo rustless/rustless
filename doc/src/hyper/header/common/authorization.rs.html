@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/authorization.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/authorization.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>authorization.rs.html -- source</title>
@@ -382,11 +382,11 @@
                 <span class='prelude-val'>Ok</span>(<span class='ident'>text</span>) <span class='op'>=&gt;</span> {
                     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>parts</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>text</span>.<span class='ident'>split</span>(<span class='string'>&#39;:&#39;</span>);
                     <span class='kw'>let</span> <span class='ident'>user</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>parts</span>.<span class='ident'>next</span>() {
-                        <span class='prelude-val'>Some</span>(<span class='ident'>part</span>) <span class='op'>=&gt;</span> <span class='ident'>part</span>.<span class='ident'>to_string</span>(),
+                        <span class='prelude-val'>Some</span>(<span class='ident'>part</span>) <span class='op'>=&gt;</span> <span class='ident'>part</span>.<span class='ident'>to_owned</span>(),
                         <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(())
                     };
                     <span class='kw'>let</span> <span class='ident'>password</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>parts</span>.<span class='ident'>next</span>() {
-                        <span class='prelude-val'>Some</span>(<span class='ident'>part</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>part</span>.<span class='ident'>to_string</span>()),
+                        <span class='prelude-val'>Some</span>(<span class='ident'>part</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>part</span>.<span class='ident'>to_owned</span>()),
                         <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>
                     };
                     <span class='prelude-val'>Ok</span>(<span class='ident'>Basic</span> {
@@ -415,8 +415,8 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_raw_auth</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
-        <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Authorization</span>(<span class='string'>&quot;foo bar baz&quot;</span>.<span class='ident'>to_string</span>()));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>headers</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;Authorization: foo bar baz\r\n&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Authorization</span>(<span class='string'>&quot;foo bar baz&quot;</span>.<span class='ident'>to_owned</span>()));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>headers</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;Authorization: foo bar baz\r\n&quot;</span>.<span class='ident'>to_owned</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -430,17 +430,17 @@
     <span class='kw'>fn</span> <span class='ident'>test_basic_auth</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
         <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Authorization</span>(
-            <span class='ident'>Basic</span> { <span class='ident'>username</span>: <span class='string'>&quot;Aladdin&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>password</span>: <span class='prelude-val'>Some</span>(<span class='string'>&quot;open sesame&quot;</span>.<span class='ident'>to_string</span>()) }));
+            <span class='ident'>Basic</span> { <span class='ident'>username</span>: <span class='string'>&quot;Aladdin&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>password</span>: <span class='prelude-val'>Some</span>(<span class='string'>&quot;open sesame&quot;</span>.<span class='ident'>to_owned</span>()) }));
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(
             <span class='ident'>headers</span>.<span class='ident'>to_string</span>(),
-            <span class='string'>&quot;Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==\r\n&quot;</span>.<span class='ident'>to_string</span>());
+            <span class='string'>&quot;Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==\r\n&quot;</span>.<span class='ident'>to_owned</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_basic_auth_no_password</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
-        <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Authorization</span>(<span class='ident'>Basic</span> { <span class='ident'>username</span>: <span class='string'>&quot;Aladdin&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>password</span>: <span class='prelude-val'>None</span> }));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>headers</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;Authorization: Basic QWxhZGRpbjo=\r\n&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Authorization</span>(<span class='ident'>Basic</span> { <span class='ident'>username</span>: <span class='string'>&quot;Aladdin&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>password</span>: <span class='prelude-val'>None</span> }));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>headers</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;Authorization: Basic QWxhZGRpbjo=\r\n&quot;</span>.<span class='ident'>to_owned</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -448,7 +448,7 @@
         <span class='kw'>let</span> <span class='ident'>auth</span>: <span class='ident'>Authorization</span><span class='op'>&lt;</span><span class='ident'>Basic</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>(
             <span class='kw-2'>&amp;</span>[<span class='string'>b&quot;Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==&quot;</span>.<span class='ident'>to_vec</span>()]).<span class='ident'>unwrap</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>auth</span>.<span class='number'>0</span>.<span class='ident'>username</span>, <span class='string'>&quot;Aladdin&quot;</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>auth</span>.<span class='number'>0</span>.<span class='ident'>password</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;open sesame&quot;</span>.<span class='ident'>to_string</span>()));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>auth</span>.<span class='number'>0</span>.<span class='ident'>password</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;open sesame&quot;</span>.<span class='ident'>to_owned</span>()));
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -456,7 +456,7 @@
         <span class='kw'>let</span> <span class='ident'>auth</span>: <span class='ident'>Authorization</span><span class='op'>&lt;</span><span class='ident'>Basic</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>(
             <span class='kw-2'>&amp;</span>[<span class='string'>b&quot;Basic QWxhZGRpbjo=&quot;</span>.<span class='ident'>to_vec</span>()]).<span class='ident'>unwrap</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>auth</span>.<span class='number'>0</span>.<span class='ident'>username</span>, <span class='string'>&quot;Aladdin&quot;</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>auth</span>.<span class='number'>0</span>.<span class='ident'>password</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>()));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>auth</span>.<span class='number'>0</span>.<span class='ident'>password</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>()));
     }
 
 }
@@ -496,10 +496,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

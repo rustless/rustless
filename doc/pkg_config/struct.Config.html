@@ -41,34 +41,32 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>pkg_config</a>::<wbr><a class='struct' href=''>Config</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-31' class='srclink' href='../src/pkg_config/lib.rs.html#70-74' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>pkg_config</a>::<wbr><a class='struct' href=''>Config</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-31' href='../src/pkg_config/lib.rs.html#70-74'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Config {
     // some fields omitted
-}</pre><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h4>
+}</pre><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h4>
 <div class='docblock'><p>Creates a new set of configuration options which are all initially set
 to &quot;blank&quot;.</p>
-</div><h4 id='method.statik' class='method'><code>fn <a href='#method.statik' class='fnname'>statik</a>(&amp;mut self, statik: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; &amp;mut <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h4>
+</div><h4 id='method.statik' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.statik' class='fnname'>statik</a>(&amp;mut self, statik: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; &amp;mut <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h4>
 <div class='docblock'><p>Indicate whether the <code>--static</code> flag should be passed.</p>
 
 <p>This will override the inference from environment variables described in
 the crate documentation.</p>
-</div><h4 id='method.atleast_version' class='method'><code>fn <a href='#method.atleast_version' class='fnname'>atleast_version</a>(&amp;mut self, vers: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; &amp;mut <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h4>
+</div><h4 id='method.atleast_version' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.atleast_version' class='fnname'>atleast_version</a>(&amp;mut self, vers: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; &amp;mut <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h4>
 <div class='docblock'><p>Indicate that the library must be at least version <code>vers</code>.</p>
-</div><h4 id='method.arg' class='method'><code>fn <a href='#method.arg' class='fnname'>arg</a>&lt;S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html' title='std::ffi::os_str::OsStr'>OsStr</a>&gt;&gt;(&amp;mut self, arg: S) -&gt; &amp;mut <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h4>
+</div><h4 id='method.arg' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.arg' class='fnname'>arg</a>&lt;S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/ffi/os_str/struct.OsStr.html' title='std::ffi::os_str::OsStr'>OsStr</a>&gt;&gt;(&amp;mut self, arg: S) -&gt; &amp;mut <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h4>
 <div class='docblock'><p>Add an argument to pass to pkg-config.</p>
 
 <p>It&#39;s placed after all of the arguments generated by this library.</p>
-</div><h4 id='method.find' class='method'><code>fn <a href='#method.find' class='fnname'>find</a>(&amp;self, name: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../pkg_config/struct.Library.html' title='pkg_config::Library'>Library</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+</div><h4 id='method.find' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.find' class='fnname'>find</a>(&amp;self, name: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../pkg_config/struct.Library.html' title='pkg_config::Library'>Library</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
 <div class='docblock'><p>Run <code>pkg-config</code> to find the library <code>name</code>.</p>
 
 <p>This will use all configuration previously set to specify how
 <code>pkg-config</code> is run.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h4>
-<h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../pkg_config/struct.Config.html' title='pkg_config::Config'>Config</a></code></h4>
+<h4 id='method.clone_from' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -101,10 +99,6 @@ the crate documentation.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

@@ -34,8 +34,7 @@
                      "macro",
                      "primitive",
                      "associatedtype",
-                     "constant",
-                     "associatedconstant"];
+                     "constant"];
 
     $('.js-only').removeClass('js-only');
 
@@ -803,58 +802,34 @@
     if (query['gotosrc']) {
         window.location = $('#src-' + query['gotosrc']).attr('href');
     }
-    if (query['gotomacrosrc']) {
-        window.location = $('.srclink').attr('href');
-    }
 
-    function labelForToggleButton(sectionIsCollapsed) {
-        if (sectionIsCollapsed) {
-            // button will expand the section
-            return "+";
-        } else {
-            // button will collapse the section
-            // note that this text is also set in the HTML template in render.rs
-            return "\u2212"; // "\u2212" is '−' minus sign
-        }
-    }
+    $("#expand-all").on("click", function() {
+        $(".docblock").show();
+        $(".toggle-label").hide();
+        $(".toggle-wrapper").removeClass("collapsed");
+        $(".collapse-toggle").children(".inner").html("-");
+    });
 
-    $("#toggle-all-docs").on("click", function() {
-        var toggle = $("#toggle-all-docs");
-        if (toggle.hasClass("will-expand")) {
-            toggle.removeClass("will-expand");
-            toggle.children(".inner").text(labelForToggleButton(false));
-            toggle.attr("title", "collapse all docs");
-            $(".docblock").show();
-            $(".toggle-label").hide();
-            $(".toggle-wrapper").removeClass("collapsed");
-            $(".collapse-toggle").children(".inner").text(labelForToggleButton(false));
-        } else {
-            toggle.addClass("will-expand");
-            toggle.children(".inner").text(labelForToggleButton(true));
-            toggle.attr("title", "expand all docs");
-            $(".docblock").hide();
-            $(".toggle-label").show();
-            $(".toggle-wrapper").addClass("collapsed");
-            $(".collapse-toggle").children(".inner").text(labelForToggleButton(true));
-        }
+    $("#collapse-all").on("click", function() {
+        $(".docblock").hide();
+        $(".toggle-label").show();
+        $(".toggle-wrapper").addClass("collapsed");
+        $(".collapse-toggle").children(".inner").html("+");
     });
 
     $(document).on("click", ".collapse-toggle", function() {
         var toggle = $(this);
         var relatedDoc = toggle.parent().next();
-        if (relatedDoc.is(".stability")) {
-            relatedDoc = relatedDoc.next();
-        }
         if (relatedDoc.is(".docblock")) {
             if (relatedDoc.is(":visible")) {
                 relatedDoc.slideUp({duration:'fast', easing:'linear'});
                 toggle.parent(".toggle-wrapper").addClass("collapsed");
-                toggle.children(".inner").text(labelForToggleButton(true));
+                toggle.children(".inner").html("+");
                 toggle.children(".toggle-label").fadeIn();
             } else {
                 relatedDoc.slideDown({duration:'fast', easing:'linear'});
                 toggle.parent(".toggle-wrapper").removeClass("collapsed");
-                toggle.children(".inner").text(labelForToggleButton(false));
+                toggle.children(".inner").html("-");
                 toggle.children(".toggle-label").hide();
             }
         }
@@ -862,14 +837,12 @@
 
     $(function() {
         var toggle = $("<a/>", {'href': 'javascript:void(0)', 'class': 'collapse-toggle'})
-            .html("[<span class='inner'></span>]");
-        toggle.children(".inner").text(labelForToggleButton(false));
+            .html("[<span class='inner'>-</span>]");
 
         $(".method").each(function() {
-            if ($(this).next().is(".docblock") ||
-                ($(this).next().is(".stability") && $(this).next().next().is(".docblock"))) {
-                    $(this).children().first().after(toggle.clone());
-            }
+           if ($(this).next().is(".docblock")) {
+               $(this).children().first().after(toggle.clone());
+           }
         });
 
         var mainToggle =

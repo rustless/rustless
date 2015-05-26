@@ -41,11 +41,9 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='trait' href=''>Scheme</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-10608' class='srclink' href='../../../hyper/header/common/authorization/trait.Scheme.html?gotosrc=10608' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a href='index.html'>header</a>::<wbr><a class='trait' href=''>Scheme</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-10640' href='../../../hyper/header/common/authorization/trait.Scheme.html?gotosrc=10640'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Scheme: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.FromStr.html' title='core::str::FromStr'>FromStr</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> {
     fn <a href='#tymethod.scheme' class='fnname'>scheme</a>() -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;;
     fn <a href='#tymethod.fmt_scheme' class='fnname'>fmt_scheme</a>(&amp;self, &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;;
@@ -53,15 +51,15 @@
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.scheme' class='method stab '><code>fn <a href='#tymethod.scheme' class='fnname'>scheme</a>() -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h3><div class='docblock'><p>An optional Scheme name.</p>
+        <h3 id='tymethod.scheme' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.scheme' class='fnname'>scheme</a>() -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h3><div class='docblock'><p>An optional Scheme name.</p>
 
 <p>Will be replaced with an associated constant once available.</p>
-</div><h3 id='tymethod.fmt_scheme' class='method stab '><code>fn <a href='#tymethod.fmt_scheme' class='fnname'>fmt_scheme</a>(&amp;self, &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h3><div class='docblock'><p>Format the Scheme data into a header value.</p>
+</div><h3 id='tymethod.fmt_scheme' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.fmt_scheme' class='fnname'>fmt_scheme</a>(&amp;self, &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h3><div class='docblock'><p>Format the Scheme data into a header value.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl <a class='trait' href='../../../rustless/server/header/trait.Scheme.html' title='rustless::server::header::Scheme'>Scheme</a> for <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></li>
-<li><code>impl <a class='trait' href='../../../rustless/server/header/trait.Scheme.html' title='rustless::server::header::Scheme'>Scheme</a> for <a class='struct' href='../../../rustless/server/header/struct.Basic.html' title='rustless::server::header::Basic'>Basic</a></code></li>
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rustless/server/header/trait.Scheme.html' title='rustless::server::header::Scheme'>Scheme</a> for <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rustless/server/header/trait.Scheme.html' title='rustless::server::header::Scheme'>Scheme</a> for <a class='struct' href='../../../rustless/server/header/struct.Basic.html' title='rustless::server::header::Basic'>Basic</a></code></li>
 </ul><script type="text/javascript" async
                               src="../../../implementors/hyper/header/common/authorization/trait.Scheme.js">
                       </script></section>
@@ -96,10 +94,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

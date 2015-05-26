@@ -41,24 +41,22 @@
     </nav>
 
     <section id='main' class="content enum">
-<h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>client</a>::<wbr><a class='enum' href=''>RedirectPolicy</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-5313' class='srclink' href='../../src/hyper/client/mod.rs.html#366-373' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>client</a>::<wbr><a class='enum' href=''>RedirectPolicy</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-5351' href='../../src/hyper/client/mod.rs.html#370-377'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum RedirectPolicy {
     FollowNone,
     FollowAll,
     FollowIf(fn(&amp;<a class='struct' href='../../hyper/struct.Url.html' title='hyper::Url'>Url</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>),
 }</pre><div class='docblock'><p>Behavior regarding how to handle redirects within a Client.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.FollowNone'><code>FollowNone</code></td><td><div class='docblock'><p>Don&#39;t follow any redirects.</p>
-</div></td></tr><tr><td id='variant.FollowAll'><code>FollowAll</code></td><td><div class='docblock'><p>Follow all redirects.</p>
-</div></td></tr><tr><td id='variant.FollowIf'><code>FollowIf</code></td><td><div class='docblock'><p>Follow a redirect if the contained function returns true.</p>
-</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a></code></h4>
-<h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a></code></h4>
-</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a></code></h3><div class='impl-items'></div></section>
+<table><tr><td id='variant.FollowNone'><a class='stability Unmarked' title='No stability level'></a><code>FollowNone</code></td><td><div class='docblock'><p>Don&#39;t follow any redirects.</p>
+</div></td></tr><tr><td id='variant.FollowAll'><a class='stability Unmarked' title='No stability level'></a><code>FollowAll</code></td><td><div class='docblock'><p>Follow all redirects.</p>
+</div></td></tr><tr><td id='variant.FollowIf'><a class='stability Unmarked' title='No stability level'></a><code>FollowIf</code></td><td><div class='docblock'><p>Follow a redirect if the contained function returns true.</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a></code></h4>
+<h4 id='method.clone_from' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a></code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a></code></h3><div class='impl-items'></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -90,10 +88,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

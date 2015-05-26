@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/if_none_match.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/if_none_match.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>if_none_match.rs.html -- source</title>
@@ -158,8 +158,8 @@
 
         <span class='ident'>if_none_match</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>([<span class='string'>b&quot;\&quot;foobar\&quot;, W/\&quot;weak-etag\&quot;&quot;</span>.<span class='ident'>to_vec</span>()].<span class='ident'>as_ref</span>());
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>entities</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
-        <span class='kw'>let</span> <span class='ident'>foobar_etag</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;foobar&quot;</span>.<span class='ident'>to_string</span>());
-        <span class='kw'>let</span> <span class='ident'>weak_etag</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;weak-etag&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='kw'>let</span> <span class='ident'>foobar_etag</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;foobar&quot;</span>.<span class='ident'>to_owned</span>());
+        <span class='kw'>let</span> <span class='ident'>weak_etag</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;weak-etag&quot;</span>.<span class='ident'>to_owned</span>());
         <span class='ident'>entities</span>.<span class='ident'>push</span>(<span class='ident'>foobar_etag</span>);
         <span class='ident'>entities</span>.<span class='ident'>push</span>(<span class='ident'>weak_etag</span>);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>if_none_match</span>, <span class='prelude-val'>Some</span>(<span class='ident'>IfNoneMatch</span>::<span class='ident'>Items</span>(<span class='ident'>entities</span>)));
@@ -200,10 +200,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

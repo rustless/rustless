@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/connection.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/connection.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>connection.rs.html -- source</title>
@@ -161,7 +161,7 @@
         <span class='kw'>match</span> <span class='ident'>s</span> {
             <span class='string'>&quot;keep-alive&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>KeepAlive</span>),
             <span class='string'>&quot;close&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Close</span>),
-            <span class='ident'>s</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>ConnectionHeader</span>(<span class='ident'>UniCase</span>(<span class='ident'>s</span>.<span class='ident'>to_string</span>())))
+            <span class='ident'>s</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>ConnectionHeader</span>(<span class='ident'>UniCase</span>(<span class='ident'>s</span>.<span class='ident'>to_owned</span>())))
         }
     }
 }
@@ -254,10 +254,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

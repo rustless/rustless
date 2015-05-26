@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Format",""]],"fn":[["is_form_data",""],["is_json",""],["is_urlencoded",""]],"struct":[["Media",""]]});
+initSidebarItems({"fn":[["is_form_data",""],["is_json",""],["is_urlencoded",""]],"struct":[["Media",""]],"enum":[["Format",""]]});

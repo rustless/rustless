@@ -41,24 +41,19 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>http</a>::<wbr><a class='struct' href=''>Incoming</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-30813' class='srclink' href='../../src/hyper/http.rs.html#427-434' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>hyper</a>::<wbr><a href='index.html'>http</a>::<wbr><a class='struct' href=''>Incoming</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-30948' href='../../src/hyper/http.rs.html#439-446'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Incoming&lt;S&gt; {
     pub version: <a class='enum' href='../../hyper/version/enum.HttpVersion.html' title='hyper::version::HttpVersion'>HttpVersion</a>,
     pub subject: S,
     pub headers: <a class='struct' href='../../hyper/header/struct.Headers.html' title='hyper::header::Headers'>Headers</a>,
 }</pre><div class='docblock'><p>An Incoming Message head. Includes request/status line, and headers.</p>
 </div><h2 class='fields'>Fields</h2>
-<table><tr class='stab '>
-                                  <td id='structfield.version'><code>version</code></td><td><div class='docblock'><p>HTTP version of the message.</p>
-</div></td></tr><tr class='stab '>
-                                  <td id='structfield.subject'><code>subject</code></td><td><div class='docblock'><p>Subject (request line or status line) of Incoming message.</p>
-</div></td></tr><tr class='stab '>
-                                  <td id='structfield.headers'><code>headers</code></td><td><div class='docblock'><p>Headers of the Incoming message.</p>
-</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl&lt;S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../hyper/http/struct.Incoming.html' title='hyper::http::Incoming'>Incoming</a>&lt;S&gt; <span class='where'>where S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a></span></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<table><tr><td id='structfield.version'><a class='stability Unmarked' title='No stability level'></a><code>version</code></td><td><div class='docblock'><p>HTTP version of the message.</p>
+</div></td></tr><tr><td id='structfield.subject'><a class='stability Unmarked' title='No stability level'></a><code>subject</code></td><td><div class='docblock'><p>Subject (request line or status line) of Incoming message.</p>
+</div></td></tr><tr><td id='structfield.headers'><a class='stability Unmarked' title='No stability level'></a><code>headers</code></td><td><div class='docblock'><p>Headers of the Incoming message.</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../hyper/http/struct.Incoming.html' title='hyper::http::Incoming'>Incoming</a>&lt;S&gt; <span class='where'>where S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a></span></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -91,10 +86,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

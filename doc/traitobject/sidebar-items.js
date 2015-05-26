@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["data","Get the data pointer from this trait object."],["data_mut","Get the data pointer from this trait object, mutably."]]});
+initSidebarItems({"trait":[["Trait","A trait implemented for all trait objects."]],"fn":[["data","Get the data pointer from this trait object."],["data_mut","Get the data pointer from this trait object, mutably."]]});

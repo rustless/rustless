@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/accept_ranges.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/accept_ranges.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>accept_ranges.rs.html -- source</title>
@@ -175,7 +175,7 @@
             <span class='string'>&quot;bytes&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>RangeUnit</span>::<span class='ident'>Bytes</span>),
             <span class='string'>&quot;none&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>RangeUnit</span>::<span class='prelude-val'>None</span>),
             <span class='comment'>// FIXME: Check if s is really a Token</span>
-            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>RangeUnit</span>::<span class='ident'>Unregistered</span>(<span class='ident'>s</span>.<span class='ident'>to_string</span>())),
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>RangeUnit</span>::<span class='ident'>Unregistered</span>(<span class='ident'>s</span>.<span class='ident'>to_owned</span>())),
         }
     }
 }
@@ -222,10 +222,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

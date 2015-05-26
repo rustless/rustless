@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/num_cpus-0.2.5/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/num_cpus-0.2.6/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -131,6 +131,11 @@
 <span id="89">89</span>
 <span id="90">90</span>
 <span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Replaces the deprecated functionality of std::os::num_cpus.</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>test</span>, <span class='ident'>deny</span>(<span class='ident'>warnings</span>))]</span>
@@ -164,6 +169,7 @@
 <span class='kw'>fn</span> <span class='ident'>get_num_cpus</span>() <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
     <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_uint</span>};
     <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>funcs</span>::<span class='ident'>bsd44</span>::<span class='ident'>sysctl</span>;
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>;
 
     <span class='comment'>//XXX: uplift to libc?</span>
     <span class='kw'>const</span> <span class='ident'>CTL_HW</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>6</span>;
@@ -175,13 +181,17 @@
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>mib</span>: [<span class='ident'>c_int</span>; <span class='number'>4</span>] <span class='op'>=</span> [<span class='ident'>CTL_HW</span>, <span class='ident'>HW_AVAILCPU</span>, <span class='number'>0</span>, <span class='number'>0</span>];
 
     <span class='kw'>unsafe</span> {
-        <span class='ident'>sysctl</span>(<span class='ident'>mib</span>.<span class='ident'>as_mut_ptr</span>(), <span class='number'>2</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>cpus</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>CPUS_SIZE</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (), <span class='number'>0</span>);
+        <span class='ident'>sysctl</span>(<span class='ident'>mib</span>.<span class='ident'>as_mut_ptr</span>(), <span class='number'>2</span>,
+               <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>cpus</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _ <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>CPUS_SIZE</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _ <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _,
+               <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(), <span class='number'>0</span>);
     }
 
     <span class='kw'>if</span> <span class='ident'>cpus</span> <span class='op'>&lt;</span> <span class='number'>1</span> {
         <span class='ident'>mib</span>[<span class='number'>1</span>] <span class='op'>=</span> <span class='ident'>HW_NCPU</span>;
         <span class='kw'>unsafe</span> {
-            <span class='ident'>sysctl</span>(<span class='ident'>mib</span>.<span class='ident'>as_mut_ptr</span>(), <span class='number'>2</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>cpus</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>CPUS_SIZE</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (), <span class='number'>0</span>);
+            <span class='ident'>sysctl</span>(<span class='ident'>mib</span>.<span class='ident'>as_mut_ptr</span>(), <span class='number'>2</span>,
+                   <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>cpus</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _ <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>CPUS_SIZE</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _ <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _,
+                   <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(), <span class='number'>0</span>);
         }
         <span class='kw'>if</span> <span class='ident'>cpus</span> <span class='op'>&lt;</span> <span class='number'>1</span> {
             <span class='ident'>cpus</span> <span class='op'>=</span> <span class='number'>1</span>;
@@ -256,10 +266,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

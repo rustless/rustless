@@ -41,31 +41,29 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>gcc</a>::<wbr><a class='struct' href=''>Config</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-13' class='srclink' href='../src/gcc/lib.rs.html#55-62' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>gcc</a>::<wbr><a class='struct' href=''>Config</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-13' href='../src/gcc/lib.rs.html#55-62'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Config {
     // some fields omitted
 }</pre><div class='docblock'><p>Extra configuration to pass to gcc.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
 <div class='docblock'><p>Construct a new instance of a blank set of configuration.</p>
 
 <p>This builder is finished with the <code>compile</code> function.</p>
-</div><h4 id='method.include' class='method'><code>fn <a href='#method.include' class='fnname'>include</a>&lt;P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(&amp;mut self, dir: P) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
+</div><h4 id='method.include' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.include' class='fnname'>include</a>&lt;P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(&amp;mut self, dir: P) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
 <div class='docblock'><p>Add a directory to the <code>-I</code> or include path for headers</p>
-</div><h4 id='method.define' class='method'><code>fn <a href='#method.define' class='fnname'>define</a>(&amp;mut self, var: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, val: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
+</div><h4 id='method.define' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.define' class='fnname'>define</a>(&amp;mut self, var: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, val: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
 <div class='docblock'><p>Specify a <code>-D</code> variable with an optional value.</p>
-</div><h4 id='method.object' class='method'><code>fn <a href='#method.object' class='fnname'>object</a>&lt;P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(&amp;mut self, obj: P) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
+</div><h4 id='method.object' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.object' class='fnname'>object</a>&lt;P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(&amp;mut self, obj: P) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
 <div class='docblock'><p>Add an arbitrary object file to link in</p>
-</div><h4 id='method.flag' class='method'><code>fn <a href='#method.flag' class='fnname'>flag</a>(&amp;mut self, flag: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
+</div><h4 id='method.flag' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.flag' class='fnname'>flag</a>(&amp;mut self, flag: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
 <div class='docblock'><p>Add an arbitrary flag to the invocation of the compiler</p>
-</div><h4 id='method.file' class='method'><code>fn <a href='#method.file' class='fnname'>file</a>&lt;P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(&amp;mut self, p: P) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
+</div><h4 id='method.file' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.file' class='fnname'>file</a>&lt;P: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>&gt;&gt;(&amp;mut self, p: P) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
 <div class='docblock'><p>Add a file which will be compiled</p>
-</div><h4 id='method.cpp' class='method'><code>fn <a href='#method.cpp' class='fnname'>cpp</a>(&amp;mut self, cpp: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
+</div><h4 id='method.cpp' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.cpp' class='fnname'>cpp</a>(&amp;mut self, cpp: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; &amp;mut <a class='struct' href='../gcc/struct.Config.html' title='gcc::Config'>Config</a></code></h4>
 <div class='docblock'><p>Set C++ support</p>
-</div><h4 id='method.compile' class='method'><code>fn <a href='#method.compile' class='fnname'>compile</a>(&amp;self, output: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+</div><h4 id='method.compile' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.compile' class='fnname'>compile</a>(&amp;self, output: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
 <div class='docblock'><p>Run the compiler, generating the file <code>output</code></p>
 
 <p>The name <code>output</code> must begin with <code>lib</code> and end with <code>.a</code></p>
@@ -101,10 +99,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

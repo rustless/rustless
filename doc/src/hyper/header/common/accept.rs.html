@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/accept.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/accept.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>accept.rs.html -- source</title>
@@ -157,7 +157,7 @@
         <span class='comment'>//    vec![b&quot;audio/*; q=0.2, audio/basic&quot;],</span>
         <span class='comment'>//    Some(HeaderField(vec![</span>
         <span class='comment'>//        QualityItem::new(Mime(TopLevel::Audio, SubLevel::Star, vec![]), Quality(200)),</span>
-        <span class='comment'>//        qitem(Mime(TopLevel::Audio, SubLevel::Ext(&quot;basic&quot;.to_string()), vec![])),</span>
+        <span class='comment'>//        qitem(Mime(TopLevel::Audio, SubLevel::Ext(&quot;basic&quot;.to_owned()), vec![])),</span>
         <span class='comment'>//        ])));</span>
         <span class='macro'>test_header</span><span class='macro'>!</span>(
             <span class='ident'>test2</span>,
@@ -166,9 +166,9 @@
                 <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Plain</span>, <span class='macro'>vec</span><span class='macro'>!</span>[]), <span class='ident'>Quality</span>(<span class='number'>500</span>)),
                 <span class='ident'>qitem</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Html</span>, <span class='macro'>vec</span><span class='macro'>!</span>[])),
                 <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(
-                    <span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;x-dvi&quot;</span>.<span class='ident'>to_string</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[]),
+                    <span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;x-dvi&quot;</span>.<span class='ident'>to_owned</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[]),
                     <span class='ident'>Quality</span>(<span class='number'>800</span>)),
-                <span class='ident'>qitem</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;x-c&quot;</span>.<span class='ident'>to_string</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[])),
+                <span class='ident'>qitem</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;x-c&quot;</span>.<span class='ident'>to_owned</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[])),
                 ])));
         <span class='comment'>// Custom tests</span>
         <span class='macro'>test_header</span><span class='macro'>!</span>(
@@ -222,10 +222,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

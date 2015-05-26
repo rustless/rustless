@@ -41,11 +41,9 @@
     </nav>
 
     <section id='main' class="content fn">
-<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>jsonway</a>::<wbr><a class='fn' href=''>array</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-1220' class='srclink' href='../src/jsonway/lib.rs.html#45-47' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>jsonway</a>::<wbr><a class='fn' href=''>array</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-1220' href='../src/jsonway/lib.rs.html#45-47'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn array&lt;F&gt;(builder: F) -&gt; <a class='struct' href='../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a> <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a>)</span></pre><div class='docblock'><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>json</span> <span class='op'>=</span> <span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>json</span><span class='op'>|</span> {
     <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;first_name&quot;</span>, <span class='string'>&quot;Luke&quot;</span>.<span class='ident'>to_string</span>()); 
@@ -105,10 +103,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

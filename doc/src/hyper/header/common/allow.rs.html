@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/allow.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/allow.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>allow.rs.html -- source</title>
@@ -133,7 +133,7 @@
                 <span class='ident'>Method</span>::<span class='ident'>Trace</span>,
                 <span class='ident'>Method</span>::<span class='ident'>Connect</span>,
                 <span class='ident'>Method</span>::<span class='ident'>Patch</span>,
-                <span class='ident'>Method</span>::<span class='ident'>Extension</span>(<span class='string'>&quot;fOObAr&quot;</span>.<span class='ident'>to_string</span>())])));
+                <span class='ident'>Method</span>::<span class='ident'>Extension</span>(<span class='string'>&quot;fOObAr&quot;</span>.<span class='ident'>to_owned</span>())])));
         <span class='macro'>test_header</span><span class='macro'>!</span>(
             <span class='ident'>test3</span>,
             <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>b&quot;&quot;</span>],
@@ -176,10 +176,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

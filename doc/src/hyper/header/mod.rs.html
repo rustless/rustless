@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -1184,7 +1184,7 @@
     <span class='kw'>fn</span> <span class='ident'>test_headers_show</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
         <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>ContentLength</span>(<span class='number'>15</span>));
-        <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Host</span> { <span class='ident'>hostname</span>: <span class='string'>&quot;foo.bar&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>port</span>: <span class='prelude-val'>None</span> });
+        <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Host</span> { <span class='ident'>hostname</span>: <span class='string'>&quot;foo.bar&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>port</span>: <span class='prelude-val'>None</span> });
 
         <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>headers</span>.<span class='ident'>to_string</span>();
         <span class='comment'>// hashmap&#39;s iterators have arbitrary order, so we must sort first</span>
@@ -1248,7 +1248,7 @@
             <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>header</span>.<span class='ident'>is</span>::<span class='op'>&lt;</span><span class='ident'>ContentLength</span><span class='op'>&gt;</span>());
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>header</span>.<span class='ident'>name</span>(), <span class='op'>&lt;</span><span class='ident'>ContentLength</span> <span class='kw'>as</span> <span class='ident'>Header</span><span class='op'>&gt;</span>::<span class='ident'>header_name</span>());
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>header</span>.<span class='ident'>value</span>(), <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>ContentLength</span>(<span class='number'>11</span>)));
-            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>header</span>.<span class='ident'>value_string</span>(), <span class='string'>&quot;11&quot;</span>.<span class='ident'>to_string</span>());
+            <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>header</span>.<span class='ident'>value_string</span>(), <span class='string'>&quot;11&quot;</span>.<span class='ident'>to_owned</span>());
         }
     }
 
@@ -1350,10 +1350,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/http.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/http.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>http.rs.html -- source</title>
@@ -617,6 +617,18 @@
 <span id="575">575</span>
 <span id="576">576</span>
 <span id="577">577</span>
+<span id="578">578</span>
+<span id="579">579</span>
+<span id="580">580</span>
+<span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Pieces pertaining to the HTTP message protocol.</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::{<span class='ident'>Cow</span>, <span class='ident'>ToOwned</span>};
@@ -677,6 +689,16 @@
             <span class='ident'>ChunkedReader</span>(<span class='ident'>r</span>, _) <span class='op'>=&gt;</span> <span class='ident'>r</span>,
             <span class='ident'>EofReader</span>(<span class='ident'>r</span>) <span class='op'>=&gt;</span> <span class='ident'>r</span>,
             <span class='ident'>EmptyReader</span>(<span class='ident'>r</span>) <span class='op'>=&gt;</span> <span class='ident'>r</span>,
+        }
+    }
+
+    <span class='doccomment'>/// Gets a mutable reference to the underlying Reader.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span> {
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>SizedReader</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>r</span>, _) <span class='op'>=&gt;</span> <span class='ident'>r</span>,
+            <span class='ident'>ChunkedReader</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>r</span>, _) <span class='op'>=&gt;</span> <span class='ident'>r</span>,
+            <span class='ident'>EofReader</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>r</span>) <span class='op'>=&gt;</span> <span class='ident'>r</span>,
+            <span class='ident'>EmptyReader</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>r</span>) <span class='op'>=&gt;</span> <span class='ident'>r</span>,
         }
     }
 }
@@ -741,7 +763,9 @@
                 <span class='prelude-val'>Ok</span>(<span class='ident'>count</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
             },
             <span class='ident'>EofReader</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>body</span>) <span class='op'>=&gt;</span> {
-                <span class='ident'>body</span>.<span class='ident'>read</span>(<span class='ident'>buf</span>)
+                <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>body</span>.<span class='ident'>read</span>(<span class='ident'>buf</span>);
+                <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;eofread: {:?}&quot;</span>, <span class='ident'>r</span>);
+                <span class='ident'>r</span>
             },
             <span class='ident'>EmptyReader</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='number'>0</span>)
         }
@@ -1228,10 +1252,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

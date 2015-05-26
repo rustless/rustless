@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/cache_control.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/cache_control.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>cache_control.rs.html -- source</title>
@@ -353,15 +353,15 @@
             <span class='string'>&quot;proxy-revalidate&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>ProxyRevalidate</span>),
             <span class='string'>&quot;&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='prelude-val'>None</span>),
             _ <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>s</span>.<span class='ident'>find</span>(<span class='string'>&#39;=&#39;</span>) {
-                <span class='prelude-val'>Some</span>(<span class='ident'>idx</span>) <span class='kw'>if</span> <span class='ident'>idx</span><span class='op'>+</span><span class='number'>1</span> <span class='op'>&lt;</span> <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='op'>=&gt;</span> <span class='kw'>match</span> (<span class='kw-2'>&amp;</span><span class='ident'>s</span>[..<span class='ident'>idx</span>], <span class='kw-2'>&amp;</span><span class='ident'>s</span>[<span class='ident'>idx</span><span class='op'>+</span><span class='number'>1</span>..].<span class='ident'>trim_matches</span>(<span class='string'>&#39;&quot;&#39;</span>)) {
-                    (<span class='string'>&quot;max-age&quot;</span> , <span class='ident'>secs</span>) <span class='op'>=&gt;</span> <span class='ident'>secs</span>.<span class='ident'>parse</span>().<span class='ident'>map</span>(<span class='ident'>MaxAge</span>).<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='prelude-val'>Some</span>(<span class='ident'>x</span>)),
-                    (<span class='string'>&quot;max-stale&quot;</span>, <span class='ident'>secs</span>) <span class='op'>=&gt;</span> <span class='ident'>secs</span>.<span class='ident'>parse</span>().<span class='ident'>map</span>(<span class='ident'>MaxStale</span>).<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='prelude-val'>Some</span>(<span class='ident'>x</span>)),
-                    (<span class='string'>&quot;min-fresh&quot;</span>, <span class='ident'>secs</span>) <span class='op'>=&gt;</span> <span class='ident'>secs</span>.<span class='ident'>parse</span>().<span class='ident'>map</span>(<span class='ident'>MinFresh</span>).<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='prelude-val'>Some</span>(<span class='ident'>x</span>)),
-                    (<span class='string'>&quot;s-maxage&quot;</span>, <span class='ident'>secs</span>) <span class='op'>=&gt;</span> <span class='ident'>secs</span>.<span class='ident'>parse</span>().<span class='ident'>map</span>(<span class='ident'>SMaxAge</span>).<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='prelude-val'>Some</span>(<span class='ident'>x</span>)),
-                    (<span class='ident'>left</span>, <span class='ident'>right</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Extension</span>(<span class='ident'>left</span>.<span class='ident'>to_string</span>(), <span class='prelude-val'>Some</span>(<span class='ident'>right</span>.<span class='ident'>to_string</span>())))
+                <span class='prelude-val'>Some</span>(<span class='ident'>idx</span>) <span class='kw'>if</span> <span class='ident'>idx</span><span class='op'>+</span><span class='number'>1</span> <span class='op'>&lt;</span> <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='op'>=&gt;</span> <span class='kw'>match</span> (<span class='kw-2'>&amp;</span><span class='ident'>s</span>[..<span class='ident'>idx</span>], (<span class='kw-2'>&amp;</span><span class='ident'>s</span>[<span class='ident'>idx</span><span class='op'>+</span><span class='number'>1</span>..]).<span class='ident'>trim_matches</span>(<span class='string'>&#39;&quot;&#39;</span>)) {
+                    (<span class='string'>&quot;max-age&quot;</span> , <span class='ident'>secs</span>) <span class='op'>=&gt;</span> <span class='ident'>secs</span>.<span class='ident'>parse</span>().<span class='ident'>map</span>(<span class='ident'>MaxAge</span>).<span class='ident'>map_err</span>(<span class='prelude-val'>Some</span>),
+                    (<span class='string'>&quot;max-stale&quot;</span>, <span class='ident'>secs</span>) <span class='op'>=&gt;</span> <span class='ident'>secs</span>.<span class='ident'>parse</span>().<span class='ident'>map</span>(<span class='ident'>MaxStale</span>).<span class='ident'>map_err</span>(<span class='prelude-val'>Some</span>),
+                    (<span class='string'>&quot;min-fresh&quot;</span>, <span class='ident'>secs</span>) <span class='op'>=&gt;</span> <span class='ident'>secs</span>.<span class='ident'>parse</span>().<span class='ident'>map</span>(<span class='ident'>MinFresh</span>).<span class='ident'>map_err</span>(<span class='prelude-val'>Some</span>),
+                    (<span class='string'>&quot;s-maxage&quot;</span>, <span class='ident'>secs</span>) <span class='op'>=&gt;</span> <span class='ident'>secs</span>.<span class='ident'>parse</span>().<span class='ident'>map</span>(<span class='ident'>SMaxAge</span>).<span class='ident'>map_err</span>(<span class='prelude-val'>Some</span>),
+                    (<span class='ident'>left</span>, <span class='ident'>right</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Extension</span>(<span class='ident'>left</span>.<span class='ident'>to_owned</span>(), <span class='prelude-val'>Some</span>(<span class='ident'>right</span>.<span class='ident'>to_owned</span>())))
                 },
                 <span class='prelude-val'>Some</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='prelude-val'>None</span>),
-                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Extension</span>(<span class='ident'>s</span>.<span class='ident'>to_string</span>(), <span class='prelude-val'>None</span>))
+                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Extension</span>(<span class='ident'>s</span>.<span class='ident'>to_owned</span>(), <span class='prelude-val'>None</span>))
             }
         }
     }
@@ -396,8 +396,8 @@
     <span class='kw'>fn</span> <span class='ident'>test_parse_extension</span>() {
         <span class='kw'>let</span> <span class='ident'>cache</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>(<span class='kw-2'>&amp;</span>[<span class='string'>b&quot;foo, bar=baz&quot;</span>.<span class='ident'>to_vec</span>()]);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>, <span class='prelude-val'>Some</span>(<span class='ident'>CacheControl</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
-            <span class='ident'>CacheDirective</span>::<span class='ident'>Extension</span>(<span class='string'>&quot;foo&quot;</span>.<span class='ident'>to_string</span>(), <span class='prelude-val'>None</span>),
-            <span class='ident'>CacheDirective</span>::<span class='ident'>Extension</span>(<span class='string'>&quot;bar&quot;</span>.<span class='ident'>to_string</span>(), <span class='prelude-val'>Some</span>(<span class='string'>&quot;baz&quot;</span>.<span class='ident'>to_string</span>()))])))
+            <span class='ident'>CacheDirective</span>::<span class='ident'>Extension</span>(<span class='string'>&quot;foo&quot;</span>.<span class='ident'>to_owned</span>(), <span class='prelude-val'>None</span>),
+            <span class='ident'>CacheDirective</span>::<span class='ident'>Extension</span>(<span class='string'>&quot;bar&quot;</span>.<span class='ident'>to_owned</span>(), <span class='prelude-val'>Some</span>(<span class='string'>&quot;baz&quot;</span>.<span class='ident'>to_owned</span>()))])))
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -442,10 +442,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

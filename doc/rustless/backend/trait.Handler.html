@@ -41,25 +41,23 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>rustless</a>::<wbr><a href='index.html'>backend</a>::<wbr><a class='trait' href=''>Handler</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-208' class='srclink' href='../../iron/middleware/trait.Handler.html?gotosrc=208' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>rustless</a>::<wbr><a href='index.html'>backend</a>::<wbr><a class='trait' href=''>Handler</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-210' href='../../iron/middleware/trait.Handler.html?gotosrc=210'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Handler: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> {
     fn <a href='#tymethod.handle' class='fnname'>handle</a>(&amp;self, &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>, <a class='struct' href='../../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>&gt;;
 }</pre><div class='docblock'><p><code>Handler</code>s are responsible for handling requests by creating Responses from Requests.</p>
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.handle' class='method stab '><code>fn <a href='#tymethod.handle' class='fnname'>handle</a>(&amp;self, &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>, <a class='struct' href='../../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>&gt;</code></h3><div class='docblock'><p>Produce a <code>Response</code> from a Request, with the possibility of error.</p>
+        <h3 id='tymethod.handle' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.handle' class='fnname'>handle</a>(&amp;self, &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>, <a class='struct' href='../../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>&gt;</code></h3><div class='docblock'><p>Produce a <code>Response</code> from a Request, with the possibility of error.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl <a class='trait' href='../../rustless/backend/trait.Handler.html' title='rustless::backend::Handler'>Handler</a> for <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a></code></li>
-<li><code>impl&lt;F&gt; <a class='trait' href='../../rustless/backend/trait.Handler.html' title='rustless::backend::Handler'>Handler</a> for F <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>, <a class='struct' href='../../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>&gt;</span></code></li>
-<li><code>impl <a class='trait' href='../../rustless/backend/trait.Handler.html' title='rustless::backend::Handler'>Handler</a> for <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../rustless/backend/trait.Handler.html' title='rustless::backend::Handler'>Handler</a> + 'static&gt;</code></li>
-<li><code>impl <a class='trait' href='../../rustless/backend/trait.Handler.html' title='rustless::backend::Handler'>Handler</a> for <a class='struct' href='../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a></code></li>
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../rustless/backend/trait.Handler.html' title='rustless::backend::Handler'>Handler</a> for <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;F&gt; <a class='trait' href='../../rustless/backend/trait.Handler.html' title='rustless::backend::Handler'>Handler</a> for F <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>, <a class='struct' href='../../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>&gt;</span></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../rustless/backend/trait.Handler.html' title='rustless::backend::Handler'>Handler</a> for <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../rustless/backend/trait.Handler.html' title='rustless::backend::Handler'>Handler</a> + 'static&gt;</code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../rustless/backend/trait.Handler.html' title='rustless::backend::Handler'>Handler</a> for <a class='struct' href='../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a></code></li>
 </ul><script type="text/javascript" async
                               src="../../implementors/iron/middleware/trait.Handler.js">
                       </script></section>
@@ -94,10 +92,6 @@
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>
