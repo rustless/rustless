@@ -24,26 +24,28 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>framework</a>::<wbr><a href='index.html'>client</a></p><script>window.sidebarCurrent = {name: 'Client', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>framework</a>::<wbr><a href='index.html'>client</a>::<wbr><a class='struct' href=''>Client</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-5393' href='../../../src/rustless/framework/client.rs.html#15-22'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>framework</a>::<wbr><a href='index.html'>client</a>::<wbr><a class='struct' href=''>Client</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-5199' class='srclink' href='../../../src/rustless/framework/client.rs.html#16-23' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Client&lt;'a&gt; {
     pub app: &amp;'a <a class='struct' href='../../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a>,
     pub endpoint: &amp;'a <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>,
@@ -52,64 +54,83 @@
     pub ext: <a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a>,
     pub response: <a class='struct' href='../../../rustless/struct.Response.html' title='rustless::Response'>Response</a>,
 }</pre><h2 class='fields'>Fields</h2>
-<table><tr><td id='structfield.app'><a class='stability Unmarked' title='No stability level'></a><code>app</code></td><td></td></tr><tr><td id='structfield.endpoint'><a class='stability Unmarked' title='No stability level'></a><code>endpoint</code></td><td></td></tr><tr><td id='structfield.request'><a class='stability Unmarked' title='No stability level'></a><code>request</code></td><td></td></tr><tr><td id='structfield.media'><a class='stability Unmarked' title='No stability level'></a><code>media</code></td><td></td></tr><tr><td id='structfield.ext'><a class='stability Unmarked' title='No stability level'></a><code>ext</code></td><td></td></tr><tr><td id='structfield.response'><a class='stability Unmarked' title='No stability level'></a><code>response</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a&gt; <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>&lt;'r&gt;(app: &amp;'a <a class='struct' href='../../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a>, endpoint: &amp;'a <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>, request: &amp;'a mut <a class='trait' href='../../../rustless/backend/request/trait.Request.html' title='rustless::backend::request::Request'>Request</a> + 'r, media: &amp;'a <a class='struct' href='../../../rustless/framework/media/struct.Media.html' title='rustless::framework::media::Media'>Media</a>) -&gt; <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></h4>
-<h4 id='method.status' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.status' class='fnname'>status</a>(&amp;mut self) -&gt; <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h4>
-<h4 id='method.set_status' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_status' class='fnname'>set_status</a>(&amp;mut self, status: <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>)</code></h4>
-<h4 id='method.unauthorized' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.unauthorized' class='fnname'>unauthorized</a>(&amp;mut self)</code></h4>
-<h4 id='method.forbidden' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.forbidden' class='fnname'>forbidden</a>(&amp;mut self)</code></h4>
-<h4 id='method.not_found' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.not_found' class='fnname'>not_found</a>(&amp;mut self)</code></h4>
-<h4 id='method.internal_server_error' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.internal_server_error' class='fnname'>internal_server_error</a>(&amp;mut self)</code></h4>
-<h4 id='method.not_implemented' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.not_implemented' class='fnname'>not_implemented</a>(&amp;mut self)</code></h4>
-<h4 id='method.set_header' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_header' class='fnname'>set_header</a>&lt;H: <a class='trait' href='../../../rustless/server/header/trait.Header.html' title='rustless::server::header::Header'>Header</a> + <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a>&gt;(&amp;mut self, header: H)</code></h4>
-<h4 id='method.set_json_content_type' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_json_content_type' class='fnname'>set_json_content_type</a>(&amp;mut self)</code></h4>
-<h4 id='method.set_content_type' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_content_type' class='fnname'>set_content_type</a>(&amp;mut self, mime: <a class='struct' href='../../../rustless/server/mime/struct.Mime.html' title='rustless::server::mime::Mime'>Mime</a>)</code></h4>
-<h4 id='method.error' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.error' class='fnname'>error</a>&lt;T: <a class='trait' href='../../../rustless/errors/trait.Error.html' title='rustless::errors::Error'>Error</a>&gt;(self, error: T) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
-<h4 id='method.json' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.json' class='fnname'>json</a>(self, result: &amp;<a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
-<h4 id='method.text' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.text' class='fnname'>text</a>(self, result: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
-<h4 id='method.file' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.file' class='fnname'>file</a>(self, path: &amp;<a class='struct' href='http://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
-<h4 id='method.empty' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.empty' class='fnname'>empty</a>(self) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
-<h4 id='method.redirect' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.redirect' class='fnname'>redirect</a>(self, to: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
-<h4 id='method.permanent_redirect' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.permanent_redirect' class='fnname'>permanent_redirect</a>(self, to: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
-<h4 id='method.move_response' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.move_response' class='fnname'>move_response</a>(self) -&gt; <a class='struct' href='../../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></h4>
-<h4 id='method.ext' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.ext' class='fnname'>ext</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
-<h4 id='method.ext_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.ext_mut' class='fnname'>ext_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a&gt; <a class='trait' href='../../../rustless/trait.Extensible.html' title='rustless::Extensible'>Extensible</a> for <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.ext' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='../../../rustless/trait.Extensible.html#method.ext' class='fnname'>ext</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
-<h4 id='method.ext_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='../../../rustless/trait.Extensible.html#method.ext_mut' class='fnname'>ext_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
+<table><tr class='stab '>
+                                  <td id='structfield.app'><code>app</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.endpoint'><code>endpoint</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.request'><code>request</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.media'><code>media</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.ext'><code>ext</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.response'><code>response</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;'r&gt;(app: &amp;'a <a class='struct' href='../../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a>, endpoint: &amp;'a <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>, request: &amp;'a mut <a class='trait' href='../../../rustless/backend/request/trait.Request.html' title='rustless::backend::request::Request'>Request</a> + 'r, media: &amp;'a <a class='struct' href='../../../rustless/framework/media/struct.Media.html' title='rustless::framework::media::Media'>Media</a>) -&gt; <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></h4>
+<h4 id='method.status' class='method'><code>fn <a href='#method.status' class='fnname'>status</a>(&amp;mut self) -&gt; <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h4>
+<h4 id='method.set_status' class='method'><code>fn <a href='#method.set_status' class='fnname'>set_status</a>(&amp;mut self, status: <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>)</code></h4>
+<h4 id='method.unauthorized' class='method'><code>fn <a href='#method.unauthorized' class='fnname'>unauthorized</a>(&amp;mut self)</code></h4>
+<h4 id='method.forbidden' class='method'><code>fn <a href='#method.forbidden' class='fnname'>forbidden</a>(&amp;mut self)</code></h4>
+<h4 id='method.not_found' class='method'><code>fn <a href='#method.not_found' class='fnname'>not_found</a>(&amp;mut self)</code></h4>
+<h4 id='method.internal_server_error' class='method'><code>fn <a href='#method.internal_server_error' class='fnname'>internal_server_error</a>(&amp;mut self)</code></h4>
+<h4 id='method.not_implemented' class='method'><code>fn <a href='#method.not_implemented' class='fnname'>not_implemented</a>(&amp;mut self)</code></h4>
+<h4 id='method.set_header' class='method'><code>fn <a href='#method.set_header' class='fnname'>set_header</a>&lt;H: <a class='trait' href='../../../rustless/server/header/trait.Header.html' title='rustless::server::header::Header'>Header</a> + <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a>&gt;(&amp;mut self, header: H)</code></h4>
+<h4 id='method.set_json_content_type' class='method'><code>fn <a href='#method.set_json_content_type' class='fnname'>set_json_content_type</a>(&amp;mut self)</code></h4>
+<h4 id='method.set_content_type' class='method'><code>fn <a href='#method.set_content_type' class='fnname'>set_content_type</a>(&amp;mut self, mime: <a class='struct' href='../../../rustless/server/mime/struct.Mime.html' title='rustless::server::mime::Mime'>Mime</a>)</code></h4>
+<h4 id='method.error' class='method'><code>fn <a href='#method.error' class='fnname'>error</a>&lt;T: <a class='trait' href='../../../rustless/errors/trait.Error.html' title='rustless::errors::Error'>Error</a>&gt;(self, error: T) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
+<h4 id='method.json' class='method'><code>fn <a href='#method.json' class='fnname'>json</a>(self, result: &amp;<a class='enum' href='../../../serialize/json/enum.Json.html' title='serialize::json::Json'>Json</a>) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
+<h4 id='method.text' class='method'><code>fn <a href='#method.text' class='fnname'>text</a>(self, result: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
+<h4 id='method.file' class='method'><code>fn <a href='#method.file' class='fnname'>file</a>(self, path: &amp;<a class='struct' href='https://doc.rust-lang.org/nightly/std/path/struct.Path.html' title='std::path::Path'>Path</a>) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
+<h4 id='method.empty' class='method'><code>fn <a href='#method.empty' class='fnname'>empty</a>(self) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
+<h4 id='method.redirect' class='method'><code>fn <a href='#method.redirect' class='fnname'>redirect</a>(self, to: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
+<h4 id='method.permanent_redirect' class='method'><code>fn <a href='#method.permanent_redirect' class='fnname'>permanent_redirect</a>(self, to: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../../rustless/framework/client/type.ClientResult.html' title='rustless::framework::client::ClientResult'>ClientResult</a>&lt;'a&gt;</code></h4>
+<h4 id='method.move_response' class='method'><code>fn <a href='#method.move_response' class='fnname'>move_response</a>(self) -&gt; <a class='struct' href='../../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></h4>
+<h4 id='method.ext' class='method'><code>fn <a href='#method.ext' class='fnname'>ext</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
+<h4 id='method.ext_mut' class='method'><code>fn <a href='#method.ext_mut' class='fnname'>ext_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='trait' href='../../../rustless/trait.Extensible.html' title='rustless::Extensible'>Extensible</a> for <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.ext' class='method'><code>fn <a href='../../../rustless/trait.Extensible.html#method.ext' class='fnname'>ext</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
+<h4 id='method.ext_mut' class='method'><code>fn <a href='../../../rustless/trait.Extensible.html#method.ext_mut' class='fnname'>ext_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/client/request.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/client/request.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>request.rs.html -- source</title>
@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -303,21 +303,41 @@
 <span id="261">261</span>
 <span id="262">262</span>
 <span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Client Requests</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Write</span>, <span class='ident'>BufWriter</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Write</span>};
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;timeouts&quot;</span>)]</span>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>time</span>::<span class='ident'>Duration</span>;
 
 <span class='kw'>use</span> <span class='ident'>url</span>::<span class='ident'>Url</span>;
 
 <span class='kw'>use</span> <span class='ident'>method</span>::{<span class='self'>self</span>, <span class='ident'>Method</span>};
 <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>Headers</span>;
-<span class='kw'>use</span> <span class='ident'>header</span>::{<span class='self'>self</span>, <span class='ident'>Host</span>};
-<span class='kw'>use</span> <span class='ident'>net</span>::{<span class='ident'>NetworkStream</span>, <span class='ident'>NetworkConnector</span>, <span class='ident'>HttpConnector</span>, <span class='ident'>Fresh</span>, <span class='ident'>Streaming</span>};
-<span class='kw'>use</span> <span class='ident'>http</span>::{<span class='ident'>HttpWriter</span>, <span class='ident'>LINE_ENDING</span>};
-<span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>HttpWriter</span>::{<span class='ident'>ThroughWriter</span>, <span class='ident'>ChunkedWriter</span>, <span class='ident'>SizedWriter</span>, <span class='ident'>EmptyWriter</span>};
+<span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>Host</span>;
+<span class='kw'>use</span> <span class='ident'>net</span>::{<span class='ident'>NetworkStream</span>, <span class='ident'>NetworkConnector</span>, <span class='ident'>DefaultConnector</span>, <span class='ident'>Fresh</span>, <span class='ident'>Streaming</span>};
 <span class='kw'>use</span> <span class='ident'>version</span>;
 <span class='kw'>use</span> <span class='ident'>client</span>::{<span class='ident'>Response</span>, <span class='ident'>get_host_and_port</span>};
+
+<span class='kw'>use</span> <span class='ident'>http</span>::{<span class='ident'>HttpMessage</span>, <span class='ident'>RequestHead</span>};
+<span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>h1</span>::<span class='ident'>Http11Message</span>;
 
 
 <span class='doccomment'>/// A client request to a remote server.</span>
@@ -329,7 +349,7 @@
     <span class='doccomment'>/// The HTTP version of this request.</span>
     <span class='kw'>pub</span> <span class='ident'>version</span>: <span class='ident'>version</span>::<span class='ident'>HttpVersion</span>,
 
-    <span class='ident'>body</span>: <span class='ident'>HttpWriter</span><span class='op'>&lt;</span><span class='ident'>BufWriter</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;</span>,
+    <span class='ident'>message</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>HttpMessage</span><span class='op'>&gt;</span>,
     <span class='ident'>headers</span>: <span class='ident'>Headers</span>,
     <span class='ident'>method</span>: <span class='ident'>method</span>::<span class='ident'>Method</span>,
 
@@ -344,25 +364,29 @@
     <span class='doccomment'>/// Read the Request method.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>method</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>method</span>::<span class='ident'>Method</span> { <span class='self'>self</span>.<span class='ident'>method</span>.<span class='ident'>clone</span>() }
+
+    <span class='doccomment'>/// Set the write timeout.</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;timeouts&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_write_timeout</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>dur</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Duration</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>message</span>.<span class='ident'>set_write_timeout</span>(<span class='ident'>dur</span>)
+    }
+
+    <span class='doccomment'>/// Set the read timeout.</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;timeouts&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_read_timeout</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>dur</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Duration</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>message</span>.<span class='ident'>set_read_timeout</span>(<span class='ident'>dur</span>)
+    }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span> {
-    <span class='doccomment'>/// Create a new client request.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>method</span>: <span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>url</span>: <span class='ident'>Url</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;&gt;</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>conn</span> <span class='op'>=</span> <span class='ident'>HttpConnector</span>(<span class='prelude-val'>None</span>);
-        <span class='ident'>Request</span>::<span class='ident'>with_connector</span>(<span class='ident'>method</span>, <span class='ident'>url</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>conn</span>)
-    }
-
-    <span class='doccomment'>/// Create a new client request with a specific underlying NetworkStream.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_connector</span><span class='op'>&lt;</span><span class='ident'>C</span>, <span class='ident'>S</span><span class='op'>&gt;</span>(<span class='ident'>method</span>: <span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>url</span>: <span class='ident'>Url</span>, <span class='ident'>connector</span>: <span class='kw-2'>&amp;</span><span class='ident'>C</span>)
-        <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;&gt;</span> <span class='kw'>where</span>
-        <span class='ident'>C</span>: <span class='ident'>NetworkConnector</span><span class='op'>&lt;</span><span class='ident'>Stream</span><span class='op'>=</span><span class='ident'>S</span><span class='op'>&gt;</span>,
-        <span class='ident'>S</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span> {
+    <span class='doccomment'>/// Create a new `Request&lt;Fresh&gt;` that will use the given `HttpMessage` for its communication</span>
+    <span class='doccomment'>/// with the server. This implies that the given `HttpMessage` instance has already been</span>
+    <span class='doccomment'>/// properly initialized by the caller (e.g. a TCP connection&#39;s already established).</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_message</span>(<span class='ident'>method</span>: <span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>url</span>: <span class='ident'>Url</span>, <span class='ident'>message</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>HttpMessage</span><span class='op'>&gt;</span>)
+            <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;&gt;</span> {
         <span class='kw'>let</span> (<span class='ident'>host</span>, <span class='ident'>port</span>) <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>get_host_and_port</span>(<span class='kw-2'>&amp;</span><span class='ident'>url</span>));
-
-        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>connector</span>.<span class='ident'>connect</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>host</span>, <span class='ident'>port</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>url</span>.<span class='ident'>scheme</span>)).<span class='ident'>into</span>();
-        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>ThroughWriter</span>(<span class='ident'>BufWriter</span>::<span class='ident'>new</span>(<span class='ident'>stream</span>));
-
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
         <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>Host</span> {
             <span class='ident'>hostname</span>: <span class='ident'>host</span>,
@@ -374,77 +398,49 @@
             <span class='ident'>headers</span>: <span class='ident'>headers</span>,
             <span class='ident'>url</span>: <span class='ident'>url</span>,
             <span class='ident'>version</span>: <span class='ident'>version</span>::<span class='ident'>HttpVersion</span>::<span class='ident'>Http11</span>,
-            <span class='ident'>body</span>: <span class='ident'>stream</span>,
+            <span class='ident'>message</span>: <span class='ident'>message</span>,
             <span class='ident'>_marker</span>: <span class='ident'>PhantomData</span>,
         })
+    }
+
+    <span class='doccomment'>/// Create a new client request.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>method</span>: <span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>url</span>: <span class='ident'>Url</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;&gt;</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>conn</span> <span class='op'>=</span> <span class='ident'>DefaultConnector</span>::<span class='ident'>default</span>();
+        <span class='ident'>Request</span>::<span class='ident'>with_connector</span>(<span class='ident'>method</span>, <span class='ident'>url</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>conn</span>)
+    }
+
+    <span class='doccomment'>/// Create a new client request with a specific underlying NetworkStream.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_connector</span><span class='op'>&lt;</span><span class='ident'>C</span>, <span class='ident'>S</span><span class='op'>&gt;</span>(<span class='ident'>method</span>: <span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>url</span>: <span class='ident'>Url</span>, <span class='ident'>connector</span>: <span class='kw-2'>&amp;</span><span class='ident'>C</span>)
+        <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;&gt;</span> <span class='kw'>where</span>
+        <span class='ident'>C</span>: <span class='ident'>NetworkConnector</span><span class='op'>&lt;</span><span class='ident'>Stream</span><span class='op'>=</span><span class='ident'>S</span><span class='op'>&gt;</span>,
+        <span class='ident'>S</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span> {
+        <span class='kw'>let</span> (<span class='ident'>host</span>, <span class='ident'>port</span>) <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>get_host_and_port</span>(<span class='kw-2'>&amp;</span><span class='ident'>url</span>));
+        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>connector</span>.<span class='ident'>connect</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>host</span>, <span class='ident'>port</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>url</span>.<span class='ident'>scheme</span>)).<span class='ident'>into</span>();
+
+        <span class='ident'>Request</span>::<span class='ident'>with_message</span>(<span class='ident'>method</span>, <span class='ident'>url</span>, <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>Http11Message</span>::<span class='ident'>with_stream</span>(<span class='ident'>stream</span>)))
     }
 
     <span class='doccomment'>/// Consume a Fresh Request, writing the headers and method,</span>
     <span class='doccomment'>/// returning a Streaming Request.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>start</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Streaming</span><span class='op'>&gt;&gt;</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>uri</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>url</span>.<span class='ident'>serialize_path</span>().<span class='ident'>unwrap</span>();
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>q</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>url</span>.<span class='ident'>query</span> {
-            <span class='ident'>uri</span>.<span class='ident'>push</span>(<span class='string'>&#39;?&#39;</span>);
-            <span class='ident'>uri</span>.<span class='ident'>push_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>q</span>[..]);
-        }
-
-        <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;request line: {:?} {:?} {:?}&quot;</span>, <span class='self'>self</span>.<span class='ident'>method</span>, <span class='ident'>uri</span>, <span class='self'>self</span>.<span class='ident'>version</span>);
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>body</span>, <span class='string'>&quot;{} {} {}{}&quot;</span>,
-                    <span class='self'>self</span>.<span class='ident'>method</span>, <span class='ident'>uri</span>, <span class='self'>self</span>.<span class='ident'>version</span>, <span class='ident'>LINE_ENDING</span>));
-
-
-        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>method</span> {
-            <span class='ident'>Method</span>::<span class='ident'>Get</span> <span class='op'>|</span> <span class='ident'>Method</span>::<span class='ident'>Head</span> <span class='op'>=&gt;</span> {
-                <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;headers={:?}&quot;</span>, <span class='self'>self</span>.<span class='ident'>headers</span>);
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>body</span>, <span class='string'>&quot;{}{}&quot;</span>, <span class='self'>self</span>.<span class='ident'>headers</span>, <span class='ident'>LINE_ENDING</span>));
-                <span class='ident'>EmptyWriter</span>(<span class='self'>self</span>.<span class='ident'>body</span>.<span class='ident'>into_inner</span>())
-            },
-            _ <span class='op'>=&gt;</span> {
-                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>chunked</span> <span class='op'>=</span> <span class='boolval'>true</span>;
-                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='number'>0</span>;
-
-                <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>ContentLength</span><span class='op'>&gt;</span>() {
-                    <span class='prelude-val'>Some</span>(<span class='ident'>cl</span>) <span class='op'>=&gt;</span> {
-                        <span class='ident'>chunked</span> <span class='op'>=</span> <span class='boolval'>false</span>;
-                        <span class='ident'>len</span> <span class='op'>=</span> <span class='op'>*</span><span class='op'>*</span><span class='ident'>cl</span>;
-                    },
-                    <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> ()
-                };
-
-                <span class='comment'>// can&#39;t do in match above, thanks borrowck</span>
-                <span class='kw'>if</span> <span class='ident'>chunked</span> {
-                    <span class='kw'>let</span> <span class='ident'>encodings</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>headers</span>.<span class='ident'>get_mut</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>TransferEncoding</span><span class='op'>&gt;</span>() {
-                        <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>header</span>::<span class='ident'>TransferEncoding</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>encodings</span>)) <span class='op'>=&gt;</span> {
-                            <span class='comment'>//TODO: check if chunked is already in encodings. use HashSet?</span>
-                            <span class='ident'>encodings</span>.<span class='ident'>push</span>(<span class='ident'>header</span>::<span class='ident'>Encoding</span>::<span class='ident'>Chunked</span>);
-                            <span class='boolval'>false</span>
-                        },
-                        <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='boolval'>true</span>
-                    };
-
-                    <span class='kw'>if</span> <span class='ident'>encodings</span> {
-                        <span class='self'>self</span>.<span class='ident'>headers</span>.<span class='ident'>set</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>TransferEncoding</span><span class='op'>&gt;</span>(
-                            <span class='ident'>header</span>::<span class='ident'>TransferEncoding</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>header</span>::<span class='ident'>Encoding</span>::<span class='ident'>Chunked</span>]))
-                    }
-                }
-
-                <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;headers={:?}&quot;</span>, <span class='self'>self</span>.<span class='ident'>headers</span>);
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>body</span>, <span class='string'>&quot;{}{}&quot;</span>, <span class='self'>self</span>.<span class='ident'>headers</span>, <span class='ident'>LINE_ENDING</span>));
-
-                <span class='kw'>if</span> <span class='ident'>chunked</span> {
-                    <span class='ident'>ChunkedWriter</span>(<span class='self'>self</span>.<span class='ident'>body</span>.<span class='ident'>into_inner</span>())
-                } <span class='kw'>else</span> {
-                    <span class='ident'>SizedWriter</span>(<span class='self'>self</span>.<span class='ident'>body</span>.<span class='ident'>into_inner</span>(), <span class='ident'>len</span>)
-                }
+        <span class='kw'>let</span> <span class='ident'>head</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>message</span>.<span class='ident'>set_outgoing</span>(<span class='ident'>RequestHead</span> {
+            <span class='ident'>headers</span>: <span class='self'>self</span>.<span class='ident'>headers</span>,
+            <span class='ident'>method</span>: <span class='self'>self</span>.<span class='ident'>method</span>,
+            <span class='ident'>url</span>: <span class='self'>self</span>.<span class='ident'>url</span>,
+        }) {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>head</span>) <span class='op'>=&gt;</span> <span class='ident'>head</span>,
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                <span class='kw'>let</span> _ <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>message</span>.<span class='ident'>close_connection</span>();
+                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>e</span>));
             }
         };
 
         <span class='prelude-val'>Ok</span>(<span class='ident'>Request</span> {
-            <span class='ident'>method</span>: <span class='self'>self</span>.<span class='ident'>method</span>,
-            <span class='ident'>headers</span>: <span class='self'>self</span>.<span class='ident'>headers</span>,
-            <span class='ident'>url</span>: <span class='self'>self</span>.<span class='ident'>url</span>,
+            <span class='ident'>method</span>: <span class='ident'>head</span>.<span class='ident'>method</span>,
+            <span class='ident'>headers</span>: <span class='ident'>head</span>.<span class='ident'>headers</span>,
+            <span class='ident'>url</span>: <span class='ident'>head</span>.<span class='ident'>url</span>,
             <span class='ident'>version</span>: <span class='self'>self</span>.<span class='ident'>version</span>,
-            <span class='ident'>body</span>: <span class='ident'>stream</span>,
+            <span class='ident'>message</span>: <span class='self'>self</span>.<span class='ident'>message</span>,
             <span class='ident'>_marker</span>: <span class='ident'>PhantomData</span>,
         })
     }
@@ -459,25 +455,37 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Consumes the Request.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>body</span>.<span class='ident'>end</span>()).<span class='ident'>into_inner</span>().<span class='ident'>unwrap</span>(); <span class='comment'>// end() already flushes</span>
-        <span class='ident'>Response</span>::<span class='ident'>new</span>(<span class='ident'>raw</span>)
+        <span class='ident'>Response</span>::<span class='ident'>with_message</span>(<span class='self'>self</span>.<span class='ident'>url</span>, <span class='self'>self</span>.<span class='ident'>message</span>)
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Write</span> <span class='kw'>for</span> <span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Streaming</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>write</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>msg</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>body</span>.<span class='ident'>write</span>(<span class='ident'>msg</span>)
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>message</span>.<span class='ident'>write</span>(<span class='ident'>msg</span>) {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>),
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                <span class='kw'>let</span> _ <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>message</span>.<span class='ident'>close_connection</span>();
+                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>)
+            }
+        }
     }
 
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>flush</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>body</span>.<span class='ident'>flush</span>()
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>message</span>.<span class='ident'>flush</span>() {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>r</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>r</span>),
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                <span class='kw'>let</span> _ <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>message</span>.<span class='ident'>close_connection</span>();
+                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>)
+            }
+        }
     }
 }
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>Write</span>;
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>from_utf8</span>;
     <span class='kw'>use</span> <span class='ident'>url</span>::<span class='ident'>Url</span>;
     <span class='kw'>use</span> <span class='ident'>method</span>::<span class='ident'>Method</span>::{<span class='ident'>Get</span>, <span class='ident'>Head</span>, <span class='ident'>Post</span>};
@@ -486,11 +494,15 @@
     <span class='kw'>use</span> <span class='ident'>header</span>::{<span class='ident'>ContentLength</span>,<span class='ident'>TransferEncoding</span>,<span class='ident'>Encoding</span>};
     <span class='kw'>use</span> <span class='ident'>url</span>::<span class='ident'>form_urlencoded</span>;
     <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>Request</span>;
+    <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>h1</span>::<span class='ident'>Http11Message</span>;
 
     <span class='kw'>fn</span> <span class='ident'>run_request</span>(<span class='ident'>req</span>: <span class='ident'>Request</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>start</span>().<span class='ident'>unwrap</span>();
-        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='op'>*</span><span class='ident'>req</span>.<span class='ident'>body</span>.<span class='ident'>end</span>().<span class='ident'>unwrap</span>()
-            .<span class='ident'>into_inner</span>().<span class='ident'>unwrap</span>().<span class='ident'>downcast</span>::<span class='op'>&lt;</span><span class='ident'>MockStream</span><span class='op'>&gt;</span>().<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='ident'>message</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>message</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>message</span> <span class='op'>=</span> <span class='ident'>message</span>.<span class='ident'>downcast</span>::<span class='op'>&lt;</span><span class='ident'>Http11Message</span><span class='op'>&gt;</span>().<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
+        <span class='ident'>message</span>.<span class='ident'>flush_outgoing</span>().<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='op'>*</span><span class='ident'>message</span>
+            .<span class='ident'>into_inner</span>().<span class='ident'>downcast</span>::<span class='op'>&lt;</span><span class='ident'>MockStream</span><span class='op'>&gt;</span>().<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
         <span class='ident'>stream</span>.<span class='ident'>write</span>
     }
 
@@ -566,6 +578,26 @@
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>s</span>.<span class='ident'>contains</span>(<span class='string'>&quot;Content-Length:&quot;</span>));
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>s</span>.<span class='ident'>contains</span>(<span class='string'>&quot;Transfer-Encoding:&quot;</span>));
     }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_write_error_closes</span>() {
+        <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://hyper.rs&quot;</span>).<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='ident'>Request</span>::<span class='ident'>with_connector</span>(
+            <span class='ident'>Get</span>, <span class='ident'>url</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>MockConnector</span>
+        ).<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>start</span>().<span class='ident'>unwrap</span>();
+
+        <span class='ident'>req</span>.<span class='ident'>message</span>.<span class='ident'>downcast_mut</span>::<span class='op'>&lt;</span><span class='ident'>Http11Message</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>()
+            .<span class='ident'>get_mut</span>().<span class='ident'>downcast_mut</span>::<span class='op'>&lt;</span><span class='ident'>MockStream</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>()
+            .<span class='ident'>error_on_write</span> <span class='op'>=</span> <span class='boolval'>true</span>;
+
+        <span class='ident'>req</span>.<span class='ident'>write</span>(<span class='string'>b&quot;foo&quot;</span>).<span class='ident'>unwrap</span>();
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>req</span>.<span class='ident'>flush</span>().<span class='ident'>is_err</span>());
+
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>req</span>.<span class='ident'>message</span>.<span class='ident'>downcast_ref</span>::<span class='op'>&lt;</span><span class='ident'>Http11Message</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>()
+            .<span class='ident'>get_ref</span>().<span class='ident'>downcast_ref</span>::<span class='op'>&lt;</span><span class='ident'>MockStream</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>()
+            .<span class='ident'>is_closed</span>);
+    }
 }
 </pre>
 </section>
@@ -573,36 +605,49 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

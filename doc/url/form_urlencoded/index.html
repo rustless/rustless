@@ -24,26 +24,28 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='../index.html'>url</a></p><script>window.sidebarCurrent = {name: 'form_urlencoded', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>url</a>::<wbr><a class='mod' href=''>form_urlencoded</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-9248' href='../../src/url/form_urlencoded.rs.html#9-174'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>url</a>::<wbr><a class='mod' href=''>form_urlencoded</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-10414' class='srclink' href='../../src/url/form_urlencoded.rs.html#9-174' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Parser and serializer for the <a href="http://url.spec.whatwg.org/#application/x-www-form-urlencoded"><code>application/x-www-form-urlencoded</code> format</a>,
 as used by HTML forms.</p>
 
@@ -51,56 +53,73 @@ as used by HTML forms.</p>
 and a sequence of (name, value) pairs.</p>
 </div><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.parse.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.parse.html'
                                title='url::form_urlencoded::parse'>parse</a></td>
-                        <td class='docblock short'><p>Convert a byte string in the <code>application/x-www-form-urlencoded</code> format
+                        <td class='docblock short'>
+                             <p>Convert a byte string in the <code>application/x-www-form-urlencoded</code> format
 into a vector of (name, value) pairs.</p>
-</td>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.serialize.html'
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.serialize.html'
                                title='url::form_urlencoded::serialize'>serialize</a></td>
-                        <td class='docblock short'><p>Convert an iterator of (name, value) pairs
+                        <td class='docblock short'>
+                             <p>Convert an iterator of (name, value) pairs
 into a string in the <code>application/x-www-form-urlencoded</code> format.</p>
-</td>
+
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/shared/entity.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/shared/entity.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>entity.rs.html -- source</title>
@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -240,6 +240,20 @@
 <span id="198">198</span>
 <span id="199">199</span>
 <span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>FromStr</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='self'>self</span>, <span class='ident'>Display</span>};
@@ -295,10 +309,22 @@
     <span class='doccomment'>/// # Panics</span>
     <span class='doccomment'>/// If the tag contains invalid characters.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>weak</span>: <span class='ident'>bool</span>, <span class='ident'>tag</span>: <span class='ident'>String</span>) <span class='op'>-&gt;</span> <span class='ident'>EntityTag</span> {
-        <span class='kw'>match</span> <span class='ident'>check_slice_validity</span>(<span class='kw-2'>&amp;</span><span class='ident'>tag</span>) {
-            <span class='boolval'>true</span> <span class='op'>=&gt;</span> <span class='ident'>EntityTag</span> { <span class='ident'>weak</span>: <span class='ident'>weak</span>, <span class='ident'>tag</span>: <span class='ident'>tag</span> },
-            <span class='boolval'>false</span> <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Invalid tag: {:?}&quot;</span>, <span class='ident'>tag</span>),
-        }
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>check_slice_validity</span>(<span class='kw-2'>&amp;</span><span class='ident'>tag</span>), <span class='string'>&quot;Invalid tag: {:?}&quot;</span>, <span class='ident'>tag</span>);
+        <span class='ident'>EntityTag</span> { <span class='ident'>weak</span>: <span class='ident'>weak</span>, <span class='ident'>tag</span>: <span class='ident'>tag</span> }
+    }
+
+    <span class='doccomment'>/// Constructs a new weak EntityTag.</span>
+    <span class='doccomment'>/// # Panics</span>
+    <span class='doccomment'>/// If the tag contains invalid characters.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>weak</span>(<span class='ident'>tag</span>: <span class='ident'>String</span>) <span class='op'>-&gt;</span> <span class='ident'>EntityTag</span> {
+        <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='ident'>tag</span>)
+    }
+
+    <span class='doccomment'>/// Constructs a new strong EntityTag.</span>
+    <span class='doccomment'>/// # Panics</span>
+    <span class='doccomment'>/// If the tag contains invalid characters.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>strong</span>(<span class='ident'>tag</span>: <span class='ident'>String</span>) <span class='op'>-&gt;</span> <span class='ident'>EntityTag</span> {
+        <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='ident'>tag</span>)
     }
 
     <span class='doccomment'>/// Get the tag.</span>
@@ -310,16 +336,14 @@
     <span class='doccomment'>/// # Panics</span>
     <span class='doccomment'>/// If the tag contains invalid characters.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_tag</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tag</span>: <span class='ident'>String</span>) {
-        <span class='kw'>match</span> <span class='ident'>check_slice_validity</span>(<span class='kw-2'>&amp;</span><span class='ident'>tag</span>[..]) {
-            <span class='boolval'>true</span> <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>tag</span> <span class='op'>=</span> <span class='ident'>tag</span>,
-            <span class='boolval'>false</span> <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Invalid tag: {:?}&quot;</span>, <span class='ident'>tag</span>),
-        }
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>check_slice_validity</span>(<span class='kw-2'>&amp;</span><span class='ident'>tag</span>), <span class='string'>&quot;Invalid tag: {:?}&quot;</span>, <span class='ident'>tag</span>);
+        <span class='self'>self</span>.<span class='ident'>tag</span> <span class='op'>=</span> <span class='ident'>tag</span>
     }
 
     <span class='doccomment'>/// For strong comparison two entity-tags are equivalent if both are not weak and their</span>
     <span class='doccomment'>/// opaque-tags match character-by-character.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>strong_eq</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>other</span>: <span class='kw-2'>&amp;</span><span class='ident'>EntityTag</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='self'>self</span>.<span class='ident'>weak</span> <span class='op'>==</span> <span class='boolval'>false</span> <span class='op'>&amp;&amp;</span> <span class='ident'>other</span>.<span class='ident'>weak</span> <span class='op'>==</span> <span class='boolval'>false</span> <span class='op'>&amp;&amp;</span> <span class='self'>self</span>.<span class='ident'>tag</span> <span class='op'>==</span> <span class='ident'>other</span>.<span class='ident'>tag</span>
+        <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>weak</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ident'>other</span>.<span class='ident'>weak</span> <span class='op'>&amp;&amp;</span> <span class='self'>self</span>.<span class='ident'>tag</span> <span class='op'>==</span> <span class='ident'>other</span>.<span class='ident'>tag</span>
     }
 
     <span class='doccomment'>/// For weak comparison two entity-tags are equivalent if their</span>
@@ -377,11 +401,15 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_etag_parse_success</span>() {
         <span class='comment'>// Expected success</span>
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;\&quot;foobar\&quot;&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;foobar&quot;</span>.<span class='ident'>to_owned</span>()));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;\&quot;\&quot;&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>()));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;W/\&quot;weaktag\&quot;&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;weaktag&quot;</span>.<span class='ident'>to_owned</span>()));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;W/\&quot;\x65\x62\&quot;&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;\x65\x62&quot;</span>.<span class='ident'>to_owned</span>()));
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;W/\&quot;\&quot;&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>()));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;\&quot;foobar\&quot;&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(),
+            <span class='ident'>EntityTag</span>::<span class='ident'>strong</span>(<span class='string'>&quot;foobar&quot;</span>.<span class='ident'>to_owned</span>()));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;\&quot;\&quot;&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(),
+            <span class='ident'>EntityTag</span>::<span class='ident'>strong</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>()));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;W/\&quot;weaktag\&quot;&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(),
+            <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;weaktag&quot;</span>.<span class='ident'>to_owned</span>()));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;W/\&quot;\x65\x62\&quot;&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(),
+            <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;\x65\x62&quot;</span>.<span class='ident'>to_owned</span>()));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;W/\&quot;\&quot;&quot;</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>EntityTag</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>(), <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>()));
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -397,11 +425,11 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_etag_fmt</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;foobar&quot;</span>.<span class='ident'>to_owned</span>())), <span class='string'>&quot;\&quot;foobar\&quot;&quot;</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>())), <span class='string'>&quot;\&quot;\&quot;&quot;</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;weak-etag&quot;</span>.<span class='ident'>to_owned</span>())), <span class='string'>&quot;W/\&quot;weak-etag\&quot;&quot;</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;\u{0065}&quot;</span>.<span class='ident'>to_owned</span>())), <span class='string'>&quot;W/\&quot;\x65\&quot;&quot;</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>())), <span class='string'>&quot;W/\&quot;\&quot;&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>EntityTag</span>::<span class='ident'>strong</span>(<span class='string'>&quot;foobar&quot;</span>.<span class='ident'>to_owned</span>())), <span class='string'>&quot;\&quot;foobar\&quot;&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>EntityTag</span>::<span class='ident'>strong</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>())), <span class='string'>&quot;\&quot;\&quot;&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;weak-etag&quot;</span>.<span class='ident'>to_owned</span>())), <span class='string'>&quot;W/\&quot;weak-etag\&quot;&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;\u{0065}&quot;</span>.<span class='ident'>to_owned</span>())), <span class='string'>&quot;W/\&quot;\x65\&quot;&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>())), <span class='string'>&quot;W/\&quot;\&quot;&quot;</span>);
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -412,33 +440,33 @@
         <span class='comment'>// | `W/&quot;1&quot;` | `W/&quot;2&quot;` | no match          | no match        |</span>
         <span class='comment'>// | `W/&quot;1&quot;` | `&quot;1&quot;`   | no match          | match           |</span>
         <span class='comment'>// | `&quot;1&quot;`   | `&quot;1&quot;`   | match             | match           |</span>
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>etag1</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>etag2</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>false</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>true</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>true</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>false</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>etag1</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>etag2</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>etag1</span>.<span class='ident'>strong_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>etag1</span>.<span class='ident'>weak_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
 
-        <span class='ident'>etag1</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
-        <span class='ident'>etag2</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;2&quot;</span>.<span class='ident'>to_owned</span>());
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>false</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>false</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>true</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>true</span>);
+        <span class='ident'>etag1</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
+        <span class='ident'>etag2</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;2&quot;</span>.<span class='ident'>to_owned</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>etag1</span>.<span class='ident'>strong_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>etag1</span>.<span class='ident'>weak_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
 
-        <span class='ident'>etag1</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>true</span>, <span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
-        <span class='ident'>etag2</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>false</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>true</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>true</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>false</span>);
+        <span class='ident'>etag1</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>weak</span>(<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
+        <span class='ident'>etag2</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>strong</span>(<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>etag1</span>.<span class='ident'>strong_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>etag1</span>.<span class='ident'>weak_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
 
-        <span class='ident'>etag1</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
-        <span class='ident'>etag2</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>new</span>(<span class='boolval'>false</span>, <span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>true</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>true</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>false</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>), <span class='boolval'>false</span>);
+        <span class='ident'>etag1</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>strong</span>(<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
+        <span class='ident'>etag2</span> <span class='op'>=</span> <span class='ident'>EntityTag</span>::<span class='ident'>strong</span>(<span class='string'>&quot;1&quot;</span>.<span class='ident'>to_owned</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>strong_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>etag1</span>.<span class='ident'>weak_eq</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>etag1</span>.<span class='ident'>strong_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>etag1</span>.<span class='ident'>weak_ne</span>(<span class='kw-2'>&amp;</span><span class='ident'>etag2</span>));
     }
 }
 </pre>
@@ -447,36 +475,49 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

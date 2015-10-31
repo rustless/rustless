@@ -24,71 +24,92 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>batteries</a>::<wbr><a href='index.html'>swagger</a></p><script>window.sidebarCurrent = {name: 'Spec', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>batteries</a>::<wbr><a href='index.html'>swagger</a>::<wbr><a class='struct' href=''>Spec</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-7767' href='../../../src/rustless/batteries/swagger.rs.html#44-51'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>batteries</a>::<wbr><a href='index.html'>swagger</a>::<wbr><a class='struct' href=''>Spec</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-7603' class='srclink' href='../../../src/rustless/batteries/swagger.rs.html#44-51' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Spec {
     pub info: <a class='struct' href='../../../rustless/batteries/swagger/struct.Info.html' title='rustless::batteries::swagger::Info'>Info</a>,
-    pub host: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
-    pub base_path: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
-    pub schemes: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../rustless/batteries/swagger/enum.Scheme.html' title='rustless::batteries::swagger::Scheme'>Scheme</a>&gt;&gt;,
-    pub consumes: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../rustless/server/mime/struct.Mime.html' title='rustless::server::mime::Mime'>Mime</a>&gt;&gt;,
-    pub produces: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../rustless/server/mime/struct.Mime.html' title='rustless::server::mime::Mime'>Mime</a>&gt;&gt;,
+    pub host: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub base_path: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
+    pub schemes: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../rustless/batteries/swagger/enum.Scheme.html' title='rustless::batteries::swagger::Scheme'>Scheme</a>&gt;&gt;,
+    pub consumes: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../rustless/server/mime/struct.Mime.html' title='rustless::server::mime::Mime'>Mime</a>&gt;&gt;,
+    pub produces: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../rustless/server/mime/struct.Mime.html' title='rustless::server::mime::Mime'>Mime</a>&gt;&gt;,
 }</pre><div class='docblock'><p>This is the root document object for the API specification.</p>
 </div><h2 class='fields'>Fields</h2>
-<table><tr><td id='structfield.info'><a class='stability Unmarked' title='No stability level'></a><code>info</code></td><td></td></tr><tr><td id='structfield.host'><a class='stability Unmarked' title='No stability level'></a><code>host</code></td><td></td></tr><tr><td id='structfield.base_path'><a class='stability Unmarked' title='No stability level'></a><code>base_path</code></td><td></td></tr><tr><td id='structfield.schemes'><a class='stability Unmarked' title='No stability level'></a><code>schemes</code></td><td></td></tr><tr><td id='structfield.consumes'><a class='stability Unmarked' title='No stability level'></a><code>consumes</code></td><td></td></tr><tr><td id='structfield.produces'><a class='stability Unmarked' title='No stability level'></a><code>produces</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../../../rustless/batteries/swagger/struct.Spec.html' title='rustless::batteries::swagger::Spec'>Spec</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../../../rustless/batteries/swagger/struct.Spec.html' title='rustless::batteries::swagger::Spec'>Spec</a></code></h4>
+<table><tr class='stab '>
+                                  <td id='structfield.info'><code>info</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.host'><code>host</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.base_path'><code>base_path</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.schemes'><code>schemes</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.consumes'><code>consumes</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.produces'><code>produces</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../../../rustless/batteries/swagger/struct.Spec.html' title='rustless::batteries::swagger::Spec'>Spec</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../../../rustless/batteries/swagger/struct.Spec.html' title='rustless::batteries::swagger::Spec'>Spec</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

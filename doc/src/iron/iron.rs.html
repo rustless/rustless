@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/iron-0.1.18/src/iron.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.4/src/iron.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>iron.rs.html -- source</title>
@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -212,11 +212,16 @@
 <span id="170">170</span>
 <span id="171">171</span>
 <span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Exposes the `Iron` type, the main entrance point of the</span>
 <span class='doccomment'>//! `Iron` library.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::{<span class='ident'>ToSocketAddrs</span>, <span class='ident'>SocketAddr</span>};
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>PathBuf</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>server</span>::<span class='ident'>Listening</span>;
@@ -241,10 +246,10 @@
     <span class='kw'>pub</span> <span class='ident'>handler</span>: <span class='ident'>H</span>,
 
     <span class='doccomment'>/// Once listening, the local address that this server is bound to.</span>
-    <span class='kw'>pub</span> <span class='ident'>addr</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SocketAddr</span><span class='op'>&gt;</span>,
+    <span class='ident'>addr</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SocketAddr</span><span class='op'>&gt;</span>,
 
     <span class='doccomment'>/// Once listening, the protocol used to serve content.</span>
-    <span class='kw'>pub</span> <span class='ident'>protocol</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Protocol</span><span class='op'>&gt;</span>
+    <span class='ident'>protocol</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Protocol</span><span class='op'>&gt;</span>
 }
 
 <span class='doccomment'>/// Protocol used to serve content. Future versions of Iron may add new protocols</span>
@@ -254,6 +259,7 @@
     <span class='doccomment'>/// Plaintext HTTP/1</span>
     <span class='ident'>Http</span>,
     <span class='doccomment'>/// HTTP/1 over SSL/TLS</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
     <span class='ident'>Https</span> {
         <span class='doccomment'>/// Path to SSL certificate file</span>
         <span class='ident'>certificate</span>: <span class='ident'>PathBuf</span>,
@@ -267,6 +273,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>name</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
             <span class='ident'>Protocol</span>::<span class='ident'>Http</span> <span class='op'>=&gt;</span> <span class='string'>&quot;http&quot;</span>,
+            <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
             <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { .. } <span class='op'>=&gt;</span> <span class='string'>&quot;https&quot;</span>
         }
     }
@@ -307,6 +314,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Panics if the provided address does not parse. To avoid this</span>
     <span class='doccomment'>/// call `to_socket_addrs` yourself and pass a parsed `SocketAddr`.</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>https</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>, <span class='ident'>certificate</span>: <span class='ident'>PathBuf</span>, <span class='ident'>key</span>: <span class='ident'>PathBuf</span>)
                                    <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>2</span> <span class='op'>*</span> ::<span class='ident'>num_cpus</span>::<span class='ident'>get</span>(),
@@ -328,13 +336,18 @@
 
         <span class='self'>self</span>.<span class='ident'>protocol</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>protocol</span>.<span class='ident'>clone</span>());
 
-        <span class='kw'>let</span> <span class='ident'>server</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>protocol</span> {
-            <span class='ident'>Protocol</span>::<span class='ident'>Http</span> <span class='op'>=&gt;</span> <span class='ident'>Server</span>::<span class='ident'>http</span>(<span class='self'>self</span>),
-            <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { <span class='kw-2'>ref</span> <span class='ident'>certificate</span>, <span class='kw-2'>ref</span> <span class='ident'>key</span> } <span class='op'>=&gt;</span>
-                <span class='ident'>Server</span>::<span class='ident'>https</span>(<span class='self'>self</span>, <span class='ident'>certificate</span>, <span class='ident'>key</span>)
-        };
+        <span class='kw'>match</span> <span class='ident'>protocol</span> {
+            <span class='ident'>Protocol</span>::<span class='ident'>Http</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Server</span>::<span class='ident'>http</span>(<span class='ident'>sock_addr</span>)).<span class='ident'>handle_threads</span>(<span class='self'>self</span>, <span class='ident'>threads</span>),
 
-        <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>server</span>.<span class='ident'>listen_threads</span>(<span class='ident'>sock_addr</span>, <span class='ident'>threads</span>)))
+            <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
+            <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { <span class='kw-2'>ref</span> <span class='ident'>certificate</span>, <span class='kw-2'>ref</span> <span class='ident'>key</span> } <span class='op'>=&gt;</span> {
+                <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>net</span>::<span class='ident'>Openssl</span>;
+
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Server</span>::<span class='ident'>https</span>(<span class='ident'>sock_addr</span>,
+                                   <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Openssl</span>::<span class='ident'>with_cert_and_key</span>(<span class='ident'>certificate</span>, <span class='ident'>key</span>))))
+                    .<span class='ident'>handle_threads</span>(<span class='self'>self</span>, <span class='ident'>threads</span>)
+            }
+        }
     }
 
     <span class='doccomment'>/// Instantiate a new instance of `Iron`.</span>
@@ -348,79 +361,87 @@
     <span class='kw'>fn</span> <span class='ident'>bad_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='kw-2'>mut</span> <span class='ident'>http_res</span>: <span class='ident'>HttpResponse</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span>) {
         <span class='op'>*</span><span class='ident'>http_res</span>.<span class='ident'>status_mut</span>() <span class='op'>=</span> <span class='ident'>status</span>::<span class='ident'>BadRequest</span>;
 
-        <span class='kw'>let</span> <span class='ident'>http_res</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>http_res</span>.<span class='ident'>start</span>() {
-            <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=&gt;</span> <span class='ident'>res</span>,
-            <span class='comment'>// Would like this to work, but if not *shrug*</span>
-            <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span>,
-        };
-
+        <span class='comment'>// Consume and flush the response.</span>
         <span class='comment'>// We would like this to work, but can&#39;t do anything if it doesn&#39;t.</span>
-        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>http_res</span>.<span class='ident'>end</span>();
-    }
-}
-
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Handler</span><span class='op'>&gt;</span> ::<span class='ident'>hyper</span>::<span class='ident'>server</span>::<span class='ident'>Handler</span> <span class='kw'>for</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>http_req</span>: <span class='ident'>HttpRequest</span>, <span class='ident'>http_res</span>: <span class='ident'>HttpResponse</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span>) {
-        <span class='comment'>// Create `Request` wrapper.</span>
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>Request</span>::<span class='ident'>from_http</span>(<span class='ident'>http_req</span>, <span class='self'>self</span>.<span class='ident'>addr</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap</span>(),
-                                               <span class='self'>self</span>.<span class='ident'>protocol</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>()) {
-            <span class='prelude-val'>Ok</span>(<span class='ident'>req</span>) <span class='op'>=&gt;</span> <span class='ident'>req</span>,
-            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error creating request:\n    {}&quot;</span>, <span class='ident'>e</span>);
-                <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>bad_request</span>(<span class='ident'>http_res</span>);
-            }
-        };
-
-        <span class='comment'>// Dispatch the request</span>
-        <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>req</span>);
-
-        <span class='kw'>match</span> <span class='ident'>res</span> {
-            <span class='comment'>// Write the response back to http_res</span>
-            <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=&gt;</span> <span class='ident'>res</span>.<span class='ident'>write_back</span>(<span class='ident'>http_res</span>),
-            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error handling:\n{:?}\nError was: {:?}&quot;</span>, <span class='ident'>req</span>, <span class='ident'>e</span>.<span class='ident'>error</span>);
-                <span class='ident'>e</span>.<span class='ident'>response</span>.<span class='ident'>write_back</span>(<span class='ident'>http_res</span>);
-            }
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=</span> <span class='ident'>http_res</span>.<span class='ident'>start</span>()
+        {
+            <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>res</span>.<span class='ident'>end</span>();
         }
     }
 }
 
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Handler</span><span class='op'>&gt;</span> ::<span class='ident'>hyper</span>::<span class='ident'>server</span>::<span class='ident'>Handler</span> <span class='kw'>for</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>http_req</span>: <span class='ident'>HttpRequest</span>, <span class='kw-2'>mut</span> <span class='ident'>http_res</span>: <span class='ident'>HttpResponse</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span>) {
+        <span class='comment'>// Set some defaults in case request handler panics.</span>
+        <span class='comment'>// This should not be necessary anymore once stdlib&#39;s catch_panic becomes stable.</span>
+        <span class='op'>*</span><span class='ident'>http_res</span>.<span class='ident'>status_mut</span>() <span class='op'>=</span> <span class='ident'>status</span>::<span class='ident'>InternalServerError</span>;
+
+        <span class='comment'>// Create `Request` wrapper.</span>
+        <span class='kw'>match</span> <span class='ident'>Request</span>::<span class='ident'>from_http</span>(<span class='ident'>http_req</span>, <span class='self'>self</span>.<span class='ident'>addr</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap</span>(),
+                                 <span class='self'>self</span>.<span class='ident'>protocol</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>()) {
+            <span class='prelude-val'>Ok</span>(<span class='kw-2'>mut</span> <span class='ident'>req</span>) <span class='op'>=&gt;</span> {
+                <span class='comment'>// Dispatch the request, write the response back to http_res</span>
+                <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>req</span>).<span class='ident'>unwrap_or_else</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> {
+                    <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error handling:\n{:?}\nError was: {:?}&quot;</span>, <span class='ident'>req</span>, <span class='ident'>e</span>.<span class='ident'>error</span>);
+                    <span class='ident'>e</span>.<span class='ident'>response</span>
+                }).<span class='ident'>write_back</span>(<span class='ident'>http_res</span>)
+            },
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error creating request:\n    {}&quot;</span>, <span class='ident'>e</span>);
+                <span class='self'>self</span>.<span class='ident'>bad_request</span>(<span class='ident'>http_res</span>)
+            }
+        }
+    }
+}
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

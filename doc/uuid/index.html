@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
-    <link rel="shortcut icon" href="http://www.rust-lang.org/favicon.ico">
+    <link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico">
     
 </head>
 <body class="rustdoc">
@@ -24,26 +24,28 @@
 
     
 
-    <section class="sidebar">
-        <a href='../uuid/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
+    <nav class="sidebar">
+        <a href='../uuid/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
         <p class='location'></p><script>window.sidebarCurrent = {name: 'uuid', ty: 'mod', relpath: '../'};</script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>uuid</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/uuid/lib.rs.html#11-814'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>uuid</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-0' class='srclink' href='../src/uuid/lib.rs.html#11-880' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Generate and parse UUIDs</p>
 
 <p>Provides support for Universally Unique Identifiers (UUIDs). A UUID is a
@@ -62,14 +64,22 @@ unlikely.</p>
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1>
 <p>To create a new random (V4) UUID and print it out in hexadecimal form:</p>
-<pre id='rust-example-rendered' class='rust '>
+<pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>uuid</span>::<span class='ident'>Uuid</span>;
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>uuid1</span> <span class='op'>=</span> <span class='ident'>Uuid</span>::<span class='ident'>new_v4</span>();
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>uuid1</span>.<span class='ident'>to_string</span>());
-}
-</pre>
+    <span class='kw'>let</span> <span class='ident'>my_uuid</span> <span class='op'>=</span> <span class='ident'>Uuid</span>::<span class='ident'>new_v4</span>();
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>my_uuid</span>);
+}</pre>
+
+<p>To parse parse a UUID in the simple format and print it as a urn:</p>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>uuid</span>::<span class='ident'>Uuid</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>my_uuid</span> <span class='op'>=</span> <span class='ident'>Uuid</span>::<span class='ident'>parse_str</span>(<span class='string'>&quot;936DA01F9ABD4d9d80C702AF85C822A8&quot;</span>).<span class='ident'>unwrap</span>();
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>my_uuid</span>.<span class='ident'>to_urn_string</span>());
+}</pre>
 
 <h1 id="strings" class='section-header'><a
                            href="#strings">Strings</a></h1>
@@ -89,77 +99,100 @@ unlikely.</p>
 </ul>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Uuid.html'
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Uuid.html'
                                title='uuid::Uuid'>Uuid</a></td>
-                        <td class='docblock short'><p>A Universally Unique Identifier (UUID)</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A Universally Unique Identifier (UUID)</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.ParseError.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.ParseError.html'
                                title='uuid::ParseError'>ParseError</a></td>
-                        <td class='docblock short'><p>Error details for string parsing failures</p>
-</td>
+                        <td class='docblock short'>
+                             <p>Error details for string parsing failures</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.UuidVariant.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.UuidVariant.html'
                                title='uuid::UuidVariant'>UuidVariant</a></td>
-                        <td class='docblock short'><p>The reserved variants of UUIDs</p>
-</td>
+                        <td class='docblock short'>
+                             <p>The reserved variants of UUIDs</p>
+
+                        </td>
                     </tr>
                 
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.UuidVersion.html'
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.UuidVersion.html'
                                title='uuid::UuidVersion'>UuidVersion</a></td>
-                        <td class='docblock short'><p>The version of the UUID, denoting the generating algorithm</p>
-</td>
+                        <td class='docblock short'>
+                             <p>The version of the UUID, denoting the generating algorithm</p>
+
+                        </td>
                     </tr>
                 </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.UuidBytes.html'
+                    <tr class=' module-item'>
+                        <td><a class='type' href='type.UuidBytes.html'
                                title='uuid::UuidBytes'>UuidBytes</a></td>
-                        <td class='docblock short'><p>A 128-bit (16 byte) buffer containing the ID</p>
-</td>
+                        <td class='docblock short'>
+                             <p>A 128-bit (16 byte) buffer containing the ID</p>
+
+                        </td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

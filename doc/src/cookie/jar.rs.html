@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/cookie-0.1.20/src/jar.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/cookie-0.1.21/src/jar.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>jar.rs.html -- source</title>
@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -581,6 +581,42 @@
 <span id="539">539</span>
 <span id="540">540</span>
 <span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
+<span id="546">546</span>
+<span id="547">547</span>
+<span id="548">548</span>
+<span id="549">549</span>
+<span id="550">550</span>
+<span id="551">551</span>
+<span id="552">552</span>
+<span id="553">553</span>
+<span id="554">554</span>
+<span id="555">555</span>
+<span id="556">556</span>
+<span id="557">557</span>
+<span id="558">558</span>
+<span id="559">559</span>
+<span id="560">560</span>
+<span id="561">561</span>
+<span id="562">562</span>
+<span id="563">563</span>
+<span id="564">564</span>
+<span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
+<span id="574">574</span>
+<span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A cookie jar implementation for storing a set of cookies.</span>
 <span class='doccomment'>//!</span>
@@ -594,7 +630,6 @@
 <span class='doccomment'>//! functionality such as automatically signing cookies, storing permanent</span>
 <span class='doccomment'>//! cookies, etc. This functionality can also be chained together.</span>
 
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span>;
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::{<span class='ident'>HashMap</span>, <span class='ident'>HashSet</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::<span class='ident'>RefCell</span>;
@@ -618,19 +653,6 @@
 <span class='doccomment'>/// // Remove the added cookie</span>
 <span class='doccomment'>/// c.remove(&quot;key&quot;);</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// // Add a signed cookie to the jar</span>
-<span class='doccomment'>/// c.signed().add(Cookie::new(&quot;key&quot;.to_string(), &quot;value&quot;.to_string()));</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// // Add a signed and encrypted cookie to the jar</span>
-<span class='doccomment'>/// c.encrypted().add(Cookie::new(&quot;key&quot;.to_string(), &quot;value&quot;.to_string()));</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// // Add a permanently signed cookie to the jar</span>
-<span class='doccomment'>/// c.permanent().signed()</span>
-<span class='doccomment'>///  .add(Cookie::new(&quot;key&quot;.to_string(), &quot;value&quot;.to_string()));</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// // Add a permanently signed and encrypted cookie to the jar</span>
-<span class='doccomment'>/// c.permanent().encrypted()</span>
-<span class='doccomment'>///  .add(Cookie::new(&quot;key&quot;.to_string(), &quot;value&quot;.to_string()));</span>
 <span class='doccomment'>/// ```</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>CookieJar</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='ident'>flavor</span>: <span class='ident'>Flavor</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>,
@@ -650,11 +672,32 @@
 <span class='kw'>type</span> <span class='ident'>Read</span> <span class='op'>=</span> <span class='kw'>fn</span>(<span class='kw-2'>&amp;</span><span class='ident'>Root</span>, <span class='ident'>Cookie</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Cookie</span><span class='op'>&gt;</span>;
 <span class='kw'>type</span> <span class='ident'>Write</span> <span class='op'>=</span> <span class='kw'>fn</span>(<span class='kw-2'>&amp;</span><span class='ident'>Root</span>, <span class='ident'>Cookie</span>) <span class='op'>-&gt;</span> <span class='ident'>Cookie</span>;
 
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>)]</span>
+<span class='kw'>type</span> <span class='ident'>SigningKey</span> <span class='op'>=</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>;
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>))]</span>
+<span class='kw'>type</span> <span class='ident'>SigningKey</span> <span class='op'>=</span> ();
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>)]</span>
+<span class='kw'>fn</span> <span class='ident'>prepare_key</span>(<span class='ident'>key</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+    <span class='kw'>if</span> <span class='ident'>key</span>.<span class='ident'>len</span>() <span class='op'>&gt;=</span> <span class='ident'>secure</span>::<span class='ident'>MIN_KEY_LEN</span> {
+        <span class='ident'>key</span>.<span class='ident'>to_vec</span>()
+    } <span class='kw'>else</span> {
+        <span class='comment'>// Using a SHA-256 hash to normalize key as Rails suggests.</span>
+        <span class='comment'>// See https://github.com/rails/rails/blob/master/activesupport/lib/active_support/message_encryptor.rb</span>
+        <span class='ident'>secure</span>::<span class='ident'>prepare_key</span>(<span class='ident'>key</span>)
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>))]</span>
+<span class='kw'>fn</span> <span class='ident'>prepare_key</span>(<span class='ident'>_key</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> () {
+    ()
+}
+
 <span class='kw'>struct</span> <span class='ident'>Root</span> {
     <span class='ident'>map</span>: <span class='ident'>RefCell</span><span class='op'>&lt;</span><span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Cookie</span><span class='op'>&gt;&gt;</span>,
     <span class='ident'>new_cookies</span>: <span class='ident'>RefCell</span><span class='op'>&lt;</span><span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;&gt;</span>,
     <span class='ident'>removed_cookies</span>: <span class='ident'>RefCell</span><span class='op'>&lt;</span><span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;&gt;</span>,
-    <span class='ident'>key</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>,
+    <span class='ident'>_key</span>: <span class='ident'>SigningKey</span>,
 }
 
 <span class='doccomment'>/// Iterator over the cookies in a cookie jar</span>
@@ -663,26 +706,18 @@
     <span class='ident'>keys</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
 }
 
+
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>CookieJar</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// Creates a new empty cookie jar with the given signing key.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// The given key is used to sign cookies in the signed cookie jar.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>key</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>CookieJar</span><span class='op'>&lt;</span><span class='lifetime'>&#39;static</span><span class='op'>&gt;</span> {
-
-        <span class='kw'>let</span> <span class='ident'>normalized_key</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>key</span>.<span class='ident'>len</span>() <span class='op'>&gt;=</span> <span class='ident'>secure</span>::<span class='ident'>MIN_KEY_LEN</span> {
-            <span class='ident'>key</span>.<span class='ident'>to_vec</span>()
-        } <span class='kw'>else</span> {
-            <span class='comment'>// Using a SHA-256 hash to normalize key as Rails suggests.</span>
-            <span class='comment'>// See https://github.com/rails/rails/blob/master/activesupport/lib/active_support/message_encryptor.rb</span>
-            <span class='ident'>secure</span>::<span class='ident'>prepare_key</span>(<span class='ident'>key</span>)
-        };
-
         <span class='ident'>CookieJar</span> {
             <span class='ident'>flavor</span>: <span class='ident'>Flavor</span>::<span class='ident'>Root</span>(<span class='ident'>Root</span> {
                 <span class='ident'>map</span>: <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='ident'>HashMap</span>::<span class='ident'>new</span>()),
                 <span class='ident'>new_cookies</span>: <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='ident'>HashSet</span>::<span class='ident'>new</span>()),
                 <span class='ident'>removed_cookies</span>: <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='ident'>HashSet</span>::<span class='ident'>new</span>()),
-                <span class='ident'>key</span>: <span class='ident'>normalized_key</span>,
+                <span class='ident'>_key</span>: <span class='ident'>prepare_key</span>(<span class='ident'>key</span>),
             })
         }
     }
@@ -760,6 +795,21 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// All cookies read from the child jar will require a valid signature and</span>
     <span class='doccomment'>/// all cookies written will be signed automatically.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Example</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// ```rust</span>
+    <span class='doccomment'>/// # use cookie::{Cookie, CookieJar};</span>
+    <span class='doccomment'>/// let c = CookieJar::new(b&quot;f8f9eaf1ecdedff5e5b749c58115441e&quot;);</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// // Add a signed cookie to the jar</span>
+    <span class='doccomment'>/// c.signed().add(Cookie::new(&quot;key&quot;.to_string(), &quot;value&quot;.to_string()));</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// // Add a permanently signed cookie to the jar</span>
+    <span class='doccomment'>/// c.permanent().signed()</span>
+    <span class='doccomment'>///  .add(Cookie::new(&quot;key&quot;.to_string(), &quot;value&quot;.to_string()));</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>signed</span><span class='op'>&lt;</span><span class='lifetime'>&#39;b</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>CookieJar</span><span class='op'>&lt;</span><span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
         <span class='kw'>return</span> <span class='ident'>CookieJar</span> {
             <span class='ident'>flavor</span>: <span class='ident'>Flavor</span>::<span class='ident'>Child</span>(<span class='ident'>Child</span> {
@@ -770,10 +820,10 @@
         };
 
         <span class='kw'>fn</span> <span class='ident'>design</span>(<span class='ident'>root</span>: <span class='kw-2'>&amp;</span><span class='ident'>Root</span>, <span class='ident'>cookie</span>: <span class='ident'>Cookie</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Cookie</span><span class='op'>&gt;</span> {
-            <span class='ident'>secure</span>::<span class='ident'>design</span>(<span class='kw-2'>&amp;</span><span class='ident'>root</span>.<span class='ident'>key</span>, <span class='ident'>cookie</span>)
+            <span class='ident'>secure</span>::<span class='ident'>design</span>(<span class='kw-2'>&amp;</span><span class='ident'>root</span>.<span class='ident'>_key</span>, <span class='ident'>cookie</span>)
         }
         <span class='kw'>fn</span> <span class='ident'>sign</span>(<span class='ident'>root</span>: <span class='kw-2'>&amp;</span><span class='ident'>Root</span>, <span class='ident'>cookie</span>: <span class='ident'>Cookie</span>) <span class='op'>-&gt;</span> <span class='ident'>Cookie</span> {
-            <span class='ident'>secure</span>::<span class='ident'>sign</span>(<span class='kw-2'>&amp;</span><span class='ident'>root</span>.<span class='ident'>key</span>, <span class='ident'>cookie</span>)
+            <span class='ident'>secure</span>::<span class='ident'>sign</span>(<span class='kw-2'>&amp;</span><span class='ident'>root</span>.<span class='ident'>_key</span>, <span class='ident'>cookie</span>)
         }
     }
 
@@ -782,6 +832,22 @@
     <span class='doccomment'>/// All cookies read from the child jar must be encrypted and signed by a</span>
     <span class='doccomment'>/// valid key and all cookies written will be encrypted and signed</span>
     <span class='doccomment'>/// automatically.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Example</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// ```rust</span>
+    <span class='doccomment'>/// # use cookie::{Cookie, CookieJar};</span>
+    <span class='doccomment'>/// let c = CookieJar::new(b&quot;f8f9eaf1ecdedff5e5b749c58115441e&quot;);</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// // Add a signed and encrypted cookie to the jar</span>
+    <span class='doccomment'>/// c.encrypted().add(Cookie::new(&quot;key&quot;.to_string(), &quot;value&quot;.to_string()));</span>
+    <span class='doccomment'>///</span>
+
+    <span class='doccomment'>/// // Add a permanently signed and encrypted cookie to the jar</span>
+    <span class='doccomment'>/// c.permanent().encrypted()</span>
+    <span class='doccomment'>///  .add(Cookie::new(&quot;key&quot;.to_string(), &quot;value&quot;.to_string()));</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>encrypted</span><span class='op'>&lt;</span><span class='lifetime'>&#39;b</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>CookieJar</span><span class='op'>&lt;</span><span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
         <span class='kw'>return</span> <span class='ident'>CookieJar</span> {
             <span class='ident'>flavor</span>: <span class='ident'>Flavor</span>::<span class='ident'>Child</span>(<span class='ident'>Child</span> {
@@ -791,10 +857,10 @@
             })
         };
         <span class='kw'>fn</span> <span class='ident'>read</span>(<span class='ident'>root</span>: <span class='kw-2'>&amp;</span><span class='ident'>Root</span>, <span class='ident'>cookie</span>: <span class='ident'>Cookie</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Cookie</span><span class='op'>&gt;</span> {
-            <span class='ident'>secure</span>::<span class='ident'>design_and_decrypt</span>(<span class='kw-2'>&amp;</span><span class='ident'>root</span>.<span class='ident'>key</span>, <span class='ident'>cookie</span>)
+            <span class='ident'>secure</span>::<span class='ident'>design_and_decrypt</span>(<span class='kw-2'>&amp;</span><span class='ident'>root</span>.<span class='ident'>_key</span>, <span class='ident'>cookie</span>)
         }
         <span class='kw'>fn</span> <span class='ident'>write</span>(<span class='ident'>root</span>: <span class='kw-2'>&amp;</span><span class='ident'>Root</span>, <span class='ident'>cookie</span>: <span class='ident'>Cookie</span>) <span class='op'>-&gt;</span> <span class='ident'>Cookie</span> {
-            <span class='ident'>secure</span>::<span class='ident'>encrypt_and_sign</span>(<span class='kw-2'>&amp;</span><span class='ident'>root</span>.<span class='ident'>key</span>, <span class='ident'>cookie</span>)
+            <span class='ident'>secure</span>::<span class='ident'>encrypt_and_sign</span>(<span class='kw-2'>&amp;</span><span class='ident'>root</span>.<span class='ident'>_key</span>, <span class='ident'>cookie</span>)
         }
     }
 
@@ -895,13 +961,15 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>secure</span> {
     <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>openssl</span>;
+    <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span>;
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
 
     <span class='kw'>use</span> <span class='ident'>Cookie</span>;
     <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>openssl</span>::<span class='ident'>crypto</span>::{<span class='ident'>hmac</span>, <span class='ident'>hash</span>, <span class='ident'>memcmp</span>, <span class='ident'>symm</span>};
-    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>rustc_serialize</span>::<span class='ident'>hex</span>::{<span class='ident'>ToHex</span>, <span class='ident'>FromHex</span>};
+    <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>rustc_serialize</span>::<span class='ident'>hex</span>::{<span class='ident'>ToHex</span>, <span class='ident'>FromHex</span>};
 
     <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>MIN_KEY_LEN</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>32</span>;
 
@@ -1052,12 +1120,14 @@
         })
     }
 
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>features</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>)]</span>
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>signed</span>() {
         <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>CookieJar</span>::<span class='ident'>new</span>(<span class='ident'>KEY</span>);
         <span class='macro'>secure_behaviour</span><span class='macro'>!</span>(<span class='ident'>c</span>, <span class='ident'>signed</span>)
     }
 
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>features</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>)]</span>
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>encrypted</span>() {
         <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>CookieJar</span>::<span class='ident'>new</span>(<span class='ident'>KEY</span>);
@@ -1077,6 +1147,7 @@
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>cookie</span>.<span class='ident'>max_age</span>.<span class='ident'>is_some</span>());
     }
 
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>features</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>)]</span>
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>chained</span>() {
         <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>CookieJar</span>::<span class='ident'>new</span>(<span class='ident'>KEY</span>);
@@ -1090,6 +1161,7 @@
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>cookie</span>.<span class='ident'>max_age</span>.<span class='ident'>is_some</span>());
     }
 
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>features</span> <span class='op'>=</span> <span class='string'>&quot;secure&quot;</span>)]</span>
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>iter</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>CookieJar</span>::<span class='ident'>new</span>(<span class='ident'>KEY</span>);
@@ -1129,36 +1201,49 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

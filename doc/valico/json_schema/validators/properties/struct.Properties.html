@@ -24,67 +24,85 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='../../../index.html'>valico</a>::<wbr><a href='../../index.html'>json_schema</a>::<wbr><a href='../index.html'>validators</a>::<wbr><a href='index.html'>properties</a></p><script>window.sidebarCurrent = {name: 'Properties', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../../../index.html'>valico</a>::<wbr><a href='../../index.html'>json_schema</a>::<wbr><a href='../index.html'>validators</a>::<wbr><a href='index.html'>properties</a>::<wbr><a class='struct' href=''>Properties</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-14802' href='../../../../src/valico/json_schema/validators/properties.rs.html#16-20'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../../index.html'>valico</a>::<wbr><a href='../../index.html'>json_schema</a>::<wbr><a href='../index.html'>validators</a>::<wbr><a href='index.html'>properties</a>::<wbr><a class='struct' href=''>Properties</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-14849' class='srclink' href='../../../../src/valico/json_schema/validators/properties.rs.html#16-20' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Properties {
-    pub properties: <a class='struct' href='http://doc.rust-lang.org/nightly/std/collections/hash/map/struct.HashMap.html' title='std::collections::hash::map::HashMap'>HashMap</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='../../../../url/struct.Url.html' title='url::Url'>Url</a>&gt;,
+    pub properties: <a class='struct' href='https://doc.rust-lang.org/nightly/std/collections/hash/map/struct.HashMap.html' title='std::collections::hash::map::HashMap'>HashMap</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='../../../../url/struct.Url.html' title='url::Url'>Url</a>&gt;,
     pub additional: <a class='enum' href='../../../../valico/json_schema/validators/properties/enum.AdditionalKind.html' title='valico::json_schema::validators::properties::AdditionalKind'>AdditionalKind</a>,
-    pub patterns: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='enum' href='../../../../regex/re/enum.Regex.html' title='regex::re::Regex'>Regex</a>, <a class='struct' href='../../../../url/struct.Url.html' title='url::Url'>Url</a>)</a>&gt;,
+    pub patterns: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='enum' href='../../../../regex/re/enum.Regex.html' title='regex::re::Regex'>Regex</a>, <a class='struct' href='../../../../url/struct.Url.html' title='url::Url'>Url</a>)</a>&gt;,
 }</pre><h2 class='fields'>Fields</h2>
-<table><tr><td id='structfield.properties'><a class='stability Unmarked' title='No stability level'></a><code>properties</code></td><td></td></tr><tr><td id='structfield.additional'><a class='stability Unmarked' title='No stability level'></a><code>additional</code></td><td></td></tr><tr><td id='structfield.patterns'><a class='stability Unmarked' title='No stability level'></a><code>patterns</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../../valico/json_schema/validators/trait.Validator.html' title='valico::json_schema::validators::Validator'>Validator</a> for <a class='struct' href='../../../../valico/json_schema/validators/properties/struct.Properties.html' title='valico::json_schema::validators::properties::Properties'>Properties</a></code></h3><div class='impl-items'><h4 id='method.validate' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='../../../../valico/json_schema/validators/trait.Validator.html#method.validate' class='fnname'>validate</a>(&amp;self, val: &amp;<a class='enum' href='../../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, path: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, scope: &amp;<a class='struct' href='../../../../valico/json_schema/scope/struct.Scope.html' title='valico::json_schema::scope::Scope'>Scope</a>) -&gt; <a class='struct' href='../../../../valico/json_schema/validators/struct.ValidationState.html' title='valico::json_schema::validators::ValidationState'>ValidationState</a></code></h4>
+<table><tr class='stab '>
+                                  <td id='structfield.properties'><code>properties</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.additional'><code>additional</code></td><td></td></tr><tr class='stab '>
+                                  <td id='structfield.patterns'><code>patterns</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../../../valico/json_schema/validators/trait.Validator.html' title='valico::json_schema::validators::Validator'>Validator</a> for <a class='struct' href='../../../../valico/json_schema/validators/properties/struct.Properties.html' title='valico::json_schema::validators::properties::Properties'>Properties</a></code></h3><div class='impl-items'><h4 id='method.validate' class='method'><code>fn <a href='../../../../valico/json_schema/validators/trait.Validator.html#method.validate' class='fnname'>validate</a>(&amp;self, val: &amp;<a class='enum' href='../../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, path: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, scope: &amp;<a class='struct' href='../../../../valico/json_schema/scope/struct.Scope.html' title='valico::json_schema::scope::Scope'>Scope</a>) -&gt; <a class='struct' href='../../../../valico/json_schema/validators/struct.ValidationState.html' title='valico::json_schema::validators::ValidationState'>ValidationState</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

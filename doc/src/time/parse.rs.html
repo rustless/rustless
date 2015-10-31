@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.25/src/parse.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/time-0.1.33/src/parse.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>parse.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
-    <link rel="shortcut icon" href="http://www.rust-lang.org/favicon.ico">
+    <link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico">
     
 </head>
 <body class="rustdoc">
@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
-        <a href='../../time/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
+    <nav class="sidebar">
+        <a href='../../time/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -430,6 +430,11 @@
 <span id="388">388</span>
 <span id="389">389</span>
 <span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>Timespec</span>, <span class='ident'>Tm</span>, <span class='ident'>at_utc</span>, <span class='ident'>ParseError</span>, <span class='ident'>NSEC_PER_SEC</span>};
 <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>ParseError</span>::<span class='op'>*</span>;
@@ -696,29 +701,34 @@
             }
         }
         <span class='string'>&#39;z&#39;</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='ident'>sign</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>parse_char</span>(<span class='ident'>s</span>, <span class='string'>&#39;+&#39;</span>).<span class='ident'>is_ok</span>() {<span class='number'>1</span>}
-                       <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>parse_char</span>(<span class='ident'>s</span>, <span class='string'>&#39;-&#39;</span>).<span class='ident'>is_ok</span>() {<span class='op'>-</span><span class='number'>1</span>}
-                       <span class='kw'>else</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidZoneOffset</span>) };
+            <span class='kw'>if</span> <span class='ident'>parse_char</span>(<span class='ident'>s</span>, <span class='string'>&#39;Z&#39;</span>).<span class='ident'>is_ok</span>() {
+                <span class='ident'>tm</span>.<span class='ident'>tm_utcoff</span> <span class='op'>=</span> <span class='number'>0</span>;
+                <span class='prelude-val'>Ok</span>(())
+            } <span class='kw'>else</span> {
+                <span class='kw'>let</span> <span class='ident'>sign</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>parse_char</span>(<span class='ident'>s</span>, <span class='string'>&#39;+&#39;</span>).<span class='ident'>is_ok</span>() {<span class='number'>1</span>}
+                           <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>parse_char</span>(<span class='ident'>s</span>, <span class='string'>&#39;-&#39;</span>).<span class='ident'>is_ok</span>() {<span class='op'>-</span><span class='number'>1</span>}
+                           <span class='kw'>else</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidZoneOffset</span>) };
 
-            <span class='kw'>let</span> <span class='ident'>hours</span>;
-            <span class='kw'>let</span> <span class='ident'>minutes</span>;
+                <span class='kw'>let</span> <span class='ident'>hours</span>;
+                <span class='kw'>let</span> <span class='ident'>minutes</span>;
 
-            <span class='kw'>match</span> <span class='ident'>match_digits</span>(<span class='ident'>s</span>, <span class='number'>2</span>, <span class='number'>2</span>, <span class='boolval'>false</span>) {
-                <span class='prelude-val'>Some</span>(<span class='ident'>h</span>) <span class='op'>=&gt;</span> <span class='ident'>hours</span> <span class='op'>=</span> <span class='ident'>h</span>,
-                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidZoneOffset</span>)
+                <span class='kw'>match</span> <span class='ident'>match_digits</span>(<span class='ident'>s</span>, <span class='number'>2</span>, <span class='number'>2</span>, <span class='boolval'>false</span>) {
+                    <span class='prelude-val'>Some</span>(<span class='ident'>h</span>) <span class='op'>=&gt;</span> <span class='ident'>hours</span> <span class='op'>=</span> <span class='ident'>h</span>,
+                    <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidZoneOffset</span>)
+                }
+
+                <span class='comment'>// consume the colon if its present,</span>
+                <span class='comment'>// just ignore it otherwise</span>
+                <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>parse_char</span>(<span class='ident'>s</span>, <span class='string'>&#39;:&#39;</span>);
+
+                <span class='kw'>match</span> <span class='ident'>match_digits</span>(<span class='ident'>s</span>, <span class='number'>2</span>, <span class='number'>2</span>, <span class='boolval'>false</span>) {
+                    <span class='prelude-val'>Some</span>(<span class='ident'>m</span>) <span class='op'>=&gt;</span> <span class='ident'>minutes</span> <span class='op'>=</span> <span class='ident'>m</span>,
+                    <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidZoneOffset</span>)
+                }
+
+                <span class='ident'>tm</span>.<span class='ident'>tm_utcoff</span> <span class='op'>=</span> <span class='ident'>sign</span> <span class='op'>*</span> (<span class='ident'>hours</span> <span class='op'>*</span> <span class='number'>60</span> <span class='op'>*</span> <span class='number'>60</span> <span class='op'>+</span> <span class='ident'>minutes</span> <span class='op'>*</span> <span class='number'>60</span>);
+                <span class='prelude-val'>Ok</span>(())
             }
-
-            <span class='comment'>// consume the colon if its present,</span>
-            <span class='comment'>// just ignore it otherwise</span>
-            <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>parse_char</span>(<span class='ident'>s</span>, <span class='string'>&#39;:&#39;</span>);
-
-            <span class='kw'>match</span> <span class='ident'>match_digits</span>(<span class='ident'>s</span>, <span class='number'>2</span>, <span class='number'>2</span>, <span class='boolval'>false</span>) {
-                <span class='prelude-val'>Some</span>(<span class='ident'>m</span>) <span class='op'>=&gt;</span> <span class='ident'>minutes</span> <span class='op'>=</span> <span class='ident'>m</span>,
-                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidZoneOffset</span>)
-            }
-
-            <span class='ident'>tm</span>.<span class='ident'>tm_utcoff</span> <span class='op'>=</span> <span class='ident'>sign</span> <span class='op'>*</span> (<span class='ident'>hours</span> <span class='op'>*</span> <span class='number'>60</span> <span class='op'>*</span> <span class='number'>60</span> <span class='op'>+</span> <span class='ident'>minutes</span> <span class='op'>*</span> <span class='number'>60</span>);
-            <span class='prelude-val'>Ok</span>(())
         }
         <span class='string'>&#39;%&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>parse_char</span>(<span class='ident'>s</span>, <span class='string'>&#39;%&#39;</span>),
         <span class='ident'>ch</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>InvalidFormatSpecifier</span>(<span class='ident'>ch</span>))
@@ -827,36 +837,49 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

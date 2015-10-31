@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/header/common/cache_control.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/cache_control.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>cache_control.rs.html -- source</title>
@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -224,6 +224,30 @@
 <span id="182">182</span>
 <span id="183">183</span>
 <span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>FromStr</span>;
@@ -247,6 +271,30 @@
 <span class='doccomment'>/// * `no-cache`</span>
 <span class='doccomment'>/// * `private, community=&quot;UCI&quot;`</span>
 <span class='doccomment'>/// * `max-age=30`</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Examples</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// use hyper::header::{Headers, CacheControl, CacheDirective};</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// let mut headers = Headers::new();</span>
+<span class='doccomment'>/// headers.set(</span>
+<span class='doccomment'>///     CacheControl(vec![CacheDirective::MaxAge(86400u32)])</span>
+<span class='doccomment'>/// );</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// use hyper::header::{Headers, CacheControl, CacheDirective};</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// let mut headers = Headers::new();</span>
+<span class='doccomment'>/// headers.set(</span>
+<span class='doccomment'>///     CacheControl(vec![</span>
+<span class='doccomment'>///         CacheDirective::NoCache,</span>
+<span class='doccomment'>///         CacheDirective::Private,</span>
+<span class='doccomment'>///         CacheDirective::MaxAge(360u32),</span>
+<span class='doccomment'>///         CacheDirective::Extension(&quot;foo&quot;.to_owned(),</span>
+<span class='doccomment'>///                                   Some(&quot;bar&quot;.to_owned())),</span>
+<span class='doccomment'>///     ])</span>
+<span class='doccomment'>/// );</span>
+<span class='doccomment'>/// ```</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>CacheControl</span>(<span class='kw'>pub</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>CacheDirective</span><span class='op'>&gt;</span>);
 
@@ -257,15 +305,15 @@
         <span class='string'>&quot;Cache-Control&quot;</span>
     }
 
-    <span class='kw'>fn</span> <span class='ident'>parse_header</span>(<span class='ident'>raw</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>CacheControl</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>parse_header</span>(<span class='ident'>raw</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>]) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>CacheControl</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>directives</span> <span class='op'>=</span> <span class='ident'>raw</span>.<span class='ident'>iter</span>()
-            .<span class='ident'>filter_map</span>(<span class='op'>|</span><span class='ident'>line</span><span class='op'>|</span> <span class='ident'>from_one_comma_delimited</span>(<span class='kw-2'>&amp;</span><span class='ident'>line</span>[..]))
+            .<span class='ident'>filter_map</span>(<span class='op'>|</span><span class='ident'>line</span><span class='op'>|</span> <span class='ident'>from_one_comma_delimited</span>(<span class='kw-2'>&amp;</span><span class='ident'>line</span>[..]).<span class='ident'>ok</span>())
             .<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>CacheDirective</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;</span>()
             .<span class='ident'>concat</span>();
         <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>directives</span>.<span class='ident'>is_empty</span>() {
-            <span class='prelude-val'>Some</span>(<span class='ident'>CacheControl</span>(<span class='ident'>directives</span>))
+            <span class='prelude-val'>Ok</span>(<span class='ident'>CacheControl</span>(<span class='ident'>directives</span>))
         } <span class='kw'>else</span> {
-            <span class='prelude-val'>None</span>
+            <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Header</span>)
         }
     }
 }
@@ -375,35 +423,35 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_parse_multiple_headers</span>() {
         <span class='kw'>let</span> <span class='ident'>cache</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>(<span class='kw-2'>&amp;</span>[<span class='string'>b&quot;no-cache&quot;</span>.<span class='ident'>to_vec</span>(), <span class='string'>b&quot;private&quot;</span>.<span class='ident'>to_vec</span>()]);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>, <span class='prelude-val'>Some</span>(<span class='ident'>CacheControl</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>CacheDirective</span>::<span class='ident'>NoCache</span>,
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>.<span class='ident'>ok</span>(), <span class='prelude-val'>Some</span>(<span class='ident'>CacheControl</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>CacheDirective</span>::<span class='ident'>NoCache</span>,
                                                  <span class='ident'>CacheDirective</span>::<span class='ident'>Private</span>])))
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_parse_argument</span>() {
         <span class='kw'>let</span> <span class='ident'>cache</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>(<span class='kw-2'>&amp;</span>[<span class='string'>b&quot;max-age=100, private&quot;</span>.<span class='ident'>to_vec</span>()]);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>, <span class='prelude-val'>Some</span>(<span class='ident'>CacheControl</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>CacheDirective</span>::<span class='ident'>MaxAge</span>(<span class='number'>100</span>),
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>.<span class='ident'>ok</span>(), <span class='prelude-val'>Some</span>(<span class='ident'>CacheControl</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>CacheDirective</span>::<span class='ident'>MaxAge</span>(<span class='number'>100</span>),
                                                  <span class='ident'>CacheDirective</span>::<span class='ident'>Private</span>])))
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_parse_quote_form</span>() {
         <span class='kw'>let</span> <span class='ident'>cache</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>(<span class='kw-2'>&amp;</span>[<span class='string'>b&quot;max-age=\&quot;200\&quot;&quot;</span>.<span class='ident'>to_vec</span>()]);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>, <span class='prelude-val'>Some</span>(<span class='ident'>CacheControl</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>CacheDirective</span>::<span class='ident'>MaxAge</span>(<span class='number'>200</span>)])))
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>.<span class='ident'>ok</span>(), <span class='prelude-val'>Some</span>(<span class='ident'>CacheControl</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>CacheDirective</span>::<span class='ident'>MaxAge</span>(<span class='number'>200</span>)])))
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_parse_extension</span>() {
         <span class='kw'>let</span> <span class='ident'>cache</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>(<span class='kw-2'>&amp;</span>[<span class='string'>b&quot;foo, bar=baz&quot;</span>.<span class='ident'>to_vec</span>()]);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>, <span class='prelude-val'>Some</span>(<span class='ident'>CacheControl</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>.<span class='ident'>ok</span>(), <span class='prelude-val'>Some</span>(<span class='ident'>CacheControl</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
             <span class='ident'>CacheDirective</span>::<span class='ident'>Extension</span>(<span class='string'>&quot;foo&quot;</span>.<span class='ident'>to_owned</span>(), <span class='prelude-val'>None</span>),
             <span class='ident'>CacheDirective</span>::<span class='ident'>Extension</span>(<span class='string'>&quot;bar&quot;</span>.<span class='ident'>to_owned</span>(), <span class='prelude-val'>Some</span>(<span class='string'>&quot;baz&quot;</span>.<span class='ident'>to_owned</span>()))])))
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_parse_bad_syntax</span>() {
-        <span class='kw'>let</span> <span class='ident'>cache</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>CacheControl</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>(<span class='kw-2'>&amp;</span>[<span class='string'>b&quot;foo=&quot;</span>.<span class='ident'>to_vec</span>()]);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>, <span class='prelude-val'>None</span>)
+        <span class='kw'>let</span> <span class='ident'>cache</span>: ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>CacheControl</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Header</span>::<span class='ident'>parse_header</span>(<span class='kw-2'>&amp;</span>[<span class='string'>b&quot;foo=&quot;</span>.<span class='ident'>to_vec</span>()]);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cache</span>.<span class='ident'>ok</span>(), <span class='prelude-val'>None</span>)
     }
 }
 
@@ -415,36 +463,49 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

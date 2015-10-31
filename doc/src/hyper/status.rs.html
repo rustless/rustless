@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.1/src/status.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/status.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>status.rs.html -- source</title>
@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -767,6 +767,10 @@
 <span id="725">725</span>
 <span id="726">726</span>
 <span id="727">727</span>
+<span id="728">728</span>
+<span id="729">729</span>
+<span id="730">730</span>
+<span id="731">731</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP status codes</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
@@ -798,7 +802,7 @@
 <span class='doccomment'>/// Registry](http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml) which is</span>
 <span class='doccomment'>/// the source for this enum (with one exception, 418 I&#39;m a teapot, which is</span>
 <span class='doccomment'>/// inexplicably not in the register).</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Hash</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>StatusCode</span> {
     <span class='doccomment'>/// 100 Continue</span>
     <span class='doccomment'>/// [[RFC7231, Section 6.2.1](https://tools.ietf.org/html/rfc7231#section-6.2.1)]</span>
@@ -1461,7 +1465,8 @@
         <span class='ident'>validate</span>(<span class='number'>404</span>, <span class='ident'>NotFound</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Not Found&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>405</span>, <span class='ident'>MethodNotAllowed</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Method Not Allowed&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>406</span>, <span class='ident'>NotAcceptable</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Not Acceptable&quot;</span>));
-        <span class='ident'>validate</span>(<span class='number'>407</span>, <span class='ident'>ProxyAuthenticationRequired</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Proxy Authentication Required&quot;</span>));
+        <span class='ident'>validate</span>(<span class='number'>407</span>, <span class='ident'>ProxyAuthenticationRequired</span>, <span class='ident'>BadRequest</span>,
+            <span class='prelude-val'>Some</span>(<span class='string'>&quot;Proxy Authentication Required&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>408</span>, <span class='ident'>RequestTimeout</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Request Timeout&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>409</span>, <span class='ident'>Conflict</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Conflict&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>410</span>, <span class='ident'>Gone</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Gone&quot;</span>));
@@ -1479,19 +1484,22 @@
         <span class='ident'>validate</span>(<span class='number'>426</span>, <span class='ident'>UpgradeRequired</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Upgrade Required&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>428</span>, <span class='ident'>PreconditionRequired</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Precondition Required&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>429</span>, <span class='ident'>TooManyRequests</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Too Many Requests&quot;</span>));
-        <span class='ident'>validate</span>(<span class='number'>431</span>, <span class='ident'>RequestHeaderFieldsTooLarge</span>, <span class='ident'>BadRequest</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Request Header Fields Too Large&quot;</span>));
+        <span class='ident'>validate</span>(<span class='number'>431</span>, <span class='ident'>RequestHeaderFieldsTooLarge</span>, <span class='ident'>BadRequest</span>,
+            <span class='prelude-val'>Some</span>(<span class='string'>&quot;Request Header Fields Too Large&quot;</span>));
 
         <span class='ident'>validate</span>(<span class='number'>500</span>, <span class='ident'>InternalServerError</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Internal Server Error&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>501</span>, <span class='ident'>NotImplemented</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Not Implemented&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>502</span>, <span class='ident'>BadGateway</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Bad Gateway&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>503</span>, <span class='ident'>ServiceUnavailable</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Service Unavailable&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>504</span>, <span class='ident'>GatewayTimeout</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Gateway Timeout&quot;</span>));
-        <span class='ident'>validate</span>(<span class='number'>505</span>, <span class='ident'>HttpVersionNotSupported</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;HTTP Version Not Supported&quot;</span>));
+        <span class='ident'>validate</span>(<span class='number'>505</span>, <span class='ident'>HttpVersionNotSupported</span>, <span class='ident'>InternalServerError</span>,
+            <span class='prelude-val'>Some</span>(<span class='string'>&quot;HTTP Version Not Supported&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>506</span>, <span class='ident'>VariantAlsoNegotiates</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Variant Also Negotiates&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>507</span>, <span class='ident'>InsufficientStorage</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Insufficient Storage&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>508</span>, <span class='ident'>LoopDetected</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Loop Detected&quot;</span>));
         <span class='ident'>validate</span>(<span class='number'>510</span>, <span class='ident'>NotExtended</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Not Extended&quot;</span>));
-        <span class='ident'>validate</span>(<span class='number'>511</span>, <span class='ident'>NetworkAuthenticationRequired</span>, <span class='ident'>InternalServerError</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;Network Authentication Required&quot;</span>));
+        <span class='ident'>validate</span>(<span class='number'>511</span>, <span class='ident'>NetworkAuthenticationRequired</span>, <span class='ident'>InternalServerError</span>,
+            <span class='prelude-val'>Some</span>(<span class='string'>&quot;Network Authentication Required&quot;</span>));
 
     }
 }
@@ -1501,36 +1509,49 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

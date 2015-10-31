@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/log-0.3.1/src/macros.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/log-0.3.3/src/macros.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>macros.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
-    <link rel="shortcut icon" href="http://www.rust-lang.org/favicon.ico">
+    <link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico">
     
 </head>
 <body class="rustdoc">
@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
-        <a href='../../log/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
+    <nav class="sidebar">
+        <a href='../../log/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -185,6 +185,16 @@
 <span id="143">143</span>
 <span id="144">144</span>
 <span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -200,24 +210,19 @@
 <span class='doccomment'>/// This macro will generically log with the specified `LogLevel` and `format!`</span>
 <span class='doccomment'>/// based argument list.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// The `log_level` cfg can be used to statically disable logging at various</span>
-<span class='doccomment'>/// levels.</span>
+<span class='doccomment'>/// The `max_level_*` features can be used to statically disable logging at</span>
+<span class='doccomment'>/// various levels.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>log</span> {
     (<span class='ident'>target</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>target</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>lvl</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>+</span>) <span class='op'>=&gt;</span> ({
-        <span class='kw'>static</span> <span class='ident'>LOC</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLocation</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLocation</span> {
+        <span class='kw'>static</span> <span class='ident'>_LOC</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLocation</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLocation</span> {
             <span class='ident'>__line</span>: <span class='macro'>line</span><span class='macro'>!</span>(),
             <span class='ident'>__file</span>: <span class='macro'>file</span><span class='macro'>!</span>(),
             <span class='ident'>__module_path</span>: <span class='macro'>module_path</span><span class='macro'>!</span>(),
         };
         <span class='kw'>let</span> <span class='ident'>lvl</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>lvl</span>;
-        <span class='kw'>if</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>log_level</span> <span class='op'>=</span> <span class='string'>&quot;off&quot;</span>) <span class='op'>&amp;&amp;</span>
-                (<span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLevel</span>::<span class='ident'>Error</span> <span class='op'>||</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>log_level</span> <span class='op'>=</span> <span class='string'>&quot;error&quot;</span>)) <span class='op'>&amp;&amp;</span>
-                (<span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLevel</span>::<span class='ident'>Warn</span> <span class='op'>||</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>log_level</span> <span class='op'>=</span> <span class='string'>&quot;warn&quot;</span>)) <span class='op'>&amp;&amp;</span>
-                (<span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLevel</span>::<span class='ident'>Debug</span> <span class='op'>||</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>log_level</span> <span class='op'>=</span> <span class='string'>&quot;debug&quot;</span>)) <span class='op'>&amp;&amp;</span>
-                (<span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLevel</span>::<span class='ident'>Info</span> <span class='op'>||</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>log_level</span> <span class='op'>=</span> <span class='string'>&quot;info&quot;</span>)) <span class='op'>&amp;&amp;</span>
-                <span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>max_log_level</span>() {
-            <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>__log</span>(<span class='ident'>lvl</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>target</span>, <span class='kw-2'>&amp;</span><span class='ident'>LOC</span>, <span class='macro'>format_args</span><span class='macro'>!</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>)<span class='op'>+</span>))
+        <span class='kw'>if</span> <span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>__static_max_level</span>() <span class='op'>&amp;&amp;</span> <span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>max_log_level</span>() {
+            <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>__log</span>(<span class='ident'>lvl</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>target</span>, <span class='kw-2'>&amp;</span><span class='ident'>_LOC</span>, <span class='macro'>format_args</span><span class='macro'>!</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>)<span class='op'>+</span>))
         }
     });
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>lvl</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>+</span>) <span class='op'>=&gt;</span> (<span class='macro'>log</span><span class='macro'>!</span>(<span class='ident'>target</span>: <span class='macro'>module_path</span><span class='macro'>!</span>(), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>lvl</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>)<span class='op'>+</span>))
@@ -225,8 +230,7 @@
 
 <span class='doccomment'>/// Logs a message at the error level.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Logging at this level is disabled if the `log_level = &quot;off&quot;` cfg is</span>
-<span class='doccomment'>/// present.</span>
+<span class='doccomment'>/// Logging at this level is disabled if the `max_level_off` feature is present.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>error</span> {
     (<span class='ident'>target</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>target</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> (
@@ -239,8 +243,12 @@
 
 <span class='doccomment'>/// Logs a message at the warn level.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Logging at this level is disabled if any of the following cfgs are present:</span>
-<span class='doccomment'>/// `log_level = &quot;off&quot;` or `log_level = &quot;error&quot;`.</span>
+<span class='doccomment'>/// Logging at this level is disabled if any of the following features are</span>
+<span class='doccomment'>/// present: `max_level_off` or `max_level_error`.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// When building in release mode (i.e., without the `debug_assertions` option),</span>
+<span class='doccomment'>/// logging at this level is also disabled if any of the following features are</span>
+<span class='doccomment'>/// present: `release_max_level_off` or `max_level_error`.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>warn</span> {
     (<span class='ident'>target</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>target</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> (
@@ -253,9 +261,13 @@
 
 <span class='doccomment'>/// Logs a message at the info level.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Logging at this level is disabled if any of the following cfgs are present:</span>
-<span class='doccomment'>/// `log_level = &quot;off&quot;`, `log_level = &quot;error&quot;`, or</span>
-<span class='doccomment'>/// `log_level = &quot;warn&quot;`.</span>
+<span class='doccomment'>/// Logging at this level is disabled if any of the following features are</span>
+<span class='doccomment'>/// present: `max_level_off`, `max_level_error`, or `max_level_warn`.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// When building in release mode (i.e., without the `debug_assertions` option),</span>
+<span class='doccomment'>/// logging at this level is also disabled if any of the following features are</span>
+<span class='doccomment'>/// present: `release_max_level_off`, `release_max_level_error`, or</span>
+<span class='doccomment'>/// `release_max_level_warn`.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>info</span> {
     (<span class='ident'>target</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>target</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> (
@@ -268,9 +280,14 @@
 
 <span class='doccomment'>/// Logs a message at the debug level.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Logging at this level is disabled if any of the following cfgs are present:</span>
-<span class='doccomment'>/// `log_level = &quot;off&quot;`, `log_level = &quot;error&quot;`, `log_level = &quot;warn&quot;`,</span>
-<span class='doccomment'>/// or `log_level = &quot;info&quot;`.</span>
+<span class='doccomment'>/// Logging at this level is disabled if any of the following features are</span>
+<span class='doccomment'>/// present: `max_level_off`, `max_level_error`, `max_level_warn`, or</span>
+<span class='doccomment'>/// `max_level_info`.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// When building in release mode (i.e., without the `debug_assertions` option),</span>
+<span class='doccomment'>/// logging at this level is also disabled if any of the following features are</span>
+<span class='doccomment'>/// present: `release_max_level_off`, `release_max_level_error`,</span>
+<span class='doccomment'>/// `release_max_level_warn`, or `release_max_level_info`.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>debug</span> {
     (<span class='ident'>target</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>target</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> (
@@ -283,9 +300,15 @@
 
 <span class='doccomment'>/// Logs a message at the trace level.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Logging at this level is disabled if any of the following cfgs are present:</span>
-<span class='doccomment'>/// `log_level = &quot;off&quot;`, `log_level = &quot;error&quot;`, `log_level = &quot;warn&quot;`,</span>
-<span class='doccomment'>/// `log_level = &quot;info&quot;`, or `log_level = &quot;debug&quot;`.</span>
+<span class='doccomment'>/// Logging at this level is disabled if any of the following features are</span>
+<span class='doccomment'>/// present: `max_level_off`, `max_level_error`, `max_level_warn`,</span>
+<span class='doccomment'>/// `max_level_info`, or `max_level_debug`.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// When building in release mode (i.e., without the `debug_assertions` option),</span>
+<span class='doccomment'>/// logging at this level is also disabled if any of the following features are</span>
+<span class='doccomment'>/// present: `release_max_level_off`, `release_max_level_error`,</span>
+<span class='doccomment'>/// `release_max_level_warn`, `release_max_level_info`, or</span>
+<span class='doccomment'>/// `release_max_level_debug`.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>trace</span> {
     (<span class='ident'>target</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>target</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> (
@@ -311,22 +334,19 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # fn foo() {</span>
 <span class='doccomment'>/// if log_enabled!(Debug) {</span>
-<span class='doccomment'>///     debug!(&quot;expensive debug data: {}&quot;, expensive_call());</span>
+<span class='doccomment'>///     let data = expensive_call();</span>
+<span class='doccomment'>///     debug!(&quot;expensive debug data: {} {}&quot;, data.x, data.y);</span>
 <span class='doccomment'>/// }</span>
 <span class='doccomment'>/// # }</span>
-<span class='doccomment'>/// # fn expensive_call() -&gt; u32 { 0 }</span>
+<span class='doccomment'>/// # struct Data { x: u32, y: u32 }</span>
+<span class='doccomment'>/// # fn expensive_call() -&gt; Data { Data { x: 0, y: 0 } }</span>
 <span class='doccomment'>/// # fn main() {}</span>
 <span class='doccomment'>/// ```</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>log_enabled</span> {
     (<span class='ident'>target</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>target</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>lvl</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> ({
         <span class='kw'>let</span> <span class='ident'>lvl</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>lvl</span>;
-        <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>log_level</span> <span class='op'>=</span> <span class='string'>&quot;off&quot;</span>) <span class='op'>&amp;&amp;</span>
-            (<span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLevel</span>::<span class='ident'>Error</span> <span class='op'>||</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>log_level</span> <span class='op'>=</span> <span class='string'>&quot;error&quot;</span>)) <span class='op'>&amp;&amp;</span>
-            (<span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLevel</span>::<span class='ident'>Warn</span> <span class='op'>||</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>log_level</span> <span class='op'>=</span> <span class='string'>&quot;warn&quot;</span>)) <span class='op'>&amp;&amp;</span>
-            (<span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLevel</span>::<span class='ident'>Debug</span> <span class='op'>||</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>log_level</span> <span class='op'>=</span> <span class='string'>&quot;debug&quot;</span>)) <span class='op'>&amp;&amp;</span>
-            (<span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>LogLevel</span>::<span class='ident'>Info</span> <span class='op'>||</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>log_level</span> <span class='op'>=</span> <span class='string'>&quot;info&quot;</span>)) <span class='op'>&amp;&amp;</span>
-            <span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>max_log_level</span>() <span class='op'>&amp;&amp;</span>
+        <span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>__static_max_level</span>() <span class='op'>&amp;&amp;</span> <span class='ident'>lvl</span> <span class='op'>&lt;=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>max_log_level</span>() <span class='op'>&amp;&amp;</span>
             <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>__enabled</span>(<span class='ident'>lvl</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>target</span>)
     });
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>lvl</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>log_enabled</span><span class='macro'>!</span>(<span class='ident'>target</span>: <span class='macro'>module_path</span><span class='macro'>!</span>(), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>lvl</span>))
@@ -337,36 +357,49 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

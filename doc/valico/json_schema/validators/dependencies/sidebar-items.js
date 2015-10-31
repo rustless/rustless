@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Dependencies",""]],"enum":[["DepKind",""]]});
+initSidebarItems({"enum":[["DepKind",""]],"struct":[["Dependencies",""]]});

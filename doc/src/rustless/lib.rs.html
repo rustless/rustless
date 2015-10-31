@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -130,7 +130,7 @@
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>log</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>backend</span>::{<span class='ident'>Request</span>, <span class='ident'>SimpleRequest</span>, <span class='ident'>Response</span>, <span class='ident'>Handler</span>, <span class='ident'>HandleResult</span>, <span class='ident'>HandleSuccessResult</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>backend</span>::{<span class='ident'>Request</span>, <span class='ident'>SimpleRequest</span>, <span class='ident'>Response</span>, <span class='ident'>Handler</span>, <span class='ident'>HandleResult</span>, <span class='ident'>HandleSuccessResult</span>, <span class='ident'>ResponseBody</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>errors</span>::{<span class='ident'>ErrorResponse</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>framework</span>::{
     <span class='ident'>Endpoint</span>, <span class='ident'>Client</span>, <span class='ident'>Api</span>, <span class='ident'>Application</span>, <span class='ident'>Namespace</span>, <span class='ident'>Nesting</span>, <span class='ident'>Media</span>, <span class='ident'>Versioning</span>
@@ -158,43 +158,55 @@
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>backend</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>server</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>framework</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>batteries</span>;
-</pre>
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>batteries</span>;</pre>
 </section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 

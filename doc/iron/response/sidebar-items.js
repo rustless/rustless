@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["HttpResponse","The outgoing half for a Tcp connection, created by a `Server` and given to a `Handler`."],["Response","The response representation given to `Middleware`"]]});
+initSidebarItems({"struct":[["HttpResponse","The outgoing half for a Tcp connection, created by a `Server` and given to a `Handler`."],["Response","The response representation given to `Middleware`"],["ResponseBody","A `Write`r of HTTP response bodies."]],"trait":[["WriteBody","A trait which writes the body of an HTTP response."]]});

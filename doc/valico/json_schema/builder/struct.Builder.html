@@ -24,110 +24,125 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='../../index.html'>valico</a>::<wbr><a href='../index.html'>json_schema</a>::<wbr><a href='index.html'>builder</a></p><script>window.sidebarCurrent = {name: 'Builder', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>valico</a>::<wbr><a href='../index.html'>json_schema</a>::<wbr><a href='index.html'>builder</a>::<wbr><a class='struct' href=''>Builder</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-20463' href='../../../src/valico/json_schema/builder.rs.html#82-84'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>valico</a>::<wbr><a href='../index.html'>json_schema</a>::<wbr><a href='index.html'>builder</a>::<wbr><a class='struct' href=''>Builder</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-20542' class='srclink' href='../../../src/valico/json_schema/builder.rs.html#82-84' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Builder {
     // some fields omitted
 }</pre><div class='docblock'><p>Builder provides simple DSL to build Schema. It allows you not to use
 strings and raw JSON manipulation. It also prevent some kinds of spelling
 and type errors.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a></code></h4>
-<h4 id='method.id' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.id' class='fnname'>id</a>(&amp;mut self, url: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
-<h4 id='method.ref_' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.ref_' class='fnname'>ref_</a>(&amp;mut self, url: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
-<h4 id='method.schema' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.schema' class='fnname'>schema</a>(&amp;mut self, url: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
-<h4 id='method.default' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.default' class='fnname'>default</a>&lt;T&gt;(&amp;mut self, default: T) <span class='where'>where T: <a class='trait' href='../../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a></span></code></h4>
-<h4 id='method.multiple_of' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.multiple_of' class='fnname'>multiple_of</a>(&amp;mut self, number: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>)</code></h4>
-<h4 id='method.maximum' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.maximum' class='fnname'>maximum</a>(&amp;mut self, number: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>, exclusive: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.minimum' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.minimum' class='fnname'>minimum</a>(&amp;mut self, number: <a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>, exclusive: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.max_length' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.max_length' class='fnname'>max_length</a>(&amp;mut self, number: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
-<h4 id='method.min_length' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.min_length' class='fnname'>min_length</a>(&amp;mut self, number: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
-<h4 id='method.pattern' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.pattern' class='fnname'>pattern</a>(&amp;mut self, pattern: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
-<h4 id='method.format' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.format' class='fnname'>format</a>(&amp;mut self, format: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
-<h4 id='method.items_schema' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.items_schema' class='fnname'>items_schema</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a>)</span></code></h4>
-<h4 id='method.items_array' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.items_array' class='fnname'>items_array</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaArray.html' title='valico::json_schema::builder::SchemaArray'>SchemaArray</a>)</span></code></h4>
-<h4 id='method.additional_items' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.additional_items' class='fnname'>additional_items</a>(&amp;mut self, allow: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.additional_items_schema' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.additional_items_schema' class='fnname'>additional_items_schema</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a>)</span></code></h4>
-<h4 id='method.max_items' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.max_items' class='fnname'>max_items</a>(&amp;mut self, number: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
-<h4 id='method.min_items' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.min_items' class='fnname'>min_items</a>(&amp;mut self, number: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
-<h4 id='method.unique_items' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.unique_items' class='fnname'>unique_items</a>(&amp;mut self, unique: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.max_properties' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.max_properties' class='fnname'>max_properties</a>(&amp;mut self, number: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
-<h4 id='method.min_properties' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.min_properties' class='fnname'>min_properties</a>(&amp;mut self, number: <a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
-<h4 id='method.required' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.required' class='fnname'>required</a>(&amp;mut self, items: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;)</code></h4>
-<h4 id='method.properties' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.properties' class='fnname'>properties</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaHash.html' title='valico::json_schema::builder::SchemaHash'>SchemaHash</a>)</span></code></h4>
-<h4 id='method.pattern_properties' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.pattern_properties' class='fnname'>pattern_properties</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaHash.html' title='valico::json_schema::builder::SchemaHash'>SchemaHash</a>)</span></code></h4>
-<h4 id='method.additional_properties' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.additional_properties' class='fnname'>additional_properties</a>(&amp;mut self, allow: <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
-<h4 id='method.additional_properties_schema' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.additional_properties_schema' class='fnname'>additional_properties_schema</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a>)</span></code></h4>
-<h4 id='method.dependencies' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.dependencies' class='fnname'>dependencies</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Dependencies.html' title='valico::json_schema::builder::Dependencies'>Dependencies</a>)</span></code></h4>
-<h4 id='method.enum_' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.enum_' class='fnname'>enum_</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a>)</span></code></h4>
-<h4 id='method.array' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.array' class='fnname'>array</a>(&amp;mut self)</code></h4>
-<h4 id='method.boolean' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.boolean' class='fnname'>boolean</a>(&amp;mut self)</code></h4>
-<h4 id='method.integer' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.integer' class='fnname'>integer</a>(&amp;mut self)</code></h4>
-<h4 id='method.number' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.number' class='fnname'>number</a>(&amp;mut self)</code></h4>
-<h4 id='method.null' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.null' class='fnname'>null</a>(&amp;mut self)</code></h4>
-<h4 id='method.object' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.object' class='fnname'>object</a>(&amp;mut self)</code></h4>
-<h4 id='method.string' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.string' class='fnname'>string</a>(&amp;mut self)</code></h4>
-<h4 id='method.type_' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.type_' class='fnname'>type_</a>(&amp;mut self, type_: <a class='enum' href='../../../valico/json_schema/enum.PrimitiveType.html' title='valico::json_schema::PrimitiveType'>PrimitiveType</a>)</code></h4>
-<h4 id='method.types' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.types' class='fnname'>types</a>(&amp;mut self, types: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='enum' href='../../../valico/json_schema/enum.PrimitiveType.html' title='valico::json_schema::PrimitiveType'>PrimitiveType</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>)</code></h4>
-<h4 id='method.all_of' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.all_of' class='fnname'>all_of</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaArray.html' title='valico::json_schema::builder::SchemaArray'>SchemaArray</a>)</span></code></h4>
-<h4 id='method.any_of' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.any_of' class='fnname'>any_of</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaArray.html' title='valico::json_schema::builder::SchemaArray'>SchemaArray</a>)</span></code></h4>
-<h4 id='method.one_of' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.one_of' class='fnname'>one_of</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaArray.html' title='valico::json_schema::builder::SchemaArray'>SchemaArray</a>)</span></code></h4>
-<h4 id='method.not' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.not' class='fnname'>not</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a>)</span></code></h4>
-<h4 id='method.build' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.build' class='fnname'>build</a>&lt;F&gt;(build: F) -&gt; <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a> <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a>)</span></code></h4>
-<h4 id='method.into_json' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.into_json' class='fnname'>into_json</a>(self) -&gt; <a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a> for <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a></code></h3><div class='impl-items'><h4 id='method.to_json' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='../../../rustc_serialize/json/trait.ToJson.html#method.to_json' class='fnname'>to_json</a>(&amp;self) -&gt; <a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a></code></h4>
+<h4 id='method.id' class='method'><code>fn <a href='#method.id' class='fnname'>id</a>(&amp;mut self, url: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+<h4 id='method.ref_' class='method'><code>fn <a href='#method.ref_' class='fnname'>ref_</a>(&amp;mut self, url: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+<h4 id='method.schema' class='method'><code>fn <a href='#method.schema' class='fnname'>schema</a>(&amp;mut self, url: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+<h4 id='method.default' class='method'><code>fn <a href='#method.default' class='fnname'>default</a>&lt;T&gt;(&amp;mut self, default: T) <span class='where'>where T: <a class='trait' href='../../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a></span></code></h4>
+<h4 id='method.multiple_of' class='method'><code>fn <a href='#method.multiple_of' class='fnname'>multiple_of</a>(&amp;mut self, number: <a href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>)</code></h4>
+<h4 id='method.maximum' class='method'><code>fn <a href='#method.maximum' class='fnname'>maximum</a>(&amp;mut self, number: <a href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>, exclusive: <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
+<h4 id='method.minimum' class='method'><code>fn <a href='#method.minimum' class='fnname'>minimum</a>(&amp;mut self, number: <a href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>, exclusive: <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
+<h4 id='method.max_length' class='method'><code>fn <a href='#method.max_length' class='fnname'>max_length</a>(&amp;mut self, number: <a href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
+<h4 id='method.min_length' class='method'><code>fn <a href='#method.min_length' class='fnname'>min_length</a>(&amp;mut self, number: <a href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
+<h4 id='method.pattern' class='method'><code>fn <a href='#method.pattern' class='fnname'>pattern</a>(&amp;mut self, pattern: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+<h4 id='method.format' class='method'><code>fn <a href='#method.format' class='fnname'>format</a>(&amp;mut self, format: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+<h4 id='method.items_schema' class='method'><code>fn <a href='#method.items_schema' class='fnname'>items_schema</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a>)</span></code></h4>
+<h4 id='method.items_array' class='method'><code>fn <a href='#method.items_array' class='fnname'>items_array</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaArray.html' title='valico::json_schema::builder::SchemaArray'>SchemaArray</a>)</span></code></h4>
+<h4 id='method.additional_items' class='method'><code>fn <a href='#method.additional_items' class='fnname'>additional_items</a>(&amp;mut self, allow: <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
+<h4 id='method.additional_items_schema' class='method'><code>fn <a href='#method.additional_items_schema' class='fnname'>additional_items_schema</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a>)</span></code></h4>
+<h4 id='method.max_items' class='method'><code>fn <a href='#method.max_items' class='fnname'>max_items</a>(&amp;mut self, number: <a href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
+<h4 id='method.min_items' class='method'><code>fn <a href='#method.min_items' class='fnname'>min_items</a>(&amp;mut self, number: <a href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
+<h4 id='method.unique_items' class='method'><code>fn <a href='#method.unique_items' class='fnname'>unique_items</a>(&amp;mut self, unique: <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
+<h4 id='method.max_properties' class='method'><code>fn <a href='#method.max_properties' class='fnname'>max_properties</a>(&amp;mut self, number: <a href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
+<h4 id='method.min_properties' class='method'><code>fn <a href='#method.min_properties' class='fnname'>min_properties</a>(&amp;mut self, number: <a href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>)</code></h4>
+<h4 id='method.required' class='method'><code>fn <a href='#method.required' class='fnname'>required</a>(&amp;mut self, items: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;)</code></h4>
+<h4 id='method.properties' class='method'><code>fn <a href='#method.properties' class='fnname'>properties</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaHash.html' title='valico::json_schema::builder::SchemaHash'>SchemaHash</a>)</span></code></h4>
+<h4 id='method.pattern_properties' class='method'><code>fn <a href='#method.pattern_properties' class='fnname'>pattern_properties</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaHash.html' title='valico::json_schema::builder::SchemaHash'>SchemaHash</a>)</span></code></h4>
+<h4 id='method.additional_properties' class='method'><code>fn <a href='#method.additional_properties' class='fnname'>additional_properties</a>(&amp;mut self, allow: <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
+<h4 id='method.additional_properties_schema' class='method'><code>fn <a href='#method.additional_properties_schema' class='fnname'>additional_properties_schema</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a>)</span></code></h4>
+<h4 id='method.dependencies' class='method'><code>fn <a href='#method.dependencies' class='fnname'>dependencies</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Dependencies.html' title='valico::json_schema::builder::Dependencies'>Dependencies</a>)</span></code></h4>
+<h4 id='method.enum_' class='method'><code>fn <a href='#method.enum_' class='fnname'>enum_</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a>)</span></code></h4>
+<h4 id='method.array' class='method'><code>fn <a href='#method.array' class='fnname'>array</a>(&amp;mut self)</code></h4>
+<h4 id='method.boolean' class='method'><code>fn <a href='#method.boolean' class='fnname'>boolean</a>(&amp;mut self)</code></h4>
+<h4 id='method.integer' class='method'><code>fn <a href='#method.integer' class='fnname'>integer</a>(&amp;mut self)</code></h4>
+<h4 id='method.number' class='method'><code>fn <a href='#method.number' class='fnname'>number</a>(&amp;mut self)</code></h4>
+<h4 id='method.null' class='method'><code>fn <a href='#method.null' class='fnname'>null</a>(&amp;mut self)</code></h4>
+<h4 id='method.object' class='method'><code>fn <a href='#method.object' class='fnname'>object</a>(&amp;mut self)</code></h4>
+<h4 id='method.string' class='method'><code>fn <a href='#method.string' class='fnname'>string</a>(&amp;mut self)</code></h4>
+<h4 id='method.type_' class='method'><code>fn <a href='#method.type_' class='fnname'>type_</a>(&amp;mut self, type_: <a class='enum' href='../../../valico/json_schema/enum.PrimitiveType.html' title='valico::json_schema::PrimitiveType'>PrimitiveType</a>)</code></h4>
+<h4 id='method.types' class='method'><code>fn <a href='#method.types' class='fnname'>types</a>(&amp;mut self, types: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='enum' href='../../../valico/json_schema/enum.PrimitiveType.html' title='valico::json_schema::PrimitiveType'>PrimitiveType</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>)</code></h4>
+<h4 id='method.all_of' class='method'><code>fn <a href='#method.all_of' class='fnname'>all_of</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaArray.html' title='valico::json_schema::builder::SchemaArray'>SchemaArray</a>)</span></code></h4>
+<h4 id='method.any_of' class='method'><code>fn <a href='#method.any_of' class='fnname'>any_of</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaArray.html' title='valico::json_schema::builder::SchemaArray'>SchemaArray</a>)</span></code></h4>
+<h4 id='method.one_of' class='method'><code>fn <a href='#method.one_of' class='fnname'>one_of</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.SchemaArray.html' title='valico::json_schema::builder::SchemaArray'>SchemaArray</a>)</span></code></h4>
+<h4 id='method.not' class='method'><code>fn <a href='#method.not' class='fnname'>not</a>&lt;F&gt;(&amp;mut self, build: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a>)</span></code></h4>
+<h4 id='method.build' class='method'><code>fn <a href='#method.build' class='fnname'>build</a>&lt;F&gt;(build: F) -&gt; <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a> <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a>)</span></code></h4>
+<h4 id='method.into_json' class='method'><code>fn <a href='#method.into_json' class='fnname'>into_json</a>(self) -&gt; <a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a> for <a class='struct' href='../../../valico/json_schema/builder/struct.Builder.html' title='valico::json_schema::builder::Builder'>Builder</a></code></h3><div class='impl-items'><h4 id='method.to_json' class='method'><code>fn <a href='../../../rustc_serialize/json/trait.ToJson.html#method.to_json' class='fnname'>to_json</a>(&amp;self) -&gt; <a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 
