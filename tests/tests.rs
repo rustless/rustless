@@ -33,10 +33,11 @@ macro_rules! call_app {
 macro_rules! resp_body {
     ($resp:ident) => {
         {
-            use std::io::Read;
-            let mut bytes = Vec::new();
-            $resp.read_to_end(&mut bytes).unwrap();
-            String::from_utf8(bytes).unwrap()
+            use ::rustless::backend::WriteBody;
+            let mut vec = Vec::new();
+            
+            $resp.body.unwrap().write_body(&mut ::rustless::ResponseBody::new(&mut vec)).expect("Can't write");
+            String::from_utf8(vec).unwrap()
         }
     }
 }

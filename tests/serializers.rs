@@ -1,6 +1,4 @@
 use serialize::json;
-use std::io::Read;
-use std::str;
 
 use jsonway;
 
@@ -25,7 +23,7 @@ fn it_serializes_json_properly() {
         })
     });
 
-    let mut response = call_app!(app, Get, "http://127.0.0.1:3000/api/status").ok().unwrap();
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/status").ok().unwrap();
     assert_eq!(response.status, status::StatusCode::Ok);
 
     {
@@ -33,9 +31,8 @@ fn it_serializes_json_properly() {
         assert_eq!(*mime_type, mime::Mime(mime::TopLevel::Application, mime::SubLevel::Json, vec![]));
     }
 
-    let mut bytes = Vec::new();
-    response.read_to_end(&mut bytes).unwrap();
-    let body: json::Json = str::from_utf8(&bytes).unwrap().parse().unwrap();
+    let raw_body = resp_body!(response);
+    let body: json::Json = raw_body.parse().unwrap();
 
     assert!(body.find("uptime").is_some());
     assert!(body.find("echo_params").is_some());

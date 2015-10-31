@@ -2,6 +2,7 @@ use serialize::json;
 use typemap;
 use std::env;
 use std::path::Path;
+use std::fs::File;
 
 use backend;
 use errors::{self, Error};
@@ -91,13 +92,13 @@ impl<'a> Client<'a> {
 
     pub fn json(mut self, result: &json::Json) -> ClientResult<'a> {
         self.set_json_content_type();
-        self.response.push_string(result.to_string());
+        self.response.replace_body(Box::new(result.to_string()));
 
         Ok(self)
     }
 
     pub fn text(mut self, result: String) -> ClientResult<'a> {
-        self.response.push_string(result);
+        self.response.replace_body(Box::new(result));
 
         Ok(self)
     }
@@ -109,13 +110,16 @@ impl<'a> Client<'a> {
                 return Err(error_response!(errors::File(err)));
             }
         };
-
-        match self.response.push_file(&absolute_path) {
-            Ok(()) => Ok(self),
+        
+        let file = match File::open(absolute_path) {
+            Ok(file) => file,
             Err(err) => {
                 return Err(error_response!(errors::File(err)));
             }
-        }
+        };
+        
+        self.response.replace_body(Box::new(file));
+        Ok(self)
     }
 
     pub fn empty(self) -> ClientResult<'a> {

@@ -28,7 +28,7 @@ extern crate lazy_static;
 #[macro_use]
 extern crate log;
 
-pub use backend::{Request, SimpleRequest, Response, Handler, HandleResult, HandleSuccessResult};
+pub use backend::{Request, SimpleRequest, Response, Handler, HandleResult, HandleSuccessResult, ResponseBody};
 pub use errors::{ErrorResponse};
 pub use framework::{
     Endpoint, Client, Api, Application, Namespace, Nesting, Media, Versioning

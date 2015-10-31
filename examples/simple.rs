@@ -44,9 +44,9 @@ fn main() {
         api.error_formatter(|err, _media| {
             match err.downcast::<UnauthorizedError>() {
                 Some(_) => {
-                    return Some(rustless::Response::from_string(
+                    return Some(rustless::Response::from(
                         status::StatusCode::Unauthorized,
-                        "Please provide correct `token` parameter".to_string()
+                        Box::new("Please provide correct `token` parameter")
                     ))
                 },
                 None => None

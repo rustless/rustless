@@ -29,7 +29,7 @@ fn it_invokes_callbacks() {
 
         api.error_formatter(|err, _media| {
             if err.is::<UnauthorizedError>() {
-                Some(rustless::Response::from_string(status::StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
+                Some(rustless::Response::from(status::StatusCode::Unauthorized, Box::new("Please provide correct `token` parameter")))
             } else {
                 None
             }

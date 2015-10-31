@@ -123,7 +123,7 @@ fn it_validates_common_namespace_params() {
     // missed `ext` param
     assert_eq!(err_resp.response.status, status::StatusCode::BadRequest);
 
-    let mut response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100/profile/full?ext=some").ok().unwrap();
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100/profile/full?ext=some").ok().unwrap();
         println!("{}", resp_body!(response));
     assert_eq!(response.status, status::StatusCode::Ok);
 }

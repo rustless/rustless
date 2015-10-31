@@ -29,13 +29,16 @@ valico = "*"
 queryst = "*"
 jsonway = "*"
 url = "*"
-cookie = "*"
 hyper = "*"
 error = "*"
 typemap = "*"
 log = "*"
 typeable = "*"
 traitobject = "*"
+
+[dependencies.cookie]
+version = "0.1"
+default-features = false
 
 [dependencies.iron]
 optional = true

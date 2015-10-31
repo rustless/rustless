@@ -31,7 +31,7 @@ impl Application {
         let parse_result = parse_request(req, &mut params);
 
         parse_result.and_then(|_| {
-            self.root_api.api_call(&(req.url().path().connect("/")), &mut params, req, &mut super::CallInfo::new(self))
+            self.root_api.api_call(&(req.url().path().join("/")), &mut params, req, &mut super::CallInfo::new(self))
         })
     }
 

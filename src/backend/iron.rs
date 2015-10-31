@@ -53,7 +53,7 @@ impl<'a, 'b> backend::Request for iron::Request<'a, 'b> {
     }
 }
 
-impl<'a, 'b>  ::Extensible for iron::Request<'a, 'b> {
+impl<'a, 'b> ::Extensible for iron::Request<'a, 'b> {
     fn ext(&self) -> &::typemap::TypeMap { self.extensions() }
     fn ext_mut(&mut self) -> &mut ::typemap::TypeMap { self.extensions_mut() }
 }
