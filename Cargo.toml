@@ -23,19 +23,19 @@ default = ["iron_backend"]
 iron_backend = ["iron", "bodyparser", "plugin"]
 
 [dependencies]
-regex = "*"
-lazy_static = "*"
-rustc-serialize = "*"
-valico = "*"
-queryst = "*"
-jsonway = "*"
-url = "*"
-hyper = "*"
-error = "*"
-typemap = "*"
-log = "*"
-typeable = "*"
-traitobject = "*"
+regex = "0.1"
+lazy_static = "0.1"
+rustc-serialize = "0.3"
+valico = "0.8"
+hyper = "0.6"
+queryst = "0.1"
+jsonway = "0.3"
+url = "0.2"
+error = "0.1"
+typemap = "0.3"
+log = "0.3"
+typeable = "0.1"
+traitobject = "0.0"
 
 [dependencies.cookie]
 version = "0.1"
@@ -43,12 +43,12 @@ default-features = false
 
 [dependencies.iron]
 optional = true
-version = "*"
+version = "0.2"
 
 [dependencies.bodyparser]
 optional = true
-version = "*"
+version = "0.0"
 
 [dependencies.plugin]
 optional = true
-version = "*"
+version = "0.2"
