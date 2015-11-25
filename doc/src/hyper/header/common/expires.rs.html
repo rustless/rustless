@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/expires.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/expires.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>expires.rs.html -- source</title>
@@ -89,37 +89,37 @@
 <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>HttpDate</span>;
 
 <span class='macro'>header</span><span class='macro'>!</span> {
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`Expires` header, defined in [RFC7234](http://tools.ietf.org/html/rfc7234#section-5.3)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The `Expires` header field gives the date/time after which the&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;response is considered stale.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The presence of an Expires field does not imply that the original&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;resource will change or cease to exist at, before, or after that&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;time.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# ABNF&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```plain&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;Expires = HTTP-date&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example values&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `Thu, 01 Dec 1994 16:00:00 GMT`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# extern crate hyper;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# extern crate time;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# fn main() {&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;// extern crate time;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, Expires, HttpDate};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use time::{self, Duration};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(Expires(HttpDate(time::now() + Duration::days(1))));&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# }&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
+    <span class='doccomment'>/// `Expires` header, defined in [RFC7234](http://tools.ietf.org/html/rfc7234#section-5.3)</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// The `Expires` header field gives the date/time after which the</span>
+    <span class='doccomment'>/// response is considered stale.</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// The presence of an Expires field does not imply that the original</span>
+    <span class='doccomment'>/// resource will change or cease to exist at, before, or after that</span>
+    <span class='doccomment'>/// time.</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # ABNF</span>
+    <span class='doccomment'>/// ```plain</span>
+    <span class='doccomment'>/// Expires = HTTP-date</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # Example values</span>
+    <span class='doccomment'>/// * `Thu, 01 Dec 1994 16:00:00 GMT`</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # Example</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// # extern crate hyper;</span>
+    <span class='doccomment'>/// # extern crate time;</span>
+    <span class='doccomment'>/// # fn main() {</span>
+    <span class='doccomment'>/// // extern crate time;</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// use hyper::header::{Headers, Expires, HttpDate};</span>
+    <span class='doccomment'>/// use time::{self, Duration};</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(Expires(HttpDate(time::now() + Duration::days(1))));</span>
+    <span class='doccomment'>/// # }</span>
+    <span class='doccomment'>/// ```</span>
     (<span class='ident'>Expires</span>, <span class='string'>&quot;Expires&quot;</span>) <span class='op'>=&gt;</span> [<span class='ident'>HttpDate</span>]
 
     <span class='ident'>test_expires</span> {

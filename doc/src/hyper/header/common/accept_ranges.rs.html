@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/accept_ranges.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/accept_ranges.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>accept_ranges.rs.html -- source</title>
@@ -146,49 +146,49 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>FromStr</span>;
 
 <span class='macro'>header</span><span class='macro'>!</span> {
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`Accept-Ranges` header, defined in&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;[RFC7233](http://tools.ietf.org/html/rfc7233#section-2.3)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The `Accept-Ranges` header field allows a server to indicate that it&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;supports range requests for the target resource.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# ABNF&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```plain&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;Accept-Ranges     = acceptable-ranges&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;acceptable-ranges = 1#range-unit / \&quot;none\&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example values&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `bytes`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `none`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `unknown-unit`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Examples&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, AcceptRanges, RangeUnit};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(AcceptRanges(vec![RangeUnit::Bytes]));&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, AcceptRanges, RangeUnit};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(AcceptRanges(vec![RangeUnit::None]));&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, AcceptRanges, RangeUnit};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    AcceptRanges(vec![&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        RangeUnit::Unregistered(\&quot;nibbles\&quot;.to_owned()),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        RangeUnit::Bytes,&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        RangeUnit::Unregistered(\&quot;doublets\&quot;.to_owned()),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        RangeUnit::Unregistered(\&quot;quadlets\&quot;.to_owned()),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ])&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;);&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
+    <span class='doccomment'>/// `Accept-Ranges` header, defined in</span>
+    <span class='doccomment'>/// [RFC7233](http://tools.ietf.org/html/rfc7233#section-2.3)</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// The `Accept-Ranges` header field allows a server to indicate that it</span>
+    <span class='doccomment'>/// supports range requests for the target resource.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # ABNF</span>
+    <span class='doccomment'>/// ```plain</span>
+    <span class='doccomment'>/// Accept-Ranges     = acceptable-ranges</span>
+    <span class='doccomment'>/// acceptable-ranges = 1#range-unit / \&quot;none\&quot;</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Example values</span>
+    <span class='doccomment'>/// * `bytes`</span>
+    <span class='doccomment'>/// * `none`</span>
+    <span class='doccomment'>/// * `unknown-unit`</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, AcceptRanges, RangeUnit};</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(AcceptRanges(vec![RangeUnit::Bytes]));</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, AcceptRanges, RangeUnit};</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(AcceptRanges(vec![RangeUnit::None]));</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, AcceptRanges, RangeUnit};</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(</span>
+    <span class='doccomment'>///     AcceptRanges(vec![</span>
+    <span class='doccomment'>///         RangeUnit::Unregistered(&quot;nibbles&quot;.to_owned()),</span>
+    <span class='doccomment'>///         RangeUnit::Bytes,</span>
+    <span class='doccomment'>///         RangeUnit::Unregistered(&quot;doublets&quot;.to_owned()),</span>
+    <span class='doccomment'>///         RangeUnit::Unregistered(&quot;quadlets&quot;.to_owned()),</span>
+    <span class='doccomment'>///     ])</span>
+    <span class='doccomment'>/// );</span>
+    <span class='doccomment'>/// ```</span>
     (<span class='ident'>AcceptRanges</span>, <span class='string'>&quot;Accept-Ranges&quot;</span>) <span class='op'>=&gt;</span> (<span class='ident'>RangeUnit</span>)<span class='op'>+</span>
 
     <span class='ident'>test_acccept_ranges</span> {

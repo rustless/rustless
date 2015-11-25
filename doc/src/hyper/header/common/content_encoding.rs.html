@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/content_encoding.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/content_encoding.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>content_encoding.rs.html -- source</title>
@@ -94,43 +94,43 @@
 <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>Encoding</span>;
 
 <span class='macro'>header</span><span class='macro'>!</span> {
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`Content-Encoding` header, defined in&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;[RFC7231](http://tools.ietf.org/html/rfc7231#section-3.1.2.2)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The `Content-Encoding` header field indicates what content codings&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;have been applied to the representation, beyond those inherent in the&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;media type, and thus what decoding mechanisms have to be applied in&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;order to obtain data in the media type referenced by the Content-Type&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;header field.  Content-Encoding is primarily used to allow a&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;representation&#39;s data to be compressed without losing the identity of&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;its underlying media type.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# ABNF&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```plain&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;Content-Encoding = 1#content-coding&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example values&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `gzip`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Examples&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, ContentEncoding, Encoding};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(ContentEncoding(vec![Encoding::Chunked]));&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, ContentEncoding, Encoding};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ContentEncoding(vec![&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        Encoding::Gzip,&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        Encoding::Chunked,&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ])&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;);&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
+    <span class='doccomment'>/// `Content-Encoding` header, defined in</span>
+    <span class='doccomment'>/// [RFC7231](http://tools.ietf.org/html/rfc7231#section-3.1.2.2)</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// The `Content-Encoding` header field indicates what content codings</span>
+    <span class='doccomment'>/// have been applied to the representation, beyond those inherent in the</span>
+    <span class='doccomment'>/// media type, and thus what decoding mechanisms have to be applied in</span>
+    <span class='doccomment'>/// order to obtain data in the media type referenced by the Content-Type</span>
+    <span class='doccomment'>/// header field.  Content-Encoding is primarily used to allow a</span>
+    <span class='doccomment'>/// representation&#39;s data to be compressed without losing the identity of</span>
+    <span class='doccomment'>/// its underlying media type.</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # ABNF</span>
+    <span class='doccomment'>/// ```plain</span>
+    <span class='doccomment'>/// Content-Encoding = 1#content-coding</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # Example values</span>
+    <span class='doccomment'>/// * `gzip`</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, ContentEncoding, Encoding};</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(ContentEncoding(vec![Encoding::Chunked]));</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, ContentEncoding, Encoding};</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(</span>
+    <span class='doccomment'>///     ContentEncoding(vec![</span>
+    <span class='doccomment'>///         Encoding::Gzip,</span>
+    <span class='doccomment'>///         Encoding::Chunked,</span>
+    <span class='doccomment'>///     ])</span>
+    <span class='doccomment'>/// );</span>
+    <span class='doccomment'>/// ```</span>
     (<span class='ident'>ContentEncoding</span>, <span class='string'>&quot;Content-Encoding&quot;</span>) <span class='op'>=&gt;</span> (<span class='ident'>Encoding</span>)<span class='op'>+</span>
 
     <span class='ident'>test_content_encoding</span> {

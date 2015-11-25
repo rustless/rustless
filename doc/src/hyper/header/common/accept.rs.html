@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/accept.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/accept.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>accept.rs.html -- source</title>
@@ -166,79 +166,79 @@
 <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>QualityItem</span>;
 
 <span class='macro'>header</span><span class='macro'>!</span> {
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`Accept` header, defined in [RFC7231](http://tools.ietf.org/html/rfc7231#section-5.3.2)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The `Accept` header field can be used by user agents to specify&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;response media types that are acceptable.  Accept header fields can&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;be used to indicate that the request is specifically limited to a&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;small set of desired types, as in the case of a request for an&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;in-line image&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# ABNF&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```plain&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;Accept = #( media-range [ accept-params ] )&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;media-range    = ( \&quot;*/*\&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;                 / ( type \&quot;/\&quot; \&quot;*\&quot; )&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;                 / ( type \&quot;/\&quot; subtype )&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;                 ) *( OWS \&quot;;\&quot; OWS parameter )&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;accept-params  = weight *( accept-ext )&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;accept-ext = OWS \&quot;;\&quot; OWS token [ \&quot;=\&quot; ( token / quoted-string ) ]&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example values&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `audio/*; q=0.2, audio/basic` (`*` value won&#39;t parse correctly)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `text/plain; q=0.5, text/html, text/x-dvi; q=0.8, text/x-c`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Examples&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, Accept, qitem};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::mime::{Mime, TopLevel, SubLevel};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    Accept(vec![&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        qitem(Mime(TopLevel::Text, SubLevel::Html, vec![])),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ])&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;);&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, Accept, qitem};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::mime::{Mime, TopLevel, SubLevel, Attr, Value};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    Accept(vec![&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        qitem(Mime(TopLevel::Application, SubLevel::Json,&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;                   vec![(Attr::Charset, Value::Utf8)])),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ])&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;);&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, Accept, QualityItem, Quality, qitem};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::mime::{Mime, TopLevel, SubLevel};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    Accept(vec![&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        qitem(Mime(TopLevel::Text, SubLevel::Html, vec![])),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        qitem(Mime(TopLevel::Application,&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;                   SubLevel::Ext(\&quot;xhtml+xml\&quot;.to_owned()), vec![])),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        QualityItem::new(Mime(TopLevel::Application, SubLevel::Xml, vec![]),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;                         Quality(900)),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;                         qitem(Mime(TopLevel::Image,&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;                                    SubLevel::Ext(\&quot;webp\&quot;.to_owned()), vec![])),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;                         QualityItem::new(Mime(TopLevel::Star, SubLevel::Star, vec![]),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;                                          Quality(800))&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ])&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;);&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Notes&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* Using always Mime types to represent `media-range` differs from the ABNF.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* **FIXME**: `accept-ext` is not supported.&quot;</span>]</span>
+    <span class='doccomment'>/// `Accept` header, defined in [RFC7231](http://tools.ietf.org/html/rfc7231#section-5.3.2)</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// The `Accept` header field can be used by user agents to specify</span>
+    <span class='doccomment'>/// response media types that are acceptable.  Accept header fields can</span>
+    <span class='doccomment'>/// be used to indicate that the request is specifically limited to a</span>
+    <span class='doccomment'>/// small set of desired types, as in the case of a request for an</span>
+    <span class='doccomment'>/// in-line image</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # ABNF</span>
+    <span class='doccomment'>/// ```plain</span>
+    <span class='doccomment'>/// Accept = #( media-range [ accept-params ] )</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// media-range    = ( &quot;*/*&quot;</span>
+    <span class='doccomment'>///                  / ( type &quot;/&quot; &quot;*&quot; )</span>
+    <span class='doccomment'>///                  / ( type &quot;/&quot; subtype )</span>
+    <span class='doccomment'>///                  ) *( OWS &quot;;&quot; OWS parameter )</span>
+    <span class='doccomment'>/// accept-params  = weight *( accept-ext )</span>
+    <span class='doccomment'>/// accept-ext = OWS &quot;;&quot; OWS token [ &quot;=&quot; ( token / quoted-string ) ]</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Example values</span>
+    <span class='doccomment'>/// * `audio/*; q=0.2, audio/basic` (`*` value won&#39;t parse correctly)</span>
+    <span class='doccomment'>/// * `text/plain; q=0.5, text/html, text/x-dvi; q=0.8, text/x-c`</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, Accept, qitem};</span>
+    <span class='doccomment'>/// use hyper::mime::{Mime, TopLevel, SubLevel};</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// headers.set(</span>
+    <span class='doccomment'>///     Accept(vec![</span>
+    <span class='doccomment'>///         qitem(Mime(TopLevel::Text, SubLevel::Html, vec![])),</span>
+    <span class='doccomment'>///     ])</span>
+    <span class='doccomment'>/// );</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, Accept, qitem};</span>
+    <span class='doccomment'>/// use hyper::mime::{Mime, TopLevel, SubLevel, Attr, Value};</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(</span>
+    <span class='doccomment'>///     Accept(vec![</span>
+    <span class='doccomment'>///         qitem(Mime(TopLevel::Application, SubLevel::Json,</span>
+    <span class='doccomment'>///                    vec![(Attr::Charset, Value::Utf8)])),</span>
+    <span class='doccomment'>///     ])</span>
+    <span class='doccomment'>/// );</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, Accept, QualityItem, Quality, qitem};</span>
+    <span class='doccomment'>/// use hyper::mime::{Mime, TopLevel, SubLevel};</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// headers.set(</span>
+    <span class='doccomment'>///     Accept(vec![</span>
+    <span class='doccomment'>///         qitem(Mime(TopLevel::Text, SubLevel::Html, vec![])),</span>
+    <span class='doccomment'>///         qitem(Mime(TopLevel::Application,</span>
+    <span class='doccomment'>///                    SubLevel::Ext(&quot;xhtml+xml&quot;.to_owned()), vec![])),</span>
+    <span class='doccomment'>///         QualityItem::new(Mime(TopLevel::Application, SubLevel::Xml, vec![]),</span>
+    <span class='doccomment'>///                          Quality(900)),</span>
+    <span class='doccomment'>///                          qitem(Mime(TopLevel::Image,</span>
+    <span class='doccomment'>///                                     SubLevel::Ext(&quot;webp&quot;.to_owned()), vec![])),</span>
+    <span class='doccomment'>///                          QualityItem::new(Mime(TopLevel::Star, SubLevel::Star, vec![]),</span>
+    <span class='doccomment'>///                                           Quality(800))</span>
+    <span class='doccomment'>///     ])</span>
+    <span class='doccomment'>/// );</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Notes</span>
+    <span class='doccomment'>/// * Using always Mime types to represent `media-range` differs from the ABNF.</span>
+    <span class='doccomment'>/// * **FIXME**: `accept-ext` is not supported.</span>
     (<span class='ident'>Accept</span>, <span class='string'>&quot;Accept&quot;</span>) <span class='op'>=&gt;</span> (<span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>Mime</span><span class='op'>&gt;</span>)<span class='op'>+</span>
 
     <span class='ident'>test_accept</span> {

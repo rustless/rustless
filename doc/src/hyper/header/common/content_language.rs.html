@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/content_language.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/content_language.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>content_language.rs.html -- source</title>
@@ -104,54 +104,54 @@
 <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>QualityItem</span>;
 
 <span class='macro'>header</span><span class='macro'>!</span> {
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`Content-Language` header, defined in&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;[RFC7231](https://tools.ietf.org/html/rfc7231#section-3.1.3.2)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The `Content-Language` header field describes the natural language(s)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;of the intended audience for the representation.  Note that this&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;might not be equivalent to all the languages used within the&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;representation.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# ABNF&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```plain&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;Content-Language = 1#language-tag&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example values&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `da`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `mi, en`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Examples&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# extern crate hyper;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# #[macro_use] extern crate language_tags;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# use hyper::header::{Headers, ContentLanguage, qitem};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# &quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# fn main() {&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ContentLanguage(vec![&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        qitem(langtag!(en)),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ])&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;);&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# }&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# extern crate hyper;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# #[macro_use] extern crate language_tags;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# use hyper::header::{Headers, ContentLanguage, qitem};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# &quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# fn main() {&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ContentLanguage(vec![&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        qitem(langtag!(da)),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        qitem(langtag!(en;;;GB)),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ])&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;);&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# }&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
+    <span class='doccomment'>/// `Content-Language` header, defined in</span>
+    <span class='doccomment'>/// [RFC7231](https://tools.ietf.org/html/rfc7231#section-3.1.3.2)</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// The `Content-Language` header field describes the natural language(s)</span>
+    <span class='doccomment'>/// of the intended audience for the representation.  Note that this</span>
+    <span class='doccomment'>/// might not be equivalent to all the languages used within the</span>
+    <span class='doccomment'>/// representation.</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # ABNF</span>
+    <span class='doccomment'>/// ```plain</span>
+    <span class='doccomment'>/// Content-Language = 1#language-tag</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # Example values</span>
+    <span class='doccomment'>/// * `da`</span>
+    <span class='doccomment'>/// * `mi, en`</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// # extern crate hyper;</span>
+    <span class='doccomment'>/// # #[macro_use] extern crate language_tags;</span>
+    <span class='doccomment'>/// # use hyper::header::{Headers, ContentLanguage, qitem};</span>
+    <span class='doccomment'>/// # </span>
+    <span class='doccomment'>/// # fn main() {</span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(</span>
+    <span class='doccomment'>///     ContentLanguage(vec![</span>
+    <span class='doccomment'>///         qitem(langtag!(en)),</span>
+    <span class='doccomment'>///     ])</span>
+    <span class='doccomment'>/// );</span>
+    <span class='doccomment'>/// # }</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// # extern crate hyper;</span>
+    <span class='doccomment'>/// # #[macro_use] extern crate language_tags;</span>
+    <span class='doccomment'>/// # use hyper::header::{Headers, ContentLanguage, qitem};</span>
+    <span class='doccomment'>/// # </span>
+    <span class='doccomment'>/// # fn main() {</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(</span>
+    <span class='doccomment'>///     ContentLanguage(vec![</span>
+    <span class='doccomment'>///         qitem(langtag!(da)),</span>
+    <span class='doccomment'>///         qitem(langtag!(en;;;GB)),</span>
+    <span class='doccomment'>///     ])</span>
+    <span class='doccomment'>/// );</span>
+    <span class='doccomment'>/// # }</span>
+    <span class='doccomment'>/// ```</span>
     (<span class='ident'>ContentLanguage</span>, <span class='string'>&quot;Content-Language&quot;</span>) <span class='op'>=&gt;</span> (<span class='ident'>QualityItem</span><span class='op'>&lt;</span><span class='ident'>LanguageTag</span><span class='op'>&gt;</span>)<span class='op'>+</span>
 
     <span class='ident'>test_content_language</span> {

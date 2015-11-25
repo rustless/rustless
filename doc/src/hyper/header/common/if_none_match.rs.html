@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/if_none_match.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/if_none_match.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>if_none_match.rs.html -- source</title>
@@ -127,51 +127,51 @@
 <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>EntityTag</span>;
 
 <span class='macro'>header</span><span class='macro'>!</span> {
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`If-None-Match` header, defined in&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;[RFC7232](https://tools.ietf.org/html/rfc7232#section-3.2)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The `If-None-Match` header field makes the request method conditional&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;on a recipient cache or origin server either not having any current&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;representation of the target resource, when the field-value is \&quot;*\&quot;,&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;or having a selected representation with an entity-tag that does not&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;match any of those listed in the field-value.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;A recipient MUST use the weak comparison function when comparing&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;entity-tags for If-None-Match (Section 2.3.2), since weak entity-tags&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;can be used for cache validation even if there have been changes to&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;the representation data.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# ABNF&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```plain&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;If-None-Match = \&quot;*\&quot; / 1#entity-tag&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example values&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `\&quot;xyzzy\&quot;`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `W/\&quot;xyzzy\&quot;`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `\&quot;xyzzy\&quot;, \&quot;r2d2xxxx\&quot;, \&quot;c3piozzzz\&quot;`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `W/\&quot;xyzzy\&quot;, W/\&quot;r2d2xxxx\&quot;, W/\&quot;c3piozzzz\&quot;`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `*`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Examples&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, IfNoneMatch};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(IfNoneMatch::Any);&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, IfNoneMatch, EntityTag};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    IfNoneMatch::Items(vec![&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        EntityTag::new(false, \&quot;xyzzy\&quot;.to_owned()),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        EntityTag::new(false, \&quot;foobar\&quot;.to_owned()),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;        EntityTag::new(false, \&quot;bazquux\&quot;.to_owned()),&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;    ])&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;);&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
+    <span class='doccomment'>/// `If-None-Match` header, defined in</span>
+    <span class='doccomment'>/// [RFC7232](https://tools.ietf.org/html/rfc7232#section-3.2)</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// The `If-None-Match` header field makes the request method conditional</span>
+    <span class='doccomment'>/// on a recipient cache or origin server either not having any current</span>
+    <span class='doccomment'>/// representation of the target resource, when the field-value is &quot;*&quot;,</span>
+    <span class='doccomment'>/// or having a selected representation with an entity-tag that does not</span>
+    <span class='doccomment'>/// match any of those listed in the field-value.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// A recipient MUST use the weak comparison function when comparing</span>
+    <span class='doccomment'>/// entity-tags for If-None-Match (Section 2.3.2), since weak entity-tags</span>
+    <span class='doccomment'>/// can be used for cache validation even if there have been changes to</span>
+    <span class='doccomment'>/// the representation data.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # ABNF</span>
+    <span class='doccomment'>/// ```plain</span>
+    <span class='doccomment'>/// If-None-Match = &quot;*&quot; / 1#entity-tag</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Example values</span>
+    <span class='doccomment'>/// * `&quot;xyzzy&quot;`</span>
+    <span class='doccomment'>/// * `W/&quot;xyzzy&quot;`</span>
+    <span class='doccomment'>/// * `&quot;xyzzy&quot;, &quot;r2d2xxxx&quot;, &quot;c3piozzzz&quot;`</span>
+    <span class='doccomment'>/// * `W/&quot;xyzzy&quot;, W/&quot;r2d2xxxx&quot;, W/&quot;c3piozzzz&quot;`</span>
+    <span class='doccomment'>/// * `*`</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, IfNoneMatch};</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(IfNoneMatch::Any);</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, IfNoneMatch, EntityTag};</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(</span>
+    <span class='doccomment'>///     IfNoneMatch::Items(vec![</span>
+    <span class='doccomment'>///         EntityTag::new(false, &quot;xyzzy&quot;.to_owned()),</span>
+    <span class='doccomment'>///         EntityTag::new(false, &quot;foobar&quot;.to_owned()),</span>
+    <span class='doccomment'>///         EntityTag::new(false, &quot;bazquux&quot;.to_owned()),</span>
+    <span class='doccomment'>///     ])</span>
+    <span class='doccomment'>/// );</span>
+    <span class='doccomment'>/// ```</span>
     (<span class='ident'>IfNoneMatch</span>, <span class='string'>&quot;If-None-Match&quot;</span>) <span class='op'>=&gt;</span> {<span class='ident'>Any</span> <span class='op'>/</span> (<span class='ident'>EntityTag</span>)<span class='op'>+</span>}
 
     <span class='ident'>test_if_none_match</span> {

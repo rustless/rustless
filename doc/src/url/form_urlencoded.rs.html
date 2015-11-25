@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/url-0.2.37/src/form_urlencoded.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/url-0.2.38/src/form_urlencoded.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>form_urlencoded.rs.html -- source</title>
@@ -214,6 +214,9 @@
 <span id="172">172</span>
 <span id="173">173</span>
 <span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2015 Simon Sapin.</span>
 <span class='comment'>//</span>
@@ -240,6 +243,9 @@
 <span class='doccomment'>/// into a vector of (name, value) pairs.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Use `parse(input.as_bytes())` to parse a `&amp;str` string.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// The names and values are URL-decoded. For instance, `%23first=%25try%25` will be</span>
+<span class='doccomment'>/// converted to `[(&quot;#first&quot;, &quot;%try%&quot;)]`.</span>
 <span class='attribute'>#[<span class='ident'>inline</span>]</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse</span>(<span class='ident'>input</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span>(<span class='ident'>String</span>, <span class='ident'>String</span>)<span class='op'>&gt;</span> {
     <span class='ident'>parse_internal</span>(<span class='ident'>input</span>, <span class='ident'>EncodingOverride</span>::<span class='ident'>utf8</span>(), <span class='boolval'>false</span>).<span class='ident'>unwrap</span>()

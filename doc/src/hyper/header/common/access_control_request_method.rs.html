@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/access_control_request_method.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/access_control_request_method.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>access_control_request_method.rs.html -- source</title>
@@ -74,27 +74,27 @@
 <span class='kw'>use</span> <span class='ident'>method</span>::<span class='ident'>Method</span>;
 
 <span class='macro'>header</span><span class='macro'>!</span> {
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`Access-Control-Request-Method` header, part of&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;[CORS](http://www.w3.org/TR/cors/#access-control-request-method-request-header)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The `Access-Control-Request-Method` header indicates which method will be&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;used in the actual request as part of the preflight request.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# ABNF&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```plain&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;Access-Control-Request-Method: \&quot;Access-Control-Request-Method\&quot; \&quot;:\&quot; Method&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example values&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `GET`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Examples&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, AccessControlRequestMethod};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::method::Method;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(AccessControlRequestMethod(Method::Get));&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
+    <span class='doccomment'>/// `Access-Control-Request-Method` header, part of</span>
+    <span class='doccomment'>/// [CORS](http://www.w3.org/TR/cors/#access-control-request-method-request-header)</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// The `Access-Control-Request-Method` header indicates which method will be</span>
+    <span class='doccomment'>/// used in the actual request as part of the preflight request.</span>
+    <span class='doccomment'>/// # ABNF</span>
+    <span class='doccomment'>/// ```plain</span>
+    <span class='doccomment'>/// Access-Control-Request-Method: \&quot;Access-Control-Request-Method\&quot; \&quot;:\&quot; Method</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # Example values</span>
+    <span class='doccomment'>/// * `GET`</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, AccessControlRequestMethod};</span>
+    <span class='doccomment'>/// use hyper::method::Method;</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(AccessControlRequestMethod(Method::Get));</span>
+    <span class='doccomment'>/// ```</span>
     (<span class='ident'>AccessControlRequestMethod</span>, <span class='string'>&quot;Access-Control-Request-Method&quot;</span>) <span class='op'>=&gt;</span> [<span class='ident'>Method</span>]
 
     <span class='ident'>test_access_control_request_method</span> {

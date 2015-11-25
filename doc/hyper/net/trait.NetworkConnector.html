@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-38599' class='srclink' href='../../src/hyper/net.rs.html#79-84' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-38829' class='srclink' href='../../src/hyper/net.rs.html#81-87' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait NetworkConnector {
     type Stream: <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.Into.html' title='core::convert::Into'>Into</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../hyper/net/trait.NetworkStream.html' title='hyper::net::NetworkStream'>NetworkStream</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>&gt;&gt;;
     fn <a href='#tymethod.connect' class='fnname'>connect</a>(&amp;self, host: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, port: <a href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, scheme: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../hyper/error/type.Result.html' title='hyper::error::Result'>Result</a>&lt;Self::<a class='trait' href='../../hyper/net/trait.NetworkConnector.html' title='hyper::net::NetworkConnector'>Stream</a>&gt;;

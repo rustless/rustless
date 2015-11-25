@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/if_unmodified_since.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/if_unmodified_since.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>if_unmodified_since.rs.html -- source</title>
@@ -89,37 +89,37 @@
 <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>HttpDate</span>;
 
 <span class='macro'>header</span><span class='macro'>!</span> {
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`If-Unmodified-Since` header, defined in&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;[RFC7232](http://tools.ietf.org/html/rfc7232#section-3.4)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The `If-Unmodified-Since` header field makes the request method&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;conditional on the selected representation&#39;s last modification date&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;being earlier than or equal to the date provided in the field-value.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;This field accomplishes the same purpose as If-Match for cases where&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;the user agent does not have an entity-tag for the representation.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# ABNF&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```plain&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;If-Unmodified-Since = HTTP-date&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example values&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `Sat, 29 Oct 1994 19:43:31 GMT`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# extern crate hyper;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# extern crate time;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# fn main() {&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;// extern crate time;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, IfUnmodifiedSince, HttpDate};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use time::{self, Duration};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(IfUnmodifiedSince(HttpDate(time::now() - Duration::days(1))));&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# }&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
+    <span class='doccomment'>/// `If-Unmodified-Since` header, defined in</span>
+    <span class='doccomment'>/// [RFC7232](http://tools.ietf.org/html/rfc7232#section-3.4)</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// The `If-Unmodified-Since` header field makes the request method</span>
+    <span class='doccomment'>/// conditional on the selected representation&#39;s last modification date</span>
+    <span class='doccomment'>/// being earlier than or equal to the date provided in the field-value.</span>
+    <span class='doccomment'>/// This field accomplishes the same purpose as If-Match for cases where</span>
+    <span class='doccomment'>/// the user agent does not have an entity-tag for the representation.</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # ABNF</span>
+    <span class='doccomment'>/// ```plain</span>
+    <span class='doccomment'>/// If-Unmodified-Since = HTTP-date</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # Example values</span>
+    <span class='doccomment'>/// * `Sat, 29 Oct 1994 19:43:31 GMT`</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// # Example</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// # extern crate hyper;</span>
+    <span class='doccomment'>/// # extern crate time;</span>
+    <span class='doccomment'>/// # fn main() {</span>
+    <span class='doccomment'>/// // extern crate time;</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// use hyper::header::{Headers, IfUnmodifiedSince, HttpDate};</span>
+    <span class='doccomment'>/// use time::{self, Duration};</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(IfUnmodifiedSince(HttpDate(time::now() - Duration::days(1))));</span>
+    <span class='doccomment'>/// # }</span>
+    <span class='doccomment'>/// ```</span>
     (<span class='ident'>IfUnmodifiedSince</span>, <span class='string'>&quot;If-Unmodified-Since&quot;</span>) <span class='op'>=&gt;</span> [<span class='ident'>HttpDate</span>]
 
     <span class='ident'>test_if_unmodified_since</span> {

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/user_agent.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/user_agent.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>user_agent.rs.html -- source</title>
@@ -84,38 +84,38 @@
 <span id="42">42</span>
 </pre><pre class='rust '>
 <span class='macro'>header</span><span class='macro'>!</span> {
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`User-Agent` header, defined in&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;[RFC7231](http://tools.ietf.org/html/rfc7231#section-5.5.3)&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;The `User-Agent` header field contains information about the user&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;agent originating the request, which is often used by servers to help&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;identify the scope of reported interoperability problems, to work&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;around or tailor responses to avoid particular user agent&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;limitations, and for analytics regarding browser or operating system&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use.  A user agent SHOULD send a User-Agent field in each request&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;unless specifically configured not to do so.&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# ABNF&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```plain&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;User-Agent = product *( RWS ( product / comment ) )&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;product         = token [\&quot;/\&quot; product-version]&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;product-version = token&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example values&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `CERN-LineMode/2.15 libwww/2.17b3`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `Bunnies`&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Notes&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* The parser does not split the value&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, UserAgent};&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(UserAgent(\&quot;hyper/0.5.2\&quot;.to_owned()));&quot;</span>]</span>
-    <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
+    <span class='doccomment'>/// `User-Agent` header, defined in</span>
+    <span class='doccomment'>/// [RFC7231](http://tools.ietf.org/html/rfc7231#section-5.5.3)</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// The `User-Agent` header field contains information about the user</span>
+    <span class='doccomment'>/// agent originating the request, which is often used by servers to help</span>
+    <span class='doccomment'>/// identify the scope of reported interoperability problems, to work</span>
+    <span class='doccomment'>/// around or tailor responses to avoid particular user agent</span>
+    <span class='doccomment'>/// limitations, and for analytics regarding browser or operating system</span>
+    <span class='doccomment'>/// use.  A user agent SHOULD send a User-Agent field in each request</span>
+    <span class='doccomment'>/// unless specifically configured not to do so.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # ABNF</span>
+    <span class='doccomment'>/// ```plain</span>
+    <span class='doccomment'>/// User-Agent = product *( RWS ( product / comment ) )</span>
+    <span class='doccomment'>/// product         = token [&quot;/&quot; product-version]</span>
+    <span class='doccomment'>/// product-version = token</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Example values</span>
+    <span class='doccomment'>/// * `CERN-LineMode/2.15 libwww/2.17b3`</span>
+    <span class='doccomment'>/// * `Bunnies`</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Notes</span>
+    <span class='doccomment'>/// * The parser does not split the value</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Example</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// use hyper::header::{Headers, UserAgent};</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut headers = Headers::new();</span>
+    <span class='doccomment'>/// headers.set(UserAgent(&quot;hyper/0.5.2&quot;.to_owned()));</span>
+    <span class='doccomment'>/// ```</span>
     (<span class='ident'>UserAgent</span>, <span class='string'>&quot;User-Agent&quot;</span>) <span class='op'>=&gt;</span> [<span class='ident'>String</span>]
 
     <span class='ident'>test_user_agent</span> {

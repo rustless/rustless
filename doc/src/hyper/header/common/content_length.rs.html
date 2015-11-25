@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/header/common/content_length.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/content_length.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>content_length.rs.html -- source</title>
@@ -131,33 +131,33 @@
 
 <span class='kw'>use</span> <span class='ident'>header</span>::{<span class='ident'>HeaderFormat</span>, <span class='ident'>Header</span>, <span class='ident'>parsing</span>};
 
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;`Content-Length` header, defined in&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;[RFC7230](http://tools.ietf.org/html/rfc7230#section-3.3.2)&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;When a message does not have a `Transfer-Encoding` header field, a&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;Content-Length header field can provide the anticipated size, as a&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;decimal number of octets, for a potential payload body.  For messages&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;that do include a payload body, the Content-Length field-value&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;provides the framing information necessary for determining where the&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;body (and message) ends.  For messages that do not include a payload&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;body, the Content-Length indicates the size of the selected&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;representation.&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# ABNF&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```plain&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;Content-Length = 1*DIGIT&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example values&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;* `3495`&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;# Example&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;use hyper::header::{Headers, ContentLength};&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;let mut headers = Headers::new();&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;headers.set(ContentLength(1024u64));&quot;</span>]</span>
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;```&quot;</span>]</span>
+<span class='doccomment'>/// `Content-Length` header, defined in</span>
+<span class='doccomment'>/// [RFC7230](http://tools.ietf.org/html/rfc7230#section-3.3.2)</span>
+<span class='doccomment'>/// </span>
+<span class='doccomment'>/// When a message does not have a `Transfer-Encoding` header field, a</span>
+<span class='doccomment'>/// Content-Length header field can provide the anticipated size, as a</span>
+<span class='doccomment'>/// decimal number of octets, for a potential payload body.  For messages</span>
+<span class='doccomment'>/// that do include a payload body, the Content-Length field-value</span>
+<span class='doccomment'>/// provides the framing information necessary for determining where the</span>
+<span class='doccomment'>/// body (and message) ends.  For messages that do not include a payload</span>
+<span class='doccomment'>/// body, the Content-Length indicates the size of the selected</span>
+<span class='doccomment'>/// representation.</span>
+<span class='doccomment'>/// </span>
+<span class='doccomment'>/// # ABNF</span>
+<span class='doccomment'>/// ```plain</span>
+<span class='doccomment'>/// Content-Length = 1*DIGIT</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// </span>
+<span class='doccomment'>/// # Example values</span>
+<span class='doccomment'>/// * `3495`</span>
+<span class='doccomment'>/// </span>
+<span class='doccomment'>/// # Example</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// use hyper::header::{Headers, ContentLength};</span>
+<span class='doccomment'>/// </span>
+<span class='doccomment'>/// let mut headers = Headers::new();</span>
+<span class='doccomment'>/// headers.set(ContentLength(1024u64));</span>
+<span class='doccomment'>/// ```</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Copy</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ContentLength</span>(<span class='kw'>pub</span> <span class='ident'>u64</span>);
 

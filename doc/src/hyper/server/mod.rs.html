@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/server/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/server/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -548,11 +548,6 @@
 <span id="506">506</span>
 <span id="507">507</span>
 <span id="508">508</span>
-<span id="509">509</span>
-<span id="510">510</span>
-<span id="511">511</span>
-<span id="512">512</span>
-<span id="513">513</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP Server</span>
 <span class='doccomment'>//!</span>
@@ -750,8 +745,6 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_write_timeout</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>dur</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Duration</span><span class='op'>&gt;</span>) {
         <span class='self'>self</span>.<span class='ident'>timeouts</span>.<span class='ident'>write</span> <span class='op'>=</span> <span class='ident'>dur</span>;
     }
-
-
 }
 
 <span class='kw'>impl</span> <span class='ident'>Server</span><span class='op'>&lt;</span><span class='ident'>HttpListener</span><span class='op'>&gt;</span> {
@@ -775,6 +768,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>handle</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Handler</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>handler</span>: <span class='ident'>H</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>handle_threads</span>(<span class='ident'>handler</span>, <span class='ident'>num_cpus</span>::<span class='ident'>get</span>() <span class='op'>*</span> <span class='number'>5</span> <span class='op'>/</span> <span class='number'>4</span>)
     }
+
     <span class='doccomment'>/// Binds to a socket and starts handling connections with the provided</span>
     <span class='doccomment'>/// number of threads.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>handle_threads</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Handler</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>handler</span>: <span class='ident'>H</span>,
@@ -784,8 +778,7 @@
 }
 
 <span class='kw'>fn</span> <span class='ident'>handle</span><span class='op'>&lt;</span><span class='ident'>H</span>, <span class='ident'>L</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='ident'>server</span>: <span class='ident'>Server</span><span class='op'>&lt;</span><span class='ident'>L</span><span class='op'>&gt;</span>, <span class='ident'>handler</span>: <span class='ident'>H</span>, <span class='ident'>threads</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span>
-<span class='kw'>where</span> <span class='ident'>H</span>: <span class='ident'>Handler</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span>,
-<span class='ident'>L</span>: <span class='ident'>NetworkListener</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span> {
+<span class='kw'>where</span> <span class='ident'>H</span>: <span class='ident'>Handler</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span>, <span class='ident'>L</span>: <span class='ident'>NetworkListener</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span> {
     <span class='kw'>let</span> <span class='ident'>socket</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>server</span>.<span class='ident'>listener</span>.<span class='ident'>local_addr</span>());
 
     <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;threads = {:?}&quot;</span>, <span class='ident'>threads</span>);
@@ -807,7 +800,6 @@
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Handler</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span> <span class='ident'>Worker</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
-
     <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>handler</span>: <span class='ident'>H</span>, <span class='ident'>timeouts</span>: <span class='ident'>Timeouts</span>) <span class='op'>-&gt;</span> <span class='ident'>Worker</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
         <span class='ident'>Worker</span> {
             <span class='ident'>handler</span>: <span class='ident'>handler</span>,
@@ -855,7 +847,6 @@
         <span class='self'>self</span>.<span class='ident'>set_write_timeout</span>(<span class='ident'>s</span>, <span class='self'>self</span>.<span class='ident'>timeouts</span>.<span class='ident'>write</span>)
     }
 
-
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;timeouts&quot;</span>))]</span>
     <span class='kw'>fn</span> <span class='ident'>set_write_timeout</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>_s</span>: <span class='kw-2'>&amp;</span><span class='ident'>NetworkStream</span>, <span class='ident'>_timeout</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Duration</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='prelude-val'>Ok</span>(())
@@ -894,7 +885,6 @@
                 <span class='kw'>return</span> <span class='boolval'>false</span>;
             }
         };
-
 
         <span class='kw'>if</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>handle_expect</span>(<span class='kw-2'>&amp;</span><span class='ident'>req</span>, <span class='ident'>wrt</span>) {
             <span class='kw'>return</span> <span class='boolval'>false</span>;

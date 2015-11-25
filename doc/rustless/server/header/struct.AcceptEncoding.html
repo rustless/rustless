@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-8163' class='srclink' href='../../../hyper/header/common/accept_encoding/struct.AcceptEncoding.html?gotosrc=8163' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-8393' class='srclink' href='../../../hyper/header/common/accept_encoding/struct.AcceptEncoding.html?gotosrc=8393' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct AcceptEncoding(pub <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../rustless/server/header/struct.QualityItem.html' title='rustless::server::header::QualityItem'>QualityItem</a>&lt;<a class='enum' href='../../../rustless/server/header/enum.Encoding.html' title='rustless::server::header::Encoding'>Encoding</a>&gt;&gt;);</pre><div class='docblock'><p><code>Accept-Encoding</code> header, defined in
 <a href="http://tools.ietf.org/html/rfc7231#section-5.3.4">RFC7231</a></p>
 
@@ -81,7 +81,7 @@ codings          = content-coding / &quot;identity&quot; / &quot;*&quot;
 );</pre>
 <pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>header</span>::{<span class='ident'>Headers</span>, <span class='ident'>AcceptEncoding</span>, <span class='ident'>Encoding</span>, <span class='ident'>qitem</span>};
- 
+
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
 <span class='ident'>headers</span>.<span class='ident'>set</span>(
     <span class='ident'>AcceptEncoding</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
@@ -92,7 +92,7 @@ codings          = content-coding / &quot;identity&quot; / &quot;*&quot;
 );</pre>
 <pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>header</span>::{<span class='ident'>Headers</span>, <span class='ident'>AcceptEncoding</span>, <span class='ident'>Encoding</span>, <span class='ident'>QualityItem</span>, <span class='ident'>Quality</span>, <span class='ident'>qitem</span>};
- 
+
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
 <span class='ident'>headers</span>.<span class='ident'>set</span>(
     <span class='ident'>AcceptEncoding</span>(<span class='macro'>vec</span><span class='macro'>!</span>[

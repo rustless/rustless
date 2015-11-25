@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-15617' class='srclink' href='../src/url/lib.rs.html#396-399' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-15382' class='srclink' href='../src/url/lib.rs.html#458-461' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn parse_path(input: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../url/type.ParseResult.html' title='url::ParseResult'>ParseResult</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;, <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;, <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;)</a>&gt;</pre><div class='docblock'><p>Parse <code>input</code> as a “standalone” URL path,
 with an optional query string and fragment identifier.</p>
 
@@ -61,6 +61,9 @@ servers typically parse it and ignore it
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>path</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;foo&quot;</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;baz&quot;</span>.<span class='ident'>to_string</span>()]);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>query</span>, <span class='prelude-val'>Some</span>(<span class='string'>&quot;q=42&quot;</span>.<span class='ident'>to_string</span>()));
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>fragment</span>, <span class='prelude-val'>None</span>);</pre>
+
+<p>The query string returned by <code>url::parse_path</code> can be decoded with
+<code>url::form_urlencoded::parse</code>.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/url-0.2.37/src/percent_encoding.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/url-0.2.38/src/percent_encoding.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>percent_encoding.rs.html -- source</title>
@@ -186,6 +186,9 @@
 <span id="144">144</span>
 <span id="145">145</span>
 <span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2014 Simon Sapin.</span>
 <span class='comment'>//</span>
@@ -244,6 +247,9 @@
     <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='ident'>encode_sets</span>::<span class='ident'>FORM_URLENCODED</span>,
 };
 
+<span class='doccomment'>/// This encode set is used for HTTP header values and is defined at</span>
+<span class='doccomment'>/// https://tools.ietf.org/html/rfc5987#section-3.2</span>
+<span class='kw'>pub</span> <span class='kw'>static</span> <span class='ident'>HTTP_VALUE_ENCODE_SET</span>: <span class='ident'>EncodeSet</span> <span class='op'>=</span> <span class='ident'>EncodeSet</span> { <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='ident'>encode_sets</span>::<span class='ident'>HTTP_VALUE</span> };
 
 <span class='doccomment'>/// Percent-encode the given bytes, and push the result to `output`.</span>
 <span class='doccomment'>///</span>

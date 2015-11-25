@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-13543' class='srclink' href='../../../hyper/header/common/content_length/struct.ContentLength.html?gotosrc=13543' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-13773' class='srclink' href='../../../hyper/header/common/content_length/struct.ContentLength.html?gotosrc=13773' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct ContentLength(pub <a href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>);</pre><div class='docblock'><p><code>Content-Length</code> header, defined in
 <a href="http://tools.ietf.org/html/rfc7230#section-3.3.2">RFC7230</a></p>
 
@@ -72,7 +72,7 @@ representation.</p>
 <h1 id="example" class='section-header'><a
                            href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>header</span>::{<span class='ident'>Headers</span>, <span class='ident'>ContentLength</span>};
-
+ 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
 <span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>ContentLength</span>(<span class='number'>1024u64</span>));</pre>
 </div><h2 id='deref-methods'>Methods from <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>&gt;</h2><div class='impl-items'><h4 id='method.count_ones' class='method'><code>fn <a href='#method.count_ones' class='fnname'>count_ones</a>(self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></h4>

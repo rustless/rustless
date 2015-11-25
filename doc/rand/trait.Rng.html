@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
-    <link rel="shortcut icon" href="http://www.rust-lang.org/favicon.ico">
+    <link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico">
     
 </head>
 <body class="rustdoc">
@@ -25,7 +25,7 @@
     
 
     <nav class="sidebar">
-        <a href='../rand/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk.png' alt='' width='100'></a>
+        <a href='../rand/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk.png' alt='' width='100'></a>
         <p class='location'><a href='index.html'>rand</a></p><script>window.sidebarCurrent = {name: 'Rng', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-18714' class='srclink' href='../src/rand/lib.rs.html#287-532' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-18714' class='srclink' href='../src/rand/lib.rs.html#287-543' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Rng {
     fn <a href='#tymethod.next_u32' class='fnname'>next_u32</a>(&amp;mut self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>;
 
@@ -79,6 +79,21 @@ these two methods. Similarly to <code>next_u32</code>, this rarely needs
 to be called directly, prefer <code>r.gen()</code> to <code>r.next_u64()</code>.</p>
 </div><h3 id='method.next_f32' class='method stab '><code>fn <a href='#method.next_f32' class='fnname'>next_f32</a>(&amp;mut self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a></code></h3><div class='docblock'><p>Return the next random f32 selected from the half-open
 interval <code>[0, 1)</code>.</p>
+
+<p>This uses a technique described by Saito and Matsumoto at
+MCQMC&#39;08. Given that the IEEE floating point numbers are
+uniformly distributed over [1,2), we generate a number in
+this range and then offset it onto the range [0,1). Our
+choice of bits (masking v. shifting) is arbitrary and
+should be immaterial for high quality generators. For low
+quality generators (ex. LCG), prefer bitshifting due to
+correlation between sequential low order bits.</p>
+
+<p>See:
+A PRNG specialized in double precision floating point numbers using
+an affine transition
+<a href="http://www.math.sci.hiroshima-u.ac.jp/%7Em-mat/MT/ARTICLES/dSFMT.pdf">http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/ARTICLES/dSFMT.pdf</a>
+<a href="http://www.math.sci.hiroshima-u.ac.jp/%7Em-mat/MT/SFMT/dSFMT-slide-e.pdf">http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/SFMT/dSFMT-slide-e.pdf</a></p>
 
 <p>By default this is implemented in terms of <code>next_u32</code>, but a
 random number generator which can generate numbers satisfying

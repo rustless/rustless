@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/client/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/client/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -571,6 +571,15 @@
 <span id="529">529</span>
 <span id="530">530</span>
 <span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP Client</span>
 <span class='doccomment'>//!</span>
@@ -725,42 +734,42 @@
     }
 
     <span class='doccomment'>/// Build a Get request.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span> {
         <span class='self'>self</span>.<span class='ident'>request</span>(<span class='ident'>Method</span>::<span class='ident'>Get</span>, <span class='ident'>url</span>)
     }
 
     <span class='doccomment'>/// Build a Head request.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>head</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>head</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span> {
         <span class='self'>self</span>.<span class='ident'>request</span>(<span class='ident'>Method</span>::<span class='ident'>Head</span>, <span class='ident'>url</span>)
     }
 
     <span class='doccomment'>/// Build a Patch request.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>patch</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>patch</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span> {
         <span class='self'>self</span>.<span class='ident'>request</span>(<span class='ident'>Method</span>::<span class='ident'>Patch</span>, <span class='ident'>url</span>)
     }
 
     <span class='doccomment'>/// Build a Post request.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>post</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>post</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span> {
         <span class='self'>self</span>.<span class='ident'>request</span>(<span class='ident'>Method</span>::<span class='ident'>Post</span>, <span class='ident'>url</span>)
     }
 
     <span class='doccomment'>/// Build a Put request.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>put</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>put</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span> {
         <span class='self'>self</span>.<span class='ident'>request</span>(<span class='ident'>Method</span>::<span class='ident'>Put</span>, <span class='ident'>url</span>)
     }
 
     <span class='doccomment'>/// Build a Delete request.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>delete</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>delete</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span> {
         <span class='self'>self</span>.<span class='ident'>request</span>(<span class='ident'>Method</span>::<span class='ident'>Delete</span>, <span class='ident'>url</span>)
     }
 
 
     <span class='doccomment'>/// Build a new request using this Client.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>request</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>method</span>: <span class='ident'>Method</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>request</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>method</span>: <span class='ident'>Method</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span> {
         <span class='ident'>RequestBuilder</span> {
             <span class='ident'>client</span>: <span class='self'>self</span>,
             <span class='ident'>method</span>: <span class='ident'>method</span>,
-            <span class='ident'>url</span>: <span class='ident'>url</span>,
+            <span class='ident'>url</span>: <span class='ident'>url</span>.<span class='ident'>into_url</span>(),
             <span class='ident'>body</span>: <span class='prelude-val'>None</span>,
             <span class='ident'>headers</span>: <span class='prelude-val'>None</span>,
         }
@@ -775,30 +784,39 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// One of these will be built for you if you use one of the convenience</span>
 <span class='doccomment'>/// methods, such as `get()`, `post()`, etc.</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='ident'>client</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>Client</span>,
-    <span class='ident'>url</span>: <span class='ident'>U</span>,
+    <span class='comment'>// We store a result here because it&#39;s good to keep RequestBuilder</span>
+    <span class='comment'>// from being generic, but it is a nicer API to report the error</span>
+    <span class='comment'>// from `send` (when other errors may be happening, so it already</span>
+    <span class='comment'>// returns a `Result`). Why&#39;s it good to keep it non-generic? It</span>
+    <span class='comment'>// stops downstream crates having to remonomorphise and recompile</span>
+    <span class='comment'>// the code, which can take a while, since `send` is fairly large.</span>
+    <span class='comment'>// (For an extreme example, a tiny crate containing</span>
+    <span class='comment'>// `hyper::Client::new().get(&quot;x&quot;).send().unwrap();` took ~4s to</span>
+    <span class='comment'>// compile with a generic RequestBuilder, but 2s with this scheme,)</span>
+    <span class='ident'>url</span>: <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Url</span>, <span class='ident'>UrlError</span><span class='op'>&gt;</span>,
     <span class='ident'>headers</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Headers</span><span class='op'>&gt;</span>,
     <span class='ident'>method</span>: <span class='ident'>Method</span>,
     <span class='ident'>body</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;&gt;</span>,
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>U</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
 
     <span class='doccomment'>/// Set a request body to be sent.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>body</span><span class='op'>&lt;</span><span class='ident'>B</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>body</span>: <span class='ident'>B</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>body</span><span class='op'>&lt;</span><span class='ident'>B</span>: <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>body</span>: <span class='ident'>B</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>body</span>.<span class='ident'>into</span>());
         <span class='self'>self</span>
     }
 
     <span class='doccomment'>/// Add additional headers to the request.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>headers</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>headers</span>: <span class='ident'>Headers</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>headers</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>headers</span>: <span class='ident'>Headers</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>headers</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>headers</span>);
         <span class='self'>self</span>
     }
 
     <span class='doccomment'>/// Add an individual new header to the request.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>header</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Header</span> <span class='op'>+</span> <span class='ident'>HeaderFormat</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>header</span>: <span class='ident'>H</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>U</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>header</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Header</span> <span class='op'>+</span> <span class='ident'>HeaderFormat</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>header</span>: <span class='ident'>H</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
         {
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>headers</span> {
                 <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>h</span>) <span class='op'>=&gt;</span> <span class='ident'>h</span>,
@@ -816,7 +834,7 @@
     <span class='doccomment'>/// Execute this request and receive a Response back.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>send</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>RequestBuilder</span> { <span class='ident'>client</span>, <span class='ident'>method</span>, <span class='ident'>url</span>, <span class='ident'>headers</span>, <span class='ident'>body</span> } <span class='op'>=</span> <span class='self'>self</span>;
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>url</span>.<span class='ident'>into_url</span>());
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>url</span>);
         <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;send {:?} {:?}&quot;</span>, <span class='ident'>method</span>, <span class='ident'>url</span>);
 
         <span class='kw'>let</span> <span class='ident'>can_have_body</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='kw-2'>&amp;</span><span class='ident'>method</span> {
