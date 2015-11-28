@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.4/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.5/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -206,6 +206,8 @@
 <span id="164">164</span>
 <span id="165">165</span>
 <span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_logo_url</span> <span class='op'>=</span> <span class='string'>&quot;https://avatars0.githubusercontent.com/u/7853871?s=128&quot;</span>, <span class='ident'>html_favicon_url</span> <span class='op'>=</span> <span class='string'>&quot;https://avatars0.githubusercontent.com/u/7853871?s=256&quot;</span>, <span class='ident'>html_root_url</span> <span class='op'>=</span> <span class='string'>&quot;http://ironframework.io/core/iron&quot;</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>test</span>, <span class='ident'>deny</span>(<span class='ident'>warnings</span>))]</span>
@@ -371,8 +373,10 @@
 <span class='comment'>// Request and Response Modifiers</span>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>modifiers</span>;
 
-<span class='kw'>mod</span> <span class='ident'>iron</span>;
+<span class='comment'>// Helper macros for error handling</span>
+<span class='kw'>mod</span> <span class='ident'>macros</span>;
 
+<span class='kw'>mod</span> <span class='ident'>iron</span>;
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

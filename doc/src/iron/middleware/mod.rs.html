@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.4/src/middleware/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.5/src/middleware/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -409,6 +409,13 @@
 <span id="367">367</span>
 <span id="368">368</span>
 <span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s Middleware and Handler System</span>
 <span class='doccomment'>//!</span>
@@ -563,30 +570,37 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Middleware that have a Before and After piece should have a constructor</span>
     <span class='doccomment'>/// which returns both as a tuple, so it can be passed directly to link.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>link</span><span class='op'>&lt;</span><span class='ident'>B</span>, <span class='ident'>A</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>link</span>: (<span class='ident'>B</span>, <span class='ident'>A</span>))
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>link</span><span class='op'>&lt;</span><span class='ident'>B</span>, <span class='ident'>A</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>link</span>: (<span class='ident'>B</span>, <span class='ident'>A</span>)) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Chain</span>
     <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>AfterMiddleware</span>, <span class='ident'>B</span>: <span class='ident'>BeforeMiddleware</span> {
         <span class='kw'>let</span> (<span class='ident'>before</span>, <span class='ident'>after</span>) <span class='op'>=</span> <span class='ident'>link</span>;
         <span class='self'>self</span>.<span class='ident'>befores</span>.<span class='ident'>push</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>before</span>) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>BeforeMiddleware</span><span class='op'>&gt;</span>);
         <span class='self'>self</span>.<span class='ident'>afters</span>.<span class='ident'>push</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>after</span>) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>AfterMiddleware</span><span class='op'>&gt;</span>);
+        <span class='self'>self</span>
     }
 
     <span class='doccomment'>/// Link a `BeforeMiddleware` to the `Chain`, after all previously linked</span>
     <span class='doccomment'>/// `BeforeMiddleware`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>link_before</span><span class='op'>&lt;</span><span class='ident'>B</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>before</span>: <span class='ident'>B</span>) <span class='kw'>where</span> <span class='ident'>B</span>: <span class='ident'>BeforeMiddleware</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>link_before</span><span class='op'>&lt;</span><span class='ident'>B</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>before</span>: <span class='ident'>B</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Chain</span>
+    <span class='kw'>where</span> <span class='ident'>B</span>: <span class='ident'>BeforeMiddleware</span> {
         <span class='self'>self</span>.<span class='ident'>befores</span>.<span class='ident'>push</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>before</span>) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>BeforeMiddleware</span><span class='op'>&gt;</span>);
+        <span class='self'>self</span>
     }
 
     <span class='doccomment'>/// Link a `AfterMiddleware` to the `Chain`, after all previously linked</span>
     <span class='doccomment'>/// `AfterMiddleware`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>link_after</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>after</span>: <span class='ident'>A</span>) <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>AfterMiddleware</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>link_after</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>after</span>: <span class='ident'>A</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Chain</span>
+    <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>AfterMiddleware</span> {
         <span class='self'>self</span>.<span class='ident'>afters</span>.<span class='ident'>push</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>after</span>) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>AfterMiddleware</span><span class='op'>&gt;</span>);
+        <span class='self'>self</span>
     }
 
     <span class='doccomment'>/// Apply an `AroundMiddleware` to the `Handler` in this `Chain`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>around</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>around</span>: <span class='ident'>A</span>) <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>AroundMiddleware</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>around</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>around</span>: <span class='ident'>A</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Chain</span>
+    <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>AroundMiddleware</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>handler</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>();
         <span class='ident'>handler</span> <span class='op'>=</span> <span class='ident'>around</span>.<span class='ident'>around</span>(<span class='ident'>handler</span>);
         <span class='self'>self</span>.<span class='ident'>handler</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>handler</span>);
+        <span class='self'>self</span>
     }
 }
 

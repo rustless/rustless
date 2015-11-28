@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/http/h2.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.7.0/src/http/h2.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>h2.rs.html -- source</title>
@@ -860,9 +860,6 @@
 <span id="818">818</span>
 <span id="819">819</span>
 <span id="820">820</span>
-<span id="821">821</span>
-<span id="822">822</span>
-<span id="823">823</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Adapts the `solicit`-provided HTTP/2 implementation into the `HttpMessage` API.</span>
 
@@ -870,7 +867,6 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::<span class='ident'>Shutdown</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ascii</span>::<span class='ident'>AsciiExt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>;
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;timeouts&quot;</span>)]</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>time</span>::<span class='ident'>Duration</span>;
 
 <span class='kw'>use</span> <span class='ident'>http</span>::{
@@ -1270,13 +1266,11 @@
         <span class='boolval'>true</span>
     }
 
-    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;timeouts&quot;</span>)]</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>set_read_timeout</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>_dur</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Duration</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='prelude-val'>Ok</span>(())
     }
 
-    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;timeouts&quot;</span>)]</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>set_write_timeout</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>_dur</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Duration</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='prelude-val'>Ok</span>(())
@@ -1527,8 +1521,8 @@
         <span class='kw'>let</span> <span class='ident'>h2headers</span> <span class='op'>=</span> <span class='ident'>prepare_headers</span>(<span class='ident'>headers</span>);
 
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
-            (<span class='string'>b&quot;set-cookie&quot;</span>.<span class='ident'>to_vec</span>(), <span class='string'>b&quot;foo=bar; Path=/&quot;</span>.<span class='ident'>to_vec</span>()),
-            (<span class='string'>b&quot;set-cookie&quot;</span>.<span class='ident'>to_vec</span>(), <span class='string'>b&quot;baz=quux; Path=/&quot;</span>.<span class='ident'>to_vec</span>()),
+            (<span class='string'>b&quot;set-cookie&quot;</span>.<span class='ident'>to_vec</span>(), <span class='string'>b&quot;foo=bar&quot;</span>.<span class='ident'>to_vec</span>()),
+            (<span class='string'>b&quot;set-cookie&quot;</span>.<span class='ident'>to_vec</span>(), <span class='string'>b&quot;baz=quux&quot;</span>.<span class='ident'>to_vec</span>()),
         ], <span class='ident'>h2headers</span>);
     }
 
@@ -1566,8 +1560,8 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_http2_parse_headers_with_set_cookie</span>() {
         <span class='kw'>let</span> <span class='ident'>h2headers</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[
-            (<span class='string'>b&quot;set-cookie&quot;</span>.<span class='ident'>to_vec</span>(), <span class='string'>b&quot;foo=bar; Path=/&quot;</span>.<span class='ident'>to_vec</span>()),
-            (<span class='string'>b&quot;set-cookie&quot;</span>.<span class='ident'>to_vec</span>(), <span class='string'>b&quot;baz=quux; Path=/&quot;</span>.<span class='ident'>to_vec</span>()),
+            (<span class='string'>b&quot;set-cookie&quot;</span>.<span class='ident'>to_vec</span>(), <span class='string'>b&quot;foo=bar&quot;</span>.<span class='ident'>to_vec</span>()),
+            (<span class='string'>b&quot;set-cookie&quot;</span>.<span class='ident'>to_vec</span>(), <span class='string'>b&quot;baz=quux&quot;</span>.<span class='ident'>to_vec</span>()),
         ];
         <span class='kw'>let</span> <span class='ident'>expected</span> <span class='op'>=</span> <span class='ident'>header</span>::<span class='ident'>SetCookie</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
             <span class='ident'>cookie</span>::<span class='ident'>Cookie</span>::<span class='ident'>new</span>(<span class='string'>&quot;foo&quot;</span>.<span class='ident'>to_owned</span>(), <span class='string'>&quot;bar&quot;</span>.<span class='ident'>to_owned</span>()),

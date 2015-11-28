@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.4/src/response.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.5/src/response.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>response.rs.html -- source</title>
@@ -230,11 +230,6 @@
 <span id="188">188</span>
 <span id="189">189</span>
 <span id="190">190</span>
-<span id="191">191</span>
-<span id="192">192</span>
-<span id="193">193</span>
-<span id="194">194</span>
-<span id="195">195</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s HTTP Response representation and associated methods.</span>
 
@@ -336,11 +331,6 @@ impl&lt;R: Read&gt; WriteBody for R {
     <span class='kw'>pub</span> <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>,
 
     <span class='doccomment'>/// The body of the response.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// This is a Reader for generality, most data should</span>
-    <span class='doccomment'>/// be sent using either `serve` or `serve_file`.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Arbitrary Readers can be sent by assigning to body.</span>
     <span class='kw'>pub</span> <span class='ident'>body</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span>
 }
 

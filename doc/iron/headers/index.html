@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-5973' class='srclink' href='../../hyper/headers/index.html?gotosrc=5973' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-6082' class='srclink' href='../../hyper/headers/index.html?gotosrc=6082' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Headers container, and common header fields.</p>
 
 <p>hyper has the opinion that Headers should be strongly-typed, because that&#39;s
@@ -186,6 +186,16 @@ that via the numerals <code>1</code> and <code>0</code>.</p>
                     </tr>
                 
                     <tr class=' module-item'>
+                        <td><a class='struct' href='struct.AccessControlAllowCredentials.html'
+                               title='iron::headers::AccessControlAllowCredentials'>AccessControlAllowCredentials</a></td>
+                        <td class='docblock short'>
+                             <p><code>Access-Control-Allow-Credentials</code> header, part of
+<a href="http://www.w3.org/TR/cors/#access-control-allow-headers-response-header">CORS</a></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
                         <td><a class='struct' href='struct.AccessControlAllowHeaders.html'
                                title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></td>
                         <td class='docblock short'>
@@ -301,6 +311,15 @@ that via the numerals <code>1</code> and <code>0</code>.</p>
                     </tr>
                 
                     <tr class=' module-item'>
+                        <td><a class='struct' href='struct.ContentDisposition.html'
+                               title='iron::headers::ContentDisposition'>ContentDisposition</a></td>
+                        <td class='docblock short'>
+                             <p>A <code>Content-Disposition</code> header, (re)defined in <a href="https://tools.ietf.org/html/rfc6266">RFC6266</a></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
                         <td><a class='struct' href='struct.ContentEncoding.html'
                                title='iron::headers::ContentEncoding'>ContentEncoding</a></td>
                         <td class='docblock short'>
@@ -354,7 +373,24 @@ that via the numerals <code>1</code> and <code>0</code>.</p>
                         <td><a class='struct' href='struct.Cookie.html'
                                title='iron::headers::Cookie'>Cookie</a></td>
                         <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Cookie.html'
+                               title='iron::headers::Cookie'>Cookie</a></td>
+                        <td class='docblock short'>
                              <p><code>Cookie</code> header, defined in <a href="http://tools.ietf.org/html/rfc6265#section-5.4">RFC6265</a></p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.CookieJar.html'
+                               title='iron::headers::CookieJar'>CookieJar</a></td>
+                        <td class='docblock short'>
+                             <p>A jar of cookies for managing a session</p>
 
                         </td>
                     </tr>
@@ -650,6 +686,24 @@ Each ByteRangeSpec defines a range of bytes to fetch</p>
                     </tr>
                 
                     <tr class=' module-item'>
+                        <td><a class='enum' href='enum.DispositionParam.html'
+                               title='iron::headers::DispositionParam'>DispositionParam</a></td>
+                        <td class='docblock short'>
+                             <p>A parameter to the disposition type</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.DispositionType.html'
+                               title='iron::headers::DispositionType'>DispositionType</a></td>
+                        <td class='docblock short'>
+                             <p>The implied disposition of the content of the HTTP body</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
                         <td><a class='enum' href='enum.Encoding.html'
                                title='iron::headers::Encoding'>Encoding</a></td>
                         <td class='docblock short'>
@@ -776,7 +830,7 @@ except for the <code>WebSocket</code> value.</p>
                         <td><a class='fn' href='fn.q.html'
                                title='iron::headers::q'>q</a></td>
                         <td class='docblock short'>
-                             <p>Convenience function to create a <code>Quality</code> fromt a float.</p>
+                             <p>Convenience function to create a <code>Quality</code> from a float.</p>
 
                         </td>
                     </tr>

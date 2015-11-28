@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-20685' class='srclink' href='../../src/openssl/x509/mod.rs.html#145-152' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-21666' class='srclink' href='../../src/openssl/x509/mod.rs.html#143-150' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct X509Generator {
     // some fields omitted
 }</pre><div class='docblock'><p>Generator of private key/certificate pairs</p>
@@ -58,14 +58,15 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>Path</span>;
 
 <span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>Type</span>;
-<span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>x509</span>::{<span class='ident'>KeyUsage</span>, <span class='ident'>X509Generator</span>};
+<span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>x509</span>::<span class='ident'>X509Generator</span>;
+<span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>x509</span>::<span class='ident'>extension</span>::{<span class='ident'>Extension</span>, <span class='ident'>KeyUsageOption</span>};
 
 <span class='kw'>let</span> <span class='ident'>gen</span> <span class='op'>=</span> <span class='ident'>X509Generator</span>::<span class='ident'>new</span>()
        .<span class='ident'>set_bitlength</span>(<span class='number'>2048</span>)
        .<span class='ident'>set_valid_period</span>(<span class='number'>365</span><span class='op'>*</span><span class='number'>2</span>)
-       .<span class='ident'>set_CN</span>(<span class='string'>&quot;SuperMegaCorp Inc.&quot;</span>)
+       .<span class='ident'>add_name</span>(<span class='string'>&quot;CN&quot;</span>.<span class='ident'>to_owned</span>(), <span class='string'>&quot;SuperMegaCorp Inc.&quot;</span>.<span class='ident'>to_owned</span>())
        .<span class='ident'>set_sign_hash</span>(<span class='ident'>Type</span>::<span class='ident'>SHA256</span>)
-       .<span class='ident'>set_usage</span>(<span class='kw-2'>&amp;</span>[<span class='ident'>KeyUsage</span>::<span class='ident'>DigitalSignature</span>]);
+       .<span class='ident'>add_extension</span>(<span class='ident'>Extension</span>::<span class='ident'>KeyUsage</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>KeyUsageOption</span>::<span class='ident'>DigitalSignature</span>]));
 
 <span class='kw'>let</span> (<span class='ident'>cert</span>, <span class='ident'>pkey</span>) <span class='op'>=</span> <span class='ident'>gen</span>.<span class='ident'>generate</span>().<span class='ident'>unwrap</span>();
 
@@ -90,11 +91,6 @@
 <div class='docblock'><p>Sets desired bit length</p>
 </div><h4 id='method.set_valid_period' class='method'><code>fn <a href='#method.set_valid_period' class='fnname'>set_valid_period</a>(self, days: <a href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
 <div class='docblock'><p>Sets certificate validity period in days since today</p>
-</div><h4 id='method.set_CN' class='method'><code>fn <a href='#method.set_CN' class='fnname'>set_CN</a>(self, CN: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
-<div class='docblock'><p>(deprecated) Sets Common Name of certificate</p>
-
-<p>This function is deprecated, use <code>X509Generator.add_name</code> instead.
-Don&#39;t use this function AND the <code>add_name</code> method</p>
 </div><h4 id='method.add_name' class='method'><code>fn <a href='#method.add_name' class='fnname'>add_name</a>(self, attr_type: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, attr_value: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
 <div class='docblock'><p>Add attribute to the name of the certificate</p>
 <pre class='rust rust-example-rendered'>
@@ -103,14 +99,6 @@ Don&#39;t use this function AND the <code>add_name</code> method</p>
 <div class='docblock'><p>Add multiple attributes to the name of the certificate</p>
 <pre class='rust rust-example-rendered'>
 <span class='ident'>generator</span>.<span class='ident'>add_names</span>(<span class='macro'>vec</span><span class='macro'>!</span>[(<span class='string'>&quot;CN&quot;</span>.<span class='ident'>to_string</span>(),<span class='string'>&quot;example.com&quot;</span>.<span class='ident'>to_string</span>())]);</pre>
-</div><h4 id='method.set_usage' class='method'><code>fn <a href='#method.set_usage' class='fnname'>set_usage</a>(self, purposes: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='enum' href='../../openssl/x509/extension/enum.KeyUsageOption.html' title='openssl::x509::extension::KeyUsageOption'>KeyUsage</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
-<div class='docblock'><p>(deprecated) Sets what for certificate could be used</p>
-
-<p>This function is deprecated, use <code>X509Generator.add_extension</code> instead.</p>
-</div><h4 id='method.set_ext_usage' class='method'><code>fn <a href='#method.set_ext_usage' class='fnname'>set_ext_usage</a>(self, purposes: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='enum' href='../../openssl/x509/extension/enum.ExtKeyUsageOption.html' title='openssl::x509::extension::ExtKeyUsageOption'>ExtKeyUsage</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
-<div class='docblock'><p>(deprecated) Sets allowed extended usage of certificate</p>
-
-<p>This function is deprecated, use <code>X509Generator.add_extension</code> instead.</p>
 </div><h4 id='method.add_extension' class='method'><code>fn <a href='#method.add_extension' class='fnname'>add_extension</a>(self, ext: <a class='enum' href='../../openssl/x509/extension/enum.Extension.html' title='openssl::x509::extension::Extension'>Extension</a>) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
 <div class='docblock'><p>Add an extension to a certificate</p>
 

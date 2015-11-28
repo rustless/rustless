@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.16/src/header/common/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.7.0/src/header/common/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -439,6 +439,10 @@
 <span id="397">397</span>
 <span id="398">398</span>
 <span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+<span id="403">403</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A Collection of Header implementations for common HTTP Headers.</span>
 <span class='doccomment'>//!</span>
@@ -449,6 +453,7 @@
 <span class='doccomment'>//! is used, such as `ContentType(pub Mime)`.</span>
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>accept</span>::<span class='ident'>Accept</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>access_control_allow_credentials</span>::<span class='ident'>AccessControlAllowCredentials</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>access_control_allow_headers</span>::<span class='ident'>AccessControlAllowHeaders</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>access_control_allow_methods</span>::<span class='ident'>AccessControlAllowMethods</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>access_control_allow_origin</span>::<span class='ident'>AccessControlAllowOrigin</span>;
@@ -464,6 +469,7 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>authorization</span>::{<span class='ident'>Authorization</span>, <span class='ident'>Scheme</span>, <span class='ident'>Basic</span>, <span class='ident'>Bearer</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>cache_control</span>::{<span class='ident'>CacheControl</span>, <span class='ident'>CacheDirective</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>connection</span>::{<span class='ident'>Connection</span>, <span class='ident'>ConnectionOption</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>content_disposition</span>::{<span class='ident'>ContentDisposition</span>, <span class='ident'>DispositionType</span>, <span class='ident'>DispositionParam</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>content_length</span>::<span class='ident'>ContentLength</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>content_encoding</span>::<span class='ident'>ContentEncoding</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>content_language</span>::<span class='ident'>ContentLanguage</span>;
@@ -795,6 +801,7 @@
 
 
 <span class='kw'>mod</span> <span class='ident'>accept</span>;
+<span class='kw'>mod</span> <span class='ident'>access_control_allow_credentials</span>;
 <span class='kw'>mod</span> <span class='ident'>access_control_allow_headers</span>;
 <span class='kw'>mod</span> <span class='ident'>access_control_allow_methods</span>;
 <span class='kw'>mod</span> <span class='ident'>access_control_allow_origin</span>;
@@ -811,6 +818,7 @@
 <span class='kw'>mod</span> <span class='ident'>cache_control</span>;
 <span class='kw'>mod</span> <span class='ident'>cookie</span>;
 <span class='kw'>mod</span> <span class='ident'>connection</span>;
+<span class='kw'>mod</span> <span class='ident'>content_disposition</span>;
 <span class='kw'>mod</span> <span class='ident'>content_encoding</span>;
 <span class='kw'>mod</span> <span class='ident'>content_language</span>;
 <span class='kw'>mod</span> <span class='ident'>content_length</span>;

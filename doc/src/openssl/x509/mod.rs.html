@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.6.7/src/x509/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.7.0/src/x509/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -696,38 +696,6 @@
 <span id="654">654</span>
 <span id="655">655</span>
 <span id="656">656</span>
-<span id="657">657</span>
-<span id="658">658</span>
-<span id="659">659</span>
-<span id="660">660</span>
-<span id="661">661</span>
-<span id="662">662</span>
-<span id="663">663</span>
-<span id="664">664</span>
-<span id="665">665</span>
-<span id="666">666</span>
-<span id="667">667</span>
-<span id="668">668</span>
-<span id="669">669</span>
-<span id="670">670</span>
-<span id="671">671</span>
-<span id="672">672</span>
-<span id="673">673</span>
-<span id="674">674</span>
-<span id="675">675</span>
-<span id="676">676</span>
-<span id="677">677</span>
-<span id="678">678</span>
-<span id="679">679</span>
-<span id="680">680</span>
-<span id="681">681</span>
-<span id="682">682</span>
-<span id="683">683</span>
-<span id="684">684</span>
-<span id="685">685</span>
-<span id="686">686</span>
-<span id="687">687</span>
-<span id="688">688</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_char</span>, <span class='ident'>c_int</span>, <span class='ident'>c_long</span>, <span class='ident'>c_ulong</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_void</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
@@ -749,6 +717,7 @@
 <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>pkey</span>::{<span class='ident'>PKey</span>,<span class='ident'>Parts</span>};
 <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>rand</span>::<span class='ident'>rand_bytes</span>;
 <span class='kw'>use</span> <span class='ident'>ffi</span>;
+<span class='kw'>use</span> <span class='ident'>ffi_extras</span>;
 <span class='kw'>use</span> <span class='ident'>ssl</span>::<span class='ident'>error</span>::{<span class='ident'>SslError</span>, <span class='ident'>StreamError</span>};
 <span class='kw'>use</span> <span class='ident'>nid</span>;
 
@@ -833,10 +802,6 @@
     }
 }
 
-<span class='comment'>// Backwards-compatibility</span>
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>extension</span>::<span class='ident'>KeyUsageOption</span> <span class='kw'>as</span> <span class='ident'>KeyUsage</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>extension</span>::<span class='ident'>ExtKeyUsageOption</span> <span class='kw'>as</span> <span class='ident'>ExtKeyUsage</span>;
-
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>non_snake_case</span>)]</span>
 <span class='doccomment'>/// Generator of private key/certificate pairs</span>
 <span class='doccomment'>///</span>
@@ -851,14 +816,15 @@
 <span class='doccomment'>/// use std::path::Path;</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// use openssl::crypto::hash::Type;</span>
-<span class='doccomment'>/// use openssl::x509::{KeyUsage, X509Generator};</span>
+<span class='doccomment'>/// use openssl::x509::X509Generator;</span>
+<span class='doccomment'>/// use openssl::x509::extension::{Extension, KeyUsageOption};</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// let gen = X509Generator::new()</span>
 <span class='doccomment'>///        .set_bitlength(2048)</span>
 <span class='doccomment'>///        .set_valid_period(365*2)</span>
-<span class='doccomment'>///        .set_CN(&quot;SuperMegaCorp Inc.&quot;)</span>
+<span class='doccomment'>///        .add_name(&quot;CN&quot;.to_owned(), &quot;SuperMegaCorp Inc.&quot;.to_owned())</span>
 <span class='doccomment'>///        .set_sign_hash(Type::SHA256)</span>
-<span class='doccomment'>///        .set_usage(&amp;[KeyUsage::DigitalSignature]);</span>
+<span class='doccomment'>///        .add_extension(Extension::KeyUsage(vec![KeyUsageOption::DigitalSignature]));</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// let (cert, pkey) = gen.generate().unwrap();</span>
 <span class='doccomment'>///</span>
@@ -914,22 +880,6 @@
         <span class='self'>self</span>
     }
 
-    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>non_snake_case</span>)]</span>
-    <span class='doccomment'>/// (deprecated) Sets Common Name of certificate</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// This function is deprecated, use `X509Generator.add_name` instead.</span>
-    <span class='doccomment'>/// Don&#39;t use this function AND the `add_name` method</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_CN</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>CN</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>X509Generator</span> {
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>names</span>.<span class='ident'>get_mut</span>(<span class='number'>0</span>) {
-            <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span>(_,<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>val</span>)) <span class='op'>=&gt;</span> <span class='op'>*</span><span class='ident'>val</span><span class='op'>=</span><span class='ident'>CN</span>.<span class='ident'>to_string</span>(),
-            _ <span class='op'>=&gt;</span> {} <span class='comment'>/* would move push here, but borrow checker won&#39;t let me */</span>
-        }
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>names</span>.<span class='ident'>len</span>()<span class='op'>==</span><span class='number'>0</span> {
-            <span class='self'>self</span>.<span class='ident'>names</span>.<span class='ident'>push</span>((<span class='string'>&quot;CN&quot;</span>.<span class='ident'>to_string</span>(),<span class='ident'>CN</span>.<span class='ident'>to_string</span>()));
-        }
-        <span class='self'>self</span>
-    }
-
     <span class='doccomment'>/// Add attribute to the name of the certificate</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
@@ -951,20 +901,6 @@
         <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>IntoIterator</span><span class='op'>&lt;</span><span class='ident'>Item</span><span class='op'>=</span>(<span class='ident'>String</span>,<span class='ident'>String</span>)<span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>names</span>.<span class='ident'>extend</span>(<span class='ident'>attrs</span>);
         <span class='self'>self</span>
-    }
-
-    <span class='doccomment'>/// (deprecated) Sets what for certificate could be used</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// This function is deprecated, use `X509Generator.add_extension` instead.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_usage</span>(<span class='self'>self</span>, <span class='ident'>purposes</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>KeyUsage</span>]) <span class='op'>-&gt;</span> <span class='ident'>X509Generator</span> {
-        <span class='self'>self</span>.<span class='ident'>add_extension</span>(<span class='ident'>Extension</span>::<span class='ident'>KeyUsage</span>(<span class='ident'>purposes</span>.<span class='ident'>to_owned</span>()))
-    }
-
-    <span class='doccomment'>/// (deprecated) Sets allowed extended usage of certificate</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// This function is deprecated, use `X509Generator.add_extension` instead.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_ext_usage</span>(<span class='self'>self</span>, <span class='ident'>purposes</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>ExtKeyUsage</span>]) <span class='op'>-&gt;</span> <span class='ident'>X509Generator</span> {
-        <span class='self'>self</span>.<span class='ident'>add_extension</span>(<span class='ident'>Extension</span>::<span class='ident'>ExtKeyUsage</span>(<span class='ident'>purposes</span>.<span class='ident'>to_owned</span>()))
     }
 
     <span class='doccomment'>/// Add an extension to a certificate</span>
@@ -1131,7 +1067,7 @@
             <span class='kw'>let</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>X509_to_X509_REQ</span>(<span class='ident'>cert</span>.<span class='ident'>handle</span>, <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(), <span class='ident'>ptr</span>::<span class='ident'>null</span>());
             <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>req</span>);
 
-            <span class='kw'>let</span> <span class='ident'>exts</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>X509_get_extensions</span>(<span class='ident'>cert</span>.<span class='ident'>handle</span>);
+            <span class='kw'>let</span> <span class='ident'>exts</span> <span class='op'>=</span> <span class='ident'>ffi_extras</span>::<span class='ident'>X509_get_extensions</span>(<span class='ident'>cert</span>.<span class='ident'>handle</span>);
             <span class='kw'>if</span> <span class='ident'>exts</span> <span class='op'>!=</span> <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>() {
                 <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>X509_REQ_add_extensions</span>(<span class='ident'>req</span>,<span class='ident'>exts</span>));
             }

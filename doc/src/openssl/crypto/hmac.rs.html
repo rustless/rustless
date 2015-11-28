@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.6.7/src/crypto/hmac.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.7.0/src/crypto/hmac.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>hmac.rs.html -- source</title>
@@ -518,6 +518,8 @@
 <span id="476">476</span>
 <span id="477">477</span>
 <span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
 </pre><pre class='rust '>
 <span class='comment'>/*
  * Copyright 2013 Jack Lloyd
@@ -542,6 +544,7 @@
 
 <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>Type</span>;
 <span class='kw'>use</span> <span class='ident'>ffi</span>;
+<span class='kw'>use</span> <span class='ident'>ffi_extras</span>;
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>enum</span> <span class='ident'>State</span> {
@@ -609,9 +612,10 @@
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>init_once</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>md</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_MD</span>, <span class='ident'>key</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) {
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>HMAC_Init_ex</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>,
-                                      <span class='ident'>key</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>key</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
-                                      <span class='ident'>md</span>, <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _);
+            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi_extras</span>::<span class='ident'>HMAC_Init_ex</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>,
+                                             <span class='ident'>key</span>.<span class='ident'>as_ptr</span>(),
+                                             <span class='ident'>key</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
+                                             <span class='ident'>md</span>, <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='number'>1</span>);
         }
         <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Reset</span>;
@@ -627,9 +631,9 @@
         <span class='comment'>// If the key and/or md is not supplied it&#39;s reused from the last time</span>
         <span class='comment'>// avoiding redundant initializations</span>
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>HMAC_Init_ex</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>,
-                                      <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _, <span class='number'>0</span>,
-                                      <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _, <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _);
+            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi_extras</span>::<span class='ident'>HMAC_Init_ex</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>,
+                                             <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _, <span class='number'>0</span>,
+                                             <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _, <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='number'>1</span>);
         }
         <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Reset</span>;
@@ -641,7 +645,7 @@
             <span class='self'>self</span>.<span class='ident'>init</span>();
         }
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>HMAC_Update</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>data</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>data</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>);
+            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi_extras</span>::<span class='ident'>HMAC_Update</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>data</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>data</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='number'>1</span>);
         }
         <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Updated</span>;
@@ -656,7 +660,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>repeat</span>(<span class='number'>0</span>).<span class='ident'>take</span>(<span class='ident'>md_len</span>).<span class='ident'>collect</span>();
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='number'>0</span>;
-            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>HMAC_Final</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>res</span>.<span class='ident'>as_mut_ptr</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>len</span>);
+            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi_extras</span>::<span class='ident'>HMAC_Final</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>res</span>.<span class='ident'>as_mut_ptr</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>len</span>);
             <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Finalized</span>;
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span>, <span class='ident'>md_len</span>);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='number'>1</span>);
@@ -689,7 +693,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>ctx</span>: <span class='ident'>ffi</span>::<span class='ident'>HMAC_CTX</span>;
         <span class='kw'>unsafe</span> {
             <span class='ident'>ctx</span> <span class='op'>=</span> ::<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>uninitialized</span>();
-            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>HMAC_CTX_copy</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ctx</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>ctx</span>);
+            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi_extras</span>::<span class='ident'>HMAC_CTX_copy</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ctx</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>ctx</span>);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='number'>1</span>);
         }
         <span class='ident'>HMAC</span> { <span class='ident'>ctx</span>: <span class='ident'>ctx</span>, <span class='ident'>type_</span>: <span class='self'>self</span>.<span class='ident'>type_</span>, <span class='ident'>state</span>: <span class='self'>self</span>.<span class='ident'>state</span> }
@@ -702,7 +706,7 @@
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>!=</span> <span class='ident'>Finalized</span> {
                 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>repeat</span>(<span class='number'>0</span>).<span class='ident'>take</span>(<span class='self'>self</span>.<span class='ident'>type_</span>.<span class='ident'>md_len</span>()).<span class='ident'>collect</span>();
                 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='number'>0</span>;
-                <span class='ident'>ffi</span>::<span class='ident'>HMAC_Final</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>buf</span>.<span class='ident'>as_mut_ptr</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>len</span>);
+                <span class='ident'>ffi_extras</span>::<span class='ident'>HMAC_Final</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>buf</span>.<span class='ident'>as_mut_ptr</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>len</span>);
             }
             <span class='ident'>ffi</span>::<span class='ident'>HMAC_CTX_cleanup</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ctx</span>);
         }

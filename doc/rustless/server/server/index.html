@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-40806' class='srclink' href='../../../hyper/server/index.html?gotosrc=40806' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-43049' class='srclink' href='../../../hyper/server/index.html?gotosrc=43049' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>HTTP Server</p>
 
 <h1 id="server" class='section-header'><a
@@ -145,8 +145,8 @@ and only once. But this has 2 downsides:</p>
 <code>Response&lt;Fresh&gt;</code> includes a <code>headers_mut()</code> method, allowing you add more
 headers. It also does not implement <code>Write</code>, so you can&#39;t accidentally
 write early. Once the &quot;head&quot; of the response is correct, you can &quot;send&quot; it
-out by calling <code>start</code> on the <code>Request&lt;Fresh&gt;</code>. This will return a new
-<code>Request&lt;Streaming&gt;</code> object, that no longer has <code>headers_mut()</code>, but does
+out by calling <code>start</code> on the <code>Response&lt;Fresh&gt;</code>. This will return a new
+<code>Response&lt;Streaming&gt;</code> object, that no longer has <code>headers_mut()</code>, but does
 implement <code>Write</code>.</p>
 </div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>

@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-3268' class='srclink' href='../../src/hyper/client/mod.rs.html#89-96' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-3340' class='srclink' href='../../src/hyper/client/mod.rs.html#88-93' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Client {
     // some fields omitted
 }</pre><div class='docblock'><p>A Client to use additional features with Requests.</p>
@@ -61,6 +61,10 @@
 <div class='docblock'><p>Create a new client with a specific <code>Protocol</code>.</p>
 </div><h4 id='method.set_redirect_policy' class='method'><code>fn <a href='#method.set_redirect_policy' class='fnname'>set_redirect_policy</a>(&amp;mut self, policy: <a class='enum' href='../../hyper/client/enum.RedirectPolicy.html' title='hyper::client::RedirectPolicy'>RedirectPolicy</a>)</code></h4>
 <div class='docblock'><p>Set the RedirectPolicy.</p>
+</div><h4 id='method.set_read_timeout' class='method'><code>fn <a href='#method.set_read_timeout' class='fnname'>set_read_timeout</a>(&amp;mut self, dur: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>&gt;)</code></h4>
+<div class='docblock'><p>Set the read timeout value for all requests.</p>
+</div><h4 id='method.set_write_timeout' class='method'><code>fn <a href='#method.set_write_timeout' class='fnname'>set_write_timeout</a>(&amp;mut self, dur: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>&gt;)</code></h4>
+<div class='docblock'><p>Set the write timeout value for all requests.</p>
 </div><h4 id='method.get' class='method'><code>fn <a href='#method.get' class='fnname'>get</a>&lt;U: <a class='trait' href='../../hyper/client/trait.IntoUrl.html' title='hyper::client::IntoUrl'>IntoUrl</a>&gt;(&amp;self, url: U) -&gt; <a class='struct' href='../../hyper/client/struct.RequestBuilder.html' title='hyper::client::RequestBuilder'>RequestBuilder</a></code></h4>
 <div class='docblock'><p>Build a Get request.</p>
 </div><h4 id='method.head' class='method'><code>fn <a href='#method.head' class='fnname'>head</a>&lt;U: <a class='trait' href='../../hyper/client/trait.IntoUrl.html' title='hyper::client::IntoUrl'>IntoUrl</a>&gt;(&amp;self, url: U) -&gt; <a class='struct' href='../../hyper/client/struct.RequestBuilder.html' title='hyper::client::RequestBuilder'>RequestBuilder</a></code></h4>

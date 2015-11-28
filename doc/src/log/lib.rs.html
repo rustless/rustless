@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/log-0.3.3/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/log-0.3.4/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -847,6 +847,9 @@
 <span id="805">805</span>
 <span id="806">806</span>
 <span id="807">807</span>
+<span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -913,7 +916,7 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ## In executables</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! Executables should chose a logging framework and initialize it early in the</span>
+<span class='doccomment'>//! Executables should choose a logging framework and initialize it early in the</span>
 <span class='doccomment'>//! runtime of the program. Logging frameworks will typically include a</span>
 <span class='doccomment'>//! function to do this. Any log messages generated before the framework is</span>
 <span class='doccomment'>//! initialized will be ignored.</span>
@@ -1413,40 +1416,6 @@
     <span class='kw'>unsafe</span> { <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>MAX_LOG_LEVEL_FILTER</span>.<span class='ident'>load</span>(<span class='ident'>Ordering</span>::<span class='ident'>Relaxed</span>)) }
 }
 
-<span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
-<span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>hidden</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>__static_max_level</span>() <span class='op'>-&gt;</span> <span class='ident'>LogLevelFilter</span> {
-    <span class='kw'>if</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>debug_assertions</span>) {
-        <span class='comment'>// This is a release build. Check `release_max_level_*` first.</span>
-        <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_off&quot;</span>) {
-            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Off</span>
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_error&quot;</span>) {
-            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Error</span>
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_warn&quot;</span>) {
-            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Warn</span>
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_info&quot;</span>) {
-            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Info</span>
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_debug&quot;</span>) {
-            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Debug</span>
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_trace&quot;</span>) {
-            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Trace</span>
-        }
-    }
-    <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;max_level_off&quot;</span>) {
-        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Off</span>
-    } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;max_level_error&quot;</span>) {
-        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Error</span>
-    } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;max_level_warn&quot;</span>) {
-        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Warn</span>
-    } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;max_level_info&quot;</span>) {
-        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Info</span>
-    } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;max_level_debug&quot;</span>) {
-        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Debug</span>
-    } <span class='kw'>else</span> {
-        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Trace</span>
-    }
-}
-
 <span class='doccomment'>/// Sets the global logger.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// The `make_logger` closure is passed a `MaxLogLevel` object, which the</span>
@@ -1559,6 +1528,43 @@
             <span class='ident'>args</span>: <span class='ident'>args</span>
         };
         <span class='ident'>logger</span>.<span class='ident'>log</span>(<span class='kw-2'>&amp;</span><span class='ident'>record</span>)
+    }
+}
+
+<span class='comment'>// WARNING</span>
+<span class='comment'>// This is not considered part of the crate&#39;s public API. It is subject to</span>
+<span class='comment'>// change at any time.</span>
+<span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
+<span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>hidden</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>__static_max_level</span>() <span class='op'>-&gt;</span> <span class='ident'>LogLevelFilter</span> {
+    <span class='kw'>if</span> <span class='op'>!</span><span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>debug_assertions</span>) {
+        <span class='comment'>// This is a release build. Check `release_max_level_*` first.</span>
+        <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_off&quot;</span>) {
+            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Off</span>
+        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_error&quot;</span>) {
+            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Error</span>
+        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_warn&quot;</span>) {
+            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Warn</span>
+        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_info&quot;</span>) {
+            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Info</span>
+        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_debug&quot;</span>) {
+            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Debug</span>
+        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;release_max_level_trace&quot;</span>) {
+            <span class='kw'>return</span> <span class='ident'>LogLevelFilter</span>::<span class='ident'>Trace</span>
+        }
+    }
+    <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;max_level_off&quot;</span>) {
+        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Off</span>
+    } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;max_level_error&quot;</span>) {
+        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Error</span>
+    } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;max_level_warn&quot;</span>) {
+        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Warn</span>
+    } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;max_level_info&quot;</span>) {
+        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Info</span>
+    } <span class='kw'>else</span> <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;max_level_debug&quot;</span>) {
+        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Debug</span>
+    } <span class='kw'>else</span> {
+        <span class='ident'>LogLevelFilter</span>::<span class='ident'>Trace</span>
     }
 }
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.6.7/src/bio/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.7.0/src/bio/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -144,6 +144,7 @@
 <span id="102">102</span>
 <span id="103">103</span>
 <span id="104">104</span>
+<span id="105">105</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_void</span>, <span class='ident'>c_int</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
@@ -152,6 +153,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>;
 
 <span class='kw'>use</span> <span class='ident'>ffi</span>;
+<span class='kw'>use</span> <span class='ident'>ffi_extras</span>;
 <span class='kw'>use</span> <span class='ident'>ssl</span>::<span class='ident'>error</span>::{<span class='ident'>SslError</span>};
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>MemBio</span> {
@@ -207,7 +209,7 @@
     <span class='doccomment'>/// Sets the BIO&#39;s EOF state.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_eof</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>eof</span>: <span class='ident'>bool</span>) {
         <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>eof</span> { <span class='number'>0</span> } <span class='kw'>else</span> { <span class='op'>-</span><span class='number'>1</span> };
-        <span class='kw'>unsafe</span> { <span class='ident'>ffi</span>::<span class='ident'>BIO_set_mem_eof_return</span>(<span class='self'>self</span>.<span class='ident'>bio</span>, <span class='ident'>v</span>); }
+        <span class='kw'>unsafe</span> { <span class='ident'>ffi_extras</span>::<span class='ident'>BIO_set_mem_eof_return</span>(<span class='self'>self</span>.<span class='ident'>bio</span>, <span class='ident'>v</span>); }
     }
 }
 
@@ -219,7 +221,7 @@
         };
 
         <span class='kw'>if</span> <span class='ident'>ret</span> <span class='op'>&lt;=</span> <span class='number'>0</span> {
-            <span class='kw'>let</span> <span class='ident'>is_eof</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>ffi</span>::<span class='ident'>BIO_eof</span>(<span class='self'>self</span>.<span class='ident'>bio</span>) };
+            <span class='kw'>let</span> <span class='ident'>is_eof</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>ffi_extras</span>::<span class='ident'>BIO_eof</span>(<span class='self'>self</span>.<span class='ident'>bio</span>) };
             <span class='kw'>if</span> <span class='ident'>is_eof</span> <span class='op'>!=</span> <span class='number'>0</span> {
                 <span class='prelude-val'>Ok</span>(<span class='number'>0</span>)
             } <span class='kw'>else</span> {

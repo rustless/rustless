@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/url-0.2.38/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/url-0.5.0/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -1182,7 +1182,6 @@
 <span id="1140">1140</span>
 <span id="1141">1141</span>
 <span id="1142">1142</span>
-<span id="1143">1143</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2015 Simon Sapin.</span>
 <span class='comment'>//</span>
@@ -1329,7 +1328,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;serde_serialization&quot;</span>)]</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>FromStr</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>host</span>::{<span class='ident'>Host</span>, <span class='ident'>Ipv6Address</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>host</span>::<span class='ident'>Host</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>parser</span>::{<span class='ident'>ErrorHandler</span>, <span class='ident'>ParseResult</span>, <span class='ident'>ParseError</span>};
 
 <span class='kw'>use</span> <span class='ident'>percent_encoding</span>::{<span class='ident'>percent_encode</span>, <span class='ident'>lossy_utf8_percent_decode</span>, <span class='ident'>DEFAULT_ENCODE_SET</span>};
@@ -2326,7 +2325,6 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
                   <span class='string'>&quot;to_file_path() failed to produce an absolute Path&quot;</span>);
     <span class='prelude-val'>Ok</span>(<span class='ident'>path</span>)
 }
-
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
