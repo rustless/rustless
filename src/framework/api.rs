@@ -3,9 +3,9 @@ use serialize::json;
 use backend;
 use server::mime;
 use server::header;
-use errors::{self, Error};
-
-use framework::{self, ApiHandler};
+use errors;
+ 
+use framework;
 use framework::nesting::{self, Nesting, Node};
 use framework::media;
 use framework::path;

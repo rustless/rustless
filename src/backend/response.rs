@@ -11,7 +11,7 @@ pub use iron::response::ResponseBody;
 pub struct Response {
     pub status: status::StatusCode,
     pub headers: header::Headers,
-    pub body: Option<Box<WriteBody + Send>>,
+    pub body: Option<Box<WriteBody>>,
     pub ext: typemap::TypeMap
 }
 
@@ -27,7 +27,7 @@ impl Response {
     }
 
     #[allow(dead_code)]
-    pub fn from(status: status::StatusCode, body: Box<WriteBody + Send>) -> Response {
+    pub fn from(status: status::StatusCode, body: Box<WriteBody>) -> Response {
         Response {
             status: status,
             headers: header::Headers::new(),
@@ -53,7 +53,7 @@ impl Response {
         response
     }
 
-    pub fn replace_body(&mut self, body: Box<WriteBody + Send>) {
+    pub fn replace_body(&mut self, body: Box<WriteBody>) {
         self.body = Some(body)
     }
 }

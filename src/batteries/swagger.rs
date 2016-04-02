@@ -3,7 +3,7 @@ use valico::json_dsl;
 use std::collections;
 use serialize::json::{self, ToJson};
 use jsonway::{self, MutableJson};
-use framework::{self, Nesting, ApiHandler};
+use framework::{self, Nesting};
 use server::mime;
 use server::header;
 use server::method;
