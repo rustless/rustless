@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors['log'] = [];implementors['regex_syntax'] = [];implementors['openssl'] = [];implementors['hyper'] = [];implementors['iron'] = [];implementors['rustless'] = [];
+implementors['regex_syntax'] = [];implementors['openssl'] = [];implementors['hyper'] = [];implementors['iron'] = [];implementors['rustless'] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.5/src/iron.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/iron-0.3.0/src/iron.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>iron.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
@@ -216,11 +217,56 @@
 <span id="174">174</span>
 <span id="175">175</span>
 <span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Exposes the `Iron` type, the main entrance point of the</span>
 <span class='doccomment'>//! `Iron` library.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::{<span class='ident'>ToSocketAddrs</span>, <span class='ident'>SocketAddr</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>time</span>::<span class='ident'>Duration</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>PathBuf</span>;
 
@@ -250,6 +296,37 @@
 
     <span class='doccomment'>/// Once listening, the protocol used to serve content.</span>
     <span class='ident'>protocol</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Protocol</span><span class='op'>&gt;</span>
+}
+
+<span class='doccomment'>/// A settings struct containing a set of timeouts which can be applied to a server.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>, <span class='ident'>Copy</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Timeouts</span> {
+    <span class='doccomment'>/// Controls the timeout for keep alive connections.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// The default is `Some(Duration::from_secs(5))`.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// NOTE: Setting this to None will have the effect of turning off keep alive.</span>
+    <span class='kw'>pub</span> <span class='ident'>keep_alive</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Duration</span><span class='op'>&gt;</span>,
+
+    <span class='doccomment'>/// Controls the timeout for reads on existing connections.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// The default is `Some(Duration::from_secs(30))`</span>
+    <span class='kw'>pub</span> <span class='ident'>read</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Duration</span><span class='op'>&gt;</span>,
+
+    <span class='doccomment'>/// Controls the timeout for writes on existing conncetions.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// The default is `Some(Duration::from_secs(1))`</span>
+    <span class='kw'>pub</span> <span class='ident'>write</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Duration</span><span class='op'>&gt;</span>
+}
+
+<span class='kw'>impl</span> <span class='ident'>Default</span> <span class='kw'>for</span> <span class='ident'>Timeouts</span> {
+    <span class='kw'>fn</span> <span class='ident'>default</span>() <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
+        <span class='ident'>Timeouts</span> {
+            <span class='ident'>keep_alive</span>: <span class='prelude-val'>Some</span>(<span class='ident'>Duration</span>::<span class='ident'>from_secs</span>(<span class='number'>5</span>)),
+            <span class='ident'>read</span>: <span class='prelude-val'>Some</span>(<span class='ident'>Duration</span>::<span class='ident'>from_secs</span>(<span class='number'>30</span>)),
+            <span class='ident'>write</span>: <span class='prelude-val'>Some</span>(<span class='ident'>Duration</span>::<span class='ident'>from_secs</span>(<span class='number'>1</span>))
+        }
+    }
 }
 
 <span class='doccomment'>/// Protocol used to serve content. Future versions of Iron may add new protocols</span>
@@ -289,14 +366,14 @@
     <span class='doccomment'>/// The thread returns a guard that will automatically join with the parent</span>
     <span class='doccomment'>/// once it is dropped, blocking until this happens.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Defaults to a threadpool of size `2 * num_cpus`.</span>
+    <span class='doccomment'>/// Defaults to a threadpool of size `8 * num_cpus`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ## Panics</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Panics if the provided address does not parse. To avoid this</span>
     <span class='doccomment'>/// call `to_socket_addrs` yourself and pass a parsed `SocketAddr`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>http</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>2</span> <span class='op'>*</span> ::<span class='ident'>num_cpus</span>::<span class='ident'>get</span>(), <span class='ident'>Protocol</span>::<span class='ident'>Http</span>)
+        <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>8</span> <span class='op'>*</span> ::<span class='ident'>num_cpus</span>::<span class='ident'>get</span>(), <span class='ident'>Protocol</span>::<span class='ident'>Http</span>, <span class='prelude-val'>None</span>)
     }
 
     <span class='doccomment'>/// Kick off the server process using the HTTPS protocol.</span>
@@ -308,7 +385,7 @@
     <span class='doccomment'>/// The thread returns a guard that will automatically join with the parent</span>
     <span class='doccomment'>/// once it is dropped, blocking until this happens.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Defaults to a threadpool of size `2 * num_cpus`.</span>
+    <span class='doccomment'>/// Defaults to a threadpool of size `8 * num_cpus`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ## Panics</span>
     <span class='doccomment'>///</span>
@@ -317,8 +394,8 @@
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>https</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>, <span class='ident'>certificate</span>: <span class='ident'>PathBuf</span>, <span class='ident'>key</span>: <span class='ident'>PathBuf</span>)
                                    <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>2</span> <span class='op'>*</span> ::<span class='ident'>num_cpus</span>::<span class='ident'>get</span>(),
-                         <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { <span class='ident'>certificate</span>: <span class='ident'>certificate</span>, <span class='ident'>key</span>: <span class='ident'>key</span> })
+        <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>8</span> <span class='op'>*</span> ::<span class='ident'>num_cpus</span>::<span class='ident'>get</span>(),
+                         <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { <span class='ident'>certificate</span>: <span class='ident'>certificate</span>, <span class='ident'>key</span>: <span class='ident'>key</span> }, <span class='prelude-val'>None</span>)
     }
 
     <span class='doccomment'>/// Kick off the server process with X threads.</span>
@@ -328,24 +405,35 @@
     <span class='doccomment'>/// Panics if the provided address does not parse. To avoid this</span>
     <span class='doccomment'>/// call `to_socket_addrs` yourself and pass a parsed `SocketAddr`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen_with</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>, <span class='ident'>threads</span>: <span class='ident'>usize</span>,
-                                         <span class='ident'>protocol</span>: <span class='ident'>Protocol</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+                                         <span class='ident'>protocol</span>: <span class='ident'>Protocol</span>,
+                                         <span class='ident'>timeouts</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Timeouts</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>sock_addr</span> <span class='op'>=</span> <span class='ident'>addr</span>.<span class='ident'>to_socket_addrs</span>()
             .<span class='ident'>ok</span>().<span class='ident'>and_then</span>(<span class='op'>|</span><span class='kw-2'>mut</span> <span class='ident'>addrs</span><span class='op'>|</span> <span class='ident'>addrs</span>.<span class='ident'>next</span>()).<span class='ident'>expect</span>(<span class='string'>&quot;Could not parse socket address.&quot;</span>);
 
         <span class='self'>self</span>.<span class='ident'>addr</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>sock_addr</span>);
-
         <span class='self'>self</span>.<span class='ident'>protocol</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>protocol</span>.<span class='ident'>clone</span>());
 
         <span class='kw'>match</span> <span class='ident'>protocol</span> {
-            <span class='ident'>Protocol</span>::<span class='ident'>Http</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Server</span>::<span class='ident'>http</span>(<span class='ident'>sock_addr</span>)).<span class='ident'>handle_threads</span>(<span class='self'>self</span>, <span class='ident'>threads</span>),
+            <span class='ident'>Protocol</span>::<span class='ident'>Http</span> <span class='op'>=&gt;</span> {
+                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>server</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Server</span>::<span class='ident'>http</span>(<span class='ident'>sock_addr</span>));
+                <span class='kw'>let</span> <span class='ident'>timeouts</span> <span class='op'>=</span> <span class='ident'>timeouts</span>.<span class='ident'>unwrap_or_default</span>();
+                <span class='ident'>server</span>.<span class='ident'>keep_alive</span>(<span class='ident'>timeouts</span>.<span class='ident'>keep_alive</span>);
+                <span class='ident'>server</span>.<span class='ident'>set_read_timeout</span>(<span class='ident'>timeouts</span>.<span class='ident'>read</span>);
+                <span class='ident'>server</span>.<span class='ident'>set_write_timeout</span>(<span class='ident'>timeouts</span>.<span class='ident'>write</span>);
+                <span class='ident'>server</span>.<span class='ident'>handle_threads</span>(<span class='self'>self</span>, <span class='ident'>threads</span>)
+            },
 
             <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
             <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { <span class='kw-2'>ref</span> <span class='ident'>certificate</span>, <span class='kw-2'>ref</span> <span class='ident'>key</span> } <span class='op'>=&gt;</span> {
                 <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>net</span>::<span class='ident'>Openssl</span>;
 
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Server</span>::<span class='ident'>https</span>(<span class='ident'>sock_addr</span>,
-                                   <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Openssl</span>::<span class='ident'>with_cert_and_key</span>(<span class='ident'>certificate</span>, <span class='ident'>key</span>))))
-                    .<span class='ident'>handle_threads</span>(<span class='self'>self</span>, <span class='ident'>threads</span>)
+                <span class='kw'>let</span> <span class='ident'>ssl</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Openssl</span>::<span class='ident'>with_cert_and_key</span>(<span class='ident'>certificate</span>, <span class='ident'>key</span>));
+                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>server</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Server</span>::<span class='ident'>https</span>(<span class='ident'>sock_addr</span>, <span class='ident'>ssl</span>));
+                <span class='kw'>let</span> <span class='ident'>timeouts</span> <span class='op'>=</span> <span class='ident'>timeouts</span>.<span class='ident'>unwrap_or_default</span>();
+                <span class='ident'>server</span>.<span class='ident'>keep_alive</span>(<span class='ident'>timeouts</span>.<span class='ident'>keep_alive</span>);
+                <span class='ident'>server</span>.<span class='ident'>set_read_timeout</span>(<span class='ident'>timeouts</span>.<span class='ident'>read</span>);
+                <span class='ident'>server</span>.<span class='ident'>set_write_timeout</span>(<span class='ident'>timeouts</span>.<span class='ident'>write</span>);
+                <span class='ident'>server</span>.<span class='ident'>handle_threads</span>(<span class='self'>self</span>, <span class='ident'>threads</span>)
             }
         }
     }
@@ -356,17 +444,6 @@
     <span class='doccomment'>/// passed in `Handler`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>handler</span>: <span class='ident'>H</span>) <span class='op'>-&gt;</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
         <span class='ident'>Iron</span> { <span class='ident'>handler</span>: <span class='ident'>handler</span>, <span class='ident'>addr</span>: <span class='prelude-val'>None</span>, <span class='ident'>protocol</span>: <span class='prelude-val'>None</span> }
-    }
-
-    <span class='kw'>fn</span> <span class='ident'>bad_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='kw-2'>mut</span> <span class='ident'>http_res</span>: <span class='ident'>HttpResponse</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span>) {
-        <span class='op'>*</span><span class='ident'>http_res</span>.<span class='ident'>status_mut</span>() <span class='op'>=</span> <span class='ident'>status</span>::<span class='ident'>BadRequest</span>;
-
-        <span class='comment'>// Consume and flush the response.</span>
-        <span class='comment'>// We would like this to work, but can&#39;t do anything if it doesn&#39;t.</span>
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=</span> <span class='ident'>http_res</span>.<span class='ident'>start</span>()
-        {
-            <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>res</span>.<span class='ident'>end</span>();
-        }
     }
 }
 
@@ -388,11 +465,23 @@
             },
             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
                 <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error creating request:\n    {}&quot;</span>, <span class='ident'>e</span>);
-                <span class='self'>self</span>.<span class='ident'>bad_request</span>(<span class='ident'>http_res</span>)
+                <span class='ident'>bad_request</span>(<span class='ident'>http_res</span>)
             }
         }
     }
 }
+
+<span class='kw'>fn</span> <span class='ident'>bad_request</span>(<span class='kw-2'>mut</span> <span class='ident'>http_res</span>: <span class='ident'>HttpResponse</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span>) {
+    <span class='op'>*</span><span class='ident'>http_res</span>.<span class='ident'>status_mut</span>() <span class='op'>=</span> <span class='ident'>status</span>::<span class='ident'>BadRequest</span>;
+
+    <span class='comment'>// Consume and flush the response.</span>
+    <span class='comment'>// We would like this to work, but can&#39;t do anything if it doesn&#39;t.</span>
+    <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=</span> <span class='ident'>http_res</span>.<span class='ident'>start</span>()
+    {
+        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>res</span>.<span class='ident'>end</span>();
+    }
+}
+
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
@@ -453,6 +542,6 @@
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

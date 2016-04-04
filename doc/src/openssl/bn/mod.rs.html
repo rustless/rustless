@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.7.0/src/bn/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.8/src/bn/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -644,11 +645,81 @@
 <span id="602">602</span>
 <span id="603">603</span>
 <span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
+<span id="629">629</span>
+<span id="630">630</span>
+<span id="631">631</span>
+<span id="632">632</span>
+<span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
+<span id="649">649</span>
+<span id="650">650</span>
+<span id="651">651</span>
+<span id="652">652</span>
+<span id="653">653</span>
+<span id="654">654</span>
+<span id="655">655</span>
+<span id="656">656</span>
+<span id="657">657</span>
+<span id="658">658</span>
+<span id="659">659</span>
+<span id="660">660</span>
+<span id="661">661</span>
+<span id="662">662</span>
+<span id="663">663</span>
+<span id="664">664</span>
+<span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
+<span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_ulong</span>, <span class='ident'>c_void</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::{<span class='ident'>CStr</span>, <span class='ident'>CString</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>::<span class='ident'>Ordering</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>fmt</span>, <span class='ident'>ptr</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>fmt</span>, <span class='ident'>ptr</span>, <span class='ident'>mem</span>};
 
 <span class='kw'>use</span> <span class='ident'>ffi</span>;
 <span class='kw'>use</span> <span class='ident'>ssl</span>::<span class='ident'>error</span>::<span class='ident'>SslError</span>;
@@ -736,7 +807,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_dec_str</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='ident'>BigNum</span>::<span class='ident'>new</span>().<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>v</span><span class='op'>|</span> <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>c_str</span> <span class='op'>=</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='ident'>s</span>.<span class='ident'>as_bytes</span>()).<span class='ident'>unwrap</span>();
-            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>BN_dec2bn</span>(<span class='ident'>v</span>.<span class='ident'>raw_ptr</span>(), <span class='ident'>c_str</span>.<span class='ident'>as_ptr</span>()));
+            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>BN_dec2bn</span>(<span class='ident'>v</span>.<span class='ident'>raw_ptr</span>(), <span class='ident'>c_str</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _));
             <span class='prelude-val'>Ok</span>(<span class='ident'>v</span>)
         })
     }
@@ -744,9 +815,21 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_hex_str</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='ident'>BigNum</span>::<span class='ident'>new</span>().<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>v</span><span class='op'>|</span> <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>c_str</span> <span class='op'>=</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='ident'>s</span>.<span class='ident'>as_bytes</span>()).<span class='ident'>unwrap</span>();
-            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>BN_hex2bn</span>(<span class='ident'>v</span>.<span class='ident'>raw_ptr</span>(), <span class='ident'>c_str</span>.<span class='ident'>as_ptr</span>()));
+            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>BN_hex2bn</span>(<span class='ident'>v</span>.<span class='ident'>raw_ptr</span>(), <span class='ident'>c_str</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _));
             <span class='prelude-val'>Ok</span>(<span class='ident'>v</span>)
         })
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>new_from_ffi</span>(<span class='ident'>orig</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>BIGNUM</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='ident'>orig</span>.<span class='ident'>is_null</span>() {
+            <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Null Pointer was supplied to BigNum::new_from_ffi&quot;</span>);
+        }
+        <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>BN_dup</span>(<span class='ident'>orig</span>);
+        <span class='kw'>if</span> <span class='ident'>r</span>.<span class='ident'>is_null</span>() {
+            <span class='prelude-val'>Err</span>(<span class='ident'>SslError</span>::<span class='ident'>get</span>())
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>BigNum</span>(<span class='ident'>r</span>))
+        }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new_from_slice</span>(<span class='ident'>n</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
@@ -758,55 +841,73 @@
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_sqr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_sqr</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_sqr</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_nnmod</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>n</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_nnmod</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_nnmod</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_mod_add</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>, <span class='ident'>n</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_mod_add</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_mod_add</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_mod_sub</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>, <span class='ident'>n</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_mod_sub</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_mod_sub</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_mod_mul</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>, <span class='ident'>n</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_mod_mul</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_mod_mul</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_mod_sqr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>n</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_mod_sqr</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_mod_sqr</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_exp</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>p</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_exp</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>p</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_exp</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>p</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_mod_exp</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>p</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>, <span class='ident'>n</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_mod_exp</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>p</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_mod_exp</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>p</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_mod_inv</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>n</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='op'>!</span><span class='ident'>ffi</span>::<span class='ident'>BN_mod_inverse</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>).<span class='ident'>is_null</span>() })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='op'>!</span><span class='ident'>ffi</span>::<span class='ident'>BN_mod_inverse</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>).<span class='ident'>is_null</span>()
+            })
         }
     }
 
@@ -864,17 +965,28 @@
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_gcd</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_gcd</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_gcd</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_generate_prime</span>(<span class='ident'>bits</span>: <span class='ident'>i32</span>, <span class='ident'>safe</span>: <span class='ident'>bool</span>, <span class='ident'>add</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>BigNum</span><span class='op'>&gt;</span>, <span class='ident'>rem</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>BigNum</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_generate_prime</span>(<span class='ident'>bits</span>: <span class='ident'>i32</span>,
+                                  <span class='ident'>safe</span>: <span class='ident'>bool</span>,
+                                  <span class='ident'>add</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>BigNum</span><span class='op'>&gt;</span>,
+                                  <span class='ident'>rem</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>BigNum</span><span class='op'>&gt;</span>)
+                                  <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
             <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
                 <span class='kw'>let</span> <span class='ident'>add_arg</span> <span class='op'>=</span> <span class='ident'>add</span>.<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>a</span><span class='op'>|</span> <span class='ident'>a</span>.<span class='ident'>raw</span>()).<span class='ident'>unwrap_or</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>());
                 <span class='kw'>let</span> <span class='ident'>rem_arg</span> <span class='op'>=</span> <span class='ident'>rem</span>.<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>r</span><span class='op'>|</span> <span class='ident'>r</span>.<span class='ident'>raw</span>()).<span class='ident'>unwrap_or</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>());
 
-                <span class='ident'>ffi</span>::<span class='ident'>BN_generate_prime_ex</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='ident'>bits</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>safe</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>add_arg</span>, <span class='ident'>rem_arg</span>, <span class='ident'>ptr</span>::<span class='ident'>null</span>()) <span class='op'>==</span> <span class='number'>1</span>
+                <span class='ident'>ffi</span>::<span class='ident'>BN_generate_prime_ex</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(),
+                                          <span class='ident'>bits</span> <span class='kw'>as</span> <span class='ident'>c_int</span>,
+                                          <span class='ident'>safe</span> <span class='kw'>as</span> <span class='ident'>c_int</span>,
+                                          <span class='ident'>add_arg</span>,
+                                          <span class='ident'>rem_arg</span>,
+                                          <span class='ident'>ptr</span>::<span class='ident'>null</span>()) <span class='op'>==</span> <span class='number'>1</span>
             })
         }
     }
@@ -890,32 +1002,47 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_prime_fast</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>checks</span>: <span class='ident'>i32</span>, <span class='ident'>do_trial_division</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>bool</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
             <span class='macro'>with_ctx</span><span class='macro'>!</span>(<span class='ident'>ctx</span>, {
-                <span class='prelude-val'>Ok</span>(<span class='ident'>ffi</span>::<span class='ident'>BN_is_prime_fasttest_ex</span>(<span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>checks</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>ctx</span>, <span class='ident'>do_trial_division</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>ptr</span>::<span class='ident'>null</span>()) <span class='op'>==</span> <span class='number'>1</span>)
+                <span class='prelude-val'>Ok</span>(<span class='ident'>ffi</span>::<span class='ident'>BN_is_prime_fasttest_ex</span>(<span class='self'>self</span>.<span class='ident'>raw</span>(),
+                                                <span class='ident'>checks</span> <span class='kw'>as</span> <span class='ident'>c_int</span>,
+                                                <span class='ident'>ctx</span>,
+                                                <span class='ident'>do_trial_division</span> <span class='kw'>as</span> <span class='ident'>c_int</span>,
+                                                <span class='ident'>ptr</span>::<span class='ident'>null</span>()) <span class='op'>==</span> <span class='number'>1</span>)
             })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_new_random</span>(<span class='ident'>bits</span>: <span class='ident'>i32</span>, <span class='ident'>prop</span>: <span class='ident'>RNGProperty</span>, <span class='ident'>odd</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_rand</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='ident'>bits</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>prop</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>odd</span> <span class='kw'>as</span> <span class='ident'>c_int</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_rand</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='ident'>bits</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>prop</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>odd</span> <span class='kw'>as</span> <span class='ident'>c_int</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_new_pseudo_random</span>(<span class='ident'>bits</span>: <span class='ident'>i32</span>, <span class='ident'>prop</span>: <span class='ident'>RNGProperty</span>, <span class='ident'>odd</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_new_pseudo_random</span>(<span class='ident'>bits</span>: <span class='ident'>i32</span>,
+                                     <span class='ident'>prop</span>: <span class='ident'>RNGProperty</span>,
+                                     <span class='ident'>odd</span>: <span class='ident'>bool</span>)
+                                     <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_pseudo_rand</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='ident'>bits</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>prop</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>odd</span> <span class='kw'>as</span> <span class='ident'>c_int</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_pseudo_rand</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='ident'>bits</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>prop</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>odd</span> <span class='kw'>as</span> <span class='ident'>c_int</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_rand_in_range</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_rand_range</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_rand_range</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_pseudo_rand_in_range</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_pseudo_rand_range</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_pseudo_rand_range</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
@@ -940,9 +1067,7 @@
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_bit_set</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='kw'>unsafe</span> {
-            <span class='ident'>ffi</span>::<span class='ident'>BN_is_bit_set</span>(<span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>c_int</span>) <span class='op'>==</span> <span class='number'>1</span>
-        }
+        <span class='kw'>unsafe</span> { <span class='ident'>ffi</span>::<span class='ident'>BN_is_bit_set</span>(<span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>n</span> <span class='kw'>as</span> <span class='ident'>c_int</span>) <span class='op'>==</span> <span class='number'>1</span> }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>mask_bits</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>n</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SslError</span><span class='op'>&gt;</span> {
@@ -957,62 +1082,78 @@
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_shl1</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_lshift1</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_lshift1</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_shr1</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_rshift1</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_rshift1</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_add</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_add</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_add</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_sub</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_sub</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_sub</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_mul</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_mul</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_mul</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_div</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_div</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_div</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_mod</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_div</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(), <span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn_in_ctx</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='ident'>ctx</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_div</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(), <span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>a</span>.<span class='ident'>raw</span>(), <span class='ident'>ctx</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_shl</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_lshift</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='op'>*</span><span class='ident'>a</span> <span class='kw'>as</span> <span class='ident'>c_int</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_lshift</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='op'>*</span><span class='ident'>a</span> <span class='kw'>as</span> <span class='ident'>c_int</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>checked_shr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>a</span>: <span class='kw-2'>&amp;</span><span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>BigNum</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
-            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, { <span class='ident'>ffi</span>::<span class='ident'>BN_rshift</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='op'>*</span><span class='ident'>a</span> <span class='kw'>as</span> <span class='ident'>c_int</span>) <span class='op'>==</span> <span class='number'>1</span> })
+            <span class='macro'>with_bn</span><span class='macro'>!</span>(<span class='ident'>r</span>, {
+                <span class='ident'>ffi</span>::<span class='ident'>BN_rshift</span>(<span class='ident'>r</span>.<span class='ident'>raw</span>(), <span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='op'>*</span><span class='ident'>a</span> <span class='kw'>as</span> <span class='ident'>c_int</span>) <span class='op'>==</span> <span class='number'>1</span>
+            })
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>negate</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='kw'>unsafe</span> {
-            <span class='ident'>ffi</span>::<span class='ident'>BN_set_negative</span>(<span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>is_negative</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>)
-        }
+        <span class='kw'>unsafe</span> { <span class='ident'>ffi</span>::<span class='ident'>BN_set_negative</span>(<span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>is_negative</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>) }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>abs_cmp</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>oth</span>: <span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='ident'>Ordering</span> {
@@ -1029,15 +1170,11 @@
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_negative</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>raw</span>()).<span class='ident'>neg</span> <span class='op'>==</span> <span class='number'>1</span>
-        }
+        <span class='kw'>unsafe</span> { (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>raw</span>()).<span class='ident'>neg</span> <span class='op'>==</span> <span class='number'>1</span> }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_bits</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
-        <span class='kw'>unsafe</span> {
-            <span class='ident'>ffi</span>::<span class='ident'>BN_num_bits</span>(<span class='self'>self</span>.<span class='ident'>raw</span>()) <span class='kw'>as</span> <span class='ident'>i32</span>
-        }
+        <span class='kw'>unsafe</span> { <span class='ident'>ffi</span>::<span class='ident'>BN_num_bits</span>(<span class='self'>self</span>.<span class='ident'>raw</span>()) <span class='kw'>as</span> <span class='ident'>i32</span> }
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_bytes</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
@@ -1054,6 +1191,11 @@
         <span class='ident'>n</span>
     }
 
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_raw</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>BIGNUM</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>me</span> <span class='op'>=</span> <span class='self'>self</span>;
+        <span class='ident'>mem</span>::<span class='ident'>replace</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>me</span>.<span class='number'>0</span>, <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>())
+    }
+
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>to_vec</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>size</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>num_bytes</span>() <span class='kw'>as</span> <span class='ident'>usize</span>;
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>with_capacity</span>(<span class='ident'>size</span>);
@@ -1068,7 +1210,8 @@
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>BN_bn2dec</span>(<span class='self'>self</span>.<span class='ident'>raw</span>());
             <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>buf</span>.<span class='ident'>is_null</span>());
-            <span class='kw'>let</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>buf</span>).<span class='ident'>to_bytes</span>().<span class='ident'>to_vec</span>()).<span class='ident'>unwrap</span>();
+            <span class='kw'>let</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>buf</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _).<span class='ident'>to_bytes</span>().<span class='ident'>to_vec</span>())
+                          .<span class='ident'>unwrap</span>();
             <span class='ident'>ffi</span>::<span class='ident'>CRYPTO_free</span>(<span class='ident'>buf</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
             <span class='ident'>str</span>
         }
@@ -1078,7 +1221,8 @@
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>BN_bn2hex</span>(<span class='self'>self</span>.<span class='ident'>raw</span>());
             <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>buf</span>.<span class='ident'>is_null</span>());
-            <span class='kw'>let</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>buf</span>).<span class='ident'>to_bytes</span>().<span class='ident'>to_vec</span>()).<span class='ident'>unwrap</span>();
+            <span class='kw'>let</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>buf</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _).<span class='ident'>to_bytes</span>().<span class='ident'>to_vec</span>())
+                          .<span class='ident'>unwrap</span>();
             <span class='ident'>ffi</span>::<span class='ident'>CRYPTO_free</span>(<span class='ident'>buf</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
             <span class='ident'>str</span>
         }
@@ -1091,12 +1235,10 @@
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>Eq</span> <span class='kw'>for</span> <span class='ident'>BigNum</span> { }
+<span class='kw'>impl</span> <span class='ident'>Eq</span> <span class='kw'>for</span> <span class='ident'>BigNum</span> {}
 <span class='kw'>impl</span> <span class='ident'>PartialEq</span> <span class='kw'>for</span> <span class='ident'>BigNum</span> {
     <span class='kw'>fn</span> <span class='ident'>eq</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>oth</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='kw'>unsafe</span> {
-            <span class='ident'>ffi</span>::<span class='ident'>BN_cmp</span>(<span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>oth</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>0</span>
-        }
+        <span class='kw'>unsafe</span> { <span class='ident'>ffi</span>::<span class='ident'>BN_cmp</span>(<span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>oth</span>.<span class='ident'>raw</span>()) <span class='op'>==</span> <span class='number'>0</span> }
     }
 }
 
@@ -1110,14 +1252,13 @@
     <span class='kw'>fn</span> <span class='ident'>partial_cmp</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>oth</span>: <span class='kw-2'>&amp;</span><span class='ident'>BigNum</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Ordering</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>BN_cmp</span>(<span class='self'>self</span>.<span class='ident'>raw</span>(), <span class='ident'>oth</span>.<span class='ident'>raw</span>());
-            <span class='kw'>let</span> <span class='ident'>ret</span> <span class='op'>=</span>
-                <span class='kw'>if</span> <span class='ident'>v</span> <span class='op'>==</span> <span class='number'>0</span> {
-                    <span class='ident'>Ordering</span>::<span class='ident'>Equal</span>
-                } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>v</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
-                    <span class='ident'>Ordering</span>::<span class='ident'>Less</span>
-                } <span class='kw'>else</span> {
-                    <span class='ident'>Ordering</span>::<span class='ident'>Greater</span>
-                };
+            <span class='kw'>let</span> <span class='ident'>ret</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>v</span> <span class='op'>==</span> <span class='number'>0</span> {
+                <span class='ident'>Ordering</span>::<span class='ident'>Equal</span>
+            } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>v</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
+                <span class='ident'>Ordering</span>::<span class='ident'>Less</span>
+            } <span class='kw'>else</span> {
+                <span class='ident'>Ordering</span>::<span class='ident'>Greater</span>
+            };
             <span class='prelude-val'>Some</span>(<span class='ident'>ret</span>)
         }
     }
@@ -1136,7 +1277,7 @@
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>unchecked</span> {
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Add</span>, <span class='ident'>Div</span>, <span class='ident'>Mul</span>, <span class='ident'>Neg</span>, <span class='ident'>Rem</span>, <span class='ident'>Shl</span>, <span class='ident'>Shr</span>, <span class='ident'>Sub</span>};
     <span class='kw'>use</span> <span class='ident'>ffi</span>;
-    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>BigNum</span>};
+    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>BigNum</span>;
 
     <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Add</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>BigNum</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>BigNum</span> {
         <span class='kw'>type</span> <span class='ident'>Output</span> <span class='op'>=</span> <span class='ident'>BigNum</span>;
@@ -1309,6 +1450,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

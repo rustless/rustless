@@ -9,6 +9,7 @@
 
     <title>hpack::encoder::Encoder - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-123' class='srclink' href='../../src/hpack/encoder.rs.html#121-124' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-23' class='srclink' href='../../src/hpack/encoder.rs.html#121-124' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Encoder&lt;'a&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>Represents an HPACK encoder. Allows clients to encode arbitrary header sets
@@ -54,8 +55,7 @@ will use the context built by previous encode calls.</p>
 
 <p>This is the main API for performing HPACK encoding of headers.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1>
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>Encoding a header two times in a row produces two different
 representations, due to the utilization of HPACK compression.</p>
 <pre class='rust rust-example-rendered'>
@@ -86,7 +86,7 @@ representations, due to the utilization of HPACK compression.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../../hpack/encoder/struct.Encoder.html' title='hpack::encoder::Encoder'>Encoder</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../hpack/encoder/struct.Encoder.html' title='hpack::encoder::Encoder'>Encoder</a>&lt;'a&gt;</code></h4>
 <div class='docblock'><p>Creates a new <code>Encoder</code> with a default static table, as defined by the
 HPACK spec (Appendix A).</p>
-</div><h4 id='method.encode' class='method'><code>fn <a href='#method.encode' class='fnname'>encode</a>(&amp;mut self, headers: &amp;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;)</a>&gt;) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
+</div><h4 id='method.encode' class='method'><code>fn <a href='#method.encode' class='fnname'>encode</a>(&amp;mut self, headers: &amp;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;)</a>&gt;) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
 <div class='docblock'><p>Encodes the given headers using the HPACK rules and returns a newly
 allocated <code>Vec</code> containing the bytes representing the encoded header
 set.</p>
@@ -157,6 +157,6 @@ literals (Huffman encoding is not used).</p>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

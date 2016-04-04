@@ -9,6 +9,7 @@
 
     <title>lazy_static - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -53,8 +54,7 @@ executed at runtime in order to be initialized.
 This includes anything requiring heap allocations, like vectors or hash maps,
 as well as anything that requires function calls to be computed.</p>
 
-<h1 id="syntax" class='section-header'><a
-                           href="#syntax">Syntax</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='syntax' class='section-header'><a href='#syntax'>Syntax</a></h1><pre class='rust rust-example-rendered'>
 <span class='macro'>lazy_static</span><span class='macro'>!</span> {
     [<span class='kw'>pub</span>] <span class='kw'>static</span> <span class='kw-2'>ref</span> <span class='ident'>NAME_1</span>: <span class='ident'>TYPE_1</span> <span class='op'>=</span> <span class='ident'>EXPR_1</span>;
     [<span class='kw'>pub</span>] <span class='kw'>static</span> <span class='kw-2'>ref</span> <span class='ident'>NAME_2</span>: <span class='ident'>TYPE_2</span> <span class='op'>=</span> <span class='ident'>EXPR_2</span>;
@@ -64,8 +64,7 @@ as well as anything that requires function calls to be computed.</p>
 
 <p>Metadata (such as doc comments) is allowed on each ref.</p>
 
-<h1 id="semantic" class='section-header'><a
-                           href="#semantic">Semantic</a></h1>
+<h1 id='semantic' class='section-header'><a href='#semantic'>Semantic</a></h1>
 <p>For a given <code>static ref NAME: TYPE = EXPR;</code>, the macro generates a unique type that
 implements <code>Deref&lt;TYPE&gt;</code> and stores it in a static with name <code>NAME</code>. (Metadata ends up
 attaching to this type.)</p>
@@ -76,8 +75,7 @@ can return a reference to the same object.</p>
 <p>Like regular <code>static mut</code>s, this macro only works for types that fulfill the <code>Sync</code>
 trait.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1>
+<h1 id='example' class='section-header'><a href='#example'>Example</a></h1>
 <p>Using the macro:</p>
 <pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
@@ -105,8 +103,7 @@ trait.</p>
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;A expensive calculation on a static results in: {}.&quot;</span>, <span class='op'>*</span><span class='ident'>NUMBER</span>);
 }</pre>
 
-<h1 id="implementation-details" class='section-header'><a
-                           href="#implementation-details">Implementation details</a></h1>
+<h1 id='implementation-details' class='section-header'><a href='#implementation-details'>Implementation details</a></h1>
 <p>The <code>Deref</code> implementation uses a hidden static variable that is guarded by a atomic check on each access. On stable Rust, the macro may need to allocate each static on the heap.</p>
 </div><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
 <table>
@@ -176,6 +173,6 @@ trait.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

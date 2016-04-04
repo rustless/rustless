@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.5/src/request/url.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/iron-0.3.0/src/request/url.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>url.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
@@ -414,7 +415,7 @@
             <span class='ident'>scheme</span>: <span class='self'>self</span>.<span class='ident'>scheme</span>,
             <span class='ident'>scheme_data</span>: <span class='ident'>SchemeData</span>::<span class='ident'>Relative</span>(
                 <span class='ident'>RelativeSchemeData</span> {
-                    <span class='ident'>username</span>: <span class='self'>self</span>.<span class='ident'>username</span>.<span class='ident'>unwrap_or</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>()),
+                    <span class='ident'>username</span>: <span class='self'>self</span>.<span class='ident'>username</span>.<span class='ident'>unwrap_or</span>(<span class='ident'>String</span>::<span class='ident'>new</span>()),
                     <span class='ident'>password</span>: <span class='self'>self</span>.<span class='ident'>password</span>,
                     <span class='ident'>host</span>: <span class='self'>self</span>.<span class='ident'>host</span>,
                     <span class='ident'>port</span>: <span class='kw'>if</span> <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>port</span>) <span class='op'>!=</span> <span class='ident'>default_port</span> { <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>port</span>) } <span class='kw'>else</span> { <span class='prelude-val'>None</span> },
@@ -436,7 +437,7 @@
 
         <span class='comment'>// Write the user info.</span>
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>formatter</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>UserInfoFormatter</span> {
-            <span class='ident'>username</span>: <span class='self'>self</span>.<span class='ident'>username</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>s</span>).<span class='ident'>unwrap_or</span>(<span class='string'>&quot;&quot;</span>),
+            <span class='ident'>username</span>: <span class='self'>self</span>.<span class='ident'>username</span>.<span class='ident'>as_ref</span>().<span class='ident'>map_or</span>(<span class='string'>&quot;&quot;</span>, <span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>s</span>),
             <span class='ident'>password</span>: <span class='self'>self</span>.<span class='ident'>password</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>s</span>)
         }));
 
@@ -597,6 +598,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

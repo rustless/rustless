@@ -9,6 +9,7 @@
 
     <title>openssl::x509::extension::Extension - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -45,12 +46,12 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-20703' class='srclink' href='../../../src/openssl/x509/extension.rs.html#23-55' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-2946' class='srclink' href='../../../src/openssl/x509/extension.rs.html#23-55' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Extension {
     KeyUsage(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../openssl/x509/extension/enum.KeyUsageOption.html' title='openssl::x509::extension::KeyUsageOption'>KeyUsageOption</a>&gt;),
     ExtKeyUsage(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../openssl/x509/extension/enum.ExtKeyUsageOption.html' title='openssl::x509::extension::ExtKeyUsageOption'>ExtKeyUsageOption</a>&gt;),
-    SubjectAltName(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='enum' href='../../../openssl/x509/extension/enum.AltNameOption.html' title='openssl::x509::extension::AltNameOption'>AltNameOption</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>)</a>&gt;),
-    IssuerAltName(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='enum' href='../../../openssl/x509/extension/enum.AltNameOption.html' title='openssl::x509::extension::AltNameOption'>AltNameOption</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>)</a>&gt;),
+    SubjectAltName(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='enum' href='../../../openssl/x509/extension/enum.AltNameOption.html' title='openssl::x509::extension::AltNameOption'>AltNameOption</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>)</a>&gt;),
+    IssuerAltName(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='enum' href='../../../openssl/x509/extension/enum.AltNameOption.html' title='openssl::x509::extension::AltNameOption'>AltNameOption</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>)</a>&gt;),
     OtherNid(<a class='enum' href='../../../openssl/nid/enum.Nid.html' title='openssl::nid::Nid'>Nid</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>),
     OtherStr(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>),
 }</pre><div class='docblock'><p>A X.509 v3 certificate extension.</p>
@@ -140,6 +141,6 @@ See RFC 3280 for more information about extensions.</p>
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

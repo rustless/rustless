@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.7.0/src/header/common/content_type.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/hyper-0.8.0/src/header/common/content_type.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>content_type.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
 
     
@@ -201,7 +202,7 @@
     <span class='doccomment'>/// A constructor  to easily create a `Content-Type: application/json; charset=utf-8` header.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>json</span>() <span class='op'>-&gt;</span> <span class='ident'>ContentType</span> {
-        <span class='ident'>ContentType</span>(<span class='macro'>mime</span><span class='macro'>!</span>(<span class='ident'>Application</span><span class='op'>/</span><span class='ident'>Json</span>; <span class='ident'>Charset</span><span class='op'>=</span><span class='ident'>Utf8</span>))
+        <span class='ident'>ContentType</span>(<span class='macro'>mime</span><span class='macro'>!</span>(<span class='ident'>Application</span><span class='op'>/</span><span class='ident'>Json</span>))
     }
 
     <span class='doccomment'>/// A constructor  to easily create a `Content-Type: text/plain; charset=utf-8` header.</span>
@@ -295,6 +296,6 @@
     <script src="../../../../jquery.js"></script>
     <script src="../../../../main.js"></script>
     
-    <script async src="../../../../search-index.js"></script>
+    <script defer src="../../../../search-index.js"></script>
 </body>
 </html>

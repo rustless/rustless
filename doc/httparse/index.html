@@ -9,6 +9,7 @@
 
     <title>httparse - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -45,10 +46,9 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/httparse/lib.rs.html#1-741' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/httparse/lib.rs.html#1-838' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'>
-<h1 id="httparse" class='section-header'><a
-                           href="#httparse">httparse</a></h1>
+<h1 id='httparse' class='section-header'><a href='#httparse'>httparse</a></h1>
 <p>A push library for parsing HTTP/1.x requests and responses.</p>
 
 <p>The focus is on speed and safety. Unsafe code is used to keep parsing fast,
@@ -66,6 +66,15 @@ intrinsic, and simd, are stabilized in rustc.</p>
                                title='httparse::Header'>Header</a></td>
                         <td class='docblock short'>
                              <p>Represents a parsed header.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.InvalidChunkSize.html'
+                               title='httparse::InvalidChunkSize'>InvalidChunkSize</a></td>
+                        <td class='docblock short'>
+                             <p>An error in parsing a chunk size.</p>
 
                         </td>
                     </tr>
@@ -119,6 +128,15 @@ parsing.</p>
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.parse_chunk_size.html'
+                               title='httparse::parse_chunk_size'>parse_chunk_size</a></td>
+                        <td class='docblock short'>
+                             <p>Parse a buffer of bytes as a chunk size.</p>
+
+                        </td>
+                    </tr>
+                
                     <tr class=' module-item'>
                         <td><a class='fn' href='fn.parse_headers.html'
                                title='httparse::parse_headers'>parse_headers</a></td>
@@ -196,6 +214,6 @@ parsing.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/phf-0.7.8/src/ordered_map.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/phf-0.7.14/src/ordered_map.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>ordered_map.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     
@@ -275,9 +276,9 @@
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>ops</span>::<span class='ident'>Index</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>slice</span>;
+<span class='kw'>use</span> <span class='ident'>phf_shared</span>::{<span class='self'>self</span>, <span class='ident'>PhfHash</span>};
 
-<span class='kw'>use</span> <span class='ident'>PhfHash</span>;
-<span class='kw'>use</span> <span class='ident'>phf_shared</span>;
+<span class='kw'>use</span> <span class='ident'>Slice</span>;
 
 <span class='doccomment'>/// An order-preserving immutable map constructed at compile time.</span>
 <span class='doccomment'>///</span>
@@ -293,11 +294,11 @@
     <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>hidden</span>)]</span>
     <span class='kw'>pub</span> <span class='ident'>key</span>: <span class='ident'>u64</span>,
     <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>hidden</span>)]</span>
-    <span class='kw'>pub</span> <span class='ident'>disps</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [(<span class='ident'>u32</span>, <span class='ident'>u32</span>)],
+    <span class='kw'>pub</span> <span class='ident'>disps</span>: <span class='ident'>Slice</span><span class='op'>&lt;</span>(<span class='ident'>u32</span>, <span class='ident'>u32</span>)<span class='op'>&gt;</span>,
     <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>hidden</span>)]</span>
-    <span class='kw'>pub</span> <span class='ident'>idxs</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='ident'>usize</span>],
+    <span class='kw'>pub</span> <span class='ident'>idxs</span>: <span class='ident'>Slice</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>,
     <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>hidden</span>)]</span>
-    <span class='kw'>pub</span> <span class='ident'>entries</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [(<span class='ident'>K</span>, <span class='ident'>V</span>)],
+    <span class='kw'>pub</span> <span class='ident'>entries</span>: <span class='ident'>Slice</span><span class='op'>&lt;</span>(<span class='ident'>K</span>, <span class='ident'>V</span>)<span class='op'>&gt;</span>,
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span><span class='op'>&gt;</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>OrderedMap</span><span class='op'>&lt;</span><span class='ident'>K</span>, <span class='ident'>V</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>K</span>: <span class='ident'>fmt</span>::<span class='ident'>Debug</span>, <span class='ident'>V</span>: <span class='ident'>fmt</span>::<span class='ident'>Debug</span> {
@@ -380,7 +381,7 @@
               <span class='ident'>K</span>: <span class='ident'>Borrow</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>
     {
         <span class='kw'>let</span> <span class='ident'>hash</span> <span class='op'>=</span> <span class='ident'>phf_shared</span>::<span class='ident'>hash</span>(<span class='ident'>key</span>, <span class='self'>self</span>.<span class='ident'>key</span>);
-        <span class='kw'>let</span> <span class='ident'>idx_index</span> <span class='op'>=</span> <span class='ident'>phf_shared</span>::<span class='ident'>get_index</span>(<span class='ident'>hash</span>, <span class='self'>self</span>.<span class='ident'>disps</span>, <span class='self'>self</span>.<span class='ident'>idxs</span>.<span class='ident'>len</span>());
+        <span class='kw'>let</span> <span class='ident'>idx_index</span> <span class='op'>=</span> <span class='ident'>phf_shared</span>::<span class='ident'>get_index</span>(<span class='ident'>hash</span>, <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='self'>self</span>.<span class='ident'>disps</span>, <span class='self'>self</span>.<span class='ident'>idxs</span>.<span class='ident'>len</span>());
         <span class='kw'>let</span> <span class='ident'>idx</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>idxs</span>[<span class='ident'>idx_index</span> <span class='kw'>as</span> <span class='ident'>usize</span>];
         <span class='kw'>let</span> <span class='ident'>entry</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>entries</span>[<span class='ident'>idx</span>];
 
@@ -557,6 +558,6 @@
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

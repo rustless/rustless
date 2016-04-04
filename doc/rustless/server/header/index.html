@@ -9,6 +9,7 @@
 
     <title>rustless::server::header - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-6082' class='srclink' href='../../../hyper/header/index.html?gotosrc=6082' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-932' class='srclink' href='../../../hyper/header/index.html?gotosrc=932' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Headers container, and common header fields.</p>
 
 <p>hyper has the opinion that Headers should be strongly-typed, because that&#39;s
@@ -53,8 +54,7 @@ why we&#39;re using Rust in the first place. To set or get any header, an object
 must implement the <code>Header</code> trait from this module. Several common headers
 are already provided, such as <code>Host</code>, <code>ContentType</code>, <code>UserAgent</code>, and others.</p>
 
-<h1 id="why-typed?" class='section-header'><a
-                           href="#why-typed?">Why Typed?</a></h1>
+<h1 id='why-typed' class='section-header'><a href='#why-typed'>Why Typed?</a></h1>
 <p>Or, why not stringly-typed? Types give the following advantages:</p>
 
 <ul>
@@ -62,8 +62,7 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
 <li>Parsing to a proper type by default</li>
 </ul>
 
-<h1 id="defining-custom-headers" class='section-header'><a
-                           href="#defining-custom-headers">Defining Custom Headers</a></h1>
+<h1 id='defining-custom-headers' class='section-header'><a href='#defining-custom-headers'>Defining Custom Headers</a></h1>
 <p>Hyper provides many of the most commonly used headers in HTTP. If
 you need to define a custom header, it&#39;s easy to do while still taking
 advantage of the type system. Hyper includes a <code>header!</code> macro for defining
@@ -83,8 +82,7 @@ many wrapper-style headers.</p>
 actually involves 2 parts: parsing, and formatting. If you need to
 customize either part, you can do so.</p>
 
-<h2 id="header-and-headerformat" class='section-header'><a
-                           href="#header-and-headerformat"><code>Header</code> and <code>HeaderFormat</code></a></h2>
+<h2 id='header-and-headerformat' class='section-header'><a href='#header-and-headerformat'><code>Header</code> and <code>HeaderFormat</code></a></h2>
 <p>Consider a Do Not Track header. It can be true or false, but it represents
 that via the numerals <code>1</code> and <code>0</code>.</p>
 <pre class='rust rust-example-rendered'>
@@ -373,7 +371,8 @@ that via the numerals <code>1</code> and <code>0</code>.</p>
                         <td><a class='struct' href='struct.Cookie.html'
                                title='rustless::server::header::Cookie'>Cookie</a></td>
                         <td class='docblock short'>
-                             
+                             <p><code>Cookie</code> header, defined in <a href="http://tools.ietf.org/html/rfc6265#section-5.4">RFC6265</a></p>
+
                         </td>
                     </tr>
                 
@@ -381,8 +380,7 @@ that via the numerals <code>1</code> and <code>0</code>.</p>
                         <td><a class='struct' href='struct.Cookie.html'
                                title='rustless::server::header::Cookie'>Cookie</a></td>
                         <td class='docblock short'>
-                             <p><code>Cookie</code> header, defined in <a href="http://tools.ietf.org/html/rfc6265#section-5.4">RFC6265</a></p>
-
+                             
                         </td>
                     </tr>
                 
@@ -903,6 +901,6 @@ Sets <code>q</code> to the default 1.0</p>
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

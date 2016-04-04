@@ -9,6 +9,7 @@
 
     <title>typemap::OccupiedEntry - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -45,11 +46,11 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-577' class='srclink' href='../src/typemap/lib.rs.html#208-211' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct OccupiedEntry&lt;'a, K, A: ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> + <a class='trait' href='../uany/trait.UnsafeAnyExt.html' title='uany::UnsafeAnyExt'>UnsafeAnyExt</a> + 'a = <a class='trait' href='../uany/trait.UnsafeAny.html' title='uany::UnsafeAny'>UnsafeAny</a>&gt; {
+        </span><a id='src-116' class='srclink' href='../src/typemap/lib.rs.html#208-211' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct OccupiedEntry&lt;'a, K, A: ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> + <a class='trait' href='../unsafe_any/trait.UnsafeAnyExt.html' title='unsafe_any::UnsafeAnyExt'>UnsafeAnyExt</a> + 'a = <a class='trait' href='../unsafe_any/trait.UnsafeAny.html' title='unsafe_any::UnsafeAny'>UnsafeAny</a>&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>A view onto an occupied entry in a TypeMap.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a, K: <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a>, A: <a class='trait' href='../uany/trait.UnsafeAnyExt.html' title='uany::UnsafeAnyExt'>UnsafeAnyExt</a> + ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; <a class='struct' href='../typemap/struct.OccupiedEntry.html' title='typemap::OccupiedEntry'>OccupiedEntry</a>&lt;'a, K, A&gt;</code></h3><div class='impl-items'><h4 id='method.get' class='method'><code>fn <a href='#method.get' class='fnname'>get</a>(&amp;self) -&gt; &amp;K::Value <span class='where'>where K::Value: <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a, K: <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a>, A: <a class='trait' href='../unsafe_any/trait.UnsafeAnyExt.html' title='unsafe_any::UnsafeAnyExt'>UnsafeAnyExt</a> + ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; <a class='struct' href='../typemap/struct.OccupiedEntry.html' title='typemap::OccupiedEntry'>OccupiedEntry</a>&lt;'a, K, A&gt;</code></h3><div class='impl-items'><h4 id='method.get' class='method'><code>fn <a href='#method.get' class='fnname'>get</a>(&amp;self) -&gt; &amp;K::Value <span class='where'>where K::Value: <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
 <div class='docblock'><p>Get a reference to the entry&#39;s value.</p>
 </div><h4 id='method.get_mut' class='method'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; &amp;mut K::Value <span class='where'>where K::Value: <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
 <div class='docblock'><p>Get a mutable reference to the entry&#39;s value.</p>
@@ -118,6 +119,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

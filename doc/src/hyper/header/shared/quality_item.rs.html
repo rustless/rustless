@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.7.0/src/header/shared/quality_item.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/hyper-0.8.0/src/header/shared/quality_item.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>quality_item.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
 
     
@@ -359,7 +360,7 @@
         <span class='kw'>match</span> <span class='ident'>raw_item</span>.<span class='ident'>parse</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() {
             <span class='comment'>// we already checked above that the quality is within range</span>
             <span class='prelude-val'>Ok</span>(<span class='ident'>item</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>item</span>, <span class='ident'>from_f32</span>(<span class='ident'>quality</span>))),
-            <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Header</span>),
+            <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Header</span>),
         }
     }
 }
@@ -531,6 +532,6 @@
     <script src="../../../../jquery.js"></script>
     <script src="../../../../main.js"></script>
     
-    <script async src="../../../../search-index.js"></script>
+    <script defer src="../../../../search-index.js"></script>
 </body>
 </html>

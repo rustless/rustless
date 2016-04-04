@@ -9,6 +9,7 @@
 
     <title>openssl::crypto::symm::Crypter - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -45,20 +46,20 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-8849' class='srclink' href='../../../src/openssl/crypto/symm.rs.html#45-50' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-1128' class='srclink' href='../../../src/openssl/crypto/symm.rs.html#45-50' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Crypter {
     // some fields omitted
 }</pre><div class='docblock'><p>Represents a symmetric cipher context.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../../openssl/crypto/symm/struct.Crypter.html' title='openssl::crypto::symm::Crypter'>Crypter</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(t: <a class='enum' href='../../../openssl/crypto/symm/enum.Type.html' title='openssl::crypto::symm::Type'>Type</a>) -&gt; <a class='struct' href='../../../openssl/crypto/symm/struct.Crypter.html' title='openssl::crypto::symm::Crypter'>Crypter</a></code></h4>
-<h4 id='method.pad' class='method'><code>fn <a href='#method.pad' class='fnname'>pad</a>(&amp;self, padding: <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
+<h4 id='method.pad' class='method'><code>fn <a href='#method.pad' class='fnname'>pad</a>(&amp;self, padding: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></h4>
 <div class='docblock'><p>Enables or disables padding. If padding is disabled, total amount of
 data encrypted must be a multiple of block size.</p>
-</div><h4 id='method.init' class='method'><code>fn <a href='#method.init' class='fnname'>init</a>(&amp;self, mode: <a class='enum' href='../../../openssl/crypto/symm/enum.Mode.html' title='openssl::crypto::symm::Mode'>Mode</a>, key: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, iv: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>)</code></h4>
+</div><h4 id='method.init' class='method'><code>fn <a href='#method.init' class='fnname'>init</a>(&amp;self, mode: <a class='enum' href='../../../openssl/crypto/symm/enum.Mode.html' title='openssl::crypto::symm::Mode'>Mode</a>, key: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, iv: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>)</code></h4>
 <div class='docblock'><p>Initializes this crypter.</p>
-</div><h4 id='method.update' class='method'><code>fn <a href='#method.update' class='fnname'>update</a>(&amp;self, data: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
+</div><h4 id='method.update' class='method'><code>fn <a href='#method.update' class='fnname'>update</a>(&amp;self, data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
 <div class='docblock'><p>Update this crypter with more data to encrypt or decrypt. Returns
 encrypted or decrypted bytes.</p>
-</div><h4 id='method.finalize' class='method'><code>fn <a href='#method.finalize' class='fnname'>finalize</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
+</div><h4 id='method.finalize' class='method'><code>fn <a href='#method.finalize' class='fnname'>finalize</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
 <div class='docblock'><p>Finish crypting. Returns the remaining partial block of output, if any.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../../../openssl/crypto/symm/struct.Crypter.html' title='openssl::crypto::symm::Crypter'>Crypter</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
 </div></section>
@@ -120,6 +121,6 @@ encrypted or decrypted bytes.</p>
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

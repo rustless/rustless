@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-sys-extras-0.7.0/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-sys-extras-0.7.8/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     
@@ -108,14 +109,26 @@
 <span id="66">66</span>
 <span id="67">67</span>
 <span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>non_upper_case_globals</span>, <span class='ident'>non_snake_case</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_root_url</span><span class='op'>=</span><span class='string'>&quot;https://sfackler.github.io/rust-openssl/doc/v0.7.0&quot;</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_root_url</span><span class='op'>=</span><span class='string'>&quot;https://sfackler.github.io/rust-openssl/doc/v0.7.8&quot;</span>)]</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>openssl_sys</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
-<span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_long</span>, <span class='ident'>c_char</span>};
+<span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_long</span>, <span class='ident'>c_char</span>, <span class='ident'>c_void</span>};
 <span class='kw'>use</span> <span class='ident'>openssl_sys</span>::{<span class='ident'>HMAC_CTX</span>, <span class='ident'>EVP_MD</span>, <span class='ident'>ENGINE</span>, <span class='ident'>SSL_CTX</span>, <span class='ident'>BIO</span>, <span class='ident'>X509</span>, <span class='ident'>stack_st_X509_EXTENSION</span>, <span class='ident'>SSL</span>, <span class='ident'>DH</span>};
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>import_options</span> {
@@ -160,6 +173,14 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>BIO_set_nbio</span>(<span class='ident'>b</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>, <span class='ident'>enabled</span>: <span class='ident'>c_long</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
     <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;BIO_set_mem_eof_return_shim&quot;</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>BIO_set_mem_eof_return</span>(<span class='ident'>b</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>, <span class='ident'>v</span>: <span class='ident'>c_int</span>);
+    <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;BIO_clear_retry_flags_shim&quot;</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>BIO_clear_retry_flags</span>(<span class='ident'>b</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>);
+    <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;BIO_set_retry_read_shim&quot;</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>BIO_set_retry_read</span>(<span class='ident'>b</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>);
+    <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;BIO_set_retry_write_shim&quot;</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>BIO_set_retry_write</span>(<span class='ident'>b</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>);
+    <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;BIO_flush&quot;</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>BIO_flush</span>(<span class='ident'>b</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_set_options_shim</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL_CTX</span>, <span class='ident'>options</span>: <span class='ident'>c_long</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_get_options_shim</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL_CTX</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_clear_options_shim</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL_CTX</span>, <span class='ident'>options</span>: <span class='ident'>c_long</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
@@ -176,6 +197,10 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_set_tmp_dh</span>(<span class='ident'>s</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL</span>, <span class='ident'>dh</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>DH</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
     <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;X509_get_extensions_shim&quot;</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_get_extensions</span>(<span class='ident'>x</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>stack_st_X509_EXTENSION</span>;
+    <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;SSL_CTX_set_tlsext_servername_callback_shim&quot;</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_set_tlsext_servername_callback</span>(<span class='ident'>ssl</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL_CTX</span>, <span class='ident'>callback</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw'>extern</span> <span class='kw'>fn</span>()<span class='op'>&gt;</span>);
+    <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;SSL_CTX_set_tlsext_servername_arg_shim&quot;</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_set_tlsext_servername_arg</span>(<span class='ident'>ssl</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL_CTX</span>, <span class='ident'>arg</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>);
 }
 </pre>
 </section>
@@ -237,6 +262,6 @@
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

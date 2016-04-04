@@ -9,6 +9,7 @@
 
     <title>iron::modifiers - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
@@ -45,28 +46,37 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-3590' class='srclink' href='../../src/iron/modifiers.rs.html#1-162' title='goto source code'>[src]</a></span></h1>
-<div class='docblock'><p>Defines a series of convenience modifiers for editing Responses</p>
+        </span><a id='src-643' class='srclink' href='../../src/iron/modifiers.rs.html#1-197' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>This module defines a series of convenience modifiers for changing
+Responses.</p>
 
-<p>Modifiers can be used to edit Responses through the owning
-method <code>set</code> or the mutating <code>set_mut</code>, both of which are
-defined in the <code>Set</code> trait.</p>
+<p>Modifiers can be used to edit <code>Response</code>s through the owning method <code>set</code>
+or the mutating <code>set_mut</code>, both of which are defined in the <code>Set</code> trait.</p>
 
-<p>Instead of having a combinatorial explosion of Response methods
-and constructors, this provides a series of modifiers that
-can be used through the <code>Set</code> trait.</p>
+<p>For Iron, the <code>Modifier</code> interface offers extensible and ergonomic response
+creation while avoiding the introduction of many highly specific <code>Response</code>
+constructors.</p>
 
-<p>For instance, instead of <code>Response::redirect</code> constructing a
-redirect response, we provide a <code>Redirect</code> modifier, so you
-can just do:</p>
+<p>The simplest case of a modifier is probably the one used to change the
+return status code:</p>
 <pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>with</span>(<span class='ident'>status</span>::<span class='ident'>NotFound</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>r</span>.<span class='ident'>status</span>.<span class='ident'>unwrap</span>().<span class='ident'>to_u16</span>(), <span class='number'>404</span>);</pre>
 
+<p>You can also pass in a tuple of modifiers, they will all be applied. Here&#39;s
+an example of a modifier 2-tuple that will change the status code and the
+body message:</p>
+<pre class='rust rust-example-rendered'>
+<span class='ident'>Response</span>::<span class='ident'>with</span>((<span class='ident'>status</span>::<span class='ident'>ImATeapot</span>, <span class='string'>&quot;I am a tea pot!&quot;</span>));</pre>
+
+<p>There is also a <code>Redirect</code> modifier:</p>
+<pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://doc.rust-lang.org&quot;</span>).<span class='ident'>unwrap</span>();
-<span class='ident'>Response</span>::<span class='ident'>with</span>((<span class='ident'>status</span>::<span class='ident'>Found</span>, <span class='ident'>Redirect</span>(<span class='ident'>url</span>)));</pre>
+<span class='ident'>Response</span>::<span class='ident'>with</span>((<span class='ident'>status</span>::<span class='ident'>Found</span>, <span class='ident'>modifiers</span>::<span class='ident'>Redirect</span>(<span class='ident'>url</span>)));</pre>
 
-<p>This is more extensible as it allows you to combine
-arbitrary modifiers without having a massive number of
-Response constructors.</p>
+<p>The modifiers are applied depending on their type. Currently the easiest
+way to see how different types are used as modifiers, take a look at <a href="https://github.com/iron/iron/blob/master/src/modifiers.rs">the
+source code</a>.</p>
 
 <p>For more information about the modifier system, see
 <a href="https://github.com/reem/rust-modifier">rust-modifier</a>.</p>
@@ -84,6 +94,15 @@ Response constructors.</p>
                     <tr class=' module-item'>
                         <td><a class='struct' href='struct.Redirect.html'
                                title='iron::modifiers::Redirect'>Redirect</a></td>
+                        <td class='docblock short'>
+                             <p>A modifier for creating redirect responses.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.RedirectRaw.html'
+                               title='iron::modifiers::RedirectRaw'>RedirectRaw</a></td>
                         <td class='docblock short'>
                              <p>A modifier for creating redirect responses.</p>
 
@@ -148,6 +167,6 @@ Response constructors.</p>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

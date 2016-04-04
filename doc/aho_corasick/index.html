@@ -9,6 +9,7 @@
 
     <title>aho_corasick - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/aho_corasick/lib.rs.html#1-885' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/aho_corasick/lib.rs.html#1-919' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>An implementation of the
 <a href="https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_string_matching_algorithm">Aho-Corasick string search algorithm</a>.</p>
 
@@ -56,8 +57,7 @@ finite state machine. The search phase is then a quick linear scan through the
 text. Each character in the search text causes a state transition in the
 automaton. Matches are reported when the automaton enters a match state.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1>
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>The main type exposed by this crate is <code>AcAutomaton</code>, which can be constructed
 from an iterator of pattern strings:</p>
 <pre class='rust rust-example-rendered'>
@@ -124,8 +124,7 @@ but it operates on streams.</p>
 complete example. It creates a large automaton from a dictionary and can do a
 streaming match over arbitrarily large data.</p>
 
-<h1 id="memory-usage" class='section-header'><a
-                           href="#memory-usage">Memory usage</a></h1>
+<h1 id='memory-usage' class='section-header'><a href='#memory-usage'>Memory usage</a></h1>
 <p>A key aspect of an Aho-Corasick implementation is how the state transitions
 are represented. The easiest way to make the automaton fast is to store a
 sparse 256-slot map in each state. It maps an input byte to a state index.
@@ -325,6 +324,6 @@ construct this Automaton.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.5/src/macros.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/iron-0.3.0/src/macros.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>macros.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
@@ -75,18 +76,30 @@
 <span id="33">33</span>
 <span id="34">34</span>
 <span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Helper macros. Note that these are relatively new and may change in a later version.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! The idea is to use `itry` for internal server operations which can&#39;t be recovered from, and</span>
 <span class='doccomment'>//! `iexpect` for validating user input. Note that this kind of usage is completely non-normative.</span>
-<span class='doccomment'>//! Feedback about actual usability and usage is apprechiated.</span>
+<span class='doccomment'>//! Feedback about actual usability and usage is appreciated.</span>
 
-<span class='doccomment'>/// Like try!(), but wrapping the error value in `IronError`. To be used in request handlers.</span>
+<span class='doccomment'>/// Like `try!()`, but wraps the error value in `IronError`. To be used in</span>
+<span class='doccomment'>/// request handlers.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// The second (optional) parameter is any [modifier](modifiers/index.html).</span>
+<span class='doccomment'>/// The default modifier is `status::InternalServerError`.</span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```ignore</span>
 <span class='doccomment'>/// let f = itry!(fs::File::create(&quot;foo.txt&quot;), status::BadRequest);</span>
-<span class='doccomment'>/// let f = itry!(fs::File::create(&quot;foo.txt&quot;));  // Default modifier is status::InternalServerError</span>
+<span class='doccomment'>/// let f = itry!(fs::File::create(&quot;foo.txt&quot;), (status::NotFound, &quot;Not Found&quot;));</span>
+<span class='doccomment'>/// let f = itry!(fs::File::create(&quot;foo.txt&quot;));  // HTTP 500</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>///</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
@@ -100,8 +113,8 @@
     })
 }
 
-<span class='doccomment'>/// Unwrap the given Option or return a Ok(Response::new()) with the given modifier. The default</span>
-<span class='doccomment'>/// modifier is status::BadRequest.</span>
+<span class='doccomment'>/// Unwrap the given `Option` or return a `Ok(Response::new())` with the given</span>
+<span class='doccomment'>/// modifier. The default modifier is `status::BadRequest`.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>iexpect</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>iexpect</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>status</span>::<span class='ident'>BadRequest</span>));
@@ -171,6 +184,6 @@
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@
 
     <title>iron::iexpect! - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
@@ -45,18 +46,14 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-4657' class='srclink' href='../src/iron/macros.rs.html#28-35' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-871' class='srclink' href='../src/iron/macros.rs.html#34-41' title='goto source code'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>iexpect</span> {
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>iexpect</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>status</span>::<span class='ident'>BadRequest</span>));
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='kw'>match</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span> {
-        ::<span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span>::<span class='prelude-val'>Some</span>(<span class='ident'>x</span>) <span class='op'>=&gt;</span> <span class='ident'>x</span>,
-        ::<span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span>::<span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> ::<span class='ident'>std</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span>::<span class='prelude-val'>Ok</span>(
-            <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>response</span>::<span class='ident'>Response</span>::<span class='ident'>with</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>))
-    })
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> { ... };
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> { ... };
 }</pre>
-<div class='docblock'><p>Unwrap the given Option or return a Ok(Response::new()) with the given modifier. The default
-modifier is status::BadRequest.</p>
+<div class='docblock'><p>Unwrap the given <code>Option</code> or return a <code>Ok(Response::new())</code> with the given
+modifier. The default modifier is <code>status::BadRequest</code>.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -116,6 +113,6 @@ modifier is status::BadRequest.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

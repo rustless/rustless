@@ -9,6 +9,7 @@
 
     <title>api.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -257,9 +258,9 @@
 <span class='kw'>use</span> <span class='ident'>backend</span>;
 <span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>mime</span>;
 <span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>header</span>;
-<span class='kw'>use</span> <span class='ident'>errors</span>::{<span class='self'>self</span>, <span class='ident'>Error</span>};
-
-<span class='kw'>use</span> <span class='ident'>framework</span>::{<span class='self'>self</span>, <span class='ident'>ApiHandler</span>};
+<span class='kw'>use</span> <span class='ident'>errors</span>;
+ 
+<span class='kw'>use</span> <span class='ident'>framework</span>;
 <span class='kw'>use</span> <span class='ident'>framework</span>::<span class='ident'>nesting</span>::{<span class='self'>self</span>, <span class='ident'>Nesting</span>, <span class='ident'>Node</span>};
 <span class='kw'>use</span> <span class='ident'>framework</span>::<span class='ident'>media</span>;
 <span class='kw'>use</span> <span class='ident'>framework</span>::<span class='ident'>path</span>;
@@ -462,7 +463,8 @@
             }
         })
     }
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 
@@ -522,6 +524,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

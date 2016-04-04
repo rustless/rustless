@@ -9,6 +9,7 @@
 
     <title>rustless::server::server::Server - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-45466' class='srclink' href='../../../hyper/server/struct.Server.html?gotosrc=45466' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-7050' class='srclink' href='../../../hyper/server/struct.Server.html?gotosrc=7050' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Server&lt;L = <a class='struct' href='../../../rustless/server/net/struct.HttpListener.html' title='rustless::server::net::HttpListener'>HttpListener</a>&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>A server can listen on a TCP socket.</p>
@@ -75,10 +76,10 @@ to keep the connection alive before dropping it.</p>
 <p>You can use any SSL implementation, as long as implements <code>hyper::net::Ssl</code>.</p>
 </div></div><h3 class='impl'><code>impl&lt;L&gt; <a class='struct' href='../../../rustless/server/server/struct.Server.html' title='rustless::server::server::Server'>Server</a>&lt;L&gt; <span class='where'>where L: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + 'static + <a class='trait' href='../../../rustless/server/net/trait.NetworkListener.html' title='rustless::server::net::NetworkListener'>NetworkListener</a></span></code></h3><div class='impl-items'><h4 id='method.handle' class='method'><code>fn <a href='#method.handle' class='fnname'>handle</a>&lt;H&gt;(self, handler: H) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../../rustless/server/server/struct.Listening.html' title='rustless::server::server::Listening'>Listening</a>, <a class='enum' href='../../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>&gt; <span class='where'>where H: 'static + <a class='trait' href='../../../rustless/server/server/trait.Handler.html' title='rustless::server::server::Handler'>Handler</a></span></code></h4>
 <div class='docblock'><p>Binds to a socket and starts handling connections.</p>
-</div><h4 id='method.handle_threads' class='method'><code>fn <a href='#method.handle_threads' class='fnname'>handle_threads</a>&lt;H&gt;(self, handler: H, threads: <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../../rustless/server/server/struct.Listening.html' title='rustless::server::server::Listening'>Listening</a>, <a class='enum' href='../../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>&gt; <span class='where'>where H: 'static + <a class='trait' href='../../../rustless/server/server/trait.Handler.html' title='rustless::server::server::Handler'>Handler</a></span></code></h4>
+</div><h4 id='method.handle_threads' class='method'><code>fn <a href='#method.handle_threads' class='fnname'>handle_threads</a>&lt;H&gt;(self, handler: H, threads: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../../rustless/server/server/struct.Listening.html' title='rustless::server::server::Listening'>Listening</a>, <a class='enum' href='../../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>&gt; <span class='where'>where H: 'static + <a class='trait' href='../../../rustless/server/server/trait.Handler.html' title='rustless::server::server::Handler'>Handler</a></span></code></h4>
 <div class='docblock'><p>Binds to a socket and starts handling connections with the provided
 number of threads.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl&lt;L&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../../rustless/server/server/struct.Server.html' title='rustless::server::server::Server'>Server</a>&lt;L&gt; <span class='where'>where L: <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a></span></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl&lt;L&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../../rustless/server/server/struct.Server.html' title='rustless::server::server::Server'>Server</a>&lt;L&gt; <span class='where'>where L: <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a></span></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -138,6 +139,6 @@ number of threads.</p>
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

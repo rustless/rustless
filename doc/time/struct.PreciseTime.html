@@ -9,6 +9,7 @@
 
     <title>time::PreciseTime - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     <link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico">
@@ -45,14 +46,13 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-9508' class='srclink' href='../src/time/lib.rs.html#193' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-960' class='srclink' href='../src/time/lib.rs.html#193' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct PreciseTime(_);</pre><div class='docblock'><p>An opaque structure representing a moment in time.</p>
 
 <p>The only operation that can be performed on a <code>PreciseTime</code> is the
 calculation of the <code>Duration</code> of time that lies between them.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1>
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
 <p>Repeatedly call a function for 1 second:</p>
 <pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>time</span>::{<span class='ident'>Duration</span>, <span class='ident'>PreciseTime</span>};
@@ -68,8 +68,7 @@ calculation of the <code>Duration</code> of time that lies between them.</p>
 <div class='docblock'><p>Returns a <code>Duration</code> representing the span of time from the value of
 <code>self</code> to the value of <code>later</code>.</p>
 
-<h1 id="notes" class='section-header'><a
-                           href="#notes">Notes</a></h1>
+<h1 id='notes' class='section-header'><a href='#notes'>Notes</a></h1>
 <p>If <code>later</code> represents a time before <code>self</code>, the result of this method
 is unspecified.</p>
 
@@ -136,6 +135,6 @@ result of this method is unspecified.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

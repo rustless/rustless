@@ -9,6 +9,7 @@
 
     <title>jsonway::serializer::ObjectSerializer - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     
@@ -45,16 +46,15 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-955' class='srclink' href='../../src/jsonway/serializer.rs.html#90-108' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-200' class='srclink' href='../../src/jsonway/serializer.rs.html#90-108' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ObjectSerializer&lt;T&gt; {
     fn <a href='#tymethod.build' class='fnname'>build</a>(&amp;self, &amp;T, &amp;mut <a class='struct' href='../../jsonway/object_builder/struct.ObjectBuilder.html' title='jsonway::object_builder::ObjectBuilder'>ObjectBuilder</a>);
 
-    fn <a href='#method.root' class='fnname'>root</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt; { ... }
-    fn <a href='#method.serialize' class='fnname'>serialize</a>(&amp;mut self, obj: &amp;T, include_root: <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; <a class='enum' href='../../serialize/json/enum.Json.html' title='serialize::json::Json'>Json</a> { ... }
+    fn <a href='#method.root' class='fnname'>root</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt; { ... }
+    fn <a href='#method.serialize' class='fnname'>serialize</a>(&amp;mut self, obj: &amp;T, include_root: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a> { ... }
 }</pre><div class='docblock'><p>Provides functionality to create custom JSON presenters for your structs.</p>
 
-<h2 id="example" class='section-header'><a
-                           href="#example">Example</a></h2><pre class='rust rust-example-rendered'>
+<h2 id='example' class='section-header'><a href='#example'>Example</a></h2><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>jsonway</span>::{<span class='self'>self</span>, <span class='ident'>ObjectSerializer</span>};
 
 <span class='kw'>struct</span> <span class='ident'>Jedi</span> {
@@ -86,7 +86,7 @@
         <h3 id='tymethod.build' class='method stab '><code>fn <a href='#tymethod.build' class='fnname'>build</a>(&amp;self, &amp;T, &amp;mut <a class='struct' href='../../jsonway/object_builder/struct.ObjectBuilder.html' title='jsonway::object_builder::ObjectBuilder'>ObjectBuilder</a>)</code></h3></div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.root' class='method stab '><code>fn <a href='#method.root' class='fnname'>root</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h3><h3 id='method.serialize' class='method stab '><code>fn <a href='#method.serialize' class='fnname'>serialize</a>(&amp;mut self, obj: &amp;T, include_root: <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; <a class='enum' href='../../serialize/json/enum.Json.html' title='serialize::json::Json'>Json</a></code></h3></div>
+        <h3 id='method.root' class='method stab '><code>fn <a href='#method.root' class='fnname'>root</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h3><h3 id='method.serialize' class='method stab '><code>fn <a href='#method.serialize' class='fnname'>serialize</a>(&amp;mut self, obj: &amp;T, include_root: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></code></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
     </ul><script type="text/javascript" async
@@ -150,6 +150,6 @@
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@
 
     <title>typemap::Entry - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -45,15 +46,15 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-484' class='srclink' href='../src/typemap/lib.rs.html#178-183' title='goto source code'>[src]</a></span></h1>
-<pre class='rust enum'>pub enum Entry&lt;'a, K, A: ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> + <a class='trait' href='../uany/trait.UnsafeAnyExt.html' title='uany::UnsafeAnyExt'>UnsafeAnyExt</a> + 'a = <a class='trait' href='../uany/trait.UnsafeAny.html' title='uany::UnsafeAny'>UnsafeAny</a>&gt; {
+        </span><a id='src-93' class='srclink' href='../src/typemap/lib.rs.html#178-183' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum Entry&lt;'a, K, A: ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> + <a class='trait' href='../unsafe_any/trait.UnsafeAnyExt.html' title='unsafe_any::UnsafeAnyExt'>UnsafeAnyExt</a> + 'a = <a class='trait' href='../unsafe_any/trait.UnsafeAny.html' title='unsafe_any::UnsafeAny'>UnsafeAny</a>&gt; {
     Occupied(<a class='struct' href='../typemap/struct.OccupiedEntry.html' title='typemap::OccupiedEntry'>OccupiedEntry</a>&lt;'a, K, A&gt;),
     Vacant(<a class='struct' href='../typemap/struct.VacantEntry.html' title='typemap::VacantEntry'>VacantEntry</a>&lt;'a, K, A&gt;),
 }</pre><div class='docblock'><p>A view onto an entry in a TypeMap.</p>
 </div><h2 class='variants'>Variants</h2>
 <table><tr><td id='variant.Occupied'><code>Occupied</code></td><td><div class='docblock'><p>A view onto an occupied entry in a TypeMap.</p>
 </div></td></tr><tr><td id='variant.Vacant'><code>Vacant</code></td><td><div class='docblock'><p>A view onto an unoccupied entry in a TypeMap.</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a, K: <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a>, A: ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> + <a class='trait' href='../uany/trait.UnsafeAnyExt.html' title='uany::UnsafeAnyExt'>UnsafeAnyExt</a> + 'a = <a class='trait' href='../uany/trait.UnsafeAny.html' title='uany::UnsafeAny'>UnsafeAny</a>&gt; <a class='enum' href='../typemap/enum.Entry.html' title='typemap::Entry'>Entry</a>&lt;'a, K, A&gt;</code></h3><div class='impl-items'><h4 id='method.or_insert' class='method'><code>fn <a href='#method.or_insert' class='fnname'>or_insert</a>(self, default: K::Value) -&gt; &amp;'a mut K::Value <span class='where'>where K::Value: <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a, K: <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a>, A: ?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> + <a class='trait' href='../unsafe_any/trait.UnsafeAnyExt.html' title='unsafe_any::UnsafeAnyExt'>UnsafeAnyExt</a> + 'a = <a class='trait' href='../unsafe_any/trait.UnsafeAny.html' title='unsafe_any::UnsafeAny'>UnsafeAny</a>&gt; <a class='enum' href='../typemap/enum.Entry.html' title='typemap::Entry'>Entry</a>&lt;'a, K, A&gt;</code></h3><div class='impl-items'><h4 id='method.or_insert' class='method'><code>fn <a href='#method.or_insert' class='fnname'>or_insert</a>(self, default: K::Value) -&gt; &amp;'a mut K::Value <span class='where'>where K::Value: <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
 <div class='docblock'><p>Ensures a value is in the entry by inserting the default if empty, and returns
 a mutable reference to the value in the entry.</p>
 </div><h4 id='method.or_insert_with' class='method'><code>fn <a href='#method.or_insert_with' class='fnname'>or_insert_with</a>&lt;F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>() -&gt; K::Value&gt;(self, default: F) -&gt; &amp;'a mut K::Value <span class='where'>where K::Value: <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + Implements&lt;A&gt;</span></code></h4>
@@ -118,6 +119,6 @@ and returns a mutable reference to the value in the entry.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

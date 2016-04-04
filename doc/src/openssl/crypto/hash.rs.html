@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.7.0/src/crypto/hash.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.8/src/crypto/hash.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>hash.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -378,6 +379,23 @@
 <span id="336">336</span>
 <span id="337">337</span>
 <span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_uint</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>::<span class='ident'>repeat</span>;
@@ -395,7 +413,7 @@
     <span class='ident'>SHA256</span>,
     <span class='ident'>SHA384</span>,
     <span class='ident'>SHA512</span>,
-    <span class='ident'>RIPEMD160</span>
+    <span class='ident'>RIPEMD160</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>Type</span> {
@@ -493,7 +511,12 @@
         };
         <span class='kw'>let</span> <span class='ident'>md</span> <span class='op'>=</span> <span class='ident'>ty</span>.<span class='ident'>evp_md</span>();
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h</span> <span class='op'>=</span> <span class='ident'>Hasher</span> { <span class='ident'>ctx</span>: <span class='ident'>ctx</span>, <span class='ident'>md</span>: <span class='ident'>md</span>, <span class='ident'>type_</span>: <span class='ident'>ty</span>, <span class='ident'>state</span>: <span class='ident'>Finalized</span> };
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>h</span> <span class='op'>=</span> <span class='ident'>Hasher</span> {
+            <span class='ident'>ctx</span>: <span class='ident'>ctx</span>,
+            <span class='ident'>md</span>: <span class='ident'>md</span>,
+            <span class='ident'>type_</span>: <span class='ident'>ty</span>,
+            <span class='ident'>state</span>: <span class='ident'>Finalized</span>,
+        };
         <span class='ident'>h</span>.<span class='ident'>init</span>();
         <span class='ident'>h</span>
     }
@@ -502,7 +525,9 @@
     <span class='kw'>fn</span> <span class='ident'>init</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>state</span> {
             <span class='ident'>Reset</span> <span class='op'>=&gt;</span> <span class='kw'>return</span>,
-            <span class='ident'>Updated</span> <span class='op'>=&gt;</span> { <span class='self'>self</span>.<span class='ident'>finalize</span>(); },
+            <span class='ident'>Updated</span> <span class='op'>=&gt;</span> {
+                <span class='self'>self</span>.<span class='ident'>finalize</span>();
+            }
             <span class='ident'>Finalized</span> <span class='op'>=&gt;</span> (),
         }
         <span class='kw'>unsafe</span> {
@@ -518,8 +543,7 @@
             <span class='self'>self</span>.<span class='ident'>init</span>();
         }
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_DigestUpdate</span>(<span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>data</span>.<span class='ident'>as_ptr</span>(),
-                                          <span class='ident'>data</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>);
+            <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_DigestUpdate</span>(<span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>data</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>data</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='number'>1</span>);
         }
         <span class='self'>self</span>.<span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>Updated</span>;
@@ -571,7 +595,12 @@
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>r</span>, <span class='number'>1</span>);
             <span class='ident'>ctx</span>
         };
-        <span class='ident'>Hasher</span> { <span class='ident'>ctx</span>: <span class='ident'>ctx</span>, <span class='ident'>md</span>: <span class='self'>self</span>.<span class='ident'>md</span>, <span class='ident'>type_</span>: <span class='self'>self</span>.<span class='ident'>type_</span>, <span class='ident'>state</span>: <span class='self'>self</span>.<span class='ident'>state</span> }
+        <span class='ident'>Hasher</span> {
+            <span class='ident'>ctx</span>: <span class='ident'>ctx</span>,
+            <span class='ident'>md</span>: <span class='self'>self</span>.<span class='ident'>md</span>,
+            <span class='ident'>type_</span>: <span class='self'>self</span>.<span class='ident'>type_</span>,
+            <span class='ident'>state</span>: <span class='self'>self</span>.<span class='ident'>state</span>,
+        }
     }
 }
 
@@ -614,21 +643,32 @@
 
     <span class='comment'>// Test vectors from http://www.nsrl.nist.gov/testdata/</span>
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>non_upper_case_globals</span>)]</span>
-    <span class='kw'>const</span> <span class='ident'>md5_tests</span>: [(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>); <span class='number'>13</span>] <span class='op'>=</span> [
-        (<span class='string'>&quot;&quot;</span>, <span class='string'>&quot;d41d8cd98f00b204e9800998ecf8427e&quot;</span>),
-        (<span class='string'>&quot;7F&quot;</span>, <span class='string'>&quot;83acb6e67e50e31db6ed341dd2de1595&quot;</span>),
-        (<span class='string'>&quot;EC9C&quot;</span>, <span class='string'>&quot;0b07f0d4ca797d8ac58874f887cb0b68&quot;</span>),
-        (<span class='string'>&quot;FEE57A&quot;</span>, <span class='string'>&quot;e0d583171eb06d56198fc0ef22173907&quot;</span>),
-        (<span class='string'>&quot;42F497E0&quot;</span>, <span class='string'>&quot;7c430f178aefdf1487fee7144e9641e2&quot;</span>),
-        (<span class='string'>&quot;C53B777F1C&quot;</span>, <span class='string'>&quot;75ef141d64cb37ec423da2d9d440c925&quot;</span>),
-        (<span class='string'>&quot;89D5B576327B&quot;</span>, <span class='string'>&quot;ebbaf15eb0ed784c6faa9dc32831bf33&quot;</span>),
-        (<span class='string'>&quot;5D4CCE781EB190&quot;</span>, <span class='string'>&quot;ce175c4b08172019f05e6b5279889f2c&quot;</span>),
-        (<span class='string'>&quot;81901FE94932D7B9&quot;</span>, <span class='string'>&quot;cd4d2f62b8cdb3a0cf968a735a239281&quot;</span>),
-        (<span class='string'>&quot;C9FFDEE7788EFB4EC9&quot;</span>, <span class='string'>&quot;e0841a231ab698db30c6c0f3f246c014&quot;</span>),
-        (<span class='string'>&quot;66AC4B7EBA95E53DC10B&quot;</span>, <span class='string'>&quot;a3b3cea71910d9af56742aa0bb2fe329&quot;</span>),
-        (<span class='string'>&quot;A510CD18F7A56852EB0319&quot;</span>, <span class='string'>&quot;577e216843dd11573574d3fb209b97d8&quot;</span>),
-        (<span class='string'>&quot;AAED18DBE8938C19ED734A8D&quot;</span>, <span class='string'>&quot;6f80fb775f27e0a4ce5c2f42fc72c5f1&quot;</span>)
-    ];
+    <span class='kw'>const</span> <span class='ident'>md5_tests</span>: [(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>); <span class='number'>13</span>] <span class='op'>=</span> [(<span class='string'>&quot;&quot;</span>,
+                                                            <span class='string'>&quot;d41d8cd98f00b204e9800998ecf8427e&quot;</span>),
+                                                           (<span class='string'>&quot;7F&quot;</span>,
+                                                            <span class='string'>&quot;83acb6e67e50e31db6ed341dd2de1595&quot;</span>),
+                                                           (<span class='string'>&quot;EC9C&quot;</span>,
+                                                            <span class='string'>&quot;0b07f0d4ca797d8ac58874f887cb0b68&quot;</span>),
+                                                           (<span class='string'>&quot;FEE57A&quot;</span>,
+                                                            <span class='string'>&quot;e0d583171eb06d56198fc0ef22173907&quot;</span>),
+                                                           (<span class='string'>&quot;42F497E0&quot;</span>,
+                                                            <span class='string'>&quot;7c430f178aefdf1487fee7144e9641e2&quot;</span>),
+                                                           (<span class='string'>&quot;C53B777F1C&quot;</span>,
+                                                            <span class='string'>&quot;75ef141d64cb37ec423da2d9d440c925&quot;</span>),
+                                                           (<span class='string'>&quot;89D5B576327B&quot;</span>,
+                                                            <span class='string'>&quot;ebbaf15eb0ed784c6faa9dc32831bf33&quot;</span>),
+                                                           (<span class='string'>&quot;5D4CCE781EB190&quot;</span>,
+                                                            <span class='string'>&quot;ce175c4b08172019f05e6b5279889f2c&quot;</span>),
+                                                           (<span class='string'>&quot;81901FE94932D7B9&quot;</span>,
+                                                            <span class='string'>&quot;cd4d2f62b8cdb3a0cf968a735a239281&quot;</span>),
+                                                           (<span class='string'>&quot;C9FFDEE7788EFB4EC9&quot;</span>,
+                                                            <span class='string'>&quot;e0841a231ab698db30c6c0f3f246c014&quot;</span>),
+                                                           (<span class='string'>&quot;66AC4B7EBA95E53DC10B&quot;</span>,
+                                                            <span class='string'>&quot;a3b3cea71910d9af56742aa0bb2fe329&quot;</span>),
+                                                           (<span class='string'>&quot;A510CD18F7A56852EB0319&quot;</span>,
+                                                            <span class='string'>&quot;577e216843dd11573574d3fb209b97d8&quot;</span>),
+                                                           (<span class='string'>&quot;AAED18DBE8938C19ED734A8D&quot;</span>,
+                                                            <span class='string'>&quot;6f80fb775f27e0a4ce5c2f42fc72c5f1&quot;</span>)];
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_md5</span>() {
@@ -686,9 +726,7 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_sha1</span>() {
-        <span class='kw'>let</span> <span class='ident'>tests</span> <span class='op'>=</span> [
-            (<span class='string'>&quot;616263&quot;</span>, <span class='string'>&quot;a9993e364706816aba3e25717850c26c9cd0d89d&quot;</span>),
-            ];
+        <span class='kw'>let</span> <span class='ident'>tests</span> <span class='op'>=</span> [(<span class='string'>&quot;616263&quot;</span>, <span class='string'>&quot;a9993e364706816aba3e25717850c26c9cd0d89d&quot;</span>)];
 
         <span class='kw'>for</span> <span class='ident'>test</span> <span class='kw'>in</span> <span class='ident'>tests</span>.<span class='ident'>iter</span>() {
             <span class='ident'>hash_test</span>(<span class='ident'>Type</span>::<span class='ident'>SHA1</span>, <span class='ident'>test</span>);
@@ -697,9 +735,8 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_sha256</span>() {
-        <span class='kw'>let</span> <span class='ident'>tests</span> <span class='op'>=</span> [
-            (<span class='string'>&quot;616263&quot;</span>, <span class='string'>&quot;ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad&quot;</span>)
-            ];
+        <span class='kw'>let</span> <span class='ident'>tests</span> <span class='op'>=</span> [(<span class='string'>&quot;616263&quot;</span>,
+                      <span class='string'>&quot;ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad&quot;</span>)];
 
         <span class='kw'>for</span> <span class='ident'>test</span> <span class='kw'>in</span> <span class='ident'>tests</span>.<span class='ident'>iter</span>() {
             <span class='ident'>hash_test</span>(<span class='ident'>Type</span>::<span class='ident'>SHA256</span>, <span class='ident'>test</span>);
@@ -708,9 +745,7 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_ripemd160</span>() {
-        <span class='kw'>let</span> <span class='ident'>tests</span> <span class='op'>=</span> [
-            (<span class='string'>&quot;616263&quot;</span>, <span class='string'>&quot;8eb208f7e05d987a9b044a8e98c6b087f15a0bfc&quot;</span>)
-            ];
+        <span class='kw'>let</span> <span class='ident'>tests</span> <span class='op'>=</span> [(<span class='string'>&quot;616263&quot;</span>, <span class='string'>&quot;8eb208f7e05d987a9b044a8e98c6b087f15a0bfc&quot;</span>)];
 
         <span class='kw'>for</span> <span class='ident'>test</span> <span class='kw'>in</span> <span class='ident'>tests</span>.<span class='ident'>iter</span>() {
             <span class='ident'>hash_test</span>(<span class='ident'>Type</span>::<span class='ident'>RIPEMD160</span>, <span class='ident'>test</span>);
@@ -777,6 +812,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

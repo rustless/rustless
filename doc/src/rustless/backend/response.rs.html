@@ -9,6 +9,7 @@
 
     <title>response.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -115,7 +116,7 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Response</span> {
     <span class='kw'>pub</span> <span class='ident'>status</span>: <span class='ident'>status</span>::<span class='ident'>StatusCode</span>,
     <span class='kw'>pub</span> <span class='ident'>headers</span>: <span class='ident'>header</span>::<span class='ident'>Headers</span>,
-    <span class='kw'>pub</span> <span class='ident'>body</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span>,
+    <span class='kw'>pub</span> <span class='ident'>body</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span><span class='op'>&gt;&gt;</span>,
     <span class='kw'>pub</span> <span class='ident'>ext</span>: <span class='ident'>typemap</span>::<span class='ident'>TypeMap</span>
 }
 
@@ -131,7 +132,7 @@
     }
 
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>status</span>: <span class='ident'>status</span>::<span class='ident'>StatusCode</span>, <span class='ident'>body</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>status</span>: <span class='ident'>status</span>::<span class='ident'>StatusCode</span>, <span class='ident'>body</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
         <span class='ident'>Response</span> {
             <span class='ident'>status</span>: <span class='ident'>status</span>,
             <span class='ident'>headers</span>: <span class='ident'>header</span>::<span class='ident'>Headers</span>::<span class='ident'>new</span>(),
@@ -157,12 +158,13 @@
         <span class='ident'>response</span>
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>replace_body</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>body</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>) {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>replace_body</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>body</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span><span class='op'>&gt;</span>) {
         <span class='self'>self</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>body</span>)
     }
 }
 
-<span class='macro'>impl_extensible</span><span class='macro'>!</span>(<span class='ident'>Response</span>);</pre>
+<span class='macro'>impl_extensible</span><span class='macro'>!</span>(<span class='ident'>Response</span>);
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 
@@ -222,6 +224,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

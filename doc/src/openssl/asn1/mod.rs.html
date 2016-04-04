@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.7.0/src/asn1/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.8/src/asn1/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -88,18 +89,17 @@
 <span id="46">46</span>
 <span id="47">47</span>
 <span id="48">48</span>
-<span id="49">49</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_long</span>};
+<span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_long</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>;
 
 <span class='kw'>use</span> <span class='ident'>ffi</span>;
-<span class='kw'>use</span> <span class='ident'>ssl</span>::<span class='ident'>error</span>::{<span class='ident'>SslError</span>};
+<span class='kw'>use</span> <span class='ident'>ssl</span>::<span class='ident'>error</span>::<span class='ident'>SslError</span>;
 
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Asn1Time</span> {
     <span class='ident'>handle</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_TIME</span>,
-    <span class='ident'>owned</span>: <span class='ident'>bool</span>
+    <span class='ident'>owned</span>: <span class='ident'>bool</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>Asn1Time</span> {
@@ -107,7 +107,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>handle</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_TIME</span>) <span class='op'>-&gt;</span> <span class='ident'>Asn1Time</span> {
         <span class='ident'>Asn1Time</span> {
             <span class='ident'>handle</span>: <span class='ident'>handle</span>,
-            <span class='ident'>owned</span>: <span class='boolval'>true</span>
+            <span class='ident'>owned</span>: <span class='boolval'>true</span>,
         }
     }
 
@@ -115,8 +115,7 @@
         <span class='ident'>ffi</span>::<span class='ident'>init</span>();
 
         <span class='kw'>let</span> <span class='ident'>handle</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
-            <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>X509_gmtime_adj</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
-                                               <span class='ident'>period</span> <span class='kw'>as</span> <span class='ident'>c_long</span>))
+            <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>X509_gmtime_adj</span>(<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(), <span class='ident'>period</span> <span class='kw'>as</span> <span class='ident'>c_long</span>))
         };
         <span class='prelude-val'>Ok</span>(<span class='ident'>Asn1Time</span>::<span class='ident'>new</span>(<span class='ident'>handle</span>))
     }
@@ -128,7 +127,7 @@
 
     <span class='doccomment'>/// Returns raw handle</span>
     <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>get_handle</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>ASN1_TIME</span> {
-        <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>handle</span>
+        <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>handle</span>;
     }
 }
 
@@ -199,6 +198,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

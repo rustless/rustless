@@ -9,6 +9,7 @@
 
     <title>swagger.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -770,7 +771,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>;
 <span class='kw'>use</span> <span class='ident'>serialize</span>::<span class='ident'>json</span>::{<span class='self'>self</span>, <span class='ident'>ToJson</span>};
 <span class='kw'>use</span> <span class='ident'>jsonway</span>::{<span class='self'>self</span>, <span class='ident'>MutableJson</span>};
-<span class='kw'>use</span> <span class='ident'>framework</span>::{<span class='self'>self</span>, <span class='ident'>Nesting</span>, <span class='ident'>ApiHandler</span>};
+<span class='kw'>use</span> <span class='ident'>framework</span>::{<span class='self'>self</span>, <span class='ident'>Nesting</span>};
 <span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>mime</span>;
 <span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>header</span>;
 <span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>method</span>;
@@ -1488,7 +1489,8 @@
     }
 
     <span class='ident'>params</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span>(<span class='ident'>_key</span>, <span class='ident'>value</span>)<span class='op'>|</span> <span class='ident'>value</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Param</span><span class='op'>&gt;&gt;</span>()
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 
@@ -1548,6 +1550,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

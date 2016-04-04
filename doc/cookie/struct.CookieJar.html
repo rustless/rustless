@@ -9,6 +9,7 @@
 
     <title>cookie::CookieJar - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -45,13 +46,12 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-19' class='srclink' href='../src/cookie/jar.rs.html#37-39' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-17' class='srclink' href='../src/cookie/jar.rs.html#37-39' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct CookieJar&lt;'a&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>A jar of cookies for managing a session</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example' class='section-header'><a href='#example'>Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>cookie</span>::{<span class='ident'>Cookie</span>, <span class='ident'>CookieJar</span>};
 
 <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>CookieJar</span>::<span class='ident'>new</span>(<span class='string'>b&quot;f8f9eaf1ecdedff5e5b749c58115441e&quot;</span>);
@@ -62,7 +62,7 @@
 <span class='comment'>// Remove the added cookie</span>
 <span class='ident'>c</span>.<span class='ident'>remove</span>(<span class='string'>&quot;key&quot;</span>);
 </pre>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../cookie/struct.CookieJar.html' title='cookie::CookieJar'>CookieJar</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(key: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='../cookie/struct.CookieJar.html' title='cookie::CookieJar'>CookieJar</a>&lt;'static&gt;</code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../cookie/struct.CookieJar.html' title='cookie::CookieJar'>CookieJar</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(key: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='../cookie/struct.CookieJar.html' title='cookie::CookieJar'>CookieJar</a>&lt;'static&gt;</code></h4>
 <div class='docblock'><p>Creates a new empty cookie jar with the given signing key.</p>
 
 <p>The given key is used to sign cookies in the signed cookie jar.</p>
@@ -77,9 +77,9 @@ cookie jar from an incoming request.</p>
 
 <p>If this jar is a child cookie jar, this will walk up the chain of
 borrowed jars, modifying the cookie as it goes along.</p>
-</div><h4 id='method.remove' class='method'><code>fn <a href='#method.remove' class='fnname'>remove</a>(&amp;self, cookie: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+</div><h4 id='method.remove' class='method'><code>fn <a href='#method.remove' class='fnname'>remove</a>(&amp;self, cookie: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
 <div class='docblock'><p>Removes a cookie from this cookie jar.</p>
-</div><h4 id='method.find' class='method'><code>fn <a href='#method.find' class='fnname'>find</a>(&amp;self, name: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;</code></h4>
+</div><h4 id='method.find' class='method'><code>fn <a href='#method.find' class='fnname'>find</a>(&amp;self, name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../cookie/struct.Cookie.html' title='cookie::Cookie'>Cookie</a>&gt;</code></h4>
 <div class='docblock'><p>Finds a cookie inside of this cookie jar.</p>
 
 <p>The cookie is subject to modification by any of the child cookie jars
@@ -90,8 +90,7 @@ that are currently borrowed. A copy of the cookie is returned.</p>
 <p>All cookies read from the child jar will require a valid signature and
 all cookies written will be signed automatically.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example-1' class='section-header'><a href='#example-1'>Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>CookieJar</span>::<span class='ident'>new</span>(<span class='string'>b&quot;f8f9eaf1ecdedff5e5b749c58115441e&quot;</span>);
 
 <span class='comment'>// Add a signed cookie to the jar</span>
@@ -107,8 +106,7 @@ all cookies written will be signed automatically.</p>
 valid key and all cookies written will be encrypted and signed
 automatically.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example-2' class='section-header'><a href='#example-2'>Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>CookieJar</span>::<span class='ident'>new</span>(<span class='string'>b&quot;f8f9eaf1ecdedff5e5b749c58115441e&quot;</span>);
 
 <span class='comment'>// Add a signed and encrypted cookie to the jar</span>
@@ -191,6 +189,6 @@ be yielded.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

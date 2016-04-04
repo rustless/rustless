@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.7.0/src/net.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/hyper-0.8.0/src/net.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>net.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     
@@ -1214,8 +1215,8 @@
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>set_write_timeout</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>dur</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Duration</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>HttpsStream</span>::<span class='ident'>Http</span>(<span class='kw-2'>ref</span> <span class='ident'>inner</span>) <span class='op'>=&gt;</span> <span class='ident'>inner</span>.<span class='number'>0</span>.<span class='ident'>set_read_timeout</span>(<span class='ident'>dur</span>),
-            <span class='ident'>HttpsStream</span>::<span class='ident'>Https</span>(<span class='kw-2'>ref</span> <span class='ident'>inner</span>) <span class='op'>=&gt;</span> <span class='ident'>inner</span>.<span class='ident'>set_read_timeout</span>(<span class='ident'>dur</span>)
+            <span class='ident'>HttpsStream</span>::<span class='ident'>Http</span>(<span class='kw-2'>ref</span> <span class='ident'>inner</span>) <span class='op'>=&gt;</span> <span class='ident'>inner</span>.<span class='number'>0</span>.<span class='ident'>set_write_timeout</span>(<span class='ident'>dur</span>),
+            <span class='ident'>HttpsStream</span>::<span class='ident'>Https</span>(<span class='kw-2'>ref</span> <span class='ident'>inner</span>) <span class='op'>=&gt;</span> <span class='ident'>inner</span>.<span class='ident'>set_write_timeout</span>(<span class='ident'>dur</span>)
         }
     }
 
@@ -1489,6 +1490,6 @@
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@
 
     <title>iron::middleware::Chain - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-320' class='srclink' href='../../src/iron/middleware/mod.rs.html#132-138' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-105' class='srclink' href='../../src/iron/middleware/mod.rs.html#131-137' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Chain {
     // some fields omitted
 }</pre><div class='docblock'><p>The middleware chain used in Iron.</p>
@@ -55,7 +56,7 @@ but Iron&#39;s infrastructure is flexible enough to allow alternate
 systems.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;H: <a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;(handler: H) -&gt; <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a></code></h4>
 <div class='docblock'><p>Construct a new ChainBuilder from a <code>Handler</code>.</p>
-</div><h4 id='method.link' class='method'><code>fn <a href='#method.link' class='fnname'>link</a>&lt;B, A&gt;(&amp;mut self, link: <a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(B, A)</a>) -&gt; &amp;mut <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a> <span class='where'>where A: <a class='trait' href='../../iron/middleware/trait.AfterMiddleware.html' title='iron::middleware::AfterMiddleware'>AfterMiddleware</a>, B: <a class='trait' href='../../iron/middleware/trait.BeforeMiddleware.html' title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a></span></code></h4>
+</div><h4 id='method.link' class='method'><code>fn <a href='#method.link' class='fnname'>link</a>&lt;B, A&gt;(&amp;mut self, link: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(B, A)</a>) -&gt; &amp;mut <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a> <span class='where'>where A: <a class='trait' href='../../iron/middleware/trait.AfterMiddleware.html' title='iron::middleware::AfterMiddleware'>AfterMiddleware</a>, B: <a class='trait' href='../../iron/middleware/trait.BeforeMiddleware.html' title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a></span></code></h4>
 <div class='docblock'><p>Link both a before and after middleware to the chain at once.</p>
 
 <p>Middleware that have a Before and After piece should have a constructor
@@ -67,6 +68,11 @@ which returns both as a tuple, so it can be passed directly to link.</p>
 <div class='docblock'><p>Link a <code>AfterMiddleware</code> to the <code>Chain</code>, after all previously linked
 <code>AfterMiddleware</code>.</p>
 </div><h4 id='method.around' class='method'><code>fn <a href='#method.around' class='fnname'>around</a>&lt;A&gt;(&amp;mut self, around: A) -&gt; &amp;mut <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a> <span class='where'>where A: <a class='trait' href='../../iron/middleware/trait.AroundMiddleware.html' title='iron::middleware::AroundMiddleware'>AroundMiddleware</a></span></code></h4>
+<div class='docblock'><p>Apply an <code>AroundMiddleware</code> to the <code>Handler</code> in this <code>Chain</code>.</p>
+
+<p>Note: This function is being renamed <code>link_around()</code>, and will
+eventually be removed.</p>
+</div><h4 id='method.link_around' class='method'><code>fn <a href='#method.link_around' class='fnname'>link_around</a>&lt;A&gt;(&amp;mut self, around: A) -&gt; &amp;mut <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a> <span class='where'>where A: <a class='trait' href='../../iron/middleware/trait.AroundMiddleware.html' title='iron::middleware::AroundMiddleware'>AroundMiddleware</a></span></code></h4>
 <div class='docblock'><p>Apply an <code>AroundMiddleware</code> to the <code>Handler</code> in this <code>Chain</code>.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a></code></h3><div class='impl-items'><h4 id='method.handle' class='method'><code>fn <a href='../../iron/middleware/trait.Handler.html#method.handle' class='fnname'>handle</a>(&amp;self, req: &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;</code></h4>
 </div></section>
@@ -128,6 +134,6 @@ which returns both as a tuple, so it can be passed directly to link.</p>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

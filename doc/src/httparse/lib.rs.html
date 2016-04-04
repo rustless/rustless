@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/httparse-1.0.0/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/httparse-1.1.2/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     
@@ -781,6 +782,103 @@
 <span id="739">739</span>
 <span id="740">740</span>
 <span id="741">741</span>
+<span id="742">742</span>
+<span id="743">743</span>
+<span id="744">744</span>
+<span id="745">745</span>
+<span id="746">746</span>
+<span id="747">747</span>
+<span id="748">748</span>
+<span id="749">749</span>
+<span id="750">750</span>
+<span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
+<span id="757">757</span>
+<span id="758">758</span>
+<span id="759">759</span>
+<span id="760">760</span>
+<span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
+<span id="764">764</span>
+<span id="765">765</span>
+<span id="766">766</span>
+<span id="767">767</span>
+<span id="768">768</span>
+<span id="769">769</span>
+<span id="770">770</span>
+<span id="771">771</span>
+<span id="772">772</span>
+<span id="773">773</span>
+<span id="774">774</span>
+<span id="775">775</span>
+<span id="776">776</span>
+<span id="777">777</span>
+<span id="778">778</span>
+<span id="779">779</span>
+<span id="780">780</span>
+<span id="781">781</span>
+<span id="782">782</span>
+<span id="783">783</span>
+<span id="784">784</span>
+<span id="785">785</span>
+<span id="786">786</span>
+<span id="787">787</span>
+<span id="788">788</span>
+<span id="789">789</span>
+<span id="790">790</span>
+<span id="791">791</span>
+<span id="792">792</span>
+<span id="793">793</span>
+<span id="794">794</span>
+<span id="795">795</span>
+<span id="796">796</span>
+<span id="797">797</span>
+<span id="798">798</span>
+<span id="799">799</span>
+<span id="800">800</span>
+<span id="801">801</span>
+<span id="802">802</span>
+<span id="803">803</span>
+<span id="804">804</span>
+<span id="805">805</span>
+<span id="806">806</span>
+<span id="807">807</span>
+<span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
+<span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
+<span id="817">817</span>
+<span id="818">818</span>
+<span id="819">819</span>
+<span id="820">820</span>
+<span id="821">821</span>
+<span id="822">822</span>
+<span id="823">823</span>
+<span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
+<span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
+<span id="832">832</span>
+<span id="833">833</span>
+<span id="834">834</span>
+<span id="835">835</span>
+<span id="836">836</span>
+<span id="837">837</span>
+<span id="838">838</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>test</span>, <span class='ident'>deny</span>(<span class='ident'>warnings</span>))]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>)]</span>
@@ -889,8 +987,13 @@
     <span class='doccomment'>/// Parsed more headers than provided buffer can contain.</span>
     <span class='ident'>TooManyHeaders</span>,
     <span class='doccomment'>/// Invalid byte in HTTP version.</span>
-    <span class='ident'>Version</span>
+    <span class='ident'>Version</span>,
 }
+
+<span class='doccomment'>/// An error in parsing a chunk size.</span>
+<span class='comment'>// Note: Move this into the error enum once v2.0 is released.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>InvalidChunkSize</span>;
 
 <span class='doccomment'>/// A Result of any parsing action.</span>
 <span class='doccomment'>///</span>
@@ -1059,6 +1162,7 @@
         <span class='kw'>let</span> <span class='ident'>orig_len</span> <span class='op'>=</span> <span class='ident'>buf</span>.<span class='ident'>len</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bytes</span> <span class='op'>=</span> <span class='ident'>Bytes</span>::<span class='ident'>new</span>(<span class='ident'>buf</span>);
 
+        <span class='macro'>complete</span><span class='macro'>!</span>(<span class='ident'>skip_empty_lines</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bytes</span>));
         <span class='self'>self</span>.<span class='ident'>version</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='macro'>complete</span><span class='macro'>!</span>(<span class='ident'>parse_version</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bytes</span>)));
         <span class='macro'>space</span><span class='macro'>!</span>(<span class='ident'>bytes</span> <span class='ident'>or</span> <span class='ident'>Error</span>::<span class='ident'>Version</span>);
         <span class='self'>self</span>.<span class='ident'>code</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='macro'>complete</span><span class='macro'>!</span>(<span class='ident'>parse_code</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bytes</span>)));
@@ -1155,7 +1259,7 @@
 <span class='kw'>fn</span> <span class='ident'>parse_token</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>bytes</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Bytes</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span><span class='op'>&gt;</span> {
     <span class='kw'>loop</span> {
         <span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='macro'>next</span><span class='macro'>!</span>(<span class='ident'>bytes</span>);
-        <span class='kw'>if</span> <span class='ident'>b</span> <span class='op'>==</span> <span class='string'>b&#39; &#39;</span> <span class='op'>||</span> <span class='ident'>b</span> <span class='op'>==</span> <span class='string'>b&#39;\r&#39;</span> <span class='op'>||</span> <span class='ident'>b</span> <span class='op'>==</span> <span class='string'>b&#39;\n&#39;</span> {
+        <span class='kw'>if</span> <span class='ident'>b</span> <span class='op'>==</span> <span class='string'>b&#39; &#39;</span> {
             <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>(<span class='kw'>unsafe</span> {
                 <span class='comment'>// all bytes up till `i` must have been `is_token`.</span>
                 <span class='ident'>str</span>::<span class='ident'>from_utf8_unchecked</span>(<span class='ident'>bytes</span>.<span class='ident'>slice_skip</span>(<span class='number'>1</span>))
@@ -1323,9 +1427,73 @@
     <span class='ident'>result</span>
 }
 
+<span class='doccomment'>/// Parse a buffer of bytes as a chunk size.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// The return value, if complete and successful, includes the index of the</span>
+<span class='doccomment'>/// buffer that parsing stopped at, and the size of the following chunk.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Example</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// let buf = b&quot;4\r\nRust\r\n0\r\n\r\n&quot;;</span>
+<span class='doccomment'>/// assert_eq!(httparse::parse_chunk_size(buf),</span>
+<span class='doccomment'>///            Ok(httparse::Status::Complete((3, 4))));</span>
+<span class='doccomment'>/// ```</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse_chunk_size</span>(<span class='ident'>buf</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>])
+        <span class='op'>-&gt;</span> ::<span class='ident'>std</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Status</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>u64</span>)<span class='op'>&gt;</span>, <span class='ident'>InvalidChunkSize</span><span class='op'>&gt;</span> {
+    <span class='kw'>const</span> <span class='ident'>RADIX</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>16</span>;
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bytes</span> <span class='op'>=</span> <span class='ident'>Bytes</span>::<span class='ident'>new</span>(<span class='ident'>buf</span>);
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>size</span> <span class='op'>=</span> <span class='number'>0</span>;
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>in_chunk_size</span> <span class='op'>=</span> <span class='boolval'>true</span>;
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>in_ext</span> <span class='op'>=</span> <span class='boolval'>false</span>;
+    <span class='kw'>loop</span> {
+        <span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='macro'>next</span><span class='macro'>!</span>(<span class='ident'>bytes</span>);
+        <span class='kw'>match</span> <span class='ident'>b</span> {
+            <span class='string'>b&#39;0&#39;</span>...<span class='string'>b&#39;9&#39;</span> <span class='kw'>if</span> <span class='ident'>in_chunk_size</span> <span class='op'>=&gt;</span> {
+                <span class='ident'>size</span> <span class='op'>*=</span> <span class='ident'>RADIX</span>;
+                <span class='ident'>size</span> <span class='op'>+=</span> (<span class='ident'>b</span> <span class='op'>-</span> <span class='string'>b&#39;0&#39;</span>) <span class='kw'>as</span> <span class='ident'>u64</span>;
+            },
+            <span class='string'>b&#39;a&#39;</span>...<span class='string'>b&#39;f&#39;</span> <span class='kw'>if</span> <span class='ident'>in_chunk_size</span> <span class='op'>=&gt;</span> {
+                <span class='ident'>size</span> <span class='op'>*=</span> <span class='ident'>RADIX</span>;
+                <span class='ident'>size</span> <span class='op'>+=</span> (<span class='ident'>b</span> <span class='op'>+</span> <span class='number'>10</span> <span class='op'>-</span> <span class='string'>b&#39;a&#39;</span>) <span class='kw'>as</span> <span class='ident'>u64</span>;
+            }
+            <span class='string'>b&#39;A&#39;</span>...<span class='string'>b&#39;F&#39;</span> <span class='kw'>if</span> <span class='ident'>in_chunk_size</span> <span class='op'>=&gt;</span> {
+                <span class='ident'>size</span> <span class='op'>*=</span> <span class='ident'>RADIX</span>;
+                <span class='ident'>size</span> <span class='op'>+=</span> (<span class='ident'>b</span> <span class='op'>+</span> <span class='number'>10</span> <span class='op'>-</span> <span class='string'>b&#39;A&#39;</span>) <span class='kw'>as</span> <span class='ident'>u64</span>;
+            }
+            <span class='string'>b&#39;\r&#39;</span> <span class='op'>=&gt;</span> {
+                <span class='kw'>match</span> <span class='macro'>next</span><span class='macro'>!</span>(<span class='ident'>bytes</span>) {
+                    <span class='string'>b&#39;\n&#39;</span> <span class='op'>=&gt;</span> <span class='kw'>break</span>,
+                    _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>InvalidChunkSize</span>),
+                }
+            }
+            <span class='comment'>// If we weren&#39;t in the extension yet, the &quot;;&quot; signals its start</span>
+            <span class='string'>b&#39;;&#39;</span> <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>in_ext</span> <span class='op'>=&gt;</span> {
+                <span class='ident'>in_ext</span> <span class='op'>=</span> <span class='boolval'>true</span>;
+                <span class='ident'>in_chunk_size</span> <span class='op'>=</span> <span class='boolval'>false</span>;
+            }
+            <span class='comment'>// &quot;Linear white space&quot; is ignored between the chunk size and the</span>
+            <span class='comment'>// extension separator token (&quot;;&quot;) due to the &quot;implied *LWS rule&quot;.</span>
+            <span class='string'>b&#39;\t&#39;</span> <span class='op'>|</span> <span class='string'>b&#39; &#39;</span> <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>in_ext</span> <span class='kw-2'>&amp;</span> <span class='op'>!</span><span class='ident'>in_chunk_size</span> <span class='op'>=&gt;</span> {}
+            <span class='comment'>// LWS can follow the chunk size, but no more digits can come</span>
+            <span class='string'>b&#39;\t&#39;</span> <span class='op'>|</span> <span class='string'>b&#39; &#39;</span> <span class='kw'>if</span> <span class='ident'>in_chunk_size</span> <span class='op'>=&gt;</span> <span class='ident'>in_chunk_size</span> <span class='op'>=</span> <span class='boolval'>false</span>,
+            <span class='comment'>// We allow any arbitrary octet once we are in the extension, since</span>
+            <span class='comment'>// they all get ignored anyway. According to the HTTP spec, valid</span>
+            <span class='comment'>// extensions would have a more strict syntax:</span>
+            <span class='comment'>//     (token [&quot;=&quot; (token | quoted-string)])</span>
+            <span class='comment'>// but we gain nothing by rejecting an otherwise valid chunk size.</span>
+            _ <span class='kw'>if</span> <span class='ident'>in_ext</span> <span class='op'>=&gt;</span> {}
+            <span class='comment'>// Finally, if we aren&#39;t in the extension and we&#39;re reading any</span>
+            <span class='comment'>// other octet, the chunk size line is invalid!</span>
+            _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>InvalidChunkSize</span>),
+        }
+    }
+    <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>((<span class='ident'>bytes</span>.<span class='ident'>pos</span>(), <span class='ident'>size</span>)))
+}
+
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
-    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>Request</span>, <span class='ident'>Response</span>, <span class='ident'>Status</span>, <span class='ident'>EMPTY_HEADER</span>, <span class='ident'>shrink</span>};
+    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>Request</span>, <span class='ident'>Response</span>, <span class='ident'>Status</span>, <span class='ident'>EMPTY_HEADER</span>, <span class='ident'>shrink</span>, <span class='ident'>parse_chunk_size</span>};
 
     <span class='kw'>const</span> <span class='ident'>NUM_OF_HEADERS</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>4</span>;
 
@@ -1429,7 +1597,7 @@
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>req</span>.<span class='ident'>headers</span>.<span class='ident'>len</span>(), <span class='number'>0</span>);
         }
     }
-    
+
     <span class='macro'>req</span><span class='macro'>!</span> {
         <span class='ident'>test_request_empty_lines_prefix_lf_only</span>,
         <span class='string'>b&quot;\n\nGET / HTTP/1.1\n\n&quot;</span>,
@@ -1439,6 +1607,13 @@
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>req</span>.<span class='ident'>version</span>.<span class='ident'>unwrap</span>(), <span class='number'>1</span>);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>req</span>.<span class='ident'>headers</span>.<span class='ident'>len</span>(), <span class='number'>0</span>);
         }
+    }
+
+    <span class='macro'>req</span><span class='macro'>!</span> {
+        <span class='ident'>test_request_with_invalid_token_delimiter</span>,
+        <span class='string'>b&quot;GET\n/ HTTP/1.1\r\nHost: foo.bar\r\n\r\n&quot;</span>,
+        <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Token</span>),
+        <span class='op'>|</span>_<span class='op'>|</span> {}
     }
 
     <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>res</span> {
@@ -1522,6 +1697,26 @@
         <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Partial</span>),
         <span class='op'>|</span><span class='ident'>_res</span><span class='op'>|</span> {}
     }
+
+    <span class='macro'>res</span><span class='macro'>!</span> {
+        <span class='ident'>test_response_empty_lines_prefix_lf_only</span>,
+        <span class='string'>b&quot;\n\nHTTP/1.1 200 OK\n\n&quot;</span>,
+        <span class='op'>|</span><span class='ident'>_res</span><span class='op'>|</span> {}
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_chunk_size</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parse_chunk_size</span>(<span class='string'>b&quot;0\r\n&quot;</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>((<span class='number'>3</span>, <span class='number'>0</span>))));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parse_chunk_size</span>(<span class='string'>b&quot;12\r\nchunk&quot;</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>((<span class='number'>4</span>, <span class='number'>18</span>))));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parse_chunk_size</span>(<span class='string'>b&quot;3086d\r\n&quot;</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>((<span class='number'>7</span>, <span class='number'>198765</span>))));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parse_chunk_size</span>(<span class='string'>b&quot;3735AB1;foo bar*\r\n&quot;</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>((<span class='number'>18</span>, <span class='number'>57891505</span>))));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parse_chunk_size</span>(<span class='string'>b&quot;3735ab1 ; baz \r\n&quot;</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>((<span class='number'>16</span>, <span class='number'>57891505</span>))));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parse_chunk_size</span>(<span class='string'>b&quot;77a65\r&quot;</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Partial</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parse_chunk_size</span>(<span class='string'>b&quot;ab&quot;</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Partial</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parse_chunk_size</span>(<span class='string'>b&quot;567f8a\rfoo&quot;</span>), <span class='prelude-val'>Err</span>(::<span class='ident'>InvalidChunkSize</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parse_chunk_size</span>(<span class='string'>b&quot;567f8a\rfoo&quot;</span>), <span class='prelude-val'>Err</span>(::<span class='ident'>InvalidChunkSize</span>));
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parse_chunk_size</span>(<span class='string'>b&quot;567xf8a\r\n&quot;</span>), <span class='prelude-val'>Err</span>(::<span class='ident'>InvalidChunkSize</span>));
+    }
 }
 </pre>
 </section>
@@ -1583,6 +1778,6 @@
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@
 
     <title>rustless::server::net::NetworkConnections - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-40850' class='srclink' href='../../../hyper/net/struct.NetworkConnections.html?gotosrc=40850' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-6321' class='srclink' href='../../../hyper/net/struct.NetworkConnections.html?gotosrc=6321' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct NetworkConnections&lt;'a, N&gt; <span class='where'>where N: 'a + <a class='trait' href='../../../rustless/server/net/trait.NetworkListener.html' title='rustless::server::net::NetworkListener'>NetworkListener</a></span>(_);</pre><div class='docblock'><p>An iterator wrapper over a NetworkAcceptor.</p>
 </div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;'a, N&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html' title='core::iter::Iterator'>Iterator</a> for <a class='struct' href='../../../rustless/server/net/struct.NetworkConnections.html' title='rustless::server::net::NetworkConnections'>NetworkConnections</a>&lt;'a, N&gt; <span class='where'>where N: 'a + <a class='trait' href='../../../rustless/server/net/trait.NetworkListener.html' title='rustless::server::net::NetworkListener'>NetworkListener</a></span></code></h3><div class='impl-items'><h4 id='assoc_type.Item' class='type'><code>type Item = <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;N::<a class='trait' href='../../../rustless/server/net/trait.NetworkListener.html' title='rustless::server::net::NetworkListener'>Stream</a>, <a class='enum' href='../../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>&gt;</code></h4>
 <h4 id='method.next' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html#method.next' class='fnname'>next</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;N::<a class='trait' href='../../../rustless/server/net/trait.NetworkListener.html' title='rustless::server::net::NetworkListener'>Stream</a>, <a class='enum' href='../../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>&gt;&gt;</code></h4>
@@ -108,6 +109,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

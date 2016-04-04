@@ -9,6 +9,7 @@
 
     <title>iron::middleware::BeforeMiddleware - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
@@ -45,10 +46,10 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-228' class='srclink' href='../../src/iron/middleware/mod.rs.html#74-84' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait BeforeMiddleware: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> {
-    fn <a href='#method.before' class='fnname'>before</a>(&amp;self, _: &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; { ... }
-    fn <a href='#method.catch' class='fnname'>catch</a>(&amp;self, _: &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>, err: <a class='struct' href='../../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; { ... }
+        </span><a id='src-88' class='srclink' href='../../src/iron/middleware/mod.rs.html#73-83' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait BeforeMiddleware: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + 'static {
+    fn <a href='#method.before' class='fnname'>before</a>(&amp;self, _: &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; { ... }
+    fn <a href='#method.catch' class='fnname'>catch</a>(&amp;self, _: &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>, err: <a class='struct' href='../../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt; { ... }
 }</pre><div class='docblock'><p><code>BeforeMiddleware</code> are fired before a <code>Handler</code> is called inside of a Chain.</p>
 
 <p><code>BeforeMiddleware</code> are responsible for doing request pre-processing that requires
@@ -62,8 +63,8 @@ instead be <code>AroundMiddleware</code>.</p>
 </div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.before' class='method stab '><code>fn <a href='#method.before' class='fnname'>before</a>(&amp;self, _: &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h3><div class='docblock'><p>Do whatever work this middleware should do with a <code>Request</code> object.</p>
-</div><h3 id='method.catch' class='method stab '><code>fn <a href='#method.catch' class='fnname'>catch</a>(&amp;self, _: &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>, err: <a class='struct' href='../../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h3><div class='docblock'><p>Respond to an error thrown by a previous <code>BeforeMiddleware</code>.</p>
+        <h3 id='method.before' class='method stab '><code>fn <a href='#method.before' class='fnname'>before</a>(&amp;self, _: &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h3><div class='docblock'><p>Do whatever work this middleware should do with a <code>Request</code> object.</p>
+</div><h3 id='method.catch' class='method stab '><code>fn <a href='#method.catch' class='fnname'>catch</a>(&amp;self, _: &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>, err: <a class='struct' href='../../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h3><div class='docblock'><p>Respond to an error thrown by a previous <code>BeforeMiddleware</code>.</p>
 
 <p>Returning a <code>Ok</code> will cause the request to resume the normal flow at the
 next <code>BeforeMiddleware</code>, or if this was the last <code>BeforeMiddleware</code>,
@@ -134,6 +135,6 @@ at the <code>Handler</code>.</p>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

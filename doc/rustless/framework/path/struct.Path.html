@@ -9,6 +9,7 @@
 
     <title>rustless::framework::path::Path - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-6224' class='srclink' href='../../../src/rustless/framework/path.rs.html#9-13' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-1184' class='srclink' href='../../../src/rustless/framework/path.rs.html#9-13' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Path {
     pub path: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>,
     pub params: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
@@ -53,9 +54,9 @@
 }</pre><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                                   <td id='structfield.path'><code>path</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.params'><code>params</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../../rustless/framework/path/struct.Path.html' title='rustless::framework::path::Path'>Path</a></code></h3><div class='impl-items'><h4 id='method.apply_captures' class='method'><code>fn <a href='#method.apply_captures' class='fnname'>apply_captures</a>(&amp;self, params: &amp;mut <a class='enum' href='../../../serialize/json/enum.Json.html' title='serialize::json::Json'>Json</a>, captures: <a class='struct' href='../../../regex/re/struct.Captures.html' title='regex::re::Captures'>Captures</a>)</code></h4>
-<h4 id='method.is_match' class='method'><code>fn <a href='#method.is_match' class='fnname'>is_match</a>&lt;'a&gt;(&amp;'a self, path: &amp;'a <a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../../regex/re/struct.Captures.html' title='regex::re::Captures'>Captures</a>&gt;</code></h4>
-<h4 id='method.parse' class='method'><code>fn <a href='#method.parse' class='fnname'>parse</a>(path: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, endpoint: <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../../rustless/framework/path/struct.Path.html' title='rustless::framework::path::Path'>Path</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+                                  <td id='structfield.params'><code>params</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../../rustless/framework/path/struct.Path.html' title='rustless::framework::path::Path'>Path</a></code></h3><div class='impl-items'><h4 id='method.apply_captures' class='method'><code>fn <a href='#method.apply_captures' class='fnname'>apply_captures</a>(&amp;self, params: &amp;mut <a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, captures: <a class='struct' href='../../../regex/re_unicode/struct.Captures.html' title='regex::re_unicode::Captures'>Captures</a>)</code></h4>
+<h4 id='method.is_match' class='method'><code>fn <a href='#method.is_match' class='fnname'>is_match</a>&lt;'a&gt;(&amp;'a self, path: &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../../regex/re_unicode/struct.Captures.html' title='regex::re_unicode::Captures'>Captures</a>&gt;</code></h4>
+<h4 id='method.parse' class='method'><code>fn <a href='#method.parse' class='fnname'>parse</a>(path: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, endpoint: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../../rustless/framework/path/struct.Path.html' title='rustless::framework::path::Path'>Path</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -115,6 +116,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

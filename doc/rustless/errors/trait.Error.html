@@ -9,6 +9,7 @@
 
     <title>rustless::errors::Error - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     
@@ -49,8 +50,7 @@
 <pre class='rust trait'>pub trait Error: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> + <a class='trait' href='../../typeable/trait.Typeable.html' title='typeable::Typeable'>Typeable</a> { }</pre><div class='docblock'><p>An extension to std::error::Error which provides dynamic downcasting of
 errors for use in highly generic contexts.</p>
 
-<h2 id="when-to-use-this-trait" class='section-header'><a
-                           href="#when-to-use-this-trait">When to use this trait</a></h2>
+<h2 id='when-to-use-this-trait' class='section-header'><a href='#when-to-use-this-trait'>When to use this trait</a></h2>
 <p>In the vast majority of cases, a library-specific <code>enum</code> should be used
 for cases where there can be many different types of errors. This has
 the benefit of being very performant and benefiting from all sorts
@@ -153,6 +153,6 @@ where enums or generics are better suited.</p>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

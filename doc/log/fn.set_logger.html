@@ -9,6 +9,7 @@
 
     <title>log::set_logger - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     <link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico">
@@ -45,8 +46,8 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-1204' class='srclink' href='../src/log/lib.rs.html#579-605' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn set_logger&lt;M&gt;(make_logger: M) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../log/struct.SetLoggerError.html' title='log::SetLoggerError'>SetLoggerError</a>&gt; <span class='where'>where M: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(<a class='struct' href='../log/struct.MaxLogLevelFilter.html' title='log::MaxLogLevelFilter'>MaxLogLevelFilter</a>) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../log/trait.Log.html' title='log::Log'>Log</a>&gt;</span></pre><div class='docblock'><p>Sets the global logger.</p>
+        </span><a id='src-246' class='srclink' href='../src/log/lib.rs.html#656-659' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn set_logger&lt;M&gt;(make_logger: M) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../log/struct.SetLoggerError.html' title='log::SetLoggerError'>SetLoggerError</a>&gt; <span class='where'>where M: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(<a class='struct' href='../log/struct.MaxLogLevelFilter.html' title='log::MaxLogLevelFilter'>MaxLogLevelFilter</a>) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../log/trait.Log.html' title='log::Log'>Log</a>&gt;</span></pre><div class='docblock'><p>Sets the global logger.</p>
 
 <p>The <code>make_logger</code> closure is passed a <code>MaxLogLevel</code> object, which the
 logger should use to keep the global maximum log level in sync with the
@@ -59,6 +60,8 @@ ignored.</p>
 <p>This function does not typically need to be called manually. Logger
 implementations should provide an initialization method that calls
 <code>set_logger</code> internally.</p>
+
+<p>Requires the <code>use_std</code> feature (enabled by default).</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -118,6 +121,6 @@ implementations should provide an initialization method that calls
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

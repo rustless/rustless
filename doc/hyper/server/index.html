@@ -9,6 +9,7 @@
 
     <title>hyper::server - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     
@@ -45,17 +46,15 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-43049' class='srclink' href='../../src/hyper/server/mod.rs.html#1-507' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-6726' class='srclink' href='../../src/hyper/server/mod.rs.html#1-510' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>HTTP Server</p>
 
-<h1 id="server" class='section-header'><a
-                           href="#server">Server</a></h1>
+<h1 id='server' class='section-header'><a href='#server'>Server</a></h1>
 <p>A <code>Server</code> is created to listen on port, parse HTTP requests, and hand
 them off to a <code>Handler</code>. By default, the Server will listen across multiple
 threads, but that can be configured to a single thread if preferred.</p>
 
-<h1 id="handling-requests" class='section-header'><a
-                           href="#handling-requests">Handling requests</a></h1>
+<h1 id='handling-requests' class='section-header'><a href='#handling-requests'>Handling requests</a></h1>
 <p>You must pass a <code>Handler</code> to the Server that will handle requests. There is
 a default implementation for <code>fn</code>s and closures, allowing you pass one of
 those easily.</p>
@@ -102,8 +101,7 @@ must implement <code>Sync</code>: any mutable state must be synchronized.</p>
     <span class='ident'>counter</span>.<span class='ident'>fetch_add</span>(<span class='number'>1</span>, <span class='ident'>Ordering</span>::<span class='ident'>Relaxed</span>);
 }).<span class='ident'>unwrap</span>();</pre>
 
-<h1 id="the-request-and-response-pair" class='section-header'><a
-                           href="#the-request-and-response-pair">The <code>Request</code> and <code>Response</code> pair</a></h1>
+<h1 id='the-request-and-response-pair' class='section-header'><a href='#the-request-and-response-pair'>The <code>Request</code> and <code>Response</code> pair</a></h1>
 <p>A <code>Handler</code> receives a pair of arguments, a <code>Request</code> and a <code>Response</code>. The
 <code>Request</code> includes access to the <code>method</code>, <code>uri</code>, and <code>headers</code> of the
 incoming HTTP request. It also implements <code>std::io::Read</code>, in order to
@@ -125,8 +123,7 @@ and implements <code>std::io::Write</code> to allow writing the response body.</
     }
 }).<span class='ident'>unwrap</span>();</pre>
 
-<h2 id="an-aside:-write-status" class='section-header'><a
-                           href="#an-aside:-write-status">An aside: Write Status</a></h2>
+<h2 id='an-aside-write-status' class='section-header'><a href='#an-aside-write-status'>An aside: Write Status</a></h2>
 <p>The <code>Response</code> uses a phantom type parameter to determine its write status.
 What does that mean? In short, it ensures you never write a body before
 adding all headers, and never add a header after writing some of the body.</p>
@@ -258,6 +255,6 @@ implement <code>Write</code>.</p>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>

@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.7.0/src/crypto/pkey.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.8/src/crypto/pkey.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>pkey.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -764,6 +765,151 @@
 <span id="722">722</span>
 <span id="723">723</span>
 <span id="724">724</span>
+<span id="725">725</span>
+<span id="726">726</span>
+<span id="727">727</span>
+<span id="728">728</span>
+<span id="729">729</span>
+<span id="730">730</span>
+<span id="731">731</span>
+<span id="732">732</span>
+<span id="733">733</span>
+<span id="734">734</span>
+<span id="735">735</span>
+<span id="736">736</span>
+<span id="737">737</span>
+<span id="738">738</span>
+<span id="739">739</span>
+<span id="740">740</span>
+<span id="741">741</span>
+<span id="742">742</span>
+<span id="743">743</span>
+<span id="744">744</span>
+<span id="745">745</span>
+<span id="746">746</span>
+<span id="747">747</span>
+<span id="748">748</span>
+<span id="749">749</span>
+<span id="750">750</span>
+<span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
+<span id="757">757</span>
+<span id="758">758</span>
+<span id="759">759</span>
+<span id="760">760</span>
+<span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
+<span id="764">764</span>
+<span id="765">765</span>
+<span id="766">766</span>
+<span id="767">767</span>
+<span id="768">768</span>
+<span id="769">769</span>
+<span id="770">770</span>
+<span id="771">771</span>
+<span id="772">772</span>
+<span id="773">773</span>
+<span id="774">774</span>
+<span id="775">775</span>
+<span id="776">776</span>
+<span id="777">777</span>
+<span id="778">778</span>
+<span id="779">779</span>
+<span id="780">780</span>
+<span id="781">781</span>
+<span id="782">782</span>
+<span id="783">783</span>
+<span id="784">784</span>
+<span id="785">785</span>
+<span id="786">786</span>
+<span id="787">787</span>
+<span id="788">788</span>
+<span id="789">789</span>
+<span id="790">790</span>
+<span id="791">791</span>
+<span id="792">792</span>
+<span id="793">793</span>
+<span id="794">794</span>
+<span id="795">795</span>
+<span id="796">796</span>
+<span id="797">797</span>
+<span id="798">798</span>
+<span id="799">799</span>
+<span id="800">800</span>
+<span id="801">801</span>
+<span id="802">802</span>
+<span id="803">803</span>
+<span id="804">804</span>
+<span id="805">805</span>
+<span id="806">806</span>
+<span id="807">807</span>
+<span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
+<span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
+<span id="817">817</span>
+<span id="818">818</span>
+<span id="819">819</span>
+<span id="820">820</span>
+<span id="821">821</span>
+<span id="822">822</span>
+<span id="823">823</span>
+<span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
+<span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
+<span id="832">832</span>
+<span id="833">833</span>
+<span id="834">834</span>
+<span id="835">835</span>
+<span id="836">836</span>
+<span id="837">837</span>
+<span id="838">838</span>
+<span id="839">839</span>
+<span id="840">840</span>
+<span id="841">841</span>
+<span id="842">842</span>
+<span id="843">843</span>
+<span id="844">844</span>
+<span id="845">845</span>
+<span id="846">846</span>
+<span id="847">847</span>
+<span id="848">848</span>
+<span id="849">849</span>
+<span id="850">850</span>
+<span id="851">851</span>
+<span id="852">852</span>
+<span id="853">853</span>
+<span id="854">854</span>
+<span id="855">855</span>
+<span id="856">856</span>
+<span id="857">857</span>
+<span id="858">858</span>
+<span id="859">859</span>
+<span id="860">860</span>
+<span id="861">861</span>
+<span id="862">862</span>
+<span id="863">863</span>
+<span id="864">864</span>
+<span id="865">865</span>
+<span id="866">866</span>
+<span id="867">867</span>
+<span id="868">868</span>
+<span id="869">869</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_ulong</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
@@ -771,17 +917,18 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>::<span class='ident'>repeat</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>;
-<span class='kw'>use</span> <span class='ident'>bio</span>::{<span class='ident'>MemBio</span>};
+<span class='kw'>use</span> <span class='ident'>bio</span>::<span class='ident'>MemBio</span>;
 <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>hash</span>;
 <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>Type</span> <span class='kw'>as</span> <span class='ident'>HashType</span>;
 <span class='kw'>use</span> <span class='ident'>ffi</span>;
 <span class='kw'>use</span> <span class='ident'>ssl</span>::<span class='ident'>error</span>::{<span class='ident'>SslError</span>, <span class='ident'>StreamError</span>};
+<span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>rsa</span>::<span class='ident'>RSA</span>;
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Parts</span> {
     <span class='ident'>Neither</span>,
     <span class='ident'>Public</span>,
-    <span class='ident'>Both</span>
+    <span class='ident'>Both</span>,
 }
 
 <span class='doccomment'>/// Represents a role an asymmetric key might be appropriate for.</span>
@@ -790,39 +937,46 @@
     <span class='ident'>Encrypt</span>,
     <span class='ident'>Decrypt</span>,
     <span class='ident'>Sign</span>,
-    <span class='ident'>Verify</span>
+    <span class='ident'>Verify</span>,
 }
 
 <span class='doccomment'>/// Type of encryption padding to use.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>EncryptionPadding</span> {
     <span class='ident'>OAEP</span>,
-    <span class='ident'>PKCS1v15</span>
+    <span class='ident'>PKCS1v15</span>,
 }
 
 <span class='kw'>fn</span> <span class='ident'>openssl_padding_code</span>(<span class='ident'>padding</span>: <span class='ident'>EncryptionPadding</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span> {
     <span class='kw'>match</span> <span class='ident'>padding</span> {
         <span class='ident'>EncryptionPadding</span>::<span class='ident'>OAEP</span> <span class='op'>=&gt;</span> <span class='number'>4</span>,
-        <span class='ident'>EncryptionPadding</span>::<span class='ident'>PKCS1v15</span> <span class='op'>=&gt;</span> <span class='number'>1</span>
+        <span class='ident'>EncryptionPadding</span>::<span class='ident'>PKCS1v15</span> <span class='op'>=&gt;</span> <span class='number'>1</span>,
     }
 }
 
 <span class='kw'>fn</span> <span class='ident'>openssl_hash_nid</span>(<span class='ident'>hash</span>: <span class='ident'>HashType</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span> {
     <span class='kw'>match</span> <span class='ident'>hash</span> {
-        <span class='ident'>HashType</span>::<span class='ident'>MD5</span>       <span class='op'>=&gt;</span> <span class='number'>4</span>,   <span class='comment'>// NID_md5,</span>
-        <span class='ident'>HashType</span>::<span class='ident'>SHA1</span>      <span class='op'>=&gt;</span> <span class='number'>64</span>,  <span class='comment'>// NID_sha1</span>
-        <span class='ident'>HashType</span>::<span class='ident'>SHA224</span>    <span class='op'>=&gt;</span> <span class='number'>675</span>, <span class='comment'>// NID_sha224</span>
-        <span class='ident'>HashType</span>::<span class='ident'>SHA256</span>    <span class='op'>=&gt;</span> <span class='number'>672</span>, <span class='comment'>// NID_sha256</span>
-        <span class='ident'>HashType</span>::<span class='ident'>SHA384</span>    <span class='op'>=&gt;</span> <span class='number'>673</span>, <span class='comment'>// NID_sha384</span>
-        <span class='ident'>HashType</span>::<span class='ident'>SHA512</span>    <span class='op'>=&gt;</span> <span class='number'>674</span>, <span class='comment'>// NID_sha512</span>
+        <span class='ident'>HashType</span>::<span class='ident'>MD5</span> <span class='op'>=&gt;</span> <span class='number'>4</span>,   <span class='comment'>// NID_md5,</span>
+        <span class='ident'>HashType</span>::<span class='ident'>SHA1</span> <span class='op'>=&gt;</span> <span class='number'>64</span>,  <span class='comment'>// NID_sha1</span>
+        <span class='ident'>HashType</span>::<span class='ident'>SHA224</span> <span class='op'>=&gt;</span> <span class='number'>675</span>, <span class='comment'>// NID_sha224</span>
+        <span class='ident'>HashType</span>::<span class='ident'>SHA256</span> <span class='op'>=&gt;</span> <span class='number'>672</span>, <span class='comment'>// NID_sha256</span>
+        <span class='ident'>HashType</span>::<span class='ident'>SHA384</span> <span class='op'>=&gt;</span> <span class='number'>673</span>, <span class='comment'>// NID_sha384</span>
+        <span class='ident'>HashType</span>::<span class='ident'>SHA512</span> <span class='op'>=&gt;</span> <span class='number'>674</span>, <span class='comment'>// NID_sha512</span>
         <span class='ident'>HashType</span>::<span class='ident'>RIPEMD160</span> <span class='op'>=&gt;</span> <span class='number'>117</span>, <span class='comment'>// NID_ripemd160</span>
     }
+}
+
+<span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> {
+    <span class='kw'>fn</span> <span class='ident'>rust_EVP_PKEY_clone</span>(<span class='ident'>pkey</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY</span>);
 }
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>PKey</span> {
     <span class='ident'>evp</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY</span>,
     <span class='ident'>parts</span>: <span class='ident'>Parts</span>,
 }
+
+<span class='kw'>unsafe</span> <span class='kw'>impl</span> <span class='ident'>Send</span> <span class='kw'>for</span> <span class='ident'>PKey</span> {}
+<span class='kw'>unsafe</span> <span class='kw'>impl</span> <span class='ident'>Sync</span> <span class='kw'>for</span> <span class='ident'>PKey</span> {}
 
 <span class='doccomment'>/// Represents a public key, optionally with a private key attached.</span>
 <span class='kw'>impl</span> <span class='ident'>PKey</span> {
@@ -848,32 +1002,70 @@
     }
 
     <span class='doccomment'>/// Reads private key from PEM, takes ownership of handle</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>private_key_from_pem</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>reader</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PKey</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>private_key_from_pem</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>reader</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PKey</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span>
+        <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
+    {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>mem_bio</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>MemBio</span>::<span class='ident'>new</span>());
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>io</span>::<span class='ident'>copy</span>(<span class='ident'>reader</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>mem_bio</span>).<span class='ident'>map_err</span>(<span class='ident'>StreamError</span>));
 
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>evp</span> <span class='op'>=</span> <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>PEM_read_bio_PrivateKey</span>(<span class='ident'>mem_bio</span>.<span class='ident'>get_handle</span>(),
                                                                  <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
-                                                                 <span class='prelude-val'>None</span>, <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
+                                                                 <span class='prelude-val'>None</span>,
+                                                                 <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
             <span class='prelude-val'>Ok</span>(<span class='ident'>PKey</span> {
-                <span class='ident'>evp</span>:   <span class='ident'>evp</span>,
+                <span class='ident'>evp</span>: <span class='ident'>evp</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY</span>,
                 <span class='ident'>parts</span>: <span class='ident'>Parts</span>::<span class='ident'>Both</span>,
             })
         }
     }
 
     <span class='doccomment'>/// Reads public key from PEM, takes ownership of handle</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>public_key_from_pem</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>reader</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PKey</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>public_key_from_pem</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>reader</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PKey</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span>
+        <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
+    {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>mem_bio</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>MemBio</span>::<span class='ident'>new</span>());
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>io</span>::<span class='ident'>copy</span>(<span class='ident'>reader</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>mem_bio</span>).<span class='ident'>map_err</span>(<span class='ident'>StreamError</span>));
 
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>evp</span> <span class='op'>=</span> <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>PEM_read_bio_PUBKEY</span>(<span class='ident'>mem_bio</span>.<span class='ident'>get_handle</span>(),
-                                                                 <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
-                                                                 <span class='prelude-val'>None</span>, <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
+                                                             <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
+                                                             <span class='prelude-val'>None</span>,
+                                                             <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
             <span class='prelude-val'>Ok</span>(<span class='ident'>PKey</span> {
-                <span class='ident'>evp</span>:   <span class='ident'>evp</span>,
+                <span class='ident'>evp</span>: <span class='ident'>evp</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY</span>,
+                <span class='ident'>parts</span>: <span class='ident'>Parts</span>::<span class='ident'>Public</span>,
+            })
+        }
+    }
+
+    <span class='doccomment'>/// Reads an RSA private key from PEM, takes ownership of handle</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>private_rsa_key_from_pem</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>reader</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PKey</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span>
+    <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
+    {
+        <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>RSA</span>::<span class='ident'>private_key_from_pem</span>(<span class='ident'>reader</span>));
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>evp</span> <span class='op'>=</span> <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_new</span>());
+            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_set1_RSA</span>(<span class='ident'>evp</span>, <span class='ident'>rsa</span>.<span class='ident'>as_ptr</span>()));
+
+            <span class='prelude-val'>Ok</span>(<span class='ident'>PKey</span> {
+                <span class='ident'>evp</span>: <span class='ident'>evp</span>,
+                <span class='ident'>parts</span>: <span class='ident'>Parts</span>::<span class='ident'>Public</span>,
+            })
+        }
+    }
+
+    <span class='doccomment'>/// Reads an RSA public key from PEM, takes ownership of handle</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>public_rsa_key_from_pem</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>reader</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PKey</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span>
+    <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
+    {
+        <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>RSA</span>::<span class='ident'>public_key_from_pem</span>(<span class='ident'>reader</span>));
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>evp</span> <span class='op'>=</span> <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_new</span>());
+            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_set1_RSA</span>(<span class='ident'>evp</span>, <span class='ident'>rsa</span>.<span class='ident'>as_ptr</span>()));
+
+            <span class='prelude-val'>Ok</span>(<span class='ident'>PKey</span> {
+                <span class='ident'>evp</span>: <span class='ident'>evp</span>,
                 <span class='ident'>parts</span>: <span class='ident'>Parts</span>::<span class='ident'>Public</span>,
             })
         }
@@ -883,24 +1075,30 @@
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_get1_RSA</span>(<span class='self'>self</span>.<span class='ident'>evp</span>);
             <span class='kw'>let</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='ident'>f</span>(<span class='ident'>rsa</span>, <span class='ident'>ptr</span>::<span class='ident'>null</span>());
-            <span class='kw'>if</span> <span class='ident'>len</span> <span class='op'>&lt;</span> <span class='number'>0</span> <span class='kw'>as</span> <span class='ident'>c_int</span> { <span class='kw'>return</span> <span class='macro'>vec</span><span class='macro'>!</span>(); }
+            <span class='kw'>if</span> <span class='ident'>len</span> <span class='op'>&lt;</span> <span class='number'>0</span> <span class='kw'>as</span> <span class='ident'>c_int</span> {
+                <span class='kw'>return</span> <span class='macro'>vec</span><span class='macro'>!</span>[];
+            }
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>repeat</span>(<span class='number'>0u8</span>).<span class='ident'>take</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
 
             <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>f</span>(<span class='ident'>rsa</span>, <span class='kw-2'>&amp;</span><span class='ident'>s</span>.<span class='ident'>as_mut_ptr</span>());
+            <span class='ident'>ffi</span>::<span class='ident'>RSA_free</span>(<span class='ident'>rsa</span>);
 
             <span class='ident'>s</span>.<span class='ident'>truncate</span>(<span class='ident'>r</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
             <span class='ident'>s</span>
         }
     }
 
-    <span class='kw'>fn</span> <span class='ident'>_fromstr</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>], <span class='ident'>f</span>: <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='op'>*</span><span class='kw'>const</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>RSA</span>, <span class='op'>*</span><span class='kw'>const</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>, <span class='ident'>c_uint</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>RSA</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+    <span class='kw'>fn</span> <span class='ident'>_fromstr</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>,
+                <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>],
+                <span class='ident'>f</span>: <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='op'>*</span><span class='kw'>const</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>RSA</span>, <span class='op'>*</span><span class='kw'>const</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>, <span class='ident'>c_uint</span>)
+                                        <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>RSA</span>)
+                <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
             <span class='ident'>f</span>(<span class='kw-2'>&amp;</span><span class='ident'>rsa</span>, <span class='kw-2'>&amp;</span><span class='ident'>s</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>);
             <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>rsa</span>.<span class='ident'>is_null</span>() {
                 <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_set1_RSA</span>(<span class='self'>self</span>.<span class='ident'>evp</span>, <span class='ident'>rsa</span>) <span class='op'>==</span> <span class='number'>1</span>
-            }
-            <span class='kw'>else</span> {
+            } <span class='kw'>else</span> {
                 <span class='boolval'>false</span>
             }
         }
@@ -908,20 +1106,37 @@
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>gen</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>keysz</span>: <span class='ident'>usize</span>) {
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_generate_key</span>(
-                <span class='ident'>keysz</span> <span class='kw'>as</span> <span class='ident'>c_int</span>,
-                <span class='number'>65537</span> <span class='kw'>as</span> <span class='ident'>c_ulong</span>,
-                <span class='ident'>ptr</span>::<span class='ident'>null</span>(),
-                <span class='ident'>ptr</span>::<span class='ident'>null</span>()
-            );
+            <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_generate_key</span>(<span class='ident'>keysz</span> <span class='kw'>as</span> <span class='ident'>c_int</span>,
+                                            <span class='number'>65537</span> <span class='kw'>as</span> <span class='ident'>c_ulong</span>,
+                                            <span class='ident'>ptr</span>::<span class='ident'>null</span>(),
+                                            <span class='ident'>ptr</span>::<span class='ident'>null</span>());
 
             <span class='comment'>// XXX: 6 == NID_rsaEncryption</span>
-            <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_assign</span>(
-                <span class='self'>self</span>.<span class='ident'>evp</span>,
-                <span class='number'>6</span> <span class='kw'>as</span> <span class='ident'>c_int</span>,
-                <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>rsa</span>));
+            <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_assign</span>(<span class='self'>self</span>.<span class='ident'>evp</span>, <span class='number'>6</span> <span class='kw'>as</span> <span class='ident'>c_int</span>, <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>rsa</span>));
 
             <span class='self'>self</span>.<span class='ident'>parts</span> <span class='op'>=</span> <span class='ident'>Parts</span>::<span class='ident'>Both</span>;
+        }
+    }
+
+    <span class='doccomment'>/// assign RSA key to this pkey</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_rsa</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rsa</span>: <span class='kw-2'>&amp;</span><span class='ident'>RSA</span>) {
+        <span class='kw'>unsafe</span> {
+            <span class='comment'>// this needs to be a reference as the set1_RSA ups the reference count</span>
+            <span class='kw'>let</span> <span class='ident'>rsa_ptr</span> <span class='op'>=</span> <span class='ident'>rsa</span>.<span class='ident'>as_ptr</span>();
+            <span class='kw'>if</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_set1_RSA</span>(<span class='self'>self</span>.<span class='ident'>evp</span>, <span class='ident'>rsa_ptr</span>) <span class='op'>==</span> <span class='number'>1</span> {
+                <span class='kw'>if</span> <span class='ident'>rsa</span>.<span class='ident'>has_e</span>() <span class='op'>&amp;&amp;</span> <span class='ident'>rsa</span>.<span class='ident'>has_n</span>() {
+                    <span class='self'>self</span>.<span class='ident'>parts</span> <span class='op'>=</span> <span class='ident'>Parts</span>::<span class='ident'>Public</span>;
+                }
+            }
+        }
+    }
+
+    <span class='doccomment'>/// get a reference to the interal RSA key for direct access to the key components</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_rsa</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>RSA</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>evp_pkey</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>evp</span>;
+            <span class='comment'>// this is safe as the ffi increments a reference counter to the internal key</span>
+            <span class='ident'>RSA</span>::<span class='ident'>from_raw</span>(<span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_get1_RSA</span>(<span class='ident'>evp_pkey</span>))
         }
     }
 
@@ -960,11 +1175,18 @@
 
     <span class='doccomment'>/// Stores private key as a PEM</span>
     <span class='comment'>// FIXME: also add password and encryption</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_pem</span><span class='op'>&lt;</span><span class='ident'>W</span>: <span class='ident'>Write</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>writer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>W</span><span class='comment'>/*, password: Option&lt;String&gt;*/</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SslError</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_pem</span><span class='op'>&lt;</span><span class='ident'>W</span>: <span class='ident'>Write</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>,
+                               <span class='ident'>writer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>W</span> <span class='comment'>/* , password: Option&lt;String&gt; */</span>)
+                               <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>mem_bio</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>MemBio</span>::<span class='ident'>new</span>());
         <span class='kw'>unsafe</span> {
-            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>PEM_write_bio_PrivateKey</span>(<span class='ident'>mem_bio</span>.<span class='ident'>get_handle</span>(), <span class='self'>self</span>.<span class='ident'>evp</span>, <span class='ident'>ptr</span>::<span class='ident'>null</span>(),
-                                                   <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(), <span class='op'>-</span><span class='number'>1</span>, <span class='prelude-val'>None</span>, <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
+            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>PEM_write_bio_PrivateKey</span>(<span class='ident'>mem_bio</span>.<span class='ident'>get_handle</span>(),
+                                                   <span class='self'>self</span>.<span class='ident'>evp</span>,
+                                                   <span class='ident'>ptr</span>::<span class='ident'>null</span>(),
+                                                   <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
+                                                   <span class='op'>-</span><span class='number'>1</span>,
+                                                   <span class='prelude-val'>None</span>,
+                                                   <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
 
         }
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[];
@@ -973,11 +1195,11 @@
     }
 
     <span class='doccomment'>/// Stores public key as a PEM</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_pub_pem</span><span class='op'>&lt;</span><span class='ident'>W</span>: <span class='ident'>Write</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>writer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>W</span><span class='comment'>/*, password: Option&lt;String&gt;*/</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SslError</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>write_pub_pem</span><span class='op'>&lt;</span><span class='ident'>W</span>: <span class='ident'>Write</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>,
+                                   <span class='ident'>writer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>W</span> <span class='comment'>/* , password: Option&lt;String&gt; */</span>)
+                                   <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>mem_bio</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>MemBio</span>::<span class='ident'>new</span>());
-        <span class='kw'>unsafe</span> {
-            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>PEM_write_bio_PUBKEY</span>(<span class='ident'>mem_bio</span>.<span class='ident'>get_handle</span>(), <span class='self'>self</span>.<span class='ident'>evp</span>))
-        }
+        <span class='kw'>unsafe</span> { <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>PEM_write_bio_PUBKEY</span>(<span class='ident'>mem_bio</span>.<span class='ident'>get_handle</span>(), <span class='self'>self</span>.<span class='ident'>evp</span>)) }
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[];
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>mem_bio</span>.<span class='ident'>read_to_end</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>).<span class='ident'>map_err</span>(<span class='ident'>StreamError</span>));
         <span class='ident'>writer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='ident'>buf</span>).<span class='ident'>map_err</span>(<span class='ident'>StreamError</span>)
@@ -991,8 +1213,7 @@
             <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_get1_RSA</span>(<span class='self'>self</span>.<span class='ident'>evp</span>);
             <span class='kw'>if</span> <span class='ident'>rsa</span>.<span class='ident'>is_null</span>() {
                 <span class='number'>0</span>
-            }
-            <span class='kw'>else</span> {
+            } <span class='kw'>else</span> {
                 <span class='ident'>ffi</span>::<span class='ident'>RSA_size</span>(<span class='ident'>rsa</span>) <span class='kw'>as</span> <span class='ident'>usize</span>
             }
         }
@@ -1003,26 +1224,30 @@
      */</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>can</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>r</span>: <span class='ident'>Role</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='ident'>r</span> {
-            <span class='ident'>Role</span>::<span class='ident'>Encrypt</span> <span class='op'>=&gt;</span>
+            <span class='ident'>Role</span>::<span class='ident'>Encrypt</span> <span class='op'>=&gt;</span> {
                 <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>parts</span> {
                     <span class='ident'>Parts</span>::<span class='ident'>Neither</span> <span class='op'>=&gt;</span> <span class='boolval'>false</span>,
                     _ <span class='op'>=&gt;</span> <span class='boolval'>true</span>,
-                },
-            <span class='ident'>Role</span>::<span class='ident'>Verify</span> <span class='op'>=&gt;</span>
+                }
+            }
+            <span class='ident'>Role</span>::<span class='ident'>Verify</span> <span class='op'>=&gt;</span> {
                 <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>parts</span> {
                     <span class='ident'>Parts</span>::<span class='ident'>Neither</span> <span class='op'>=&gt;</span> <span class='boolval'>false</span>,
                     _ <span class='op'>=&gt;</span> <span class='boolval'>true</span>,
-                },
-            <span class='ident'>Role</span>::<span class='ident'>Decrypt</span> <span class='op'>=&gt;</span>
+                }
+            }
+            <span class='ident'>Role</span>::<span class='ident'>Decrypt</span> <span class='op'>=&gt;</span> {
                 <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>parts</span> {
                     <span class='ident'>Parts</span>::<span class='ident'>Both</span> <span class='op'>=&gt;</span> <span class='boolval'>true</span>,
                     _ <span class='op'>=&gt;</span> <span class='boolval'>false</span>,
-                },
-            <span class='ident'>Role</span>::<span class='ident'>Sign</span> <span class='op'>=&gt;</span>
+                }
+            }
+            <span class='ident'>Role</span>::<span class='ident'>Sign</span> <span class='op'>=&gt;</span> {
                 <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>parts</span> {
                     <span class='ident'>Parts</span>::<span class='ident'>Both</span> <span class='op'>=&gt;</span> <span class='boolval'>true</span>,
                     _ <span class='op'>=&gt;</span> <span class='boolval'>false</span>,
-                },
+                }
+            }
         }
     }
 
@@ -1055,16 +1280,15 @@
 
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>repeat</span>(<span class='number'>0u8</span>).<span class='ident'>take</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>+</span> <span class='number'>1</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
 
-            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_private_encrypt</span>(
-                <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
-                <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
-                <span class='ident'>r</span>.<span class='ident'>as_mut_ptr</span>(),
-                <span class='ident'>rsa</span>,
-                <span class='ident'>openssl_padding_code</span>(<span class='ident'>padding</span>));
+            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_private_encrypt</span>(<span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
+                                              <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
+                                              <span class='ident'>r</span>.<span class='ident'>as_mut_ptr</span>(),
+                                              <span class='ident'>rsa</span>,
+                                              <span class='ident'>openssl_padding_code</span>(<span class='ident'>padding</span>));
 
             <span class='kw'>if</span> <span class='ident'>rv</span> <span class='op'>&lt;</span> <span class='number'>0</span> <span class='kw'>as</span> <span class='ident'>c_int</span> {
                 <span class='comment'>// println!(&quot;{:?}&quot;, SslError::get());</span>
-                <span class='macro'>vec</span><span class='macro'>!</span>()
+                <span class='macro'>vec</span><span class='macro'>!</span>[]
             } <span class='kw'>else</span> {
                 <span class='ident'>r</span>.<span class='ident'>truncate</span>(<span class='ident'>rv</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
                 <span class='ident'>r</span>
@@ -1084,15 +1308,14 @@
 
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>repeat</span>(<span class='number'>0u8</span>).<span class='ident'>take</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>+</span> <span class='number'>1</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
 
-            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_public_encrypt</span>(
-                <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
-                <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
-                <span class='ident'>r</span>.<span class='ident'>as_mut_ptr</span>(),
-                <span class='ident'>rsa</span>,
-                <span class='ident'>openssl_padding_code</span>(<span class='ident'>padding</span>));
+            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_public_encrypt</span>(<span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
+                                             <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
+                                             <span class='ident'>r</span>.<span class='ident'>as_mut_ptr</span>(),
+                                             <span class='ident'>rsa</span>,
+                                             <span class='ident'>openssl_padding_code</span>(<span class='ident'>padding</span>));
 
             <span class='kw'>if</span> <span class='ident'>rv</span> <span class='op'>&lt;</span> <span class='number'>0</span> <span class='kw'>as</span> <span class='ident'>c_int</span> {
-                <span class='macro'>vec</span><span class='macro'>!</span>()
+                <span class='macro'>vec</span><span class='macro'>!</span>[]
             } <span class='kw'>else</span> {
                 <span class='ident'>r</span>.<span class='ident'>truncate</span>(<span class='ident'>rv</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
                 <span class='ident'>r</span>
@@ -1112,15 +1335,14 @@
 
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>repeat</span>(<span class='number'>0u8</span>).<span class='ident'>take</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>+</span> <span class='number'>1</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
 
-            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_private_decrypt</span>(
-                <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
-                <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
-                <span class='ident'>r</span>.<span class='ident'>as_mut_ptr</span>(),
-                <span class='ident'>rsa</span>,
-                <span class='ident'>openssl_padding_code</span>(<span class='ident'>padding</span>));
+            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_private_decrypt</span>(<span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
+                                              <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
+                                              <span class='ident'>r</span>.<span class='ident'>as_mut_ptr</span>(),
+                                              <span class='ident'>rsa</span>,
+                                              <span class='ident'>openssl_padding_code</span>(<span class='ident'>padding</span>));
 
             <span class='kw'>if</span> <span class='ident'>rv</span> <span class='op'>&lt;</span> <span class='number'>0</span> <span class='kw'>as</span> <span class='ident'>c_int</span> {
-                <span class='macro'>vec</span><span class='macro'>!</span>()
+                <span class='macro'>vec</span><span class='macro'>!</span>[]
             } <span class='kw'>else</span> {
                 <span class='ident'>r</span>.<span class='ident'>truncate</span>(<span class='ident'>rv</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
                 <span class='ident'>r</span>
@@ -1140,15 +1362,14 @@
 
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>repeat</span>(<span class='number'>0u8</span>).<span class='ident'>take</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>+</span> <span class='number'>1</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
 
-            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_public_decrypt</span>(
-                <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
-                <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
-                <span class='ident'>r</span>.<span class='ident'>as_mut_ptr</span>(),
-                <span class='ident'>rsa</span>,
-                <span class='ident'>openssl_padding_code</span>(<span class='ident'>padding</span>));
+            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_public_decrypt</span>(<span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_int</span>,
+                                             <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
+                                             <span class='ident'>r</span>.<span class='ident'>as_mut_ptr</span>(),
+                                             <span class='ident'>rsa</span>,
+                                             <span class='ident'>openssl_padding_code</span>(<span class='ident'>padding</span>));
 
             <span class='kw'>if</span> <span class='ident'>rv</span> <span class='op'>&lt;</span> <span class='number'>0</span> <span class='kw'>as</span> <span class='ident'>c_int</span> {
-                <span class='macro'>vec</span><span class='macro'>!</span>()
+                <span class='macro'>vec</span><span class='macro'>!</span>[]
             } <span class='kw'>else</span> {
                 <span class='ident'>r</span>.<span class='ident'>truncate</span>(<span class='ident'>rv</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
                 <span class='ident'>r</span>
@@ -1160,46 +1381,62 @@
      * Encrypts data with the public key, using OAEP padding, returning the encrypted data. The
      * supplied data must not be larger than max_data().
      */</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>encrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>public_encrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>OAEP</span>) }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>encrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>public_encrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>OAEP</span>)
+    }
 
     <span class='doccomment'>/**
      * Encrypts data with the public key, using provided padding, returning the encrypted data. The
      * supplied data must not be larger than max_data().
      */</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>encrypt_with_padding</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>], <span class='ident'>padding</span>: <span class='ident'>EncryptionPadding</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>public_encrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>padding</span>) }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>encrypt_with_padding</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>], <span class='ident'>padding</span>: <span class='ident'>EncryptionPadding</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>public_encrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>padding</span>)
+    }
 
     <span class='doccomment'>/**
      * Encrypts data with the public key, using OAEP padding, returning the encrypted data. The
      * supplied data must not be larger than max_data().
      */</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>public_encrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>public_encrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>OAEP</span>) }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>public_encrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>public_encrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>OAEP</span>)
+    }
 
     <span class='doccomment'>/**
      * Decrypts data with the public key, using PKCS1v15 padding, returning the decrypted data.
      */</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>public_decrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>public_decrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>PKCS1v15</span>) }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>public_decrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>public_decrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>PKCS1v15</span>)
+    }
 
     <span class='doccomment'>/**
      * Decrypts data with the private key, expecting OAEP padding, returning the decrypted data.
      */</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>decrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>private_decrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>OAEP</span>) }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>decrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>private_decrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>OAEP</span>)
+    }
 
     <span class='doccomment'>/**
      * Decrypts data with the private key, using provided padding, returning the encrypted data. The
      * supplied data must not be larger than max_data().
      */</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>decrypt_with_padding</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>], <span class='ident'>padding</span>: <span class='ident'>EncryptionPadding</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>private_decrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>padding</span>) }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>decrypt_with_padding</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>], <span class='ident'>padding</span>: <span class='ident'>EncryptionPadding</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>private_decrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>padding</span>)
+    }
 
     <span class='doccomment'>/**
      * Decrypts data with the private key, expecting OAEP padding, returning the decrypted data.
      */</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>private_decrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>private_decrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>OAEP</span>) }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>private_decrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>private_decrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>OAEP</span>)
+    }
 
     <span class='doccomment'>/**
      * Encrypts data with the private key, using PKCS1v15 padding, returning the encrypted data. The
      * supplied data must not be larger than max_data().
      */</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>private_encrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>private_encrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>PKCS1v15</span>) }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>private_encrypt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>private_encrypt_with_padding</span>(<span class='ident'>s</span>, <span class='ident'>EncryptionPadding</span>::<span class='ident'>PKCS1v15</span>)
+    }
 
     <span class='doccomment'>/**
      * Signs data, using OpenSSL&#39;s default scheme and adding sha256 ASN.1 information to the
@@ -1207,14 +1444,18 @@
      * The bytes to sign must be the result of a sha256 hashing;
      * returns the signature.
      */</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>sign</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> { <span class='self'>self</span>.<span class='ident'>sign_with_hash</span>(<span class='ident'>s</span>, <span class='ident'>HashType</span>::<span class='ident'>SHA256</span>) }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>sign</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>sign_with_hash</span>(<span class='ident'>s</span>, <span class='ident'>HashType</span>::<span class='ident'>SHA256</span>)
+    }
 
     <span class='doccomment'>/**
      * Verifies a signature s (using OpenSSL&#39;s default scheme and sha256) on the SHA256 hash of a
      * message.
      * Returns true if the signature is valid, and false otherwise.
      */</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>verify</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>h</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>], <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>bool</span> { <span class='self'>self</span>.<span class='ident'>verify_with_hash</span>(<span class='ident'>h</span>, <span class='ident'>s</span>, <span class='ident'>HashType</span>::<span class='ident'>SHA256</span>) }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>verify</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>h</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>], <span class='ident'>s</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+        <span class='self'>self</span>.<span class='ident'>verify_with_hash</span>(<span class='ident'>h</span>, <span class='ident'>s</span>, <span class='ident'>HashType</span>::<span class='ident'>SHA256</span>)
+    }
 
     <span class='doccomment'>/**
      * Signs data, using OpenSSL&#39;s default scheme and add ASN.1 information for the given hash type to the
@@ -1232,16 +1473,15 @@
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>repeat</span>(<span class='number'>0u8</span>).<span class='ident'>take</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>+</span> <span class='number'>1</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
 
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='number'>0</span>;
-            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_sign</span>(
-                <span class='ident'>openssl_hash_nid</span>(<span class='ident'>hash</span>),
-                <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
-                <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>,
-                <span class='ident'>r</span>.<span class='ident'>as_mut_ptr</span>(),
-                <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>len</span>,
-                <span class='ident'>rsa</span>);
+            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_sign</span>(<span class='ident'>openssl_hash_nid</span>(<span class='ident'>hash</span>),
+                                   <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
+                                   <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>,
+                                   <span class='ident'>r</span>.<span class='ident'>as_mut_ptr</span>(),
+                                   <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>len</span>,
+                                   <span class='ident'>rsa</span>);
 
             <span class='kw'>if</span> <span class='ident'>rv</span> <span class='op'>&lt;</span> <span class='number'>0</span> <span class='kw'>as</span> <span class='ident'>c_int</span> {
-                <span class='macro'>vec</span><span class='macro'>!</span>()
+                <span class='macro'>vec</span><span class='macro'>!</span>[]
             } <span class='kw'>else</span> {
                 <span class='ident'>r</span>.<span class='ident'>truncate</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
                 <span class='ident'>r</span>
@@ -1256,21 +1496,19 @@
                 <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Could not get RSA key for verification&quot;</span>);
             }
 
-            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_verify</span>(
-                <span class='ident'>openssl_hash_nid</span>(<span class='ident'>hash</span>),
-                <span class='ident'>h</span>.<span class='ident'>as_ptr</span>(),
-                <span class='ident'>h</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>,
-                <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
-                <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>,
-                <span class='ident'>rsa</span>
-            );
+            <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>RSA_verify</span>(<span class='ident'>openssl_hash_nid</span>(<span class='ident'>hash</span>),
+                                     <span class='ident'>h</span>.<span class='ident'>as_ptr</span>(),
+                                     <span class='ident'>h</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>,
+                                     <span class='ident'>s</span>.<span class='ident'>as_ptr</span>(),
+                                     <span class='ident'>s</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>c_uint</span>,
+                                     <span class='ident'>rsa</span>);
 
             <span class='ident'>rv</span> <span class='op'>==</span> <span class='number'>1</span> <span class='kw'>as</span> <span class='ident'>c_int</span>
         }
     }
 
     <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>get_handle</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY</span> {
-        <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>evp</span>
+        <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>evp</span>;
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>public_eq</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>other</span>: <span class='kw-2'>&amp;</span><span class='ident'>PKey</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
@@ -1286,11 +1524,22 @@
     }
 }
 
+<span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>PKey</span> {
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>rust_EVP_PKEY_clone</span>(<span class='self'>self</span>.<span class='ident'>evp</span>);
+        }
+
+        <span class='ident'>PKey</span>::<span class='ident'>from_handle</span>(<span class='self'>self</span>.<span class='ident'>evp</span>, <span class='self'>self</span>.<span class='ident'>parts</span>)
+    }
+}
+
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>Path</span>;
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>File</span>;
     <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>Type</span>::{<span class='ident'>MD5</span>, <span class='ident'>SHA1</span>};
+    <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>rsa</span>::<span class='ident'>RSA</span>;
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_gen_pub</span>() {
@@ -1334,8 +1583,8 @@
     <span class='kw'>fn</span> <span class='ident'>test_private_key_from_pem</span>() {
         <span class='kw'>let</span> <span class='ident'>key_path</span> <span class='op'>=</span> <span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='string'>&quot;test/key.pem&quot;</span>);
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>open</span>(<span class='kw-2'>&amp;</span><span class='ident'>key_path</span>)
-            .<span class='ident'>ok</span>()
-            .<span class='ident'>expect</span>(<span class='string'>&quot;Failed to open `test/key.pem`&quot;</span>);
+                           .<span class='ident'>ok</span>()
+                           .<span class='ident'>expect</span>(<span class='string'>&quot;Failed to open `test/key.pem`&quot;</span>);
 
         <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>private_key_from_pem</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>file</span>).<span class='ident'>unwrap</span>();
     }
@@ -1344,17 +1593,37 @@
     <span class='kw'>fn</span> <span class='ident'>test_public_key_from_pem</span>() {
         <span class='kw'>let</span> <span class='ident'>key_path</span> <span class='op'>=</span> <span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='string'>&quot;test/key.pem.pub&quot;</span>);
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>open</span>(<span class='kw-2'>&amp;</span><span class='ident'>key_path</span>)
-            .<span class='ident'>ok</span>()
-            .<span class='ident'>expect</span>(<span class='string'>&quot;Failed to open `test/key.pem.pub`&quot;</span>);
+                           .<span class='ident'>ok</span>()
+                           .<span class='ident'>expect</span>(<span class='string'>&quot;Failed to open `test/key.pem.pub`&quot;</span>);
 
         <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>public_key_from_pem</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>file</span>).<span class='ident'>unwrap</span>();
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_private_rsa_key_from_pem</span>() {
+        <span class='kw'>let</span> <span class='ident'>key_path</span> <span class='op'>=</span> <span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='string'>&quot;test/key.pem&quot;</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>open</span>(<span class='kw-2'>&amp;</span><span class='ident'>key_path</span>)
+                            .<span class='ident'>ok</span>()
+                            .<span class='ident'>expect</span>(<span class='string'>&quot;Failed to open `test/key.pem`&quot;</span>);
+
+        <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>private_rsa_key_from_pem</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>file</span>).<span class='ident'>unwrap</span>();
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_public_rsa_key_from_pem</span>() {
+        <span class='kw'>let</span> <span class='ident'>key_path</span> <span class='op'>=</span> <span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='string'>&quot;test/key.pem.pub&quot;</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>open</span>(<span class='kw-2'>&amp;</span><span class='ident'>key_path</span>)
+                            .<span class='ident'>ok</span>()
+                            .<span class='ident'>expect</span>(<span class='string'>&quot;Failed to open `test/key.pem.pub`&quot;</span>);
+
+        <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>public_rsa_key_from_pem</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>file</span>).<span class='ident'>unwrap</span>();
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_private_encrypt</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k0</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k1</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
-        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>(<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>);
+        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>];
         <span class='ident'>k0</span>.<span class='ident'>gen</span>(<span class='number'>512</span>);
         <span class='ident'>k1</span>.<span class='ident'>load_pub</span>(<span class='kw-2'>&amp;</span><span class='ident'>k0</span>.<span class='ident'>save_pub</span>());
         <span class='kw'>let</span> <span class='ident'>emsg</span> <span class='op'>=</span> <span class='ident'>k0</span>.<span class='ident'>private_encrypt</span>(<span class='kw-2'>&amp;</span><span class='ident'>msg</span>);
@@ -1366,7 +1635,7 @@
     <span class='kw'>fn</span> <span class='ident'>test_public_encrypt</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k0</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k1</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
-        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>(<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>);
+        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>];
         <span class='ident'>k0</span>.<span class='ident'>gen</span>(<span class='number'>512</span>);
         <span class='ident'>k1</span>.<span class='ident'>load_pub</span>(<span class='kw-2'>&amp;</span><span class='ident'>k0</span>.<span class='ident'>save_pub</span>());
         <span class='kw'>let</span> <span class='ident'>emsg</span> <span class='op'>=</span> <span class='ident'>k1</span>.<span class='ident'>public_encrypt</span>(<span class='kw-2'>&amp;</span><span class='ident'>msg</span>);
@@ -1378,7 +1647,7 @@
     <span class='kw'>fn</span> <span class='ident'>test_public_encrypt_pkcs</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k0</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k1</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
-        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>(<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>);
+        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>];
         <span class='ident'>k0</span>.<span class='ident'>gen</span>(<span class='number'>512</span>);
         <span class='ident'>k1</span>.<span class='ident'>load_pub</span>(<span class='kw-2'>&amp;</span><span class='ident'>k0</span>.<span class='ident'>save_pub</span>());
         <span class='kw'>let</span> <span class='ident'>emsg</span> <span class='op'>=</span> <span class='ident'>k1</span>.<span class='ident'>public_encrypt_with_padding</span>(<span class='kw-2'>&amp;</span><span class='ident'>msg</span>, <span class='ident'>super</span>::<span class='ident'>EncryptionPadding</span>::<span class='ident'>PKCS1v15</span>);
@@ -1390,7 +1659,7 @@
     <span class='kw'>fn</span> <span class='ident'>test_sign</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k0</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k1</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
-        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>(<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>);
+        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>];
         <span class='ident'>k0</span>.<span class='ident'>gen</span>(<span class='number'>512</span>);
         <span class='ident'>k1</span>.<span class='ident'>load_pub</span>(<span class='kw-2'>&amp;</span><span class='ident'>k0</span>.<span class='ident'>save_pub</span>());
         <span class='kw'>let</span> <span class='ident'>sig</span> <span class='op'>=</span> <span class='ident'>k0</span>.<span class='ident'>sign</span>(<span class='kw-2'>&amp;</span><span class='ident'>msg</span>);
@@ -1402,7 +1671,7 @@
     <span class='kw'>fn</span> <span class='ident'>test_sign_hashes</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k0</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k1</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
-        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>(<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>);
+        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>];
         <span class='ident'>k0</span>.<span class='ident'>gen</span>(<span class='number'>512</span>);
         <span class='ident'>k1</span>.<span class='ident'>load_pub</span>(<span class='kw-2'>&amp;</span><span class='ident'>k0</span>.<span class='ident'>save_pub</span>());
 
@@ -1440,8 +1709,8 @@
     <span class='kw'>fn</span> <span class='ident'>test_pem</span>() {
         <span class='kw'>let</span> <span class='ident'>key_path</span> <span class='op'>=</span> <span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='string'>&quot;test/key.pem&quot;</span>);
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>open</span>(<span class='kw-2'>&amp;</span><span class='ident'>key_path</span>)
-            .<span class='ident'>ok</span>()
-            .<span class='ident'>expect</span>(<span class='string'>&quot;Failed to open `test/key.pem`&quot;</span>);
+                           .<span class='ident'>ok</span>()
+                           .<span class='ident'>expect</span>(<span class='string'>&quot;Failed to open `test/key.pem`&quot;</span>);
 
         <span class='kw'>let</span> <span class='ident'>key</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>private_key_from_pem</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>file</span>).<span class='ident'>unwrap</span>();
 
@@ -1455,6 +1724,28 @@
         <span class='comment'>// the `PRIVATE KEY` or `PUBLIC KEY` strings.</span>
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>priv_key</span>.<span class='ident'>windows</span>(<span class='number'>11</span>).<span class='ident'>any</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span> <span class='op'>==</span> <span class='string'>b&quot;PRIVATE KEY&quot;</span>));
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>pub_key</span>.<span class='ident'>windows</span>(<span class='number'>10</span>).<span class='ident'>any</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span> <span class='op'>==</span> <span class='string'>b&quot;PUBLIC KEY&quot;</span>));
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_public_key_from_raw</span>() {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k0</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>k1</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
+        <span class='kw'>let</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0xdeu8</span>, <span class='number'>0xadu8</span>, <span class='number'>0xd0u8</span>, <span class='number'>0x0du8</span>];
+
+        <span class='ident'>k0</span>.<span class='ident'>gen</span>(<span class='number'>512</span>);
+        <span class='kw'>let</span> <span class='ident'>sig</span> <span class='op'>=</span> <span class='ident'>k0</span>.<span class='ident'>sign</span>(<span class='kw-2'>&amp;</span><span class='ident'>msg</span>);
+
+        <span class='kw'>let</span> <span class='ident'>r0</span> <span class='op'>=</span> <span class='ident'>k0</span>.<span class='ident'>get_rsa</span>();
+        <span class='kw'>let</span> <span class='ident'>r1</span> <span class='op'>=</span> <span class='ident'>RSA</span>::<span class='ident'>from_public_components</span>(<span class='ident'>r0</span>.<span class='ident'>n</span>().<span class='ident'>expect</span>(<span class='string'>&quot;n&quot;</span>), <span class='ident'>r0</span>.<span class='ident'>e</span>().<span class='ident'>expect</span>(<span class='string'>&quot;e&quot;</span>)).<span class='ident'>expect</span>(<span class='string'>&quot;r1&quot;</span>);
+        <span class='ident'>k1</span>.<span class='ident'>set_rsa</span>(<span class='kw-2'>&amp;</span><span class='ident'>r1</span>);
+
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>k1</span>.<span class='ident'>can</span>(<span class='ident'>super</span>::<span class='ident'>Role</span>::<span class='ident'>Encrypt</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>k1</span>.<span class='ident'>can</span>(<span class='ident'>super</span>::<span class='ident'>Role</span>::<span class='ident'>Decrypt</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>k1</span>.<span class='ident'>can</span>(<span class='ident'>super</span>::<span class='ident'>Role</span>::<span class='ident'>Verify</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>k1</span>.<span class='ident'>can</span>(<span class='ident'>super</span>::<span class='ident'>Role</span>::<span class='ident'>Sign</span>));
+
+        <span class='kw'>let</span> <span class='ident'>rv</span> <span class='op'>=</span> <span class='ident'>k1</span>.<span class='ident'>verify</span>(<span class='kw-2'>&amp;</span><span class='ident'>msg</span>, <span class='kw-2'>&amp;</span><span class='ident'>sig</span>);
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>rv</span> <span class='op'>==</span> <span class='boolval'>true</span>);
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -1549,6 +1840,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

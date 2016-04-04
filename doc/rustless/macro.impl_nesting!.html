@@ -9,6 +9,7 @@
 
     <title>rustless::impl_nesting! - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -45,33 +46,10 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-10069' class='srclink' href='../src/rustless/framework/nesting.rs.html#32-57' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-1714' class='srclink' href='../src/rustless/framework/nesting.rs.html#32-57' title='goto source code'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>impl_nesting</span> {
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>t</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> (
-        <span class='kw'>impl</span> <span class='ident'>nesting</span>::<span class='ident'>Node</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>t</span> {
-            <span class='kw'>fn</span> <span class='ident'>get_handlers</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> ::<span class='ident'>framework</span>::<span class='ident'>ApiHandlers</span> { <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>handlers</span> }
-            <span class='kw'>fn</span> <span class='ident'>get_handlers_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> ::<span class='ident'>framework</span>::<span class='ident'>ApiHandlers</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>handlers</span> }
-
-            <span class='kw'>fn</span> <span class='ident'>get_before</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> ::<span class='ident'>framework</span>::<span class='ident'>Callbacks</span> { <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>before</span> }
-            <span class='kw'>fn</span> <span class='ident'>get_before_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> ::<span class='ident'>framework</span>::<span class='ident'>Callbacks</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>before</span> }
-
-            <span class='kw'>fn</span> <span class='ident'>get_before_validation</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> ::<span class='ident'>framework</span>::<span class='ident'>Callbacks</span> { <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>before_validation</span> }
-            <span class='kw'>fn</span> <span class='ident'>get_before_validation_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> ::<span class='ident'>framework</span>::<span class='ident'>Callbacks</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>before_validation</span> }
-
-            <span class='kw'>fn</span> <span class='ident'>get_after_validation</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> ::<span class='ident'>framework</span>::<span class='ident'>Callbacks</span> { <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>after_validation</span> }
-            <span class='kw'>fn</span> <span class='ident'>get_after_validation_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> ::<span class='ident'>framework</span>::<span class='ident'>Callbacks</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>after_validation</span> }
-
-            <span class='kw'>fn</span> <span class='ident'>get_after</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> ::<span class='ident'>framework</span>::<span class='ident'>Callbacks</span> { <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>after</span> }
-            <span class='kw'>fn</span> <span class='ident'>get_after_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> ::<span class='ident'>framework</span>::<span class='ident'>Callbacks</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>after</span> }
-
-            <span class='kw'>fn</span> <span class='ident'>push_node</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>, <span class='ident'>_info</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> ::<span class='ident'>framework</span>::<span class='ident'>CallInfo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>) {
-                <span class='ident'>_info</span>.<span class='ident'>parents</span>.<span class='ident'>push</span>(<span class='self'>self</span>);
-            }
-        }
-
-        <span class='kw'>impl</span> ::<span class='ident'>framework</span>::<span class='ident'>nesting</span>::<span class='ident'>Nesting</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>t</span> {}
-    )
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>t</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> { ... };
 }</pre>
 </section>
     <section id='search' class="content hidden"></section>
@@ -132,6 +110,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>
