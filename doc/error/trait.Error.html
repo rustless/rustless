@@ -70,6 +70,7 @@ and will call them one after the other, rejecting the request on any
 error.</p>
 
 <p>The first step would be to write a <code>Verifier</code> trait:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Verifier</span> {
     <span class='doccomment'>/// Verify the request, yielding an error if the request is invalid.</span>
@@ -145,7 +146,7 @@ where enums or generics are better suited.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

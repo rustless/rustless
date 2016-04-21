@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-6834' class='srclink' href='../../../hyper/server/response/struct.Response.html?gotosrc=6834' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-7083' class='srclink' href='../../../hyper/server/response/struct.Response.html?gotosrc=7083' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Response&lt;'a, W = <a class='enum' href='../../../rustless/server/net/enum.Fresh.html' title='rustless::server::net::Fresh'>Fresh</a>&gt; <span class='where'>where W: <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a></span> {
     pub version: <a class='enum' href='../../../hyper/version/enum.HttpVersion.html' title='hyper::version::HttpVersion'>HttpVersion</a>,
     // some fields omitted
@@ -66,7 +66,7 @@ so that the server doesn&#39;t accidentally leave dangling requests.</p>
 <div class='docblock'><p>The headers of this response.</p>
 </div><h4 id='method.construct' class='method'><code>fn <a href='#method.construct' class='fnname'>construct</a>(version: <a class='enum' href='../../../hyper/version/enum.HttpVersion.html' title='hyper::version::HttpVersion'>HttpVersion</a>, body: <a class='enum' href='../../../hyper/http/h1/enum.HttpWriter.html' title='hyper::http::h1::HttpWriter'>HttpWriter</a>&lt;&amp;'a mut <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Write.html' title='std::io::Write'>Write</a> + 'a&gt;, status: <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>, headers: &amp;'a mut <a class='struct' href='../../../rustless/server/header/struct.Headers.html' title='rustless::server::header::Headers'>Headers</a>) -&gt; <a class='struct' href='../../../rustless/server/server/struct.Response.html' title='rustless::server::server::Response'>Response</a>&lt;'a, <a class='enum' href='../../../rustless/server/net/enum.Fresh.html' title='rustless::server::net::Fresh'>Fresh</a>&gt;</code></h4>
 <div class='docblock'><p>Construct a Response from its constituent parts.</p>
-</div><h4 id='method.deconstruct' class='method'><code>fn <a href='#method.deconstruct' class='fnname'>deconstruct</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='enum' href='../../../hyper/version/enum.HttpVersion.html' title='hyper::version::HttpVersion'>HttpVersion</a>, <a class='enum' href='../../../hyper/http/h1/enum.HttpWriter.html' title='hyper::http::h1::HttpWriter'>HttpWriter</a>&lt;&amp;'a mut <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Write.html' title='std::io::Write'>Write</a> + 'a&gt;, <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>, &amp;'a mut <a class='struct' href='../../../rustless/server/header/struct.Headers.html' title='rustless::server::header::Headers'>Headers</a>)</a></code></h4>
+</div><h4 id='method.deconstruct' class='method'><code>fn <a href='#method.deconstruct' class='fnname'>deconstruct</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='enum' href='../../../hyper/version/enum.HttpVersion.html' title='hyper::version::HttpVersion'>HttpVersion</a>, <a class='enum' href='../../../hyper/http/h1/enum.HttpWriter.html' title='hyper::http::h1::HttpWriter'>HttpWriter</a>&lt;&amp;'a mut <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Write.html' title='std::io::Write'>Write</a> + 'a&gt;, <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>, &amp;'a mut <a class='struct' href='../../../rustless/server/header/struct.Headers.html' title='rustless::server::header::Headers'>Headers</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a></code></h4>
 <div class='docblock'><p>Deconstruct this Response into its constituent parts.</p>
 </div></div><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../../../rustless/server/server/struct.Response.html' title='rustless::server::server::Response'>Response</a>&lt;'a, <a class='enum' href='../../../rustless/server/net/enum.Fresh.html' title='rustless::server::net::Fresh'>Fresh</a>&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(stream: &amp;'a mut <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Write.html' title='std::io::Write'>Write</a> + 'a, headers: &amp;'a mut <a class='struct' href='../../../rustless/server/header/struct.Headers.html' title='rustless::server::header::Headers'>Headers</a>) -&gt; <a class='struct' href='../../../rustless/server/server/struct.Response.html' title='rustless::server::server::Response'>Response</a>&lt;'a, <a class='enum' href='../../../rustless/server/net/enum.Fresh.html' title='rustless::server::net::Fresh'>Fresh</a>&gt;</code></h4>
 <div class='docblock'><p>Creates a new Response that can be used to write to a network stream.</p>
@@ -76,12 +76,14 @@ so that the server doesn&#39;t accidentally leave dangling requests.</p>
 <p>This is a shortcut method for when you have a response with a fixed
 size, and would only need a single <code>write</code> call normally.</p>
 
-<h1 id='example' class='section-header'><a href='#example'>Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example' class='section-header'><a href='#example'>Example</a></h1>
+<pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>handler</span>(<span class='ident'>res</span>: <span class='ident'>Response</span>) {
     <span class='ident'>res</span>.<span class='ident'>send</span>(<span class='string'>b&quot;Hello World!&quot;</span>).<span class='ident'>unwrap</span>();
 }</pre>
 
 <p>The above is the same, but shorter, than the longer:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>Write</span>;
 <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>header</span>::<span class='ident'>ContentLength</span>;
@@ -147,7 +149,7 @@ creating a Response<Streaming></p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

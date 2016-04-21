@@ -50,25 +50,25 @@
 <pre class='rust struct'>pub struct RSA {
     pub pad: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
     pub version: <a class='type' href='../libc/unix/notbsd/linux/other/b64/type.c_long.html' title='libc::unix::notbsd::linux::other::b64::c_long'>c_long</a>,
-    pub meth: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
-    pub engine: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
-    pub n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a></a>,
-    pub e: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a></a>,
-    pub d: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a></a>,
-    pub p: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a></a>,
-    pub q: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a></a>,
-    pub dmp1: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a></a>,
-    pub dmq1: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a></a>,
-    pub iqmp: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a></a>,
-    pub ex_data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
+    pub meth: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
+    pub engine: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
+    pub n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a>,
+    pub e: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a>,
+    pub d: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a>,
+    pub p: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a>,
+    pub q: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a>,
+    pub dmp1: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a>,
+    pub dmq1: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a>,
+    pub iqmp: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIGNUM.html' title='openssl_sys::BIGNUM'>BIGNUM</a>,
+    pub ex_data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
     pub references: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
     pub flags: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
-    pub _method_mod_n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
-    pub _method_mod_p: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
-    pub _method_mod_q: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
-    pub bignum_data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a></a>,
-    pub blinding: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
-    pub mt_blinding: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
+    pub _method_mod_n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
+    pub _method_mod_p: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
+    pub _method_mod_q: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
+    pub bignum_data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a>,
+    pub blinding: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
+    pub mt_blinding: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
 }</pre><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                                   <td id='structfield.pad'><code>pad</code></td><td></td></tr><tr class='stab '>
@@ -134,7 +134,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

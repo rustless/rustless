@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-4956' class='srclink' href='../../../hyper/header/trait.HeaderFormat.html?gotosrc=4956' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-5181' class='srclink' href='../../../hyper/header/trait.HeaderFormat.html?gotosrc=5181' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait HeaderFormat: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='../../../hyper/header/trait.HeaderClone.html' title='hyper::header::HeaderClone'>HeaderClone</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> + <a class='trait' href='../../../typeable/trait.Typeable.html' title='typeable::Typeable'>Typeable</a> {
     fn <a href='#tymethod.fmt_header' class='fnname'>fmt_header</a>(&amp;self, f: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;;
 }</pre><div class='docblock'><p>A trait for any object that will represent a header field and value.</p>
@@ -101,6 +101,8 @@ by the passed-in Formatter.</p>
 <li><code>impl <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../../rustless/server/header/struct.LastModified.html' title='rustless::server::header::LastModified'>LastModified</a></code></li>
 <li><code>impl <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../../rustless/server/header/struct.Location.html' title='rustless::server::header::Location'>Location</a></code></li>
 <li><code>impl <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../../rustless/server/header/enum.Pragma.html' title='rustless::server::header::Pragma'>Pragma</a></code></li>
+<li><code>impl <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../../rustless/server/header/struct.Prefer.html' title='rustless::server::header::Prefer'>Prefer</a></code></li>
+<li><code>impl <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../../rustless/server/header/struct.PreferenceApplied.html' title='rustless::server::header::PreferenceApplied'>PreferenceApplied</a></code></li>
 <li><code>impl <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../../rustless/server/header/enum.Range.html' title='rustless::server::header::Range'>Range</a></code></li>
 <li><code>impl <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../../rustless/server/header/struct.Referer.html' title='rustless::server::header::Referer'>Referer</a></code></li>
 <li><code>impl <a class='trait' href='../../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../../rustless/server/header/struct.Server.html' title='rustless::server::header::Server'>Server</a></code></li>
@@ -155,7 +157,7 @@ by the passed-in Formatter.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-6300' class='srclink' href='../../../hyper/net/index.html?gotosrc=6300' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-6525' class='srclink' href='../../../hyper/net/index.html?gotosrc=6525' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A collection of traits abstracting over Listeners and Streams.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
@@ -55,7 +55,6 @@
                                title='rustless::server::net::HttpConnector'>HttpConnector</a></td>
                         <td class='docblock short'>
                              <p>A connector that will produce HttpStreams.</p>
-
                         </td>
                     </tr>
                 
@@ -64,7 +63,6 @@
                                title='rustless::server::net::HttpListener'>HttpListener</a></td>
                         <td class='docblock short'>
                              <p>A <code>NetworkListener</code> for <code>HttpStream</code>s.</p>
-
                         </td>
                     </tr>
                 
@@ -73,7 +71,6 @@
                                title='rustless::server::net::HttpStream'>HttpStream</a></td>
                         <td class='docblock short'>
                              <p>A wrapper around a TcpStream.</p>
-
                         </td>
                     </tr>
                 
@@ -82,7 +79,6 @@
                                title='rustless::server::net::HttpsConnector'>HttpsConnector</a></td>
                         <td class='docblock short'>
                              <p>A connector that can protect HTTP streams using SSL.</p>
-
                         </td>
                     </tr>
                 
@@ -91,7 +87,6 @@
                                title='rustless::server::net::HttpsListener'>HttpsListener</a></td>
                         <td class='docblock short'>
                              <p>A Http Listener over SSL.</p>
-
                         </td>
                     </tr>
                 
@@ -100,7 +95,6 @@
                                title='rustless::server::net::NetworkConnections'>NetworkConnections</a></td>
                         <td class='docblock short'>
                              <p>An iterator wrapper over a NetworkAcceptor.</p>
-
                         </td>
                     </tr>
                 
@@ -109,7 +103,6 @@
                                title='rustless::server::net::Openssl'>Openssl</a></td>
                         <td class='docblock short'>
                              <p>An implementation of <code>Ssl</code> for OpenSSL.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
@@ -119,7 +112,6 @@
                                title='rustless::server::net::Fresh'>Fresh</a></td>
                         <td class='docblock short'>
                              <p>The write-status indicating headers have not been written.</p>
-
                         </td>
                     </tr>
                 
@@ -128,7 +120,6 @@
                                title='rustless::server::net::HttpsStream'>HttpsStream</a></td>
                         <td class='docblock short'>
                              <p>A stream over the HTTP protocol, possibly protected by SSL.</p>
-
                         </td>
                     </tr>
                 
@@ -137,7 +128,6 @@
                                title='rustless::server::net::Streaming'>Streaming</a></td>
                         <td class='docblock short'>
                              <p>The write-status indicating headers have been written.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
@@ -147,7 +137,6 @@
                                title='rustless::server::net::NetworkConnector'>NetworkConnector</a></td>
                         <td class='docblock short'>
                              <p>A connector creates a NetworkStream.</p>
-
                         </td>
                     </tr>
                 
@@ -156,7 +145,6 @@
                                title='rustless::server::net::NetworkListener'>NetworkListener</a></td>
                         <td class='docblock short'>
                              <p>An abstraction to listen for connections on a certain port.</p>
-
                         </td>
                     </tr>
                 
@@ -165,7 +153,6 @@
                                title='rustless::server::net::NetworkStream'>NetworkStream</a></td>
                         <td class='docblock short'>
                              <p>An abstraction over streams that a Server can utilize.</p>
-
                         </td>
                     </tr>
                 
@@ -173,8 +160,23 @@
                         <td><a class='trait' href='trait.Ssl.html'
                                title='rustless::server::net::Ssl'>Ssl</a></td>
                         <td class='docblock short'>
-                             <p>An abstraction to allow any SSL implementation to be used with HttpsStreams.</p>
-
+                             <p>Deprecated</p>
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.SslClient.html'
+                               title='rustless::server::net::SslClient'>SslClient</a></td>
+                        <td class='docblock short'>
+                             <p>An abstraction to allow any SSL implementation to be used with client-side HttpsStreams.</p>
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.SslServer.html'
+                               title='rustless::server::net::SslServer'>SslServer</a></td>
+                        <td class='docblock short'>
+                             <p>An abstraction to allow any SSL implementation to be used with server-side HttpsStreams.</p>
                         </td>
                     </tr>
                 </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
@@ -229,7 +231,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

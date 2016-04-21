@@ -47,7 +47,8 @@
                 [<span class='inner'>&#x2212;</span>]
             </a>
         </span><a id='src-253' class='srclink' href='../src/jsonway/lib.rs.html#45-47' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn array&lt;F&gt;(builder: F) -&gt; <a class='struct' href='../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a> <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a>)</span></pre><div class='docblock'><pre class='rust rust-example-rendered'>
+<pre class='rust fn'>pub fn array&lt;F&gt;(builder: F) -&gt; <a class='struct' href='../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a> <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a>)</span></pre><div class='docblock'>
+<pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>json</span> <span class='op'>=</span> <span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>json</span><span class='op'>|</span> {
     <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;first_name&quot;</span>, <span class='string'>&quot;Luke&quot;</span>.<span class='ident'>to_string</span>()); 
     <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;last_name&quot;</span>, <span class='string'>&quot;Skywalker&quot;</span>.<span class='ident'>to_string</span>());
@@ -116,7 +117,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

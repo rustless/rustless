@@ -26,7 +26,7 @@
     
 
     <nav class="sidebar">
-        <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='logo' width='100'></a>
         <p class='location'><a href='index.html'>iron</a></p><script>window.sidebarCurrent = {name: 'Iron', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-773' class='srclink' href='../src/iron/iron.rs.html#25-35' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-774' class='srclink' href='../src/iron/iron.rs.html#25-35' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Iron&lt;H&gt; {
     pub handler: H,
     // some fields omitted
@@ -85,7 +85,7 @@ call <code>to_socket_addrs</code> yourself and pass a parsed <code>SocketAddr</c
 <p>This will create a new <code>Iron</code>, the base unit of the server, using the
 passed in <code>Handler</code>.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt; <a class='trait' href='../hyper/server/trait.Handler.html' title='hyper::server::Handler'>Handler</a> for <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h3><div class='impl-items'><h4 id='method.handle' class='method'><code>fn <a href='../hyper/server/trait.Handler.html#method.handle' class='fnname'>handle</a>(&amp;self, http_req: <a class='struct' href='../iron/request/struct.HttpRequest.html' title='iron::request::HttpRequest'>HttpRequest</a>, http_res: <a class='struct' href='../iron/response/struct.HttpResponse.html' title='iron::response::HttpResponse'>HttpResponse</a>&lt;<a class='enum' href='../hyper/net/enum.Fresh.html' title='hyper::net::Fresh'>Fresh</a>&gt;)</code></h4>
-<h4 id='method.check_continue' class='method'><code>fn <a href='../hyper/server/trait.Handler.html#method.check_continue' class='fnname'>check_continue</a>(&amp;self, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;<a class='enum' href='../iron/method/enum.Method.html' title='iron::method::Method'>Method</a>, &amp;<a class='enum' href='../hyper/uri/enum.RequestUri.html' title='hyper::uri::RequestUri'>RequestUri</a>, &amp;<a class='struct' href='../iron/struct.Headers.html' title='iron::Headers'>Headers</a>)</a>) -&gt; <a class='enum' href='../iron/status/enum.Status.html' title='iron::status::Status'>StatusCode</a></code></h4>
+<h4 id='method.check_continue' class='method'><code>fn <a href='../hyper/server/trait.Handler.html#method.check_continue' class='fnname'>check_continue</a>(&amp;self, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a>&amp;<a class='enum' href='../iron/method/enum.Method.html' title='iron::method::Method'>Method</a>, &amp;<a class='enum' href='../hyper/uri/enum.RequestUri.html' title='hyper::uri::RequestUri'>RequestUri</a>, &amp;<a class='struct' href='../iron/struct.Headers.html' title='iron::Headers'>Headers</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>) -&gt; <a class='enum' href='../iron/status/enum.Status.html' title='iron::status::Status'>StatusCode</a></code></h4>
 <h4 id='method.on_connection_start' class='method'><code>fn <a href='../hyper/server/trait.Handler.html#method.on_connection_start' class='fnname'>on_connection_start</a>(&amp;self)</code></h4>
 <h4 id='method.on_connection_end' class='method'><code>fn <a href='../hyper/server/trait.Handler.html#method.on_connection_end' class='fnname'>on_connection_end</a>(&amp;self)</code></h4>
 </div></section>
@@ -131,7 +131,7 @@ passed in <code>Handler</code>.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

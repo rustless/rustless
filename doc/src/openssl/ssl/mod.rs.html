@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.8/src/ssl/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.10/src/ssl/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -1659,6 +1659,29 @@
 <span id="1616">1616</span>
 <span id="1617">1617</span>
 <span id="1618">1618</span>
+<span id="1619">1619</span>
+<span id="1620">1620</span>
+<span id="1621">1621</span>
+<span id="1622">1622</span>
+<span id="1623">1623</span>
+<span id="1624">1624</span>
+<span id="1625">1625</span>
+<span id="1626">1626</span>
+<span id="1627">1627</span>
+<span id="1628">1628</span>
+<span id="1629">1629</span>
+<span id="1630">1630</span>
+<span id="1631">1631</span>
+<span id="1632">1632</span>
+<span id="1633">1633</span>
+<span id="1634">1634</span>
+<span id="1635">1635</span>
+<span id="1636">1636</span>
+<span id="1637">1637</span>
+<span id="1638">1638</span>
+<span id="1639">1639</span>
+<span id="1640">1640</span>
+<span id="1641">1641</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_void</span>, <span class='ident'>c_long</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>any</span>::<span class='ident'>TypeId</span>;
@@ -1696,6 +1719,8 @@
 <span class='kw'>mod</span> <span class='ident'>bio</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span>;
+
+<span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>bio</span>::<span class='ident'>BioMethod</span>;
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>inline</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>ssl</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
@@ -2272,12 +2297,35 @@
         <span class='ident'>wrap_ssl_result</span>(<span class='kw'>unsafe</span> { <span class='ident'>ffi_extras</span>::<span class='ident'>SSL_CTX_set_tmp_dh</span>(<span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>dh</span>.<span class='ident'>raw</span>()) <span class='kw'>as</span> <span class='ident'>i32</span> })
     }
 
+    <span class='doccomment'>/// Use the default locations of trusted certificates for verification.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// These locations are read from the `SSL_CERT_FILE` and `SSL_CERT_DIR`</span>
+    <span class='doccomment'>/// environment variables if present, or defaults specified at OpenSSL</span>
+    <span class='doccomment'>/// build time otherwise.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_default_verify_paths</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SslError</span><span class='op'>&gt;</span> {
+        <span class='ident'>wrap_ssl_result</span>(<span class='kw'>unsafe</span> { <span class='ident'>ffi</span>::<span class='ident'>SSL_CTX_set_default_verify_paths</span>(<span class='self'>self</span>.<span class='ident'>ctx</span>) })
+    }
+
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>non_snake_case</span>)]</span>
     <span class='doccomment'>/// Specifies the file that contains trusted CA certificates.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_CA_file</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>Path</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>file</span>: <span class='ident'>P</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SslError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='ident'>file</span>.<span class='ident'>as_ref</span>().<span class='ident'>as_os_str</span>().<span class='ident'>to_str</span>().<span class='ident'>expect</span>(<span class='string'>&quot;invalid utf8&quot;</span>)).<span class='ident'>unwrap</span>();
         <span class='ident'>wrap_ssl_result</span>(<span class='kw'>unsafe</span> {
             <span class='ident'>ffi</span>::<span class='ident'>SSL_CTX_load_verify_locations</span>(<span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>file</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _, <span class='ident'>ptr</span>::<span class='ident'>null</span>())
+        })
+    }
+
+    <span class='doccomment'>/// Set the context identifier for sessions</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This value identifies the server&#39;s session cache to a clients, telling them when they&#39;re</span>
+    <span class='doccomment'>/// able to reuse sessions. Should be set to a unique value per server, unless multiple servers</span>
+    <span class='doccomment'>/// share a session cache.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This value should be set when using client certificates, or each request will fail</span>
+    <span class='doccomment'>/// handshake and need to be restarted.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_session_id_context</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>sid_ctx</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>SslError</span><span class='op'>&gt;</span> {
+        <span class='ident'>wrap_ssl_result</span>(<span class='kw'>unsafe</span> {
+            <span class='ident'>ffi</span>::<span class='ident'>SSL_CTX_set_session_id_context</span>(<span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>sid_ctx</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>sid_ctx</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>u32</span>)
         })
     }
 
@@ -2489,7 +2537,7 @@
             <span class='kw'>let</span> <span class='ident'>desc_ptr</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>SSL_CIPHER_description</span>(<span class='self'>self</span>.<span class='ident'>cipher</span>, <span class='ident'>buf</span>.<span class='ident'>as_mut_ptr</span>(), <span class='number'>128</span>);
 
             <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>desc_ptr</span>.<span class='ident'>is_null</span>() {
-                <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>desc_ptr</span>).<span class='ident'>to_bytes</span>().<span class='ident'>to_vec</span>()).<span class='ident'>ok</span>()
+                <span class='ident'>String</span>::<span class='ident'>from_utf8</span>(<span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>desc_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _).<span class='ident'>to_bytes</span>().<span class='ident'>to_vec</span>()).<span class='ident'>ok</span>()
             } <span class='kw'>else</span> {
                 <span class='prelude-val'>None</span>
             }
@@ -2779,11 +2827,9 @@
 <span class='doccomment'>/// A stream wrapper which handles SSL encryption for an underlying stream.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SslStream</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span> {
     <span class='ident'>ssl</span>: <span class='ident'>Ssl</span>,
-    <span class='ident'>_method</span>: <span class='ident'>Arc</span><span class='op'>&lt;</span><span class='ident'>ffi</span>::<span class='ident'>BIO_METHOD</span><span class='op'>&gt;</span>, <span class='comment'>// NOTE: this *must* be after the Ssl field so things drop right</span>
+    <span class='ident'>_method</span>: <span class='ident'>Arc</span><span class='op'>&lt;</span><span class='ident'>BioMethod</span><span class='op'>&gt;</span>, <span class='comment'>// NOTE: this *must* be after the Ssl field so things drop right</span>
     <span class='ident'>_p</span>: <span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>,
 }
-
-<span class='kw'>unsafe</span> <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>S</span>: <span class='ident'>Send</span><span class='op'>&gt;</span> <span class='ident'>Send</span> <span class='kw'>for</span> <span class='ident'>SslStream</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span> {}
 
 <span class='doccomment'>/// # Deprecated</span>
 <span class='doccomment'>///</span>
@@ -2971,7 +3017,7 @@
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;nightly&quot;</span>)]</span>
     <span class='kw'>fn</span> <span class='ident'>check_panic</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>err</span>) <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>bio</span>::<span class='ident'>take_panic</span>::<span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>(<span class='self'>self</span>.<span class='ident'>ssl</span>.<span class='ident'>get_raw_rbio</span>()) } {
-            ::<span class='ident'>std</span>::<span class='ident'>panic</span>::<span class='ident'>propagate</span>(<span class='ident'>err</span>)
+            ::<span class='ident'>std</span>::<span class='ident'>panic</span>::<span class='ident'>resume_unwind</span>(<span class='ident'>err</span>)
         }
     }
 
@@ -3322,7 +3368,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

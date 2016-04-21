@@ -46,11 +46,11 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-2145' class='srclink' href='../../../../src/valico/json_schema/validators/properties.rs.html#16-20' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-2146' class='srclink' href='../../../../src/valico/json_schema/validators/properties.rs.html#16-20' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Properties {
     pub properties: <a class='struct' href='https://doc.rust-lang.org/nightly/std/collections/hash/map/struct.HashMap.html' title='std::collections::hash::map::HashMap'>HashMap</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='../../../../url/struct.Url.html' title='url::Url'>Url</a>&gt;,
     pub additional: <a class='enum' href='../../../../valico/json_schema/validators/properties/enum.AdditionalKind.html' title='valico::json_schema::validators::properties::AdditionalKind'>AdditionalKind</a>,
-    pub patterns: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='struct' href='../../../../regex/re_unicode/struct.Regex.html' title='regex::re_unicode::Regex'>Regex</a>, <a class='struct' href='../../../../url/struct.Url.html' title='url::Url'>Url</a>)</a>&gt;,
+    pub patterns: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='struct' href='../../../../regex/re_unicode/struct.Regex.html' title='regex::re_unicode::Regex'>Regex</a>, <a class='struct' href='../../../../url/struct.Url.html' title='url::Url'>Url</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;,
 }</pre><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                                   <td id='structfield.properties'><code>properties</code></td><td></td></tr><tr class='stab '>
@@ -99,7 +99,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

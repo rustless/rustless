@@ -26,7 +26,7 @@
     
 
     <nav class="sidebar">
-        <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='logo' width='100'></a>
         <p class='location'></p><script>window.sidebarCurrent = {name: 'iron', ty: 'mod', relpath: '../'};</script>
     </nav>
 
@@ -60,7 +60,8 @@ load balancer or by running more threads on a more powerful machine. Iron
 avoids the bottlenecks encountered in highly concurrent code by avoiding shared
 writes and locking in the core framework.</p>
 
-<h2 id='hello-world' class='section-header'><a href='#hello-world'>Hello World</a></h2><pre class='rust rust-example-rendered'>
+<h2 id='hello-world' class='section-header'><a href='#hello-world'>Hello World</a></h2>
+<pre class='rust rust-example-rendered'>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
 
 <span class='kw'>use</span> <span class='ident'>iron</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -105,7 +106,6 @@ middleware. No plugins or middleware are bundled with Iron.</p>
                                title='iron::error'>error</a></td>
                         <td class='docblock short'>
                              <p>Iron&#39;s error type and associated utilities.</p>
-
                         </td>
                     </tr>
                 
@@ -114,7 +114,6 @@ middleware. No plugins or middleware are bundled with Iron.</p>
                                title='iron::headers'>headers</a></td>
                         <td class='docblock short'>
                              <p>Headers container, and common header fields.</p>
-
                         </td>
                     </tr>
                 
@@ -123,7 +122,6 @@ middleware. No plugins or middleware are bundled with Iron.</p>
                                title='iron::method'>method</a></td>
                         <td class='docblock short'>
                              <p>HTTP Methods</p>
-
                         </td>
                     </tr>
                 
@@ -132,7 +130,6 @@ middleware. No plugins or middleware are bundled with Iron.</p>
                                title='iron::middleware'>middleware</a></td>
                         <td class='docblock short'>
                              <p>Iron&#39;s Middleware and Handler System</p>
-
                         </td>
                     </tr>
                 
@@ -141,7 +138,6 @@ middleware. No plugins or middleware are bundled with Iron.</p>
                                title='iron::mime'>mime</a></td>
                         <td class='docblock short'>
                              <p>Re-exporting the mime crate, for convenience.</p>
-
                         </td>
                     </tr>
                 
@@ -150,7 +146,6 @@ middleware. No plugins or middleware are bundled with Iron.</p>
                                title='iron::modifier'>modifier</a></td>
                         <td class='docblock short'>
                              <p>Re-exports from the Modifier crate.</p>
-
                         </td>
                     </tr>
                 
@@ -160,7 +155,6 @@ middleware. No plugins or middleware are bundled with Iron.</p>
                         <td class='docblock short'>
                              <p>This module defines a series of convenience modifiers for changing
 Responses.</p>
-
                         </td>
                     </tr>
                 
@@ -169,7 +163,6 @@ Responses.</p>
                                title='iron::prelude'>prelude</a></td>
                         <td class='docblock short'>
                              <p>A module meant to be glob imported when using Iron.</p>
-
                         </td>
                     </tr>
                 
@@ -178,7 +171,6 @@ Responses.</p>
                                title='iron::request'>request</a></td>
                         <td class='docblock short'>
                              <p>Iron&#39;s HTTP Request representation and associated methods.</p>
-
                         </td>
                     </tr>
                 
@@ -187,7 +179,6 @@ Responses.</p>
                                title='iron::response'>response</a></td>
                         <td class='docblock short'>
                              <p>Iron&#39;s HTTP Response representation and associated methods.</p>
-
                         </td>
                     </tr>
                 
@@ -196,7 +187,6 @@ Responses.</p>
                                title='iron::status'>status</a></td>
                         <td class='docblock short'>
                              <p>Status Codes</p>
-
                         </td>
                     </tr>
                 
@@ -205,7 +195,6 @@ Responses.</p>
                                title='iron::typemap'>typemap</a></td>
                         <td class='docblock short'>
                              <p>Re-exports from the TypeMap crate.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
@@ -216,7 +205,6 @@ Responses.</p>
                         <td class='docblock short'>
                              <p>Unwrap the given <code>Option</code> or return a <code>Ok(Response::new())</code> with the given
 modifier. The default modifier is <code>status::BadRequest</code>.</p>
-
                         </td>
                     </tr>
                 
@@ -226,7 +214,6 @@ modifier. The default modifier is <code>status::BadRequest</code>.</p>
                         <td class='docblock short'>
                              <p>Like <code>try!()</code>, but wraps the error value in <code>IronError</code>. To be used in
 request handlers.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
@@ -236,7 +223,6 @@ request handlers.</p>
                                title='iron::Headers'>Headers</a></td>
                         <td class='docblock short'>
                              <p>A map of header fields on requests and responses.</p>
-
                         </td>
                     </tr>
                 
@@ -245,7 +231,6 @@ request handlers.</p>
                                title='iron::Iron'>Iron</a></td>
                         <td class='docblock short'>
                              <p>The primary entrance point to <code>Iron</code>, a <code>struct</code> to instantiate a new server.</p>
-
                         </td>
                     </tr>
                 
@@ -254,7 +239,6 @@ request handlers.</p>
                                title='iron::Listening'>Listening</a></td>
                         <td class='docblock short'>
                              <p>A listening server, which can later be closed.</p>
-
                         </td>
                     </tr>
                 
@@ -263,7 +247,6 @@ request handlers.</p>
                                title='iron::Timeouts'>Timeouts</a></td>
                         <td class='docblock short'>
                              <p>A settings struct containing a set of timeouts which can be applied to a server.</p>
-
                         </td>
                     </tr>
                 
@@ -272,7 +255,6 @@ request handlers.</p>
                                title='iron::TypeMap'>TypeMap</a></td>
                         <td class='docblock short'>
                              <p>A map keyed by types.</p>
-
                         </td>
                     </tr>
                 
@@ -281,7 +263,6 @@ request handlers.</p>
                                title='iron::Url'>Url</a></td>
                         <td class='docblock short'>
                              <p>HTTP/HTTPS URL type for Iron.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
@@ -292,7 +273,6 @@ request handlers.</p>
                         <td class='docblock short'>
                              <p>Protocol used to serve content. Future versions of Iron may add new protocols
 to this enum. Thus you should not exhaustively match on its variants.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
@@ -303,7 +283,6 @@ to this enum. Thus you should not exhaustively match on its variants.</p>
                         <td class='docblock short'>
                              <p>An extension to std::error::Error which provides dynamic downcasting of
 errors for use in highly generic contexts.</p>
-
                         </td>
                     </tr>
                 
@@ -312,7 +291,6 @@ errors for use in highly generic contexts.</p>
                                title='iron::Plugin'>Plugin</a></td>
                         <td class='docblock short'>
                              <p>An interface for plugins that cache values between calls.</p>
-
                         </td>
                     </tr>
                 
@@ -321,7 +299,6 @@ errors for use in highly generic contexts.</p>
                                title='iron::Set'>Set</a></td>
                         <td class='docblock short'>
                              <p>A trait providing the set and set_mut methods for all types.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
@@ -331,7 +308,6 @@ errors for use in highly generic contexts.</p>
                                title='iron::IronResult'>IronResult</a></td>
                         <td class='docblock short'>
                              <p>The Result alias used throughout Iron and in clients of Iron.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='impls' class='section-header'><a href="#impls">Implementations</a></h2>
@@ -378,7 +354,7 @@ errors for use in highly generic contexts.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

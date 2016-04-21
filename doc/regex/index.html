@@ -26,7 +26,7 @@
     
 
     <nav class="sidebar">
-        <a href='../regex/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
+        <a href='../regex/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
         <p class='location'></p><script>window.sidebarCurrent = {name: 'regex', ty: 'mod', relpath: '../'};</script>
     </nav>
 
@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/regex/lib.rs.html#11-625' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/regex/lib.rs.html#11-645' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>This crate provides a native implementation of regular expressions that is
 heavily based on RE2 both in syntax and in implementation. Notably,
 backreferences and arbitrary lookahead/lookbehind assertions are not
@@ -68,6 +68,7 @@ regex = &quot;0.1&quot;
 </code></pre>
 
 <p>and this to your crate root:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex</span>;</pre>
 
@@ -75,6 +76,7 @@ regex = &quot;0.1&quot;
 <p>General use of regular expressions in this package involves compiling an
 expression and then using it to search, split or replace text. For example,
 to confirm that some text resembles a date:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>regex</span>::<span class='ident'>Regex</span>;
 <span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;^\d{4}-\d{2}-\d{2}$&quot;</span>).<span class='ident'>unwrap</span>();
@@ -105,6 +107,7 @@ they&#39;re used from inside a helper function. Instead, we recommend using the
 regular expressions are compiled exactly once.</p>
 
 <p>For example:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>lazy_static</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex</span>;
@@ -144,6 +147,7 @@ regex_macros = &quot;0.1&quot;
 
 <p>and then enable the <code>plugin</code> feature and import the <code>regex_macros</code> crate as
 a syntax extension:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>plugin</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>plugin</span>(<span class='ident'>regex_macros</span>)]</span>
@@ -174,6 +178,7 @@ be able to use <code>regex!</code> on the nightly Rust releases.</p>
 repeatedly against a search string to find successive non-overlapping
 matches. For example, to find all dates in a string and be able to access
 them by their component pieces:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(\d{4})-(\d{2})-(\d{2})&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='string'>&quot;2012-03-14, 2013-01-01 and 2014-07-05&quot;</span>;
@@ -195,6 +200,7 @@ because the <em>entire match</em> is stored in the capture group at index <code>
 formats. This can be done with text replacement. But to make the code
 clearer, we can <em>name</em>  our capture groups and use those names as variables
 in our replacement text:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?P&lt;y&gt;\d{4})-(?P&lt;m&gt;\d{2})-(?P&lt;d&gt;\d{2})&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>before</span> <span class='op'>=</span> <span class='string'>&quot;2012-03-14, 2013-01-01 and 2014-07-05&quot;</span>;
@@ -207,6 +213,7 @@ provides more flexibility than is seen here. (See the documentation for
 
 <p>Note that if your regex gets complicated, you can use the <code>x</code> flag to
 enable insigificant whitespace mode, which also lets you write comments:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?x)
   (?P&lt;y&gt;\d{4}) # the year
@@ -222,6 +229,7 @@ enable insigificant whitespace mode, which also lets you write comments:</p>
 <h1 id='example-match-multiple-regular-expressions-simultaneously' class='section-header'><a href='#example-match-multiple-regular-expressions-simultaneously'>Example: match multiple regular expressions simultaneously</a></h1>
 <p>This demonstrates how to use a <code>RegexSet</code> to match multiple (possibly
 overlapping) regular expressions in a single scan of the search text:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>regex</span>::<span class='ident'>RegexSet</span>;
 
@@ -267,14 +275,15 @@ instead.)</p>
 <p>This implementation executes regular expressions <strong>only</strong> on valid UTF-8
 while exposing match locations as byte indices into the search string.</p>
 
-<p>Currently, only simple case folding is supported. Namely, when matching
-case-insensitively, the characters are first mapped using the
-<a href="ftp://ftp.unicode.org/Public/UNIDATA/CaseFolding.txt">simple case folding</a>
-mapping.</p>
+<p>Only simple case folding is supported. Namely, when matching
+case-insensitively, the characters are first mapped using the <a href="ftp://ftp.unicode.org/Public/UNIDATA/CaseFolding.txt">simple case
+folding</a> mapping
+before matching.</p>
 
 <p>Regular expressions themselves are <strong>only</strong> interpreted as a sequence of
 Unicode scalar values. This means you can use Unicode characters directly
 in your expression:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?i)Δ+&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>re</span>.<span class='ident'>find</span>(<span class='string'>&quot;ΔδΔ&quot;</span>), <span class='prelude-val'>Some</span>((<span class='number'>0</span>, <span class='number'>6</span>)));</pre>
@@ -282,6 +291,7 @@ in your expression:</p>
 <p>Finally, Unicode general categories and scripts are available as character
 classes. For example, you can match a sequence of numerals, Greek or
 Cherokee letters:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;[\pN\p{Greek}\p{Cherokee}]+&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>re</span>.<span class='ident'>find</span>(<span class='string'>&quot;abcΔᎠβⅠᏴγδⅡxyz&quot;</span>), <span class='prelude-val'>Some</span>((<span class='number'>3</span>, <span class='number'>23</span>)));</pre>
@@ -293,8 +303,11 @@ all Unicode support disabled (e.g., <code>.</code> matches any byte instead of a
 Unicode codepoint). Unicode support can be selectively enabled with the
 <code>u</code> flag. See the <code>bytes</code> module documentation for more details.</p>
 
-<p>Note that Unicode support <em>cannot</em> be selectively disabled on the main
-<code>Regex</code> type that matches on <code>&amp;str</code>.</p>
+<p>Unicode support can also be selectively <em>disabled</em> with the main <code>Regex</code>
+type that matches on <code>&amp;str</code>. For example, <code>(?-u:\b)</code> will match an ASCII
+word boundary. Note though that invalid UTF-8 is not allowed to be matched
+even when the <code>u</code> flag is disabled. For example, <code>(?-u:.)</code> will return an
+error, since <code>.</code> matches <em>any byte</em> when Unicode support is disabled.</p>
 
 <h1 id='syntax' class='section-header'><a href='#syntax'>Syntax</a></h1>
 <p>The syntax supported in this crate is almost in an exact correspondence
@@ -334,14 +347,14 @@ x|y   alternation (x or y, prefer x)
 x*        zero or more of x (greedy)
 x+        one or more of x (greedy)
 x?        zero or one of x (greedy)
-x*?       zero or more of x (ungreedy)
-x+?       one or more of x (ungreedy)
-x??       zero or one of x (ungreedy)
+x*?       zero or more of x (ungreedy/lazy)
+x+?       one or more of x (ungreedy/lazy)
+x??       zero or one of x (ungreedy/lazy)
 x{n,m}    at least n x and at most m x (greedy)
 x{n,}     at least n x (greedy)
 x{n}      exactly n x
-x{n,m}?   at least n x and at most m x (ungreedy)
-x{n,}?    at least n x (ungreedy)
+x{n,m}?   at least n x and at most m x (ungreedy/lazy)
+x{n,}?    at least n x (ungreedy/lazy)
 x{n}?     exactly n x
 </pre>
 
@@ -369,18 +382,20 @@ and <code>(?-x)</code> clears the flag <code>x</code>. Multiple flags can be set
 the same time: <code>(?xy)</code> sets both the <code>x</code> and <code>y</code> flags and <code>(?x-y)</code> sets
 the <code>x</code> flag and clears the <code>y</code> flag.</p>
 
-<p>All flags are by default disabled. They are:</p>
+<p>All flags are by default disabled unless stated otherwise. They are:</p>
 
 <pre class="rust">
 i     case-insensitive
 m     multi-line mode: ^ and $ match begin/end of line
 s     allow . to match \n
 U     swap the meaning of x* and x*?
+u     Unicode support (enabled by default)
 x     ignore whitespace and allow line comments (starting with `#`)
 </pre>
 
 <p>Here&#39;s an example that matches case-insensitively for only part of the
 expression:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?i)a+(?-i)b+&quot;</span>).<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>cap</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>captures</span>(<span class='string'>&quot;AaAaAbbBBBb&quot;</span>).<span class='ident'>unwrap</span>();
@@ -388,6 +403,14 @@ expression:</p>
 
 <p>Notice that the <code>a+</code> matches either <code>a</code> or <code>A</code>, but the <code>b+</code> only matches
 <code>b</code>.</p>
+
+<p>Here is an example that uses an ASCII word boundary instead of a Unicode
+word boundary:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>re</span> <span class='op'>=</span> <span class='ident'>Regex</span>::<span class='ident'>new</span>(<span class='string'>r&quot;(?-u:\b).+(?-u:\b)&quot;</span>).<span class='ident'>unwrap</span>();
+<span class='kw'>let</span> <span class='ident'>cap</span> <span class='op'>=</span> <span class='ident'>re</span>.<span class='ident'>captures</span>(<span class='string'>&quot;$$abc$$&quot;</span>).<span class='ident'>unwrap</span>();
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cap</span>.<span class='ident'>at</span>(<span class='number'>0</span>), <span class='prelude-val'>Some</span>(<span class='string'>&quot;abc&quot;</span>));</pre>
 
 <h2 id='escape-sequences' class='section-header'><a href='#escape-sequences'>Escape sequences</a></h2>
 <pre class="rust">
@@ -454,7 +477,9 @@ at most one new state can be created for each byte of input. This satisfies
 our time complexity guarantees, but can lead to unbounded memory growth
 proportional to the size of the input. As a stopgap, the DFA is only
 allowed to store a fixed number of states. (When the limit is reached, its
-states are wiped and continues on, possibly duplicating previous work.)</p>
+states are wiped and continues on, possibly duplicating previous work. If
+the limit is reached too frequently, it gives up and hands control of to
+another matching engine with fixed memory requirements.)</p>
 </div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                     <tr class=' module-item'>
@@ -462,7 +487,6 @@ states are wiped and continues on, possibly duplicating previous work.)</p>
                                title='regex::bytes'>bytes</a></td>
                         <td class='docblock short'>
                              <p>Match regular expressions on arbitrary bytes.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
@@ -472,7 +496,6 @@ states are wiped and continues on, possibly duplicating previous work.)</p>
                                title='regex::CaptureNames'>CaptureNames</a></td>
                         <td class='docblock short'>
                              <p>An iterator over the names of all possible captures.</p>
-
                         </td>
                     </tr>
                 
@@ -481,7 +504,6 @@ states are wiped and continues on, possibly duplicating previous work.)</p>
                                title='regex::Captures'>Captures</a></td>
                         <td class='docblock short'>
                              <p>Captures represents a group of captured strings for a single match.</p>
-
                         </td>
                     </tr>
                 
@@ -491,7 +513,6 @@ states are wiped and continues on, possibly duplicating previous work.)</p>
                         <td class='docblock short'>
                              <p>An iterator that yields all non-overlapping capture groups matching a
 particular regular expression.</p>
-
                         </td>
                     </tr>
                 
@@ -500,7 +521,6 @@ particular regular expression.</p>
                                title='regex::FindMatches'>FindMatches</a></td>
                         <td class='docblock short'>
                              <p>An iterator over all non-overlapping matches for a particular string.</p>
-
                         </td>
                     </tr>
                 
@@ -509,7 +529,6 @@ particular regular expression.</p>
                                title='regex::NoExpand'>NoExpand</a></td>
                         <td class='docblock short'>
                              <p>NoExpand indicates literal string replacement.</p>
-
                         </td>
                     </tr>
                 
@@ -518,7 +537,6 @@ particular regular expression.</p>
                                title='regex::Regex'>Regex</a></td>
                         <td class='docblock short'>
                              <p>A compiled regular expression for matching Unicode strings.</p>
-
                         </td>
                     </tr>
                 
@@ -527,7 +545,6 @@ particular regular expression.</p>
                                title='regex::RegexSet'>RegexSet</a></td>
                         <td class='docblock short'>
                              <p>Match multiple (possibly overlapping) regular expressions in a single scan.</p>
-
                         </td>
                     </tr>
                 
@@ -536,7 +553,6 @@ particular regular expression.</p>
                                title='regex::RegexSplits'>RegexSplits</a></td>
                         <td class='docblock short'>
                              <p>Yields all substrings delimited by a regular expression match.</p>
-
                         </td>
                     </tr>
                 
@@ -545,7 +561,6 @@ particular regular expression.</p>
                                title='regex::RegexSplitsN'>RegexSplitsN</a></td>
                         <td class='docblock short'>
                              <p>Yields at most <code>N</code> substrings delimited by a regular expression match.</p>
-
                         </td>
                     </tr>
                 
@@ -554,7 +569,6 @@ particular regular expression.</p>
                                title='regex::SetMatches'>SetMatches</a></td>
                         <td class='docblock short'>
                              <p>A set of matches returned by a regex set.</p>
-
                         </td>
                     </tr>
                 
@@ -563,7 +577,6 @@ particular regular expression.</p>
                                title='regex::SetMatchesIntoIter'>SetMatchesIntoIter</a></td>
                         <td class='docblock short'>
                              <p>An owned iterator over the set of matches from a regex set.</p>
-
                         </td>
                     </tr>
                 
@@ -572,7 +585,6 @@ particular regular expression.</p>
                                title='regex::SetMatchesIter'>SetMatchesIter</a></td>
                         <td class='docblock short'>
                              <p>A borrowed iterator over the set of matches from a regex set.</p>
-
                         </td>
                     </tr>
                 
@@ -582,7 +594,6 @@ particular regular expression.</p>
                         <td class='docblock short'>
                              <p>An iterator over capture groups for a particular match of a regular
 expression.</p>
-
                         </td>
                     </tr>
                 
@@ -592,7 +603,6 @@ expression.</p>
                         <td class='docblock short'>
                              <p>An Iterator over named capture groups as a tuple with the group
 name and the value.</p>
-
                         </td>
                     </tr>
                 
@@ -602,7 +612,6 @@ name and the value.</p>
                         <td class='docblock short'>
                              <p>An iterator over capture group positions for a particular match of a
 regular expression.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
@@ -612,7 +621,6 @@ regular expression.</p>
                                title='regex::Error'>Error</a></td>
                         <td class='docblock short'>
                              <p>An error that occurred during parsing or compiling a regular expression.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
@@ -622,7 +630,6 @@ regular expression.</p>
                                title='regex::Replacer'>Replacer</a></td>
                         <td class='docblock short'>
                              <p>Replacer describes types that can be used to replace matches in a string.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
@@ -632,7 +639,6 @@ regular expression.</p>
                                title='regex::is_match'>is_match</a></td>
                         <td class='docblock short'>
                              <p>Tests if the given regular expression matches somewhere in the text given.</p>
-
                         </td>
                     </tr>
                 
@@ -641,7 +647,6 @@ regular expression.</p>
                                title='regex::quote'>quote</a></td>
                         <td class='docblock short'>
                              <p>Escapes all regular expression meta characters in <code>text</code>.</p>
-
                         </td>
                     </tr>
                 </table></section>
@@ -687,7 +692,7 @@ regular expression.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

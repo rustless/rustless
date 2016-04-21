@@ -46,19 +46,19 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-1440' class='srclink' href='../../../src/openssl/ssl/error.rs.html#154-163' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-1438' class='srclink' href='../../../src/openssl/ssl/error.rs.html#154-163' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum NonblockingSslError {
     SslError(<a class='enum' href='../../../openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>),
     WantRead,
     WantWrite,
 }</pre><div class='docblock'><p>An error on a nonblocking stream.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.SslError'><code>SslError</code></td><td><div class='docblock'><p>A standard SSL error occurred.</p>
-</div></td></tr><tr><td id='variant.WantRead'><code>WantRead</code></td><td><div class='docblock'><p>The OpenSSL library wants data from the remote socket;
+<table class='variants_table'><tr><td id='variant.SslError'><code>SslError</code></td><td><div class='docblock'><p>A standard SSL error occurred.</p>
+</div></td><td></td></tr><tr><td id='variant.WantRead'><code>WantRead</code></td><td><div class='docblock'><p>The OpenSSL library wants data from the remote socket;
 the caller should wait for read readiness.</p>
-</div></td></tr><tr><td id='variant.WantWrite'><code>WantWrite</code></td><td><div class='docblock'><p>The OpenSSL library wants to send data to the remote socket;
+</div></td><td></td></tr><tr><td id='variant.WantWrite'><code>WantWrite</code></td><td><div class='docblock'><p>The OpenSSL library wants to send data to the remote socket;
 the caller should wait for write readiness.</p>
-</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../../../openssl/ssl/error/enum.NonblockingSslError.html' title='openssl::ssl::error::NonblockingSslError'>NonblockingSslError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#method.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../../../openssl/ssl/error/enum.NonblockingSslError.html' title='openssl::ssl::error::NonblockingSslError'>NonblockingSslError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#method.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> for <a class='enum' href='../../../openssl/ssl/error/enum.NonblockingSslError.html' title='openssl::ssl::error::NonblockingSslError'>NonblockingSslError</a></code></h3><div class='impl-items'><h4 id='method.description' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.description' class='fnname'>description</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
 <h4 id='method.cause' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.cause' class='fnname'>cause</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a>&gt;</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='enum' href='../../../openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>&gt; for <a class='enum' href='../../../openssl/ssl/error/enum.NonblockingSslError.html' title='openssl::ssl::error::NonblockingSslError'>NonblockingSslError</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(e: <a class='enum' href='../../../openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>) -&gt; <a class='enum' href='../../../openssl/ssl/error/enum.NonblockingSslError.html' title='openssl::ssl::error::NonblockingSslError'>NonblockingSslError</a></code></h4>
@@ -106,7 +106,7 @@ the caller should wait for write readiness.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

@@ -51,11 +51,11 @@
     pub type_: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
     pub save_type: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
     pub references: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
-    pub ameth: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
-    pub engine: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='type' href='../openssl_sys/type.ENGINE.html' title='openssl_sys::ENGINE'>ENGINE</a></a>,
-    pub pkey: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
+    pub ameth: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
+    pub engine: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='type' href='../openssl_sys/type.ENGINE.html' title='openssl_sys::ENGINE'>ENGINE</a>,
+    pub pkey: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
     pub save_parameters: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
-    pub attributes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a></a>,
+    pub attributes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
 }</pre><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
                                   <td id='structfield.type_'><code>type_</code></td><td></td></tr><tr class='stab '>
@@ -108,7 +108,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

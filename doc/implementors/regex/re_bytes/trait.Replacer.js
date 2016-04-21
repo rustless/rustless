@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors['valico'] = [];implementors['queryst'] = [];implementors['rustless'] = [];
+implementors['queryst'] = [];implementors['valico'] = [];implementors['rustless'] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

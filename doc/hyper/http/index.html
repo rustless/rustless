@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-5249' class='srclink' href='../../src/hyper/http/mod.rs.html#1-64' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-5474' class='srclink' href='../../src/hyper/http/mod.rs.html#1-64' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Pieces pertaining to the HTTP message protocol.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use self::message::{<a class='trait' href='../../hyper/http/message/trait.HttpMessage.html' title='hyper::http::message::HttpMessage'>HttpMessage</a>, <a class='struct' href='../../hyper/http/message/struct.RequestHead.html' title='hyper::http::message::RequestHead'>RequestHead</a>, <a class='struct' href='../../hyper/http/message/struct.ResponseHead.html' title='hyper::http::message::ResponseHead'>ResponseHead</a>, <a class='trait' href='../../hyper/http/message/trait.Protocol.html' title='hyper::http::message::Protocol'>Protocol</a>};</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
@@ -56,7 +56,6 @@
                                title='hyper::http::h1'>h1</a></td>
                         <td class='docblock short'>
                              <p>Adapts the HTTP/1.1 implementation into the <code>HttpMessage</code> API.</p>
-
                         </td>
                     </tr>
                 
@@ -65,7 +64,6 @@
                                title='hyper::http::h2'>h2</a></td>
                         <td class='docblock short'>
                              <p>Adapts the <code>solicit</code>-provided HTTP/2 implementation into the <code>HttpMessage</code> API.</p>
-
                         </td>
                     </tr>
                 
@@ -75,7 +73,6 @@
                         <td class='docblock short'>
                              <p>Defines the <code>HttpMessage</code> trait that serves to encapsulate the operations of a single
 request-response cycle on any HTTP connection.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
@@ -85,7 +82,6 @@ request-response cycle on any HTTP connection.</p>
                                title='hyper::http::RawStatus'>RawStatus</a></td>
                         <td class='docblock short'>
                              <p>The raw status code and reason-phrase.</p>
-
                         </td>
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
@@ -95,7 +91,6 @@ request-response cycle on any HTTP connection.</p>
                                title='hyper::http::should_keep_alive'>should_keep_alive</a></td>
                         <td class='docblock short'>
                              <p>Checks if a connection should be kept alive.</p>
-
                         </td>
                     </tr>
                 </table></section>
@@ -141,7 +136,7 @@ request-response cycle on any HTTP connection.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

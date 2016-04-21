@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.8/src/crypto/pkey.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.10/src/crypto/pkey.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>pkey.rs.html -- source</title>
@@ -910,6 +910,44 @@
 <span id="867">867</span>
 <span id="868">868</span>
 <span id="869">869</span>
+<span id="870">870</span>
+<span id="871">871</span>
+<span id="872">872</span>
+<span id="873">873</span>
+<span id="874">874</span>
+<span id="875">875</span>
+<span id="876">876</span>
+<span id="877">877</span>
+<span id="878">878</span>
+<span id="879">879</span>
+<span id="880">880</span>
+<span id="881">881</span>
+<span id="882">882</span>
+<span id="883">883</span>
+<span id="884">884</span>
+<span id="885">885</span>
+<span id="886">886</span>
+<span id="887">887</span>
+<span id="888">888</span>
+<span id="889">889</span>
+<span id="890">890</span>
+<span id="891">891</span>
+<span id="892">892</span>
+<span id="893">893</span>
+<span id="894">894</span>
+<span id="895">895</span>
+<span id="896">896</span>
+<span id="897">897</span>
+<span id="898">898</span>
+<span id="899">899</span>
+<span id="900">900</span>
+<span id="901">901</span>
+<span id="902">902</span>
+<span id="903">903</span>
+<span id="904">904</span>
+<span id="905">905</span>
+<span id="906">906</span>
+<span id="907">907</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_ulong</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
@@ -964,10 +1002,6 @@
         <span class='ident'>HashType</span>::<span class='ident'>SHA512</span> <span class='op'>=&gt;</span> <span class='number'>674</span>, <span class='comment'>// NID_sha512</span>
         <span class='ident'>HashType</span>::<span class='ident'>RIPEMD160</span> <span class='op'>=&gt;</span> <span class='number'>117</span>, <span class='comment'>// NID_ripemd160</span>
     }
-}
-
-<span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> {
-    <span class='kw'>fn</span> <span class='ident'>rust_EVP_PKEY_clone</span>(<span class='ident'>pkey</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY</span>);
 }
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>PKey</span> {
@@ -1526,11 +1560,19 @@
 
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>PKey</span> {
     <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
-        <span class='kw'>unsafe</span> {
-            <span class='ident'>rust_EVP_PKEY_clone</span>(<span class='self'>self</span>.<span class='ident'>evp</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>pkey</span> <span class='op'>=</span> <span class='ident'>PKey</span>::<span class='ident'>from_handle</span>(<span class='kw'>unsafe</span> { <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_new</span>() }, <span class='self'>self</span>.<span class='ident'>parts</span>);
+        <span class='comment'>//  copy by encoding to DER and back</span>
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>parts</span> {
+            <span class='ident'>Parts</span>::<span class='ident'>Public</span> <span class='op'>=&gt;</span> {
+                <span class='ident'>pkey</span>.<span class='ident'>load_pub</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>save_pub</span>()[..]);
+            },
+            <span class='ident'>Parts</span>::<span class='ident'>Both</span> <span class='op'>=&gt;</span> {
+                <span class='ident'>pkey</span>.<span class='ident'>load_priv</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>save_priv</span>()[..]);
+            },
+            <span class='ident'>Parts</span>::<span class='ident'>Neither</span> <span class='op'>=&gt;</span> {
+            },
         }
-
-        <span class='ident'>PKey</span>::<span class='ident'>from_handle</span>(<span class='self'>self</span>.<span class='ident'>evp</span>, <span class='self'>self</span>.<span class='ident'>parts</span>)
+        <span class='ident'>pkey</span>
     }
 }
 
@@ -1779,6 +1821,40 @@
         <span class='ident'>pkey</span>.<span class='ident'>load_pub</span>(<span class='kw-2'>&amp;</span>[]);
         <span class='ident'>pkey</span>.<span class='ident'>verify</span>(<span class='kw-2'>&amp;</span>[], <span class='kw-2'>&amp;</span>[]);
     }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_pkey_clone_creates_copy</span>() {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>pkey</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
+        <span class='ident'>pkey</span>.<span class='ident'>gen</span>(<span class='number'>512</span>);
+        <span class='kw'>let</span> <span class='ident'>old_pkey_n</span> <span class='op'>=</span> <span class='ident'>pkey</span>.<span class='ident'>get_rsa</span>().<span class='ident'>n</span>().<span class='ident'>unwrap</span>();
+
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>pkey2</span> <span class='op'>=</span> <span class='ident'>pkey</span>.<span class='ident'>clone</span>();
+        <span class='ident'>pkey2</span>.<span class='ident'>gen</span>(<span class='number'>512</span>);
+
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>old_pkey_n</span> <span class='op'>==</span> <span class='ident'>pkey</span>.<span class='ident'>get_rsa</span>().<span class='ident'>n</span>().<span class='ident'>unwrap</span>());
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_pkey_clone_copies_private</span>() {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>pkey</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
+        <span class='ident'>pkey</span>.<span class='ident'>gen</span>(<span class='number'>512</span>);
+
+        <span class='kw'>let</span> <span class='ident'>pkey2</span> <span class='op'>=</span> <span class='ident'>pkey</span>.<span class='ident'>clone</span>();
+
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>pkey</span>.<span class='ident'>get_rsa</span>().<span class='ident'>q</span>().<span class='ident'>unwrap</span>() <span class='op'>==</span> <span class='ident'>pkey2</span>.<span class='ident'>get_rsa</span>().<span class='ident'>q</span>().<span class='ident'>unwrap</span>());
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_pkey_clone_copies_public</span>() {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>pkey</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
+        <span class='ident'>pkey</span>.<span class='ident'>gen</span>(<span class='number'>512</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>pub_key</span> <span class='op'>=</span> <span class='ident'>super</span>::<span class='ident'>PKey</span>::<span class='ident'>new</span>();
+        <span class='ident'>pub_key</span>.<span class='ident'>load_pub</span>(<span class='kw-2'>&amp;</span><span class='ident'>pkey</span>.<span class='ident'>save_pub</span>()[..]);
+
+        <span class='kw'>let</span> <span class='ident'>pub_key2</span> <span class='op'>=</span> <span class='ident'>pub_key</span>.<span class='ident'>clone</span>();
+
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>pub_key</span>.<span class='ident'>get_rsa</span>().<span class='ident'>n</span>().<span class='ident'>unwrap</span>() <span class='op'>==</span> <span class='ident'>pub_key2</span>.<span class='ident'>get_rsa</span>().<span class='ident'>n</span>().<span class='ident'>unwrap</span>());
+    }
 }
 </pre>
 </section>
@@ -1824,7 +1900,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

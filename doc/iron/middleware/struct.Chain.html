@@ -26,7 +26,7 @@
     
 
     <nav class="sidebar">
-        <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='logo' width='100'></a>
         <p class='location'><a href='../index.html'>iron</a>::<wbr><a href='index.html'>middleware</a></p><script>window.sidebarCurrent = {name: 'Chain', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
@@ -56,7 +56,7 @@ but Iron&#39;s infrastructure is flexible enough to allow alternate
 systems.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;H: <a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;(handler: H) -&gt; <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a></code></h4>
 <div class='docblock'><p>Construct a new ChainBuilder from a <code>Handler</code>.</p>
-</div><h4 id='method.link' class='method'><code>fn <a href='#method.link' class='fnname'>link</a>&lt;B, A&gt;(&amp;mut self, link: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(B, A)</a>) -&gt; &amp;mut <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a> <span class='where'>where A: <a class='trait' href='../../iron/middleware/trait.AfterMiddleware.html' title='iron::middleware::AfterMiddleware'>AfterMiddleware</a>, B: <a class='trait' href='../../iron/middleware/trait.BeforeMiddleware.html' title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a></span></code></h4>
+</div><h4 id='method.link' class='method'><code>fn <a href='#method.link' class='fnname'>link</a>&lt;B, A&gt;(&amp;mut self, link: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a>B, A<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>) -&gt; &amp;mut <a class='struct' href='../../iron/middleware/struct.Chain.html' title='iron::middleware::Chain'>Chain</a> <span class='where'>where A: <a class='trait' href='../../iron/middleware/trait.AfterMiddleware.html' title='iron::middleware::AfterMiddleware'>AfterMiddleware</a>, B: <a class='trait' href='../../iron/middleware/trait.BeforeMiddleware.html' title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a></span></code></h4>
 <div class='docblock'><p>Link both a before and after middleware to the chain at once.</p>
 
 <p>Middleware that have a Before and After piece should have a constructor
@@ -118,7 +118,7 @@ eventually be removed.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
