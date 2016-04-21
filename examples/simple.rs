@@ -140,7 +140,7 @@ fn main() {
     let mut chain = iron::Chain::new(app);
     chain.link(::rustless::batteries::cookie::new("secretsecretsecretsecretsecretsecretsecret".as_bytes()));
 
-    iron::Iron::new(chain).http("localhost:4000").unwrap();
+    iron::Iron::new(chain).http("0.0.0.0:4000").unwrap();
     println!("On 4000");
 
 }

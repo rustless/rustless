@@ -60,69 +60,67 @@ Rustless is based on Iron, which is based on Hyper, which is **synchronous**. Hy
 Below is a simple example showing some of the more common features of Rustless.
 
 ~~~rust
-#![feature(plugin)]
-
-#[plugin]
+#[macro_use]
 extern crate rustless;
 extern crate hyper;
 extern crate iron;
-extern crate "rustc-serialize" as rustc_serialize;
+extern crate rustc_serialize as serialize;
 extern crate valico;
 
+use valico::json_dsl;
 use hyper::status::StatusCode;
-use iron::Iron;
 use rustless::{
     Application, Api, Nesting, Versioning
 };
-use rustc_serialize::json::ToJson;
+use serialize::json::ToJson;
 
 fn main() {
 
-    let api = Api::build(dsl!(|api| {
+    let api = Api::build(|api| {
         // Specify API version
-        version("v1", Versioning::AcceptHeader("chat"));
-        prefix("api");
+        api.version("v1", Versioning::AcceptHeader("chat"));
+        api.prefix("api");
 
         // Create API for chats
-        mount(Api::build(dsl!(|chats_api| {
+        api.mount(Api::build(|chats_api| {
 
-            after(|client, _params| {
+            chats_api.after(|client, _params| {
                 client.set_status(StatusCode::NotFound);
                 Ok(())
             });
 
             // Add namespace
-            namespace("chats/:id", dsl!(|chat_ns| {
+            chats_api.namespace("chats/:id", |chat_ns| {
 
                 // Valico settings for this namespace
-                params(|params| {
-                    params.req_typed("id", valico::u64())
+                chat_ns.params(|params| {
+                    params.req_typed("id", json_dsl::u64())
                 });
 
                 // Create endpoint for POST /chats/:id/users/:user_id
-                post("users/:user_id", dsl!(|endpoint| {
+                chat_ns.post("users/:user_id", |endpoint| {
 
                     // Add description
-                    desc("Update user");
+                    endpoint.desc("Update user");
 
                     // Valico settings for endpoint params
-                    params(|params| {
-                        params.req_typed("user_id", valico::u64());
-                        params.req_typed("name", valico::string())
+                    endpoint.params(|params| {
+                        params.req_typed("user_id", json_dsl::u64());
+                        params.req_typed("name", json_dsl::string())
                     });
 
-                    handle(|client, params| {
+                    endpoint.handle(|client, params| {
                         client.json(&params.to_json())
                     })
-                }));
+                });
 
-            }));
-        })));
-    }));
+            });
+        }));
+    });
 
     let app = Application::new(api);
 
-    Iron::new(app).listen("localhost:4000").unwrap();
+    iron::Iron::new(app).http("0.0.0.0:4000").unwrap();
     println!("On 4000");
 
     println!("Rustless server started!");
@@ -156,20 +154,20 @@ In Rustless you can use three core entities to build your RESTful app: `Api`, `N
 Api::build(|api| {
 
     // Api inside Api example
-    api.mount(Api::build(dsl!(|nested_api| {
+    api.mount(Api::build(|nested_api| {
 
         // Endpoint definition
-        get("nested_info", dsl!|endpoint| {
+        nested_api.get("nested_info", |endpoint| {
             // endpoint.params(|params| {});
             // endpoint.desc("Some description");
 
             // Endpoint handler
-            handle(|client, _params| {
+            endpoint.handle(|client, _params| {
                 client.text("Some usefull info".to_string())
             })
-        }));
+        });
 
-    })))
+    }))
 
     // The namespace method has a number of aliases, including: group,
     // resource, resources, and segment. Use whichever reads the best
@@ -380,11 +378,11 @@ The block applies to every API call within and below the current nesting level.
 ## Secure API example
 
 ~~~rust
-Api::build(dsl!(|api| {
-    prefix("api");
-    version("v1", Versioning::Path);
+Api::build(|api| {
+    api.prefix("api");
+    api.version("v1", Versioning::Path);
 
-    error_formatter(|err, _media| {
+    api.error_formatter(|err, _media| {
         match err.downcast::<UnauthorizedError>() {
             Some(_) => {
                 return Some(Response::from_string(StatusCode::Unauthorized, "Please provide correct `token` parameter".to_string()))
@@ -393,14 +391,14 @@ Api::build(dsl!(|api| {
         }
     });
 
-    namespace("admin", dsl!(|admin_ns| {
+    api.namespace("admin", |admin_ns| {
 
-        params(|params| {
+        admin_ns.params(|params| {
             params.req_typed("token", Valico::string())
         });
 
         // Using after_validation callback to check token
-        after_validation(|&: _client, params| {
+        admin_ns.after_validation(|&: _client, params| {
 
             match params.get("token") {
                 // We can unwrap() safely because token in validated already
@@ -414,8 +412,8 @@ Api::build(dsl!(|api| {
         });
 
         // This `/api/admin/server_status` endpoint is secure now
-        get("server_status", dsl!(|endpoint| {
-            handle(|client, _params| {
+        admin_ns.get("server_status", |endpoint| {
+            endpoint.handle(|client, _params| {
                 {
                     let cookies = client.request.cookies();
                     let signed_cookies = cookies.signed();
@@ -426,9 +424,9 @@ Api::build(dsl!(|api| {
 
                 client.text("Everything is OK".to_string())
             })
-        }));
-    }))
-}))
+        });
+    })
+})
 ~~~
 
 ## JSON responses
