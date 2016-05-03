@@ -1,18 +1,15 @@
-use serialize::json;
-
 use valico::json_dsl;
 use valico::json_schema;
 
-use server::method;
-use server::mime;
+use server::{method, mime};
 use backend;
 use errors;
+use json::{JsonValue};
+use batteries::schemes;
 use framework;
 use framework::path;
 
-use batteries::schemes;
-
-pub type EndpointHandler = Box<for<'a> Fn(framework::Client<'a>, &json::Json) -> backend::HandleResult<framework::Client<'a>> + 'static + Sync>;
+pub type EndpointHandler = Box<for<'a> Fn(framework::Client<'a>, &JsonValue) -> backend::HandleResult<framework::Client<'a>> + 'static + Sync>;
 
 #[allow(missing_copy_implementations)]
 pub enum EndpointHandlerPresent {
@@ -78,7 +75,7 @@ impl Endpoint {
     }
 
     pub fn handle<F: 'static>(&mut self, handler: F) -> EndpointHandlerPresent
-    where F: for<'a> Fn(framework::Client<'a>, &json::Json) -> backend::HandleResult<framework::Client<'a>> + Sync+Send {
+    where F: for<'a> Fn(framework::Client<'a>, &JsonValue) -> backend::HandleResult<framework::Client<'a>> + Sync+Send {
         self.handler = Some(Box::new(handler));
         EndpointHandlerPresent::HandlerPresent
     }
@@ -88,7 +85,7 @@ impl Endpoint {
         EndpointHandlerPresent::HandlerPresent
     }
 
-    fn validate(&self, params: &mut json::Json, scope: Option<&json_schema::Scope>) -> backend::HandleResult<()> {
+    fn validate(&self, params: &mut JsonValue, scope: Option<&json_schema::Scope>) -> backend::HandleResult<()> {
         // Validate namespace params with valico
         if self.coercer.is_some() {
             // validate and coerce params
@@ -108,7 +105,7 @@ impl Endpoint {
     }
 
     pub fn call_endpoint<'a>(&self,
-        params: &mut json::Json,
+        params: &mut JsonValue,
         req: &'a mut (backend::Request + 'a),
         info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
 
@@ -141,7 +138,7 @@ impl Endpoint {
     fn call_callbacks(
         cbs: &Vec<framework::Callback>,
         client: &mut framework::Client,
-        params: &mut json::Json) -> backend::HandleSuccessResult {
+        params: &mut JsonValue) -> backend::HandleSuccessResult {
 
         for cb in cbs.iter() {
             try!(cb(client, params));
@@ -155,7 +152,7 @@ impl Endpoint {
 impl framework::ApiHandler for Endpoint {
     fn api_call<'r>(&self,
         rest_path: &str,
-        params: &mut json::Json,
+        params: &mut JsonValue,
         req: &'r mut (backend::Request + 'r),
         info: &mut framework::CallInfo) -> backend::HandleResult<backend::Response> {
 

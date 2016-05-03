@@ -1,14 +1,12 @@
-use serialize::json;
-
-use backend;
-use server::mime;
-use server::header;
-use errors;
- 
 use framework;
 use framework::nesting::{self, Nesting, Node};
 use framework::media;
 use framework::path;
+use backend;
+use errors;
+use server::mime;
+use server::header;
+use json::{JsonValue};
 
 #[allow(dead_code)]
 #[allow(missing_copy_implementations)]
@@ -116,7 +114,7 @@ impl_nesting!(Api);
 impl framework::ApiHandler for Api {
     fn api_call<'a, 'r>(&'a self,
         rest_path: &str,
-        params: &mut json::Json,
+        params: &mut JsonValue,
         req: &'r mut (backend::Request + 'r),
         info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
 
@@ -150,7 +148,7 @@ impl framework::ApiHandler for Api {
                 },
                 &Versioning::Param(ref param_name) => {
                     match params.find(param_name) {
-                        Some(obj) if obj.is_string() && obj.as_string().unwrap() == &version[..] => (),
+                        Some(obj) if obj.is_string() && obj.as_str().unwrap() == &version[..] => (),
                         _ => return Err(error_response!(errors::NotMatch))
                     }
                 },

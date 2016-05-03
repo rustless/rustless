@@ -31,14 +31,14 @@ impl WrapUrl for url::Url {
 }
 
 impl backend::AsUrl for Url {
-    fn scheme(&self) -> &str { &self.scheme }
-    fn host(&self) -> &url::Host { &self.host }
-    fn port(&self) -> &u16 { &self.port }
-    fn path(&self) -> &Vec<String> { &self.path }
-    fn username(&self) -> &Option<String> { &self.username }
-    fn password(&self) -> &Option<String> { &self.password }
-    fn query(&self) -> &Option<String> { &self.query }
-    fn fragment(&self) -> &Option<String> { &self.fragment }
+    fn scheme(&self) -> &str { &self.scheme() }
+    fn host(&self) -> url::Host<&str> { self.host() }
+    fn port(&self) -> u16 { self.port() }
+    fn path(&self) -> Vec<&str> { self.path() }
+    fn username(&self) -> Option<&str> { self.username() }
+    fn password(&self) -> Option<&str> { self.password() }
+    fn query(&self) -> Option<&str> { self.query() }
+    fn fragment(&self) -> Option<&str> { self.fragment() }
 }
 
 impl<'a, 'b> backend::Request for iron::Request<'a, 'b> {

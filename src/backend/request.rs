@@ -15,13 +15,13 @@ impl Body for Box<io::Read + 'static> { }
 
 pub trait AsUrl {
     fn scheme(&self) -> &str;
-    fn host(&self) -> &url::Host;
-    fn port(&self) -> &u16;
-    fn path(&self) -> &Vec<String>;
-    fn username(&self) -> &Option<String>;
-    fn password(&self) -> &Option<String>;
-    fn query(&self) -> &Option<String>;
-    fn fragment(&self) -> &Option<String>;
+    fn host(&self) -> url::Host<&str>;
+    fn port(&self) -> u16;
+    fn path(&self) -> Vec<&str>;
+    fn username(&self) -> Option<&str>;
+    fn password(&self) -> Option<&str>;
+    fn query(&self) -> Option<&str>;
+    fn fragment(&self) -> Option<&str>;
 }
 
 pub trait Request: fmt::Debug + ::Extensible {

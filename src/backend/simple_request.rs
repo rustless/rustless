@@ -112,7 +112,7 @@ impl fmt::Debug for SimpleRequest {
         try!(writeln!(f, "  url: {}", self.url));
         try!(writeln!(f, "  method: {}", self.method()));
         try!(writeln!(f, "  path: {:?}", self.url.path()));
-        try!(writeln!(f, "  query: {:?}", self.url.query));
+        try!(writeln!(f, "  query: {:?}", self.url.query()));
         try!(writeln!(f, "  remote_addr: {}", self.remote_addr()));
         Ok(())
     }

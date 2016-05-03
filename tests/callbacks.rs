@@ -45,7 +45,7 @@ fn it_invokes_callbacks() {
             admin_ns.after_validation(|_client, params| {
                 match params.find(&"token".to_string()) {
                     // We can.unwrap() safely because token in validated already
-                    Some(token) => if token.as_string().unwrap() == "password1" { return Ok(()) },
+                    Some(token) => if token.as_str().unwrap() == "password1" { return Ok(()) },
                     None => ()
                 }
 

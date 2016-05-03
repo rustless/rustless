@@ -1,14 +1,13 @@
 use std::collections;
-use serialize::json;
 use typemap;
 use queryst;
-use valico::MutableJson;
 
 use super::{ApiHandler};
-use super::api;
-use super::super::backend;
-use super::super::errors;
-use super::super::server::status;
+use framework::api;
+use backend;
+use errors;
+use server::status;
+use json::{JsonValue};
 
 pub struct Application {
     pub ext: typemap::TypeMap,
@@ -27,7 +26,7 @@ impl Application {
     }
 
     fn call_internal<'a>(&self, req: &'a mut (backend::Request + 'a)) -> backend::HandleResult<backend::Response> {
-        let mut params = json::Json::Object(collections::BTreeMap::new());
+        let mut params = JsonValue::Object(collections::BTreeMap::new());
         let parse_result = parse_request(req, &mut params);
 
         parse_result.and_then(|_| {
@@ -76,7 +75,7 @@ impl super::super::Extensible for Application {
     fn ext_mut(&mut self) -> &mut ::typemap::TypeMap { &mut self.ext }
 }
 
-fn parse_query(query_str: &str, params: &mut json::Json) -> backend::HandleSuccessResult {
+fn parse_query(query_str: &str, params: &mut JsonValue) -> backend::HandleSuccessResult {
     let maybe_query_params = queryst::parse(query_str);
     match maybe_query_params {
         Ok(query_params) => {
@@ -95,12 +94,12 @@ fn parse_query(query_str: &str, params: &mut json::Json) -> backend::HandleSucce
     Ok(())
 }
 
-fn parse_json_body(req: &mut backend::Request, params: &mut json::Json) -> backend::HandleSuccessResult {
+fn parse_json_body(req: &mut backend::Request, params: &mut JsonValue) -> backend::HandleSuccessResult {
     let maybe_body = try!(req.read_to_end().map_err(|err| error_response_boxed!(err)))
         .unwrap_or(String::new());
 
     if maybe_body.len() > 0 {
-      let maybe_json_body = maybe_body.parse::<json::Json>();
+      let maybe_json_body = maybe_body.parse::<JsonValue>();
         match maybe_json_body {
             Ok(json_body) => {
                 let params = params.as_object_mut().expect("Params must be object");
@@ -121,7 +120,7 @@ fn parse_json_body(req: &mut backend::Request, params: &mut json::Json) -> backe
     Ok(())
 }
 
-fn parse_urlencoded_body(req: &mut backend::Request, params: &mut json::Json) -> backend::HandleSuccessResult {
+fn parse_urlencoded_body(req: &mut backend::Request, params: &mut JsonValue) -> backend::HandleSuccessResult {
     let maybe_body = try!(req.read_to_end().map_err(|err| error_response_boxed!(err)))
         .unwrap_or(String::new());
 
@@ -147,7 +146,7 @@ fn parse_urlencoded_body(req: &mut backend::Request, params: &mut json::Json) ->
     Ok(())
 }
 
-fn parse_request(req: &mut backend::Request, params: &mut json::Json) -> backend::HandleSuccessResult {
+fn parse_request(req: &mut backend::Request, params: &mut JsonValue) -> backend::HandleSuccessResult {
     // extend params with query-string params if any
     if req.url().query().is_some() {
         try!(parse_query(&req.url().query().as_ref().unwrap(), params));

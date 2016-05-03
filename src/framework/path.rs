@@ -1,9 +1,8 @@
 extern crate url;
 
-use url::percent_encoding::lossy_utf8_percent_decode;
-use valico::MutableJson;
-use serialize::json::{self, ToJson};
+use url::percent_encoding::percent_decode;
 use regex;
+use json::{JsonValue, ToJson};
 
 lazy_static! {
     pub static ref MATCHER: regex::Regex = regex::Regex::new(r":([a-z][a-z_]*)").unwrap();
@@ -25,10 +24,14 @@ pub fn normalize<'a>(path: &'a str) -> &'a str {
 
 impl Path {
 
-    pub fn apply_captures(&self, params: &mut json::Json, captures: regex::Captures) {
+    pub fn apply_captures(&self, params: &mut JsonValue, captures: regex::Captures) {
         let obj = params.as_object_mut().expect("Params must be object");
         for param in self.params.iter() {
-            obj.insert(param.clone(), lossy_utf8_percent_decode(captures.name(&param).unwrap_or("").as_bytes()).to_json());
+            obj.insert(
+                param.clone(), 
+                percent_decode(
+                    captures.name(&param).unwrap_or("").as_bytes()
+                ).decode_utf8_lossy().to_string().to_json());
         }
     }
 

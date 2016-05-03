@@ -4,10 +4,11 @@
 #[macro_use]
 extern crate rustless;
 extern crate hyper;
-extern crate rustc_serialize as serialize;
 extern crate url;
 extern crate valico;
 extern crate jsonway;
+extern crate serde;
+extern crate serde_json;
 
 #[macro_export]
 macro_rules! sr {

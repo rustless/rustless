@@ -1,13 +1,12 @@
-use serialize::json;
 use valico::json_dsl;
 use valico::json_schema;
 
 use backend;
 use errors;
-
+use json::{JsonValue};
+use framework::nesting::{self, Nesting, Node};
 use framework;
 use framework::path;
-use framework::nesting::{self, Nesting, Node};
 
 use batteries::schemes;
 
@@ -48,7 +47,7 @@ impl Namespace {
         return namespace;
     }
 
-    fn validate(&self, params: &mut json::Json, scope: Option<&json_schema::Scope>) -> backend::HandleResult<()> {
+    fn validate(&self, params: &mut JsonValue, scope: Option<&json_schema::Scope>) -> backend::HandleResult<()> {
         // Validate namespace params with valico
         if self.coercer.is_some() {
             // validate and coerce params
@@ -70,8 +69,13 @@ impl Namespace {
 }
 
 impl framework::ApiHandler for Namespace {
-    fn api_call<'a, 'r>(&'a self, rest_path: &str, params: &mut json::Json, req: &'r mut (backend::Request + 'r),
-                    info: &mut framework::CallInfo<'a>) -> backend::HandleResult<backend::Response> {
+    fn api_call<'a, 'r>(
+        &'a self,
+        rest_path: &str,
+        params: &mut JsonValue,
+        req: &'r mut (backend::Request + 'r),
+        info: &mut framework::CallInfo<'a>
+    ) -> backend::HandleResult<backend::Response> {
 
         let rest_path: &str = match self.path.is_match(rest_path) {
             Some(captures) =>  {

@@ -1,6 +1,6 @@
 use iron;
 
-use cookie;
+pub use hyper::header::{CookiePair as Cookie, CookieJar};
 use backend::{self, Request};
 use server::header;
 use ::{Extensible};
@@ -8,23 +8,23 @@ use ::{Extensible};
 struct CookieJarKey;
 
 impl ::typemap::Key for CookieJarKey {
-    type Value = cookie::CookieJar<'static>;
+    type Value = CookieJar<'static>;
 }
 
 pub trait CookieExt {
-    fn find_cookie_jar(&mut self) -> Option<&mut cookie::CookieJar<'static>>;
-    fn store_cookie_jar(&mut self, jar: cookie::CookieJar<'static>);
-    fn cookies<'a>(&'a mut self) -> &'a mut cookie::CookieJar<'static> {
+    fn find_cookie_jar(&mut self) -> Option<&mut CookieJar<'static>>;
+    fn store_cookie_jar(&mut self, jar: CookieJar<'static>);
+    fn cookies<'a>(&'a mut self) -> &'a mut CookieJar<'static> {
         self.find_cookie_jar().unwrap()
     }
 }
 
 impl<'r> CookieExt for (backend::Request + 'r) {
-    fn find_cookie_jar<'a>(&'a mut self) -> Option<&'a mut cookie::CookieJar<'static>> {
+    fn find_cookie_jar<'a>(&'a mut self) -> Option<&'a mut CookieJar<'static>> {
         self.ext_mut().get_mut::<CookieJarKey>()
     }
 
-    fn store_cookie_jar(&mut self, jar: cookie::CookieJar<'static>) {
+    fn store_cookie_jar(&mut self, jar: CookieJar<'static>) {
         self.ext_mut().insert::<CookieJarKey>(jar);
     }
 }
@@ -38,7 +38,7 @@ impl iron::BeforeMiddleware for CookieDecodeMiddleware {
         let token = &self.secret_token;
         let jar = req.headers().get::<header::Cookie>()
             .map(|cookies| cookies.to_cookie_jar(token))
-            .unwrap_or_else(|| cookie::CookieJar::new(token));
+            .unwrap_or_else(|| CookieJar::new(token));
 
         req.ext_mut().insert::<CookieJarKey>(jar);
         Ok(())
