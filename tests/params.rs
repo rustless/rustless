@@ -5,6 +5,56 @@ use rustless::batteries::schemes;
 use rustless::{Nesting};
 
 #[test]
+fn it_urldecodes_path_params() {
+
+    let app = app!(|api| {
+        api.prefix("api");
+
+        api.get("users/:user_id/messages/:message_id", |endpoint| {
+            endpoint.params(|params| {
+                params.req("user_id", |user_id| {
+                    user_id.allow_values(&["100/200".to_string()])
+                })
+            });
+
+            endpoint.handle(|client, params| {
+                client.text(format!("{}", params.find("message_id").and_then(|obj| { obj.as_string() }).unwrap()))
+            })
+        })
+    });
+
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users/100%2F200/messages/a%2Fb%3F").ok().unwrap();
+    assert_eq!(response.status, status::StatusCode::Ok);
+    assert_eq!(resp_body!(response), "a/b?");
+
+}
+
+#[test]
+fn it_urldecodes_query_params() {
+
+    let app = app!(|api| {
+        api.prefix("api");
+
+        api.get("users", |endpoint| {
+            endpoint.params(|params| {
+                params.req("user_id", |user_id| {
+                    user_id.allow_values(&["100&200".to_string()])
+                })
+            });
+
+            endpoint.handle(|client, params| {
+                client.text(format!("{}", params.find("message_id").and_then(|obj| { obj.as_string() }).unwrap()))
+            })
+        })
+    });
+
+    let response = call_app!(app, Get, "http://127.0.0.1:3000/api/users?user_id=100%26200&message_id=a%26b%3F").ok().unwrap();
+    assert_eq!(response.status, status::StatusCode::Ok);
+    assert_eq!(resp_body!(response), "a&b?");
+
+}
+
+#[test]
 fn it_validates_endpoint_simple_path_params() {
 
     let app = app!(|api| {
