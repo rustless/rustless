@@ -34,7 +34,7 @@ Rustless in a port of [Grape] library from Ruby world. Based on [hyper] - an HTT
 
 Like Rust itself, Rustless is still in the early stages of development, so don't be surprised if APIs change and things break. If something's not working properly, file an issue or submit a pull request!
 
-[Grape]: https://github.com/intridea/grape
+[Grape]: https://github.com/ruby-grape/grape
 [hyper]: https://github.com/hyperium/hyper
 
 ```toml
@@ -43,13 +43,13 @@ Like Rust itself, Rustless is still in the early stages of development, so don't
 git = "https://github.com/rustless/rustless"
 ```
 
-[API docs](http://rustless.org/rustless/doc/rustless)
+[API docs](http://rustless.org/rustless/doc/rustless/)
 
 ## See also
 
-* [Valico](https://github.com/rustless/valico) - Rust JSON validator and coercer. See [Api docs](http://rustless.org/valico/doc/valico).
-* [Queryst](https://github.com/rustless/queryst) - Rust query string parser with nesting support. See [Api docs](http://rustless.org/queryst/doc/queryst).
-* [JsonWay](https://github.com/rustless/jsonway) - JSON building DSL and configurable serializers for Rust. See [Api docs](http://rustless.org/jsonway/doc/jsonway).
+* [Valico](https://github.com/rustless/valico) - Rust JSON validator and coercer. See [Api docs](http://rustless.org/valico/doc/valico/).
+* [Queryst](https://github.com/rustless/queryst) - Rust query string parser with nesting support. See [Api docs](http://rustless.org/queryst/doc/queryst/).
+* [JsonWay](https://github.com/rustless/jsonway) - JSON building DSL and configurable serializers for Rust. See [Api docs](http://rustless.org/jsonway/doc/jsonway/).
 
 ## Usage warning
 
@@ -308,7 +308,7 @@ route string parameters will have precedence.
 You can redirect to a new url temporarily (302) or permanently (301).
 
 ~~~rust
-client.redirect("http://google.com");
+client.redirect("http://www.google.com/");
 ~~~
 
 ~~~rust
@@ -464,7 +464,7 @@ swagger::enable(&mut app, swagger::Spec {
         }),
         license: Some(swagger::License {
             name: "MIT".to_string(),
-            url: "http://opensource.org/licenses/MIT".to_string()
+            url: "https://opensource.org/licenses/MIT".to_string()
         }),
         ..std::default::Default::default()
     },
