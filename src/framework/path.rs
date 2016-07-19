@@ -1,3 +1,6 @@
+extern crate url;
+
+use url::percent_encoding::lossy_utf8_percent_decode;
 use valico::MutableJson;
 use serialize::json::{self, ToJson};
 use regex;
@@ -25,7 +28,7 @@ impl Path {
     pub fn apply_captures(&self, params: &mut json::Json, captures: regex::Captures) {
         let obj = params.as_object_mut().expect("Params must be object");
         for param in self.params.iter() {
-            obj.insert(param.clone(), captures.name(&param).unwrap_or("").to_string().to_json());
+            obj.insert(param.clone(), lossy_utf8_percent_decode(captures.name(&param).unwrap_or("").as_bytes()).to_json());
         }
     }
 
