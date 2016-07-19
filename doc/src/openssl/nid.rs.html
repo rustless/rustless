@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.10/src/nid.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.7.14/src/nid.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>nid.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -217,12 +218,32 @@
 <span id="174">174</span>
 <span id="175">175</span>
 <span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
 </pre><pre class='rust '>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>non_camel_case_types</span>)]</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>Hash</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>usize</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Nid</span> {
-    <span class='ident'>Undefined</span>,
+    <span class='ident'>Undefined</span>, <span class='comment'>// 0</span>
     <span class='ident'>Rsadsi</span>,
     <span class='ident'>Pkcs</span>,
     <span class='ident'>MD2</span>,
@@ -232,7 +253,7 @@
     <span class='ident'>RsaEncryption</span>,
     <span class='ident'>RSA_MD2</span>,
     <span class='ident'>RSA_MD5</span>,
-    <span class='ident'>PBE_MD2_DES</span>,
+    <span class='ident'>PBE_MD2_DES</span>, <span class='comment'>// 10</span>
     <span class='ident'>X500</span>,
     <span class='ident'>x509</span>,
     <span class='ident'>CN</span>,
@@ -242,7 +263,7 @@
     <span class='ident'>O</span>,
     <span class='ident'>OU</span>,
     <span class='ident'>RSA</span>,
-    <span class='ident'>Pkcs7</span>,
+    <span class='ident'>Pkcs7</span>, <span class='comment'>// 20</span>
     <span class='ident'>Pkcs7_data</span>,
     <span class='ident'>Pkcs7_signedData</span>,
     <span class='ident'>Pkcs7_envelopedData</span>,
@@ -252,7 +273,7 @@
     <span class='ident'>Pkcs3</span>,
     <span class='ident'>DhKeyAgreement</span>,
     <span class='ident'>DES_ECB</span>,
-    <span class='ident'>DES_CFB</span>,
+    <span class='ident'>DES_CFB</span>, <span class='comment'>// 30</span>
     <span class='ident'>DES_CBC</span>,
     <span class='ident'>DES_EDE</span>,
     <span class='ident'>DES_EDE3</span>,
@@ -262,7 +283,7 @@
     <span class='ident'>RC2_CBC</span>,
     <span class='ident'>RC2_ECB</span>,
     <span class='ident'>RC2_CFB</span>,
-    <span class='ident'>RC2_OFB</span>,
+    <span class='ident'>RC2_OFB</span>, <span class='comment'>// 40</span>
     <span class='ident'>SHA</span>,
     <span class='ident'>RSA_SHA</span>,
     <span class='ident'>DES_EDE_CBC</span>,
@@ -272,7 +293,7 @@
     <span class='ident'>Pkcs9</span>,
     <span class='ident'>Email</span>,
     <span class='ident'>UnstructuredName</span>,
-    <span class='ident'>ContentType</span>,
+    <span class='ident'>ContentType</span>, <span class='comment'>// 50</span>
     <span class='ident'>MessageDigest</span>,
     <span class='ident'>SigningTime</span>,
     <span class='ident'>CounterSignature</span>,
@@ -282,7 +303,7 @@
     <span class='ident'>Netscape</span>,
     <span class='ident'>NetscapeCertExtention</span>,
     <span class='ident'>NetscapeDatatype</span>,
-    <span class='ident'>DES_EDE_CFB64</span>,
+    <span class='ident'>DES_EDE_CFB64</span>, <span class='comment'>// 60</span>
     <span class='ident'>DES_EDE3_CFB64</span>,
     <span class='ident'>DES_EDE_OFB64</span>,
     <span class='ident'>DES_EDE3_OFB64</span>,
@@ -292,7 +313,7 @@
     <span class='ident'>DSA_OLD</span>,
     <span class='ident'>PBE_SHA1_RC2_64</span>,
     <span class='ident'>PBKDF2</span>,
-    <span class='ident'>DSA_SHA1_OLD</span>,
+    <span class='ident'>DSA_SHA1_OLD</span>, <span class='comment'>// 70</span>
     <span class='ident'>NetscapeCertType</span>,
     <span class='ident'>NetscapeBaseUrl</span>,
     <span class='ident'>NetscapeRevocationUrl</span>,
@@ -302,7 +323,7 @@
     <span class='ident'>NetscapeSSLServerName</span>,
     <span class='ident'>NetscapeComment</span>,
     <span class='ident'>NetscapeCertSequence</span>,
-    <span class='ident'>DESX_CBC</span>,
+    <span class='ident'>DESX_CBC</span>, <span class='comment'>// 80</span>
     <span class='ident'>ID_CE</span>,
     <span class='ident'>SubjectKeyIdentifier</span>,
     <span class='ident'>KeyUsage</span>,
@@ -312,7 +333,7 @@
     <span class='ident'>BasicConstraints</span>,
     <span class='ident'>CrlNumber</span>,
     <span class='ident'>CertificatePolicies</span>,
-    <span class='ident'>AuthorityKeyIdentifier</span>,
+    <span class='ident'>AuthorityKeyIdentifier</span>, <span class='comment'>// 90</span>
     <span class='ident'>BF_CBC</span>,
     <span class='ident'>BF_ECB</span>,
     <span class='ident'>BF_CFB</span>,
@@ -322,7 +343,7 @@
     <span class='ident'>RC4_40</span>,
     <span class='ident'>RC2_40_CBC</span>,
     <span class='ident'>G</span>,
-    <span class='ident'>S</span>,
+    <span class='ident'>S</span>, <span class='comment'>// 100</span>
     <span class='ident'>I</span>,
     <span class='doccomment'>/// uniqueIdentifier</span>
     <span class='ident'>UID</span>,
@@ -333,7 +354,7 @@
     <span class='ident'>D</span>,
     <span class='ident'>CAST5_CBC</span>,
     <span class='ident'>CAST5_ECB</span>,
-    <span class='ident'>CAST5_CFB</span>,
+    <span class='ident'>CAST5_CFB</span>, <span class='comment'>// 110</span>
     <span class='ident'>CAST5_OFB</span>,
     <span class='ident'>PbeWithMD5AndCast5CBC</span>,
     <span class='ident'>DSA_SHA1</span>,
@@ -343,7 +364,7 @@
     <span class='ident'>RIPEMD160</span>,
     <span class='comment'>// 118 missing</span>
     <span class='ident'>RSA_RIPEMD160</span> <span class='op'>=</span> <span class='number'>119</span>,
-    <span class='ident'>RC5_CBC</span>,
+    <span class='ident'>RC5_CBC</span>, <span class='comment'>// 120</span>
     <span class='ident'>RC5_ECB</span>,
     <span class='ident'>RC5_CFB</span>,
     <span class='ident'>RC5_OFB</span>,
@@ -353,7 +374,7 @@
     <span class='ident'>PKIX</span>,
     <span class='ident'>ID_KP</span>,
     <span class='ident'>ServerAuth</span>,
-    <span class='ident'>ClientAuth</span>,
+    <span class='ident'>ClientAuth</span>, <span class='comment'>// 130</span>
     <span class='ident'>CodeSigning</span>,
     <span class='ident'>EmailProtection</span>,
     <span class='ident'>TimeStamping</span>,
@@ -363,7 +384,7 @@
     <span class='ident'>MsSGC</span>,
     <span class='ident'>MsEFS</span>,
     <span class='ident'>NsSGC</span>,
-    <span class='ident'>DeltaCRL</span>,
+    <span class='ident'>DeltaCRL</span>, <span class='comment'>// 140</span>
     <span class='ident'>CRLReason</span>,
     <span class='ident'>InvalidityDate</span>,
     <span class='ident'>SXNetID</span>,
@@ -373,7 +394,7 @@
     <span class='ident'>PBE_SHA1_2DES</span>,
     <span class='ident'>PBE_SHA1_RC2_128</span>,
     <span class='ident'>PBE_SHA1_RC2_40</span>,
-    <span class='ident'>KeyBag</span>,
+    <span class='ident'>KeyBag</span>, <span class='comment'>// 150</span>
     <span class='ident'>Pkcs8ShroudedKeyBag</span>,
     <span class='ident'>CertBag</span>,
     <span class='ident'>CrlBag</span>,
@@ -383,7 +404,7 @@
     <span class='ident'>LocalKeyID</span>,
     <span class='ident'>X509Certificate</span>,
     <span class='ident'>SdsiCertificate</span>,
-    <span class='ident'>X509Crl</span>,
+    <span class='ident'>X509Crl</span>, <span class='comment'>// 160</span>
     <span class='ident'>PBES2</span>,
     <span class='ident'>PBMAC1</span>,
     <span class='ident'>HmacWithSha1</span>,
@@ -391,8 +412,28 @@
     <span class='ident'>ID_QT_UNOTICE</span>,
     <span class='ident'>RC2_64_CBC</span>,
     <span class='ident'>SMIMECaps</span>,
+    <span class='ident'>PBE_MD2_RC2_64</span>,
+    <span class='ident'>PBE_MD5_RC2_64</span>,
+    <span class='ident'>PBE_SHA1_DES</span>,
+    <span class='ident'>MicrosoftExtensionRequest</span>,
+    <span class='ident'>ExtensionRequest</span>,
+    <span class='ident'>Name</span>,
+    <span class='ident'>DnQualifier</span>,
+    <span class='ident'>IdPe</span>,
+    <span class='ident'>IdAd</span>,
+    <span class='ident'>AuthorityInfoAccess</span>,
+    <span class='ident'>OCSP</span>,
+    <span class='ident'>CaIssuers</span>,
+    <span class='ident'>OCSPSigning</span>, <span class='comment'>// 180</span>
+
+    <span class='comment'>// 181 and up are from openssl&#39;s obj_mac.h</span>
     <span class='doccomment'>/// Shown as UID in cert subject</span>
-    <span class='ident'>UserId</span> <span class='op'>=</span> <span class='number'>458</span>
+    <span class='ident'>UserId</span> <span class='op'>=</span> <span class='number'>458</span>,
+
+    <span class='ident'>SHA256</span> <span class='op'>=</span> <span class='number'>672</span>,
+    <span class='ident'>SHA384</span>,
+    <span class='ident'>SHA512</span>,
+    <span class='ident'>SHA224</span>,
 }
 </pre>
 </section>
@@ -418,6 +459,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

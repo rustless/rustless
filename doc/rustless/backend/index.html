@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -43,104 +44,93 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>rustless</a>::<wbr><a class='mod' href=''>backend</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-150' class='srclink' href='../../src/rustless/src/backend/mod.rs.html#1-17' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-150' class='srclink' href='../../src/rustless/src/backend/mod.rs.html#1-17' title='goto source code'>[src]</a></span></h1>
 <h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use self::request::{<a class='trait' href='../../rustless/backend/request/trait.Request.html' title='rustless::backend::request::Request'>Request</a>, <a class='trait' href='../../rustless/backend/request/trait.AsUrl.html' title='rustless::backend::request::AsUrl'>AsUrl</a>};</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='mod' href='request/index.html'
-                               title='rustless::backend::request'>request</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='mod' href='request/index.html'
+                                  title='rustless::backend::request'>request</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Response.html'
-                               title='rustless::backend::Response'>Response</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.ResponseBody.html'
-                               title='rustless::backend::ResponseBody'>ResponseBody</a></td>
-                        <td class='docblock short'>
-                             <p>A <code>Write</code>r of HTTP response bodies.</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.SimpleRequest.html'
-                               title='rustless::backend::SimpleRequest'>SimpleRequest</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Url.html'
-                               title='rustless::backend::Url'>Url</a></td>
-                        <td class='docblock short'>
-                             <p>HTTP/HTTPS URL type for Iron.</p>
-                        </td>
-                    </tr>
-                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Response.html'
+                                  title='rustless::backend::Response'>Response</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.ResponseBody.html'
+                                  title='rustless::backend::ResponseBody'>ResponseBody</a></td>
+                           <td class='docblock short'>
+                                <p>A <code>Write</code>r of HTTP response bodies.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SimpleRequest.html'
+                                  title='rustless::backend::SimpleRequest'>SimpleRequest</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Url.html'
+                                  title='rustless::backend::Url'>Url</a></td>
+                           <td class='docblock short'>
+                                <p>HTTP/HTTPS URL type for Iron.</p>
+                           </td>
+                       </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='trait' href='trait.Handler.html'
-                               title='rustless::backend::Handler'>Handler</a></td>
-                        <td class='docblock short'>
-                             <p><code>Handler</code>s are responsible for handling requests by creating Responses from Requests.</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='trait' href='trait.WrapUrl.html'
-                               title='rustless::backend::WrapUrl'>WrapUrl</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='trait' href='trait.WriteBody.html'
-                               title='rustless::backend::WriteBody'>WriteBody</a></td>
-                        <td class='docblock short'>
-                             <p>A trait which writes the body of an HTTP response.</p>
-                        </td>
-                    </tr>
-                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.Handler.html'
+                                  title='rustless::backend::Handler'>Handler</a></td>
+                           <td class='docblock short'>
+                                <p><code>Handler</code>s are responsible for handling requests by creating Responses from Requests.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.WrapUrl.html'
+                                  title='rustless::backend::WrapUrl'>WrapUrl</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.WriteBody.html'
+                                  title='rustless::backend::WriteBody'>WriteBody</a></td>
+                           <td class='docblock short'>
+                                <p>A trait which writes the body of an HTTP response.</p>
+                           </td>
+                       </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='type' href='type.HandleResult.html'
-                               title='rustless::backend::HandleResult'>HandleResult</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='type' href='type.HandleResultStrict.html'
-                               title='rustless::backend::HandleResultStrict'>HandleResultStrict</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='type' href='type.HandleSuccessResult.html'
-                               title='rustless::backend::HandleSuccessResult'>HandleSuccessResult</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                </table></section>
+                       <tr class=' module-item'>
+                           <td><a class='type' href='type.HandleResult.html'
+                                  title='rustless::backend::HandleResult'>HandleResult</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='type' href='type.HandleResultStrict.html'
+                                  title='rustless::backend::HandleResultStrict'>HandleResultStrict</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='type' href='type.HandleSuccessResult.html'
+                                  title='rustless::backend::HandleSuccessResult'>HandleSuccessResult</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -163,6 +153,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

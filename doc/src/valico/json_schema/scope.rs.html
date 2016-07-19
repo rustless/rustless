@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/valico-0.8.2/src/json_schema/scope.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/json_schema/scope.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>scope.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -207,9 +208,9 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>;
 <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
 
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>schema</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>keywords</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>helpers</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>schema</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>keywords</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>helpers</span>;
 
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -350,14 +351,14 @@
 
     <span class='ident'>scope</span>.<span class='ident'>compile</span>(<span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>schema</span><span class='op'>|</span> {
         <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;id&quot;</span>, <span class='string'>&quot;http://example.com/schema&quot;</span>.<span class='ident'>to_string</span>())
-    }).<span class='ident'>unwrap</span>(), <span class='boolval'>false</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
+    }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>false</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
 
     <span class='ident'>scope</span>.<span class='ident'>compile</span>(<span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>schema</span><span class='op'>|</span> {
         <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;id&quot;</span>, <span class='string'>&quot;http://example.com/schema#sub&quot;</span>.<span class='ident'>to_string</span>());
         <span class='ident'>schema</span>.<span class='ident'>object</span>(<span class='string'>&quot;subschema&quot;</span>, <span class='op'>|</span><span class='ident'>subschema</span><span class='op'>|</span> {
             <span class='ident'>subschema</span>.<span class='ident'>set</span>(<span class='string'>&quot;id&quot;</span>, <span class='string'>&quot;#subschema&quot;</span>.<span class='ident'>to_string</span>());
         })
-    }).<span class='ident'>unwrap</span>(), <span class='boolval'>false</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
+    }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>false</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
 
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>scope</span>.<span class='ident'>resolve</span>(<span class='kw-2'>&amp;</span><span class='ident'>url</span>::<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://example.com/schema&quot;</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>()).<span class='ident'>is_some</span>());
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>scope</span>.<span class='ident'>resolve</span>(<span class='kw-2'>&amp;</span><span class='ident'>url</span>::<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://example.com/schema#sub&quot;</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>()).<span class='ident'>is_some</span>());
@@ -387,6 +388,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/valico-0.8.2/src/json_schema/keywords/maxmin.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/json_schema/keywords/maxmin.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>maxmin.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
+    
 
     
     
@@ -199,15 +200,15 @@
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
 
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>super</span>::<span class='ident'>schema</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>super</span>::<span class='ident'>validators</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>schema</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>validators</span>;
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>kw_minmax</span>{
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>keyword</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>exclusive</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
         <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
         <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>;
-        <span class='kw'>impl</span> <span class='ident'>super</span>::<span class='ident'>Keyword</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span> {
-            <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>def</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>ctx</span>: <span class='kw-2'>&amp;</span><span class='ident'>schema</span>::<span class='ident'>WalkContext</span>) <span class='op'>-&gt;</span> <span class='ident'>super</span>::<span class='ident'>KeywordResult</span> {
+        <span class='kw'>impl</span> <span class='kw'>super</span>::<span class='ident'>Keyword</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span> {
+            <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>def</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>ctx</span>: <span class='kw-2'>&amp;</span><span class='ident'>schema</span>::<span class='ident'>WalkContext</span>) <span class='op'>-&gt;</span> <span class='kw'>super</span>::<span class='ident'>KeywordResult</span> {
                 <span class='kw'>let</span> <span class='ident'>maybe_value</span> <span class='op'>=</span> <span class='ident'>def</span>.<span class='ident'>find</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>keyword</span>);
                 <span class='kw'>let</span> <span class='ident'>exclusive</span> <span class='op'>=</span> <span class='ident'>def</span>.<span class='ident'>find</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>exclusive</span>);
 
@@ -253,33 +254,33 @@
 <span class='macro'>kw_minmax</span><span class='macro'>!</span>(<span class='ident'>Minimum</span>, <span class='string'>&quot;minimum&quot;</span>, <span class='string'>&quot;exclusiveMinimum&quot;</span>);
 <span class='macro'>kw_minmax</span><span class='macro'>!</span>(<span class='ident'>Maximum</span>, <span class='string'>&quot;maximum&quot;</span>, <span class='string'>&quot;exclusiveMaximum&quot;</span>);
 
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>super</span>::<span class='ident'>scope</span>;
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>scope</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='ident'>jsonway</span>;
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>super</span>::<span class='ident'>builder</span>;
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>builder</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>::{<span class='ident'>ToJson</span>};
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>validate_maximum</span>() {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>scope</span> <span class='op'>=</span> <span class='ident'>scope</span>::<span class='ident'>Scope</span>::<span class='ident'>new</span>();
     <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>builder</span>::<span class='ident'>schema</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> {
-        <span class='ident'>s</span>.<span class='ident'>maximum</span>(<span class='number'>10f64</span>, <span class='boolval'>false</span>);
-    }).<span class='ident'>into_json</span>(), <span class='boolval'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
+        <span class='ident'>s</span>.<span class='ident'>maximum</span>(<span class='number'>10f64</span>, <span class='boolvalue'>false</span>);
+    }).<span class='ident'>into_json</span>(), <span class='boolvalue'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
 
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>9</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>true</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>10</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>true</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>11</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>false</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>9</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>true</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>10</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>true</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>11</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>false</span>);
 }
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>validate_exclusive_maximum</span>() {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>scope</span> <span class='op'>=</span> <span class='ident'>scope</span>::<span class='ident'>Scope</span>::<span class='ident'>new</span>();
     <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>builder</span>::<span class='ident'>schema</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> {
-        <span class='ident'>s</span>.<span class='ident'>maximum</span>(<span class='number'>10f64</span>, <span class='boolval'>true</span>);
-    }).<span class='ident'>into_json</span>(), <span class='boolval'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
+        <span class='ident'>s</span>.<span class='ident'>maximum</span>(<span class='number'>10f64</span>, <span class='boolvalue'>true</span>);
+    }).<span class='ident'>into_json</span>(), <span class='boolvalue'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
 
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>9</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>true</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>10</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>false</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>11</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>false</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>9</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>true</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>10</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>false</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>11</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>false</span>);
 }
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -287,8 +288,8 @@
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>scope</span> <span class='op'>=</span> <span class='ident'>scope</span>::<span class='ident'>Scope</span>::<span class='ident'>new</span>();
 
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>schema</span><span class='op'>|</span> {
-        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;maximum&quot;</span>, <span class='boolval'>true</span>);
-    }).<span class='ident'>unwrap</span>(), <span class='boolval'>true</span>).<span class='ident'>is_err</span>());
+        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;maximum&quot;</span>, <span class='boolvalue'>true</span>);
+    }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>true</span>).<span class='ident'>is_err</span>());
 }
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -296,37 +297,37 @@
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>scope</span> <span class='op'>=</span> <span class='ident'>scope</span>::<span class='ident'>Scope</span>::<span class='ident'>new</span>();
 
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>schema</span><span class='op'>|</span> {
-        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;exclusiveMaximum&quot;</span>, <span class='boolval'>true</span>);
-    }).<span class='ident'>unwrap</span>(), <span class='boolval'>true</span>).<span class='ident'>is_err</span>());
+        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;exclusiveMaximum&quot;</span>, <span class='boolvalue'>true</span>);
+    }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>true</span>).<span class='ident'>is_err</span>());
 
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>schema</span><span class='op'>|</span> {
         <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;maximum&quot;</span>, <span class='number'>10</span>);
         <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;exclusiveMaximum&quot;</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>());
-    }).<span class='ident'>unwrap</span>(), <span class='boolval'>true</span>).<span class='ident'>is_err</span>());
+    }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>true</span>).<span class='ident'>is_err</span>());
 }
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>validate_minumum</span>() {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>scope</span> <span class='op'>=</span> <span class='ident'>scope</span>::<span class='ident'>Scope</span>::<span class='ident'>new</span>();
     <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>builder</span>::<span class='ident'>schema</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> {
-        <span class='ident'>s</span>.<span class='ident'>minimum</span>(<span class='number'>10f64</span>, <span class='boolval'>false</span>);
-    }).<span class='ident'>into_json</span>(), <span class='boolval'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
+        <span class='ident'>s</span>.<span class='ident'>minimum</span>(<span class='number'>10f64</span>, <span class='boolvalue'>false</span>);
+    }).<span class='ident'>into_json</span>(), <span class='boolvalue'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
 
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>9</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>false</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>10</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>true</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>11</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>true</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>9</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>false</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>10</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>true</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>11</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>true</span>);
 }
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>validate_exclusive_minimum</span>() {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>scope</span> <span class='op'>=</span> <span class='ident'>scope</span>::<span class='ident'>Scope</span>::<span class='ident'>new</span>();
     <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>builder</span>::<span class='ident'>schema</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> {
-        <span class='ident'>s</span>.<span class='ident'>minimum</span>(<span class='number'>10f64</span>, <span class='boolval'>true</span>);
-    }).<span class='ident'>into_json</span>(), <span class='boolval'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
+        <span class='ident'>s</span>.<span class='ident'>minimum</span>(<span class='number'>10f64</span>, <span class='boolvalue'>true</span>);
+    }).<span class='ident'>into_json</span>(), <span class='boolvalue'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
 
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>9</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>false</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>10</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>false</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>11</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolval'>true</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>9</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>false</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>10</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>false</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>11</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>true</span>);
 }
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -334,8 +335,8 @@
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>scope</span> <span class='op'>=</span> <span class='ident'>scope</span>::<span class='ident'>Scope</span>::<span class='ident'>new</span>();
 
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>schema</span><span class='op'>|</span> {
-        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;minimum&quot;</span>, <span class='boolval'>true</span>);
-    }).<span class='ident'>unwrap</span>(), <span class='boolval'>true</span>).<span class='ident'>is_err</span>());
+        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;minimum&quot;</span>, <span class='boolvalue'>true</span>);
+    }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>true</span>).<span class='ident'>is_err</span>());
 }
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -343,13 +344,13 @@
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>scope</span> <span class='op'>=</span> <span class='ident'>scope</span>::<span class='ident'>Scope</span>::<span class='ident'>new</span>();
 
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>schema</span><span class='op'>|</span> {
-        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;exclusiveMinimum&quot;</span>, <span class='boolval'>true</span>);
-    }).<span class='ident'>unwrap</span>(), <span class='boolval'>true</span>).<span class='ident'>is_err</span>());
+        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;exclusiveMinimum&quot;</span>, <span class='boolvalue'>true</span>);
+    }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>true</span>).<span class='ident'>is_err</span>());
 
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>schema</span><span class='op'>|</span> {
         <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;minimum&quot;</span>, <span class='number'>10</span>);
         <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;exclusiveMinimum&quot;</span>, <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>());
-    }).<span class='ident'>unwrap</span>(), <span class='boolval'>true</span>).<span class='ident'>is_err</span>());
+    }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>true</span>).<span class='ident'>is_err</span>());
 }
 
 </pre>
@@ -376,6 +377,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

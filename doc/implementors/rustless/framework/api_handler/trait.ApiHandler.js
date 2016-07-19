@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors['rustless'] = [];
+implementors["rustless"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -43,13 +44,14 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>openssl</a>::<wbr><a href='../index.html'>crypto</a>::<wbr><a href='index.html'>pkey</a>::<wbr><a class='struct' href=''>PKey</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-860' class='srclink' href='../../../src/openssl/crypto/pkey.rs.html#56-59' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-842' class='srclink' href='../../../src/openssl/crypto/pkey.rs.html#46-49' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct PKey {
     // some fields omitted
-}</pre><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></h3><div class='docblock'><p>Represents a public key, optionally with a private key attached.</p>
+}</pre><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-847' class='srclink' href='../../../src/openssl/crypto/pkey.rs.html#55-590' title='goto source code'>[src]</a></span></h3>
+<div class='docblock'><p>Represents a public key, optionally with a private key attached.</p>
 </div><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></h4>
 <h4 id='method.from_handle' class='method'><code>fn <a href='#method.from_handle' class='fnname'>from_handle</a>(handle: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../../openssl_sys/struct.EVP_PKEY.html' title='openssl_sys::EVP_PKEY'>EVP_PKEY</a>, parts: <a class='enum' href='../../../openssl/crypto/pkey/enum.Parts.html' title='openssl::crypto::pkey::Parts'>Parts</a>) -&gt; <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></h4>
 <h4 id='method.private_key_from_pem' class='method'><code>fn <a href='#method.private_key_from_pem' class='fnname'>private_key_from_pem</a>&lt;R&gt;(reader: &amp;mut R) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a>, <a class='enum' href='../../../openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>&gt; <span class='where'>where R: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a></span></code></h4>
@@ -128,10 +130,17 @@ returns the signature.</p>
 </div><h4 id='method.verify_with_hash' class='method'><code>fn <a href='#method.verify_with_hash' class='fnname'>verify_with_hash</a>(&amp;self, h: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, s: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, hash: <a class='enum' href='../../../openssl/crypto/hash/enum.Type.html' title='openssl::crypto::hash::Type'>Type</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <h4 id='method.get_handle' class='method'><code>unsafe fn <a href='#method.get_handle' class='fnname'>get_handle</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../../openssl_sys/struct.EVP_PKEY.html' title='openssl_sys::EVP_PKEY'>EVP_PKEY</a></code></h4>
 <h4 id='method.public_eq' class='method'><code>fn <a href='#method.public_eq' class='fnname'>public_eq</a>(&amp;self, other: &amp;<a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> for <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> for <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; Self</code></h4>
-<h4 id='method.clone_from' class='method'><span class="since">1.0.0</span><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div></section>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> for <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-845' class='srclink' href='../../../src/openssl/crypto/pkey.rs.html#51' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> for <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-846' class='srclink' href='../../../src/openssl/crypto/pkey.rs.html#52' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1063' class='srclink' href='../../../src/openssl/crypto/pkey.rs.html#592-598' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+<div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../../openssl/crypto/pkey/struct.PKey.html' title='openssl::crypto::pkey::PKey'>PKey</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1066' class='srclink' href='../../../src/openssl/crypto/pkey.rs.html#600-615' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; Self</code></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -154,6 +163,8 @@ returns the signature.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

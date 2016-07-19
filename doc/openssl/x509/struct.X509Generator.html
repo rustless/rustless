@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>openssl</a>::<wbr><a href='index.html'>x509</a>::<wbr><a class='struct' href=''>X509Generator</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-3108' class='srclink' href='../../src/openssl/x509/mod.rs.html#145-151' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-3351' class='srclink' href='../../src/openssl/x509/mod.rs.html#150-156' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct X509Generator {
     // some fields omitted
 }</pre><div class='docblock'><p>Generator of private key/certificate pairs</p>
@@ -78,7 +79,8 @@
 <span class='kw'>let</span> <span class='ident'>pkey_path</span> <span class='op'>=</span> <span class='string'>&quot;doc_key.pem&quot;</span>;
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>File</span>::<span class='ident'>create</span>(<span class='ident'>pkey_path</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>pkey</span>.<span class='ident'>write_pem</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>file</span>).<span class='ident'>is_ok</span>());</pre>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-3357' class='srclink' href='../../src/openssl/x509/mod.rs.html#158-415' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a></code></h4>
 <div class='docblock'><p>Creates a new generator with the following defaults:</p>
 
 <p>bit length: 1024</p>
@@ -97,7 +99,7 @@
 
 <pre class='rust rust-example-rendered'>
 <span class='ident'>generator</span>.<span class='ident'>add_name</span>(<span class='string'>&quot;CN&quot;</span>.<span class='ident'>to_string</span>(),<span class='string'>&quot;example.com&quot;</span>.<span class='ident'>to_string</span>());</pre>
-</div><h4 id='method.add_names' class='method'><code>fn <a href='#method.add_names' class='fnname'>add_names</a>&lt;I&gt;(self, attrs: I) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a> <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/trait.IntoIterator.html' title='core::iter::IntoIterator'>IntoIterator</a>&lt;Item=<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;</span></code></h4>
+</div><h4 id='method.add_names' class='method'><code>fn <a href='#method.add_names' class='fnname'>add_names</a>&lt;I&gt;(self, attrs: I) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a> <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html' title='core::iter::traits::IntoIterator'>IntoIterator</a>&lt;Item=<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;</span></code></h4>
 <div class='docblock'><p>Add multiple attributes to the name of the certificate</p>
 
 <pre class='rust rust-example-rendered'>
@@ -112,7 +114,7 @@
 <span class='kw'>use</span> <span class='ident'>openssl</span>::<span class='ident'>x509</span>::<span class='ident'>extension</span>::<span class='ident'>KeyUsageOption</span>::<span class='op'>*</span>;
 
 <span class='ident'>generator</span>.<span class='ident'>add_extension</span>(<span class='ident'>KeyUsage</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>DigitalSignature</span>, <span class='ident'>KeyEncipherment</span>]));</pre>
-</div><h4 id='method.add_extensions' class='method'><code>fn <a href='#method.add_extensions' class='fnname'>add_extensions</a>&lt;I&gt;(self, exts: I) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a> <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/trait.IntoIterator.html' title='core::iter::IntoIterator'>IntoIterator</a>&lt;Item=<a class='enum' href='../../openssl/x509/extension/enum.Extension.html' title='openssl::x509::extension::Extension'>Extension</a>&gt;</span></code></h4>
+</div><h4 id='method.add_extensions' class='method'><code>fn <a href='#method.add_extensions' class='fnname'>add_extensions</a>&lt;I&gt;(self, exts: I) -&gt; <a class='struct' href='../../openssl/x509/struct.X509Generator.html' title='openssl::x509::X509Generator'>X509Generator</a> <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.IntoIterator.html' title='core::iter::traits::IntoIterator'>IntoIterator</a>&lt;Item=<a class='enum' href='../../openssl/x509/extension/enum.Extension.html' title='openssl::x509::extension::Extension'>Extension</a>&gt;</span></code></h4>
 <div class='docblock'><p>Add multiple extensions to a certificate</p>
 
 <p>If any of the extensions already exist, they will be replaced.</p>
@@ -153,6 +155,8 @@ Note: That the bit-length of the private key is used (set_bitlength is ignored)<
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

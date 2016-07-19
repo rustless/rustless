@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>valico</a>::<wbr><a href='../index.html'>common</a>::<wbr><a href='index.html'>error</a>::<wbr><a class='trait' href=''>ValicoError</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-44' class='srclink' href='../../../src/valico/common/error.rs.html#9-14' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-44' class='srclink' href='../../../src/valico/common/error.rs.html#9-14' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ValicoError: <a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> + <a class='trait' href='../../../typeable/trait.Typeable.html' title='typeable::Typeable'>Typeable</a> + <a class='trait' href='../../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a> {
     fn <a href='#tymethod.get_code' class='fnname'>get_code</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>;
     fn <a href='#tymethod.get_path' class='fnname'>get_path</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>;
@@ -59,42 +60,43 @@
         <h3 id='tymethod.get_code' class='method stab '><code>fn <a href='#tymethod.get_code' class='fnname'>get_code</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h3><h3 id='tymethod.get_path' class='method stab '><code>fn <a href='#tymethod.get_path' class='fnname'>get_path</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h3><h3 id='tymethod.get_title' class='method stab '><code>fn <a href='#tymethod.get_title' class='fnname'>get_title</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h3></div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.get_detail' class='method stab '><code>fn <a href='#method.get_detail' class='fnname'>get_detail</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h3></div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a></code></h3><div class='impl-items'><h4 id='method.is' class='method'><code>fn <a href='#method.is' class='fnname'>is</a>&lt;E: <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a>&gt;(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+        <h3 id='method.get_detail' class='method stab '><code>fn <a href='#method.get_detail' class='fnname'>get_detail</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</code></h3></div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-53' class='srclink' href='../../../src/valico/common/error.rs.html#16-28' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.is' class='method'><code>fn <a href='#method.is' class='fnname'>is</a>&lt;E: <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a>&gt;(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Is this <code>Error</code> object of type <code>E</code>?</p>
 </div><h4 id='method.downcast' class='method'><code>fn <a href='#method.downcast' class='fnname'>downcast</a>&lt;E: <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a>&gt;(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;E&gt;</code></h4>
 <div class='docblock'><p>If this error is <code>E</code>, downcast this error to <code>E</code>, by reference.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_dsl/errors/struct.Required.html' title='valico::json_dsl::errors::Required'>Required</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_dsl/errors/struct.WrongType.html' title='valico::json_dsl::errors::WrongType'>WrongType</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_dsl/errors/struct.WrongValue.html' title='valico::json_dsl::errors::WrongValue'>WrongValue</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_dsl/errors/struct.MutuallyExclusive.html' title='valico::json_dsl::errors::MutuallyExclusive'>MutuallyExclusive</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_dsl/errors/struct.ExactlyOne.html' title='valico::json_dsl::errors::ExactlyOne'>ExactlyOne</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_dsl/errors/struct.AtLeastOne.html' title='valico::json_dsl::errors::AtLeastOne'>AtLeastOne</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.WrongType.html' title='valico::json_schema::errors::WrongType'>WrongType</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.MultipleOf.html' title='valico::json_schema::errors::MultipleOf'>MultipleOf</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.Maximum.html' title='valico::json_schema::errors::Maximum'>Maximum</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.Minimum.html' title='valico::json_schema::errors::Minimum'>Minimum</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.MaxLength.html' title='valico::json_schema::errors::MaxLength'>MaxLength</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.MinLength.html' title='valico::json_schema::errors::MinLength'>MinLength</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.Pattern.html' title='valico::json_schema::errors::Pattern'>Pattern</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.MaxItems.html' title='valico::json_schema::errors::MaxItems'>MaxItems</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.MinItems.html' title='valico::json_schema::errors::MinItems'>MinItems</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.UniqueItems.html' title='valico::json_schema::errors::UniqueItems'>UniqueItems</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.Items.html' title='valico::json_schema::errors::Items'>Items</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.MaxProperties.html' title='valico::json_schema::errors::MaxProperties'>MaxProperties</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.MinProperties.html' title='valico::json_schema::errors::MinProperties'>MinProperties</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.Required.html' title='valico::json_schema::errors::Required'>Required</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.Properties.html' title='valico::json_schema::errors::Properties'>Properties</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.Enum.html' title='valico::json_schema::errors::Enum'>Enum</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.AnyOf.html' title='valico::json_schema::errors::AnyOf'>AnyOf</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.OneOf.html' title='valico::json_schema::errors::OneOf'>OneOf</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.Not.html' title='valico::json_schema::errors::Not'>Not</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/common/error/trait.ValicoError.html' title='valico::common::error::ValicoError'>ValicoError</a> for <a class='struct' href='../../../valico/json_schema/errors/struct.Format.html' title='valico::json_schema::errors::Format'>Format</a></code></li>
+    <li><code>impl ValicoError for <a class='struct' href='../../../valico/json_dsl/errors/struct.Required.html' title='valico::json_dsl::errors::Required'>Required</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_dsl/errors/struct.WrongType.html' title='valico::json_dsl::errors::WrongType'>WrongType</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_dsl/errors/struct.WrongValue.html' title='valico::json_dsl::errors::WrongValue'>WrongValue</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_dsl/errors/struct.MutuallyExclusive.html' title='valico::json_dsl::errors::MutuallyExclusive'>MutuallyExclusive</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_dsl/errors/struct.ExactlyOne.html' title='valico::json_dsl::errors::ExactlyOne'>ExactlyOne</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_dsl/errors/struct.AtLeastOne.html' title='valico::json_dsl::errors::AtLeastOne'>AtLeastOne</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.WrongType.html' title='valico::json_schema::errors::WrongType'>WrongType</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.MultipleOf.html' title='valico::json_schema::errors::MultipleOf'>MultipleOf</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.Maximum.html' title='valico::json_schema::errors::Maximum'>Maximum</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.Minimum.html' title='valico::json_schema::errors::Minimum'>Minimum</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.MaxLength.html' title='valico::json_schema::errors::MaxLength'>MaxLength</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.MinLength.html' title='valico::json_schema::errors::MinLength'>MinLength</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.Pattern.html' title='valico::json_schema::errors::Pattern'>Pattern</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.MaxItems.html' title='valico::json_schema::errors::MaxItems'>MaxItems</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.MinItems.html' title='valico::json_schema::errors::MinItems'>MinItems</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.UniqueItems.html' title='valico::json_schema::errors::UniqueItems'>UniqueItems</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.Items.html' title='valico::json_schema::errors::Items'>Items</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.MaxProperties.html' title='valico::json_schema::errors::MaxProperties'>MaxProperties</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.MinProperties.html' title='valico::json_schema::errors::MinProperties'>MinProperties</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.Required.html' title='valico::json_schema::errors::Required'>Required</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.Properties.html' title='valico::json_schema::errors::Properties'>Properties</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.Enum.html' title='valico::json_schema::errors::Enum'>Enum</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.AnyOf.html' title='valico::json_schema::errors::AnyOf'>AnyOf</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.OneOf.html' title='valico::json_schema::errors::OneOf'>OneOf</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.Not.html' title='valico::json_schema::errors::Not'>Not</a></code></li>
+<li><code>impl ValicoError for <a class='struct' href='../../../valico/json_schema/errors/struct.Format.html' title='valico::json_schema::errors::Format'>Format</a></code></li>
 </ul><script type="text/javascript" async
-                              src="../../../implementors/valico/common/error/trait.ValicoError.js">
-                      </script></section>
+                         src="../../../implementors/valico/common/error/trait.ValicoError.js">
+                 </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -117,6 +119,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

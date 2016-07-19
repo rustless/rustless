@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
     
@@ -43,11 +44,11 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='trait' href=''>HeaderFormat</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-5181' class='srclink' href='../../hyper/header/trait.HeaderFormat.html?gotosrc=5181' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait HeaderFormat: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + <a class='trait' href='../../hyper/header/trait.HeaderClone.html' title='hyper::header::HeaderClone'>HeaderClone</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> + <a class='trait' href='../../typeable/trait.Typeable.html' title='typeable::Typeable'>Typeable</a> {
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-5147' class='srclink' href='../../hyper/header/trait.HeaderFormat.html?gotosrc=5147' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait HeaderFormat: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + HeaderClone + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> + <a class='trait' href='../../typeable/trait.Typeable.html' title='typeable::Typeable'>Typeable</a> {
     fn <a href='#tymethod.fmt_header' class='fnname'>fmt_header</a>(&amp;self, f: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;;
 }</pre><div class='docblock'><p>A trait for any object that will represent a header field and value.</p>
 
@@ -59,62 +60,64 @@
 
 <p>This method is not allowed to introduce an Err not produced
 by the passed-in Formatter.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for &amp;'a <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> + 'static + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
-</div>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for &amp;'a <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> + 'static + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a></code></span><span class='out-of-band'></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Accept.html' title='iron::headers::Accept'>Accept</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowCredentials.html' title='iron::headers::AccessControlAllowCredentials'>AccessControlAllowCredentials</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowMethods.html' title='iron::headers::AccessControlAllowMethods'>AccessControlAllowMethods</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../iron/headers/enum.AccessControlAllowOrigin.html' title='iron::headers::AccessControlAllowOrigin'>AccessControlAllowOrigin</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AccessControlExposeHeaders.html' title='iron::headers::AccessControlExposeHeaders'>AccessControlExposeHeaders</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AccessControlMaxAge.html' title='iron::headers::AccessControlMaxAge'>AccessControlMaxAge</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AccessControlRequestHeaders.html' title='iron::headers::AccessControlRequestHeaders'>AccessControlRequestHeaders</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AccessControlRequestMethod.html' title='iron::headers::AccessControlRequestMethod'>AccessControlRequestMethod</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AcceptCharset.html' title='iron::headers::AcceptCharset'>AcceptCharset</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AcceptEncoding.html' title='iron::headers::AcceptEncoding'>AcceptEncoding</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AcceptLanguage.html' title='iron::headers::AcceptLanguage'>AcceptLanguage</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AcceptRanges.html' title='iron::headers::AcceptRanges'>AcceptRanges</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Allow.html' title='iron::headers::Allow'>Allow</a></code></li>
-<li><code>impl&lt;S&gt; <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Authorization.html' title='iron::headers::Authorization'>Authorization</a>&lt;S&gt; <span class='where'>where S: <a class='trait' href='../../iron/headers/trait.Scheme.html' title='iron::headers::Scheme'>Scheme</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>, S::<a class='trait' href='https://doc.rust-lang.org/nightly/core/str/trait.FromStr.html' title='core::str::FromStr'>Err</a>: 'static</span></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.CacheControl.html' title='iron::headers::CacheControl'>CacheControl</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Cookie.html' title='iron::headers::Cookie'>Cookie</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Connection.html' title='iron::headers::Connection'>Connection</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.ContentDisposition.html' title='iron::headers::ContentDisposition'>ContentDisposition</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.ContentEncoding.html' title='iron::headers::ContentEncoding'>ContentEncoding</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.ContentLanguage.html' title='iron::headers::ContentLanguage'>ContentLanguage</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.ContentLength.html' title='iron::headers::ContentLength'>ContentLength</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.ContentRange.html' title='iron::headers::ContentRange'>ContentRange</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.ContentType.html' title='iron::headers::ContentType'>ContentType</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Date.html' title='iron::headers::Date'>Date</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.ETag.html' title='iron::headers::ETag'>ETag</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../iron/headers/enum.Expect.html' title='iron::headers::Expect'>Expect</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Expires.html' title='iron::headers::Expires'>Expires</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.From.html' title='iron::headers::From'>From</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Host.html' title='iron::headers::Host'>Host</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../iron/headers/enum.IfMatch.html' title='iron::headers::IfMatch'>IfMatch</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.IfModifiedSince.html' title='iron::headers::IfModifiedSince'>IfModifiedSince</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../iron/headers/enum.IfNoneMatch.html' title='iron::headers::IfNoneMatch'>IfNoneMatch</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../iron/headers/enum.IfRange.html' title='iron::headers::IfRange'>IfRange</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.IfUnmodifiedSince.html' title='iron::headers::IfUnmodifiedSince'>IfUnmodifiedSince</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.LastModified.html' title='iron::headers::LastModified'>LastModified</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Location.html' title='iron::headers::Location'>Location</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../iron/headers/enum.Pragma.html' title='iron::headers::Pragma'>Pragma</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Prefer.html' title='iron::headers::Prefer'>Prefer</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.PreferenceApplied.html' title='iron::headers::PreferenceApplied'>PreferenceApplied</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../iron/headers/enum.Range.html' title='iron::headers::Range'>Range</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Referer.html' title='iron::headers::Referer'>Referer</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Server.html' title='iron::headers::Server'>Server</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.SetCookie.html' title='iron::headers::SetCookie'>SetCookie</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.StrictTransportSecurity.html' title='iron::headers::StrictTransportSecurity'>StrictTransportSecurity</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.TransferEncoding.html' title='iron::headers::TransferEncoding'>TransferEncoding</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.Upgrade.html' title='iron::headers::Upgrade'>Upgrade</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.UserAgent.html' title='iron::headers::UserAgent'>UserAgent</a></code></li>
-<li><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../iron/headers/enum.Vary.html' title='iron::headers::Vary'>Vary</a></code></li>
+    <li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Accept.html' title='iron::headers::Accept'>Accept</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AccessControlAllowCredentials.html' title='iron::headers::AccessControlAllowCredentials'>AccessControlAllowCredentials</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AccessControlAllowMethods.html' title='iron::headers::AccessControlAllowMethods'>AccessControlAllowMethods</a></code></li>
+<li><code>impl HeaderFormat for <a class='enum' href='../../iron/headers/enum.AccessControlAllowOrigin.html' title='iron::headers::AccessControlAllowOrigin'>AccessControlAllowOrigin</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AccessControlExposeHeaders.html' title='iron::headers::AccessControlExposeHeaders'>AccessControlExposeHeaders</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AccessControlMaxAge.html' title='iron::headers::AccessControlMaxAge'>AccessControlMaxAge</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AccessControlRequestHeaders.html' title='iron::headers::AccessControlRequestHeaders'>AccessControlRequestHeaders</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AccessControlRequestMethod.html' title='iron::headers::AccessControlRequestMethod'>AccessControlRequestMethod</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AcceptCharset.html' title='iron::headers::AcceptCharset'>AcceptCharset</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AcceptEncoding.html' title='iron::headers::AcceptEncoding'>AcceptEncoding</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AcceptLanguage.html' title='iron::headers::AcceptLanguage'>AcceptLanguage</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.AcceptRanges.html' title='iron::headers::AcceptRanges'>AcceptRanges</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Allow.html' title='iron::headers::Allow'>Allow</a></code></li>
+<li><code>impl&lt;S&gt; HeaderFormat for <a class='struct' href='../../iron/headers/struct.Authorization.html' title='iron::headers::Authorization'>Authorization</a>&lt;S&gt; <span class='where'>where S: <a class='trait' href='../../iron/headers/trait.Scheme.html' title='iron::headers::Scheme'>Scheme</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>, S::<a class='trait' href='https://doc.rust-lang.org/nightly/core/str/trait.FromStr.html' title='core::str::FromStr'>Err</a>: 'static</span></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.CacheControl.html' title='iron::headers::CacheControl'>CacheControl</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Cookie.html' title='iron::headers::Cookie'>Cookie</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Connection.html' title='iron::headers::Connection'>Connection</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.ContentDisposition.html' title='iron::headers::ContentDisposition'>ContentDisposition</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.ContentEncoding.html' title='iron::headers::ContentEncoding'>ContentEncoding</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.ContentLanguage.html' title='iron::headers::ContentLanguage'>ContentLanguage</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.ContentLength.html' title='iron::headers::ContentLength'>ContentLength</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.ContentRange.html' title='iron::headers::ContentRange'>ContentRange</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.ContentType.html' title='iron::headers::ContentType'>ContentType</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Date.html' title='iron::headers::Date'>Date</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.ETag.html' title='iron::headers::ETag'>ETag</a></code></li>
+<li><code>impl HeaderFormat for <a class='enum' href='../../iron/headers/enum.Expect.html' title='iron::headers::Expect'>Expect</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Expires.html' title='iron::headers::Expires'>Expires</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.From.html' title='iron::headers::From'>From</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Host.html' title='iron::headers::Host'>Host</a></code></li>
+<li><code>impl HeaderFormat for <a class='enum' href='../../iron/headers/enum.IfMatch.html' title='iron::headers::IfMatch'>IfMatch</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.IfModifiedSince.html' title='iron::headers::IfModifiedSince'>IfModifiedSince</a></code></li>
+<li><code>impl HeaderFormat for <a class='enum' href='../../iron/headers/enum.IfNoneMatch.html' title='iron::headers::IfNoneMatch'>IfNoneMatch</a></code></li>
+<li><code>impl HeaderFormat for <a class='enum' href='../../iron/headers/enum.IfRange.html' title='iron::headers::IfRange'>IfRange</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.IfUnmodifiedSince.html' title='iron::headers::IfUnmodifiedSince'>IfUnmodifiedSince</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.LastModified.html' title='iron::headers::LastModified'>LastModified</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Location.html' title='iron::headers::Location'>Location</a></code></li>
+<li><code>impl HeaderFormat for <a class='enum' href='../../iron/headers/enum.Pragma.html' title='iron::headers::Pragma'>Pragma</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Prefer.html' title='iron::headers::Prefer'>Prefer</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.PreferenceApplied.html' title='iron::headers::PreferenceApplied'>PreferenceApplied</a></code></li>
+<li><code>impl HeaderFormat for <a class='enum' href='../../iron/headers/enum.Range.html' title='iron::headers::Range'>Range</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Referer.html' title='iron::headers::Referer'>Referer</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Server.html' title='iron::headers::Server'>Server</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.SetCookie.html' title='iron::headers::SetCookie'>SetCookie</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.StrictTransportSecurity.html' title='iron::headers::StrictTransportSecurity'>StrictTransportSecurity</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.TransferEncoding.html' title='iron::headers::TransferEncoding'>TransferEncoding</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.Upgrade.html' title='iron::headers::Upgrade'>Upgrade</a></code></li>
+<li><code>impl HeaderFormat for <a class='struct' href='../../iron/headers/struct.UserAgent.html' title='iron::headers::UserAgent'>UserAgent</a></code></li>
+<li><code>impl HeaderFormat for <a class='enum' href='../../iron/headers/enum.Vary.html' title='iron::headers::Vary'>Vary</a></code></li>
 </ul><script type="text/javascript" async
-                              src="../../implementors/hyper/header/trait.HeaderFormat.js">
-                      </script></section>
+                         src="../../implementors/hyper/header/trait.HeaderFormat.js">
+                 </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -137,6 +140,8 @@ by the passed-in Formatter.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

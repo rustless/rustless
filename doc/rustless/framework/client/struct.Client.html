@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>framework</a>::<wbr><a href='index.html'>client</a>::<wbr><a class='struct' href=''>Client</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-1007' class='srclink' href='../../../src/rustless/src/framework/client.rs.html#16-23' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-991' class='srclink' href='../../../src/rustless/src/framework/client.rs.html#16-23' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Client&lt;'a&gt; {
     pub app: &amp;'a <a class='struct' href='../../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a>,
     pub endpoint: &amp;'a <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>,
@@ -56,12 +57,13 @@
     pub response: <a class='struct' href='../../../rustless/struct.Response.html' title='rustless::Response'>Response</a>,
 }</pre><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
-                                  <td id='structfield.app'><code>app</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.endpoint'><code>endpoint</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.request'><code>request</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.media'><code>media</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.ext'><code>ext</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.response'><code>response</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;'r&gt;(app: &amp;'a <a class='struct' href='../../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a>, endpoint: &amp;'a <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>, request: &amp;'a mut <a class='trait' href='../../../rustless/backend/request/trait.Request.html' title='rustless::backend::request::Request'>Request</a> + 'r, media: &amp;'a <a class='struct' href='../../../rustless/framework/media/struct.Media.html' title='rustless::framework::media::Media'>Media</a>) -&gt; <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></h4>
+                             <td id='structfield.app'><code>app</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.endpoint'><code>endpoint</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.request'><code>request</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.media'><code>media</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.ext'><code>ext</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.response'><code>response</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1001' class='srclink' href='../../../src/rustless/src/framework/client.rs.html#27-155' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;'r&gt;(app: &amp;'a <a class='struct' href='../../../rustless/framework/app/struct.Application.html' title='rustless::framework::app::Application'>Application</a>, endpoint: &amp;'a <a class='struct' href='../../../rustless/framework/endpoint/struct.Endpoint.html' title='rustless::framework::endpoint::Endpoint'>Endpoint</a>, request: &amp;'a mut <a class='trait' href='../../../rustless/backend/request/trait.Request.html' title='rustless::backend::request::Request'>Request</a> + 'r, media: &amp;'a <a class='struct' href='../../../rustless/framework/media/struct.Media.html' title='rustless::framework::media::Media'>Media</a>) -&gt; <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></h4>
 <h4 id='method.status' class='method'><code>fn <a href='#method.status' class='fnname'>status</a>(&amp;mut self) -&gt; <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h4>
 <h4 id='method.set_status' class='method'><code>fn <a href='#method.set_status' class='fnname'>set_status</a>(&amp;mut self, status: <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>)</code></h4>
 <h4 id='method.unauthorized' class='method'><code>fn <a href='#method.unauthorized' class='fnname'>unauthorized</a>(&amp;mut self)</code></h4>
@@ -82,8 +84,9 @@
 <h4 id='method.move_response' class='method'><code>fn <a href='#method.move_response' class='fnname'>move_response</a>(self) -&gt; <a class='struct' href='../../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></h4>
 <h4 id='method.ext' class='method'><code>fn <a href='#method.ext' class='fnname'>ext</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
 <h4 id='method.ext_mut' class='method'><code>fn <a href='#method.ext_mut' class='fnname'>ext_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='trait' href='../../../rustless/trait.Extensible.html' title='rustless::Extensible'>Extensible</a> for <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.ext-1' class='method'><code>fn <a href='../../../rustless/trait.Extensible.html#method.ext' class='fnname'>ext</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
-<h4 id='method.ext_mut-1' class='method'><code>fn <a href='../../../rustless/trait.Extensible.html#method.ext_mut' class='fnname'>ext_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='trait' href='../../../rustless/trait.Extensible.html' title='rustless::Extensible'>Extensible</a> for <a class='struct' href='../../../rustless/framework/client/struct.Client.html' title='rustless::framework::client::Client'>Client</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1068' class='srclink' href='../../../src/rustless/src/framework/client.rs.html#157-160' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.ext-1' class='method'><code>fn <a href='../../../rustless/trait.Extensible.html#tymethod.ext' class='fnname'>ext</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
+<h4 id='method.ext_mut-1' class='method'><code>fn <a href='../../../rustless/trait.Extensible.html#tymethod.ext_mut' class='fnname'>ext_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -107,6 +110,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

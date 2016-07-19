@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -43,28 +44,31 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>valico</a>::<wbr><a href='../index.html'>json_dsl</a>::<wbr><a href='index.html'>validators</a>::<wbr><a class='trait' href=''>Validator</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-887' class='srclink' href='../../../src/valico/json_dsl/validators/mod.rs.html#37-39' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-861' class='srclink' href='../../../src/valico/json_dsl/validators/mod.rs.html#37-39' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Validator {
     fn <a href='#tymethod.validate' class='fnname'>validate</a>(&amp;self, item: &amp;<a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../../valico/json_dsl/validators/type.ValidatorResult.html' title='valico::json_dsl::validators::ValidatorResult'>ValidatorResult</a>;
 }</pre>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.validate' class='method stab '><code>fn <a href='#tymethod.validate' class='fnname'>validate</a>(&amp;self, item: &amp;<a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../../valico/json_dsl/validators/type.ValidatorResult.html' title='valico::json_dsl::validators::ValidatorResult'>ValidatorResult</a></code></h3></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='trait' href='../../../valico/json_dsl/validators/trait.Validator.html' title='valico::json_dsl::validators::Validator'>Validator</a> + 'static</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div>
+        <h3 id='tymethod.validate' class='method stab '><code>fn <a href='#tymethod.validate' class='fnname'>validate</a>(&amp;self, item: &amp;<a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../../valico/json_dsl/validators/type.ValidatorResult.html' title='valico::json_dsl::validators::ValidatorResult'>ValidatorResult</a></code></h3></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='trait' href='../../../valico/json_dsl/validators/trait.Validator.html' title='valico::json_dsl::validators::Validator'>Validator</a> + 'static</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-866' class='srclink' href='../../../src/valico/json_dsl/validators/mod.rs.html#41-45' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl <a class='trait' href='../../../valico/json_dsl/validators/trait.Validator.html' title='valico::json_dsl::validators::Validator'>Validator</a> for <a class='struct' href='../../../valico/json_dsl/validators/struct.AllowedValues.html' title='valico::json_dsl::validators::AllowedValues'>AllowedValues</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/json_dsl/validators/trait.Validator.html' title='valico::json_dsl::validators::Validator'>Validator</a> for <a class='struct' href='../../../valico/json_dsl/validators/struct.AtLeastOneOf.html' title='valico::json_dsl::validators::AtLeastOneOf'>AtLeastOneOf</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/json_dsl/validators/trait.Validator.html' title='valico::json_dsl::validators::Validator'>Validator</a> for <a class='struct' href='../../../valico/json_dsl/validators/struct.ExactlyOneOf.html' title='valico::json_dsl::validators::ExactlyOneOf'>ExactlyOneOf</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/json_dsl/validators/trait.Validator.html' title='valico::json_dsl::validators::Validator'>Validator</a> for <a class='struct' href='../../../valico/json_dsl/validators/struct.MutuallyExclusive.html' title='valico::json_dsl::validators::MutuallyExclusive'>MutuallyExclusive</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/json_dsl/validators/trait.Validator.html' title='valico::json_dsl::validators::Validator'>Validator</a> for <a class='struct' href='../../../regex/re_unicode/struct.Regex.html' title='regex::re_unicode::Regex'>Regex</a></code></li>
-<li><code>impl <a class='trait' href='../../../valico/json_dsl/validators/trait.Validator.html' title='valico::json_dsl::validators::Validator'>Validator</a> for <a class='struct' href='../../../valico/json_dsl/validators/struct.RejectedValues.html' title='valico::json_dsl::validators::RejectedValues'>RejectedValues</a></code></li>
+    <li><code>impl Validator for <a class='struct' href='../../../valico/json_dsl/validators/struct.AllowedValues.html' title='valico::json_dsl::validators::AllowedValues'>AllowedValues</a></code></li>
+<li><code>impl Validator for <a class='struct' href='../../../valico/json_dsl/validators/struct.AtLeastOneOf.html' title='valico::json_dsl::validators::AtLeastOneOf'>AtLeastOneOf</a></code></li>
+<li><code>impl Validator for <a class='struct' href='../../../valico/json_dsl/validators/struct.ExactlyOneOf.html' title='valico::json_dsl::validators::ExactlyOneOf'>ExactlyOneOf</a></code></li>
+<li><code>impl Validator for <a class='struct' href='../../../valico/json_dsl/validators/struct.MutuallyExclusive.html' title='valico::json_dsl::validators::MutuallyExclusive'>MutuallyExclusive</a></code></li>
+<li><code>impl Validator for <a class='struct' href='../../../regex/re_unicode/struct.Regex.html' title='regex::re_unicode::Regex'>Regex</a></code></li>
+<li><code>impl Validator for <a class='struct' href='../../../valico/json_dsl/validators/struct.RejectedValues.html' title='valico::json_dsl::validators::RejectedValues'>RejectedValues</a></code></li>
+<li><code>impl&lt;T&gt; Validator for T <span class='where'>where T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;<a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../../valico/json_dsl/validators/type.ValidatorResult.html' title='valico::json_dsl::validators::ValidatorResult'>ValidatorResult</a></span></code></li>
 </ul><script type="text/javascript" async
-                              src="../../../implementors/valico/json_dsl/validators/trait.Validator.js">
-                      </script></section>
+                         src="../../../implementors/valico/json_dsl/validators/trait.Validator.js">
+                 </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -87,6 +91,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

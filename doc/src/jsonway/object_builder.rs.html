@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/jsonway-0.3.5/src/object_builder.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/jsonway-0.3.5/src/object_builder.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>object_builder.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -182,8 +183,8 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>ObjectBuilder</span> {
         <span class='ident'>ObjectBuilder</span> { 
             <span class='ident'>object</span>: <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span>::<span class='ident'>new</span>(), 
-            <span class='ident'>null</span>: <span class='boolval'>false</span>,
-            <span class='ident'>skip</span>: <span class='boolval'>false</span>,
+            <span class='ident'>null</span>: <span class='boolvalue'>false</span>,
+            <span class='ident'>skip</span>: <span class='boolvalue'>false</span>,
             <span class='ident'>root</span>: <span class='prelude-val'>None</span>
         }
     }
@@ -193,8 +194,8 @@
         <span class='kw'>match</span> <span class='ident'>object</span> {
             <span class='ident'>json</span>::<span class='ident'>Json</span>::<span class='ident'>Object</span>(<span class='ident'>object</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>ObjectBuilder</span> { 
                 <span class='ident'>object</span>: <span class='ident'>object</span>, 
-                <span class='ident'>null</span>: <span class='boolval'>false</span>,
-                <span class='ident'>skip</span>: <span class='boolval'>false</span>,
+                <span class='ident'>null</span>: <span class='boolvalue'>false</span>,
+                <span class='ident'>skip</span>: <span class='boolvalue'>false</span>,
                 <span class='ident'>root</span>: <span class='prelude-val'>None</span>
             }),
             _ <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>
@@ -211,12 +212,12 @@
 
     <span class='doccomment'>/// It you call `null`, this object will be converted to null.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>null</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='self'>self</span>.<span class='ident'>null</span> <span class='op'>=</span> <span class='boolval'>true</span>;
+        <span class='self'>self</span>.<span class='ident'>null</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
     }
 
     <span class='doccomment'>/// It you call `skip`, this object will be skipped.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>skip</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='self'>self</span>.<span class='ident'>skip</span> <span class='op'>=</span> <span class='boolval'>true</span>;
+        <span class='self'>self</span>.<span class='ident'>skip</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
     }
 
     <span class='comment'>// Set custom root for result json::Json object</span>
@@ -312,6 +313,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

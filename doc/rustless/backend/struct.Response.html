@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>rustless</a>::<wbr><a href='index.html'>backend</a>::<wbr><a class='struct' href=''>Response</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-321' class='srclink' href='../../src/rustless/src/backend/response.rs.html#11-16' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-321' class='srclink' href='../../src/rustless/src/backend/response.rs.html#11-16' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Response {
     pub status: <a class='enum' href='../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>,
     pub headers: <a class='struct' href='../../rustless/server/header/struct.Headers.html' title='rustless::server::header::Headers'>Headers</a>,
@@ -54,17 +55,19 @@
     pub ext: <a class='struct' href='../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a>,
 }</pre><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
-                                  <td id='structfield.status'><code>status</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.headers'><code>headers</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.body'><code>body</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.ext'><code>ext</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(status: <a class='enum' href='../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>) -&gt; <a class='struct' href='../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></h4>
+                             <td id='structfield.status'><code>status</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.headers'><code>headers</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.body'><code>body</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.ext'><code>ext</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-326' class='srclink' href='../../src/rustless/src/backend/response.rs.html#18-59' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(status: <a class='enum' href='../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>) -&gt; <a class='struct' href='../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></h4>
 <h4 id='method.from' class='method'><code>fn <a href='#method.from' class='fnname'>from</a>(status: <a class='enum' href='../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>, body: <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../rustless/backend/trait.WriteBody.html' title='rustless::backend::WriteBody'>WriteBody</a>&gt;) -&gt; <a class='struct' href='../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></h4>
 <h4 id='method.set_header' class='method'><code>fn <a href='#method.set_header' class='fnname'>set_header</a>&lt;H: <a class='trait' href='../../rustless/server/header/trait.Header.html' title='rustless::server::header::Header'>Header</a> + <a class='trait' href='../../rustless/server/header/trait.HeaderFormat.html' title='rustless::server::header::HeaderFormat'>HeaderFormat</a>&gt;(&amp;mut self, header: H)</code></h4>
 <h4 id='method.set_json_content_type' class='method'><code>fn <a href='#method.set_json_content_type' class='fnname'>set_json_content_type</a>(&amp;mut self)</code></h4>
 <h4 id='method.from_json' class='method'><code>fn <a href='#method.from_json' class='fnname'>from_json</a>(status: <a class='enum' href='../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a>, body: &amp;<a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>) -&gt; <a class='struct' href='../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></h4>
 <h4 id='method.replace_body' class='method'><code>fn <a href='#method.replace_body' class='fnname'>replace_body</a>(&amp;mut self, body: <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../rustless/backend/trait.WriteBody.html' title='rustless::backend::WriteBody'>WriteBody</a>&gt;)</code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../rustless/trait.Extensible.html' title='rustless::Extensible'>Extensible</a> for <a class='struct' href='../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></h3><div class='impl-items'><h4 id='method.ext' class='method'><code>fn <a href='../../rustless/trait.Extensible.html#method.ext' class='fnname'>ext</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
-<h4 id='method.ext_mut' class='method'><code>fn <a href='../../rustless/trait.Extensible.html#method.ext_mut' class='fnname'>ext_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../rustless/trait.Extensible.html' title='rustless::Extensible'>Extensible</a> for <a class='struct' href='../../rustless/struct.Response.html' title='rustless::Response'>Response</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-345' class='srclink' href='../../src/rustless/src/lib.rs.html#48-51' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.ext' class='method'><code>fn <a href='../../rustless/trait.Extensible.html#tymethod.ext' class='fnname'>ext</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
+<h4 id='method.ext_mut' class='method'><code>fn <a href='../../rustless/trait.Extensible.html#tymethod.ext_mut' class='fnname'>ext_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../../typemap/struct.TypeMap.html' title='typemap::TypeMap'>TypeMap</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -88,6 +91,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

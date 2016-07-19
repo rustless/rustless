@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
+    
 
     
     
@@ -172,8 +173,8 @@
 <span class='kw'>use</span> {<span class='ident'>Extensible</span>};
 <span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>method</span>;
 <span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>header</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>request</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>super</span>::<span class='ident'>errors</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>request</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>errors</span>;
 <span class='kw'>use</span> <span class='ident'>backend</span>::{<span class='ident'>Request</span>, <span class='ident'>Url</span>, <span class='ident'>AsUrl</span>, <span class='ident'>WrapUrl</span>};
 
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
@@ -303,6 +304,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

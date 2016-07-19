@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>framework</a>::<wbr><a href='index.html'>path</a>::<wbr><a class='struct' href=''>MATCHER</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span></span></h1>
 <pre class='rust struct'>pub struct MATCHER {
     // some fields omitted
 }</pre><h2 id='deref-methods'>Methods from <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a class='struct' href='../../../regex/re_unicode/struct.Regex.html' title='regex::re_unicode::Regex'>Regex</a>&gt;</h2><div class='impl-items'><h4 id='method.is_match' class='method'><code>fn <a href='#method.is_match' class='fnname'>is_match</a>(&amp;self, text: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
@@ -292,9 +293,12 @@ text, but <code>shortest_match</code> can give up as soon as it sees the first
 <div class='docblock'><p>Returns an iterator over the capture names.</p>
 </div><h4 id='method.captures_len' class='method'><code>fn <a href='#method.captures_len' class='fnname'>captures_len</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
 <div class='docblock'><p>Returns the number of captures.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../../rustless/framework/path/struct.MATCHER.html' title='rustless::framework::path::MATCHER'>MATCHER</a></code></h3><div class='impl-items'><h4 id='associatedtype.Target' class='type'><code>type Target = <a class='struct' href='../../../regex/re_unicode/struct.Regex.html' title='regex::re_unicode::Regex'>Regex</a></code></h4>
-<h4 id='method.deref' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a <a class='struct' href='../../../regex/re_unicode/struct.Regex.html' title='regex::re_unicode::Regex'>Regex</a></code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../../rustless/framework/path/struct.MATCHER.html' title='rustless::framework::path::MATCHER'>MATCHER</a></code></span><span class='out-of-band'></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Target' class='type'><code>type <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#associatedtype.Target' class='type'>Target</a> = <a class='struct' href='../../../regex/re_unicode/struct.Regex.html' title='regex::re_unicode::Regex'>Regex</a></code></h4>
+<div class='docblock'><p>The resulting type after dereferencing</p>
+</div><h4 id='method.deref' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#tymethod.deref' class='fnname'>deref</a>&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a <a class='struct' href='../../../regex/re_unicode/struct.Regex.html' title='regex::re_unicode::Regex'>Regex</a></code></h4>
+<div class='docblock'><p>The method called to dereference a value</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -317,6 +321,8 @@ text, but <code>shortest_match</code> can give up as soon as it sees the first
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

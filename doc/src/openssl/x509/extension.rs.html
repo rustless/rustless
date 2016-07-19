@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.10/src/x509/extension.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.7.14/src/x509/extension.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>extension.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -261,8 +262,10 @@
 <span id="218">218</span>
 <span id="219">219</span>
 <span id="220">220</span>
+<span id="221">221</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
+
 <span class='kw'>use</span> <span class='ident'>nid</span>::<span class='ident'>Nid</span>;
 
 <span class='doccomment'>/// Type-only version of the `Extension` enum.</span>
@@ -343,7 +346,7 @@
         }
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_name</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_name</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
         <span class='kw'>match</span> <span class='self'>self</span> {
             <span class='kw-2'>&amp;</span><span class='ident'>ExtensionType</span>::<span class='ident'>OtherStr</span>(<span class='kw-2'>ref</span> <span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>s</span>),
             _ <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
@@ -506,6 +509,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

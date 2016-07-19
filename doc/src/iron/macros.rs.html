@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/iron-0.3.0/src/macros.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/iron-0.3.0/src/macros.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>macros.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
     
@@ -104,12 +105,12 @@
 <span class='doccomment'>///</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>itry</span> {
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>itry</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>status</span>::<span class='ident'>InternalServerError</span>));
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>itry</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span>, <span class='macro-nonterminal'>$</span><span class='kw'>crate</span>::<span class='macro-nonterminal'>status</span>::<span class='ident'>InternalServerError</span>));
 
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='kw'>match</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span> {
         ::<span class='ident'>std</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span>::<span class='prelude-val'>Ok</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='ident'>val</span>,
         ::<span class='ident'>std</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span>::<span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> ::<span class='ident'>std</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span>::<span class='prelude-val'>Err</span>(
-            <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>IronError</span>::<span class='ident'>new</span>(<span class='ident'>err</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>))
+            <span class='macro-nonterminal'>$</span><span class='kw'>crate</span>::<span class='macro-nonterminal'>IronError</span>::<span class='ident'>new</span>(<span class='ident'>err</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>))
     })
 }
 
@@ -117,11 +118,11 @@
 <span class='doccomment'>/// modifier. The default modifier is `status::BadRequest`.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>iexpect</span> {
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>iexpect</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>status</span>::<span class='ident'>BadRequest</span>));
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>iexpect</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>, <span class='macro-nonterminal'>$</span><span class='kw'>crate</span>::<span class='macro-nonterminal'>status</span>::<span class='ident'>BadRequest</span>));
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='kw'>match</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span> {
         ::<span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span>::<span class='prelude-val'>Some</span>(<span class='ident'>x</span>) <span class='op'>=&gt;</span> <span class='ident'>x</span>,
         ::<span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span>::<span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> ::<span class='ident'>std</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span>::<span class='prelude-val'>Ok</span>(
-            <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>response</span>::<span class='ident'>Response</span>::<span class='ident'>with</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>))
+            <span class='macro-nonterminal'>$</span><span class='kw'>crate</span>::<span class='macro-nonterminal'>response</span>::<span class='ident'>Response</span>::<span class='ident'>with</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>))
     })
 }
 </pre>
@@ -148,6 +149,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

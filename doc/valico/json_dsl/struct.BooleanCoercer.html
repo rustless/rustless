@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -43,15 +44,20 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>valico</a>::<wbr><a href='index.html'>json_dsl</a>::<wbr><a class='struct' href=''>BooleanCoercer</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-344' class='srclink' href='../../src/valico/json_dsl/coercers.rs.html#161' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct BooleanCoercer;</pre><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../valico/json_dsl/trait.Coercer.html' title='valico::json_dsl::Coercer'>Coercer</a> for <a class='struct' href='../../valico/json_dsl/struct.BooleanCoercer.html' title='valico::json_dsl::BooleanCoercer'>BooleanCoercer</a></code></h3><div class='impl-items'><h4 id='method.get_primitive_type' class='method'><code>fn <a href='../../valico/json_dsl/trait.Coercer.html#method.get_primitive_type' class='fnname'>get_primitive_type</a>(&amp;self) -&gt; <a class='enum' href='../../valico/json_dsl/enum.PrimitiveType.html' title='valico::json_dsl::PrimitiveType'>PrimitiveType</a></code></h4>
-<h4 id='method.coerce' class='method'><code>fn <a href='../../valico/json_dsl/trait.Coercer.html#method.coerce' class='fnname'>coerce</a>(&amp;self, val: &amp;mut <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, path: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; CoercerResult&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>&gt;&gt;</code></h4>
-</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../valico/json_dsl/struct.BooleanCoercer.html' title='valico::json_dsl::BooleanCoercer'>BooleanCoercer</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../valico/json_dsl/struct.BooleanCoercer.html' title='valico::json_dsl::BooleanCoercer'>BooleanCoercer</a></code></h4>
-<h4 id='method.clone_from' class='method'><span class="since">1.0.0</span><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../../valico/json_dsl/struct.BooleanCoercer.html' title='valico::json_dsl::BooleanCoercer'>BooleanCoercer</a></code></h3><div class='impl-items'></div></section>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-332' class='srclink' href='../../src/valico/json_dsl/coercers.rs.html#161' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct BooleanCoercer;</pre><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../valico/json_dsl/trait.Coercer.html' title='valico::json_dsl::Coercer'>Coercer</a> for <a class='struct' href='../../valico/json_dsl/struct.BooleanCoercer.html' title='valico::json_dsl::BooleanCoercer'>BooleanCoercer</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-338' class='srclink' href='../../src/valico/json_dsl/coercers.rs.html#163-191' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.get_primitive_type' class='method'><code>fn <a href='../../valico/json_dsl/trait.Coercer.html#tymethod.get_primitive_type' class='fnname'>get_primitive_type</a>(&amp;self) -&gt; <a class='enum' href='../../valico/json_dsl/enum.PrimitiveType.html' title='valico::json_dsl::PrimitiveType'>PrimitiveType</a></code></h4>
+<h4 id='method.coerce' class='method'><code>fn <a href='../../valico/json_dsl/trait.Coercer.html#tymethod.coerce' class='fnname'>coerce</a>(&amp;self, val: &amp;mut <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, path: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; CoercerResult&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>&gt;&gt;</code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../valico/json_dsl/struct.BooleanCoercer.html' title='valico::json_dsl::BooleanCoercer'>BooleanCoercer</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-334' class='srclink' href='../../src/valico/json_dsl/coercers.rs.html#160' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../valico/json_dsl/struct.BooleanCoercer.html' title='valico::json_dsl::BooleanCoercer'>BooleanCoercer</a></code></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../../valico/json_dsl/struct.BooleanCoercer.html' title='valico::json_dsl::BooleanCoercer'>BooleanCoercer</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-337' class='srclink' href='../../src/valico/json_dsl/coercers.rs.html#160' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -74,6 +80,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

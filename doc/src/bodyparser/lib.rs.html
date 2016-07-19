@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/bodyparser-0.0.6/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/bodyparser-0.3.0/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -186,6 +187,8 @@
 <span id="143">143</span>
 <span id="144">144</span>
 <span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_name</span> <span class='op'>=</span> <span class='string'>&quot;bodyparser&quot;</span>]</span>
 
@@ -194,11 +197,13 @@
 <span class='doccomment'>//! This plugin parses JSON out of an incoming Request.</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>plugin</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>persistent</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde_json</span>;
 
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::{<span class='ident'>json</span>, <span class='ident'>Decodable</span>};
+<span class='kw'>use</span> <span class='ident'>serde</span>::<span class='ident'>Deserialize</span>;
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>from_str</span>, <span class='ident'>from_value</span>};
 
 <span class='kw'>use</span> <span class='ident'>iron</span>::<span class='ident'>mime</span>;
 <span class='kw'>use</span> <span class='ident'>iron</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -255,10 +260,10 @@
     <span class='kw'>fn</span> <span class='ident'>eval</span>(<span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, <span class='ident'>BodyError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>need_read</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>headers</span>::<span class='ident'>ContentType</span><span class='op'>&gt;</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>header</span><span class='op'>|</span> {
             <span class='kw'>match</span> <span class='op'>*</span><span class='op'>*</span><span class='ident'>header</span> {
-                <span class='ident'>mime</span>::<span class='ident'>Mime</span>(<span class='ident'>mime</span>::<span class='ident'>TopLevel</span>::<span class='ident'>Multipart</span>, <span class='ident'>mime</span>::<span class='ident'>SubLevel</span>::<span class='ident'>FormData</span>, _) <span class='op'>=&gt;</span> <span class='boolval'>false</span>,
-                _ <span class='op'>=&gt;</span> <span class='boolval'>true</span>
+                <span class='ident'>mime</span>::<span class='ident'>Mime</span>(<span class='ident'>mime</span>::<span class='ident'>TopLevel</span>::<span class='ident'>Multipart</span>, <span class='ident'>mime</span>::<span class='ident'>SubLevel</span>::<span class='ident'>FormData</span>, _) <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+                _ <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>
             }
-        }).<span class='ident'>unwrap_or</span>(<span class='boolval'>false</span>);
+        }).<span class='ident'>unwrap_or</span>(<span class='boolvalue'>false</span>);
 
         <span class='kw'>if</span> <span class='ident'>need_read</span> {
             <span class='kw'>let</span> <span class='ident'>max_length</span> <span class='op'>=</span> <span class='ident'>req</span>
@@ -280,20 +285,20 @@
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Json</span>;
 <span class='kw'>impl</span> <span class='ident'>Key</span> <span class='kw'>for</span> <span class='ident'>Json</span> {
-    <span class='kw'>type</span> <span class='ident'>Value</span> <span class='op'>=</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>json</span>::<span class='ident'>Json</span><span class='op'>&gt;</span>;
+    <span class='kw'>type</span> <span class='ident'>Value</span> <span class='op'>=</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>serde_json</span>::<span class='ident'>Value</span><span class='op'>&gt;</span>;
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> <span class='ident'>plugin</span>::<span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>Json</span> {
     <span class='kw'>type</span> <span class='ident'>Error</span> <span class='op'>=</span> <span class='ident'>BodyError</span>;
 
-    <span class='kw'>fn</span> <span class='ident'>eval</span>(<span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>json</span>::<span class='ident'>Json</span><span class='op'>&gt;</span>, <span class='ident'>BodyError</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>eval</span>(<span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>serde_json</span>::<span class='ident'>Value</span><span class='op'>&gt;</span>, <span class='ident'>BodyError</span><span class='op'>&gt;</span> {
         <span class='ident'>req</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>Raw</span><span class='op'>&gt;</span>()
             .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>maybe_body</span><span class='op'>|</span> {
-                <span class='ident'>reverse_option</span>(<span class='ident'>maybe_body</span>.<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>body</span><span class='op'>|</span> <span class='ident'>body</span>.<span class='ident'>parse</span>()))
+                <span class='ident'>reverse_option</span>(<span class='ident'>maybe_body</span>.<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>body</span><span class='op'>|</span> <span class='ident'>from_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>body</span>)))
                     .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> {
                         <span class='ident'>BodyError</span> {
                             <span class='ident'>detail</span>: <span class='string'>&quot;Can&#39;t parse body to JSON&quot;</span>.<span class='ident'>to_string</span>(),
-                            <span class='ident'>cause</span>: <span class='ident'>BodyErrorCause</span>::<span class='ident'>ParserError</span>(<span class='ident'>err</span>)
+                            <span class='ident'>cause</span>: <span class='ident'>BodyErrorCause</span>::<span class='ident'>JsonError</span>(<span class='ident'>err</span>)
                         }
                     })
             })
@@ -302,24 +307,24 @@
 
 <span class='doccomment'>/// Struct is a plugin to parse a request body into a struct.</span>
 <span class='doccomment'>/// Uses Raw plugin to parse the body with limit.</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Struct</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Decodable</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Struct</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Deserialize</span><span class='op'>&gt;</span> {
     <span class='ident'>marker</span>: <span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>
 }
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Key</span> <span class='kw'>for</span> <span class='ident'>Struct</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Decodable</span> <span class='op'>+</span> <span class='ident'>Any</span> {
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Key</span> <span class='kw'>for</span> <span class='ident'>Struct</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Deserialize</span> <span class='op'>+</span> <span class='ident'>Any</span> {
     <span class='kw'>type</span> <span class='ident'>Value</span> <span class='op'>=</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>;
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span>, <span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>plugin</span>::<span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='ident'>Request</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;&gt;</span> <span class='kw'>for</span> <span class='ident'>Struct</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>
-<span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Decodable</span> <span class='op'>+</span> <span class='ident'>Any</span> {
+<span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Deserialize</span> <span class='op'>+</span> <span class='ident'>Any</span> {
     <span class='kw'>type</span> <span class='ident'>Error</span> <span class='op'>=</span> <span class='ident'>BodyError</span>;
 
     <span class='kw'>fn</span> <span class='ident'>eval</span>(<span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>, <span class='ident'>BodyError</span><span class='op'>&gt;</span> {
         <span class='ident'>req</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>Json</span><span class='op'>&gt;</span>()
             .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>maybe_body</span><span class='op'>|</span> {
-                <span class='ident'>reverse_option</span>(<span class='ident'>maybe_body</span>.<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>body</span><span class='op'>|</span> <span class='ident'>Decodable</span>::<span class='ident'>decode</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>json</span>::<span class='ident'>Decoder</span>::<span class='ident'>new</span>(<span class='ident'>body</span>))))
+                <span class='ident'>reverse_option</span>(<span class='ident'>maybe_body</span>.<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>body</span><span class='op'>|</span> <span class='ident'>from_value</span>(<span class='ident'>body</span>)))
                     .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> <span class='ident'>BodyError</span> {
                         <span class='ident'>detail</span>: <span class='string'>&quot;Can&#39;t parse body to the struct&quot;</span>.<span class='ident'>to_string</span>(),
-                        <span class='ident'>cause</span>: <span class='ident'>BodyErrorCause</span>::<span class='ident'>DecoderError</span>(<span class='ident'>err</span>)
+                        <span class='ident'>cause</span>: <span class='ident'>BodyErrorCause</span>::<span class='ident'>JsonError</span>(<span class='ident'>err</span>)
                     })
             })
     }
@@ -331,7 +336,8 @@
         <span class='prelude-val'>Some</span>(<span class='prelude-val'>Err</span>(<span class='ident'>err</span>)) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>err</span>),
         <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='prelude-val'>None</span>),
     }
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 
@@ -355,6 +361,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

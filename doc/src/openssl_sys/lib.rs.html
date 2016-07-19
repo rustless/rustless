@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-sys-0.7.10/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-sys-0.7.14/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -825,10 +826,78 @@
 <span id="782">782</span>
 <span id="783">783</span>
 <span id="784">784</span>
+<span id="785">785</span>
+<span id="786">786</span>
+<span id="787">787</span>
+<span id="788">788</span>
+<span id="789">789</span>
+<span id="790">790</span>
+<span id="791">791</span>
+<span id="792">792</span>
+<span id="793">793</span>
+<span id="794">794</span>
+<span id="795">795</span>
+<span id="796">796</span>
+<span id="797">797</span>
+<span id="798">798</span>
+<span id="799">799</span>
+<span id="800">800</span>
+<span id="801">801</span>
+<span id="802">802</span>
+<span id="803">803</span>
+<span id="804">804</span>
+<span id="805">805</span>
+<span id="806">806</span>
+<span id="807">807</span>
+<span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
+<span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
+<span id="817">817</span>
+<span id="818">818</span>
+<span id="819">819</span>
+<span id="820">820</span>
+<span id="821">821</span>
+<span id="822">822</span>
+<span id="823">823</span>
+<span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
+<span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
+<span id="832">832</span>
+<span id="833">833</span>
+<span id="834">834</span>
+<span id="835">835</span>
+<span id="836">836</span>
+<span id="837">837</span>
+<span id="838">838</span>
+<span id="839">839</span>
+<span id="840">840</span>
+<span id="841">841</span>
+<span id="842">842</span>
+<span id="843">843</span>
+<span id="844">844</span>
+<span id="845">845</span>
+<span id="846">846</span>
+<span id="847">847</span>
+<span id="848">848</span>
+<span id="849">849</span>
+<span id="850">850</span>
+<span id="851">851</span>
+<span id="852">852</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>non_camel_case_types</span>, <span class='ident'>non_upper_case_globals</span>, <span class='ident'>non_snake_case</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_root_url</span><span class='op'>=</span><span class='string'>&quot;https://sfackler.github.io/rust-openssl/doc/v0.7.10&quot;</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_root_url</span><span class='op'>=</span><span class='string'>&quot;https://sfackler.github.io/rust-openssl/doc/v0.7.14&quot;</span>)]</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
@@ -862,9 +931,22 @@
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>X509_NAME_ENTRY</span> <span class='op'>=</span> <span class='ident'>c_void</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>X509_REQ</span> <span class='op'>=</span> <span class='ident'>c_void</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>X509_STORE_CTX</span> <span class='op'>=</span> <span class='ident'>c_void</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>stack_st_X509_EXTENSION</span> <span class='op'>=</span> <span class='ident'>c_void</span>;
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>stack_st_void</span> <span class='op'>=</span> <span class='ident'>c_void</span>;
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>bio_st</span> <span class='op'>=</span> <span class='ident'>c_void</span>;
+
+<span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>stack_st_X509_EXTENSION</span> {
+    <span class='kw'>pub</span> <span class='ident'>stack</span>: <span class='ident'>_STACK</span>,
+}
+
+<span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>stack_st_GENERAL_NAME</span> {
+    <span class='kw'>pub</span> <span class='ident'>stack</span>: <span class='ident'>_STACK</span>,
+}
+
+<span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>stack_st_void</span> {
+    <span class='kw'>pub</span> <span class='ident'>stack</span>: <span class='ident'>_STACK</span>,
+}
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>bio_info_cb</span> <span class='op'>=</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>,
                                                    <span class='ident'>c_int</span>,
@@ -890,6 +972,15 @@
 
 <span class='comment'>// so we can create static BIO_METHODs</span>
 <span class='kw'>unsafe</span> <span class='kw'>impl</span> <span class='ident'>Sync</span> <span class='kw'>for</span> <span class='ident'>BIO_METHOD</span> {}
+
+<span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>_STACK</span> {
+    <span class='kw'>pub</span> <span class='ident'>num</span>: <span class='ident'>c_int</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>,
+    <span class='kw'>pub</span> <span class='ident'>sorted</span>: <span class='ident'>c_int</span>,
+    <span class='kw'>pub</span> <span class='ident'>num_alloc</span>: <span class='ident'>c_int</span>,
+    <span class='kw'>pub</span> <span class='ident'>comp</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>, <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>)<span class='op'>&gt;</span>,
+}
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>RSA</span> {
@@ -1006,6 +1097,17 @@
     <span class='comment'>// Maybe more here</span>
 }
 
+<span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>GENERAL_NAME</span> {
+    <span class='kw'>pub</span> <span class='ident'>type_</span>: <span class='ident'>c_int</span>,
+    <span class='kw'>pub</span> <span class='ident'>d</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>GENERAL_NAME</span> {}
+<span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>GENERAL_NAME</span> {
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>GENERAL_NAME</span> { <span class='op'>*</span><span class='self'>self</span> }
+}
+
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>X509V3_CTX</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>X509V3_CTX</span> {
     <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>X509V3_CTX</span> { <span class='op'>*</span><span class='self'>self</span> }
@@ -1065,8 +1167,10 @@
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>SSL_CTRL_SET_TLSEXT_SERVERNAME_ARG</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>54</span>;
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>SSL_CTRL_SET_TLSEXT_HOSTNAME</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>55</span>;
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>SSL_CTRL_EXTRA_CHAIN_CERT</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>14</span>;
-
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>SSL_CTRL_SET_READ_AHEAD</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>41</span>;
+
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>SSL_MODE_AUTO_RETRY</span>: <span class='ident'>c_long</span> <span class='op'>=</span> <span class='number'>4</span>;
+
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>SSL_ERROR_NONE</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>0</span>;
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>SSL_ERROR_SSL</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>1</span>;
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>SSL_ERROR_SYSCALL</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>5</span>;
@@ -1160,6 +1264,16 @@
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>X509_V_ERR_UNSUPPORTED_EXTENSION_FEATURE</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>45</span>;
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>X509_V_ERR_UNSUPPORTED_NAME_SYNTAX</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>53</span>;
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>X509_V_OK</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>0</span>;
+
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>GEN_OTHERNAME</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>0</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>GEN_EMAIL</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>1</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>GEN_DNS</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>2</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>GEN_X400</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>3</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>GEN_DIRNAME</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>4</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>GEN_EDIPARTY</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>5</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>GEN_URI</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>6</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>GEN_IPADD</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>7</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>GEN_RID</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>8</span>;
 
 <span class='kw'>static</span> <span class='kw-2'>mut</span> <span class='ident'>MUTEXES</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Mutex</span><span class='op'>&lt;</span>()<span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Mutex</span><span class='op'>&lt;</span>()<span class='op'>&gt;&gt;</span>;
 <span class='kw'>static</span> <span class='kw-2'>mut</span> <span class='ident'>GUARDS</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>MutexGuard</span><span class='op'>&lt;</span><span class='lifetime'>&#39;static</span>, ()<span class='op'>&gt;&gt;</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='number'>0</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>MutexGuard</span><span class='op'>&lt;</span><span class='lifetime'>&#39;static</span>, ()<span class='op'>&gt;&gt;</span><span class='op'>&gt;</span>;
@@ -1355,6 +1469,9 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>EVP_aes_256_cfb8</span>() <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>EVP_CIPHER</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>EVP_rc4</span>() <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>EVP_CIPHER</span>;
 
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>EVP_des_cbc</span>() <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>EVP_CIPHER</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>EVP_des_ecb</span>() <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>EVP_CIPHER</span>;
+
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>EVP_BytesToKey</span>(<span class='ident'>typ</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>EVP_CIPHER</span>, <span class='ident'>md</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>EVP_MD</span>,
                           <span class='ident'>salt</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>, <span class='ident'>data</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>, <span class='ident'>datalen</span>: <span class='ident'>c_int</span>,
                           <span class='ident'>count</span>: <span class='ident'>c_int</span>, <span class='ident'>key</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>, <span class='ident'>iv</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
@@ -1409,6 +1526,12 @@
                                     <span class='ident'>callback</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>PasswordCallback</span><span class='op'>&gt;</span>,
                                     <span class='ident'>user_data</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>PEM_write_bio_PUBKEY</span>(<span class='ident'>bp</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>, <span class='ident'>x</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>EVP_PKEY</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>PEM_write_bio_RSAPrivateKey</span>(<span class='ident'>bp</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>, <span class='ident'>rsa</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>RSA</span>, <span class='ident'>cipher</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>EVP_CIPHER</span>,
+                                        <span class='ident'>kstr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>, <span class='ident'>klen</span>: <span class='ident'>c_int</span>,
+                                        <span class='ident'>callback</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>PasswordCallback</span><span class='op'>&gt;</span>,
+                                        <span class='ident'>user_data</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>PEM_write_bio_RSAPublicKey</span>(<span class='ident'>bp</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>, <span class='ident'>rsa</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>RSA</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>PEM_write_bio_RSA_PUBKEY</span>(<span class='ident'>bp</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>, <span class='ident'>rsa</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>RSA</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>PEM_write_bio_X509</span>(<span class='ident'>bio</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>, <span class='ident'>x509</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>PEM_write_bio_X509_REQ</span>(<span class='ident'>bio</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>BIO</span>, <span class='ident'>x509</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_REQ</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
@@ -1482,6 +1605,16 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_get_version</span>(<span class='ident'>ssl</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_state_string</span>(<span class='ident'>ssl</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_state_string_long</span>(<span class='ident'>ssl</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_set_verify</span>(<span class='ident'>ssl</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL</span>,
+                          <span class='ident'>mode</span>: <span class='ident'>c_int</span>,
+                          <span class='ident'>verify_callback</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw'>extern</span> <span class='kw'>fn</span>(<span class='ident'>c_int</span>, <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_STORE_CTX</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span><span class='op'>&gt;</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_get_ex_new_index</span>(<span class='ident'>argl</span>: <span class='ident'>c_long</span>, <span class='ident'>argp</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
+                                <span class='ident'>new_func</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>CRYPTO_EX_new</span><span class='op'>&gt;</span>,
+                                <span class='ident'>dup_func</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>CRYPTO_EX_dup</span><span class='op'>&gt;</span>,
+                                <span class='ident'>free_func</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>CRYPTO_EX_free</span><span class='op'>&gt;</span>)
+                                <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_set_ex_data</span>(<span class='ident'>ssl</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL</span>, <span class='ident'>idx</span>: <span class='ident'>c_int</span>, <span class='ident'>data</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_get_ex_data</span>(<span class='ident'>ssl</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL</span>, <span class='ident'>idx</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>;
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_get_servername</span>(<span class='ident'>ssl</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>SSL</span>, <span class='ident'>name_type</span>: <span class='ident'>c_long</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>;
 
@@ -1579,6 +1712,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_sign</span>(<span class='ident'>x</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509</span>, <span class='ident'>pkey</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>EVP_PKEY</span>, <span class='ident'>md</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>EVP_MD</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_get_pubkey</span>(<span class='ident'>x</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>EVP_PKEY</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_to_X509_REQ</span>(<span class='ident'>x</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509</span>, <span class='ident'>pkey</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>EVP_PKEY</span>, <span class='ident'>md</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>EVP_MD</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_REQ</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_get_ext_d2i</span>(<span class='ident'>x</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509</span>, <span class='ident'>nid</span>: <span class='ident'>c_int</span>, <span class='ident'>crit</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>, <span class='ident'>idx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>;
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_EXTENSION_free</span>(<span class='ident'>ext</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_EXTENSION</span>);
 
@@ -1588,10 +1722,13 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_NAME_ENTRY_get_data</span>(<span class='ident'>ne</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_NAME_ENTRY</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ASN1_STRING</span>;
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ASN1_STRING_to_UTF8</span>(<span class='ident'>out</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>, <span class='ident'>s</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ASN1_STRING</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ASN1_STRING_length</span>(<span class='ident'>x</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ASN1_STRING</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ASN1_STRING_data</span>(<span class='ident'>x</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ASN1_STRING</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_uchar</span>;
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_STORE_CTX_get_current_cert</span>(<span class='ident'>ct</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_STORE_CTX</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_STORE_CTX_get_error</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_STORE_CTX</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_STORE_CTX_get_ex_data</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_STORE_CTX</span>, <span class='ident'>idx</span>: <span class='ident'>c_int</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509_STORE_CTX_get_error_depth</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_STORE_CTX</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509V3_EXT_conf_nid</span>(<span class='ident'>conf</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509V3_CTX</span>, <span class='ident'>ext_nid</span>: <span class='ident'>c_int</span>, <span class='ident'>value</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_EXTENSION</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>X509V3_EXT_conf</span>(<span class='ident'>conf</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509V3_CTX</span>, <span class='ident'>name</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>, <span class='ident'>value</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509_EXTENSION</span>;
@@ -1634,6 +1771,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

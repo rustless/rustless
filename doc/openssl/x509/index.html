@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -43,94 +44,105 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>openssl</a>::<wbr><a class='mod' href=''>x509</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-2873' class='srclink' href='../../src/openssl/x509/mod.rs.html#1-777' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-3107' class='srclink' href='../../src/openssl/x509/mod.rs.html#1-914' title='goto source code'>[src]</a></span></h1>
 <h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='mod' href='extension/index.html'
-                               title='openssl::x509::extension'>extension</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='mod' href='extension/index.html'
+                                  title='openssl::x509::extension'>extension</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.SslString.html'
-                               title='openssl::x509::SslString'>SslString</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.X509.html'
-                               title='openssl::x509::X509'>X509</a></td>
-                        <td class='docblock short'>
-                             <p>A public key certificate</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.X509Generator.html'
-                               title='openssl::x509::X509Generator'>X509Generator</a></td>
-                        <td class='docblock short'>
-                             <p>Generator of private key/certificate pairs</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.X509Name.html'
-                               title='openssl::x509::X509Name'>X509Name</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.X509NameEntry.html'
-                               title='openssl::x509::X509NameEntry'>X509NameEntry</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.X509Req.html'
-                               title='openssl::x509::X509Req'>X509Req</a></td>
-                        <td class='docblock short'>
-                             <p>A certificate signing request</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.X509StoreContext.html'
-                               title='openssl::x509::X509StoreContext'>X509StoreContext</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.GeneralName.html'
+                                  title='openssl::x509::GeneralName'>GeneralName</a></td>
+                           <td class='docblock short'>
+                                <p>An OpenSSL <code>GENERAL_NAME</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.GeneralNames.html'
+                                  title='openssl::x509::GeneralNames'>GeneralNames</a></td>
+                           <td class='docblock short'>
+                                <p>A collection of OpenSSL <code>GENERAL_NAME</code>s.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.GeneralNamesIter.html'
+                                  title='openssl::x509::GeneralNamesIter'>GeneralNamesIter</a></td>
+                           <td class='docblock short'>
+                                <p>An iterator over OpenSSL <code>GENERAL_NAME</code>s.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.SslString.html'
+                                  title='openssl::x509::SslString'>SslString</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.X509.html'
+                                  title='openssl::x509::X509'>X509</a></td>
+                           <td class='docblock short'>
+                                <p>A public key certificate</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.X509Generator.html'
+                                  title='openssl::x509::X509Generator'>X509Generator</a></td>
+                           <td class='docblock short'>
+                                <p>Generator of private key/certificate pairs</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.X509Name.html'
+                                  title='openssl::x509::X509Name'>X509Name</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.X509NameEntry.html'
+                                  title='openssl::x509::X509NameEntry'>X509NameEntry</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.X509Req.html'
+                                  title='openssl::x509::X509Req'>X509Req</a></td>
+                           <td class='docblock short'>
+                                <p>A certificate signing request</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.X509StoreContext.html'
+                                  title='openssl::x509::X509StoreContext'>X509StoreContext</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.X509FileType.html'
-                               title='openssl::x509::X509FileType'>X509FileType</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.X509ValidationError.html'
-                               title='openssl::x509::X509ValidationError'>X509ValidationError</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                </table></section>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.X509FileType.html'
+                                  title='openssl::x509::X509FileType'>X509FileType</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.X509ValidationError.html'
+                                  title='openssl::x509::X509ValidationError'>X509ValidationError</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -153,6 +165,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,13 +44,13 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>openssl_sys</a>::<wbr><a class='struct' href=''>BIO</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-118' class='srclink' href='../src/openssl_sys/lib.rs.html#108-130' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-130' class='srclink' href='../src/openssl_sys/lib.rs.html#130-152' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct BIO {
     pub method: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIO_METHOD.html' title='openssl_sys::BIO_METHOD'>BIO_METHOD</a>,
-    pub callback: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;unsafe  extern "C" fn(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIO.html' title='openssl_sys::BIO'>BIO</a>, <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const </a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a>, <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>, <a class='type' href='../libc/unix/notbsd/linux/other/b64/type.c_long.html' title='libc::unix::notbsd::linux::other::b64::c_long'>c_long</a>, <a class='type' href='../libc/unix/notbsd/linux/other/b64/type.c_long.html' title='libc::unix::notbsd::linux::other::b64::c_long'>c_long</a>) -&gt; <a class='type' href='../libc/unix/notbsd/linux/other/b64/type.c_long.html' title='libc::unix::notbsd::linux::other::b64::c_long'>c_long</a>&gt;,
+    pub callback: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;unsafe extern fn(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../openssl_sys/struct.BIO.html' title='openssl_sys::BIO'>BIO</a>, <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const </a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a>, <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>, <a class='type' href='../libc/unix/notbsd/linux/other/b64/type.c_long.html' title='libc::unix::notbsd::linux::other::b64::c_long'>c_long</a>, <a class='type' href='../libc/unix/notbsd/linux/other/b64/type.c_long.html' title='libc::unix::notbsd::linux::other::b64::c_long'>c_long</a>) -&gt; <a class='type' href='../libc/unix/notbsd/linux/other/b64/type.c_long.html' title='libc::unix::notbsd::linux::other::b64::c_long'>c_long</a>&gt;,
     pub cb_arg: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a>,
     pub init: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
     pub shutdown: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
@@ -65,21 +66,21 @@
     pub ex_data: <a class='struct' href='../openssl_sys/struct.CRYPTO_EX_DATA.html' title='openssl_sys::CRYPTO_EX_DATA'>CRYPTO_EX_DATA</a>,
 }</pre><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
-                                  <td id='structfield.method'><code>method</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.callback'><code>callback</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.cb_arg'><code>cb_arg</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.init'><code>init</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.shutdown'><code>shutdown</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.flags'><code>flags</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.retry_reason'><code>retry_reason</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.num'><code>num</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.ptr'><code>ptr</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.next_bio'><code>next_bio</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.prev_bio'><code>prev_bio</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.references'><code>references</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.num_read'><code>num_read</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.num_write'><code>num_write</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.ex_data'><code>ex_data</code></td><td></td></tr></table></section>
+                             <td id='structfield.method'><code>method</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.callback'><code>callback</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.cb_arg'><code>cb_arg</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.init'><code>init</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.shutdown'><code>shutdown</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.flags'><code>flags</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.retry_reason'><code>retry_reason</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.num'><code>num</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.ptr'><code>ptr</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.next_bio'><code>next_bio</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.prev_bio'><code>prev_bio</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.references'><code>references</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.num_read'><code>num_read</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.num_write'><code>num_write</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.ex_data'><code>ex_data</code></td><td></td></tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -102,6 +103,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

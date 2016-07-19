@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
+    
 
     
     
@@ -1251,9 +1252,9 @@
                 <span class='kw'>if</span> <span class='ident'>maybe_path_obj</span>.<span class='ident'>is_some</span>() {
                     <span class='kw'>let</span> <span class='ident'>path_obj</span> <span class='op'>=</span> <span class='ident'>maybe_path_obj</span>.<span class='ident'>unwrap</span>().<span class='ident'>as_object_mut</span>().<span class='ident'>unwrap</span>();
                     <span class='ident'>path_obj</span>.<span class='ident'>insert</span>(<span class='ident'>method</span>.<span class='ident'>to_string</span>(), <span class='ident'>definition</span>.<span class='ident'>to_json</span>());
-                    <span class='boolval'>true</span>
+                    <span class='boolvalue'>true</span>
                 } <span class='kw'>else</span> {
-                    <span class='boolval'>false</span>
+                    <span class='boolvalue'>false</span>
                 }
             };
 
@@ -1451,10 +1452,10 @@
     <span class='kw'>if</span> <span class='ident'>coercer</span>.<span class='ident'>is_some</span>() {
         <span class='kw'>let</span> <span class='ident'>coercer</span> <span class='op'>=</span> <span class='ident'>coercer</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>();
         <span class='kw'>for</span> <span class='ident'>param</span> <span class='kw'>in</span> <span class='ident'>coercer</span>.<span class='ident'>get_required</span>().<span class='ident'>iter</span>() {
-            <span class='ident'>params</span>.<span class='ident'>insert</span>(<span class='ident'>param</span>.<span class='ident'>name</span>.<span class='ident'>clone</span>(), <span class='ident'>build_param_from_coercer</span>(<span class='ident'>param</span>, <span class='boolval'>true</span>));
+            <span class='ident'>params</span>.<span class='ident'>insert</span>(<span class='ident'>param</span>.<span class='ident'>name</span>.<span class='ident'>clone</span>(), <span class='ident'>build_param_from_coercer</span>(<span class='ident'>param</span>, <span class='boolvalue'>true</span>));
         }
         <span class='kw'>for</span> <span class='ident'>param</span> <span class='kw'>in</span> <span class='ident'>coercer</span>.<span class='ident'>get_optional</span>().<span class='ident'>iter</span>() {
-            <span class='ident'>params</span>.<span class='ident'>insert</span>(<span class='ident'>param</span>.<span class='ident'>name</span>.<span class='ident'>clone</span>(), <span class='ident'>build_param_from_coercer</span>(<span class='ident'>param</span>, <span class='boolval'>false</span>));
+            <span class='ident'>params</span>.<span class='ident'>insert</span>(<span class='ident'>param</span>.<span class='ident'>name</span>.<span class='ident'>clone</span>(), <span class='ident'>build_param_from_coercer</span>(<span class='ident'>param</span>, <span class='boolvalue'>false</span>));
         }
     }
 
@@ -1464,10 +1465,10 @@
             <span class='kw'>if</span> <span class='ident'>existing_param</span>.<span class='ident'>is_some</span>() {
                 <span class='kw'>let</span> <span class='ident'>param</span> <span class='op'>=</span> <span class='ident'>existing_param</span>.<span class='ident'>as_mut</span>().<span class='ident'>unwrap</span>();
                 <span class='ident'>param</span>.<span class='ident'>place</span> <span class='op'>=</span> <span class='ident'>Place</span>::<span class='ident'>Path</span>;
-                <span class='ident'>param</span>.<span class='ident'>required</span> <span class='op'>=</span> <span class='boolval'>true</span>;
-                <span class='boolval'>true</span>
+                <span class='ident'>param</span>.<span class='ident'>required</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
+                <span class='boolvalue'>true</span>
             } <span class='kw'>else</span> {
-                <span class='boolval'>false</span>
+                <span class='boolvalue'>false</span>
             }
         };
 
@@ -1476,7 +1477,7 @@
                 <span class='ident'>name</span>: <span class='ident'>param_name</span>.<span class='ident'>clone</span>(),
                 <span class='ident'>place</span>: <span class='ident'>Place</span>::<span class='ident'>Path</span>,
                 <span class='ident'>description</span>: <span class='prelude-val'>None</span>,
-                <span class='ident'>required</span>: <span class='boolval'>true</span>,
+                <span class='ident'>required</span>: <span class='boolvalue'>true</span>,
                 <span class='ident'>ext</span>: <span class='ident'>ParamExt</span>::<span class='ident'>NormalParam</span> {
                     <span class='ident'>type_</span>: <span class='ident'>ParamType</span>::<span class='ident'>String</span>,
                     <span class='ident'>format</span>: <span class='prelude-val'>None</span>,
@@ -1514,6 +1515,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

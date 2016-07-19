@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-sys-extras-0.7.10/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-sys-extras-0.7.14/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -121,9 +122,11 @@
 <span id="78">78</span>
 <span id="79">79</span>
 <span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>non_upper_case_globals</span>, <span class='ident'>non_snake_case</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_root_url</span><span class='op'>=</span><span class='string'>&quot;https://sfackler.github.io/rust-openssl/doc/v0.7.10&quot;</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_root_url</span><span class='op'>=</span><span class='string'>&quot;https://sfackler.github.io/rust-openssl/doc/v0.7.14&quot;</span>)]</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>openssl_sys</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
@@ -184,6 +187,8 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_set_options_shim</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL_CTX</span>, <span class='ident'>options</span>: <span class='ident'>c_long</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_get_options_shim</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL_CTX</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_clear_options_shim</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL_CTX</span>, <span class='ident'>options</span>: <span class='ident'>c_long</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
+    <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;SSL_CTX_set_mode_shim&quot;</span>]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_set_mode</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL_CTX</span>, <span class='ident'>options</span>: <span class='ident'>c_long</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
     <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;SSL_CTX_add_extra_chain_cert_shim&quot;</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>SSL_CTX_add_extra_chain_cert</span>(<span class='ident'>ctx</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>SSL_CTX</span>, <span class='ident'>x509</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>X509</span>) <span class='op'>-&gt;</span> <span class='ident'>c_long</span>;
     <span class='attribute'>#[<span class='ident'>link_name</span> <span class='op'>=</span> <span class='string'>&quot;SSL_CTX_set_read_ahead_shim&quot;</span>]</span>
@@ -226,6 +231,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

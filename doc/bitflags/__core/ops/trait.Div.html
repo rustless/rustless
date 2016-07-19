@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -42,13 +43,13 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>bitflags</a>::<wbr><a href='../index.html'>__core</a>::<wbr><a href='index.html'>ops</a>::<wbr><a class='trait' href=''>Div</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-14170' class='srclink' href='https://doc.rust-lang.org/nightly/core/ops/trait.Div.html?gotosrc=14170' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>bitflags</a>::<wbr><a href='../index.html'>__core</a>::<wbr><a href='index.html'>ops</a>::<wbr><a class='trait' href=''>Div</a></span><span class='out-of-band'><span class='since' title='Stable since Rust version 1.0.0'>1.0.0</span><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-14460' class='srclink' href='https://doc.rust-lang.org/nightly/core/ops/trait.Div.html?gotosrc=14460' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Div&lt;RHS = Self&gt; {
-    type Output;
+    type <a href='#associatedtype.Output' class='type'>Output</a>;
     fn <a href='#tymethod.div' class='fnname'>div</a>(self, rhs: RHS) -&gt; Self::<a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Output</a>;
 }</pre><div class='docblock'><p>The <code>Div</code> trait is used to specify the functionality of <code>/</code>.</p>
 
@@ -76,7 +77,7 @@ calling <code>div</code>, and therefore, <code>main</code> prints <code>Dividing
 </div>
             <h2 id='associated-types'>Associated Types</h2>
             <div class='methods'>
-        <h3 id='associatedtype.Output' class='method stab '><code>type Output</code></h3><div class='docblock'><p>The resulting type after applying the <code>/</code> operator</p>
+        <h3 id='associatedtype.Output' class='method stab '><code>type <a href='#associatedtype.Output' class='type'>Output</a></code></h3><div class='docblock'><p>The resulting type after applying the <code>/</code> operator</p>
 </div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
@@ -84,68 +85,67 @@ calling <code>div</code>, and therefore, <code>main</code> prints <code>Dividing
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.usize.html'>usize</a>&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.usize.html'>usize</a>&gt;</code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u8.html'>u8</a>&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u8.html'>u8</a>&gt;</code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u16.html'>u16</a>&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u16.html'>u16</a>&gt;</code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a>&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a>&gt;</code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u64.html'>u64</a>&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u64.html'>u64</a>&gt;</code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.isize.html'>isize</a>&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.isize.html'>isize</a>&gt;</code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i8.html'>i8</a>&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i8.html'>i8</a>&gt;</code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i16.html'>i16</a>&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i16.html'>i16</a>&gt;</code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i32.html'>i32</a>&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i32.html'>i32</a>&gt;</code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i64.html'>i64</a>&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i64.html'>i64</a>&gt;</code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.usize.html'>usize</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.usize.html'>usize</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.usize.html'>usize</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.usize.html'>usize</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.usize.html'>usize</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.usize.html'>usize</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.usize.html'>usize</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.usize.html'>usize</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u8.html'>u8</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u8.html'>u8</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u8.html'>u8</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u8.html'>u8</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u8.html'>u8</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u8.html'>u8</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u8.html'>u8</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u8.html'>u8</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u16.html'>u16</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u16.html'>u16</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u16.html'>u16</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u16.html'>u16</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u16.html'>u16</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u16.html'>u16</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u16.html'>u16</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u16.html'>u16</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u64.html'>u64</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u64.html'>u64</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u64.html'>u64</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u64.html'>u64</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u64.html'>u64</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u64.html'>u64</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u64.html'>u64</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u64.html'>u64</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.isize.html'>isize</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.isize.html'>isize</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.isize.html'>isize</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.isize.html'>isize</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.isize.html'>isize</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.isize.html'>isize</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.isize.html'>isize</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.isize.html'>isize</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i8.html'>i8</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i8.html'>i8</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i8.html'>i8</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i8.html'>i8</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i8.html'>i8</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i8.html'>i8</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i8.html'>i8</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i8.html'>i8</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i16.html'>i16</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i16.html'>i16</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i16.html'>i16</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i16.html'>i16</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i16.html'>i16</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i16.html'>i16</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i16.html'>i16</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i16.html'>i16</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i32.html'>i32</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i32.html'>i32</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i32.html'>i32</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i32.html'>i32</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i32.html'>i32</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i32.html'>i32</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i32.html'>i32</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i32.html'>i32</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i64.html'>i64</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i64.html'>i64</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i64.html'>i64</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i64.html'>i64</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i64.html'>i64</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i64.html'>i64</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i64.html'>i64</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.i64.html'>i64</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f32.html'>f32</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f32.html'>f32</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f32.html'>f32</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f32.html'>f32</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f32.html'>f32</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f32.html'>f32</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f32.html'>f32</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f32.html'>f32</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f64.html'>f64</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f64.html'>f64</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f64.html'>f64</a>&gt; for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f64.html'>f64</a></code></li>
-<li><code>impl&lt;'a&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f64.html'>f64</a>&gt; for <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f64.html'>f64</a></code></li>
-<li><code>impl&lt;'a, 'b&gt; <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;&amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f64.html'>f64</a>&gt; for &amp;'b <a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.f64.html'>f64</a></code></li>
-<li><code>impl <a class='trait' href='../../../bitflags/__core/ops/trait.Div.html' title='bitflags::__core::ops::Div'>Div</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/bitflags/primitive.u32.html'>u32</a>&gt; for <a class='struct' href='../../../bitflags/__core/time/struct.Duration.html' title='bitflags::__core::time::Duration'>Duration</a></code></li>
+    <li><code>impl Div&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;usize&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;usize&gt;</code></li>
+<li><code>impl Div&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;u8&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;u8&gt;</code></li>
+<li><code>impl Div&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;u16&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;u16&gt;</code></li>
+<li><code>impl Div&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;u32&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;u32&gt;</code></li>
+<li><code>impl Div&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;u64&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;u64&gt;</code></li>
+<li><code>impl Div&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;isize&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;isize&gt;</code></li>
+<li><code>impl Div&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;i8&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;i8&gt;</code></li>
+<li><code>impl Div&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;i16&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;i16&gt;</code></li>
+<li><code>impl Div&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;i32&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;i32&gt;</code></li>
+<li><code>impl Div&lt;<a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;i64&gt;&gt; for <a class='struct' href='../../../bitflags/__core/num/struct.Wrapping.html' title='bitflags::__core::num::Wrapping'>Wrapping</a>&lt;i64&gt;</code></li>
+<li><code>impl Div&lt;usize&gt; for usize</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;usize&gt; for &amp;'a usize</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a usize&gt; for usize</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a usize&gt; for &amp;'b usize</code></li>
+<li><code>impl Div&lt;u8&gt; for u8</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;u8&gt; for &amp;'a u8</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a u8&gt; for u8</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a u8&gt; for &amp;'b u8</code></li>
+<li><code>impl Div&lt;u16&gt; for u16</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;u16&gt; for &amp;'a u16</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a u16&gt; for u16</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a u16&gt; for &amp;'b u16</code></li>
+<li><code>impl Div&lt;u32&gt; for u32</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;u32&gt; for &amp;'a u32</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a u32&gt; for u32</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a u32&gt; for &amp;'b u32</code></li>
+<li><code>impl Div&lt;u64&gt; for u64</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;u64&gt; for &amp;'a u64</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a u64&gt; for u64</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a u64&gt; for &amp;'b u64</code></li>
+<li><code>impl Div&lt;isize&gt; for isize</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;isize&gt; for &amp;'a isize</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a isize&gt; for isize</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a isize&gt; for &amp;'b isize</code></li>
+<li><code>impl Div&lt;i8&gt; for i8</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;i8&gt; for &amp;'a i8</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a i8&gt; for i8</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a i8&gt; for &amp;'b i8</code></li>
+<li><code>impl Div&lt;i16&gt; for i16</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;i16&gt; for &amp;'a i16</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a i16&gt; for i16</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a i16&gt; for &amp;'b i16</code></li>
+<li><code>impl Div&lt;i32&gt; for i32</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;i32&gt; for &amp;'a i32</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a i32&gt; for i32</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a i32&gt; for &amp;'b i32</code></li>
+<li><code>impl Div&lt;i64&gt; for i64</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;i64&gt; for &amp;'a i64</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a i64&gt; for i64</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a i64&gt; for &amp;'b i64</code></li>
+<li><code>impl Div&lt;f32&gt; for f32</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;f32&gt; for &amp;'a f32</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a f32&gt; for f32</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a f32&gt; for &amp;'b f32</code></li>
+<li><code>impl Div&lt;f64&gt; for f64</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;f64&gt; for &amp;'a f64</code></li>
+<li><code>impl&lt;'a&gt; Div&lt;&amp;'a f64&gt; for f64</code></li>
+<li><code>impl&lt;'a, 'b&gt; Div&lt;&amp;'a f64&gt; for &amp;'b f64</code></li>
 </ul><script type="text/javascript" async
-                              src="../../../implementors/core/ops/trait.Div.js">
-                      </script></section>
+                         src="../../../implementors/core/ops/trait.Div.js">
+                 </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -168,6 +168,8 @@ calling <code>div</code>, and therefore, <code>main</code> prints <code>Dividing
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

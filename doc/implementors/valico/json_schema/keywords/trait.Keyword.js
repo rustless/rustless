@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors['valico'] = [];
+implementors["valico"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>jsonway</a>::<wbr><a href='index.html'>array_builder</a>::<wbr><a class='struct' href=''>ArrayBuilder</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-15' class='srclink' href='../../src/jsonway/array_builder.rs.html#6-11' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-15' class='srclink' href='../../src/jsonway/array_builder.rs.html#6-11' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct ArrayBuilder {
     pub array: <a class='type' href='../../rustc_serialize/json/type.Array.html' title='rustc_serialize::json::Array'>Array</a>,
     pub null: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>,
@@ -54,10 +55,11 @@
     pub root: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
 }</pre><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
-                                  <td id='structfield.array'><code>array</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.null'><code>null</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.skip'><code>skip</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.root'><code>root</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a></code></h3><div class='docblock'><p>Use ArrayBuilder to produce JSON arrays</p>
+                             <td id='structfield.array'><code>array</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.null'><code>null</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.skip'><code>skip</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.root'><code>root</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-20' class='srclink' href='../../src/jsonway/array_builder.rs.html#14-103' title='goto source code'>[src]</a></span></h3>
+<div class='docblock'><p>Use ArrayBuilder to produce JSON arrays</p>
 </div><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a></code></h4>
 <h4 id='method.from_json' class='method'><code>fn <a href='#method.from_json' class='fnname'>from_json</a>(array: <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a>&gt;</code></h4>
 <div class='docblock'><p>Initialize builder with initial value.</p>
@@ -78,15 +80,19 @@ to raw JSON value.</p>
 <h4 id='method.has_root' class='method'><code>fn <a href='#method.has_root' class='fnname'>has_root</a>(&amp;mut self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <h4 id='method.unwrap' class='method'><code>fn <a href='#method.unwrap' class='fnname'>unwrap</a>(self) -&gt; <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></code></h4>
 <div class='docblock'><p>Move out internal JSON value.</p>
-</div></div><h3 class='impl'><code>impl <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a></code></h3><div class='impl-items'><h4 id='method.push' class='method'><code>fn <a href='#method.push' class='fnname'>push</a>&lt;T: <a class='trait' href='../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a>&gt;(&amp;mut self, value: T)</code></h4>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-56' class='srclink' href='../../src/jsonway/array_builder.rs.html#105-110' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.push' class='method'><code>fn <a href='#method.push' class='fnname'>push</a>&lt;T: <a class='trait' href='../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a>&gt;(&amp;mut self, value: T)</code></h4>
 <div class='docblock'><p>Push to array something that can be converted to JSON.</p>
-</div></div><h3 class='impl'><code>impl <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a></code></h3><div class='impl-items'><h4 id='method.objects' class='method'><code>fn <a href='#method.objects' class='fnname'>objects</a>&lt;A, T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html' title='core::iter::Iterator'>Iterator</a>&lt;Item=A&gt;, F&gt;(&amp;mut self, iter: T, func: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(A, &amp;mut <a class='struct' href='../../jsonway/object_builder/struct.ObjectBuilder.html' title='jsonway::object_builder::ObjectBuilder'>ObjectBuilder</a>)</span></code></h4>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-61' class='srclink' href='../../src/jsonway/array_builder.rs.html#112-142' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.objects' class='method'><code>fn <a href='#method.objects' class='fnname'>objects</a>&lt;A, T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html' title='core::iter::iterator::Iterator'>Iterator</a>&lt;Item=A&gt;, F&gt;(&amp;mut self, iter: T, func: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(A, &amp;mut <a class='struct' href='../../jsonway/object_builder/struct.ObjectBuilder.html' title='jsonway::object_builder::ObjectBuilder'>ObjectBuilder</a>)</span></code></h4>
 <div class='docblock'><p>Fill this array by objects builded from iterator.</p>
-</div><h4 id='method.arrays' class='method'><code>fn <a href='#method.arrays' class='fnname'>arrays</a>&lt;A, T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html' title='core::iter::Iterator'>Iterator</a>&lt;Item=A&gt;, F&gt;(&amp;mut self, iter: T, func: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(A, &amp;mut <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a>)</span></code></h4>
-<h4 id='method.map' class='method'><code>fn <a href='#method.map' class='fnname'>map</a>&lt;A, T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html' title='core::iter::Iterator'>Iterator</a>&lt;Item=A&gt;, F&gt;(&amp;mut self, iter: T, func: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(A) -&gt; <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></span></code></h4>
+</div><h4 id='method.arrays' class='method'><code>fn <a href='#method.arrays' class='fnname'>arrays</a>&lt;A, T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html' title='core::iter::iterator::Iterator'>Iterator</a>&lt;Item=A&gt;, F&gt;(&amp;mut self, iter: T, func: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(A, &amp;mut <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a>)</span></code></h4>
+<h4 id='method.map' class='method'><code>fn <a href='#method.map' class='fnname'>map</a>&lt;A, T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html' title='core::iter::iterator::Iterator'>Iterator</a>&lt;Item=A&gt;, F&gt;(&amp;mut self, iter: T, func: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(A) -&gt; <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></span></code></h4>
 <div class='docblock'><p>Fill this array by JSON values builded from iterator.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a> for <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a></code></h3><div class='impl-items'><h4 id='method.to_json' class='method'><code>fn <a href='../../rustc_serialize/json/trait.ToJson.html#method.to_json' class='fnname'>to_json</a>(&amp;self) -&gt; <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a> for <a class='struct' href='../../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-88' class='srclink' href='../../src/jsonway/array_builder.rs.html#144-149' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.to_json' class='method'><code>fn <a href='../../rustc_serialize/json/trait.ToJson.html#tymethod.to_json' class='fnname'>to_json</a>(&amp;self) -&gt; <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></code></h4>
+<div class='docblock'><p>Copy self to new JSON instance.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -109,6 +115,8 @@ to raw JSON value.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

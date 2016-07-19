@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/plugin-0.2.6/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/plugin-0.2.6/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -253,7 +254,7 @@
     <span class='doccomment'>/// type, it is important for implementers to remember that</span>
     <span class='doccomment'>/// the result of `eval` is usually cached, so care should</span>
     <span class='doccomment'>/// be taken when doing mutation on the extended type.</span>
-    <span class='kw'>fn</span> <span class='ident'>eval</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>E</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Self</span>::<span class='ident'>Value</span>, <span class='ident'>Self</span>::<span class='ident'>Error</span><span class='op'>&gt;</span>;
+    <span class='kw'>fn</span> <span class='ident'>eval</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>E</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='self'>Self</span>::<span class='ident'>Value</span>, <span class='self'>Self</span>::<span class='ident'>Error</span><span class='op'>&gt;</span>;
 }
 
 <span class='doccomment'>/// Defines an interface that extensible types must implement.</span>
@@ -277,8 +278,8 @@
     <span class='doccomment'>/// If plugin creation fails, an error is returned.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// `P` is the plugin type.</span>
-    <span class='kw'>fn</span> <span class='ident'>get</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>P</span>::<span class='ident'>Value</span>, <span class='ident'>P</span>::<span class='ident'>Error</span><span class='op'>&gt;</span>
-    <span class='kw'>where</span> <span class='ident'>P</span>::<span class='ident'>Value</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Any</span>, <span class='kw'>Self</span>: <span class='ident'>Extensible</span> {
+    <span class='kw'>fn</span> <span class='ident'>get</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='self'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>P</span>::<span class='ident'>Value</span>, <span class='ident'>P</span>::<span class='ident'>Error</span><span class='op'>&gt;</span>
+    <span class='kw'>where</span> <span class='ident'>P</span>::<span class='ident'>Value</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Any</span>, <span class='self'>Self</span>: <span class='ident'>Extensible</span> {
         <span class='self'>self</span>.<span class='ident'>get_ref</span>::<span class='op'>&lt;</span><span class='ident'>P</span><span class='op'>&gt;</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>v</span><span class='op'>|</span> <span class='ident'>v</span>.<span class='ident'>clone</span>())
     }
 
@@ -288,8 +289,8 @@
     <span class='doccomment'>/// If plugin creation fails an error is returned.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// `P` is the plugin type.</span>
-    <span class='kw'>fn</span> <span class='ident'>get_ref</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>P</span>::<span class='ident'>Value</span>, <span class='ident'>P</span>::<span class='ident'>Error</span><span class='op'>&gt;</span>
-    <span class='kw'>where</span> <span class='ident'>P</span>::<span class='ident'>Value</span>: <span class='ident'>Any</span>, <span class='kw'>Self</span>: <span class='ident'>Extensible</span> {
+    <span class='kw'>fn</span> <span class='ident'>get_ref</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='self'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>P</span>::<span class='ident'>Value</span>, <span class='ident'>P</span>::<span class='ident'>Error</span><span class='op'>&gt;</span>
+    <span class='kw'>where</span> <span class='ident'>P</span>::<span class='ident'>Value</span>: <span class='ident'>Any</span>, <span class='self'>Self</span>: <span class='ident'>Extensible</span> {
         <span class='self'>self</span>.<span class='ident'>get_mut</span>::<span class='op'>&lt;</span><span class='ident'>P</span><span class='op'>&gt;</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>mutref</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>mutref</span>)
     }
 
@@ -299,8 +300,8 @@
     <span class='doccomment'>/// If plugin creation fail an error is returned.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// `P` is the plugin type.</span>
-    <span class='kw'>fn</span> <span class='ident'>get_mut</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>P</span>::<span class='ident'>Value</span>, <span class='ident'>P</span>::<span class='ident'>Error</span><span class='op'>&gt;</span>
-    <span class='kw'>where</span> <span class='ident'>P</span>::<span class='ident'>Value</span>: <span class='ident'>Any</span>, <span class='kw'>Self</span>: <span class='ident'>Extensible</span> {
+    <span class='kw'>fn</span> <span class='ident'>get_mut</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='self'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>P</span>::<span class='ident'>Value</span>, <span class='ident'>P</span>::<span class='ident'>Error</span><span class='op'>&gt;</span>
+    <span class='kw'>where</span> <span class='ident'>P</span>::<span class='ident'>Value</span>: <span class='ident'>Any</span>, <span class='self'>Self</span>: <span class='ident'>Extensible</span> {
         <span class='kw'>use</span> <span class='ident'>typemap</span>::<span class='ident'>Entry</span>::{<span class='ident'>Occupied</span>, <span class='ident'>Vacant</span>};
 
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>extensions</span>().<span class='ident'>contains</span>::<span class='op'>&lt;</span><span class='ident'>P</span><span class='op'>&gt;</span>() {
@@ -316,8 +317,8 @@
     }
 
     <span class='doccomment'>/// Create and evaluate a once-off instance of a plugin.</span>
-    <span class='kw'>fn</span> <span class='ident'>compute</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>P</span>::<span class='ident'>Value</span>, <span class='ident'>P</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='op'>&lt;</span><span class='ident'>P</span> <span class='kw'>as</span> <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;&gt;</span>::<span class='ident'>eval</span>(<span class='self'>self</span>)
+    <span class='kw'>fn</span> <span class='ident'>compute</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='self'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>P</span>::<span class='ident'>Value</span>, <span class='ident'>P</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='op'>&lt;</span><span class='ident'>P</span> <span class='kw'>as</span> <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='self'>Self</span><span class='op'>&gt;&gt;</span>::<span class='ident'>eval</span>(<span class='self'>self</span>)
     }
 }
 
@@ -328,7 +329,7 @@
     <span class='kw'>use</span> <span class='ident'>test</span>::<span class='ident'>void</span>::{<span class='ident'>Void</span>, <span class='ident'>ResultVoidExt</span>};
 
     <span class='kw'>use</span> <span class='ident'>typemap</span>::{<span class='ident'>TypeMap</span>, <span class='ident'>Key</span>};
-    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>Extensible</span>, <span class='ident'>Plugin</span>, <span class='ident'>Pluggable</span>};
+    <span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>Extensible</span>, <span class='ident'>Plugin</span>, <span class='ident'>Pluggable</span>};
 
     <span class='kw'>struct</span> <span class='ident'>Extended</span> {
         <span class='ident'>map</span>: <span class='ident'>TypeMap</span>
@@ -442,6 +443,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

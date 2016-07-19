@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/valico-0.8.2/src/common/error.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/common/error.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>error.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -222,7 +223,7 @@
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>code</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>title</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
         <span class='macro'>impl_basic_err</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>code</span>);
 
-        <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>common</span>::<span class='ident'>error</span>::<span class='ident'>ValicoError</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span> {
+        <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='kw'>crate</span>::<span class='macro-nonterminal'>common</span>::<span class='ident'>error</span>::<span class='ident'>ValicoError</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span> {
             <span class='kw'>fn</span> <span class='ident'>get_code</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>code</span> }
             <span class='kw'>fn</span> <span class='ident'>get_title</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>title</span> }
             <span class='kw'>fn</span> <span class='ident'>get_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> { <span class='self'>self</span>.<span class='ident'>path</span>.<span class='ident'>as_ref</span>() }
@@ -232,7 +233,7 @@
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>code</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>title</span>:<span class='ident'>expr</span>, <span class='op'>+</span><span class='ident'>detail</span>) <span class='op'>=&gt;</span> {
         <span class='macro'>impl_basic_err</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>code</span>);
 
-        <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>common</span>::<span class='ident'>error</span>::<span class='ident'>ValicoError</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span> {
+        <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='kw'>crate</span>::<span class='macro-nonterminal'>common</span>::<span class='ident'>error</span>::<span class='ident'>ValicoError</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span> {
             <span class='kw'>fn</span> <span class='ident'>get_code</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>code</span> }
             <span class='kw'>fn</span> <span class='ident'>get_title</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>title</span> }
             <span class='kw'>fn</span> <span class='ident'>get_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> { <span class='self'>self</span>.<span class='ident'>path</span>.<span class='ident'>as_ref</span>() }
@@ -243,7 +244,7 @@
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>:<span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>code</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>title</span>:<span class='ident'>expr</span>, <span class='op'>+</span><span class='ident'>opt_detail</span>) <span class='op'>=&gt;</span> {
         <span class='macro'>impl_basic_err</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>code</span>);
 
-        <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>common</span>::<span class='ident'>error</span>::<span class='ident'>ValicoError</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span> {
+        <span class='kw'>impl</span> <span class='macro-nonterminal'>$</span><span class='kw'>crate</span>::<span class='macro-nonterminal'>common</span>::<span class='ident'>error</span>::<span class='ident'>ValicoError</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span> {
             <span class='kw'>fn</span> <span class='ident'>get_code</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>code</span> }
             <span class='kw'>fn</span> <span class='ident'>get_title</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> { <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>title</span> }
             <span class='kw'>fn</span> <span class='ident'>get_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> { <span class='self'>self</span>.<span class='ident'>path</span>.<span class='ident'>as_ref</span>() }
@@ -311,6 +312,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

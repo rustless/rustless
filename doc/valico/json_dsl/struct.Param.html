@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>valico</a>::<wbr><a href='index.html'>json_dsl</a>::<wbr><a class='struct' href=''>Param</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-441' class='srclink' href='../../src/valico/json_dsl/param.rs.html#10-20' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-427' class='srclink' href='../../src/valico/json_dsl/param.rs.html#10-20' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Param {
     pub name: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>,
     pub coercer: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../valico/json_dsl/trait.Coercer.html' title='valico::json_dsl::Coercer'>Coercer</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a>&gt;&gt;,
@@ -59,15 +60,16 @@
     pub schema_id: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../url/struct.Url.html' title='url::Url'>Url</a>&gt;,
 }</pre><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
-                                  <td id='structfield.name'><code>name</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.coercer'><code>coercer</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.nest'><code>nest</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.description'><code>description</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.allow_null'><code>allow_null</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.validators'><code>validators</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.default'><code>default</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.schema_builder'><code>schema_builder</code></td><td></td></tr><tr class='stab '>
-                                  <td id='structfield.schema_id'><code>schema_id</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a></code></h4>
+                             <td id='structfield.name'><code>name</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.coercer'><code>coercer</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.nest'><code>nest</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.description'><code>description</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.allow_null'><code>allow_null</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.validators'><code>validators</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.default'><code>default</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.schema_builder'><code>schema_builder</code></td><td></td></tr><tr class='stab '>
+                             <td id='structfield.schema_id'><code>schema_id</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-438' class='srclink' href='../../src/valico/json_dsl/param.rs.html#24-173' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a></code></h4>
 <h4 id='method.new_with_coercer' class='method'><code>fn <a href='#method.new_with_coercer' class='fnname'>new_with_coercer</a>(name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, coercer: <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../valico/json_dsl/trait.Coercer.html' title='valico::json_dsl::Coercer'>Coercer</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a>&gt;) -&gt; <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a></code></h4>
 <h4 id='method.new_with_nest' class='method'><code>fn <a href='#method.new_with_nest' class='fnname'>new_with_nest</a>(name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, coercer: <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../valico/json_dsl/trait.Coercer.html' title='valico::json_dsl::Coercer'>Coercer</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a>&gt;, nest: <a class='struct' href='../../valico/json_dsl/struct.Builder.html' title='valico::json_dsl::Builder'>Builder</a>) -&gt; <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a></code></h4>
 <h4 id='method.build' class='method'><code>fn <a href='#method.build' class='fnname'>build</a>&lt;F&gt;(name: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, build_def: F) -&gt; <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a> <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a>)</span></code></h4>
@@ -81,10 +83,12 @@
 <h4 id='method.validate' class='method'><code>fn <a href='#method.validate' class='fnname'>validate</a>(&amp;mut self, validator: <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../valico/json_dsl/validators/trait.Validator.html' title='valico::json_dsl::validators::Validator'>Validator</a> + 'static + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a>&gt;)</code></h4>
 <h4 id='method.validate_with' class='method'><code>fn <a href='#method.validate_with' class='fnname'>validate_with</a>&lt;F&gt;(&amp;mut self, validator: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>(&amp;<a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='type' href='../../valico/json_dsl/validators/type.ValidatorResult.html' title='valico::json_dsl::validators::ValidatorResult'>ValidatorResult</a> + 'static + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a></span></code></h4>
 <h4 id='method.process' class='method'><code>fn <a href='#method.process' class='fnname'>process</a>(&amp;self, val: &amp;mut <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, path: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, scope: &amp;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='struct' href='../../valico/json_schema/scope/struct.Scope.html' title='valico::json_schema::scope::Scope'>Scope</a>&gt;) -&gt; <a class='struct' href='../../valico/json_dsl/struct.ExtendedResult.html' title='valico::json_dsl::ExtendedResult'>ExtendedResult</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>&gt;&gt;</code></h4>
-</div><h3 class='impl'><code>impl <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a></code></h3><div class='impl-items'><h4 id='method.allow_values' class='method'><code>fn <a href='#method.allow_values' class='fnname'>allow_values</a>&lt;T: <a class='trait' href='../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a>&gt;(&amp;mut self, values: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a>T<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>)</code></h4>
+</div><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-506' class='srclink' href='../../src/valico/json_dsl/param.rs.html#175-191' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.allow_values' class='method'><code>fn <a href='#method.allow_values' class='fnname'>allow_values</a>&lt;T: <a class='trait' href='../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a>&gt;(&amp;mut self, values: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a>T<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>)</code></h4>
 <h4 id='method.reject_values' class='method'><code>fn <a href='#method.reject_values' class='fnname'>reject_values</a>&lt;T: <a class='trait' href='../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a>&gt;(&amp;mut self, values: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a>T<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>)</code></h4>
 <h4 id='method.default' class='method'><code>fn <a href='#method.default' class='fnname'>default</a>&lt;T: <a class='trait' href='../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a>&gt;(&amp;mut self, default: T)</code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> for <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a></code></h3><div class='impl-items'></div></section>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> for <a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-437' class='srclink' href='../../src/valico/json_dsl/param.rs.html#22' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -107,6 +111,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

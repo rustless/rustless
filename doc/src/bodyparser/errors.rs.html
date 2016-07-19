@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/bodyparser-0.0.6/src/errors.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/bodyparser-0.3.0/src/errors.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>errors.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -77,14 +78,14 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
+
+<span class='kw'>use</span> <span class='ident'>serde_json</span>;
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>BodyErrorCause</span> {
     <span class='ident'>Utf8Error</span>(<span class='ident'>str</span>::<span class='ident'>Utf8Error</span>),
     <span class='ident'>IoError</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>),
-    <span class='ident'>ParserError</span>(<span class='ident'>json</span>::<span class='ident'>ParserError</span>),
-    <span class='ident'>DecoderError</span>(<span class='ident'>json</span>::<span class='ident'>DecoderError</span>)
+    <span class='ident'>JsonError</span>(<span class='ident'>serde_json</span>::<span class='ident'>Error</span>),
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -103,7 +104,8 @@
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>formatter</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
         <span class='self'>self</span>.<span class='ident'>description</span>().<span class='ident'>fmt</span>(<span class='ident'>formatter</span>)
     }
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 
@@ -127,6 +129,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

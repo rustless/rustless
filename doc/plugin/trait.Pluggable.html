@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>plugin</a>::<wbr><a class='trait' href=''>Pluggable</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-17' class='srclink' href='../src/plugin/lib.rs.html#41-90' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-17' class='srclink' href='../src/plugin/lib.rs.html#41-90' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Pluggable {
     fn <a href='#method.get' class='fnname'>get</a>&lt;P: <a class='trait' href='../plugin/trait.Plugin.html' title='plugin::Plugin'>Plugin</a>&lt;Self&gt;&gt;(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;P::Value, P::Error&gt; <span class='where'>where P::Value: <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>, Self: <a class='trait' href='../plugin/trait.Extensible.html' title='plugin::Extensible'>Extensible</a></span> { ... }
     fn <a href='#method.get_ref' class='fnname'>get_ref</a>&lt;P: <a class='trait' href='../plugin/trait.Plugin.html' title='plugin::Plugin'>Plugin</a>&lt;Self&gt;&gt;(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;&amp;P::Value, P::Error&gt; <span class='where'>where P::Value: <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>, Self: <a class='trait' href='../plugin/trait.Extensible.html' title='plugin::Extensible'>Extensible</a></span> { ... }
@@ -81,8 +82,8 @@ If plugin creation fail an error is returned.</p>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
     </ul><script type="text/javascript" async
-                              src="../implementors/plugin/trait.Pluggable.js">
-                      </script></section>
+                         src="../implementors/plugin/trait.Pluggable.js">
+                 </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -105,6 +106,8 @@ If plugin creation fail an error is returned.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

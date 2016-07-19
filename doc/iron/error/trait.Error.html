@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>iron</a>::<wbr><a href='index.html'>error</a>::<wbr><a class='trait' href=''>Error</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-11' class='srclink' href='../../error/trait.Error.html?gotosrc=11' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-11' class='srclink' href='../../error/trait.Error.html?gotosrc=11' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Error: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> + <a class='trait' href='../../typeable/trait.Typeable.html' title='typeable::Typeable'>Typeable</a> { }</pre><div class='docblock'><p>An extension to std::error::Error which provides dynamic downcasting of
 errors for use in highly generic contexts.</p>
 
@@ -90,12 +91,23 @@ be handled later by downcasting it to the right error using either
 <code>.downcast</code> or the <code>match_error!</code> macro. This type can be used to meet
 the needs of consumers like <code>Verifier</code>, but should not be used in cases
 where enums or generics are better suited.</p>
-</div>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../iron/error/trait.Error.html' title='iron::error::Error'>Error</a> + 'static</code></span><span class='out-of-band'></span></h3>
+<div class='impl-items'><h4 id='method.is' class='method'><code>fn <a href='#method.is' class='fnname'>is</a>&lt;E&gt;(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> <span class='where'>where E: <a class='trait' href='../../iron/error/trait.Error.html' title='iron::error::Error'>Error</a></span></code></h4>
+<div class='docblock'><p>Is this <code>Error</code> object of type <code>E</code>?</p>
+</div><h4 id='method.downcast' class='method'><code>fn <a href='#method.downcast' class='fnname'>downcast</a>&lt;E&gt;(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;E&gt; <span class='where'>where E: <a class='trait' href='../../iron/error/trait.Error.html' title='iron::error::Error'>Error</a></span></code></h4>
+<div class='docblock'><p>If this error is <code>E</code>, downcast this error to <code>E</code>, by reference.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../iron/error/trait.Error.html' title='iron::error::Error'>Error</a> + 'static + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a></code></span><span class='out-of-band'></span></h3>
+<div class='impl-items'><h4 id='method.is-1' class='method'><code>fn <a href='#method.is-1' class='fnname'>is</a>&lt;E&gt;(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> <span class='where'>where E: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='../../iron/error/trait.Error.html' title='iron::error::Error'>Error</a></span></code></h4>
+<div class='docblock'><p>Is this <code>Error + Send</code> object of type <code>E</code>?</p>
+</div><h4 id='method.downcast-1' class='method'><code>fn <a href='#method.downcast-1' class='fnname'>downcast</a>&lt;E&gt;(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;E&gt; <span class='where'>where E: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='../../iron/error/trait.Error.html' title='iron::error::Error'>Error</a></span></code></h4>
+<div class='docblock'><p>If this error is <code>E</code>, downcast this error to <code>E</code>, by reference.</p>
+</div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    </ul><script type="text/javascript" async
-                              src="../../implementors/error/trait.Error.js">
-                      </script></section>
+    <li><code>impl&lt;S&gt; Error for S <span class='where'>where S: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> + <a class='trait' href='../../typeable/trait.Typeable.html' title='typeable::Typeable'>Typeable</a></span></code></li>
+</ul><script type="text/javascript" async
+                         src="../../implementors/error/trait.Error.js">
+                 </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -118,6 +130,8 @@ where enums or generics are better suited.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

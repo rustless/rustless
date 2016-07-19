@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='../../index.html'>openssl</a>::<wbr><a href='../index.html'>ssl</a>::<wbr><a href='index.html'>error</a>::<wbr><a class='enum' href=''>OpensslError</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-1490' class='srclink' href='../../../src/openssl/ssl/error.rs.html#239-249' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-1526' class='srclink' href='../../../src/openssl/ssl/error.rs.html#239-249' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum OpensslError {
     UnknownError {
         library: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>,
@@ -58,16 +59,26 @@
 <table class='variants_table'><tr><td id='variant.UnknownError'><code>UnknownError</code></td><td><div class='docblock'><p>An unknown error</p>
 </div><h3 class='fields'>Fields</h3>
 
-                                              <table><tr><td id='variant.UnknownError.field.library'><code>library</code></td><td><div class='docblock'><p>The library reporting the error</p>
+                           <table><tr><td id='variant.UnknownError.field.library'><code>library</code></td><td><div class='docblock'><p>The library reporting the error</p>
 </div></td></tr><tr><td id='variant.UnknownError.field.function'><code>function</code></td><td><div class='docblock'><p>The function reporting the error</p>
 </div></td></tr><tr><td id='variant.UnknownError.field.reason'><code>reason</code></td><td><div class='docblock'><p>The reason for the error</p>
-</div></td></tr></table></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></h3><div class='impl-items'><h4 id='method.from_error_code' class='method'><code>fn <a href='#method.from_error_code' class='fnname'>from_error_code</a>(err: <a class='type' href='../../../libc/unix/notbsd/linux/other/b64/type.c_ulong.html' title='libc::unix::notbsd::linux::other::b64::c_ulong'>c_ulong</a>) -&gt; <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></h4>
-<h4 id='method.clone_from' class='method'><span class="since">1.0.0</span><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div></section>
+</div></td></tr></table></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1570' class='srclink' href='../../../src/openssl/ssl/error.rs.html#251-260' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.from_error_code' class='method'><code>fn <a href='#method.from_error_code' class='fnname'>from_error_code</a>(err: <a class='type' href='../../../libc/unix/notbsd/linux/other/b64/type.c_ulong.html' title='libc::unix::notbsd::linux::other::b64::c_ulong'>c_ulong</a>) -&gt; <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1531' class='srclink' href='../../../src/openssl/ssl/error.rs.html#238' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1537' class='srclink' href='../../../src/openssl/ssl/error.rs.html#238' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1556' class='srclink' href='../../../src/openssl/ssl/error.rs.html#238' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../../openssl/ssl/error/enum.OpensslError.html' title='openssl::ssl::error::OpensslError'>OpensslError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1562' class='srclink' href='../../../src/openssl/ssl/error.rs.html#238' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -90,6 +101,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

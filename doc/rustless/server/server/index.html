@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../../index.html'>rustless</a>::<wbr><a href='../index.html'>server</a>::<wbr><a class='mod' href=''>server</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-6975' class='srclink' href='../../../hyper/server/index.html?gotosrc=6975' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-6924' class='srclink' href='../../../hyper/server/index.html?gotosrc=6924' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>HTTP Server</p>
 
 <h1 id='server' class='section-header'><a href='#server'>Server</a></h1>
@@ -151,81 +152,72 @@ out by calling <code>start</code> on the <code>Response&lt;Fresh&gt;</code>. Thi
 implement <code>Write</code>.</p>
 </div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='mod' href='request/index.html'
-                               title='rustless::server::server::request'>request</a></td>
-                        <td class='docblock short'>
-                             <p>Server Requests</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='mod' href='response/index.html'
-                               title='rustless::server::server::response'>response</a></td>
-                        <td class='docblock short'>
-                             <p>Server Responses</p>
-                        </td>
-                    </tr>
-                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='mod' href='request/index.html'
+                                  title='rustless::server::server::request'>request</a></td>
+                           <td class='docblock short'>
+                                <p>Server Requests</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='mod' href='response/index.html'
+                                  title='rustless::server::server::response'>response</a></td>
+                           <td class='docblock short'>
+                                <p>Server Responses</p>
+                           </td>
+                       </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Listening.html'
-                               title='rustless::server::server::Listening'>Listening</a></td>
-                        <td class='docblock short'>
-                             <p>A listening server, which can later be closed.</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Request.html'
-                               title='rustless::server::server::Request'>Request</a></td>
-                        <td class='docblock short'>
-                             <p>A request bundles several parts of an incoming <code>NetworkStream</code>, given to a <code>Handler</code>.</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Response.html'
-                               title='rustless::server::server::Response'>Response</a></td>
-                        <td class='docblock short'>
-                             <p>The outgoing half for a Tcp connection, created by a <code>Server</code> and given to a <code>Handler</code>.</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Server.html'
-                               title='rustless::server::server::Server'>Server</a></td>
-                        <td class='docblock short'>
-                             <p>A server can listen on a TCP socket.</p>
-                        </td>
-                    </tr>
-                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Listening.html'
+                                  title='rustless::server::server::Listening'>Listening</a></td>
+                           <td class='docblock short'>
+                                <p>A listening server, which can later be closed.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Request.html'
+                                  title='rustless::server::server::Request'>Request</a></td>
+                           <td class='docblock short'>
+                                <p>A request bundles several parts of an incoming <code>NetworkStream</code>, given to a <code>Handler</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Response.html'
+                                  title='rustless::server::server::Response'>Response</a></td>
+                           <td class='docblock short'>
+                                <p>The outgoing half for a Tcp connection, created by a <code>Server</code> and given to a <code>Handler</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Server.html'
+                                  title='rustless::server::server::Server'>Server</a></td>
+                           <td class='docblock short'>
+                                <p>A server can listen on a TCP socket.</p>
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.Fresh.html'
-                               title='rustless::server::server::Fresh'>Fresh</a></td>
-                        <td class='docblock short'>
-                             <p>The write-status indicating headers have not been written.</p>
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.Streaming.html'
-                               title='rustless::server::server::Streaming'>Streaming</a></td>
-                        <td class='docblock short'>
-                             <p>The write-status indicating headers have been written.</p>
-                        </td>
-                    </tr>
-                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.Fresh.html'
+                                  title='rustless::server::server::Fresh'>Fresh</a></td>
+                           <td class='docblock short'>
+                                <p>The write-status indicating headers have not been written.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.Streaming.html'
+                                  title='rustless::server::server::Streaming'>Streaming</a></td>
+                           <td class='docblock short'>
+                                <p>The write-status indicating headers have been written.</p>
+                           </td>
+                       </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='trait' href='trait.Handler.html'
-                               title='rustless::server::server::Handler'>Handler</a></td>
-                        <td class='docblock short'>
-                             <p>A handler that can handle incoming requests for a server.</p>
-                        </td>
-                    </tr>
-                </table></section>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.Handler.html'
+                                  title='rustless::server::server::Handler'>Handler</a></td>
+                           <td class='docblock short'>
+                                <p>A handler that can handle incoming requests for a server.</p>
+                           </td>
+                       </tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -248,6 +240,8 @@ implement <code>Write</code>.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
+    
 
     
     
@@ -212,11 +213,11 @@
 <span class='kw'>use</span> <span class='ident'>queryst</span>;
 <span class='kw'>use</span> <span class='ident'>valico</span>::<span class='ident'>MutableJson</span>;
 
-<span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>ApiHandler</span>};
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>api</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>super</span>::<span class='ident'>backend</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>super</span>::<span class='ident'>errors</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>super</span>::<span class='ident'>server</span>::<span class='ident'>status</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>ApiHandler</span>};
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>api</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>backend</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>errors</span>;
+<span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>server</span>::<span class='ident'>status</span>;
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Application</span> {
     <span class='kw'>pub</span> <span class='ident'>ext</span>: <span class='ident'>typemap</span>::<span class='ident'>TypeMap</span>,
@@ -239,7 +240,7 @@
         <span class='kw'>let</span> <span class='ident'>parse_result</span> <span class='op'>=</span> <span class='ident'>parse_request</span>(<span class='ident'>req</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>params</span>);
 
         <span class='ident'>parse_result</span>.<span class='ident'>and_then</span>(<span class='op'>|</span>_<span class='op'>|</span> {
-            <span class='self'>self</span>.<span class='ident'>root_api</span>.<span class='ident'>api_call</span>(<span class='kw-2'>&amp;</span>(<span class='ident'>req</span>.<span class='ident'>url</span>().<span class='ident'>path</span>().<span class='ident'>join</span>(<span class='string'>&quot;/&quot;</span>)), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>params</span>, <span class='ident'>req</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>super</span>::<span class='ident'>CallInfo</span>::<span class='ident'>new</span>(<span class='self'>self</span>))
+            <span class='self'>self</span>.<span class='ident'>root_api</span>.<span class='ident'>api_call</span>(<span class='kw-2'>&amp;</span>(<span class='ident'>req</span>.<span class='ident'>url</span>().<span class='ident'>path</span>().<span class='ident'>join</span>(<span class='string'>&quot;/&quot;</span>)), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>params</span>, <span class='ident'>req</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>super</span>::<span class='ident'>CallInfo</span>::<span class='ident'>new</span>(<span class='self'>self</span>))
         })
     }
 
@@ -279,7 +280,7 @@
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>super</span>::<span class='ident'>super</span>::<span class='ident'>Extensible</span> <span class='kw'>for</span> <span class='ident'>Application</span> {
+<span class='kw'>impl</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>Extensible</span> <span class='kw'>for</span> <span class='ident'>Application</span> {
     <span class='kw'>fn</span> <span class='ident'>ext</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span>::<span class='ident'>typemap</span>::<span class='ident'>TypeMap</span> { <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>ext</span> }
     <span class='kw'>fn</span> <span class='ident'>ext_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> ::<span class='ident'>typemap</span>::<span class='ident'>TypeMap</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>ext</span> }
 }
@@ -393,6 +394,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

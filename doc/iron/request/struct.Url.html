@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>iron</a>::<wbr><a href='index.html'>request</a>::<wbr><a class='struct' href=''>Url</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-400' class='srclink' href='../../src/iron/request/url.rs.html#11-52' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-392' class='srclink' href='../../src/iron/request/url.rs.html#11-52' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Url {
     pub scheme: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>,
     pub host: <a class='enum' href='../../url/host/enum.Host.html' title='url::host::Host'>Host</a>,
@@ -59,39 +60,40 @@
 }</pre><div class='docblock'><p>HTTP/HTTPS URL type for Iron.</p>
 </div><h2 class='fields'>Fields</h2>
 <table><tr class='stab '>
-                                  <td id='structfield.scheme'><code>scheme</code></td><td><div class='docblock'><p>The lower-cased scheme of the URL, typically &quot;http&quot; or &quot;https&quot;.</p>
+                             <td id='structfield.scheme'><code>scheme</code></td><td><div class='docblock'><p>The lower-cased scheme of the URL, typically &quot;http&quot; or &quot;https&quot;.</p>
 </div></td></tr><tr class='stab '>
-                                  <td id='structfield.host'><code>host</code></td><td><div class='docblock'><p>The host field of the URL, probably a domain.</p>
+                             <td id='structfield.host'><code>host</code></td><td><div class='docblock'><p>The host field of the URL, probably a domain.</p>
 </div></td></tr><tr class='stab '>
-                                  <td id='structfield.port'><code>port</code></td><td><div class='docblock'><p>The connection port.</p>
+                             <td id='structfield.port'><code>port</code></td><td><div class='docblock'><p>The connection port.</p>
 </div></td></tr><tr class='stab '>
-                                  <td id='structfield.path'><code>path</code></td><td><div class='docblock'><p>The URL path, the resource to be accessed.</p>
+                             <td id='structfield.path'><code>path</code></td><td><div class='docblock'><p>The URL path, the resource to be accessed.</p>
 
 <p>A <em>non-empty</em> vector encoding the parts of the URL path.
 Empty entries of <code>&quot;&quot;</code> correspond to trailing slashes.</p>
 </div></td></tr><tr class='stab '>
-                                  <td id='structfield.username'><code>username</code></td><td><div class='docblock'><p>The URL username field, from the userinfo section of the URL.</p>
+                             <td id='structfield.username'><code>username</code></td><td><div class='docblock'><p>The URL username field, from the userinfo section of the URL.</p>
 
 <p><code>None</code> if the <code>@</code> character was not part of the input OR
 if a blank username was provided.
 Otherwise, a non-empty string.</p>
 </div></td></tr><tr class='stab '>
-                                  <td id='structfield.password'><code>password</code></td><td><div class='docblock'><p>The URL password field, from the userinfo section of the URL.</p>
+                             <td id='structfield.password'><code>password</code></td><td><div class='docblock'><p>The URL password field, from the userinfo section of the URL.</p>
 
 <p><code>None</code> if the <code>@</code> character was not part of the input OR
 if a blank password was provided.
 Otherwise, a non-empty string.</p>
 </div></td></tr><tr class='stab '>
-                                  <td id='structfield.query'><code>query</code></td><td><div class='docblock'><p>The URL query string.</p>
+                             <td id='structfield.query'><code>query</code></td><td><div class='docblock'><p>The URL query string.</p>
 
 <p><code>None</code> if the <code>?</code> character was not part of the input.
 Otherwise, a possibly empty, percent encoded string.</p>
 </div></td></tr><tr class='stab '>
-                                  <td id='structfield.fragment'><code>fragment</code></td><td><div class='docblock'><p>The URL fragment.</p>
+                             <td id='structfield.fragment'><code>fragment</code></td><td><div class='docblock'><p>The URL fragment.</p>
 
 <p><code>None</code> if the <code>#</code> character was not part of the input.
 Otherwise, a possibly empty, percent encoded string.</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></h3><div class='impl-items'><h4 id='method.parse' class='method'><code>fn <a href='#method.parse' class='fnname'>parse</a>(input: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-475' class='srclink' href='../../src/iron/request/url.rs.html#54-138' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.parse' class='method'><code>fn <a href='#method.parse' class='fnname'>parse</a>(input: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
 <div class='docblock'><p>Create a URL from a string.</p>
 
 <p>The input must be a valid URL with a special scheme for this to succeed.</p>
@@ -103,13 +105,24 @@ Otherwise, a possibly empty, percent encoded string.</p>
 <div class='docblock'><p>Create a <code>Url</code> from a <code>rust-url</code> <code>Url</code>.</p>
 </div><h4 id='method.into_generic_url' class='method'><code>fn <a href='#method.into_generic_url' class='fnname'>into_generic_url</a>(self) -&gt; <a class='struct' href='../../url/struct.Url.html' title='url::Url'>Url</a></code></h4>
 <div class='docblock'><p>Create a <code>rust-url</code> <code>Url</code> from a <code>Url</code>.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#method.fmt' class='fnname'>fmt</a>(&amp;self, formatter: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></h3><div class='impl-items'><h4 id='method.fmt-1' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></h4>
-<h4 id='method.clone_from' class='method'><span class="since">1.0.0</span><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-501' class='srclink' href='../../src/iron/request/url.rs.html#140-182' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, formatter: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-401' class='srclink' href='../../src/iron/request/url.rs.html#10' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt-1' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-414' class='srclink' href='../../src/iron/request/url.rs.html#10' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-425' class='srclink' href='../../src/iron/request/url.rs.html#10' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-436' class='srclink' href='../../src/iron/request/url.rs.html#10' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../../iron/struct.Url.html' title='iron::Url'>Url</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -132,6 +145,8 @@ Otherwise, a possibly empty, percent encoded string.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

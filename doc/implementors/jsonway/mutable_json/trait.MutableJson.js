@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors['jsonway'] = [];
+implementors["jsonway"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

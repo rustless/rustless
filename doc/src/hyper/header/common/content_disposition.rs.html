@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/hyper-0.8.1/src/header/common/content_disposition.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.8.1/src/header/common/content_disposition.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>content_disposition.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
+    
 
     
     
@@ -473,11 +474,11 @@
         <span class='kw'>for</span> <span class='ident'>param</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>parameters</span> {
             <span class='kw'>match</span> <span class='op'>*</span><span class='ident'>param</span> {
                 <span class='ident'>DispositionParam</span>::<span class='ident'>Filename</span>(<span class='kw-2'>ref</span> <span class='ident'>charset</span>, <span class='kw-2'>ref</span> <span class='ident'>opt_lang</span>, <span class='kw-2'>ref</span> <span class='ident'>bytes</span>) <span class='op'>=&gt;</span> {
-                    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>use_simple_format</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolval'>false</span>;
+                    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>use_simple_format</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
                     <span class='kw'>if</span> <span class='ident'>opt_lang</span>.<span class='ident'>is_none</span>() {
                         <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>Charset</span>::<span class='ident'>Ext</span>(<span class='kw-2'>ref</span> <span class='ident'>ext</span>) <span class='op'>=</span> <span class='op'>*</span><span class='ident'>charset</span> {
                             <span class='kw'>if</span> <span class='ident'>UniCase</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>ext</span>) <span class='op'>==</span> <span class='ident'>UniCase</span>(<span class='string'>&quot;utf-8&quot;</span>) {
-                                <span class='ident'>use_simple_format</span> <span class='op'>=</span> <span class='boolval'>true</span>;
+                                <span class='ident'>use_simple_format</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
                             }
                         }
                     }
@@ -507,7 +508,7 @@
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
-    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>ContentDisposition</span>,<span class='ident'>DispositionType</span>,<span class='ident'>DispositionParam</span>};
+    <span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>ContentDisposition</span>,<span class='ident'>DispositionType</span>,<span class='ident'>DispositionParam</span>};
     <span class='kw'>use</span> ::<span class='ident'>header</span>::<span class='ident'>Header</span>;
     <span class='kw'>use</span> ::<span class='ident'>header</span>::<span class='ident'>shared</span>::<span class='ident'>Charset</span>;
 
@@ -598,6 +599,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/modifier-0.1.0/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/modifier-0.1.0/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -135,14 +136,14 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Set</span> {
     <span class='doccomment'>/// Modify self using the provided modifier.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>set</span><span class='op'>&lt;</span><span class='ident'>M</span>: <span class='ident'>Modifier</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>modifier</span>: <span class='ident'>M</span>) <span class='op'>-&gt;</span> <span class='kw'>Self</span> <span class='kw'>where</span> <span class='kw'>Self</span>: <span class='ident'>Sized</span> {
+    <span class='kw'>fn</span> <span class='ident'>set</span><span class='op'>&lt;</span><span class='ident'>M</span>: <span class='ident'>Modifier</span><span class='op'>&lt;</span><span class='self'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>modifier</span>: <span class='ident'>M</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> <span class='kw'>where</span> <span class='self'>Self</span>: <span class='ident'>Sized</span> {
         <span class='ident'>modifier</span>.<span class='ident'>modify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>);
         <span class='self'>self</span>
     }
 
     <span class='doccomment'>/// Modify self through a mutable reference with the provided modifier.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>always</span>)]</span>
-    <span class='kw'>fn</span> <span class='ident'>set_mut</span><span class='op'>&lt;</span><span class='ident'>M</span>: <span class='ident'>Modifier</span><span class='op'>&lt;</span><span class='kw'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>modifier</span>: <span class='ident'>M</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
+    <span class='kw'>fn</span> <span class='ident'>set_mut</span><span class='op'>&lt;</span><span class='ident'>M</span>: <span class='ident'>Modifier</span><span class='op'>&lt;</span><span class='self'>Self</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>modifier</span>: <span class='ident'>M</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>Self</span> {
         <span class='ident'>modifier</span>.<span class='ident'>modify</span>(<span class='self'>self</span>);
         <span class='self'>self</span>
     }
@@ -152,7 +153,7 @@
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>test</span> {
-    <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
+    <span class='kw'>pub</span> <span class='kw'>use</span> <span class='kw'>super</span>::<span class='op'>*</span>;
 
     <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Thing</span> {
         <span class='ident'>x</span>: <span class='ident'>usize</span>
@@ -210,6 +211,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

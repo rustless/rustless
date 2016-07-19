@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>phf</a>::<wbr><a class='trait' href=''>PhfHash</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-29' class='srclink' href='../phf_shared/trait.PhfHash.html?gotosrc=29' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-29' class='srclink' href='../phf_shared/trait.PhfHash.html?gotosrc=29' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait PhfHash {
     fn <a href='#tymethod.phf_hash' class='fnname'>phf_hash</a>&lt;H&gt;(&amp;self, state: &amp;mut H) <span class='where'>where H: <a class='trait' href='https://doc.rust-lang.org/nightly/core/hash/trait.Hasher.html' title='core::hash::Hasher'>Hasher</a></span>;
 
@@ -67,9 +68,57 @@ between the host and target when cross compiling.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    </ul><script type="text/javascript" async
-                              src="../implementors/phf_shared/trait.PhfHash.js">
-                      </script></section>
+    <li><code>impl PhfHash for <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></li>
+<li><code>impl PhfHash for <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></li>
+<li><code>impl&lt;'a&gt; PhfHash for &amp;'a <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></li>
+<li><code>impl&lt;'a&gt; PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 1]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 2]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 3]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 4]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 5]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 6]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 7]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 8]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 9]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 10]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 11]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 12]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 13]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 14]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 15]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 16]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 17]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 18]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 19]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 21]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 22]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 23]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 24]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 25]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 26]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 27]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 28]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 29]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 30]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 31]</a></code></li>
+<li><code>impl PhfHash for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 32]</a></code></li>
+</ul><script type="text/javascript" async
+                         src="../implementors/phf_shared/trait.PhfHash.js">
+                 </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -92,6 +141,8 @@ between the host and target when cross compiling.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 

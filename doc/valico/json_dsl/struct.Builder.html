@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     
     
@@ -43,13 +44,14 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>valico</a>::<wbr><a href='index.html'>json_dsl</a>::<wbr><a class='struct' href=''>Builder</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-77' class='srclink' href='../../src/valico/json_dsl/builder.rs.html#12-18' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-77' class='srclink' href='../../src/valico/json_dsl/builder.rs.html#12-18' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Builder {
     // some fields omitted
-}</pre><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../valico/json_dsl/struct.Builder.html' title='valico::json_dsl::Builder'>Builder</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../valico/json_dsl/struct.Builder.html' title='valico::json_dsl::Builder'>Builder</a></code></h4>
+}</pre><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../valico/json_dsl/struct.Builder.html' title='valico::json_dsl::Builder'>Builder</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-84' class='srclink' href='../../src/valico/json_dsl/builder.rs.html#22-280' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../valico/json_dsl/struct.Builder.html' title='valico::json_dsl::Builder'>Builder</a></code></h4>
 <h4 id='method.build' class='method'><code>fn <a href='#method.build' class='fnname'>build</a>&lt;F&gt;(rules: F) -&gt; <a class='struct' href='../../valico/json_dsl/struct.Builder.html' title='valico::json_dsl::Builder'>Builder</a> <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../../valico/json_dsl/struct.Builder.html' title='valico::json_dsl::Builder'>Builder</a>)</span></code></h4>
 <h4 id='method.get_required' class='method'><code>fn <a href='#method.get_required' class='fnname'>get_required</a>(&amp;self) -&gt; &amp;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a>&gt;</code></h4>
 <h4 id='method.get_optional' class='method'><code>fn <a href='#method.get_optional' class='fnname'>get_optional</a>(&amp;self) -&gt; &amp;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../valico/json_dsl/struct.Param.html' title='valico::json_dsl::Param'>Param</a>&gt;</code></h4>
@@ -72,7 +74,8 @@
 <h4 id='method.build_schemes' class='method'><code>fn <a href='#method.build_schemes' class='fnname'>build_schemes</a>(&amp;mut self, scope: &amp;mut <a class='struct' href='../../valico/json_schema/scope/struct.Scope.html' title='valico::json_schema::scope::Scope'>Scope</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='enum' href='../../valico/json_schema/schema/enum.SchemaError.html' title='valico::json_schema::schema::SchemaError'>SchemaError</a>&gt;</code></h4>
 <h4 id='method.process' class='method'><code>fn <a href='#method.process' class='fnname'>process</a>(&amp;self, val: &amp;mut <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, scope: &amp;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='struct' href='../../valico/json_schema/scope/struct.Scope.html' title='valico::json_schema::scope::Scope'>Scope</a>&gt;) -&gt; <a class='struct' href='../../valico/json_schema/validators/struct.ValidationState.html' title='valico::json_schema::validators::ValidationState'>ValidationState</a></code></h4>
 <h4 id='method.process_nest' class='method'><code>fn <a href='#method.process_nest' class='fnname'>process_nest</a>(&amp;self, val: &amp;mut <a class='enum' href='../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>, path: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, scope: &amp;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='struct' href='../../valico/json_schema/scope/struct.Scope.html' title='valico::json_schema::scope::Scope'>Scope</a>&gt;) -&gt; <a class='struct' href='../../valico/json_schema/validators/struct.ValidationState.html' title='valico::json_schema::validators::ValidationState'>ValidationState</a></code></h4>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> for <a class='struct' href='../../valico/json_dsl/struct.Builder.html' title='valico::json_dsl::Builder'>Builder</a></code></h3><div class='impl-items'></div></section>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> for <a class='struct' href='../../valico/json_dsl/struct.Builder.html' title='valico::json_dsl::Builder'>Builder</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-83' class='srclink' href='../../src/valico/json_dsl/builder.rs.html#20' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -95,6 +98,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
