@@ -47,7 +47,7 @@ version = "0.3"
 
 [dependencies.bodyparser]
 optional = true
-version = "0.0"
+version = "0.3"
 
 [dependencies.plugin]
 optional = true
