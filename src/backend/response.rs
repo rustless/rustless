@@ -1,5 +1,3 @@
-use serialize::json;
-
 use server::header;
 use server::mime;
 use server::status;
@@ -7,6 +5,8 @@ use typemap;
 
 pub use iron::response::WriteBody;
 pub use iron::response::ResponseBody;
+
+use super::super::json::{JsonValue};
 
 pub struct Response {
     pub status: status::StatusCode,
@@ -46,7 +46,7 @@ impl Response {
         ));
     }
 
-    pub fn from_json(status: status::StatusCode, body: &json::Json) -> Response {
+    pub fn from_json(status: status::StatusCode, body: &JsonValue) -> Response {
         let mut response = Response::new(status);
         response.set_json_content_type();
         response.replace_body(Box::new(body.to_string()));

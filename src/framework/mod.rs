@@ -1,7 +1,6 @@
-use serialize::json;
-
 use backend;
 use errors;
+use json::{JsonValue};
 
 pub use self::api_handler::{ApiHandler, ApiHandlers};
 pub use self::app::{Application};
@@ -30,7 +29,7 @@ pub struct CallInfo<'a> {
     pub app: &'a app::Application
 }
 
-pub type Callback = Box<for<'a> Fn(&'a mut client::Client, &json::Json) -> backend::HandleSuccessResult + 'static + Sync + Send>;
+pub type Callback = Box<for<'a> Fn(&'a mut client::Client, &JsonValue) -> backend::HandleSuccessResult + 'static + Sync + Send>;
 pub type Callbacks = Vec<Callback>;
 
 pub type ErrorFormatter = Box<Fn(&errors::Error, &media::Media) -> Option<backend::Response> + 'static + Sync + Send>;

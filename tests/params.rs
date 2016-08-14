@@ -18,7 +18,7 @@ fn it_urldecodes_path_params() {
             });
 
             endpoint.handle(|client, params| {
-                client.text(format!("{}", params.find("message_id").and_then(|obj| { obj.as_string() }).unwrap()))
+                client.text(format!("{}", params.find("message_id").and_then(|obj| { obj.as_str() }).unwrap()))
             })
         })
     });
@@ -43,7 +43,7 @@ fn it_urldecodes_query_params() {
             });
 
             endpoint.handle(|client, params| {
-                client.text(format!("{}", params.find("message_id").and_then(|obj| { obj.as_string() }).unwrap()))
+                client.text(format!("{}", params.find("message_id").and_then(|obj| { obj.as_str() }).unwrap()))
             })
         })
     });

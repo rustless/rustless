@@ -1,4 +1,4 @@
-use serialize::json;
+use serde_json::value::{Value};
 
 use jsonway;
 
@@ -32,7 +32,7 @@ fn it_serializes_json_properly() {
     }
 
     let raw_body = resp_body!(response);
-    let body: json::Json = raw_body.parse().unwrap();
+    let body: Value = raw_body.parse().unwrap();
 
     assert!(body.find("uptime").is_some());
     assert!(body.find("echo_params").is_some());

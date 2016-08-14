@@ -1,8 +1,9 @@
 use std::ascii::AsciiExt;
 use valico::json_dsl;
 use std::collections;
-use serialize::json::{self, ToJson};
-use jsonway::{self, MutableJson};
+use jsonway::{self};
+
+use json::{self, JsonValue, ToJson};
 use framework::{self, Nesting};
 use server::mime;
 use server::header;
@@ -180,8 +181,8 @@ struct Param {
     pub ext: ParamExt
 }
 
-impl json::ToJson for Param {
-    fn to_json(&self) -> json::Json {
+impl ToJson for Param {
+    fn to_json(&self) -> JsonValue {
         jsonway::object(|param| {
             param.set("name", self.name.clone());
             param.set("in", self.place.to_string());
@@ -205,7 +206,7 @@ impl json::ToJson for Param {
 
 pub struct SwaggerSpecKey;
 impl ::typemap::Key for SwaggerSpecKey {
-    type Value = json::Json;
+    type Value = JsonValue;
 }
 
 pub fn enable(app: &mut framework::Application, spec: Spec) {
@@ -215,7 +216,7 @@ pub fn enable(app: &mut framework::Application, spec: Spec) {
 
 #[allow(unused_variables)]
 /// Build the basic Swagger 2.0 object
-pub fn build_spec(app: &framework::Application, spec: Spec) -> json::Json {
+pub fn build_spec(app: &framework::Application, spec: Spec) -> JsonValue {
     jsonway::object(|json| {
         // Required. Specifies the Swagger Specification version being used.
         // It can be used by the Swagger UI and other clients to interpret the API listing.
@@ -490,7 +491,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
             };
 
             if !exists {
-                paths.object(&path, |path_item| {
+                paths.object(path.to_string(), |path_item| {
                     path_item.set(method.clone(), definition.to_json());
                     path_item.array("parameters", |parameters| {
                         for param in context.params.iter() {
@@ -505,7 +506,7 @@ fn fill_paths<'a>(mut context: WalkContext<'a>, paths: &mut jsonway::ObjectBuild
 
 #[allow(unused_variables)]
 /// Creates Endpoint definition according to Swagger 2.0 specification
-fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkContext) -> json::Json {
+fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkContext) -> JsonValue {
     jsonway::object(|def| {
         // A list of tags for API documentation control. Tags can be used for logical grouping
         // of operations by resources or any other qualifier.

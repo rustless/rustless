@@ -1,4 +1,3 @@
-use serialize::json;
 use typemap;
 use std::env;
 use std::path::Path;
@@ -9,9 +8,8 @@ use errors::{self, Error};
 use framework::app;
 use framework::endpoint;
 use framework::media;
-use server::status;
-use server::mime;
-use server::header;
+use server::{status, mime, header};
+use json::{JsonValue};
 
 pub struct Client<'a> {
     pub app: &'a app::Application,
@@ -90,7 +88,7 @@ impl<'a> Client<'a> {
         Err(error_response!(error))
     }
 
-    pub fn json(mut self, result: &json::Json) -> ClientResult<'a> {
+    pub fn json(mut self, result: &JsonValue) -> ClientResult<'a> {
         self.set_json_content_type();
         self.response.replace_body(Box::new(result.to_string()));
 
@@ -110,14 +108,14 @@ impl<'a> Client<'a> {
                 return Err(error_response!(errors::File(err)));
             }
         };
-        
+
         let file = match File::open(absolute_path) {
             Ok(file) => file,
             Err(err) => {
                 return Err(error_response!(errors::File(err)));
             }
         };
-        
+
         self.response.replace_body(Box::new(file));
         Ok(self)
     }

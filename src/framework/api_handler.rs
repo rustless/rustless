@@ -2,12 +2,13 @@ use typeable::Typeable;
 use traitobject;
 use std::any::TypeId;
 use std::mem;
-use serialize::json;
+
 use backend;
-use super::CallInfo;
+use super::{CallInfo};
+use json::{JsonValue};
 
 pub trait ApiHandler: Typeable {
-    fn api_call<'a, 'b>(&'a self, &str, &mut json::Json, &'b mut (backend::Request + 'b), &mut CallInfo<'a>) -> backend::HandleResult<backend::Response>;
+    fn api_call<'a, 'b>(&'a self, &str, &mut JsonValue, &'b mut (backend::Request + 'b), &mut CallInfo<'a>) -> backend::HandleResult<backend::Response>;
 }
 
 impl ApiHandler {

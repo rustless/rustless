@@ -4,21 +4,19 @@
 #![deny(bad_style)]
 
 extern crate regex;
+extern crate serde;
+extern crate serde_json;
 extern crate hyper;
-extern crate rustc_serialize as serialize;
 extern crate url;
 extern crate error;
 extern crate cookie;
-
 extern crate iron;
 extern crate typemap;
 extern crate plugin;
 extern crate bodyparser;
-
 extern crate valico;
 extern crate queryst;
 extern crate jsonway;
-
 extern crate typeable;
 extern crate traitobject;
 
@@ -28,6 +26,7 @@ extern crate lazy_static;
 #[macro_use]
 extern crate log;
 
+pub use json::{JsonValue};
 pub use backend::{Request, SimpleRequest, Response, Handler, HandleResult, HandleSuccessResult, ResponseBody};
 pub use errors::{ErrorResponse};
 pub use framework::{
@@ -57,3 +56,4 @@ macro_rules! impl_extensible {
 pub mod server;
 pub mod framework;
 pub mod batteries;
+pub mod json;
