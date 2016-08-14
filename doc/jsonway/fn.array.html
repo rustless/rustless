@@ -47,29 +47,29 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-247' class='srclink' href='../src/jsonway/lib.rs.html#45-47' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-238' class='srclink' href='../src/jsonway/lib.rs.html#45-47' title='goto source code'>[src]</a></span></h1>
 <pre class='rust fn'>pub fn array&lt;F&gt;(builder: F) -&gt; <a class='struct' href='../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a> <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(&amp;mut <a class='struct' href='../jsonway/array_builder/struct.ArrayBuilder.html' title='jsonway::array_builder::ArrayBuilder'>ArrayBuilder</a>)</span></pre><div class='docblock'>
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>json</span> <span class='op'>=</span> <span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>json</span><span class='op'>|</span> {
-    <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;first_name&quot;</span>, <span class='string'>&quot;Luke&quot;</span>.<span class='ident'>to_string</span>()); 
-    <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;last_name&quot;</span>, <span class='string'>&quot;Skywalker&quot;</span>.<span class='ident'>to_string</span>());
+    <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;first_name&quot;</span>, <span class='string'>&quot;Luke&quot;</span>);
+    <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;last_name&quot;</span>, <span class='string'>&quot;Skywalker&quot;</span>);
 
     <span class='ident'>json</span>.<span class='ident'>object</span>(<span class='string'>&quot;info&quot;</span>, <span class='op'>|</span><span class='ident'>json</span><span class='op'>|</span> {
-        <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;homeworld&quot;</span>, <span class='string'>&quot;Tatooine&quot;</span>.<span class='ident'>to_string</span>());
-        <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;born&quot;</span>, <span class='string'>&quot;19 BBY&quot;</span>.<span class='ident'>to_string</span>());
-        <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;died&quot;</span>, <span class='string'>&quot;Between 45 ABY and 137 ABY&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;homeworld&quot;</span>, <span class='string'>&quot;Tatooine&quot;</span>);
+        <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;born&quot;</span>, <span class='string'>&quot;19 BBY&quot;</span>);
+        <span class='ident'>json</span>.<span class='ident'>set</span>(<span class='string'>&quot;died&quot;</span>, <span class='string'>&quot;Between 45 ABY and 137 ABY&quot;</span>);
     });
 
     <span class='ident'>json</span>.<span class='ident'>array</span>(<span class='string'>&quot;masters&quot;</span>, <span class='op'>|</span><span class='ident'>json</span><span class='op'>|</span> {
-        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Obi-Wan Kenobi&quot;</span>.<span class='ident'>to_string</span>());
-        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Yoda&quot;</span>.<span class='ident'>to_string</span>());
-        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Joruus C&#39;baoth (Briefly)&quot;</span>.<span class='ident'>to_string</span>());
-        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Darth Sidious (Briefly)&quot;</span>.<span class='ident'>to_string</span>());
+        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Obi-Wan Kenobi&quot;</span>);
+        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Yoda&quot;</span>);
+        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Joruus C&#39;baoth (Briefly)&quot;</span>);
+        <span class='ident'>json</span>.<span class='ident'>push</span>(<span class='string'>&quot;Darth Sidious (Briefly)&quot;</span>);
     });
 }).<span class='ident'>unwrap</span>();
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>json</span>.<span class='ident'>find</span>(<span class='string'>&quot;first_name&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>as_string</span>().<span class='ident'>unwrap</span>(), <span class='string'>&quot;Luke&quot;</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>json</span>.<span class='ident'>find</span>(<span class='string'>&quot;last_name&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>as_string</span>().<span class='ident'>unwrap</span>(), <span class='string'>&quot;Skywalker&quot;</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>json</span>.<span class='ident'>find</span>(<span class='string'>&quot;first_name&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>as_str</span>().<span class='ident'>unwrap</span>(), <span class='string'>&quot;Luke&quot;</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>json</span>.<span class='ident'>find</span>(<span class='string'>&quot;last_name&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>as_str</span>().<span class='ident'>unwrap</span>(), <span class='string'>&quot;Skywalker&quot;</span>);
 
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>json</span>.<span class='ident'>find</span>(<span class='string'>&quot;info&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>is_object</span>());
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>json</span>.<span class='ident'>find</span>(<span class='string'>&quot;masters&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>is_array</span>());</pre>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/json_schema/keywords/dependencies.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-1.0.1/src/json_schema/keywords/dependencies.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>dependencies.rs.html -- source</title>
@@ -183,9 +183,8 @@
 <span id="139">139</span>
 <span id="140">140</span>
 <span id="141">141</span>
-<span id="142">142</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>Value</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>;
 
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>schema</span>;
@@ -195,7 +194,7 @@
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Dependencies</span>;
 <span class='kw'>impl</span> <span class='kw'>super</span>::<span class='ident'>Keyword</span> <span class='kw'>for</span> <span class='ident'>Dependencies</span> {
-    <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>def</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>ctx</span>: <span class='kw-2'>&amp;</span><span class='ident'>schema</span>::<span class='ident'>WalkContext</span>) <span class='op'>-&gt;</span> <span class='kw'>super</span>::<span class='ident'>KeywordResult</span> {
+    <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>def</span>: <span class='kw-2'>&amp;</span><span class='ident'>Value</span>, <span class='ident'>ctx</span>: <span class='kw-2'>&amp;</span><span class='ident'>schema</span>::<span class='ident'>WalkContext</span>) <span class='op'>-&gt;</span> <span class='kw'>super</span>::<span class='ident'>KeywordResult</span> {
         <span class='kw'>let</span> <span class='ident'>deps</span> <span class='op'>=</span> <span class='macro'>keyword_key_exists</span><span class='macro'>!</span>(<span class='ident'>def</span>, <span class='string'>&quot;dependencies&quot;</span>);
 
         <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>deps</span>.<span class='ident'>is_object</span>() {
@@ -234,7 +233,7 @@
 
                 <span class='kw'>for</span> <span class='ident'>key</span> <span class='kw'>in</span> <span class='ident'>item</span>.<span class='ident'>iter</span>() {
                     <span class='kw'>if</span> <span class='ident'>key</span>.<span class='ident'>is_string</span>() {
-                        <span class='ident'>keys</span>.<span class='ident'>push</span>(<span class='ident'>key</span>.<span class='ident'>as_string</span>().<span class='ident'>unwrap</span>().<span class='ident'>to_string</span>())
+                        <span class='ident'>keys</span>.<span class='ident'>push</span>(<span class='ident'>key</span>.<span class='ident'>as_str</span>().<span class='ident'>unwrap</span>().<span class='ident'>to_string</span>())
                     } <span class='kw'>else</span> {
                         <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>schema</span>::<span class='ident'>SchemaError</span>::<span class='ident'>Malformed</span> {
                             <span class='ident'>path</span>: <span class='ident'>ctx</span>.<span class='ident'>fragment</span>.<span class='ident'>join</span>(<span class='string'>&quot;/&quot;</span>),
@@ -264,7 +263,6 @@
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>scope</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>builder</span>;
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>::<span class='ident'>ToJson</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='ident'>jsonway</span>;
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -282,7 +280,7 @@
             });
             <span class='ident'>deps</span>.<span class='ident'>property</span>(<span class='string'>&quot;item_id&quot;</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;item_name&quot;</span>.<span class='ident'>to_string</span>()]);
         });
-    }).<span class='ident'>to_json</span>(), <span class='boolvalue'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
+    }).<span class='ident'>into_json</span>(), <span class='boolvalue'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
 
     <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>obj</span><span class='op'>|</span> {
         <span class='ident'>obj</span>.<span class='ident'>set</span>(<span class='string'>&quot;isbn&quot;</span>, <span class='string'>&quot;some_isbn&quot;</span>.<span class='ident'>to_string</span>());
@@ -326,7 +324,8 @@
             });
         });
     }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>true</span>).<span class='ident'>is_err</span>());
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 

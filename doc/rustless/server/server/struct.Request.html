@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-6958' class='srclink' href='../../../hyper/server/request/struct.Request.html?gotosrc=6958' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-7324' class='srclink' href='../../../hyper/server/request/struct.Request.html?gotosrc=7324' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Request&lt;'a, 'b&gt; <span class='where'>where 'b: 'a</span> {
     pub remote_addr: <a class='enum' href='https://doc.rust-lang.org/nightly/std/net/addr/enum.SocketAddr.html' title='std::net::addr::SocketAddr'>SocketAddr</a>,
     pub method: <a class='enum' href='../../../rustless/server/method/enum.Method.html' title='rustless::server::method::Method'>Method</a>,
@@ -78,6 +78,8 @@ immediately useful.</p>
 </div><h4 id='method.ssl' class='method'><code>fn <a href='#method.ssl' class='fnname'>ssl</a>&lt;T&gt;(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;T&gt; <span class='where'>where T: <a class='trait' href='../../../rustless/server/net/trait.NetworkStream.html' title='rustless::server::net::NetworkStream'>NetworkStream</a></span></code></h4>
 <div class='docblock'><p>Get a reference to the underlying Ssl stream, if connected
 over HTTPS.</p>
+
+<p>This is actually just an alias for <code>downcast_ref</code>.</p>
 
 <h1 id='example' class='section-header'><a href='#example'>Example</a></h1>
 <pre class='rust rust-example-rendered'>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/iron-0.3.0/src/request/url.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/iron-0.4.0/src/request/url.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>url.rs.html -- source</title>
@@ -245,103 +245,17 @@
 <span id="201">201</span>
 <span id="202">202</span>
 <span id="203">203</span>
-<span id="204">204</span>
-<span id="205">205</span>
-<span id="206">206</span>
-<span id="207">207</span>
-<span id="208">208</span>
-<span id="209">209</span>
-<span id="210">210</span>
-<span id="211">211</span>
-<span id="212">212</span>
-<span id="213">213</span>
-<span id="214">214</span>
-<span id="215">215</span>
-<span id="216">216</span>
-<span id="217">217</span>
-<span id="218">218</span>
-<span id="219">219</span>
-<span id="220">220</span>
-<span id="221">221</span>
-<span id="222">222</span>
-<span id="223">223</span>
-<span id="224">224</span>
-<span id="225">225</span>
-<span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
-<span id="235">235</span>
-<span id="236">236</span>
-<span id="237">237</span>
-<span id="238">238</span>
-<span id="239">239</span>
-<span id="240">240</span>
-<span id="241">241</span>
-<span id="242">242</span>
-<span id="243">243</span>
-<span id="244">244</span>
-<span id="245">245</span>
-<span id="246">246</span>
-<span id="247">247</span>
-<span id="248">248</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP/HTTPS URL type for Iron.</span>
 
-<span class='kw'>use</span> <span class='ident'>url</span>::{<span class='ident'>Host</span>, <span class='ident'>RelativeSchemeData</span>};
-<span class='kw'>use</span> <span class='ident'>url</span>::{<span class='ident'>whatwg_scheme_type_mapper</span>};
-<span class='kw'>use</span> <span class='ident'>url</span>::{<span class='self'>self</span>, <span class='ident'>SchemeData</span>, <span class='ident'>SchemeType</span>};
-<span class='kw'>use</span> <span class='ident'>url</span>::<span class='ident'>format</span>::{<span class='ident'>PathFormatter</span>, <span class='ident'>UserInfoFormatter</span>};
+<span class='kw'>use</span> <span class='ident'>url</span>::{<span class='self'>self</span>, <span class='ident'>Host</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 
 <span class='doccomment'>/// HTTP/HTTPS URL type for Iron.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Url</span> {
-    <span class='doccomment'>/// The lower-cased scheme of the URL, typically &quot;http&quot; or &quot;https&quot;.</span>
-    <span class='kw'>pub</span> <span class='ident'>scheme</span>: <span class='ident'>String</span>,
-
-    <span class='doccomment'>/// The host field of the URL, probably a domain.</span>
-    <span class='kw'>pub</span> <span class='ident'>host</span>: <span class='ident'>Host</span>,
-
-    <span class='doccomment'>/// The connection port.</span>
-    <span class='kw'>pub</span> <span class='ident'>port</span>: <span class='ident'>u16</span>,
-
-    <span class='doccomment'>/// The URL path, the resource to be accessed.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// A *non-empty* vector encoding the parts of the URL path.</span>
-    <span class='doccomment'>/// Empty entries of `&quot;&quot;` correspond to trailing slashes.</span>
-    <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
-
-    <span class='doccomment'>/// The URL username field, from the userinfo section of the URL.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// `None` if the `@` character was not part of the input OR</span>
-    <span class='doccomment'>/// if a blank username was provided.</span>
-    <span class='doccomment'>/// Otherwise, a non-empty string.</span>
-    <span class='kw'>pub</span> <span class='ident'>username</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
-
-    <span class='doccomment'>/// The URL password field, from the userinfo section of the URL.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// `None` if the `@` character was not part of the input OR</span>
-    <span class='doccomment'>/// if a blank password was provided.</span>
-    <span class='doccomment'>/// Otherwise, a non-empty string.</span>
-    <span class='kw'>pub</span> <span class='ident'>password</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
-
-    <span class='doccomment'>/// The URL query string.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// `None` if the `?` character was not part of the input.</span>
-    <span class='doccomment'>/// Otherwise, a possibly empty, percent encoded string.</span>
-    <span class='kw'>pub</span> <span class='ident'>query</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
-
-    <span class='doccomment'>/// The URL fragment.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// `None` if the `#` character was not part of the input.</span>
-    <span class='doccomment'>/// Otherwise, a possibly empty, percent encoded string.</span>
-    <span class='kw'>pub</span> <span class='ident'>fragment</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>
+    <span class='doccomment'>/// The generic rust-url that corresponds to this Url</span>
+    <span class='ident'>generic_url</span>: <span class='ident'>url</span>::<span class='ident'>Url</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>Url</span> {
@@ -362,114 +276,98 @@
 
     <span class='doccomment'>/// Create a `Url` from a `rust-url` `Url`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_generic_url</span>(<span class='ident'>raw_url</span>: <span class='ident'>url</span>::<span class='ident'>Url</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Url</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
-        <span class='comment'>// Create an Iron URL by extracting the special scheme data.</span>
-        <span class='kw'>match</span> <span class='ident'>raw_url</span>.<span class='ident'>scheme_data</span> {
-            <span class='ident'>SchemeData</span>::<span class='ident'>Relative</span>(<span class='ident'>data</span>) <span class='op'>=&gt;</span> {
-                <span class='comment'>// Extract the port as a 16-bit unsigned integer.</span>
-                <span class='kw'>let</span> <span class='ident'>port</span>: <span class='ident'>u16</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>data</span>.<span class='ident'>port</span> {
-                    <span class='comment'>// If explicitly defined, unwrap it.</span>
-                    <span class='prelude-val'>Some</span>(<span class='ident'>port</span>) <span class='op'>=&gt;</span> <span class='ident'>port</span>,
-
-                    <span class='comment'>// Otherwise, use the scheme&#39;s default port.</span>
-                    <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
-                        <span class='kw'>match</span> <span class='ident'>whatwg_scheme_type_mapper</span>(<span class='kw-2'>&amp;</span><span class='ident'>raw_url</span>.<span class='ident'>scheme</span>) {
-                            <span class='ident'>SchemeType</span>::<span class='ident'>Relative</span>(<span class='ident'>port</span>) <span class='op'>=&gt;</span> <span class='ident'>port</span>,
-                            _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;Invalid special scheme: `{}`&quot;</span>,
-                                                    <span class='ident'>raw_url</span>.<span class='ident'>scheme</span>))
-                        }
-                    }
-                };
-
-                <span class='comment'>// Map empty usernames to None.</span>
-                <span class='kw'>let</span> <span class='ident'>username</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>data</span>.<span class='ident'>username</span> {
-                    <span class='string'>&quot;&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
-                    _ <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>data</span>.<span class='ident'>username</span>)
-                };
-
-                <span class='comment'>// Map empty passwords to None.</span>
-                <span class='kw'>let</span> <span class='ident'>password</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>data</span>.<span class='ident'>password</span> {
-                    <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
-                    <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>x</span>) <span class='kw'>if</span> <span class='ident'>x</span>.<span class='ident'>is_empty</span>() <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
-                    <span class='prelude-val'>Some</span>(<span class='ident'>password</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>password</span>)
-                };
-
-                <span class='prelude-val'>Ok</span>(<span class='ident'>Url</span> {
-                    <span class='ident'>scheme</span>: <span class='ident'>raw_url</span>.<span class='ident'>scheme</span>,
-                    <span class='ident'>host</span>: <span class='ident'>data</span>.<span class='ident'>host</span>,
-                    <span class='ident'>port</span>: <span class='ident'>port</span>,
-                    <span class='ident'>path</span>: <span class='ident'>data</span>.<span class='ident'>path</span>,
-                    <span class='ident'>username</span>: <span class='ident'>username</span>,
-                    <span class='ident'>password</span>: <span class='ident'>password</span>,
-                    <span class='ident'>query</span>: <span class='ident'>raw_url</span>.<span class='ident'>query</span>,
-                    <span class='ident'>fragment</span>: <span class='ident'>raw_url</span>.<span class='ident'>fragment</span>
-                })
-            },
-            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;Not a special scheme: `{}`&quot;</span>, <span class='ident'>raw_url</span>.<span class='ident'>scheme</span>))
+        <span class='comment'>// Create an Iron URL by verifying the `rust-url` `Url` is a special</span>
+        <span class='comment'>// scheme that Iron supports.</span>
+        <span class='kw'>if</span> <span class='ident'>raw_url</span>.<span class='ident'>cannot_be_a_base</span>() {
+            <span class='prelude-val'>Err</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;Not a special scheme: `{}`&quot;</span>, <span class='ident'>raw_url</span>.<span class='ident'>scheme</span>()))
+        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>raw_url</span>.<span class='ident'>port_or_known_default</span>().<span class='ident'>is_none</span>() {
+            <span class='prelude-val'>Err</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;Invalid special scheme: `{}`&quot;</span>, <span class='ident'>raw_url</span>.<span class='ident'>scheme</span>()))
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>Url</span> {
+                <span class='ident'>generic_url</span>: <span class='ident'>raw_url</span>,
+            })
         }
     }
 
     <span class='doccomment'>/// Create a `rust-url` `Url` from a `Url`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_generic_url</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>url</span>::<span class='ident'>Url</span> {
-        <span class='kw'>let</span> <span class='ident'>default_port</span> <span class='op'>=</span> <span class='ident'>whatwg_scheme_type_mapper</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>scheme</span>).<span class='ident'>default_port</span>();
+        <span class='self'>self</span>.<span class='ident'>generic_url</span>
+    }
 
-        <span class='ident'>url</span>::<span class='ident'>Url</span> {
-            <span class='ident'>scheme</span>: <span class='self'>self</span>.<span class='ident'>scheme</span>,
-            <span class='ident'>scheme_data</span>: <span class='ident'>SchemeData</span>::<span class='ident'>Relative</span>(
-                <span class='ident'>RelativeSchemeData</span> {
-                    <span class='ident'>username</span>: <span class='self'>self</span>.<span class='ident'>username</span>.<span class='ident'>unwrap_or</span>(<span class='ident'>String</span>::<span class='ident'>new</span>()),
-                    <span class='ident'>password</span>: <span class='self'>self</span>.<span class='ident'>password</span>,
-                    <span class='ident'>host</span>: <span class='self'>self</span>.<span class='ident'>host</span>,
-                    <span class='ident'>port</span>: <span class='kw'>if</span> <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>port</span>) <span class='op'>!=</span> <span class='ident'>default_port</span> { <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>port</span>) } <span class='kw'>else</span> { <span class='prelude-val'>None</span> },
-                    <span class='ident'>default_port</span>: <span class='ident'>default_port</span>,
-                    <span class='ident'>path</span>: <span class='self'>self</span>.<span class='ident'>path</span>
-                }
-            ),
-            <span class='ident'>query</span>: <span class='self'>self</span>.<span class='ident'>query</span>,
-            <span class='ident'>fragment</span>: <span class='self'>self</span>.<span class='ident'>fragment</span>
+    <span class='doccomment'>/// The lower-cased scheme of the URL, typically &quot;http&quot; or &quot;https&quot;.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>scheme</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> {
+        <span class='self'>self</span>.<span class='ident'>generic_url</span>.<span class='ident'>scheme</span>()
+    }
+
+    <span class='doccomment'>/// The host field of the URL, probably a domain.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>host</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Host</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
+        <span class='comment'>// `unwrap` is safe here because urls that cannot be a base don&#39;t have a host</span>
+        <span class='self'>self</span>.<span class='ident'>generic_url</span>.<span class='ident'>host</span>().<span class='ident'>unwrap</span>()
+    }
+
+    <span class='doccomment'>/// The connection port.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>port</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
+        <span class='comment'>// `unwrap` is safe here because we checked `port_or_known_default`</span>
+        <span class='comment'>// in `from_generic_url`.</span>
+        <span class='self'>self</span>.<span class='ident'>generic_url</span>.<span class='ident'>port_or_known_default</span>().<span class='ident'>unwrap</span>()
+    }
+
+    <span class='doccomment'>/// The URL path, the resource to be accessed.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// A *non-empty* vector encoding the parts of the URL path.</span>
+    <span class='doccomment'>/// Empty entries of `&quot;&quot;` correspond to trailing slashes.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
+        <span class='comment'>// `unwrap` is safe here because urls that can be a base will have `Some`.</span>
+        <span class='self'>self</span>.<span class='ident'>generic_url</span>.<span class='ident'>path_segments</span>().<span class='ident'>unwrap</span>().<span class='ident'>collect</span>()
+    }
+
+    <span class='doccomment'>/// The URL username field, from the userinfo section of the URL.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// `None` if the `@` character was not part of the input OR</span>
+    <span class='doccomment'>/// if a blank username was provided.</span>
+    <span class='doccomment'>/// Otherwise, a non-empty string.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>username</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
+        <span class='comment'>// Map empty usernames to None.</span>
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>generic_url</span>.<span class='ident'>username</span>() {
+            <span class='string'>&quot;&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
+            <span class='ident'>username</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>username</span>)
         }
+    }
+
+    <span class='doccomment'>/// The URL password field, from the userinfo section of the URL.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// `None` if the `@` character was not part of the input OR</span>
+    <span class='doccomment'>/// if a blank password was provided.</span>
+    <span class='doccomment'>/// Otherwise, a non-empty string.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>password</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
+        <span class='comment'>// Map empty passwords to None.</span>
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>generic_url</span>.<span class='ident'>password</span>() {
+            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
+            <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>x</span>) <span class='kw'>if</span> <span class='ident'>x</span>.<span class='ident'>is_empty</span>() <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
+            <span class='prelude-val'>Some</span>(<span class='ident'>password</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>password</span>)
+        }
+    }
+
+    <span class='doccomment'>/// The URL query string.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// `None` if the `?` character was not part of the input.</span>
+    <span class='doccomment'>/// Otherwise, a possibly empty, percent encoded string.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>query</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>generic_url</span>.<span class='ident'>query</span>()
+    }
+
+    <span class='doccomment'>/// The URL fragment.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// `None` if the `#` character was not part of the input.</span>
+    <span class='doccomment'>/// Otherwise, a possibly empty, percent encoded string.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>fragment</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>generic_url</span>.<span class='ident'>fragment</span>()
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>Url</span> {
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>formatter</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
-        <span class='comment'>// Write the scheme.</span>
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>scheme</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='string'>&quot;://&quot;</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
-
-        <span class='comment'>// Write the user info.</span>
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>formatter</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>UserInfoFormatter</span> {
-            <span class='ident'>username</span>: <span class='self'>self</span>.<span class='ident'>username</span>.<span class='ident'>as_ref</span>().<span class='ident'>map_or</span>(<span class='string'>&quot;&quot;</span>, <span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>s</span>),
-            <span class='ident'>password</span>: <span class='self'>self</span>.<span class='ident'>password</span>.<span class='ident'>as_ref</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>s</span>)
-        }));
-
-        <span class='comment'>// Write the host.</span>
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>host</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
-
-        <span class='comment'>// Write the port.</span>
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='string'>&quot;:&quot;</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>port</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
-
-        <span class='comment'>// Write the path.</span>
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>formatter</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>PathFormatter</span> { <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>path</span> }));
-
-        <span class='comment'>// Write the query.</span>
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>query</span> {
-            <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>query</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='string'>&quot;?&quot;</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>query</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
-            },
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> ()
-        }
-
-        <span class='comment'>// Write the fragment.</span>
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>fragment</span> {
-            <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>fragment</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='string'>&quot;#&quot;</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>fragment</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
-            },
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> ()
-        }
-
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>generic_url</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
         <span class='prelude-val'>Ok</span>(())
     }
 }
@@ -480,49 +378,49 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_default_port</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://example.com/wow&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>port</span>, <span class='number'>80u16</span>);
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;https://example.com/wow&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>port</span>, <span class='number'>443u16</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://example.com/wow&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>port</span>(), <span class='number'>80u16</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;https://example.com/wow&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>port</span>(), <span class='number'>443u16</span>);
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_explicit_port</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://localhost:3097&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>port</span>, <span class='number'>3097u16</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://localhost:3097&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>port</span>(), <span class='number'>3097u16</span>);
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_empty_username</span>() {
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>username</span>.<span class='ident'>is_none</span>());
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://:password@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>username</span>.<span class='ident'>is_none</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>username</span>().<span class='ident'>is_none</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://:password@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>username</span>().<span class='ident'>is_none</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_not_empty_username</span>() {
-        <span class='kw'>let</span> <span class='ident'>user</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://john:pass@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>username</span>;
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>user</span>.<span class='ident'>unwrap</span>(), <span class='string'>&quot;john&quot;</span>);
+        <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://john:pass@example.com&quot;</span>).<span class='ident'>unwrap</span>();
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>url</span>.<span class='ident'>username</span>().<span class='ident'>unwrap</span>(), <span class='string'>&quot;john&quot;</span>);
 
-        <span class='kw'>let</span> <span class='ident'>user</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://john:@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>username</span>;
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>user</span>.<span class='ident'>unwrap</span>(), <span class='string'>&quot;john&quot;</span>);
+        <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://john:@example.com&quot;</span>).<span class='ident'>unwrap</span>();
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>url</span>.<span class='ident'>username</span>().<span class='ident'>unwrap</span>(), <span class='string'>&quot;john&quot;</span>);
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_empty_password</span>() {
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://michael@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>password</span>.<span class='ident'>is_none</span>());
-        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://:@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>password</span>.<span class='ident'>is_none</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://michael@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>password</span>().<span class='ident'>is_none</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://:@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>password</span>().<span class='ident'>is_none</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_not_empty_password</span>() {
-        <span class='kw'>let</span> <span class='ident'>pass</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://michael:pass@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>password</span>;
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>pass</span>.<span class='ident'>unwrap</span>(), <span class='string'>&quot;pass&quot;</span>);
+        <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://michael:pass@example.com&quot;</span>).<span class='ident'>unwrap</span>();
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>url</span>.<span class='ident'>password</span>().<span class='ident'>unwrap</span>(), <span class='string'>&quot;pass&quot;</span>);
 
-        <span class='kw'>let</span> <span class='ident'>pass</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://:pass@example.com&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>password</span>;
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>pass</span>.<span class='ident'>unwrap</span>(), <span class='string'>&quot;pass&quot;</span>);
+        <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://:pass@example.com&quot;</span>).<span class='ident'>unwrap</span>();
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>url</span>.<span class='ident'>password</span>().<span class='ident'>unwrap</span>(), <span class='string'>&quot;pass&quot;</span>);
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_formatting</span>() {
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://michael@example.com/path/?q=wow&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>to_string</span>(),
-                    <span class='string'>&quot;http://michael@example.com:80/path/?q=wow&quot;</span>.<span class='ident'>to_string</span>());
+                    <span class='string'>&quot;http://michael@example.com/path/?q=wow&quot;</span>.<span class='ident'>to_string</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -537,6 +435,18 @@
         <span class='comment'>// Convert back to an Iron URL and check fidelity.</span>
         <span class='kw'>let</span> <span class='ident'>new_url</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>from_generic_url</span>(<span class='ident'>raw_url</span>).<span class='ident'>unwrap</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>url</span>, <span class='ident'>new_url</span>);
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_https_non_default_port</span>() {
+        <span class='kw'>let</span> <span class='ident'>parsed</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;https://example.com:8080&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>to_string</span>();
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parsed</span>, <span class='string'>&quot;https://example.com:8080/&quot;</span>);
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_https_default_port</span>() {
+        <span class='kw'>let</span> <span class='ident'>parsed</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;https://example.com:443&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>to_string</span>();
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parsed</span>, <span class='string'>&quot;https://example.com/&quot;</span>);
     }
 }
 </pre>

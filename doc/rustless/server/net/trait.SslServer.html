@@ -47,10 +47,10 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-6707' class='srclink' href='../../../hyper/net/trait.SslServer.html?gotosrc=6707' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait SslServer {
+               </span><a id='src-7026' class='srclink' href='../../../hyper/net/trait.SslServer.html?gotosrc=7026' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait SslServer&lt;T = <a class='struct' href='../../../rustless/server/net/struct.HttpStream.html' title='rustless::server::net::HttpStream'>HttpStream</a>&gt; <span class='where'>where T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='../../../rustless/server/net/trait.NetworkStream.html' title='rustless::server::net::NetworkStream'>NetworkStream</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span> {
     type <a href='#associatedtype.Stream' class='type'>Stream</a>: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='../../../rustless/server/net/trait.NetworkStream.html' title='rustless::server::net::NetworkStream'>NetworkStream</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>;
-    fn <a href='#tymethod.wrap_server' class='fnname'>wrap_server</a>(&amp;self, stream: <a class='struct' href='../../../rustless/server/net/struct.HttpStream.html' title='rustless::server::net::HttpStream'>HttpStream</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;Self::<a class='trait' href='../../../rustless/server/net/trait.SslServer.html' title='rustless::server::net::SslServer'>Stream</a>, <a class='enum' href='../../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>&gt;;
+    fn <a href='#tymethod.wrap_server' class='fnname'>wrap_server</a>(&amp;self, stream: T) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;Self::<a class='trait' href='../../../rustless/server/net/trait.SslServer.html' title='rustless::server::net::SslServer'>Stream</a>, <a class='enum' href='../../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>&gt;;
 }</pre><div class='docblock'><p>An abstraction to allow any SSL implementation to be used with server-side HttpsStreams.</p>
 </div>
             <h2 id='associated-types'>Associated Types</h2>
@@ -59,11 +59,11 @@
 </div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.wrap_server' class='method stab '><code>fn <a href='#tymethod.wrap_server' class='fnname'>wrap_server</a>(&amp;self, stream: <a class='struct' href='../../../rustless/server/net/struct.HttpStream.html' title='rustless::server::net::HttpStream'>HttpStream</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;Self::<a class='trait' href='../../../rustless/server/net/trait.SslServer.html' title='rustless::server::net::SslServer'>Stream</a>, <a class='enum' href='../../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>&gt;</code></h3><div class='docblock'><p>Wrap a server stream with SSL.</p>
+        <h3 id='tymethod.wrap_server' class='method stab '><code>fn <a href='#tymethod.wrap_server' class='fnname'>wrap_server</a>(&amp;self, stream: T) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;Self::<a class='trait' href='../../../rustless/server/net/trait.SslServer.html' title='rustless::server::net::SslServer'>Stream</a>, <a class='enum' href='../../../hyper/error/enum.Error.html' title='hyper::error::Error'>Error</a>&gt;</code></h3><div class='docblock'><p>Wrap a server stream with SSL.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;S&gt; SslServer for S <span class='where'>where S: <a class='trait' href='../../../rustless/server/net/trait.Ssl.html' title='rustless::server::net::Ssl'>Ssl</a></span></code></li>
+    <li><code>impl&lt;S&gt; SslServer&lt;<a class='struct' href='../../../rustless/server/net/struct.HttpStream.html' title='rustless::server::net::HttpStream'>HttpStream</a>&gt; for S <span class='where'>where S: <a class='trait' href='../../../rustless/server/net/trait.Ssl.html' title='rustless::server::net::Ssl'>Ssl</a></span></code></li>
 </ul><script type="text/javascript" async
                          src="../../../implementors/hyper/net/trait.SslServer.js">
                  </script></section>

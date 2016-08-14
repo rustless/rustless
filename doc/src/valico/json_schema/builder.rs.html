@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/json_schema/builder.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-1.0.1/src/json_schema/builder.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>builder.rs.html -- source</title>
@@ -330,13 +330,15 @@
 <span id="286">286</span>
 <span id="287">287</span>
 <span id="288">288</span>
+<span id="289">289</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>jsonway</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>::{<span class='self'>self</span>, <span class='ident'>ToJson</span>};
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>Value</span>, <span class='ident'>to_value</span>};
+<span class='kw'>use</span> <span class='ident'>serde</span>::{<span class='ident'>Serialize</span>, <span class='ident'>Serializer</span>};
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SchemaArray</span> {
-    <span class='ident'>items</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>json</span>::<span class='ident'>Json</span><span class='op'>&gt;</span>
+    <span class='ident'>items</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Value</span><span class='op'>&gt;</span>
 }
 
 <span class='kw'>impl</span> <span class='ident'>SchemaArray</span> {
@@ -350,7 +352,7 @@
 }
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SchemaHash</span> {
-    <span class='ident'>items</span>: <span class='ident'>collections</span>::<span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>json</span>::<span class='ident'>Json</span><span class='op'>&gt;</span>
+    <span class='ident'>items</span>: <span class='ident'>collections</span>::<span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Value</span><span class='op'>&gt;</span>
 }
 
 <span class='kw'>impl</span> <span class='ident'>SchemaHash</span> {
@@ -389,22 +391,22 @@
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>json</span>::<span class='ident'>ToJson</span> <span class='kw'>for</span> <span class='ident'>Dependencies</span> {
-    <span class='kw'>fn</span> <span class='ident'>to_json</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
-        <span class='self'>self</span>.<span class='ident'>deps</span>.<span class='ident'>to_json</span>()
+<span class='kw'>impl</span> <span class='ident'>Serialize</span> <span class='kw'>for</span> <span class='ident'>Dependencies</span> {
+    <span class='kw'>fn</span> <span class='ident'>serialize</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>serializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>S</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>S</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>S</span>: <span class='ident'>Serializer</span> {
+        <span class='self'>self</span>.<span class='ident'>deps</span>.<span class='ident'>serialize</span>(<span class='ident'>serializer</span>)
     }
 }
 
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Dependency</span> {
-    <span class='ident'>Schema</span>(<span class='ident'>json</span>::<span class='ident'>Json</span>),
+    <span class='ident'>Schema</span>(<span class='ident'>Value</span>),
     <span class='ident'>Property</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>)
 }
 
-<span class='kw'>impl</span> <span class='ident'>json</span>::<span class='ident'>ToJson</span> <span class='kw'>for</span> <span class='ident'>Dependency</span> {
-    <span class='kw'>fn</span> <span class='ident'>to_json</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
+<span class='kw'>impl</span> <span class='ident'>Serialize</span> <span class='kw'>for</span> <span class='ident'>Dependency</span> {
+    <span class='kw'>fn</span> <span class='ident'>serialize</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>serializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>S</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>S</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>S</span>: <span class='ident'>Serializer</span> {
         <span class='kw'>match</span> <span class='self'>self</span> {
-            <span class='kw-2'>&amp;</span><span class='ident'>Dependency</span>::<span class='ident'>Schema</span>(<span class='kw-2'>ref</span> <span class='ident'>json</span>) <span class='op'>=&gt;</span> <span class='ident'>json</span>.<span class='ident'>clone</span>(),
-            <span class='kw-2'>&amp;</span><span class='ident'>Dependency</span>::<span class='ident'>Property</span>(<span class='kw-2'>ref</span> <span class='ident'>array</span>) <span class='op'>=&gt;</span> <span class='ident'>array</span>.<span class='ident'>to_json</span>()
+            <span class='kw-2'>&amp;</span><span class='ident'>Dependency</span>::<span class='ident'>Schema</span>(<span class='kw-2'>ref</span> <span class='ident'>json</span>) <span class='op'>=&gt;</span> <span class='ident'>json</span>.<span class='ident'>serialize</span>(<span class='ident'>serializer</span>),
+            <span class='kw-2'>&amp;</span><span class='ident'>Dependency</span>::<span class='ident'>Property</span>(<span class='kw-2'>ref</span> <span class='ident'>array</span>) <span class='op'>=&gt;</span> <span class='ident'>array</span>.<span class='ident'>serialize</span>(<span class='ident'>serializer</span>)
         }
     }
 }
@@ -435,7 +437,7 @@
         <span class='self'>self</span>.<span class='ident'>obj_builder</span>.<span class='ident'>set</span>(<span class='string'>&quot;$schema&quot;</span>, <span class='ident'>url</span>.<span class='ident'>to_string</span>())
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>default</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>default</span>: <span class='ident'>T</span>) <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>ToJson</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>default</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>default</span>: <span class='ident'>T</span>) <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Serialize</span> {
         <span class='self'>self</span>.<span class='ident'>obj_builder</span>.<span class='ident'>set</span>(<span class='string'>&quot;default&quot;</span>, <span class='ident'>default</span>)
     }
 
@@ -568,7 +570,7 @@
         <span class='self'>self</span>.<span class='ident'>obj_builder</span>.<span class='ident'>set</span>(<span class='string'>&quot;type&quot;</span>, <span class='ident'>type_</span>.<span class='ident'>to_string</span>())
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>types</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>types</span>: <span class='kw-2'>&amp;</span>[<span class='kw'>super</span>::<span class='ident'>PrimitiveType</span>]) {
-        <span class='self'>self</span>.<span class='ident'>obj_builder</span>.<span class='ident'>set</span>(<span class='string'>&quot;type&quot;</span>, <span class='ident'>types</span>.<span class='ident'>iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>t</span><span class='op'>|</span> <span class='ident'>t</span>.<span class='ident'>to_string</span>()).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;&gt;</span>().<span class='ident'>to_json</span>())
+        <span class='self'>self</span>.<span class='ident'>obj_builder</span>.<span class='ident'>set</span>(<span class='string'>&quot;type&quot;</span>, <span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='ident'>types</span>.<span class='ident'>iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>t</span><span class='op'>|</span> <span class='ident'>t</span>.<span class='ident'>to_string</span>()).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;&gt;</span>()))
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>all_of</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>build</span>: <span class='ident'>F</span>) <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>FnOnce</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>SchemaArray</span>) {
@@ -599,14 +601,14 @@
         <span class='ident'>builder</span>
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_json</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_json</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Value</span> {
         <span class='self'>self</span>.<span class='ident'>obj_builder</span>.<span class='ident'>unwrap</span>()
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>json</span>::<span class='ident'>ToJson</span> <span class='kw'>for</span> <span class='ident'>Builder</span> {
-    <span class='kw'>fn</span> <span class='ident'>to_json</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
-       <span class='self'>self</span>.<span class='ident'>obj_builder</span>.<span class='ident'>to_json</span>()
+<span class='kw'>impl</span> <span class='ident'>Serialize</span> <span class='kw'>for</span> <span class='ident'>Builder</span> {
+    <span class='kw'>fn</span> <span class='ident'>serialize</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>serializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>S</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>S</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>S</span>: <span class='ident'>Serializer</span> {
+       <span class='self'>self</span>.<span class='ident'>obj_builder</span>.<span class='ident'>serialize</span>(<span class='ident'>serializer</span>)
     }
 }
 
@@ -618,7 +620,8 @@
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>builder</span> <span class='op'>=</span> <span class='ident'>Builder</span>::<span class='ident'>new</span>();
     <span class='ident'>build</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>builder</span>);
     <span class='ident'>builder</span>
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 

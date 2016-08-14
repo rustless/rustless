@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/jsonway-0.3.5/src/array_serializer.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/jsonway-1.0.1/src/array_serializer.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>array_serializer.rs.html -- source</title>
@@ -86,19 +86,15 @@
 <span id="42">42</span>
 <span id="43">43</span>
 <span id="44">44</span>
-<span id="45">45</span>
-<span id="46">46</span>
-<span id="47">47</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>serialize</span>::<span class='ident'>json</span>;
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::<span class='ident'>Value</span>;
 
 <span class='kw'>use</span> <span class='ident'>object_builder</span>;
 <span class='kw'>use</span> <span class='ident'>array_builder</span>;
 
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ArraySerializer</span> {
-
     <span class='kw'>fn</span> <span class='ident'>build</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>array_builder</span>::<span class='ident'>ArrayBuilder</span>);
-    
+
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>root</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
         <span class='prelude-val'>None</span>
@@ -109,7 +105,7 @@
         <span class='prelude-val'>None</span>
     }
 
-    <span class='kw'>fn</span> <span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>include_root</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
+    <span class='kw'>fn</span> <span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>include_root</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>Value</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bldr</span> <span class='op'>=</span> <span class='ident'>array_builder</span>::<span class='ident'>ArrayBuilder</span>::<span class='ident'>new</span>();
 
         <span class='kw'>let</span> <span class='ident'>root</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>root</span>();
@@ -129,11 +125,9 @@
                     <span class='ident'>meta_bldr</span>
                 };
                 <span class='ident'>meta_bldr</span>.<span class='ident'>set_json</span>(<span class='string'>&quot;meta&quot;</span>, <span class='ident'>meta</span>.<span class='ident'>unwrap</span>());
-                <span class='ident'>meta_bldr</span>.<span class='ident'>unwrap</span>()    
-            },
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
-                <span class='ident'>bldr</span>.<span class='ident'>unwrap</span>()    
+                <span class='ident'>meta_bldr</span>.<span class='ident'>unwrap</span>()
             }
+            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='ident'>bldr</span>.<span class='ident'>unwrap</span>(),
         }
     }
 }</pre>

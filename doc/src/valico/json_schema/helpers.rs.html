@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/json_schema/helpers.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-1.0.1/src/json_schema/helpers.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>helpers.rs.html -- source</title>
@@ -155,40 +155,29 @@
 <span id="111">111</span>
 <span id="112">112</span>
 <span id="113">113</span>
-<span id="114">114</span>
-<span id="115">115</span>
-<span id="116">116</span>
-<span id="117">117</span>
-<span id="118">118</span>
-<span id="119">119</span>
-<span id="120">120</span>
-<span id="121">121</span>
-<span id="122">122</span>
-<span id="123">123</span>
-<span id="124">124</span>
-<span id="125">125</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
-<span class='kw'>use</span> <span class='ident'>url</span>;
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>Value</span>};
+<span class='kw'>use</span> <span class='ident'>url</span>::{<span class='ident'>Url</span>};
 <span class='kw'>use</span> <span class='ident'>url</span>::<span class='ident'>percent_encoding</span>;
-<span class='kw'>use</span> <span class='ident'>uuid</span>;
+<span class='kw'>use</span> <span class='ident'>uuid</span>::{<span class='ident'>Uuid</span>};
 
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>schema</span>;
 
-<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>url_parser</span>(
-    () <span class='op'>=&gt;</span> (::<span class='ident'>url</span>::<span class='ident'>UrlParser</span>::<span class='ident'>new</span>().<span class='ident'>scheme_type_mapper</span>(<span class='macro-nonterminal'>$</span><span class='kw'>crate</span>::<span class='macro-nonterminal'>json_schema</span>::<span class='ident'>helpers</span>::<span class='ident'>whatwg_extended_scheme_type_mapper</span>))
-);
-
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>generate_id</span>() <span class='op'>-&gt;</span> <span class='ident'>url</span>::<span class='ident'>Url</span> {
-    <span class='macro'>url_parser</span><span class='macro'>!</span>().<span class='ident'>parse</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;json-schema://{}&quot;</span>, <span class='ident'>uuid</span>::<span class='ident'>Uuid</span>::<span class='ident'>new_v4</span>())).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>()
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>generate_id</span>() <span class='op'>-&gt;</span> <span class='ident'>Url</span> {
+    <span class='kw'>let</span> <span class='ident'>uuid</span> <span class='op'>=</span> <span class='ident'>Uuid</span>::<span class='ident'>new_v4</span>();
+    <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;json-schema://{}&quot;</span>, <span class='ident'>uuid</span>)).<span class='ident'>unwrap</span>()
 }
 
 <span class='doccomment'>/// http://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-07</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>encode</span>(<span class='ident'>string</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>String</span> {
     <span class='ident'>percent_encoding</span>::<span class='ident'>percent_encode</span>(
-        <span class='ident'>string</span>.<span class='ident'>replace</span>(<span class='string'>&quot;~&quot;</span>, <span class='string'>&quot;~0&quot;</span>).<span class='ident'>replace</span>(<span class='string'>&quot;/&quot;</span>, <span class='string'>&quot;~1&quot;</span>).<span class='ident'>as_bytes</span>(),
-        <span class='ident'>percent_encoding</span>::<span class='ident'>FORM_URLENCODED_ENCODE_SET</span>
-    )
+        <span class='ident'>string</span>
+            .<span class='ident'>replace</span>(<span class='string'>&quot;~&quot;</span>, <span class='string'>&quot;~0&quot;</span>)
+            .<span class='ident'>replace</span>(<span class='string'>&quot;/&quot;</span>, <span class='string'>&quot;~1&quot;</span>)
+            .<span class='ident'>replace</span>(<span class='string'>&quot;%&quot;</span>, <span class='string'>&quot;%25&quot;</span>)
+            .<span class='ident'>as_bytes</span>(),
+        <span class='ident'>percent_encoding</span>::<span class='ident'>QUERY_ENCODE_SET</span>
+    ).<span class='ident'>to_string</span>()
 }
 
 <span class='doccomment'>/// Encode and connect</span>
@@ -196,11 +185,26 @@
     <span class='ident'>strings</span>.<span class='ident'>iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='ident'>encode</span>(<span class='ident'>s</span>)).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;&gt;</span>().<span class='ident'>join</span>(<span class='string'>&quot;/&quot;</span>)
 }
 
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse_url_key</span>(<span class='ident'>key</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>obj</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span>, <span class='ident'>schema</span>::<span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse_url_key</span>(<span class='ident'>key</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>obj</span>: <span class='kw-2'>&amp;</span><span class='ident'>Value</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Url</span><span class='op'>&gt;</span>, <span class='ident'>schema</span>::<span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
     <span class='kw'>match</span> <span class='ident'>obj</span>.<span class='ident'>find</span>(<span class='ident'>key</span>) {
         <span class='prelude-val'>Some</span>(<span class='ident'>value</span>) <span class='op'>=&gt;</span> {
-            <span class='kw'>match</span> <span class='ident'>value</span>.<span class='ident'>as_string</span>() {
-                <span class='prelude-val'>Some</span>(<span class='ident'>string</span>) <span class='op'>=&gt;</span> <span class='macro'>url_parser</span><span class='macro'>!</span>()
+            <span class='kw'>match</span> <span class='ident'>value</span>.<span class='ident'>as_str</span>() {
+                <span class='prelude-val'>Some</span>(<span class='ident'>string</span>) <span class='op'>=&gt;</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='ident'>string</span>)
+                                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>url</span><span class='op'>|</span> <span class='prelude-val'>Some</span>(<span class='ident'>url</span>))
+                                .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> <span class='ident'>schema</span>::<span class='ident'>SchemaError</span>::<span class='ident'>UrlParseError</span>(<span class='ident'>err</span>)),
+                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='prelude-val'>None</span>)
+            }
+        },
+        <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='prelude-val'>None</span>)
+    }
+}
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse_url_key_with_base</span>(<span class='ident'>key</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>obj</span>: <span class='kw-2'>&amp;</span><span class='ident'>Value</span>, <span class='ident'>base</span>: <span class='kw-2'>&amp;</span><span class='ident'>Url</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Url</span><span class='op'>&gt;</span>, <span class='ident'>schema</span>::<span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
+    <span class='kw'>match</span> <span class='ident'>obj</span>.<span class='ident'>find</span>(<span class='ident'>key</span>) {
+        <span class='prelude-val'>Some</span>(<span class='ident'>value</span>) <span class='op'>=&gt;</span> {
+            <span class='kw'>match</span> <span class='ident'>value</span>.<span class='ident'>as_str</span>() {
+                <span class='prelude-val'>Some</span>(<span class='ident'>string</span>) <span class='op'>=&gt;</span> <span class='ident'>Url</span>::<span class='ident'>options</span>()
+                                .<span class='ident'>base_url</span>(<span class='prelude-val'>Some</span>(<span class='ident'>base</span>))
                                 .<span class='ident'>parse</span>(<span class='ident'>string</span>)
                                 .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>url</span><span class='op'>|</span> <span class='prelude-val'>Some</span>(<span class='ident'>url</span>))
                                 .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> <span class='ident'>schema</span>::<span class='ident'>SchemaError</span>::<span class='ident'>UrlParseError</span>(<span class='ident'>err</span>)),
@@ -211,23 +215,7 @@
     }
 }
 
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse_url_key_with_base</span>(<span class='ident'>key</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>obj</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>base</span>: <span class='kw-2'>&amp;</span><span class='ident'>url</span>::<span class='ident'>Url</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span>, <span class='ident'>schema</span>::<span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
-    <span class='kw'>match</span> <span class='ident'>obj</span>.<span class='ident'>find</span>(<span class='ident'>key</span>) {
-        <span class='prelude-val'>Some</span>(<span class='ident'>value</span>) <span class='op'>=&gt;</span> {
-            <span class='kw'>match</span> <span class='ident'>value</span>.<span class='ident'>as_string</span>() {
-                <span class='prelude-val'>Some</span>(<span class='ident'>string</span>) <span class='op'>=&gt;</span> <span class='macro'>url_parser</span><span class='macro'>!</span>()
-                                .<span class='ident'>base_url</span>(<span class='ident'>base</span>)
-                                .<span class='ident'>parse</span>(<span class='ident'>string</span>)
-                                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>url</span><span class='op'>|</span> <span class='prelude-val'>Some</span>(<span class='ident'>url</span>))
-                                .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>err</span><span class='op'>|</span> <span class='ident'>schema</span>::<span class='ident'>SchemaError</span>::<span class='ident'>UrlParseError</span>(<span class='ident'>err</span>)),
-                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='prelude-val'>None</span>)
-            }
-        },
-        <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='prelude-val'>None</span>)
-    }
-}
-
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>alter_fragment_path</span>(<span class='kw-2'>mut</span> <span class='ident'>url</span>: <span class='ident'>url</span>::<span class='ident'>Url</span>, <span class='ident'>new_fragment</span>: <span class='ident'>String</span>) <span class='op'>-&gt;</span> <span class='ident'>url</span>::<span class='ident'>Url</span> {
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>alter_fragment_path</span>(<span class='kw-2'>mut</span> <span class='ident'>url</span>: <span class='ident'>Url</span>, <span class='ident'>new_fragment</span>: <span class='ident'>String</span>) <span class='op'>-&gt;</span> <span class='ident'>Url</span> {
 
     <span class='kw'>let</span> <span class='ident'>normalized_fragment</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>new_fragment</span>.<span class='ident'>starts_with</span>(<span class='string'>&quot;/&quot;</span>) {
         <span class='kw-2'>&amp;</span><span class='ident'>new_fragment</span>[<span class='number'>1</span>..]
@@ -235,7 +223,7 @@
         <span class='ident'>new_fragment</span>.<span class='ident'>as_ref</span>()
     };
 
-    <span class='kw'>let</span> <span class='ident'>result_fragment</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>url</span>.<span class='ident'>fragment</span> {
+    <span class='kw'>let</span> <span class='ident'>result_fragment</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>url</span>.<span class='ident'>fragment</span>() {
         <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>fragment</span>) <span class='kw'>if</span> <span class='ident'>fragment</span>.<span class='ident'>len</span>() <span class='op'>&gt;</span> <span class='number'>0</span> <span class='op'>=&gt;</span> {
             <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>fragment</span>.<span class='ident'>starts_with</span>(<span class='string'>&quot;/&quot;</span>) {
                 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>result_fragment</span> <span class='op'>=</span> <span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>();
@@ -252,14 +240,17 @@
         _ <span class='op'>=&gt;</span> <span class='string'>&quot;/&quot;</span>.<span class='ident'>to_string</span>() <span class='op'>+</span> <span class='ident'>normalized_fragment</span>
     };
 
-    <span class='ident'>url</span>.<span class='ident'>fragment</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>result_fragment</span>);
+    <span class='ident'>url</span>.<span class='ident'>set_fragment</span>(<span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>result_fragment</span>));
     <span class='ident'>url</span>
 }
 
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>serialize_schema_path</span>(<span class='ident'>url</span>: <span class='kw-2'>&amp;</span><span class='ident'>url</span>::<span class='ident'>Url</span>) <span class='op'>-&gt;</span> (<span class='ident'>String</span>, <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>) {
-    <span class='kw'>match</span> <span class='ident'>url</span>.<span class='ident'>fragment</span>.<span class='ident'>as_ref</span>() {
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>serialize_schema_path</span>(<span class='ident'>url</span>: <span class='kw-2'>&amp;</span><span class='ident'>Url</span>) <span class='op'>-&gt;</span> (<span class='ident'>String</span>, <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>) {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>url_without_fragment</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>clone</span>();
+    <span class='ident'>url_without_fragment</span>.<span class='ident'>set_fragment</span>(<span class='prelude-val'>None</span>);
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>url_str</span> <span class='op'>=</span> <span class='ident'>url_without_fragment</span>.<span class='ident'>into_string</span>();
+
+    <span class='kw'>match</span> <span class='ident'>url</span>.<span class='ident'>fragment</span>().<span class='ident'>as_ref</span>() {
         <span class='prelude-val'>Some</span>(<span class='ident'>fragment</span>) <span class='kw'>if</span> <span class='ident'>fragment</span>.<span class='ident'>len</span>() <span class='op'>&gt;</span> <span class='number'>0</span> <span class='op'>=&gt;</span> {
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>url_str</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>serialize_no_fragment</span>();
             <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>fragment</span>.<span class='ident'>starts_with</span>(<span class='string'>&quot;/&quot;</span>) {
                 <span class='kw'>let</span> <span class='ident'>fragment_parts</span> <span class='op'>=</span> <span class='ident'>fragment</span>.<span class='ident'>split</span>(<span class='string'>&quot;/&quot;</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span>.<span class='ident'>to_string</span>()).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;&gt;</span>();
                 <span class='ident'>url_str</span>.<span class='ident'>push_str</span>(<span class='string'>&quot;#&quot;</span>);
@@ -271,28 +262,14 @@
                 };
                 (<span class='ident'>url_str</span>, <span class='ident'>fragment</span>)
             } <span class='kw'>else</span> {
-                (<span class='ident'>url_str</span>, <span class='prelude-val'>Some</span>(<span class='ident'>fragment</span>.<span class='ident'>clone</span>()))
+                (<span class='ident'>url_str</span>, <span class='prelude-val'>Some</span>(<span class='ident'>fragment</span>.<span class='ident'>to_string</span>()))
             }
 
         },
-        _ <span class='op'>=&gt;</span> (<span class='ident'>url</span>.<span class='ident'>serialize_no_fragment</span>(), <span class='prelude-val'>None</span>)
+        _ <span class='op'>=&gt;</span> (<span class='ident'>url_str</span>, <span class='prelude-val'>None</span>)
     }
 }
-
-<span class='doccomment'>/// Stub function to add our &quot;json-schema&quot; to the url::UrlParser</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>whatwg_extended_scheme_type_mapper</span>(<span class='ident'>scheme</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>url</span>::<span class='ident'>SchemeType</span> {
-    <span class='kw'>match</span> <span class='ident'>scheme</span> {
-        <span class='string'>&quot;file&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>url</span>::<span class='ident'>SchemeType</span>::<span class='ident'>FileLike</span>,
-        <span class='string'>&quot;ftp&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>url</span>::<span class='ident'>SchemeType</span>::<span class='ident'>Relative</span>(<span class='number'>21</span>),
-        <span class='string'>&quot;gopher&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>url</span>::<span class='ident'>SchemeType</span>::<span class='ident'>Relative</span>(<span class='number'>70</span>),
-        <span class='string'>&quot;http&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>url</span>::<span class='ident'>SchemeType</span>::<span class='ident'>Relative</span>(<span class='number'>80</span>),
-        <span class='string'>&quot;https&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>url</span>::<span class='ident'>SchemeType</span>::<span class='ident'>Relative</span>(<span class='number'>443</span>),
-        <span class='string'>&quot;ws&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>url</span>::<span class='ident'>SchemeType</span>::<span class='ident'>Relative</span>(<span class='number'>80</span>),
-        <span class='string'>&quot;wss&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>url</span>::<span class='ident'>SchemeType</span>::<span class='ident'>Relative</span>(<span class='number'>443</span>),
-        <span class='string'>&quot;json-schema&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>url</span>::<span class='ident'>SchemeType</span>::<span class='ident'>Relative</span>(<span class='number'>80</span>),
-        _ <span class='op'>=&gt;</span> <span class='ident'>url</span>::<span class='ident'>SchemeType</span>::<span class='ident'>NonRelative</span>,
-    }
-}</pre>
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 

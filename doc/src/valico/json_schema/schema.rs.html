@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/json_schema/schema.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-1.0.1/src/json_schema/schema.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>schema.rs.html -- source</title>
@@ -382,7 +382,7 @@
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>url</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>::{<span class='self'>self</span>};
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>Value</span>};
 <span class='kw'>use</span> <span class='ident'>phf</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>;
 
@@ -440,11 +440,11 @@
         }
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>data</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>) <span class='op'>-&gt;</span> <span class='ident'>validators</span>::<span class='ident'>ValidationState</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>data</span>: <span class='kw-2'>&amp;</span><span class='ident'>Value</span>) <span class='op'>-&gt;</span> <span class='ident'>validators</span>::<span class='ident'>ValidationState</span> {
         <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>schema</span>.<span class='ident'>validate_in_scope</span>(<span class='ident'>data</span>, <span class='string'>&quot;&quot;</span>, <span class='self'>self</span>.<span class='ident'>scope</span>);
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>validate_in</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>data</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>validators</span>::<span class='ident'>ValidationState</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>validate_in</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>data</span>: <span class='kw-2'>&amp;</span><span class='ident'>Value</span>, <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>validators</span>::<span class='ident'>ValidationState</span> {
         <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>schema</span>.<span class='ident'>validate_in_scope</span>(<span class='ident'>data</span>, <span class='ident'>path</span>, <span class='self'>self</span>.<span class='ident'>scope</span>);
     }
 }
@@ -454,7 +454,7 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Schema</span> {
     <span class='kw'>pub</span> <span class='ident'>id</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span>,
     <span class='ident'>schema</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span>,
-    <span class='ident'>original</span>: <span class='ident'>json</span>::<span class='ident'>Json</span>,
+    <span class='ident'>original</span>: <span class='ident'>Value</span>,
     <span class='ident'>tree</span>: <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Schema</span><span class='op'>&gt;</span>,
     <span class='ident'>validators</span>: <span class='ident'>validators</span>::<span class='ident'>Validators</span>,
     <span class='ident'>scopes</span>: <span class='ident'>collections</span>::<span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;&gt;</span>
@@ -477,7 +477,7 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Schema</span> {
-    <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='ident'>def</span>: <span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>external_id</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span>, <span class='ident'>settings</span>: <span class='ident'>CompilationSettings</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Schema</span>, <span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='ident'>def</span>: <span class='ident'>Value</span>, <span class='ident'>external_id</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span>, <span class='ident'>settings</span>: <span class='ident'>CompilationSettings</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Schema</span>, <span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>def</span>.<span class='ident'>is_object</span>() {
             <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>SchemaError</span>::<span class='ident'>NotAnObject</span>)
         }
@@ -537,7 +537,7 @@
         <span class='prelude-val'>Ok</span>(<span class='ident'>schema</span>)
     }
 
-    <span class='kw'>fn</span> <span class='ident'>compile_keywords</span>(<span class='ident'>def</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>context</span>: <span class='kw-2'>&amp;</span><span class='ident'>WalkContext</span>, <span class='ident'>settings</span>: <span class='kw-2'>&amp;</span><span class='ident'>CompilationSettings</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>validators</span>::<span class='ident'>Validators</span>, <span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>compile_keywords</span>(<span class='ident'>def</span>: <span class='kw-2'>&amp;</span><span class='ident'>Value</span>, <span class='ident'>context</span>: <span class='kw-2'>&amp;</span><span class='ident'>WalkContext</span>, <span class='ident'>settings</span>: <span class='kw-2'>&amp;</span><span class='ident'>CompilationSettings</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>validators</span>::<span class='ident'>Validators</span>, <span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>validators</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[];
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>keys</span>: <span class='ident'>collections</span>::<span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>def</span>.<span class='ident'>as_object</span>().<span class='ident'>unwrap</span>().<span class='ident'>keys</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>key</span><span class='op'>|</span> <span class='ident'>key</span>.<span class='ident'>as_ref</span>()).<span class='ident'>collect</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>not_consumed</span> <span class='op'>=</span> <span class='ident'>collections</span>::<span class='ident'>HashSet</span>::<span class='ident'>new</span>();
@@ -578,7 +578,7 @@
         <span class='prelude-val'>Ok</span>(<span class='ident'>validators</span>)
     }
 
-    <span class='kw'>fn</span> <span class='ident'>compile_sub</span>(<span class='ident'>def</span>: <span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>context</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>WalkContext</span>, <span class='ident'>keywords</span>: <span class='kw-2'>&amp;</span><span class='ident'>CompilationSettings</span>, <span class='ident'>is_schema</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Schema</span>, <span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>compile_sub</span>(<span class='ident'>def</span>: <span class='ident'>Value</span>, <span class='ident'>context</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>WalkContext</span>, <span class='ident'>keywords</span>: <span class='kw-2'>&amp;</span><span class='ident'>CompilationSettings</span>, <span class='ident'>is_schema</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Schema</span>, <span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
 
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>id</span> <span class='op'>=</span> <span class='prelude-val'>None</span>;
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='prelude-val'>None</span>;
@@ -649,7 +649,7 @@
         };
 
         <span class='kw'>if</span> <span class='ident'>id</span>.<span class='ident'>is_some</span>() {
-            <span class='ident'>context</span>.<span class='ident'>scopes</span>.<span class='ident'>insert</span>(<span class='ident'>id</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap</span>().<span class='ident'>serialize</span>(), <span class='ident'>context</span>.<span class='ident'>fragment</span>.<span class='ident'>clone</span>());
+            <span class='ident'>context</span>.<span class='ident'>scopes</span>.<span class='ident'>insert</span>(<span class='ident'>id</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap</span>().<span class='ident'>into_string</span>(), <span class='ident'>context</span>.<span class='ident'>fragment</span>.<span class='ident'>clone</span>());
         }
 
         <span class='kw'>let</span> <span class='ident'>validators</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>is_schema</span> <span class='op'>&amp;&amp;</span> <span class='ident'>def</span>.<span class='ident'>is_object</span>() {
@@ -698,7 +698,7 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Schema</span> {
-    <span class='kw'>fn</span> <span class='ident'>validate_in_scope</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>data</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>scope</span>: <span class='kw-2'>&amp;</span><span class='ident'>scope</span>::<span class='ident'>Scope</span>) <span class='op'>-&gt;</span> <span class='ident'>validators</span>::<span class='ident'>ValidationState</span> {
+    <span class='kw'>fn</span> <span class='ident'>validate_in_scope</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>data</span>: <span class='kw-2'>&amp;</span><span class='ident'>Value</span>, <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>scope</span>: <span class='kw-2'>&amp;</span><span class='ident'>scope</span>::<span class='ident'>Scope</span>) <span class='op'>-&gt;</span> <span class='ident'>validators</span>::<span class='ident'>ValidationState</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='ident'>validators</span>::<span class='ident'>ValidationState</span>::<span class='ident'>new</span>();
 
         <span class='kw'>for</span> <span class='ident'>validator</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>validators</span>.<span class='ident'>iter</span>() {
@@ -709,14 +709,15 @@
     }
 }
 
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='ident'>def</span>: <span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>external_id</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span>, <span class='ident'>settings</span>: <span class='ident'>CompilationSettings</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Schema</span>, <span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='ident'>def</span>: <span class='ident'>Value</span>, <span class='ident'>external_id</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span>, <span class='ident'>settings</span>: <span class='ident'>CompilationSettings</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Schema</span>, <span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
     <span class='ident'>Schema</span>::<span class='ident'>compile</span>(<span class='ident'>def</span>, <span class='ident'>external_id</span>, <span class='ident'>settings</span>)
 }
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>schema_doesnt_compile_not_object</span>() {
-    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Schema</span>::<span class='ident'>compile</span>(<span class='ident'>json</span>::<span class='ident'>Json</span>::<span class='ident'>Boolean</span>(<span class='boolvalue'>true</span>), <span class='prelude-val'>None</span>, <span class='ident'>CompilationSettings</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>keywords</span>::<span class='ident'>default</span>(), <span class='boolvalue'>true</span>)).<span class='ident'>is_err</span>());
-}</pre>
+    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Schema</span>::<span class='ident'>compile</span>(<span class='ident'>Value</span>::<span class='ident'>Bool</span>(<span class='boolvalue'>true</span>), <span class='prelude-val'>None</span>, <span class='ident'>CompilationSettings</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>keywords</span>::<span class='ident'>default</span>(), <span class='boolvalue'>true</span>)).<span class='ident'>is_err</span>());
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/json_schema/errors.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-1.0.1/src/json_schema/errors.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>errors.rs.html -- source</title>
@@ -221,8 +221,8 @@
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>error</span>::{<span class='ident'>Error</span>};
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>common</span>::<span class='ident'>error</span>::<span class='ident'>ValicoError</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>::<span class='ident'>ToJson</span>;
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>Value</span>, <span class='ident'>to_value</span>};
+<span class='kw'>use</span> <span class='ident'>serde</span>::{<span class='ident'>Serialize</span>, <span class='ident'>Serializer</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>;
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -232,7 +232,7 @@
     <span class='kw'>pub</span> <span class='ident'>detail</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>WrongType</span>, <span class='string'>&quot;wrong_type&quot;</span>, <span class='string'>&quot;Type of the value is wrong&quot;</span>, <span class='op'>+</span><span class='ident'>detail</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>WrongType</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>WrongType</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -240,7 +240,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>MultipleOf</span>, <span class='string'>&quot;multiple_of&quot;</span>, <span class='string'>&quot;Wrong number of the value&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>MultipleOf</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>MultipleOf</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -248,7 +248,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>Maximum</span>, <span class='string'>&quot;maximum&quot;</span>, <span class='string'>&quot;Maximum condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>Maximum</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>Maximum</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -256,7 +256,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>Minimum</span>, <span class='string'>&quot;minimum&quot;</span>, <span class='string'>&quot;Minimum condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>Minimum</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>Minimum</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -264,7 +264,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>MaxLength</span>, <span class='string'>&quot;max_length&quot;</span>, <span class='string'>&quot;MaxLength condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>MaxLength</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>MaxLength</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -272,7 +272,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>MinLength</span>, <span class='string'>&quot;min_length&quot;</span>, <span class='string'>&quot;MinLength condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>MinLength</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>MinLength</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -280,7 +280,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>Pattern</span>, <span class='string'>&quot;pattern&quot;</span>, <span class='string'>&quot;Pattern condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>Pattern</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>Pattern</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -288,7 +288,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>MaxItems</span>, <span class='string'>&quot;max_items&quot;</span>, <span class='string'>&quot;MaxItems condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>MaxItems</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>MaxItems</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -296,7 +296,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>MinItems</span>, <span class='string'>&quot;min_items&quot;</span>, <span class='string'>&quot;MinItems condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>MinItems</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>MinItems</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -304,7 +304,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>UniqueItems</span>, <span class='string'>&quot;unique_items&quot;</span>, <span class='string'>&quot;UniqueItems condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>UniqueItems</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>UniqueItems</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -313,7 +313,7 @@
     <span class='kw'>pub</span> <span class='ident'>detail</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>Items</span>, <span class='string'>&quot;items&quot;</span>, <span class='string'>&quot;Items condition is not met&quot;</span>, <span class='op'>+</span><span class='ident'>detail</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>Items</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>Items</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -321,7 +321,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>MaxProperties</span>, <span class='string'>&quot;max_properties&quot;</span>, <span class='string'>&quot;MaxProperties condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>MaxProperties</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>MaxProperties</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -329,7 +329,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>MinProperties</span>, <span class='string'>&quot;min_properties&quot;</span>, <span class='string'>&quot;MinProperties condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>MinProperties</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>MinProperties</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -337,7 +337,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>Required</span>, <span class='string'>&quot;required&quot;</span>, <span class='string'>&quot;This property is required&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>Required</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>Required</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -346,7 +346,7 @@
     <span class='kw'>pub</span> <span class='ident'>detail</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>Properties</span>, <span class='string'>&quot;properties&quot;</span>, <span class='string'>&quot;Property conditions are not met&quot;</span>, <span class='op'>+</span><span class='ident'>detail</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>Properties</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>Properties</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -354,7 +354,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>Enum</span>, <span class='string'>&quot;enum&quot;</span>, <span class='string'>&quot;Enum conditions are not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>Enum</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>Enum</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -363,8 +363,8 @@
     <span class='kw'>pub</span> <span class='ident'>states</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='kw'>super</span>::<span class='ident'>validators</span>::<span class='ident'>ValidationState</span><span class='op'>&gt;</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>AnyOf</span>, <span class='string'>&quot;any_of&quot;</span>, <span class='string'>&quot;AnyOf conditions are not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>AnyOf</span>, <span class='op'>|</span><span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>AnyOf</span>, <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>json</span>::<span class='ident'>Json</span><span class='op'>&gt;</span><span class='op'>|</span> {
-    <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;states&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>err</span>.<span class='ident'>states</span>.<span class='ident'>to_json</span>())
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>AnyOf</span>, <span class='op'>|</span><span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>AnyOf</span>, <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Value</span><span class='op'>&gt;</span><span class='op'>|</span> {
+    <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;states&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='ident'>err</span>.<span class='ident'>states</span>))
 });
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -374,8 +374,8 @@
     <span class='kw'>pub</span> <span class='ident'>states</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='kw'>super</span>::<span class='ident'>validators</span>::<span class='ident'>ValidationState</span><span class='op'>&gt;</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>OneOf</span>, <span class='string'>&quot;one_of&quot;</span>, <span class='string'>&quot;OneOf conditions are not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>OneOf</span>, <span class='op'>|</span><span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>OneOf</span>, <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>json</span>::<span class='ident'>Json</span><span class='op'>&gt;</span><span class='op'>|</span> {
-    <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;states&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>err</span>.<span class='ident'>states</span>.<span class='ident'>to_json</span>())
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>OneOf</span>, <span class='op'>|</span><span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>OneOf</span>, <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Value</span><span class='op'>&gt;</span><span class='op'>|</span> {
+    <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;states&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='ident'>err</span>.<span class='ident'>states</span>))
 });
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -384,7 +384,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>Not</span>, <span class='string'>&quot;not&quot;</span>, <span class='string'>&quot;Not condition is not met&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>Not</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>Not</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -393,7 +393,7 @@
     <span class='kw'>pub</span> <span class='ident'>detail</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>Format</span>, <span class='string'>&quot;format&quot;</span>, <span class='string'>&quot;Format is wrong&quot;</span>, <span class='op'>+</span><span class='ident'>detail</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>Format</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>Format</span>);
 
 </pre>
 </section>

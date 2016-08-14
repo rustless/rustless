@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/common/error.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-1.0.1/src/common/error.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>error.rs.html -- source</title>
@@ -165,16 +165,26 @@
 <span id="121">121</span>
 <span id="122">122</span>
 <span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
 <span class='kw'>use</span> <span class='ident'>typeable</span>::<span class='ident'>Typeable</span>;
 <span class='kw'>use</span> <span class='ident'>traitobject</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>any</span>::<span class='ident'>TypeId</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>;
+<span class='kw'>use</span> <span class='ident'>serde</span>::{<span class='ident'>Serialize</span>, <span class='ident'>Serializer</span>};
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>Value</span>, <span class='ident'>to_value</span>};
 
-<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ValicoError</span> : <span class='ident'>Error</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Debug</span> <span class='op'>+</span> <span class='ident'>Typeable</span> <span class='op'>+</span> <span class='ident'>json</span>::<span class='ident'>ToJson</span> {
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ValicoError</span> : <span class='ident'>Error</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Debug</span> <span class='op'>+</span> <span class='ident'>Typeable</span> {
     <span class='kw'>fn</span> <span class='ident'>get_code</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>;
     <span class='kw'>fn</span> <span class='ident'>get_path</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>;
     <span class='kw'>fn</span> <span class='ident'>get_title</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>;
@@ -195,9 +205,17 @@
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>json</span>::<span class='ident'>ToJson</span> <span class='kw'>for</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>ValicoError</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>to_json</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
-        (<span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>).<span class='ident'>to_json</span>()
+<span class='kw'>impl</span> <span class='ident'>Serialize</span> <span class='kw'>for</span> <span class='ident'>ValicoError</span> {
+    <span class='kw'>fn</span> <span class='ident'>serialize</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>serializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>S</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>S</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>S</span>: <span class='ident'>Serializer</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>map</span> <span class='op'>=</span> ::<span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>BTreeMap</span>::<span class='ident'>new</span>();
+        <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;code&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='self'>self</span>.<span class='ident'>get_code</span>()));
+        <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;title&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='self'>self</span>.<span class='ident'>get_title</span>()));
+        <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;path&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='self'>self</span>.<span class='ident'>get_path</span>()));
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>get_detail</span>() {
+            <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>detail</span>) <span class='op'>=&gt;</span> { <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;detail&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='ident'>detail</span>)); },
+            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> ()
+        }
+        <span class='ident'>Value</span>::<span class='ident'>Object</span>(<span class='ident'>map</span>).<span class='ident'>serialize</span>(<span class='ident'>serializer</span>)
     }
 }
 
@@ -253,42 +271,43 @@
     }
 }
 
-<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>impl_to_json</span>{
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>impl_serialize</span>{
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>:<span class='ident'>ty</span>) <span class='op'>=&gt;</span> {
-        <span class='kw'>impl</span> <span class='ident'>json</span>::<span class='ident'>ToJson</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span> {
-            <span class='kw'>fn</span> <span class='ident'>to_json</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
+        <span class='kw'>impl</span> <span class='ident'>Serialize</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span> {
+            <span class='kw'>fn</span> <span class='ident'>serialize</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>serializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>S</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>S</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>S</span>: <span class='ident'>Serializer</span> {
                 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>map</span> <span class='op'>=</span> ::<span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>BTreeMap</span>::<span class='ident'>new</span>();
-                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;code&quot;</span>.<span class='ident'>to_string</span>(), <span class='self'>self</span>.<span class='ident'>get_code</span>().<span class='ident'>to_json</span>());
-                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;title&quot;</span>.<span class='ident'>to_string</span>(), <span class='self'>self</span>.<span class='ident'>get_title</span>().<span class='ident'>to_json</span>());
-                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;path&quot;</span>.<span class='ident'>to_string</span>(), <span class='self'>self</span>.<span class='ident'>get_path</span>().<span class='ident'>to_json</span>());
+                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;code&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='self'>self</span>.<span class='ident'>get_code</span>()));
+                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;title&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='self'>self</span>.<span class='ident'>get_title</span>()));
+                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;path&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='self'>self</span>.<span class='ident'>get_path</span>()));
                 <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>get_detail</span>() {
-                    <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>detail</span>) <span class='op'>=&gt;</span> { <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;detail&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>detail</span>.<span class='ident'>to_json</span>()); },
+                    <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>detail</span>) <span class='op'>=&gt;</span> { <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;detail&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='ident'>detail</span>)); },
                     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> ()
                 }
-                <span class='ident'>json</span>::<span class='ident'>Json</span>::<span class='ident'>Object</span>(<span class='ident'>map</span>)
+                <span class='ident'>Value</span>::<span class='ident'>Object</span>(<span class='ident'>map</span>).<span class='ident'>serialize</span>(<span class='ident'>serializer</span>)
             }
         }
     };
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span>:<span class='ident'>ty</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>sp</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {
-        <span class='kw'>impl</span> <span class='ident'>json</span>::<span class='ident'>ToJson</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span> {
-            <span class='kw'>fn</span> <span class='ident'>to_json</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
+        <span class='kw'>impl</span> <span class='ident'>Serialize</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>err</span> {
+            <span class='kw'>fn</span> <span class='ident'>serialize</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>serializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>S</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>S</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>S</span>: <span class='ident'>Serializer</span> {
                 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>map</span> <span class='op'>=</span> ::<span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>BTreeMap</span>::<span class='ident'>new</span>();
-                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;code&quot;</span>.<span class='ident'>to_string</span>(), <span class='self'>self</span>.<span class='ident'>get_code</span>().<span class='ident'>to_json</span>());
-                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;title&quot;</span>.<span class='ident'>to_string</span>(), <span class='self'>self</span>.<span class='ident'>get_title</span>().<span class='ident'>to_json</span>());
-                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;path&quot;</span>.<span class='ident'>to_string</span>(), <span class='self'>self</span>.<span class='ident'>get_path</span>().<span class='ident'>to_json</span>());
+                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;code&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='self'>self</span>.<span class='ident'>get_code</span>()));
+                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;title&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='self'>self</span>.<span class='ident'>get_title</span>()));
+                <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;path&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='self'>self</span>.<span class='ident'>get_path</span>()));
                 <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>get_detail</span>() {
-                    <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>detail</span>) <span class='op'>=&gt;</span> { <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;detail&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>detail</span>.<span class='ident'>to_json</span>()); },
+                    <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>detail</span>) <span class='op'>=&gt;</span> { <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;detail&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='ident'>detail</span>)); },
                     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> ()
                 }
                 $({
                     <span class='kw'>let</span> <span class='ident'>closure</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>sp</span>;
                     <span class='ident'>closure</span>(<span class='self'>self</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>map</span>);
                 })<span class='op'>+</span>
-                <span class='ident'>json</span>::<span class='ident'>Json</span>::<span class='ident'>Object</span>(<span class='ident'>map</span>)
+                <span class='ident'>Value</span>::<span class='ident'>Object</span>(<span class='ident'>map</span>).<span class='ident'>serialize</span>(<span class='ident'>serializer</span>)
             }
         }
     }
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 

@@ -200,10 +200,7 @@
 <span id="156">156</span>
 <span id="157">157</span>
 <span id="158">158</span>
-<span id="159">159</span>
-<span id="160">160</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>serialize</span>::<span class='ident'>json</span>;
 <span class='kw'>use</span> <span class='ident'>typemap</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>env</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>Path</span>;
@@ -214,9 +211,8 @@
 <span class='kw'>use</span> <span class='ident'>framework</span>::<span class='ident'>app</span>;
 <span class='kw'>use</span> <span class='ident'>framework</span>::<span class='ident'>endpoint</span>;
 <span class='kw'>use</span> <span class='ident'>framework</span>::<span class='ident'>media</span>;
-<span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>status</span>;
-<span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>mime</span>;
-<span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>header</span>;
+<span class='kw'>use</span> <span class='ident'>server</span>::{<span class='ident'>status</span>, <span class='ident'>mime</span>, <span class='ident'>header</span>};
+<span class='kw'>use</span> <span class='ident'>json</span>::{<span class='ident'>JsonValue</span>};
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Client</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='ident'>app</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>app</span>::<span class='ident'>Application</span>,
@@ -295,7 +291,7 @@
         <span class='prelude-val'>Err</span>(<span class='macro'>error_response</span><span class='macro'>!</span>(<span class='ident'>error</span>))
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>json</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>result</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>) <span class='op'>-&gt;</span> <span class='ident'>ClientResult</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>json</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>result</span>: <span class='kw-2'>&amp;</span><span class='ident'>JsonValue</span>) <span class='op'>-&gt;</span> <span class='ident'>ClientResult</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>set_json_content_type</span>();
         <span class='self'>self</span>.<span class='ident'>response</span>.<span class='ident'>replace_body</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>result</span>.<span class='ident'>to_string</span>()));
 
@@ -315,14 +311,14 @@
                 <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='macro'>error_response</span><span class='macro'>!</span>(<span class='ident'>errors</span>::<span class='ident'>File</span>(<span class='ident'>err</span>)));
             }
         };
-        
+
         <span class='kw'>let</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>File</span>::<span class='ident'>open</span>(<span class='ident'>absolute_path</span>) {
             <span class='prelude-val'>Ok</span>(<span class='ident'>file</span>) <span class='op'>=&gt;</span> <span class='ident'>file</span>,
             <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> {
                 <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='macro'>error_response</span><span class='macro'>!</span>(<span class='ident'>errors</span>::<span class='ident'>File</span>(<span class='ident'>err</span>)));
             }
         };
-        
+
         <span class='self'>self</span>.<span class='ident'>response</span>.<span class='ident'>replace_body</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>file</span>));
         <span class='prelude-val'>Ok</span>(<span class='self'>self</span>)
     }

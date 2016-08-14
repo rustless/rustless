@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-1.0.1/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -58,10 +58,7 @@
 <span id="14">14</span>
 <span id="15">15</span>
 <span id="16">16</span>
-<span id="17">17</span>
-<span id="18">18</span>
 </pre><pre class='rust '>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>url</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>jsonway</span>;
@@ -70,10 +67,9 @@
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>lazy_static</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>typeable</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>traitobject</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde_json</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>mutable_json</span>::<span class='ident'>MutableJson</span>;
-
-<span class='kw'>mod</span> <span class='ident'>mutable_json</span>;
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>common</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>json_dsl</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>json_schema</span>;

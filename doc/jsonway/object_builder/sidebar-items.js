@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ObjectBuilder",""]]});
+initSidebarItems({"struct":[["ObjectBuilder",""]],"type":[["Object",""]]});

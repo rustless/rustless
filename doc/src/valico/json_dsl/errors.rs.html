@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/json_dsl/errors.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-1.0.1/src/json_dsl/errors.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>errors.rs.html -- source</title>
@@ -114,8 +114,8 @@
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>error</span>::{<span class='ident'>Error</span>};
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>common</span>::<span class='ident'>error</span>::<span class='ident'>ValicoError</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>::<span class='ident'>ToJson</span>;
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>Value</span>, <span class='ident'>to_value</span>};
+<span class='kw'>use</span> <span class='ident'>serde</span>::{<span class='ident'>Serialize</span>, <span class='ident'>Serializer</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>;
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -124,7 +124,7 @@
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>Required</span>, <span class='string'>&quot;required&quot;</span>, <span class='string'>&quot;This field is required&quot;</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>Required</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>Required</span>);
 
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -134,7 +134,7 @@
     <span class='kw'>pub</span> <span class='ident'>detail</span>: <span class='ident'>String</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>WrongType</span>, <span class='string'>&quot;wrong_type&quot;</span>, <span class='string'>&quot;Type of the value is wrong&quot;</span>, <span class='op'>+</span><span class='ident'>detail</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>WrongType</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>WrongType</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -143,7 +143,7 @@
     <span class='kw'>pub</span> <span class='ident'>detail</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>WrongValue</span>, <span class='string'>&quot;wrong_value&quot;</span>, <span class='string'>&quot;The value is wrong or mailformed&quot;</span>, <span class='op'>+</span><span class='ident'>opt_detail</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>WrongValue</span>);
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>WrongValue</span>);
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -153,8 +153,8 @@
     <span class='kw'>pub</span> <span class='ident'>params</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>MutuallyExclusive</span>, <span class='string'>&quot;mutually_exclusive&quot;</span>, <span class='string'>&quot;The values are mutually exclusive&quot;</span>, <span class='op'>+</span><span class='ident'>opt_detail</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>MutuallyExclusive</span>, <span class='op'>|</span><span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>MutuallyExclusive</span>, <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>json</span>::<span class='ident'>Json</span><span class='op'>&gt;</span><span class='op'>|</span> {
-    <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;params&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>err</span>.<span class='ident'>params</span>.<span class='ident'>to_json</span>());
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>MutuallyExclusive</span>, <span class='op'>|</span><span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>MutuallyExclusive</span>, <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Value</span><span class='op'>&gt;</span><span class='op'>|</span> {
+    <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;params&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='ident'>err</span>.<span class='ident'>params</span>));
 });
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -165,8 +165,8 @@
     <span class='kw'>pub</span> <span class='ident'>params</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>ExactlyOne</span>, <span class='string'>&quot;exactly_one&quot;</span>, <span class='string'>&quot;Exacly one of the values must be present&quot;</span>, <span class='op'>+</span><span class='ident'>opt_detail</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>ExactlyOne</span>, <span class='op'>|</span><span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>ExactlyOne</span>, <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>json</span>::<span class='ident'>Json</span><span class='op'>&gt;</span><span class='op'>|</span> {
-    <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;params&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>err</span>.<span class='ident'>params</span>.<span class='ident'>to_json</span>())
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>ExactlyOne</span>, <span class='op'>|</span><span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>ExactlyOne</span>, <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Value</span><span class='op'>&gt;</span><span class='op'>|</span> {
+    <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;params&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='ident'>err</span>.<span class='ident'>params</span>))
 });
 
 
@@ -178,8 +178,8 @@
     <span class='kw'>pub</span> <span class='ident'>params</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>
 }
 <span class='macro'>impl_err</span><span class='macro'>!</span>(<span class='ident'>AtLeastOne</span>, <span class='string'>&quot;at_least_one&quot;</span>, <span class='string'>&quot;At least one of the values must be present&quot;</span>, <span class='op'>+</span><span class='ident'>opt_detail</span>);
-<span class='macro'>impl_to_json</span><span class='macro'>!</span>(<span class='ident'>AtLeastOne</span>, <span class='op'>|</span><span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>AtLeastOne</span>, <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>json</span>::<span class='ident'>Json</span><span class='op'>&gt;</span><span class='op'>|</span> {
-    <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;params&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>err</span>.<span class='ident'>params</span>.<span class='ident'>to_json</span>())
+<span class='macro'>impl_serialize</span><span class='macro'>!</span>(<span class='ident'>AtLeastOne</span>, <span class='op'>|</span><span class='ident'>err</span>: <span class='kw-2'>&amp;</span><span class='ident'>AtLeastOne</span>, <span class='ident'>map</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>collections</span>::<span class='ident'>BTreeMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Value</span><span class='op'>&gt;</span><span class='op'>|</span> {
+    <span class='ident'>map</span>.<span class='ident'>insert</span>(<span class='string'>&quot;params&quot;</span>.<span class='ident'>to_string</span>(), <span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='ident'>err</span>.<span class='ident'>params</span>))
 });</pre>
 </section>
     <section id='search' class="content hidden"></section>

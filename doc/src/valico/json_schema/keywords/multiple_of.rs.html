@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/json_schema/keywords/multiple_of.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-1.0.1/src/json_schema/keywords/multiple_of.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>multiple_of.rs.html -- source</title>
@@ -108,7 +108,7 @@
 <span id="64">64</span>
 <span id="65">65</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>Value</span>};
 
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>schema</span>;
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>validators</span>;
@@ -116,7 +116,7 @@
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>MultipleOf</span>;
 <span class='kw'>impl</span> <span class='kw'>super</span>::<span class='ident'>Keyword</span> <span class='kw'>for</span> <span class='ident'>MultipleOf</span> {
-    <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>def</span>: <span class='kw-2'>&amp;</span><span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>ctx</span>: <span class='kw-2'>&amp;</span><span class='ident'>schema</span>::<span class='ident'>WalkContext</span>) <span class='op'>-&gt;</span> <span class='kw'>super</span>::<span class='ident'>KeywordResult</span> {
+    <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>def</span>: <span class='kw-2'>&amp;</span><span class='ident'>Value</span>, <span class='ident'>ctx</span>: <span class='kw-2'>&amp;</span><span class='ident'>schema</span>::<span class='ident'>WalkContext</span>) <span class='op'>-&gt;</span> <span class='kw'>super</span>::<span class='ident'>KeywordResult</span> {
         <span class='kw'>let</span> <span class='ident'>multiple_of</span> <span class='op'>=</span> <span class='macro'>keyword_key_exists</span><span class='macro'>!</span>(<span class='ident'>def</span>, <span class='string'>&quot;multipleOf&quot;</span>);
 
         <span class='kw'>if</span> <span class='ident'>multiple_of</span>.<span class='ident'>is_number</span>() {
@@ -143,7 +143,7 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>scope</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='ident'>jsonway</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw'>super</span>::<span class='ident'>builder</span>;
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>::{<span class='ident'>ToJson</span>};
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>use</span> <span class='ident'>serde_json</span>::<span class='ident'>to_value</span>;
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>validate</span>() {
@@ -152,9 +152,9 @@
         <span class='ident'>s</span>.<span class='ident'>multiple_of</span>(<span class='number'>3.5f64</span>);
     }).<span class='ident'>into_json</span>(), <span class='boolvalue'>true</span>).<span class='ident'>ok</span>().<span class='ident'>unwrap</span>();
 
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='string'>&quot;&quot;</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>true</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>7</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>true</span>);
-    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='number'>6</span>.<span class='ident'>to_json</span>()).<span class='ident'>is_valid</span>(), <span class='boolvalue'>false</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='string'>&quot;&quot;</span>)).<span class='ident'>is_valid</span>(), <span class='boolvalue'>true</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='number'>7</span>)).<span class='ident'>is_valid</span>(), <span class='boolvalue'>true</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>schema</span>.<span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='number'>6</span>)).<span class='ident'>is_valid</span>(), <span class='boolvalue'>false</span>);
 }
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -166,13 +166,14 @@
     }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>true</span>).<span class='ident'>is_err</span>());
 
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>schema</span><span class='op'>|</span> {
-        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;multipleOf&quot;</span>, <span class='number'>0</span>.<span class='ident'>to_json</span>());
+        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;multipleOf&quot;</span>, <span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='number'>0</span>));
     }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>true</span>).<span class='ident'>is_err</span>());
 
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>scope</span>.<span class='ident'>compile_and_return</span>(<span class='ident'>jsonway</span>::<span class='ident'>object</span>(<span class='op'>|</span><span class='ident'>schema</span><span class='op'>|</span> {
-        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;multipleOf&quot;</span>, (<span class='op'>-</span><span class='number'>1</span>).<span class='ident'>to_json</span>());
+        <span class='ident'>schema</span>.<span class='ident'>set</span>(<span class='string'>&quot;multipleOf&quot;</span>, <span class='ident'>to_value</span>(<span class='kw-2'>&amp;</span><span class='op'>-</span><span class='number'>1</span>));
     }).<span class='ident'>unwrap</span>(), <span class='boolvalue'>true</span>).<span class='ident'>is_err</span>());
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 

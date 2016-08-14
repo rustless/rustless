@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ArrayBuilder",""]]});
+initSidebarItems({"struct":[["ArrayBuilder",""]],"type":[["JsonArray",""]]});

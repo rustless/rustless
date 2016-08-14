@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/jsonway-0.3.5/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/jsonway-1.0.1/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -98,9 +98,10 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_type</span> <span class='op'>=</span> <span class='string'>&quot;rlib&quot;</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>warnings</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>bad_style</span>)]</span>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span> <span class='kw'>as</span> <span class='ident'>serialize</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>mutable_json</span>::<span class='ident'>MutableJson</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde_json</span>;
+
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>object_builder</span>::<span class='ident'>ObjectBuilder</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>array_builder</span>::<span class='ident'>ArrayBuilder</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>serializer</span>::{<span class='ident'>Serializer</span>, <span class='ident'>ObjectSerializer</span>, <span class='ident'>ObjectScopeSerializer</span>};
@@ -108,31 +109,30 @@
 
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>array_builder</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>object_builder</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>mutable_json</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>serializer</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>array_serializer</span>;
 
 <span class='doccomment'>/// ```rust</span>
 <span class='doccomment'>/// let json = jsonway::object(|json| {</span>
-<span class='doccomment'>///     json.set(&quot;first_name&quot;, &quot;Luke&quot;.to_string()); </span>
-<span class='doccomment'>///     json.set(&quot;last_name&quot;, &quot;Skywalker&quot;.to_string());</span>
+<span class='doccomment'>///     json.set(&quot;first_name&quot;, &quot;Luke&quot;);</span>
+<span class='doccomment'>///     json.set(&quot;last_name&quot;, &quot;Skywalker&quot;);</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>///     json.object(&quot;info&quot;, |json| {</span>
-<span class='doccomment'>///         json.set(&quot;homeworld&quot;, &quot;Tatooine&quot;.to_string());</span>
-<span class='doccomment'>///         json.set(&quot;born&quot;, &quot;19 BBY&quot;.to_string());</span>
-<span class='doccomment'>///         json.set(&quot;died&quot;, &quot;Between 45 ABY and 137 ABY&quot;.to_string());</span>
+<span class='doccomment'>///         json.set(&quot;homeworld&quot;, &quot;Tatooine&quot;);</span>
+<span class='doccomment'>///         json.set(&quot;born&quot;, &quot;19 BBY&quot;);</span>
+<span class='doccomment'>///         json.set(&quot;died&quot;, &quot;Between 45 ABY and 137 ABY&quot;);</span>
 <span class='doccomment'>///     });</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>///     json.array(&quot;masters&quot;, |json| {</span>
-<span class='doccomment'>///         json.push(&quot;Obi-Wan Kenobi&quot;.to_string());</span>
-<span class='doccomment'>///         json.push(&quot;Yoda&quot;.to_string());</span>
-<span class='doccomment'>///         json.push(&quot;Joruus C&#39;baoth (Briefly)&quot;.to_string());</span>
-<span class='doccomment'>///         json.push(&quot;Darth Sidious (Briefly)&quot;.to_string());</span>
+<span class='doccomment'>///         json.push(&quot;Obi-Wan Kenobi&quot;);</span>
+<span class='doccomment'>///         json.push(&quot;Yoda&quot;);</span>
+<span class='doccomment'>///         json.push(&quot;Joruus C&#39;baoth (Briefly)&quot;);</span>
+<span class='doccomment'>///         json.push(&quot;Darth Sidious (Briefly)&quot;);</span>
 <span class='doccomment'>///     });</span>
 <span class='doccomment'>/// }).unwrap();</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// assert_eq!(json.find(&quot;first_name&quot;).unwrap().as_string().unwrap(), &quot;Luke&quot;);</span>
-<span class='doccomment'>/// assert_eq!(json.find(&quot;last_name&quot;).unwrap().as_string().unwrap(), &quot;Skywalker&quot;);</span>
+<span class='doccomment'>/// assert_eq!(json.find(&quot;first_name&quot;).unwrap().as_str().unwrap(), &quot;Luke&quot;);</span>
+<span class='doccomment'>/// assert_eq!(json.find(&quot;last_name&quot;).unwrap().as_str().unwrap(), &quot;Skywalker&quot;);</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// assert!(json.find(&quot;info&quot;).unwrap().is_object());</span>
 <span class='doccomment'>/// assert!(json.find(&quot;masters&quot;).unwrap().is_array());</span>
@@ -141,7 +141,7 @@
 <span class='doccomment'>/// Create and return new ListBuilder</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>array</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='ident'>builder</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='ident'>ArrayBuilder</span> <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>FnOnce</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ArrayBuilder</span>) {
     <span class='ident'>ArrayBuilder</span>::<span class='ident'>build</span>(<span class='ident'>builder</span>)
-}    
+}
 
 <span class='doccomment'>/// Create and return new ObjectBuilder</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>object</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='ident'>builder</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='ident'>ObjectBuilder</span> <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>FnOnce</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ObjectBuilder</span>) {

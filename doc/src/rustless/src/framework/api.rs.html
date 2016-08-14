@@ -251,20 +251,16 @@
 <span id="207">207</span>
 <span id="208">208</span>
 <span id="209">209</span>
-<span id="210">210</span>
-<span id="211">211</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>serialize</span>::<span class='ident'>json</span>;
-
-<span class='kw'>use</span> <span class='ident'>backend</span>;
-<span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>mime</span>;
-<span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>header</span>;
-<span class='kw'>use</span> <span class='ident'>errors</span>;
- 
 <span class='kw'>use</span> <span class='ident'>framework</span>;
 <span class='kw'>use</span> <span class='ident'>framework</span>::<span class='ident'>nesting</span>::{<span class='self'>self</span>, <span class='ident'>Nesting</span>, <span class='ident'>Node</span>};
 <span class='kw'>use</span> <span class='ident'>framework</span>::<span class='ident'>media</span>;
 <span class='kw'>use</span> <span class='ident'>framework</span>::<span class='ident'>path</span>;
+<span class='kw'>use</span> <span class='ident'>backend</span>;
+<span class='kw'>use</span> <span class='ident'>errors</span>;
+<span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>mime</span>;
+<span class='kw'>use</span> <span class='ident'>server</span>::<span class='ident'>header</span>;
+<span class='kw'>use</span> <span class='ident'>json</span>::{<span class='ident'>JsonValue</span>};
 
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_copy_implementations</span>)]</span>
@@ -372,7 +368,7 @@
 <span class='kw'>impl</span> <span class='ident'>framework</span>::<span class='ident'>ApiHandler</span> <span class='kw'>for</span> <span class='ident'>Api</span> {
     <span class='kw'>fn</span> <span class='ident'>api_call</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;r</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>,
         <span class='ident'>rest_path</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>,
-        <span class='ident'>params</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>json</span>::<span class='ident'>Json</span>,
+        <span class='ident'>params</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>JsonValue</span>,
         <span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;r</span> <span class='kw-2'>mut</span> (<span class='ident'>backend</span>::<span class='ident'>Request</span> <span class='op'>+</span> <span class='lifetime'>&#39;r</span>),
         <span class='ident'>info</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>framework</span>::<span class='ident'>CallInfo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>backend</span>::<span class='ident'>HandleResult</span><span class='op'>&lt;</span><span class='ident'>backend</span>::<span class='ident'>Response</span><span class='op'>&gt;</span> {
 
@@ -406,7 +402,7 @@
                 },
                 <span class='kw-2'>&amp;</span><span class='ident'>Versioning</span>::<span class='ident'>Param</span>(<span class='kw-2'>ref</span> <span class='ident'>param_name</span>) <span class='op'>=&gt;</span> {
                     <span class='kw'>match</span> <span class='ident'>params</span>.<span class='ident'>find</span>(<span class='ident'>param_name</span>) {
-                        <span class='prelude-val'>Some</span>(<span class='ident'>obj</span>) <span class='kw'>if</span> <span class='ident'>obj</span>.<span class='ident'>is_string</span>() <span class='op'>&amp;&amp;</span> <span class='ident'>obj</span>.<span class='ident'>as_string</span>().<span class='ident'>unwrap</span>() <span class='op'>==</span> <span class='kw-2'>&amp;</span><span class='ident'>version</span>[..] <span class='op'>=&gt;</span> (),
+                        <span class='prelude-val'>Some</span>(<span class='ident'>obj</span>) <span class='kw'>if</span> <span class='ident'>obj</span>.<span class='ident'>is_string</span>() <span class='op'>&amp;&amp;</span> <span class='ident'>obj</span>.<span class='ident'>as_str</span>().<span class='ident'>unwrap</span>() <span class='op'>==</span> <span class='kw-2'>&amp;</span><span class='ident'>version</span>[..] <span class='op'>=&gt;</span> (),
                         _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='macro'>error_response</span><span class='macro'>!</span>(<span class='ident'>errors</span>::<span class='ident'>NotMatch</span>))
                     }
                 },

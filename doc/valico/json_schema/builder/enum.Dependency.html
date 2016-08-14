@@ -47,14 +47,14 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-2999' class='srclink' href='../../../src/valico/json_schema/builder.rs.html#65-68' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-3029' class='srclink' href='../../../src/valico/json_schema/builder.rs.html#66-69' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Dependency {
-    Schema(<a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a>),
+    Schema(<a class='enum' href='../../../serde_json/value/enum.Value.html' title='serde_json::value::Value'>Value</a>),
     Property(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;),
 }</pre><h2 class='variants'>Variants</h2>
-<table class='variants_table'><tr><td id='variant.Schema'><code>Schema</code></td><td></td><td></td></tr><tr><td id='variant.Property'><code>Property</code></td><td></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../../rustc_serialize/json/trait.ToJson.html' title='rustc_serialize::json::ToJson'>ToJson</a> for <a class='enum' href='../../../valico/json_schema/builder/enum.Dependency.html' title='valico::json_schema::builder::Dependency'>Dependency</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-3004' class='srclink' href='../../../src/valico/json_schema/builder.rs.html#70-77' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.to_json' class='method'><code>fn <a href='../../../rustc_serialize/json/trait.ToJson.html#tymethod.to_json' class='fnname'>to_json</a>(&amp;self) -&gt; <a class='enum' href='../../../rustc_serialize/json/enum.Json.html' title='rustc_serialize::json::Json'>Json</a></code></h4>
-<div class='docblock'><p>Converts the value of <code>self</code> to an instance of JSON</p>
+<table class='variants_table'><tr><td id='variant.Schema'><code>Schema</code></td><td></td><td></td></tr><tr><td id='variant.Property'><code>Property</code></td><td></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../../../serde/ser/trait.Serialize.html' title='serde::ser::Serialize'>Serialize</a> for <a class='enum' href='../../../valico/json_schema/builder/enum.Dependency.html' title='valico::json_schema::builder::Dependency'>Dependency</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-3034' class='srclink' href='../../../src/valico/json_schema/builder.rs.html#71-78' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.serialize' class='method'><code>fn <a href='../../../serde/ser/trait.Serialize.html#tymethod.serialize' class='fnname'>serialize</a>&lt;S&gt;(&amp;self, serializer: &amp;mut S) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, S::Error&gt; <span class='where'>where S: <a class='trait' href='../../../serde/ser/trait.Serializer.html' title='serde::ser::Serializer'>Serializer</a></span></code></h4>
+<div class='docblock'><p>Serializes this value into this serializer.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 

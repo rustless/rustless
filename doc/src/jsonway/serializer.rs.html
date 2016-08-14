@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/jsonway-0.3.5/src/serializer.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/jsonway-1.0.1/src/serializer.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>serializer.rs.html -- source</title>
@@ -224,16 +224,14 @@
 <span id="180">180</span>
 <span id="181">181</span>
 <span id="182">182</span>
-<span id="183">183</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>serialize</span>::<span class='ident'>json</span>;
-
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>Value</span>};
 <span class='kw'>use</span> <span class='ident'>object_builder</span>;
 
 <span class='doccomment'>/// Provides functionality to create custom JSON presenters for your structs.</span>
-<span class='doccomment'>/// </span>
-<span class='doccomment'>/// ## Example </span>
-<span class='doccomment'>/// </span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ## Example</span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// use jsonway::{self, Serializer};</span>
 <span class='doccomment'>///</span>
@@ -248,7 +246,7 @@
 <span class='doccomment'>/// impl&lt;&#39;a&gt; jsonway::Serializer for JediSerializer&lt;&#39;a&gt; {</span>
 <span class='doccomment'>///     fn root(&amp;self) -&gt; Option&lt;&amp;str&gt; { Some(&quot;jedi&quot;) }</span>
 <span class='doccomment'>///     fn build(&amp;self, json: &amp;mut jsonway::ObjectBuilder) {</span>
-<span class='doccomment'>///         json.set(&quot;name&quot;, self.jedi.name.to_string());</span>
+<span class='doccomment'>///         json.set(&quot;name&quot;, &amp;self.jedi.name);</span>
 <span class='doccomment'>///     }</span>
 <span class='doccomment'>/// }</span>
 <span class='doccomment'>///</span>
@@ -259,20 +257,20 @@
 <span class='doccomment'>///     json.find_path(&amp;[</span>
 <span class='doccomment'>///         &quot;jedi&quot;,</span>
 <span class='doccomment'>///         &quot;name&quot;,</span>
-<span class='doccomment'>///     ]).unwrap().as_string().unwrap(), </span>
+<span class='doccomment'>///     ]).unwrap().as_str().unwrap(),</span>
 <span class='doccomment'>///     &quot;Saes Rrogon&quot;</span>
 <span class='doccomment'>/// );</span>
 <span class='doccomment'>/// ```</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Serializer</span> {
 
     <span class='kw'>fn</span> <span class='ident'>build</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>object_builder</span>::<span class='ident'>ObjectBuilder</span>);
-    
+
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>root</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
         <span class='prelude-val'>None</span>
     }
 
-    <span class='kw'>fn</span> <span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>include_root</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
+    <span class='kw'>fn</span> <span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>include_root</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>Value</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bldr</span> <span class='op'>=</span> <span class='ident'>object_builder</span>::<span class='ident'>ObjectBuilder</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='ident'>root</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>root</span>();
         <span class='kw'>if</span> <span class='ident'>include_root</span> <span class='op'>&amp;&amp;</span> <span class='ident'>root</span>.<span class='ident'>is_some</span>() {
@@ -285,9 +283,9 @@
 }
 
 <span class='doccomment'>/// Provides functionality to create custom JSON presenters for your structs.</span>
-<span class='doccomment'>/// </span>
-<span class='doccomment'>/// ## Example </span>
-<span class='doccomment'>/// </span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ## Example</span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// use jsonway::{self, ObjectSerializer};</span>
 <span class='doccomment'>///</span>
@@ -300,7 +298,7 @@
 <span class='doccomment'>/// impl jsonway::ObjectSerializer&lt;Jedi&gt; for JediSerializer {</span>
 <span class='doccomment'>///     fn root(&amp;self) -&gt; Option&lt;&amp;str&gt; { Some(&quot;jedi&quot;) }</span>
 <span class='doccomment'>///     fn build(&amp;self, jedi: &amp;Jedi, json: &amp;mut jsonway::ObjectBuilder) {</span>
-<span class='doccomment'>///         json.set(&quot;name&quot;, jedi.name.to_string());</span>
+<span class='doccomment'>///         json.set(&quot;name&quot;, &amp;jedi.name);</span>
 <span class='doccomment'>///     }</span>
 <span class='doccomment'>/// }</span>
 <span class='doccomment'>///</span>
@@ -311,20 +309,20 @@
 <span class='doccomment'>///     json.find_path(&amp;[</span>
 <span class='doccomment'>///         &quot;jedi&quot;,</span>
 <span class='doccomment'>///         &quot;name&quot;,</span>
-<span class='doccomment'>///     ]).unwrap().as_string().unwrap(), </span>
+<span class='doccomment'>///     ]).unwrap().as_str().unwrap(),</span>
 <span class='doccomment'>///     &quot;Saes Rrogon&quot;</span>
 <span class='doccomment'>/// );</span>
 <span class='doccomment'>/// ```</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ObjectSerializer</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
 
     <span class='kw'>fn</span> <span class='ident'>build</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='kw-2'>&amp;</span><span class='ident'>T</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>object_builder</span>::<span class='ident'>ObjectBuilder</span>);
-    
+
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>root</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
         <span class='prelude-val'>None</span>
     }
 
-    <span class='kw'>fn</span> <span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>obj</span>: <span class='kw-2'>&amp;</span><span class='ident'>T</span>, <span class='ident'>include_root</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
+    <span class='kw'>fn</span> <span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>obj</span>: <span class='kw-2'>&amp;</span><span class='ident'>T</span>, <span class='ident'>include_root</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>Value</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bldr</span> <span class='op'>=</span> <span class='ident'>object_builder</span>::<span class='ident'>ObjectBuilder</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='ident'>root</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>root</span>();
         <span class='kw'>if</span> <span class='ident'>include_root</span> <span class='op'>&amp;&amp;</span> <span class='ident'>root</span>.<span class='ident'>is_some</span>() {
@@ -336,38 +334,38 @@
 }
 
 <span class='doccomment'>/// Provides functionality to create custom JSON presenters for your structs.</span>
-<span class='doccomment'>/// </span>
-<span class='doccomment'>/// ## Example </span>
-<span class='doccomment'>/// </span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ## Example</span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// ```rust</span>
 <span class='doccomment'>/// use jsonway::{self, ObjectScopeSerializer};</span>
-<span class='doccomment'>/// </span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// struct User {</span>
 <span class='doccomment'>///     id: u64,</span>
 <span class='doccomment'>///     is_admin: bool</span>
 <span class='doccomment'>/// }</span>
-<span class='doccomment'>/// </span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// struct Jedi {</span>
 <span class='doccomment'>///     name: String,</span>
 <span class='doccomment'>///     secret: String</span>
 <span class='doccomment'>/// }</span>
-<span class='doccomment'>/// </span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// struct JediSerializer;</span>
-<span class='doccomment'>/// </span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// impl jsonway::ObjectScopeSerializer&lt;Jedi, User&gt; for JediSerializer {</span>
 <span class='doccomment'>///     fn root(&amp;self) -&gt; Option&lt;&amp;str&gt; { Some(&quot;jedi&quot;) }</span>
 <span class='doccomment'>///     fn build(&amp;self, jedi: &amp;Jedi, current_user: &amp;User, json: &amp;mut jsonway::ObjectBuilder) {</span>
 <span class='doccomment'>///         json.set(&quot;name&quot;, jedi.name.to_string());</span>
-<span class='doccomment'>/// </span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>///         if current_user.is_admin {</span>
 <span class='doccomment'>///             json.set(&quot;secret&quot;, jedi.secret.to_string());</span>
 <span class='doccomment'>///         }</span>
 <span class='doccomment'>///     }</span>
 <span class='doccomment'>/// }</span>
-<span class='doccomment'>/// </span>
-<span class='doccomment'>/// let jedi = Jedi { </span>
-<span class='doccomment'>///     name: &quot;Palpatine&quot;.to_string(), </span>
-<span class='doccomment'>///     secret: &quot;Dark side&quot;.to_string() </span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// let jedi = Jedi {</span>
+<span class='doccomment'>///     name: &quot;Palpatine&quot;.to_string(),</span>
+<span class='doccomment'>///     secret: &quot;Dark side&quot;.to_string()</span>
 <span class='doccomment'>/// };</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// let current_user = User { id: 1, is_admin: true };</span>
@@ -377,7 +375,7 @@
 <span class='doccomment'>///     json.find_path(&amp;[</span>
 <span class='doccomment'>///         &quot;jedi&quot;,</span>
 <span class='doccomment'>///         &quot;name&quot;,</span>
-<span class='doccomment'>///     ]).unwrap().as_string().unwrap(), </span>
+<span class='doccomment'>///     ]).unwrap().as_str().unwrap(),</span>
 <span class='doccomment'>///     &quot;Palpatine&quot;</span>
 <span class='doccomment'>/// );</span>
 <span class='doccomment'>///</span>
@@ -385,7 +383,7 @@
 <span class='doccomment'>///     json.find_path(&amp;[</span>
 <span class='doccomment'>///         &quot;jedi&quot;,</span>
 <span class='doccomment'>///         &quot;secret&quot;,</span>
-<span class='doccomment'>///     ]).unwrap().as_string().unwrap(), </span>
+<span class='doccomment'>///     ]).unwrap().as_str().unwrap(),</span>
 <span class='doccomment'>///     &quot;Dark side&quot;</span>
 <span class='doccomment'>/// );</span>
 <span class='doccomment'>///</span>
@@ -393,13 +391,13 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ObjectScopeSerializer</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>S</span><span class='op'>&gt;</span> {
 
     <span class='kw'>fn</span> <span class='ident'>build</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='kw-2'>&amp;</span><span class='ident'>T</span>, <span class='kw-2'>&amp;</span><span class='ident'>S</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>object_builder</span>::<span class='ident'>ObjectBuilder</span>);
-    
+
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>root</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>str</span><span class='op'>&gt;</span> {
         <span class='prelude-val'>None</span>
     }
 
-    <span class='kw'>fn</span> <span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>obj</span>: <span class='kw-2'>&amp;</span><span class='ident'>T</span>, <span class='ident'>scope</span>: <span class='kw-2'>&amp;</span><span class='ident'>S</span>, <span class='ident'>include_root</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>json</span>::<span class='ident'>Json</span> {
+    <span class='kw'>fn</span> <span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>obj</span>: <span class='kw-2'>&amp;</span><span class='ident'>T</span>, <span class='ident'>scope</span>: <span class='kw-2'>&amp;</span><span class='ident'>S</span>, <span class='ident'>include_root</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='ident'>Value</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>bldr</span> <span class='op'>=</span> <span class='ident'>object_builder</span>::<span class='ident'>ObjectBuilder</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='ident'>root</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>root</span>();
         <span class='kw'>if</span> <span class='ident'>include_root</span> <span class='op'>&amp;&amp;</span> <span class='ident'>root</span>.<span class='ident'>is_some</span>() {
@@ -408,7 +406,8 @@
         <span class='self'>self</span>.<span class='ident'>build</span>(<span class='ident'>obj</span>, <span class='ident'>scope</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>bldr</span>);
         <span class='ident'>bldr</span>.<span class='ident'>unwrap</span>()
     }
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 

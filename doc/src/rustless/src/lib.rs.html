@@ -108,21 +108,19 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>bad_style</span>)]</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>serde_json</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>hyper</span>;
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>rustc_serialize</span> <span class='kw'>as</span> <span class='ident'>serialize</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>url</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>error</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>cookie</span>;
-
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>typemap</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>plugin</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>bodyparser</span>;
-
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>valico</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>queryst</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>jsonway</span>;
-
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>typeable</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>traitobject</span>;
 
@@ -132,6 +130,7 @@
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>log</span>;
 
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>json</span>::{<span class='ident'>JsonValue</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>backend</span>::{<span class='ident'>Request</span>, <span class='ident'>SimpleRequest</span>, <span class='ident'>Response</span>, <span class='ident'>Handler</span>, <span class='ident'>HandleResult</span>, <span class='ident'>HandleSuccessResult</span>, <span class='ident'>ResponseBody</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>errors</span>::{<span class='ident'>ErrorResponse</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>framework</span>::{
@@ -161,6 +160,7 @@
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>server</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>framework</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>batteries</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>json</span>;
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

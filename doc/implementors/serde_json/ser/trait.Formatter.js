@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors["serde_json"] = [];
+implementors["serde_json"] = [];implementors["rustless"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

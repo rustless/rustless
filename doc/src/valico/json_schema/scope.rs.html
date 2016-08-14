@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-0.8.2/src/json_schema/scope.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/valico-1.0.1/src/json_schema/scope.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>scope.rs.html -- source</title>
@@ -206,7 +206,7 @@
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>url</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
+<span class='kw'>use</span> <span class='ident'>serde_json</span>::{<span class='ident'>Value</span>};
 
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>schema</span>;
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>keywords</span>;
@@ -248,28 +248,28 @@
         <span class='ident'>scope</span>
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>def</span>: <span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>ban_unknown</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span>, <span class='ident'>schema</span>::<span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>def</span>: <span class='ident'>Value</span>, <span class='ident'>ban_unknown</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span>, <span class='ident'>schema</span>::<span class='ident'>SchemaError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>schema</span>::<span class='ident'>compile</span>(<span class='ident'>def</span>, <span class='prelude-val'>None</span>, <span class='ident'>schema</span>::<span class='ident'>CompilationSettings</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>keywords</span>, <span class='ident'>ban_unknown</span>)));
         <span class='kw'>let</span> <span class='ident'>id</span> <span class='op'>=</span> <span class='ident'>schema</span>.<span class='ident'>id</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap</span>();
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>add</span>(<span class='kw-2'>&amp;</span><span class='ident'>id</span>, <span class='ident'>schema</span>));
         <span class='prelude-val'>Ok</span>(<span class='ident'>id</span>)
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile_with_id</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>id</span>: <span class='kw-2'>&amp;</span><span class='ident'>url</span>::<span class='ident'>Url</span>, <span class='ident'>def</span>: <span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>ban_unknown</span>: <span class='ident'>bool</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile_with_id</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>id</span>: <span class='kw-2'>&amp;</span><span class='ident'>url</span>::<span class='ident'>Url</span>, <span class='ident'>def</span>: <span class='ident'>Value</span>, <span class='ident'>ban_unknown</span>: <span class='ident'>bool</span>)
         <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>schema</span>::<span class='ident'>SchemaError</span><span class='op'>&gt;</span>
     {
         <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>schema</span>::<span class='ident'>compile</span>(<span class='ident'>def</span>, <span class='prelude-val'>Some</span>(<span class='ident'>id</span>.<span class='ident'>clone</span>()), <span class='ident'>schema</span>::<span class='ident'>CompilationSettings</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>keywords</span>, <span class='ident'>ban_unknown</span>)));
         <span class='self'>self</span>.<span class='ident'>add</span>(<span class='ident'>id</span>, <span class='ident'>schema</span>)
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile_and_return</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>def</span>: <span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>ban_unknown</span>: <span class='ident'>bool</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile_and_return</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>def</span>: <span class='ident'>Value</span>, <span class='ident'>ban_unknown</span>: <span class='ident'>bool</span>)
         <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>schema</span>::<span class='ident'>ScopedSchema</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>, <span class='ident'>schema</span>::<span class='ident'>SchemaError</span><span class='op'>&gt;</span>
     {
         <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>schema</span>::<span class='ident'>compile</span>(<span class='ident'>def</span>, <span class='prelude-val'>None</span>, <span class='ident'>schema</span>::<span class='ident'>CompilationSettings</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>keywords</span>, <span class='ident'>ban_unknown</span>)));
         <span class='self'>self</span>.<span class='ident'>add_and_return</span>(<span class='ident'>schema</span>.<span class='ident'>id</span>.<span class='ident'>clone</span>().<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>(), <span class='ident'>schema</span>)
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile_and_return_with_id</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>id</span>: <span class='kw-2'>&amp;</span><span class='ident'>url</span>::<span class='ident'>Url</span>, <span class='ident'>def</span>: <span class='ident'>json</span>::<span class='ident'>Json</span>, <span class='ident'>ban_unknown</span>: <span class='ident'>bool</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compile_and_return_with_id</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>id</span>: <span class='kw-2'>&amp;</span><span class='ident'>url</span>::<span class='ident'>Url</span>, <span class='ident'>def</span>: <span class='ident'>Value</span>, <span class='ident'>ban_unknown</span>: <span class='ident'>bool</span>)
         <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>schema</span>::<span class='ident'>ScopedSchema</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>, <span class='ident'>schema</span>::<span class='ident'>SchemaError</span><span class='op'>&gt;</span>
     {
         <span class='kw'>let</span> <span class='ident'>schema</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>schema</span>::<span class='ident'>compile</span>(<span class='ident'>def</span>, <span class='prelude-val'>Some</span>(<span class='ident'>id</span>.<span class='ident'>clone</span>()), <span class='ident'>schema</span>::<span class='ident'>CompilationSettings</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>keywords</span>, <span class='ident'>ban_unknown</span>)));

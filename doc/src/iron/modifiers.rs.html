@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/iron-0.3.0/src/modifiers.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/iron-0.4.0/src/modifiers.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>modifiers.rs.html -- source</title>
@@ -429,7 +429,7 @@
 }
 
 <span class='doccomment'>/// A modifier for creating redirect responses.</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>RedirectRaw</span>(<span class='ident'>String</span>);
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>RedirectRaw</span>(<span class='kw'>pub</span> <span class='ident'>String</span>);
 
 <span class='kw'>impl</span> <span class='ident'>Modifier</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>RedirectRaw</span> {
     <span class='kw'>fn</span> <span class='ident'>modify</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
