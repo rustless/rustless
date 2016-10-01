@@ -129,9 +129,9 @@ fn main() {
 
 ## Complex example
 
-If you want to see how you can write come complex application using Rustless please see the [example](https://github.com/rustless/rustless-example).
+If you want to see how you can write some complex application using Rustless, please see the [example](https://github.com/rustless/rustless-example).
 
-In that example please note these aspects:
+In the example, please note the following aspects:
 
 * Complex nested API with versioning.
 * CRUD operations with rust-postgres.
@@ -188,7 +188,7 @@ Api::build(|api| {
 
 ## Parameters validation and coercion
 
-You can define validations and coercion options for your parameters using a DSL block inside `Endpoint` and `Namespace` definition. See [Valico] for more info about things you can do.
+You can define validations and coercion options for your parameters using a DSL block inside `Endpoint` and `Namespace` definition. See [Valico] for more info about what you can do.
 
 ~~~rust
 api.get("users/:user_id/messages/:message_id", |endpoint| {
@@ -203,7 +203,7 @@ api.get("users/:user_id/messages/:message_id", |endpoint| {
 
 ## Use JSON Schema
 
-Also you can use JSON Schema (IETF's draft v4) to validate your parameters. To use schemes in your application you need to make simple setup:
+Also you can use JSON Schema (IETF's draft v4) to validate your parameters. To use schemes in your application you need to use the following setup:
 
 ~~~rust
 use valico::json_schema;
