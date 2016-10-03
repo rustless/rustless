@@ -200,22 +200,22 @@
 
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_json</span>(<span class='ident'>mime</span>: <span class='kw-2'>&amp;</span><span class='ident'>mime</span>::<span class='ident'>Mime</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
     <span class='kw'>match</span> <span class='ident'>mime</span> {
-        <span class='kw-2'>&amp;</span><span class='ident'>mime</span>::<span class='ident'>Mime</span>(<span class='ident'>mime</span>::<span class='ident'>TopLevel</span>::<span class='ident'>Application</span>, <span class='ident'>mime</span>::<span class='ident'>SubLevel</span>::<span class='ident'>Json</span>, _) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-        _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>
+        <span class='kw-2'>&amp;</span><span class='ident'>mime</span>::<span class='ident'>Mime</span>(<span class='ident'>mime</span>::<span class='ident'>TopLevel</span>::<span class='ident'>Application</span>, <span class='ident'>mime</span>::<span class='ident'>SubLevel</span>::<span class='ident'>Json</span>, _) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+        _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>
     }
 }
 
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_urlencoded</span>(<span class='ident'>mime</span>: <span class='kw-2'>&amp;</span><span class='ident'>mime</span>::<span class='ident'>Mime</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
     <span class='kw'>match</span> <span class='ident'>mime</span> {
-        <span class='kw-2'>&amp;</span><span class='ident'>mime</span>::<span class='ident'>Mime</span>(<span class='ident'>mime</span>::<span class='ident'>TopLevel</span>::<span class='ident'>Application</span>, <span class='ident'>mime</span>::<span class='ident'>SubLevel</span>::<span class='ident'>WwwFormUrlEncoded</span>, _) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-        _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>
+        <span class='kw-2'>&amp;</span><span class='ident'>mime</span>::<span class='ident'>Mime</span>(<span class='ident'>mime</span>::<span class='ident'>TopLevel</span>::<span class='ident'>Application</span>, <span class='ident'>mime</span>::<span class='ident'>SubLevel</span>::<span class='ident'>WwwFormUrlEncoded</span>, _) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+        _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>
     }
 }
 
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_form_data</span>(<span class='ident'>mime</span>: <span class='kw-2'>&amp;</span><span class='ident'>mime</span>::<span class='ident'>Mime</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
     <span class='kw'>match</span> <span class='ident'>mime</span> {
-        <span class='kw-2'>&amp;</span><span class='ident'>mime</span>::<span class='ident'>Mime</span>(<span class='ident'>mime</span>::<span class='ident'>TopLevel</span>::<span class='ident'>Multipart</span>, <span class='ident'>mime</span>::<span class='ident'>SubLevel</span>::<span class='ident'>FormData</span>, _) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-        _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>
+        <span class='kw-2'>&amp;</span><span class='ident'>mime</span>::<span class='ident'>Mime</span>(<span class='ident'>mime</span>::<span class='ident'>TopLevel</span>::<span class='ident'>Multipart</span>, <span class='ident'>mime</span>::<span class='ident'>SubLevel</span>::<span class='ident'>FormData</span>, _) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+        _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>
     }
 }
 

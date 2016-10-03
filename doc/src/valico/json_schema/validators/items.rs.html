@@ -203,7 +203,7 @@
                 <span class='comment'>// Validate agains additional items</span>
                 <span class='kw'>if</span> <span class='ident'>array</span>.<span class='ident'>len</span>() <span class='op'>&gt;</span> <span class='ident'>urls</span>.<span class='ident'>len</span>() {
                     <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>additional</span> {
-                        <span class='prelude-val'>Some</span>(<span class='ident'>AdditionalKind</span>::<span class='ident'>Boolean</span>(<span class='ident'>allow</span>)) <span class='kw'>if</span> <span class='ident'>allow</span> <span class='op'>==</span> <span class='boolvalue'>false</span> <span class='op'>=&gt;</span> {
+                        <span class='prelude-val'>Some</span>(<span class='ident'>AdditionalKind</span>::<span class='ident'>Boolean</span>(<span class='ident'>allow</span>)) <span class='kw'>if</span> <span class='ident'>allow</span> <span class='op'>==</span> <span class='bool-val'>false</span> <span class='op'>=&gt;</span> {
                             <span class='ident'>state</span>.<span class='ident'>errors</span>.<span class='ident'>push</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(
                                 <span class='ident'>errors</span>::<span class='ident'>Items</span> {
                                     <span class='ident'>path</span>: <span class='ident'>path</span>.<span class='ident'>to_string</span>(),

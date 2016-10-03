@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.1/src/error.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.2/src/error.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>error.rs.html -- source</title>
@@ -407,7 +407,7 @@
             <span class='ident'>ErrorCode</span>::<span class='ident'>UnknownField</span>(<span class='kw-2'>ref</span> <span class='ident'>field</span>) <span class='op'>=&gt;</span> {
                 <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;unknown field \&quot;{}\&quot;&quot;</span>, <span class='ident'>field</span>)
             }
-            <span class='ident'>ErrorCode</span>::<span class='ident'>MissingField</span>(<span class='kw-2'>ref</span> <span class='ident'>field</span>) <span class='op'>=&gt;</span> {
+            <span class='ident'>ErrorCode</span>::<span class='ident'>MissingField</span>(<span class='ident'>field</span>) <span class='op'>=&gt;</span> {
                 <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;missing field \&quot;{}\&quot;&quot;</span>, <span class='ident'>field</span>)
             }
             <span class='ident'>ErrorCode</span>::<span class='ident'>EOFWhileParsingList</span> <span class='op'>=&gt;</span> <span class='string'>&quot;EOF while parsing a list&quot;</span>.<span class='ident'>fmt</span>(<span class='ident'>f</span>),

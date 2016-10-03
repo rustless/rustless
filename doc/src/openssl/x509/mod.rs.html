@@ -1059,7 +1059,7 @@
             <span class='prelude-val'>Some</span>(<span class='ident'>X509</span> {
                 <span class='ident'>ctx</span>: <span class='prelude-val'>Some</span>(<span class='self'>self</span>),
                 <span class='ident'>handle</span>: <span class='ident'>ptr</span>,
-                <span class='ident'>owned</span>: <span class='boolvalue'>false</span>,
+                <span class='ident'>owned</span>: <span class='bool-val'>false</span>,
             })
         }
     }
@@ -1235,7 +1235,7 @@
                                          <span class='ident'>value</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>)
                 }
             };
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>success</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>success</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
             <span class='kw'>if</span> <span class='ident'>ext</span> <span class='op'>!=</span> <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>() {
                 <span class='ident'>success</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>X509_add_ext</span>(<span class='ident'>x509</span>, <span class='ident'>ext</span>, <span class='op'>-</span><span class='number'>1</span>) <span class='op'>!=</span> <span class='number'>0</span>;
                 <span class='ident'>ffi</span>::<span class='ident'>X509_EXTENSION_free</span>(<span class='ident'>ext</span>);
@@ -1300,7 +1300,7 @@
             <span class='kw'>let</span> <span class='ident'>x509</span> <span class='op'>=</span> <span class='ident'>X509</span> {
                 <span class='ident'>handle</span>: <span class='ident'>x509</span>,
                 <span class='ident'>ctx</span>: <span class='prelude-val'>None</span>,
-                <span class='ident'>owned</span>: <span class='boolvalue'>true</span>,
+                <span class='ident'>owned</span>: <span class='bool-val'>true</span>,
             };
 
             <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>X509_set_version</span>(<span class='ident'>x509</span>.<span class='ident'>handle</span>, <span class='number'>2</span>));
@@ -1398,7 +1398,7 @@
         <span class='ident'>X509</span> {
             <span class='ident'>ctx</span>: <span class='prelude-val'>Some</span>(<span class='ident'>ctx</span>),
             <span class='ident'>handle</span>: <span class='ident'>handle</span>,
-            <span class='ident'>owned</span>: <span class='boolvalue'>false</span>,
+            <span class='ident'>owned</span>: <span class='bool-val'>false</span>,
         }
     }
 
@@ -1414,7 +1414,7 @@
                                                               <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
                                                               <span class='prelude-val'>None</span>,
                                                               <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
-            <span class='prelude-val'>Ok</span>(<span class='ident'>X509</span>::<span class='ident'>new</span>(<span class='ident'>handle</span>, <span class='boolvalue'>true</span>))
+            <span class='prelude-val'>Ok</span>(<span class='ident'>X509</span>::<span class='ident'>new</span>(<span class='ident'>handle</span>, <span class='bool-val'>true</span>))
         }
     }
 
@@ -1503,7 +1503,7 @@
         <span class='comment'>// FIXME: given that we now have refcounting control, &#39;owned&#39; should be uneeded, the &#39;ctx</span>
         <span class='comment'>// is probably also uneeded. We can remove both to condense the x509 api quite a bit</span>
         <span class='comment'>//</span>
-        <span class='ident'>X509</span>::<span class='ident'>new</span>(<span class='self'>self</span>.<span class='ident'>handle</span>, <span class='boolvalue'>true</span>)
+        <span class='ident'>X509</span>::<span class='ident'>new</span>(<span class='self'>self</span>.<span class='ident'>handle</span>, <span class='bool-val'>true</span>)
     }
 }
 

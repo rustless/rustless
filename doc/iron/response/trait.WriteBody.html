@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-278' class='srclink' href='../../src/iron/response.rs.html#42-45' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-270' class='srclink' href='../../src/iron/response.rs.html#42-45' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait WriteBody: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> {
     fn <a href='#tymethod.write_body' class='fnname'>write_body</a>(&amp;mut self, res: &amp;mut <a class='struct' href='../../iron/response/struct.ResponseBody.html' title='iron::response::ResponseBody'>ResponseBody</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/std/io/error/type.Result.html' title='std::io::error::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;;
 }</pre><div class='docblock'><p>A trait which writes the body of an HTTP response.</p>
@@ -64,7 +64,7 @@
 <li><code>impl&lt;'a&gt; WriteBody for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></li>
 <li><code>impl WriteBody for <a class='struct' href='https://doc.rust-lang.org/nightly/std/fs/struct.File.html' title='std::fs::File'>File</a></code></li>
 <li><code>impl WriteBody for <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>&gt;</code></li>
-<li><code>impl&lt;R: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>&gt; WriteBody for <a class='struct' href='../../iron/response/struct.BodyReader.html' title='iron::response::BodyReader'>BodyReader</a>&lt;R&gt;</code></li>
+<li><code>impl&lt;R:&nbsp;<a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>&gt; WriteBody for <a class='struct' href='../../iron/response/struct.BodyReader.html' title='iron::response::BodyReader'>BodyReader</a>&lt;R&gt;</code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/iron/response/trait.WriteBody.js">
                  </script></section>

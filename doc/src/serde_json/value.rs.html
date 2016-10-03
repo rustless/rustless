@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.1/src/value.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.2/src/value.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>value.rs.html -- source</title>
@@ -1377,109 +1377,6 @@
 <span id="1333">1333</span>
 <span id="1334">1334</span>
 <span id="1335">1335</span>
-<span id="1336">1336</span>
-<span id="1337">1337</span>
-<span id="1338">1338</span>
-<span id="1339">1339</span>
-<span id="1340">1340</span>
-<span id="1341">1341</span>
-<span id="1342">1342</span>
-<span id="1343">1343</span>
-<span id="1344">1344</span>
-<span id="1345">1345</span>
-<span id="1346">1346</span>
-<span id="1347">1347</span>
-<span id="1348">1348</span>
-<span id="1349">1349</span>
-<span id="1350">1350</span>
-<span id="1351">1351</span>
-<span id="1352">1352</span>
-<span id="1353">1353</span>
-<span id="1354">1354</span>
-<span id="1355">1355</span>
-<span id="1356">1356</span>
-<span id="1357">1357</span>
-<span id="1358">1358</span>
-<span id="1359">1359</span>
-<span id="1360">1360</span>
-<span id="1361">1361</span>
-<span id="1362">1362</span>
-<span id="1363">1363</span>
-<span id="1364">1364</span>
-<span id="1365">1365</span>
-<span id="1366">1366</span>
-<span id="1367">1367</span>
-<span id="1368">1368</span>
-<span id="1369">1369</span>
-<span id="1370">1370</span>
-<span id="1371">1371</span>
-<span id="1372">1372</span>
-<span id="1373">1373</span>
-<span id="1374">1374</span>
-<span id="1375">1375</span>
-<span id="1376">1376</span>
-<span id="1377">1377</span>
-<span id="1378">1378</span>
-<span id="1379">1379</span>
-<span id="1380">1380</span>
-<span id="1381">1381</span>
-<span id="1382">1382</span>
-<span id="1383">1383</span>
-<span id="1384">1384</span>
-<span id="1385">1385</span>
-<span id="1386">1386</span>
-<span id="1387">1387</span>
-<span id="1388">1388</span>
-<span id="1389">1389</span>
-<span id="1390">1390</span>
-<span id="1391">1391</span>
-<span id="1392">1392</span>
-<span id="1393">1393</span>
-<span id="1394">1394</span>
-<span id="1395">1395</span>
-<span id="1396">1396</span>
-<span id="1397">1397</span>
-<span id="1398">1398</span>
-<span id="1399">1399</span>
-<span id="1400">1400</span>
-<span id="1401">1401</span>
-<span id="1402">1402</span>
-<span id="1403">1403</span>
-<span id="1404">1404</span>
-<span id="1405">1405</span>
-<span id="1406">1406</span>
-<span id="1407">1407</span>
-<span id="1408">1408</span>
-<span id="1409">1409</span>
-<span id="1410">1410</span>
-<span id="1411">1411</span>
-<span id="1412">1412</span>
-<span id="1413">1413</span>
-<span id="1414">1414</span>
-<span id="1415">1415</span>
-<span id="1416">1416</span>
-<span id="1417">1417</span>
-<span id="1418">1418</span>
-<span id="1419">1419</span>
-<span id="1420">1420</span>
-<span id="1421">1421</span>
-<span id="1422">1422</span>
-<span id="1423">1423</span>
-<span id="1424">1424</span>
-<span id="1425">1425</span>
-<span id="1426">1426</span>
-<span id="1427">1427</span>
-<span id="1428">1428</span>
-<span id="1429">1429</span>
-<span id="1430">1430</span>
-<span id="1431">1431</span>
-<span id="1432">1432</span>
-<span id="1433">1433</span>
-<span id="1434">1434</span>
-<span id="1435">1435</span>
-<span id="1436">1436</span>
-<span id="1437">1437</span>
-<span id="1438">1438</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! JSON Value</span>
 <span class='doccomment'>//!</span>
@@ -1761,32 +1658,32 @@
     <span class='doccomment'>/// Returns true if the `Value` is a Number. Returns false otherwise.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_number</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>Value</span>::<span class='ident'>I64</span>(_) <span class='op'>|</span> <span class='ident'>Value</span>::<span class='ident'>U64</span>(_) <span class='op'>|</span> <span class='ident'>Value</span>::<span class='ident'>F64</span>(_) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>Value</span>::<span class='ident'>I64</span>(_) <span class='op'>|</span> <span class='ident'>Value</span>::<span class='ident'>U64</span>(_) <span class='op'>|</span> <span class='ident'>Value</span>::<span class='ident'>F64</span>(_) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 
     <span class='doccomment'>/// Returns true if the `Value` is a i64. Returns false otherwise.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_i64</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>Value</span>::<span class='ident'>I64</span>(_) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>Value</span>::<span class='ident'>I64</span>(_) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 
     <span class='doccomment'>/// Returns true if the `Value` is a u64. Returns false otherwise.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_u64</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>Value</span>::<span class='ident'>U64</span>(_) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>Value</span>::<span class='ident'>U64</span>(_) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 
     <span class='doccomment'>/// Returns true if the `Value` is a f64. Returns false otherwise.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_f64</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>Value</span>::<span class='ident'>F64</span>(_) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>Value</span>::<span class='ident'>F64</span>(_) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 
@@ -2542,34 +2439,10 @@
         <span class='ident'>visitor</span>.<span class='ident'>visit_newtype_struct</span>(<span class='self'>self</span>)
     }
 
-    <span class='macro'>forward_to_deserialize</span><span class='macro'>!</span>{
-        <span class='ident'>deserialize_bool</span>();
-        <span class='ident'>deserialize_usize</span>();
-        <span class='ident'>deserialize_u8</span>();
-        <span class='ident'>deserialize_u16</span>();
-        <span class='ident'>deserialize_u32</span>();
-        <span class='ident'>deserialize_u64</span>();
-        <span class='ident'>deserialize_isize</span>();
-        <span class='ident'>deserialize_i8</span>();
-        <span class='ident'>deserialize_i16</span>();
-        <span class='ident'>deserialize_i32</span>();
-        <span class='ident'>deserialize_i64</span>();
-        <span class='ident'>deserialize_f32</span>();
-        <span class='ident'>deserialize_f64</span>();
-        <span class='ident'>deserialize_char</span>();
-        <span class='ident'>deserialize_str</span>();
-        <span class='ident'>deserialize_string</span>();
-        <span class='ident'>deserialize_unit</span>();
-        <span class='ident'>deserialize_seq</span>();
-        <span class='ident'>deserialize_seq_fixed_size</span>(<span class='ident'>len</span>: <span class='ident'>usize</span>);
-        <span class='ident'>deserialize_bytes</span>();
-        <span class='ident'>deserialize_map</span>();
-        <span class='ident'>deserialize_unit_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>);
-        <span class='ident'>deserialize_tuple_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>len</span>: <span class='ident'>usize</span>);
-        <span class='ident'>deserialize_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>fields</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>]);
-        <span class='ident'>deserialize_struct_field</span>();
-        <span class='ident'>deserialize_tuple</span>(<span class='ident'>len</span>: <span class='ident'>usize</span>);
-        <span class='ident'>deserialize_ignored_any</span>();
+    <span class='macro'>forward_to_deserialize</span><span class='macro'>!</span> {
+        <span class='ident'>bool</span> <span class='ident'>usize</span> <span class='ident'>u8</span> <span class='ident'>u16</span> <span class='ident'>u32</span> <span class='ident'>u64</span> <span class='ident'>isize</span> <span class='ident'>i8</span> <span class='ident'>i16</span> <span class='ident'>i32</span> <span class='ident'>i64</span> <span class='ident'>f32</span> <span class='ident'>f64</span> <span class='ident'>char</span> <span class='ident'>str</span> <span class='ident'>string</span>
+        <span class='ident'>unit</span> <span class='ident'>seq</span> <span class='ident'>seq_fixed_size</span> <span class='ident'>bytes</span> <span class='ident'>map</span> <span class='ident'>unit_struct</span> <span class='ident'>tuple_struct</span> <span class='kw'>struct</span>
+        <span class='ident'>struct_field</span> <span class='ident'>tuple</span> <span class='ident'>ignored_any</span>
     }
 }
 
@@ -2667,37 +2540,10 @@
         }
     }
 
-    <span class='macro'>forward_to_deserialize</span><span class='macro'>!</span>{
-        <span class='ident'>deserialize_bool</span>();
-        <span class='ident'>deserialize_usize</span>();
-        <span class='ident'>deserialize_u8</span>();
-        <span class='ident'>deserialize_u16</span>();
-        <span class='ident'>deserialize_u32</span>();
-        <span class='ident'>deserialize_u64</span>();
-        <span class='ident'>deserialize_isize</span>();
-        <span class='ident'>deserialize_i8</span>();
-        <span class='ident'>deserialize_i16</span>();
-        <span class='ident'>deserialize_i32</span>();
-        <span class='ident'>deserialize_i64</span>();
-        <span class='ident'>deserialize_f32</span>();
-        <span class='ident'>deserialize_f64</span>();
-        <span class='ident'>deserialize_char</span>();
-        <span class='ident'>deserialize_str</span>();
-        <span class='ident'>deserialize_string</span>();
-        <span class='ident'>deserialize_unit</span>();
-        <span class='ident'>deserialize_option</span>();
-        <span class='ident'>deserialize_seq</span>();
-        <span class='ident'>deserialize_seq_fixed_size</span>(<span class='ident'>len</span>: <span class='ident'>usize</span>);
-        <span class='ident'>deserialize_bytes</span>();
-        <span class='ident'>deserialize_map</span>();
-        <span class='ident'>deserialize_unit_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>);
-        <span class='ident'>deserialize_newtype_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>);
-        <span class='ident'>deserialize_tuple_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>len</span>: <span class='ident'>usize</span>);
-        <span class='ident'>deserialize_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>fields</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>]);
-        <span class='ident'>deserialize_struct_field</span>();
-        <span class='ident'>deserialize_tuple</span>(<span class='ident'>len</span>: <span class='ident'>usize</span>);
-        <span class='ident'>deserialize_enum</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>variants</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>]);
-        <span class='ident'>deserialize_ignored_any</span>();
+    <span class='macro'>forward_to_deserialize</span><span class='macro'>!</span> {
+        <span class='ident'>bool</span> <span class='ident'>usize</span> <span class='ident'>u8</span> <span class='ident'>u16</span> <span class='ident'>u32</span> <span class='ident'>u64</span> <span class='ident'>isize</span> <span class='ident'>i8</span> <span class='ident'>i16</span> <span class='ident'>i32</span> <span class='ident'>i64</span> <span class='ident'>f32</span> <span class='ident'>f64</span> <span class='ident'>char</span> <span class='ident'>str</span> <span class='ident'>string</span>
+        <span class='ident'>unit</span> <span class='ident'>option</span> <span class='ident'>seq</span> <span class='ident'>seq_fixed_size</span> <span class='ident'>bytes</span> <span class='ident'>map</span> <span class='ident'>unit_struct</span> <span class='ident'>newtype_struct</span>
+        <span class='ident'>tuple_struct</span> <span class='kw'>struct</span> <span class='ident'>struct_field</span> <span class='ident'>tuple</span> <span class='kw'>enum</span> <span class='ident'>ignored_any</span>
     }
 }
 
@@ -2797,36 +2643,11 @@
                 <span class='ident'>visitor</span>.<span class='ident'>visit_none</span>()
             }
 
-            <span class='macro'>forward_to_deserialize</span><span class='macro'>!</span>{
-                <span class='ident'>deserialize_bool</span>();
-                <span class='ident'>deserialize_usize</span>();
-                <span class='ident'>deserialize_u8</span>();
-                <span class='ident'>deserialize_u16</span>();
-                <span class='ident'>deserialize_u32</span>();
-                <span class='ident'>deserialize_u64</span>();
-                <span class='ident'>deserialize_isize</span>();
-                <span class='ident'>deserialize_i8</span>();
-                <span class='ident'>deserialize_i16</span>();
-                <span class='ident'>deserialize_i32</span>();
-                <span class='ident'>deserialize_i64</span>();
-                <span class='ident'>deserialize_f32</span>();
-                <span class='ident'>deserialize_f64</span>();
-                <span class='ident'>deserialize_char</span>();
-                <span class='ident'>deserialize_str</span>();
-                <span class='ident'>deserialize_string</span>();
-                <span class='ident'>deserialize_unit</span>();
-                <span class='ident'>deserialize_seq</span>();
-                <span class='ident'>deserialize_seq_fixed_size</span>(<span class='ident'>len</span>: <span class='ident'>usize</span>);
-                <span class='ident'>deserialize_bytes</span>();
-                <span class='ident'>deserialize_map</span>();
-                <span class='ident'>deserialize_unit_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>);
-                <span class='ident'>deserialize_newtype_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>);
-                <span class='ident'>deserialize_tuple_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>len</span>: <span class='ident'>usize</span>);
-                <span class='ident'>deserialize_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>fields</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>]);
-                <span class='ident'>deserialize_struct_field</span>();
-                <span class='ident'>deserialize_tuple</span>(<span class='ident'>len</span>: <span class='ident'>usize</span>);
-                <span class='ident'>deserialize_enum</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>variants</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>]);
-                <span class='ident'>deserialize_ignored_any</span>();
+            <span class='macro'>forward_to_deserialize</span><span class='macro'>!</span> {
+                <span class='ident'>bool</span> <span class='ident'>usize</span> <span class='ident'>u8</span> <span class='ident'>u16</span> <span class='ident'>u32</span> <span class='ident'>u64</span> <span class='ident'>isize</span> <span class='ident'>i8</span> <span class='ident'>i16</span> <span class='ident'>i32</span> <span class='ident'>i64</span> <span class='ident'>f32</span> <span class='ident'>f64</span> <span class='ident'>char</span> <span class='ident'>str</span>
+                <span class='ident'>string</span> <span class='ident'>unit</span> <span class='ident'>seq</span> <span class='ident'>seq_fixed_size</span> <span class='ident'>bytes</span> <span class='ident'>map</span> <span class='ident'>unit_struct</span>
+                <span class='ident'>newtype_struct</span> <span class='ident'>tuple_struct</span> <span class='kw'>struct</span> <span class='ident'>struct_field</span> <span class='ident'>tuple</span> <span class='kw'>enum</span>
+                <span class='ident'>ignored_any</span>
             }
         }
 
@@ -2849,37 +2670,10 @@
         <span class='ident'>visitor</span>.<span class='ident'>visit_map</span>(<span class='self'>self</span>)
     }
 
-    <span class='macro'>forward_to_deserialize</span><span class='macro'>!</span>{
-        <span class='ident'>deserialize_bool</span>();
-        <span class='ident'>deserialize_usize</span>();
-        <span class='ident'>deserialize_u8</span>();
-        <span class='ident'>deserialize_u16</span>();
-        <span class='ident'>deserialize_u32</span>();
-        <span class='ident'>deserialize_u64</span>();
-        <span class='ident'>deserialize_isize</span>();
-        <span class='ident'>deserialize_i8</span>();
-        <span class='ident'>deserialize_i16</span>();
-        <span class='ident'>deserialize_i32</span>();
-        <span class='ident'>deserialize_i64</span>();
-        <span class='ident'>deserialize_f32</span>();
-        <span class='ident'>deserialize_f64</span>();
-        <span class='ident'>deserialize_char</span>();
-        <span class='ident'>deserialize_str</span>();
-        <span class='ident'>deserialize_string</span>();
-        <span class='ident'>deserialize_unit</span>();
-        <span class='ident'>deserialize_option</span>();
-        <span class='ident'>deserialize_seq</span>();
-        <span class='ident'>deserialize_seq_fixed_size</span>(<span class='ident'>len</span>: <span class='ident'>usize</span>);
-        <span class='ident'>deserialize_bytes</span>();
-        <span class='ident'>deserialize_map</span>();
-        <span class='ident'>deserialize_unit_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>);
-        <span class='ident'>deserialize_newtype_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>);
-        <span class='ident'>deserialize_tuple_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>len</span>: <span class='ident'>usize</span>);
-        <span class='ident'>deserialize_struct</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>fields</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>]);
-        <span class='ident'>deserialize_struct_field</span>();
-        <span class='ident'>deserialize_tuple</span>(<span class='ident'>len</span>: <span class='ident'>usize</span>);
-        <span class='ident'>deserialize_enum</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>, <span class='ident'>variants</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>]);
-        <span class='ident'>deserialize_ignored_any</span>();
+    <span class='macro'>forward_to_deserialize</span><span class='macro'>!</span> {
+        <span class='ident'>bool</span> <span class='ident'>usize</span> <span class='ident'>u8</span> <span class='ident'>u16</span> <span class='ident'>u32</span> <span class='ident'>u64</span> <span class='ident'>isize</span> <span class='ident'>i8</span> <span class='ident'>i16</span> <span class='ident'>i32</span> <span class='ident'>i64</span> <span class='ident'>f32</span> <span class='ident'>f64</span> <span class='ident'>char</span> <span class='ident'>str</span> <span class='ident'>string</span>
+        <span class='ident'>unit</span> <span class='ident'>option</span> <span class='ident'>seq</span> <span class='ident'>seq_fixed_size</span> <span class='ident'>bytes</span> <span class='ident'>map</span> <span class='ident'>unit_struct</span> <span class='ident'>newtype_struct</span>
+        <span class='ident'>tuple_struct</span> <span class='kw'>struct</span> <span class='ident'>struct_field</span> <span class='ident'>tuple</span> <span class='kw'>enum</span> <span class='ident'>ignored_any</span>
     }
 }
 
@@ -2890,7 +2684,7 @@
 <span class='doccomment'>/// let val = to_value(&quot;foo&quot;);</span>
 <span class='doccomment'>/// assert_eq!(val.as_str(), Some(&quot;foo&quot;))</span>
 <span class='doccomment'>/// ```</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>to_value</span><span class='op'>&lt;</span><span class='ident'>T</span>: ?<span class='ident'>Sized</span><span class='op'>&gt;</span>(<span class='ident'>value</span>: <span class='kw-2'>&amp;</span><span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>Value</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>to_value</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>value</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>Value</span>
     <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>ser</span>::<span class='ident'>Serialize</span>,
 {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>ser</span> <span class='op'>=</span> <span class='ident'>Serializer</span>::<span class='ident'>new</span>();

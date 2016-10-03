@@ -638,7 +638,7 @@
                         <span class='ident'>value</span>.<span class='ident'>clone</span>(),
                         <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>context</span>,
                         <span class='ident'>keywords</span>,
-                        <span class='boolvalue'>true</span>
+                        <span class='bool-val'>true</span>
                     ));
 
                     <span class='ident'>tree</span>.<span class='ident'>insert</span>(<span class='ident'>idx</span>.<span class='ident'>to_string</span>().<span class='ident'>clone</span>(), <span class='ident'>scheme</span>);
@@ -715,7 +715,7 @@
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>schema_doesnt_compile_not_object</span>() {
-    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Schema</span>::<span class='ident'>compile</span>(<span class='ident'>Value</span>::<span class='ident'>Bool</span>(<span class='boolvalue'>true</span>), <span class='prelude-val'>None</span>, <span class='ident'>CompilationSettings</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>keywords</span>::<span class='ident'>default</span>(), <span class='boolvalue'>true</span>)).<span class='ident'>is_err</span>());
+    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>Schema</span>::<span class='ident'>compile</span>(<span class='ident'>Value</span>::<span class='ident'>Bool</span>(<span class='bool-val'>true</span>), <span class='prelude-val'>None</span>, <span class='ident'>CompilationSettings</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>keywords</span>::<span class='ident'>default</span>(), <span class='bool-val'>true</span>)).<span class='ident'>is_err</span>());
 }
 </pre>
 </section>

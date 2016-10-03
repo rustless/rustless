@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Response",""],["ResponseBody","A `Write`r of HTTP response bodies."]],"trait":[["WriteBody","A trait which writes the body of an HTTP response."]]});

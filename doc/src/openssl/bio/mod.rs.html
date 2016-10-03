@@ -185,7 +185,7 @@
 
         <span class='prelude-val'>Ok</span>(<span class='ident'>MemBio</span> {
             <span class='ident'>bio</span>: <span class='ident'>bio</span>,
-            <span class='ident'>owned</span>: <span class='boolvalue'>true</span>,
+            <span class='ident'>owned</span>: <span class='bool-val'>true</span>,
         })
     }
 
@@ -193,7 +193,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>borrowed</span>(<span class='ident'>bio</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>BIO</span>) <span class='op'>-&gt;</span> <span class='ident'>MemBio</span> {
         <span class='ident'>MemBio</span> {
             <span class='ident'>bio</span>: <span class='ident'>bio</span>,
-            <span class='ident'>owned</span>: <span class='boolvalue'>false</span>,
+            <span class='ident'>owned</span>: <span class='bool-val'>false</span>,
         }
     }
 
@@ -201,7 +201,7 @@
     <span class='doccomment'>/// Note that data ownership is lost and</span>
     <span class='doccomment'>/// should be managed manually</span>
     <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>unwrap</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>BIO</span> {
-        <span class='self'>self</span>.<span class='ident'>owned</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
+        <span class='self'>self</span>.<span class='ident'>owned</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
         <span class='self'>self</span>.<span class='ident'>bio</span>
     }
 

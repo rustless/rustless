@@ -94,9 +94,9 @@
 
 <span class='kw'>impl</span> <span class='kw'>super</span>::<span class='ident'>Validator</span> <span class='kw'>for</span> <span class='ident'>AllowedValues</span> {
     <span class='kw'>fn</span> <span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>val</span>: <span class='kw-2'>&amp;</span><span class='ident'>Value</span>, <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='kw'>super</span>::<span class='ident'>ValidatorResult</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>matched</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>matched</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
         <span class='kw'>for</span> <span class='ident'>allowed_value</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>allowed_values</span>.<span class='ident'>iter</span>() {
-            <span class='kw'>if</span> <span class='ident'>val</span> <span class='op'>==</span> <span class='ident'>allowed_value</span> { <span class='ident'>matched</span> <span class='op'>=</span> <span class='boolvalue'>true</span>; }
+            <span class='kw'>if</span> <span class='ident'>val</span> <span class='op'>==</span> <span class='ident'>allowed_value</span> { <span class='ident'>matched</span> <span class='op'>=</span> <span class='bool-val'>true</span>; }
         }
 
         <span class='kw'>if</span> <span class='ident'>matched</span> {

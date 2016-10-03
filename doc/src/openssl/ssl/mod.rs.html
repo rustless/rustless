@@ -1975,12 +1975,12 @@
 
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;dtlsv1&quot;</span>))]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_dtlsv1</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='boolvalue'>false</span>
+        <span class='bool-val'>false</span>
     }
 
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;dtlsv1_2&quot;</span>))]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_dtlsv1_2</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='boolvalue'>false</span>
+        <span class='bool-val'>false</span>
     }
 }
 
@@ -2834,7 +2834,7 @@
             <span class='kw'>if</span> <span class='ident'>ptr</span>.<span class='ident'>is_null</span>() {
                 <span class='prelude-val'>None</span>
             } <span class='kw'>else</span> {
-                <span class='prelude-val'>Some</span>(<span class='ident'>X509</span>::<span class='ident'>new</span>(<span class='ident'>ptr</span>, <span class='boolvalue'>true</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>X509</span>::<span class='ident'>new</span>(<span class='ident'>ptr</span>, <span class='bool-val'>true</span>))
             }
         }
     }

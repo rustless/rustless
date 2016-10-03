@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-84' class='srclink' href='../../src/iron/middleware/mod.rs.html#58-61' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-77' class='srclink' href='../../src/iron/middleware/mod.rs.html#58-61' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Handler: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> + 'static {
     fn <a href='#tymethod.handle' class='fnname'>handle</a>(&amp;self, &amp;mut <a class='struct' href='../../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;;
 }</pre><div class='docblock'><p><code>Handler</code>s are responsible for handling requests by creating Responses from Requests.</p>

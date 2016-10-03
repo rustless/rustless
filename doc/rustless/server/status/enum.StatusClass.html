@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-8027' class='srclink' href='../../../hyper/status/enum.StatusClass.html?gotosrc=8027' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-7980' class='srclink' href='../../../hyper/status/enum.StatusClass.html?gotosrc=7980' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum StatusClass {
     Informational,
     Success,
@@ -85,13 +85,13 @@ representation that explains the status.</p>
 <p>This can be used in cases where a status code’s meaning is unknown, also,
 to get the appropriate <em>category</em> of status.</p>
 </div><h2 class='variants'>Variants</h2>
-<table class='variants_table'><tr><td id='variant.Informational'><code>Informational</code></td><td><div class='docblock'><p>1xx (Informational): The request was received, continuing process</p>
-</div></td><td></td></tr><tr><td id='variant.Success'><code>Success</code></td><td><div class='docblock'><p>2xx (Success): The request was successfully received, understood, and accepted</p>
-</div></td><td></td></tr><tr><td id='variant.Redirection'><code>Redirection</code></td><td><div class='docblock'><p>3xx (Redirection): Further action needs to be taken in order to complete the request</p>
-</div></td><td></td></tr><tr><td id='variant.ClientError'><code>ClientError</code></td><td><div class='docblock'><p>4xx (Client Error): The request contains bad syntax or cannot be fulfilled</p>
-</div></td><td></td></tr><tr><td id='variant.ServerError'><code>ServerError</code></td><td><div class='docblock'><p>5xx (Server Error): The server failed to fulfill an apparently valid request</p>
-</div></td><td></td></tr><tr><td id='variant.NoClass'><code>NoClass</code></td><td><div class='docblock'><p>A status code lower than 100 or higher than 599. These codes do no belong to any class.</p>
-</div></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='enum' href='../../../rustless/server/status/enum.StatusClass.html' title='rustless::server::status::StatusClass'>StatusClass</a></code></span><span class='out-of-band'></span></h3>
+<span id='variant.Informational' class='variant'><code>Informational</code></span><div class='docblock'><p>1xx (Informational): The request was received, continuing process</p>
+</div><span id='variant.Success' class='variant'><code>Success</code></span><div class='docblock'><p>2xx (Success): The request was successfully received, understood, and accepted</p>
+</div><span id='variant.Redirection' class='variant'><code>Redirection</code></span><div class='docblock'><p>3xx (Redirection): Further action needs to be taken in order to complete the request</p>
+</div><span id='variant.ClientError' class='variant'><code>ClientError</code></span><div class='docblock'><p>4xx (Client Error): The request contains bad syntax or cannot be fulfilled</p>
+</div><span id='variant.ServerError' class='variant'><code>ServerError</code></span><div class='docblock'><p>5xx (Server Error): The server failed to fulfill an apparently valid request</p>
+</div><span id='variant.NoClass' class='variant'><code>NoClass</code></span><div class='docblock'><p>A status code lower than 100 or higher than 599. These codes do no belong to any class.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='enum' href='../../../rustless/server/status/enum.StatusClass.html' title='rustless::server::status::StatusClass'>StatusClass</a></code></span><span class='out-of-band'></span></h3>
 <div class='impl-items'><h4 id='method.default_code' class='method'><code>fn <a href='#method.default_code' class='fnname'>default_code</a>(&amp;self) -&gt; <a class='enum' href='../../../rustless/server/status/enum.StatusCode.html' title='rustless::server::status::StatusCode'>StatusCode</a></code></h4>
 <div class='docblock'><p>Get the default status code for the class.</p>
 
@@ -138,7 +138,7 @@ representation that explains the status.</p>
 <p>All status codes that do not map to an existing status class are matched
 by a <code>NoClass</code>, variant that resolves to 200 (Ok) as default code.
 This is a common handling for unknown status codes in major browsers.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusClass.html' title='rustless::server::status::StatusClass'>StatusClass</a></code></span><span class='out-of-band'></span></h3>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusClass.html' title='rustless::server::status::StatusClass'>StatusClass</a></code></span><span class='out-of-band'></span></h3>
 <div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusClass.html' title='rustless::server::status::StatusClass'>StatusClass</a></code></span><span class='out-of-band'></span></h3>
 <div class='impl-items'><h4 id='method.cmp' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html#tymethod.cmp' class='fnname'>cmp</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../../../rustless/server/status/enum.StatusClass.html' title='rustless::server::status::StatusClass'>StatusClass</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a></code></h4>
 </div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html' title='core::cmp::PartialOrd'>PartialOrd</a>&lt;<a class='enum' href='../../../rustless/server/status/enum.StatusClass.html' title='rustless::server::status::StatusClass'>StatusClass</a>&gt; for <a class='enum' href='../../../rustless/server/status/enum.StatusClass.html' title='rustless::server::status::StatusClass'>StatusClass</a></code></span><span class='out-of-band'></span></h3>
@@ -152,7 +152,7 @@ This is a common handling for unknown status codes in major browsers.</p>
 </div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
 <div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../../rustless/server/status/enum.StatusClass.html' title='rustless::server::status::StatusClass'>StatusClass</a></code></span><span class='out-of-band'></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>

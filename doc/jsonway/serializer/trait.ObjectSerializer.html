@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-185' class='srclink' href='../../src/jsonway/serializer.rs.html#89-107' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-182' class='srclink' href='../../src/jsonway/serializer.rs.html#89-107' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait ObjectSerializer&lt;T&gt; {
     fn <a href='#tymethod.build' class='fnname'>build</a>(&amp;self, &amp;T, &amp;mut <a class='struct' href='../../jsonway/object_builder/struct.ObjectBuilder.html' title='jsonway::object_builder::ObjectBuilder'>ObjectBuilder</a>);
 
@@ -73,7 +73,7 @@
 }
 
 <span class='kw'>let</span> <span class='ident'>jedi</span> <span class='op'>=</span> <span class='ident'>Jedi</span> { <span class='ident'>name</span>: <span class='string'>&quot;Saes Rrogon&quot;</span>.<span class='ident'>to_string</span>() };
-<span class='kw'>let</span> <span class='ident'>json</span> <span class='op'>=</span> <span class='ident'>JediSerializer</span>.<span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='ident'>jedi</span>, <span class='boolvalue'>true</span>);
+<span class='kw'>let</span> <span class='ident'>json</span> <span class='op'>=</span> <span class='ident'>JediSerializer</span>.<span class='ident'>serialize</span>(<span class='kw-2'>&amp;</span><span class='ident'>jedi</span>, <span class='bool-val'>true</span>);
 
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(
     <span class='ident'>json</span>.<span class='ident'>find_path</span>(<span class='kw-2'>&amp;</span>[

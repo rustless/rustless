@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-17' class='srclink' href='../src/cookie/jar.rs.html#37-39' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-16' class='srclink' href='../src/cookie/jar.rs.html#37-39' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct CookieJar&lt;'a&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>A jar of cookies for managing a session</p>
@@ -64,7 +64,7 @@
 <span class='comment'>// Remove the added cookie</span>
 <span class='ident'>c</span>.<span class='ident'>remove</span>(<span class='string'>&quot;key&quot;</span>);
 </pre>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='struct' href='../cookie/struct.CookieJar.html' title='cookie::CookieJar'>CookieJar</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-49' class='srclink' href='../src/cookie/jar.rs.html#90-319' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='struct' href='../cookie/struct.CookieJar.html' title='cookie::CookieJar'>CookieJar</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-48' class='srclink' href='../src/cookie/jar.rs.html#90-319' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(key: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='struct' href='../cookie/struct.CookieJar.html' title='cookie::CookieJar'>CookieJar</a>&lt;'static&gt;</code></h4>
 <div class='docblock'><p>Creates a new empty cookie jar with the given signing key.</p>
 
@@ -87,6 +87,39 @@ borrowed jars, modifying the cookie as it goes along.</p>
 
 <p>The cookie is subject to modification by any of the child cookie jars
 that are currently borrowed. A copy of the cookie is returned.</p>
+</div><h4 id='method.signed' class='method'><code>fn <a href='#method.signed' class='fnname'>signed</a>&lt;'b&gt;(&amp;'b self) -&gt; <a class='struct' href='../cookie/struct.CookieJar.html' title='cookie::CookieJar'>CookieJar</a>&lt;'b&gt;</code></h4>
+<div class='docblock'><p>Creates a child signed cookie jar.</p>
+
+<p>All cookies read from the child jar will require a valid signature and
+all cookies written will be signed automatically.</p>
+
+<h1 id='example-1' class='section-header'><a href='#example-1'>Example</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>CookieJar</span>::<span class='ident'>new</span>(<span class='string'>b&quot;f8f9eaf1ecdedff5e5b749c58115441e&quot;</span>);
+
+<span class='comment'>// Add a signed cookie to the jar</span>
+<span class='ident'>c</span>.<span class='ident'>signed</span>().<span class='ident'>add</span>(<span class='ident'>Cookie</span>::<span class='ident'>new</span>(<span class='string'>&quot;key&quot;</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;value&quot;</span>.<span class='ident'>to_string</span>()));
+
+<span class='comment'>// Add a permanently signed cookie to the jar</span>
+<span class='ident'>c</span>.<span class='ident'>permanent</span>().<span class='ident'>signed</span>()
+ .<span class='ident'>add</span>(<span class='ident'>Cookie</span>::<span class='ident'>new</span>(<span class='string'>&quot;key&quot;</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;value&quot;</span>.<span class='ident'>to_string</span>()));</pre>
+</div><h4 id='method.encrypted' class='method'><code>fn <a href='#method.encrypted' class='fnname'>encrypted</a>&lt;'b&gt;(&amp;'b self) -&gt; <a class='struct' href='../cookie/struct.CookieJar.html' title='cookie::CookieJar'>CookieJar</a>&lt;'b&gt;</code></h4>
+<div class='docblock'><p>Creates a child encrypted cookie jar.</p>
+
+<p>All cookies read from the child jar must be encrypted and signed by a
+valid key and all cookies written will be encrypted and signed
+automatically.</p>
+
+<h1 id='example-2' class='section-header'><a href='#example-2'>Example</a></h1>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>CookieJar</span>::<span class='ident'>new</span>(<span class='string'>b&quot;f8f9eaf1ecdedff5e5b749c58115441e&quot;</span>);
+
+<span class='comment'>// Add a signed and encrypted cookie to the jar</span>
+<span class='ident'>c</span>.<span class='ident'>encrypted</span>().<span class='ident'>add</span>(<span class='ident'>Cookie</span>::<span class='ident'>new</span>(<span class='string'>&quot;key&quot;</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;value&quot;</span>.<span class='ident'>to_string</span>()));
+
+<span class='comment'>// Add a permanently signed and encrypted cookie to the jar</span>
+<span class='ident'>c</span>.<span class='ident'>permanent</span>().<span class='ident'>encrypted</span>()
+ .<span class='ident'>add</span>(<span class='ident'>Cookie</span>::<span class='ident'>new</span>(<span class='string'>&quot;key&quot;</span>.<span class='ident'>to_string</span>(), <span class='string'>&quot;value&quot;</span>.<span class='ident'>to_string</span>()));</pre>
 </div><h4 id='method.permanent' class='method'><code>fn <a href='#method.permanent' class='fnname'>permanent</a>&lt;'b&gt;(&amp;'b self) -&gt; <a class='struct' href='../cookie/struct.CookieJar.html' title='cookie::CookieJar'>CookieJar</a>&lt;'b&gt;</code></h4>
 <div class='docblock'><p>Creates a child jar for permanent cookie storage.</p>
 

@@ -97,18 +97,18 @@
 
         <span class='comment'>// TODO we need some quicker algorithm for this</span>
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>unique</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>unique</span> <span class='op'>=</span> <span class='bool-val'>true</span>;
         <span class='lifetime'>&#39;main</span>: <span class='kw'>for</span> (<span class='ident'>idx</span>, <span class='ident'>item_i</span>) <span class='kw'>in</span> <span class='ident'>array</span>.<span class='ident'>iter</span>().<span class='ident'>enumerate</span>() {
             <span class='kw'>for</span> <span class='ident'>item_j</span> <span class='kw'>in</span> <span class='ident'>array</span>[..<span class='ident'>idx</span>].<span class='ident'>iter</span>() {
                 <span class='kw'>if</span> <span class='ident'>item_i</span> <span class='op'>==</span> <span class='ident'>item_j</span> {
-                    <span class='ident'>unique</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
+                    <span class='ident'>unique</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
                     <span class='kw'>break</span> <span class='lifetime'>&#39;main</span>;
                 }
             }
 
             <span class='kw'>for</span> <span class='ident'>item_j</span> <span class='kw'>in</span> <span class='ident'>array</span>[(<span class='ident'>idx</span> <span class='op'>+</span> <span class='number'>1</span>)..].<span class='ident'>iter</span>() {
                 <span class='kw'>if</span> <span class='ident'>item_i</span> <span class='op'>==</span> <span class='ident'>item_j</span> {
-                    <span class='ident'>unique</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
+                    <span class='ident'>unique</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
                     <span class='kw'>break</span> <span class='lifetime'>&#39;main</span>;
                 }
             }

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.1/src/read.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.2/src/read.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>read.rs.html -- source</title>
@@ -867,10 +867,10 @@
 
 <span class='comment'>//////////////////////////////////////////////////////////////////////////////</span>
 
-<span class='kw'>const</span> <span class='ident'>CT</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolvalue'>true</span>; <span class='comment'>// control character \x00...\x1F</span>
-<span class='kw'>const</span> <span class='ident'>QU</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolvalue'>true</span>; <span class='comment'>// quote \x22</span>
-<span class='kw'>const</span> <span class='ident'>BS</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolvalue'>true</span>; <span class='comment'>// backslash \x5C</span>
-<span class='kw'>const</span> <span class='ident'>O</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolvalue'>false</span>; <span class='comment'>// allow unescaped</span>
+<span class='kw'>const</span> <span class='ident'>CT</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='bool-val'>true</span>; <span class='comment'>// control character \x00...\x1F</span>
+<span class='kw'>const</span> <span class='ident'>QU</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='bool-val'>true</span>; <span class='comment'>// quote \x22</span>
+<span class='kw'>const</span> <span class='ident'>BS</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='bool-val'>true</span>; <span class='comment'>// backslash \x5C</span>
+<span class='kw'>const</span> <span class='ident'>O</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='bool-val'>false</span>; <span class='comment'>// allow unescaped</span>
 
 <span class='comment'>// Lookup table of bytes that must be escaped. A value of true at index i means</span>
 <span class='comment'>// that byte i requires an escape sequence in the input.</span>
@@ -986,7 +986,7 @@
 
 <span class='kw'>fn</span> <span class='ident'>decode_hex_escape</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span>(<span class='ident'>read</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span> {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>i</span> <span class='op'>=</span> <span class='number'>0</span>;
-    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0u16</span>;
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0</span>;
     <span class='kw'>while</span> <span class='ident'>i</span> <span class='op'>&lt;</span> <span class='number'>4</span> <span class='op'>&amp;&amp;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read</span>.<span class='ident'>peek</span>()).<span class='ident'>is_some</span>() {
         <span class='ident'>n</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read</span>.<span class='ident'>next</span>()).<span class='ident'>unwrap_or</span>(<span class='string'>b&#39;\x00&#39;</span>) {
             <span class='ident'>c</span> @ <span class='string'>b&#39;0&#39;</span>...<span class='string'>b&#39;9&#39;</span> <span class='op'>=&gt;</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='number'>16_u16</span> <span class='op'>+</span> ((<span class='ident'>c</span> <span class='kw'>as</span> <span class='ident'>u16</span>) <span class='op'>-</span> (<span class='string'>b&#39;0&#39;</span> <span class='kw'>as</span> <span class='ident'>u16</span>)),

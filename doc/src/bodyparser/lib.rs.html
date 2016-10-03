@@ -260,10 +260,10 @@
     <span class='kw'>fn</span> <span class='ident'>eval</span>(<span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>, <span class='ident'>BodyError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>need_read</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>headers</span>::<span class='ident'>ContentType</span><span class='op'>&gt;</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>header</span><span class='op'>|</span> {
             <span class='kw'>match</span> <span class='op'>*</span><span class='op'>*</span><span class='ident'>header</span> {
-                <span class='ident'>mime</span>::<span class='ident'>Mime</span>(<span class='ident'>mime</span>::<span class='ident'>TopLevel</span>::<span class='ident'>Multipart</span>, <span class='ident'>mime</span>::<span class='ident'>SubLevel</span>::<span class='ident'>FormData</span>, _) <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
-                _ <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>
+                <span class='ident'>mime</span>::<span class='ident'>Mime</span>(<span class='ident'>mime</span>::<span class='ident'>TopLevel</span>::<span class='ident'>Multipart</span>, <span class='ident'>mime</span>::<span class='ident'>SubLevel</span>::<span class='ident'>FormData</span>, _) <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
+                _ <span class='op'>=&gt;</span> <span class='bool-val'>true</span>
             }
-        }).<span class='ident'>unwrap_or</span>(<span class='boolvalue'>false</span>);
+        }).<span class='ident'>unwrap_or</span>(<span class='bool-val'>false</span>);
 
         <span class='kw'>if</span> <span class='ident'>need_read</span> {
             <span class='kw'>let</span> <span class='ident'>max_length</span> <span class='op'>=</span> <span class='ident'>req</span>
