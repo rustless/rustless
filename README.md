@@ -72,7 +72,7 @@ use hyper::status::StatusCode;
 use rustless::{
     Application, Api, Nesting, Versioning
 };
-use serialize::json::ToJson;
+use rustless::json::ToJson;
 
 fn main() {
 
@@ -106,7 +106,7 @@ fn main() {
                     // Valico settings for endpoint params
                     endpoint.params(|params| {
                         params.req_typed("user_id", json_dsl::u64());
-                        params.req_typed("name", json_dsl::string())
+                        params.req_typed("id", json_dsl::string())
                     });
 
                     endpoint.handle(|client, params| {
