@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-syntax-0.3.5/src/literals.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-syntax-0.3.7/src/literals.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>literals.rs.html -- source</title>
@@ -1459,6 +1459,72 @@
 <span id="1415">1415</span>
 <span id="1416">1416</span>
 <span id="1417">1417</span>
+<span id="1418">1418</span>
+<span id="1419">1419</span>
+<span id="1420">1420</span>
+<span id="1421">1421</span>
+<span id="1422">1422</span>
+<span id="1423">1423</span>
+<span id="1424">1424</span>
+<span id="1425">1425</span>
+<span id="1426">1426</span>
+<span id="1427">1427</span>
+<span id="1428">1428</span>
+<span id="1429">1429</span>
+<span id="1430">1430</span>
+<span id="1431">1431</span>
+<span id="1432">1432</span>
+<span id="1433">1433</span>
+<span id="1434">1434</span>
+<span id="1435">1435</span>
+<span id="1436">1436</span>
+<span id="1437">1437</span>
+<span id="1438">1438</span>
+<span id="1439">1439</span>
+<span id="1440">1440</span>
+<span id="1441">1441</span>
+<span id="1442">1442</span>
+<span id="1443">1443</span>
+<span id="1444">1444</span>
+<span id="1445">1445</span>
+<span id="1446">1446</span>
+<span id="1447">1447</span>
+<span id="1448">1448</span>
+<span id="1449">1449</span>
+<span id="1450">1450</span>
+<span id="1451">1451</span>
+<span id="1452">1452</span>
+<span id="1453">1453</span>
+<span id="1454">1454</span>
+<span id="1455">1455</span>
+<span id="1456">1456</span>
+<span id="1457">1457</span>
+<span id="1458">1458</span>
+<span id="1459">1459</span>
+<span id="1460">1460</span>
+<span id="1461">1461</span>
+<span id="1462">1462</span>
+<span id="1463">1463</span>
+<span id="1464">1464</span>
+<span id="1465">1465</span>
+<span id="1466">1466</span>
+<span id="1467">1467</span>
+<span id="1468">1468</span>
+<span id="1469">1469</span>
+<span id="1470">1470</span>
+<span id="1471">1471</span>
+<span id="1472">1472</span>
+<span id="1473">1473</span>
+<span id="1474">1474</span>
+<span id="1475">1475</span>
+<span id="1476">1476</span>
+<span id="1477">1477</span>
+<span id="1478">1478</span>
+<span id="1479">1479</span>
+<span id="1480">1480</span>
+<span id="1481">1481</span>
+<span id="1482">1482</span>
+<span id="1483">1483</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -1561,6 +1627,21 @@
         <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>lits</span>
     }
 
+    <span class='doccomment'>/// Returns the length of the smallest literal.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Returns None is there are no literals in the set.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>min_len</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>min</span> <span class='op'>=</span> <span class='prelude-val'>None</span>;
+        <span class='kw'>for</span> <span class='ident'>lit</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>lits</span> {
+            <span class='kw'>match</span> <span class='ident'>min</span> {
+                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='ident'>min</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>lit</span>.<span class='ident'>len</span>()),
+                <span class='prelude-val'>Some</span>(<span class='ident'>m</span>) <span class='kw'>if</span> <span class='ident'>lit</span>.<span class='ident'>len</span>() <span class='op'>&lt;</span> <span class='ident'>m</span> <span class='op'>=&gt;</span> <span class='ident'>min</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>lit</span>.<span class='ident'>len</span>()),
+                _ <span class='op'>=&gt;</span> {}
+            }
+        }
+        <span class='ident'>min</span>
+    }
+
     <span class='doccomment'>/// Returns true if all members in this set are complete.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>all_complete</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>lits</span>.<span class='ident'>is_empty</span>() <span class='op'>&amp;&amp;</span> <span class='self'>self</span>.<span class='ident'>lits</span>.<span class='ident'>iter</span>().<span class='ident'>all</span>(<span class='op'>|</span><span class='ident'>l</span><span class='op'>|</span> <span class='op'>!</span><span class='ident'>l</span>.<span class='ident'>is_cut</span>())
@@ -1624,6 +1705,30 @@
                    .<span class='ident'>count</span>());
         }
         <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>lits</span>[<span class='number'>0</span>][<span class='self'>self</span>.<span class='ident'>lits</span>[<span class='number'>0</span>].<span class='ident'>len</span>() <span class='op'>-</span> <span class='ident'>len</span>..]
+    }
+
+    <span class='doccomment'>/// Returns a new set of literals with the given number of bytes trimmed</span>
+    <span class='doccomment'>/// from the suffix of each literal.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// If any literal would be cut out completely by trimming, then None is</span>
+    <span class='doccomment'>/// returned.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Any duplicates that are created as a result of this transformation are</span>
+    <span class='doccomment'>/// removed.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>trim_suffix</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>num_bytes</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Literals</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>min_len</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>len</span><span class='op'>|</span> <span class='ident'>len</span> <span class='op'>&lt;=</span> <span class='ident'>num_bytes</span>).<span class='ident'>unwrap_or</span>(<span class='bool-val'>true</span>) {
+            <span class='kw'>return</span> <span class='prelude-val'>None</span>;
+        }
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>new</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>to_empty</span>();
+        <span class='kw'>for</span> <span class='kw-2'>mut</span> <span class='ident'>lit</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>lits</span>.<span class='ident'>iter</span>().<span class='ident'>cloned</span>() {
+            <span class='kw'>let</span> <span class='ident'>new_len</span> <span class='op'>=</span> <span class='ident'>lit</span>.<span class='ident'>len</span>() <span class='op'>-</span> <span class='ident'>num_bytes</span>;
+            <span class='ident'>lit</span>.<span class='ident'>truncate</span>(<span class='ident'>new_len</span>);
+            <span class='ident'>lit</span>.<span class='ident'>cut</span>();
+            <span class='ident'>new</span>.<span class='ident'>lits</span>.<span class='ident'>push</span>(<span class='ident'>lit</span>);
+        }
+        <span class='ident'>new</span>.<span class='ident'>lits</span>.<span class='ident'>sort</span>();
+        <span class='ident'>new</span>.<span class='ident'>lits</span>.<span class='ident'>dedup</span>();
+        <span class='prelude-val'>Some</span>(<span class='ident'>new</span>)
     }
 
     <span class='doccomment'>/// Returns a new set of prefixes of this set of literals that are</span>
@@ -2804,6 +2909,33 @@
     <span class='macro'>test_unamb</span><span class='macro'>!</span>(<span class='ident'>unambiguous11</span>,
                 <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>M</span>(<span class='string'>&quot;zazb&quot;</span>), <span class='ident'>M</span>(<span class='string'>&quot;azb&quot;</span>)], <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>C</span>(<span class='string'>&quot;azb&quot;</span>), <span class='ident'>C</span>(<span class='string'>&quot;z&quot;</span>)]);
     <span class='macro'>test_unamb</span><span class='macro'>!</span>(<span class='ident'>unambiguous12</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>M</span>(<span class='string'>&quot;foo&quot;</span>), <span class='ident'>C</span>(<span class='string'>&quot;foo&quot;</span>)], <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>C</span>(<span class='string'>&quot;foo&quot;</span>)]);
+
+    <span class='comment'>// ************************************************************************</span>
+    <span class='comment'>// Tests for suffix trimming.</span>
+    <span class='comment'>// ************************************************************************</span>
+    <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>test_trim</span> {
+        (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trim</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>given</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>expected</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
+            <span class='attribute'>#[<span class='ident'>test</span>]</span>
+            <span class='kw'>fn</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>() {
+                <span class='kw'>let</span> <span class='ident'>given</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Lit</span><span class='op'>&gt;</span> <span class='op'>=</span>
+                    <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>given</span>
+                    .<span class='ident'>into_iter</span>()
+                    .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>ul</span><span class='op'>|</span> {
+                        <span class='kw'>let</span> <span class='ident'>cut</span> <span class='op'>=</span> <span class='ident'>ul</span>.<span class='ident'>is_cut</span>();
+                        <span class='ident'>Lit</span> { <span class='ident'>v</span>: <span class='ident'>ul</span>.<span class='ident'>v</span>.<span class='ident'>into_bytes</span>(), <span class='ident'>cut</span>: <span class='ident'>cut</span> }
+                    })
+                    .<span class='ident'>collect</span>();
+                <span class='kw'>let</span> <span class='ident'>lits</span> <span class='op'>=</span> <span class='ident'>create_lits</span>(<span class='ident'>given</span>);
+                <span class='kw'>let</span> <span class='ident'>got</span> <span class='op'>=</span> <span class='ident'>lits</span>.<span class='ident'>trim_suffix</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>trim</span>).<span class='ident'>unwrap</span>();
+                <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>expected</span>, <span class='ident'>escape_lits</span>(<span class='ident'>got</span>.<span class='ident'>literals</span>()));
+            }
+        }
+    }
+
+    <span class='macro'>test_trim</span><span class='macro'>!</span>(<span class='ident'>trim1</span>, <span class='number'>1</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>M</span>(<span class='string'>&quot;ab&quot;</span>), <span class='ident'>M</span>(<span class='string'>&quot;yz&quot;</span>)], <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>C</span>(<span class='string'>&quot;a&quot;</span>), <span class='ident'>C</span>(<span class='string'>&quot;y&quot;</span>)]);
+    <span class='macro'>test_trim</span><span class='macro'>!</span>(<span class='ident'>trim2</span>, <span class='number'>1</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>M</span>(<span class='string'>&quot;abc&quot;</span>), <span class='ident'>M</span>(<span class='string'>&quot;abd&quot;</span>)], <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>C</span>(<span class='string'>&quot;ab&quot;</span>)]);
+    <span class='macro'>test_trim</span><span class='macro'>!</span>(<span class='ident'>trim3</span>, <span class='number'>2</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>M</span>(<span class='string'>&quot;abc&quot;</span>), <span class='ident'>M</span>(<span class='string'>&quot;abd&quot;</span>)], <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>C</span>(<span class='string'>&quot;a&quot;</span>)]);
+    <span class='macro'>test_trim</span><span class='macro'>!</span>(<span class='ident'>trim4</span>, <span class='number'>2</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>M</span>(<span class='string'>&quot;abc&quot;</span>), <span class='ident'>M</span>(<span class='string'>&quot;ghij&quot;</span>)], <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>C</span>(<span class='string'>&quot;a&quot;</span>), <span class='ident'>C</span>(<span class='string'>&quot;gh&quot;</span>)]);
 
     <span class='comment'>// ************************************************************************</span>
     <span class='comment'>// Tests for longest common prefix.</span>

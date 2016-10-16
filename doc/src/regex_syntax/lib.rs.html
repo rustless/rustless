@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-syntax-0.3.5/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-syntax-0.3.7/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -2044,6 +2044,47 @@
 <span id="2000">2000</span>
 <span id="2001">2001</span>
 <span id="2002">2002</span>
+<span id="2003">2003</span>
+<span id="2004">2004</span>
+<span id="2005">2005</span>
+<span id="2006">2006</span>
+<span id="2007">2007</span>
+<span id="2008">2008</span>
+<span id="2009">2009</span>
+<span id="2010">2010</span>
+<span id="2011">2011</span>
+<span id="2012">2012</span>
+<span id="2013">2013</span>
+<span id="2014">2014</span>
+<span id="2015">2015</span>
+<span id="2016">2016</span>
+<span id="2017">2017</span>
+<span id="2018">2018</span>
+<span id="2019">2019</span>
+<span id="2020">2020</span>
+<span id="2021">2021</span>
+<span id="2022">2022</span>
+<span id="2023">2023</span>
+<span id="2024">2024</span>
+<span id="2025">2025</span>
+<span id="2026">2026</span>
+<span id="2027">2027</span>
+<span id="2028">2028</span>
+<span id="2029">2029</span>
+<span id="2030">2030</span>
+<span id="2031">2031</span>
+<span id="2032">2032</span>
+<span id="2033">2033</span>
+<span id="2034">2034</span>
+<span id="2035">2035</span>
+<span id="2036">2036</span>
+<span id="2037">2037</span>
+<span id="2038">2038</span>
+<span id="2039">2039</span>
+<span id="2040">2040</span>
+<span id="2041">2041</span>
+<span id="2042">2042</span>
+<span id="2043">2043</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2014-2015 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -2304,7 +2345,7 @@ assert_eq!(err.kind(), &amp;ErrorKind::UnclosedParen);
 
     <span class='doccomment'>/// The end character of the range.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// This must be greater than or equal to `end`.</span>
+    <span class='doccomment'>/// This must be greater than or equal to `start`.</span>
     <span class='kw'>pub</span> <span class='ident'>end</span>: <span class='ident'>char</span>,
 }
 
@@ -3277,6 +3318,22 @@ assert_eq!(err.kind(), &amp;ErrorKind::UnclosedParen);
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;(?u:[&quot;</span>));
         <span class='kw'>for</span> <span class='ident'>range</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>iter</span>() {
+            <span class='kw'>if</span> <span class='ident'>range</span>.<span class='ident'>start</span> <span class='op'>==</span> <span class='string'>&#39;-&#39;</span> <span class='op'>||</span> <span class='ident'>range</span>.<span class='ident'>end</span> <span class='op'>==</span> <span class='string'>&#39;-&#39;</span> {
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;-&quot;</span>));
+                <span class='kw'>break</span>;
+            }
+        }
+        <span class='kw'>for</span> <span class='ident'>range</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>iter</span>() {
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>range</span> <span class='op'>=</span> <span class='op'>*</span><span class='ident'>range</span>;
+            <span class='kw'>if</span> <span class='ident'>range</span>.<span class='ident'>start</span> <span class='op'>==</span> <span class='string'>&#39;-&#39;</span> {
+                <span class='ident'>range</span>.<span class='ident'>start</span> <span class='op'>=</span> ((<span class='ident'>range</span>.<span class='ident'>start</span> <span class='kw'>as</span> <span class='ident'>u8</span>) <span class='op'>+</span> <span class='number'>1</span>) <span class='kw'>as</span> <span class='ident'>char</span>;
+            }
+            <span class='kw'>if</span> <span class='ident'>range</span>.<span class='ident'>end</span> <span class='op'>==</span> <span class='string'>&#39;-&#39;</span> {
+                <span class='ident'>range</span>.<span class='ident'>end</span> <span class='op'>=</span> ((<span class='ident'>range</span>.<span class='ident'>end</span> <span class='kw'>as</span> <span class='ident'>u8</span>) <span class='op'>-</span> <span class='number'>1</span>) <span class='kw'>as</span> <span class='ident'>char</span>;
+            }
+            <span class='kw'>if</span> <span class='ident'>range</span>.<span class='ident'>start</span> <span class='op'>&gt;</span> <span class='ident'>range</span>.<span class='ident'>end</span> {
+                <span class='kw'>continue</span>;
+            }
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>range</span>));
         }
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;])&quot;</span>));
@@ -3294,6 +3351,22 @@ assert_eq!(err.kind(), &amp;ErrorKind::UnclosedParen);
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;(?-u:[&quot;</span>));
         <span class='kw'>for</span> <span class='ident'>range</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>iter</span>() {
+            <span class='kw'>if</span> <span class='ident'>range</span>.<span class='ident'>start</span> <span class='op'>==</span> <span class='string'>b&#39;-&#39;</span> <span class='op'>||</span> <span class='ident'>range</span>.<span class='ident'>end</span> <span class='op'>==</span> <span class='string'>b&#39;-&#39;</span> {
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;-&quot;</span>));
+                <span class='kw'>break</span>;
+            }
+        }
+        <span class='kw'>for</span> <span class='ident'>range</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>iter</span>() {
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>range</span> <span class='op'>=</span> <span class='op'>*</span><span class='ident'>range</span>;
+            <span class='kw'>if</span> <span class='ident'>range</span>.<span class='ident'>start</span> <span class='op'>==</span> <span class='string'>b&#39;-&#39;</span> {
+                <span class='ident'>range</span>.<span class='ident'>start</span> <span class='op'>+=</span> <span class='number'>1</span>;
+            }
+            <span class='kw'>if</span> <span class='ident'>range</span>.<span class='ident'>end</span> <span class='op'>==</span> <span class='string'>b&#39;-&#39;</span> {
+                <span class='ident'>range</span>.<span class='ident'>start</span> <span class='op'>-=</span> <span class='number'>1</span>;
+            }
+            <span class='kw'>if</span> <span class='ident'>range</span>.<span class='ident'>start</span> <span class='op'>&gt;</span> <span class='ident'>range</span>.<span class='ident'>end</span> {
+                <span class='kw'>continue</span>;
+            }
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>range</span>));
         }
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;])&quot;</span>));
@@ -4045,6 +4118,15 @@ assert_eq!(err.kind(), &amp;ErrorKind::UnclosedParen);
         <span class='kw'>let</span> <span class='ident'>cls</span> <span class='op'>=</span> <span class='ident'>bclass</span>(<span class='kw-2'>&amp;</span>[(<span class='string'>b&#39;@&#39;</span>, <span class='string'>b&#39;@&#39;</span>)]);
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cls</span>.<span class='ident'>clone</span>().<span class='ident'>canonicalize</span>(), <span class='ident'>bclass</span>(<span class='kw-2'>&amp;</span>[(<span class='string'>b&#39;@&#39;</span>, <span class='string'>b&#39;@&#39;</span>)]));
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cls</span>.<span class='ident'>case_fold</span>(), <span class='ident'>bclass</span>(<span class='kw-2'>&amp;</span>[(<span class='string'>b&#39;@&#39;</span>, <span class='string'>b&#39;@&#39;</span>)]));
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>roundtrip_class_hypen</span>() {
+        <span class='kw'>let</span> <span class='ident'>expr</span> <span class='op'>=</span> <span class='ident'>e</span>(<span class='string'>&quot;[-./]&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;(?u:[-\\.-/])&quot;</span>, <span class='ident'>expr</span>.<span class='ident'>to_string</span>());
+
+        <span class='kw'>let</span> <span class='ident'>expr</span> <span class='op'>=</span> <span class='ident'>e</span>(<span class='string'>&quot;(?-u)[-./]&quot;</span>);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;(?-u:[-\\.-/])&quot;</span>, <span class='ident'>expr</span>.<span class='ident'>to_string</span>());
     }
 }
 </pre>
