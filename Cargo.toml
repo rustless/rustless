@@ -21,12 +21,12 @@ name = "tests"
 [features]
 default = ["iron_backend"]
 iron_backend = ["iron", "bodyparser", "plugin"]
+ssl = ["hyper/ssl","cookie/secure"]
 
 [dependencies]
 regex = "0.1"
 lazy_static = "0.2"
 valico = "1"
-hyper = "0.9"
 queryst = "1"
 jsonway = "1"
 url = "1"
@@ -37,6 +37,10 @@ typeable = "0.1"
 traitobject = "0.0"
 serde = "0.8"
 serde_json = "0.8"
+
+[dependencies.hyper]
+version = "0.9"
+default-features = false
 
 [dependencies.cookie]
 version = "0.3"

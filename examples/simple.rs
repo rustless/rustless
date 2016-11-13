@@ -107,10 +107,15 @@ fn main() {
                 endpoint.handle(|client, _params| {
                     {
                         let cookies = client.request.cookies();
+                        #[cfg(ssl)]
                         let signed_cookies = cookies.signed();
 
                         let user_cookie = Cookie::new("session".to_string(), "verified".to_string());
+
+                        #[cfg(ssl)]
                         signed_cookies.add(user_cookie);
+                        #[cfg(not(ssl))]
+                        cookies.add(user_cookie);
                     }
 
                     client.text("Everything is OK".to_string())
