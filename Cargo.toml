@@ -26,7 +26,6 @@ iron_backend = ["iron", "bodyparser", "plugin"]
 regex = "0.1"
 lazy_static = "0.2"
 valico = "1"
-hyper = "0.9"
 queryst = "1"
 jsonway = "1"
 url = "1"
@@ -40,6 +39,10 @@ serde_json = "0.8"
 
 [dependencies.cookie]
 version = "0.3"
+default-features = false
+
+[dependencies.hyper]
+version = "0.9"
 default-features = false
 
 [dependencies.iron]
