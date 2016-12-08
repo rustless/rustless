@@ -21,12 +21,12 @@ name = "tests"
 [features]
 default = ["iron_backend"]
 iron_backend = ["iron", "bodyparser", "plugin"]
+ssl = ["hyper/ssl", "iron/ssl"]
 
 [dependencies]
 regex = "0.1"
 lazy_static = "0.2"
 valico = "1"
-hyper = "0.9"
 queryst = "1"
 jsonway = "1"
 url = "1"
@@ -53,3 +53,7 @@ version = "0.4"
 [dependencies.plugin]
 optional = true
 version = "0.2"
+
+[dependencies.hyper]
+version = "0.9"
+default-features = false

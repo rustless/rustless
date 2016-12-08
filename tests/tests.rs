@@ -34,7 +34,6 @@ macro_rules! call_app {
 macro_rules! resp_body {
     ($resp:ident) => {
         {
-            use ::rustless::backend::WriteBody;
             let mut vec = Vec::new();
             
             $resp.body.unwrap().write_body(&mut ::rustless::ResponseBody::new(&mut vec)).expect("Can't write");

@@ -107,7 +107,11 @@ fn main() {
                 endpoint.handle(|client, _params| {
                     {
                         let cookies = client.request.cookies();
+
+                        #[cfg(feature = "ssl")]
                         let signed_cookies = cookies.signed();
+                        #[cfg(not(feature = "ssl"))]
+                        let signed_cookies = cookies;
 
                         let user_cookie = Cookie::new("session".to_string(), "verified".to_string());
                         signed_cookies.add(user_cookie);

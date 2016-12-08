@@ -6,7 +6,6 @@ use std::path::Path;
 
 use typemap;
 
-use {Extensible};
 use server::method;
 use server::header;
 use super::request;

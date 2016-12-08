@@ -2,6 +2,7 @@ language: rust
 script:
 - cargo build --verbose
 - cargo test --verbose
+- cargo test --features ssl --verbose
 - cargo doc
 after_success:
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && ./.travis/update_docs.sh
