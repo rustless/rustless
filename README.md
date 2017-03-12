@@ -127,6 +127,23 @@ fn main() {
 }
 ~~~
 
+To easily build the example, you can set your Cargo.toml file approximately as follows:
+
+~~~
+[package]
+name = "rustless-example"
+version = "0.1.0"
+
+[dependencies]
+rustless = "0.10.0"
+hyper = "0.10.5"
+rustc-serialize = "0.3"
+valico = "1"
+
+[dependencies.iron]
+version = "*"
+~~~
+
 ## Complex example
 
 If you want to see how you can write some complex application using Rustless, please see the [example](https://github.com/rustless/rustless-example).
