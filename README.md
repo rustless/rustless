@@ -60,7 +60,6 @@ Rustless is based on Iron, which is based on Hyper, which is **synchronous**. Hy
 Below is a simple example showing some of the more common features of Rustless.
 
 ~~~rust
-#[macro_use]
 extern crate rustless;
 extern crate hyper;
 extern crate iron;
