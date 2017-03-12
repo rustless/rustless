@@ -67,7 +67,7 @@ extern crate rustc_serialize as serialize;
 extern crate valico;
 
 use valico::json_dsl;
-use hyper::status::StatusCode;
+use rustless::server::status::StatusCode;
 use rustless::{
     Application, Api, Nesting, Versioning
 };
