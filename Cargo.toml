@@ -41,6 +41,10 @@ serde_json = "0.8"
 version = "0.3"
 default-features = false
 
+[dependencies.hyper]
+version = "0.9"
+default-features = false
+
 [dependencies.iron]
 optional = true
 version = "0.4"
