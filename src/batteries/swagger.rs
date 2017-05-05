@@ -605,7 +605,8 @@ fn build_endpoint_definition(endpoint: &framework::Endpoint, context: &mut WalkC
 
             match endpoint.method {
                 method::Method::Post |
-                method::Method::Put => {
+                method::Method::Put |
+                method::Method::Patch => {
                     for param in final_params.iter_mut() {
                         match param.place {
                             Place::Query => param.place = Place::FormData,

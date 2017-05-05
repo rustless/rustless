@@ -108,6 +108,10 @@ pub trait Nesting: Node {
     -> endpoint::EndpointHandlerPresent {
         self.mount(endpoint::Endpoint::build(method::Method::Head, path, builder));
     }
+    fn patch<F>(&mut self, path: &str, builder: F) where F: FnOnce(&mut endpoint::Endpoint)
+    -> endpoint::EndpointHandlerPresent {
+        self.mount(endpoint::Endpoint::build(method::Method::Patch, path, builder));
+    }
 
     fn before<F: 'static>(&mut self, callback: F) where F: for<'a> Fn(&'a mut client::Client, &JsonValue)
     -> backend::HandleSuccessResult + Send+Sync {
