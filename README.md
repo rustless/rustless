@@ -60,7 +60,6 @@ Rustless is based on Iron, which is based on Hyper, which is **synchronous**. Hy
 Below is a simple example showing some of the more common features of Rustless.
 
 ~~~rust
-#[macro_use]
 extern crate rustless;
 extern crate hyper;
 extern crate iron;
@@ -68,7 +67,7 @@ extern crate rustc_serialize as serialize;
 extern crate valico;
 
 use valico::json_dsl;
-use hyper::status::StatusCode;
+use rustless::server::status::StatusCode;
 use rustless::{
     Application, Api, Nesting, Versioning
 };
@@ -125,6 +124,23 @@ fn main() {
 
     println!("Rustless server started!");
 }
+~~~
+
+To easily build the example, you can set your Cargo.toml file approximately as follows:
+
+~~~
+[package]
+name = "rustless-example"
+version = "0.1.0"
+
+[dependencies]
+rustless = "0.10.0"
+hyper = "0.10.5"
+rustc-serialize = "0.3"
+valico = "1"
+
+[dependencies.iron]
+version = "*"
 ~~~
 
 ## Complex example
