@@ -493,7 +493,7 @@ After that you can use `/api-docs` path in Swagger UI to render your API structu
 
 ## Integration with PostgreSQL
 
-We have an annotated example of such integration in [postgres_example](https://github.com/rustless/rustless/tree/master/examples/postgres). Please try it and feel free to say your opinion.
+We have an annotated example of such integration in [rustless-example](https://github.com/rustless/rustless-example). Please try it and feel free to say your opinion.
 
 ## Integration with Deuterium ORM
 
